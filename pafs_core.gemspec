@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_dependency "roo"
   s.add_dependency "rubyXL"
   s.add_dependency "secure_headers"
-  s.add_dependency "mimemagic"
 
   # defra_ruby_alert is a gem we created to manage airbrake across projects
   s.add_dependency "defra_ruby_alert", "~> 2.1"
