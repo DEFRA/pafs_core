@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.version     = PafsCore::VERSION
   s.authors     = ["CIS Solutions Delivery, Environment Agency"]
   s.email       = ["tony.headford@environment-agency.gov.uk"]
-  s.homepage    = "https://github.com/EnvironmentAgency"
+  s.homepage    = "https://github.com/DEFRA"
   s.summary     = "Project Application and Funding Service core shared functionality"
   s.description = "Project Application and Funding Service core shared functionality"
   s.license     = "The Open Government Licence (OGL) Version 3"
