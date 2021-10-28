@@ -9,13 +9,11 @@ jobs:
       POSTGRES_HOST: localhost
       POSTGRES_PASSWORD: postgres
       POSTGRES_PORT: 5432
-      POSTGRES_USERNAME: postgres
       SECRET_KEY_BASE: somescarylongvaluefullofnumbersandlettersi
     services:
       postgres:
         image: postgres:9.5-alpine
         env:
-          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: pafs_core_dummy_test
         ports:
