@@ -6,10 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      POSTGRES_HOST: localhost
-      POSTGRES_PASSWORD: password
-      POSTGRES_PORT: 5432
-      POSTGRES_USERNAME: postgres
       SECRET_KEY_BASE: somescarylongvaluefullofnumbersandlettersi
     services:
       postgres:
