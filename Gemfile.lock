@@ -251,6 +251,7 @@ GEM
     parallel (1.21.0)
     parser (2.7.2.0)
       ast (~> 2.4.1)
+    pg (0.20.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -403,6 +404,7 @@ DEPENDENCIES
   memory_profiler
   overcommit
   pafs_core!
+  pg (= 0.20.0)
   pry
   pry-rails
   rails-controller-testing
