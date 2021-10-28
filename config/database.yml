@@ -16,7 +16,6 @@ test:
   <<: *default
   database: pafs_core_dummy_test
   username: postgres
-  password: postgres
 
 production:
   <<: *default
