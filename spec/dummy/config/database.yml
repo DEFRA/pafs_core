@@ -58,6 +58,7 @@ development:
 test:
   <<: *default
   database: pafs_core_dummy_test
+  host: 127.0.0.1
   username: postgres
   password: postgres
   
