@@ -6,15 +6,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
+      PG_HOST: localhost
+      PG_USERNAME: postgres
+      PG_PASSWORD: pinafore
+      PG_PORT: 5432
       SECRET_KEY_BASE: somescarylongvaluefullofnumbersandlettersi
     services:
       postgres:
         image: postgres:9.5-alpine
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: pinafore
           POSTGRES_DB: pafs_core_dummy_test
         ports:
           - 5432:5432
