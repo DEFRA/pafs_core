@@ -1,6 +1,6 @@
 # Project Application and Funding Service (PAFS) Core Shared
 
-[![Build Status](https://travis-ci.org/DEFRA/pafs_core.svg?branch=develop)](https://travis-ci.org/DEFRA/pafs_core)
+[![CI](https://github.com/DEFRA/pafs_core/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/DEFRA/pafs_core/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/DEFRA/pafs_core/badges/gpa.svg)](https://codeclimate.com/github/DEFRA/pafs_core)
 [![Test Coverage](https://codeclimate.com/github/DEFRA/pafs_core/badges/coverage.svg)](https://codeclimate.com/github/DEFRA/pafs_core/coverage)
 [![security](https://hakiri.io/github/DEFRA/pafs_core/develop.svg)](https://hakiri.io/github/DEFRA/pafs_core/develop)
