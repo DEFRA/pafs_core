@@ -58,7 +58,7 @@ development:
 test:
   <<: *default
   database: pafs_core_dummy_test
-  username: postgres
+  username: dummy
   password: postgres
   
 # As with config/secrets.yml, you never want to store sensitive information,

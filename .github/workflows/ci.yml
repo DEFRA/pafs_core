@@ -9,14 +9,13 @@ jobs:
       POSTGRES_HOST: localhost
       POSTGRES_PASSWORD: postgres
       POSTGRES_PORT: 5432
-      POSTGRES_USERNAME: postgres
+      POSTGRES_USERNAME: dummy
       SECRET_KEY_BASE: somescarylongvaluefullofnumbersandlettersi
-
     services:
       postgres:
         image: postgres:9.5-alpine
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: dummy
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: pafs_core_dummy_test
         ports:
@@ -34,8 +33,8 @@ jobs:
 
       - name: Test setup
         run: |
-          bundle exec rake db:schema:load --trace RAILS_ENV=test
-          bundle exec rake db:migrate --trace RAILS_ENV=test
+          bundle exec rake db:schema:load RAILS_ENV=test
+          bundle exec rake db:migrate RAILS_ENV=test
 
       - name: Run tests
         run: |
