@@ -11,7 +11,7 @@ jobs:
       PG_PASSWORD: postgres
       PG_PORT: 5432
       SECRET_KEY_BASE: somescarylongvaluefullofnumbersandlettersi
-      
+
     services:
       postgres:
         image: postgres:9.5-alpine
@@ -35,9 +35,8 @@ jobs:
       - name: Test setup
         run: |
           bundle exec rake db:schema:load --trace RAILS_ENV=test
-          bundle exec rake db:migrate --trace RAILS_ENV=test
+          bundle exec rails db:migrate --trace RAILS_ENV=test
 
       - name: Run tests
         run: |
-          bundle exec rails db:migrate RAILS_ENV=test
           bundle exec rspec
