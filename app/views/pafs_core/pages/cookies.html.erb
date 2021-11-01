@@ -69,6 +69,24 @@
           <% end %>
           </table>
           
+          <h2 class="govuk-heading-m"><%=t("cookies.settings_page.third_party_cookies")%></h2>
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Name</th>
+                <th scope="col" class="govuk-table__header">Purpose</th>
+              </tr>
+            </thead>
+          <% t("cookies.third_party_cookies_list").map do |cookie_item| %>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__cell"><%= cookie_item[0].dig(:text) %></th>
+                <td class="govuk-table__cell"><%= cookie_item[1].dig(:text) %></td>
+              </tr>
+            </tbody>
+          <% end %>
+          </table>
+          
           <p><%= t("cookies.settings_page.cookie_details_link_html") %></p>
 
           <%= render "govuk_publishing_components/components/button", {

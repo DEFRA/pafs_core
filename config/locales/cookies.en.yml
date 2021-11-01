@@ -36,6 +36,7 @@ en:
       all_cookies:
         title: All the cookies we use
       cookie_details_link_html: <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/help/cookie-details" rel="external">Find out more about cookies on GOV.UK</a></p>
+      third_party_cookies: Third-party cookie sites
       cookies:
       - header: Essential cookies
         text_html: These cookies are required for this service to operate. We do not
@@ -79,3 +80,12 @@ en:
       - - text: _gid
         - text: This helps us count how many people visit the service by tracking if you’ve visited before
         - text: 1 day
+    third_party_cookies_list:
+      - - text: UK Grid Reference Finder
+        - text: UK National Grid Map Reference Conversion tool to allow a user to find a specific location within the UK using either a post code, location or grid reference.
+      - - text: Magic Map
+        - text: The MAGIC website provides authoritative geographic information about the natural environment from across government. The information covers rural, urban, coastal and marine environments across Great Britain. It is presented in an interactive map which can be explored using various mapping tools that are included. Natural England manages the service under the direction of a Steering Group who represent the MAGIC partnership organisations.
+      - - text: Smartsurvey
+        - text: Smartysurvey is used to gain feedback on the PAFS site to allow us to improve the service over time.
+      - - text: GOV.UK Cookies
+        - text: This site provides a breakdown on how GOV.UK sites use cookies across their various services.
