@@ -37,6 +37,7 @@ en:
         title: All the cookies we use
       cookie_details_link_html: <p class="govuk-body"><a class="govuk-link" href="https://www.gov.uk/help/cookie-details" rel="external">Find out more about cookies on GOV.UK</a></p>
       third_party_cookies: Third-party cookie sites
+      third_party_cookies_text: This website contains links to the following 3rd party websites and these websites may also utilise cookies.
       cookies:
       - header: Essential cookies
         text_html: These cookies are required for this service to operate. We do not
