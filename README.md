@@ -7,6 +7,9 @@
 
 A Rails Engine for [Project Application and Funding Service](https://github.com/DEFRA/pafs-user)
 
+## PAFS Documentation
+For a full breakdown of the PAFS documentation, technical and non technical please click the [link](https://aimspd.sharepoint.com/sites/pwa_dev/AIMS%20Project%20Delivery%20Collaboration/_layouts/15/guestaccess.aspx?docid=08fcc88cb3f7c45b48a274bf0ea4132f5&authkey=AWuSgciHOQlICM9DP0JtdRA)
+
 ## Versions
 
 The project is currently using Ruby version 2.3.0 and Rails 4.2.7.1.
