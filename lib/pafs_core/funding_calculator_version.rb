@@ -7,7 +7,7 @@ module PafsCore
     class Check
       VERSION_MAP = {
         v8: { column: "B", row: 3, version_text: /^Version 8/ },
-        v9: { column: "B", row: 4, version_text: /^Version 1: March 2020/ }
+        v9: { column: "B", row: 4, version_text: /^Version 2: April 2022/ }
       }.freeze
 
       attr_reader :sheet
