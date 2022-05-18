@@ -45,13 +45,13 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:financial_year_step) }
-    let(:params) { ActionController::Parameters.new({ financial_year_step: { project_end_financial_year: "2021" } }) }
+    let(:params) { ActionController::Parameters.new({ financial_year_step: { project_end_financial_year: "2028" } }) }
     let(:error_params) { ActionController::Parameters.new({ financial_year_step: { project_end_financial_year: "1983" } }) }
 
     it "saves the :project_end_financial_year if valid" do
       # expect(subject.project_end_financial_year).not_to eq 2021
       expect(subject.update(params)).to be true
-      expect(subject.project_end_financial_year).to eq 2021
+      expect(subject.project_end_financial_year).to eq 2028
     end
 
     it "returns false when validation fails" do

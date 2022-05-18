@@ -2,13 +2,18 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "Serialization of a complete PAFS project to JSON",
   "allOf": [
-    { "$ref": "project.json#/project" },
+    {
+      "$ref": "project.json#/project"
+    },
     {
       "oneOf": [
-        { "$ref": "pfc_v8_2014.json#/pfc_v8_2014" },
-        { "$ref": "pfc_v1_2020.json#/pfc_v1_2020" }
+        {
+          "$ref": "pfc_v8_2014.json#/pfc_v8_2014"
+        },
+        {
+          "$ref": "pfc_v2_2020.json#/pfc_v2_2020"
+        }
       ]
     }
   ]
 }
-

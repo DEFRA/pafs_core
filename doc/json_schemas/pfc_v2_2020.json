@@ -8,12 +8,17 @@
         "least_deprived_60"
       ],
       "properties": {
-        "most_deprived_20": { "$ref": "#/definitions/risk_categories" },
-        "most_deprived_21_40": { "$ref": "#/definitions/risk_categories" },
-        "least_deprived_60": { "$ref": "#/definitions/risk_categories" }
+        "most_deprived_20": {
+          "$ref": "#/definitions/risk_categories"
+        },
+        "most_deprived_21_40": {
+          "$ref": "#/definitions/risk_categories"
+        },
+        "least_deprived_60": {
+          "$ref": "#/definitions/risk_categories"
+        }
       }
     },
-
     "risk_categories": {
       "required": [
         "moderate_risk",
@@ -23,23 +28,37 @@
       ],
       "properties": {
         "low_risk": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "moderate_risk": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "intermediate_risk": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "significant_risk": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "very_significant_risk": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         }
       }
     },
-
     "term_loss_banding": {
       "type": "object",
       "required": [
@@ -48,12 +67,17 @@
         "least_deprived_60"
       ],
       "properties": {
-        "most_deprived_20": { "$ref": "#/definitions/term_loss" },
-        "most_deprived_21_40": { "$ref": "#/definitions/term_loss" },
-        "least_deprived_60": { "$ref": "#/definitions/term_loss" }
+        "most_deprived_20": {
+          "$ref": "#/definitions/term_loss"
+        },
+        "most_deprived_21_40": {
+          "$ref": "#/definitions/term_loss"
+        },
+        "least_deprived_60": {
+          "$ref": "#/definitions/term_loss"
+        }
       }
     },
-
     "term_loss": {
       "required": [
         "long_term_loss",
@@ -61,14 +85,19 @@
       ],
       "properties": {
         "long_term_loss": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "medium_term_loss": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         }
       }
     },
-
     "habitats": {
       "required": [
         "intertidal_habitat",
@@ -81,17 +110,32 @@
         "arable_land"
       ],
       "properties": {
-        "intertidal_habitat": { "$ref": "#/definitions/habitat_grades" },
-        "woodland": { "$ref": "#/definitions/habitat_grades" },
-        "wet_woodland": { "$ref": "#/definitions/habitat_grades" },
-        "wetlands_wet_grassland": { "$ref": "#/definitions/habitat_grades" },
-        "grassland": { "$ref": "#/definitions/habitat_grades" },
-        "moor_heath": { "$ref": "#/definitions/habitat_grades" },
-        "ponds_lakes": { "$ref": "#/definitions/habitat_grades" },
-        "arable_land": { "$ref": "#/definitions/habitat_grades" }
+        "intertidal_habitat": {
+          "$ref": "#/definitions/habitat_grades"
+        },
+        "woodland": {
+          "$ref": "#/definitions/habitat_grades"
+        },
+        "wet_woodland": {
+          "$ref": "#/definitions/habitat_grades"
+        },
+        "wetlands_wet_grassland": {
+          "$ref": "#/definitions/habitat_grades"
+        },
+        "grassland": {
+          "$ref": "#/definitions/habitat_grades"
+        },
+        "moor_heath": {
+          "$ref": "#/definitions/habitat_grades"
+        },
+        "ponds_lakes": {
+          "$ref": "#/definitions/habitat_grades"
+        },
+        "arable_land": {
+          "$ref": "#/definitions/habitat_grades"
+        }
       }
     },
-
     "habitat_grades": {
       "type": "object",
       "required": [
@@ -101,19 +145,27 @@
       ],
       "properties": {
         "poor": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "moderate": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "good": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         }
       }
     }
   },
-
-  "pfc_v1_2020": {
+  "pfc_v2_2020": {
     "required": [
       "partnership_funding_calculator_version",
       "date_of_pf_calculator",
@@ -151,101 +203,200 @@
     "properties": {
       "partnership_funding_calculator_version": {
         "type": "string",
-        "const": "v1 2020"
+        "const": "v2 2020"
       },
       "date_of_pf_calculator": {
-        "type": ["string", "null"]
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "lead_rma": {
-        "type": ["string", "null"]
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "project_stage": {
-        "type": ["string", "null"]
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "option_reference": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_appraisal_approach": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_design_and_construction_costs": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_risk_contingency": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_future_costs": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_whole_life_benefits": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_local_levy_towards_appraisal_costs": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_local_levy_towards_qualifying_outcomes_upfront": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_local_levy_towards_qualifying_outcomes_future": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_public_contributions_towards_appraisal_costs": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_public_contributions_towards_qualifying_outcomes_upfront": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_public_contributions_towards_qualifying_outcomes_future": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_public_contributions_contributor_or_fund": {
-        "type": ["string", "null"]
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "pv_private_contributions_towards_appraisal_costs": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_private_contributions_towards_qualifying_outcomes_upfront": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_private_contributions_towards_qualifying_outcomes_future": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_private_contributions_contributor_or_fund": {
-        "type": ["string", "null"]
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "pv_funding_from_other_ea_functions_sources_towards_appraisal_costs": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_funding_from_other_ea_functions_sources_towards_qualifying_outcomes_upfront": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_funding_from_other_ea_functions_sources_towards_qualifying_outcomes_future": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_funding_from_other_ea_functions_sources_contributor_or_fund": {
-        "type": ["string", "null"]
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "pv_whole_life_benefits_appraisal_period": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_whole_life_benefits_duration_of_benefits": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "pv_whole_life_benefits_people_related_impacts": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "economic_summary_sheet_completed": {
-        "type": ["string", "null"],
-        "enum": ["Yes", "No", "", null]
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "Yes",
+          "No",
+          "",
+          null
+        ]
       },
       "economic_data_included_in_business_case": {
-        "type": ["string", "null"],
-        "enum": ["Yes", "No", "", null]
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "Yes",
+          "No",
+          "",
+          null
+        ]
       },
       "year_measures_ready_for_service": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
-
       "qualifying_benefits_outcome_measures": {
         "type": "object",
         "required": [
@@ -262,11 +413,14 @@
               "after"
             ],
             "properties": {
-              "before": { "$ref": "#/definitions/deprivation_banding_risk" },
-              "after": { "$ref": "#/definitions/deprivation_banding_risk" }
+              "before": {
+                "$ref": "#/definitions/deprivation_banding_risk"
+              },
+              "after": {
+                "$ref": "#/definitions/deprivation_banding_risk"
+              }
             }
           },
-
           "om2_in_2040": {
             "type": "object",
             "required": [
@@ -274,21 +428,25 @@
               "after"
             ],
             "properties": {
-              "before": { "$ref": "#/definitions/deprivation_banding_risk" },
-              "after": { "$ref": "#/definitions/deprivation_banding_risk" }
+              "before": {
+                "$ref": "#/definitions/deprivation_banding_risk"
+              },
+              "after": {
+                "$ref": "#/definitions/deprivation_banding_risk"
+              }
             }
           },
-
           "om3": {
             "type": "object",
             "required": [
               "before_construction"
             ],
             "properties": {
-              "before_construction": { "$ref": "#/definitions/term_loss_banding" }
+              "before_construction": {
+                "$ref": "#/definitions/term_loss_banding"
+              }
             }
           },
-
           "om4": {
             "type": "object",
             "required": [
@@ -303,8 +461,12 @@
                   "after"
                 ],
                 "properties": {
-                  "before": { "$ref": "#/definitions/habitats" },
-                  "after": { "$ref": "#/definitions/habitats" }
+                  "before": {
+                    "$ref": "#/definitions/habitats"
+                  },
+                  "after": {
+                    "$ref": "#/definitions/habitats"
+                  }
                 }
               },
               "length_of_habitat_enhanced": {
@@ -316,13 +478,22 @@
                 ],
                 "properties": {
                   "comprehensive_restoration_of_physical_modifications": {
-                    "type": ["number", "null"]
+                    "type": [
+                      "number",
+                      "null"
+                    ]
                   },
                   "partial_restoration_of_physical_modifications": {
-                    "type": ["number", "null"]
+                    "type": [
+                      "number",
+                      "null"
+                    ]
                   },
                   "single_major_physical_improvement": {
-                    "type": ["number", "null"]
+                    "type": [
+                      "number",
+                      "null"
+                    ]
                   }
                 }
               }
@@ -333,4 +504,3 @@
     }
   }
 }
-
