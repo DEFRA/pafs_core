@@ -104,7 +104,7 @@ module PafsCore
     def expected_version_name
       {
         v8: "v8 2014",
-        v9: "v1 2020"
+        v9: "v2 2020"
       }[expected_version.to_sym]
     end
 
