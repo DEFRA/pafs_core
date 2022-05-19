@@ -38,7 +38,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
       subject.valid?
 
       expect(subject.errors[:base])
-        .to include "The partnership funding calculator file used is the wrong version. The file used must be v8 2014. Download the correct partnership funding calculator."
+        .to include "The uploaded calculator is the incorrect version. You must submit the v8 2014 calculator."
     end
 
     context "virus found" do
