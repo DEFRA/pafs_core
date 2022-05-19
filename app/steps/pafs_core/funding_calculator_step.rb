@@ -122,7 +122,7 @@ module PafsCore
       return if calculator_version.to_s == expected_version && calculator_version.present?
 
       self.funding_calculator_file_name = ""
-      errors.add(:base, "The partnership funding calculator file used is the wrong version. The file used must be #{expected_version_name}. Download the correct partnership funding calculator.")
+      errors.add(:base, "The uploaded calculator is the incorrect version. You must submit the #{expected_version_name} calculator.")
     end
   end
 end
