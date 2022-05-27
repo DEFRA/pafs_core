@@ -1,0 +1,37 @@
+<div class="step-container">
+  <div class="grid-row">
+    <div class="column-two-thirds">
+      <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+        <%= f.error_header %>
+        <h1 class="heading-large"><%= t('.heading') %></h1>
+        <p><%= t('.lede') %></p>
+        <div class="step-form">
+          <fieldset>
+            <legend class="visuallyhidden"><%= t(".heading") %></legend>
+            <%= f.form_group :base do %>
+              <%= f.error_message(:base) %>
+              <%= f.check_box :river_restoration %>
+              <%= f.check_box :floodplain_restoration %>
+              <%= f.check_box :leaky_barriers %>
+              <%= f.check_box :offline_flood_storage_areas %>
+              <%= f.check_box :cross_slope_woodland %>
+              <%= f.check_box :catchment_woodland %>
+              <%= f.check_box :riparian_woodland %>
+              <%= f.check_box :floodplain_woodland %>
+              <%= f.check_box :soil_and_land_management %>
+              <%= f.check_box :land_and_headwater_drainage_management %>
+              <%= f.check_box :runoff_pathway_management %>
+              <%= f.check_box :saltmarsh_mudflats_and_managed_realignment %>
+              <%= f.check_box :sand_dunes %>
+              <%= f.check_box :beach_nourishment %>
+            <% end %>
+            <%= f.text_field :other_flood_measures %>
+        </fieldset>
+        </div>
+        <div class="form-group">
+          <%= f.submit t("save_and_continue_label"), class: 'button' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

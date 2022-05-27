@@ -1,0 +1,70 @@
+<article class="summary-item" aria-labelledby="natural_flood_risk_measures">
+  <% if project.natural_flood_risk_measures_started? %>
+    <div class="summary-item-content">
+      <h2 class="heading-medium" role="heading" id="risks">Natural flood measures</h2>
+      <div class="grid-row">
+        <div class="column-three-quarters">
+          <% if project.natural_flood_risk_measures_included? %>
+            Flood risk measures in your project:
+            <ul class="summary-list list-bullet">
+              <% project.selected_natural_flood_risk_measures.each do |risk_measure| %>
+                <li>
+                  <%= t("#{risk_measure}_label", scope: "pafs_core.projects.steps.natural_flood_risk_measures") %>
+                </li>
+              <% end %>
+              <% unless project.other_flood_measures.blank? %>
+               <li>
+                  <%= project.other_flood_measures %>
+                </li>
+              <% end %>
+            </ul>
+            <table class="full-table">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Total cost of your associated natural flood risk measures</td>
+                  <td class="align-right"><%= number_to_currency project.natural_flood_risk_measures_cost, unit: "£", delimeter: "," %></td>
+                </tr>
+              </tbody>
+            </table>
+          <% else %>
+            <p>The project does not include any flood risk measures</p>
+          <% end %>
+        </div>
+        <div class="column-one-quarter">
+          <% if project.draft? %>
+            <% if can_edit_project_sections?(project) -%>
+              <div class="change-link">
+                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :natural_flood_risk_measures_included) do -%>
+                  Change<span class="visually-hidden"> the flood risk measures your proposed project will use</span>
+                <% end -%>
+              </div>
+            <% end -%>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="add-row">
+      <div class="grid-row">
+        <div class="column-three-quarters">
+          <h2 class="heading-medium" role="heading" id="risks">Natural flood measures</h2>
+        </div>
+        <div class="column-one-quarter">
+          <% unless project.archived? %>
+            <% if can_edit_project_sections?(project) -%>
+              <div class="add-link">
+                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :natural_flood_risk_measures_included) do -%>
+                  Add<span class="visually-hidden"> the flood risk measures your proposed project will use</span>
+                <% end -%>
+              </div>
+            <% end -%>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</article>

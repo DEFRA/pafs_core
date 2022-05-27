@@ -716,3 +716,7 @@ ol.instructions {
   padding: 0.5em 1em;
   margin-bottom: 1em;
 }
+
+input.currency-field::before {
+  content: "&#163;"
+}
