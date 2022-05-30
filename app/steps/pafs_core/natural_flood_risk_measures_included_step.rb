@@ -24,7 +24,7 @@ module PafsCore
     def a_choice_has_been_made
       if natural_flood_risk_measures_included.nil?
         errors.add(:natural_flood_risk_measures_included,
-                   "^You must select yes or no")
+                   "You must select yes or no")
       end
     end
 

@@ -12,7 +12,7 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresIncludedStep, type: :model do
       subject.natural_flood_risk_measures_included = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:natural_flood_risk_measures_included])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 
