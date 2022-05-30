@@ -717,6 +717,9 @@ ol.instructions {
   margin-bottom: 1em;
 }
 
-input.currency-field::before {
-  content: "&#163;"
+.currency-field::before {
+  content: "£";
+  font-size: 30px;
+  font-weight: bold;
+  vertical-align: bottom;
 }

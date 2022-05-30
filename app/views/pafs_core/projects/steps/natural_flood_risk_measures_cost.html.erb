@@ -10,10 +10,11 @@
             <%= f.form_group :base do %>
               <%= f.error_message(:base) %>
               <%= f.label(:natural_flood_risk_measures_cost, t('.heading'), class: "visuallyhidden") %>
-              <%= f.number_field_without_label(:natural_flood_risk_measures_cost,
-                  class: "form-control form-large currency-field",
-                  ) %>
-              <%= %>
+              <div class="currency-field">
+                <%= f.number_field_without_label(:natural_flood_risk_measures_cost,
+                    class: "form-control form-large",
+                    ) %>
+              </div>
             <% end %>
           </fieldset>
           <div class="form-group">
