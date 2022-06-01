@@ -1,8 +1,10 @@
 # frozen_string_literal: true
+require "pafs_core/natural_flood_risk_measures"
 
 module PafsCore
   class ValidationPresenter < PafsCore::ProjectSummaryPresenter
     include PafsCore::FundingSources
+    include PafsCore::NaturalFloodRiskMeasures
 
     def complete?
       result = true
@@ -246,6 +248,18 @@ module PafsCore
       else
         risks_error
       end
+    end
+
+    def natural_flood_risk_measures_complete?
+      return true if project.natural_flood_risk_measures_included == false
+
+      return true if project.natural_flood_risk_measures_included? && natural_flood_risk_measures_and_cost_provided?
+
+      add_error(:natural_flood_risk_measures, "^Tell us about the prokect's natural flood measures")
+    end
+
+    def natural_flood_risk_measures_and_cost_provided?
+      (selected_natural_flood_risk_measures.count > 0 || !project.other_flood_measures.blank?) && !project.natural_flood_risk_measures_cost.nil?
     end
 
     def risks_error
