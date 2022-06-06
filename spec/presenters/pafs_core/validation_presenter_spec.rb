@@ -225,6 +225,50 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
   end
 
+  describe "#natural_flood_risk_measures_complete?" do
+    context "when the natural flood risk measures have not been set" do
+      before(:each) { subject.natural_flood_risk_measures_included = nil }
+
+      it "returns false" do
+        expect(subject.natural_flood_risk_measures_complete?).to eq false
+      end
+    end
+    context "when the project includes no natural flood risk measures" do
+      before(:each) { subject.natural_flood_risk_measures_included = false }
+
+      it "returns true" do
+        expect(subject.natural_flood_risk_measures_complete?).to eq true
+      end
+    end
+
+    context "when the project includes natural flood risk measures" do
+      before(:each) { subject.natural_flood_risk_measures_included = true }
+
+      context "and no flood risk measures have been selected" do
+        it "returns false" do
+          expect(subject.natural_flood_risk_measures_complete?).to eq false
+        end
+      end
+      context "and flood risk measures have been selected" do
+        before(:each) { subject.river_restoration = true }
+
+        context "when no cost has been provided" do
+          it "returns false" do
+            expect(subject.natural_flood_risk_measures_complete?).to eq false
+          end
+        end
+
+        context "when the cost has been provided" do
+          before(:each) { subject.natural_flood_risk_measures_cost = 123.45 }
+
+          it "returns true" do
+            expect(subject.natural_flood_risk_measures_complete?).to eq true
+          end
+        end
+      end
+    end
+  end
+
   describe "#standard_of_protection_complete?"
 
   describe "#approach_complete?"
