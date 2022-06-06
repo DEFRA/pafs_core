@@ -5,7 +5,10 @@ module PafsCore
   class NaturalFloodRiskMeasuresStep < BasicStep
     include PafsCore::NaturalFloodRiskMeasures
 
+    attr_accessor :other
+
     validate :at_least_one_flood_risk_measure_has_been_selected
+    validate :other_flood_measure_has_been_added
 
     private
 
@@ -26,7 +29,8 @@ module PafsCore
                 :saltmarsh_mudflats_and_managed_realignment,
                 :sand_dunes,
                 :beach_nourishment,
-                :other_flood_measures
+                :other_flood_measures,
+                :other_flood_measures_selected
               )
     end
 
@@ -34,6 +38,12 @@ module PafsCore
       return if selected_natural_flood_risk_measures.count > 0 || !other_flood_measures.blank?
 
       errors.add(:base, "The project must include at least one flood risk measure")
+    end
+
+    def other_flood_measure_has_been_added
+      return unless other_flood_measures_selected
+
+      errors.add(:other_flood_measures, "^You must give your other flood risk measure a name") if other_flood_measures.blank?
     end
   end
 end

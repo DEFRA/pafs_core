@@ -25,23 +25,20 @@
               <%= f.check_box :sand_dunes %>
               <%= f.check_box :beach_nourishment %>
               <div class="multiple-choice">
-                <% if f.object.other_flood_measures.blank? %>
-                  <input id="natural_flood_risk_measures_step_other" type="checkbox" name="natural_flood_risk_measures_step_other" class="govuk-checkboxes__input" onclick="toggleBoxVisibility()">
+                <% if f.object.other_flood_measures_selected %>
+                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" checked onclick="toggleBoxVisibility()">
                 <% else %>
-                  <input id="natural_flood_risk_measures_step_other" type="checkbox" name="natural_flood_risk_measures_step_other" class="govuk-checkboxes__input" checked onclick="toggleBoxVisibility()">
+                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" onclick="toggleBoxVisibility()">
                 <% end %>
-                <label for="natural_flood_risk_measures_step_other">Other</label>
+                <label for="natural_flood_risk_measures_step_other_flood_measures_selected">Other</label>
               </div>
 
             <% end %>
-            <% if f.object.other_flood_measures.blank? %>
-                <div id="other-flood-measures" class="panel">
-              <% else %>
-                <div id="other-flood-measures" class="panel">
-              <% end %>
-                <label class="form-label" for="natural_flood_risk_measures_step_other_flood_measures"><%= t(".other_flood_measures_label") %></label>
-                <input type="text" name="natural_flood_risk_measures_step[other_flood_measures]" id="natural_flood_risk_measures_step_other_flood_measures" value=<%= f.object.other_flood_measures %>>
-              </div>
+            <%= f.error_message(:other_flood_measures) %>
+            <div id="other-flood-measures" class="panel">
+              <label class="form-label" for="natural_flood_risk_measures_step_other_flood_measures"><%= t(".other_flood_measures_label") %></label>
+              <input type="text" name="natural_flood_risk_measures_step[other_flood_measures]" id="natural_flood_risk_measures_step_other_flood_measures" value=<%= f.object.other_flood_measures %>>
+            </div>
         </fieldset>
         </div>
         <div class="form-group">
