@@ -5,8 +5,6 @@ module PafsCore
   class NaturalFloodRiskMeasuresStep < BasicStep
     include PafsCore::NaturalFloodRiskMeasures
 
-    attr_accessor :other
-
     validate :at_least_one_flood_risk_measure_has_been_selected
     validate :other_flood_measure_has_been_added
 
