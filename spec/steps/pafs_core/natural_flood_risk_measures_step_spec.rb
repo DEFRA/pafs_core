@@ -52,5 +52,23 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresStep, type: :model do
     it "returns false when validation fails" do
       expect(subject.update(error_params)).to eq false
     end
+
+    context "when a user sets other_flood_measures_selected to false" do
+      subject { FactoryBot.create(:natural_flood_risk_measures_step, other_flood_measures_selected: "1", other_flood_measures: "Another flood measure") }
+
+      let(:params) do
+        ActionController::Parameters.new(
+          { natural_flood_risk_measures_step: {
+            other_flood_measures_selected: "0",
+            other_flood_measures: "Another flood measure"
+          } }
+        )
+      end
+
+      it "removes other_flood_measures" do
+        subject.update(params)
+        expect(subject.other_flood_measures).to be_nil
+      end
+    end
   end
 end
