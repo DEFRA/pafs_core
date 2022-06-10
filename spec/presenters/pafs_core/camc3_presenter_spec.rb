@@ -153,6 +153,20 @@ RSpec.describe PafsCore::Camc3Presenter do
       end
     end
 
+    describe "natural_flood_risk_measures" do
+      it "renders in the generated json" do
+        expect(subject.attributes).to have_key(:natural_flood_risk_measures)
+      end
+
+      it "contains all the natural_flood_risk_measures attributes" do
+        PafsCore::NaturalFloodRiskMeasures::NATURAL_FLOOD_RISK_MEASURES.each do |nfm|
+          expect(subject.attributes[:natural_flood_risk_measures]).to have_key(nfm)
+        end
+
+        expect(subject.attributes[:natural_flood_risk_measures]).to have_key(:natural_flood_risk_measures_cost)
+      end
+    end
+
     describe "#households_at_reduced_risk" do
       before(:each) do
         funding_values.each do |hash|

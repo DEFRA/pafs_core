@@ -424,101 +424,103 @@
           }
         }
       },
-      "river_restoration": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "floodplain_restoration": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "leaky_barriers": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "offline_flood_storage_areas": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "cross_slope_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "catchment_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "riparian_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "floodplain_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "soil_and_land_management": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "land_and_headwater_drainage_management": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "runoff_pathway_management": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "saltmarsh_mudflats_and_managed_realignment": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "sand_dunes": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "beach_nourishment": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "other_flood_measures": {
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "flood_risk_measures_cost": {
-        "type": [
-          "float",
-          "null"
-        ]
+      "natural_flood_risk_measures": {
+        "river_restoration": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "floodplain_restoration": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "leaky_barriers": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "offline_flood_storage_areas": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "cross_slope_woodland": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "catchment_woodland": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "riparian_woodland": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "floodplain_woodland": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "soil_and_land_management": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "land_and_headwater_drainage_management": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "runoff_pathway_management": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "saltmarsh_mudflats_and_managed_realignment": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sand_dunes": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "beach_nourishment": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "other_flood_measures": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "natural_flood_risk_measures_cost": {
+          "type": [
+            "float",
+            "null"
+          ]
+        }
       },
       "outcome_measures": {
         "type": "object",
