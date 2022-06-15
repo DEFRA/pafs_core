@@ -40,9 +40,17 @@ module PafsCore
     def import_areas
       abort("Headers incorrect.") unless (@areas.map(&:keys).flatten.uniq - HEADERS).empty?
 
+      remove_areas_that_have_already_been_imported
+
       areas = group_by_type(@areas)
       PafsCore::Area::AREA_TYPES.each { |area_type| create_records(areas[area_type]) unless areas[area_type].nil? }
       output_errors_to_console(@faulty_entries) unless @faulty_entries.empty?
+    end
+
+    def remove_areas_that_have_already_been_imported
+      existing_areas = PafsCore::Area.pluck(:name, :area_type)
+
+      @areas.delete_if { |area| existing_areas.include? [area[:name], area[:area_type]] }
     end
 
     def group_by_type(areas)

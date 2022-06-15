@@ -34,5 +34,14 @@ RSpec.describe PafsCore::AreaImporter do
       areas = PafsCore::Area.all
       expect(areas.size).to eq(6)
     end
+
+    it "shouldn't import areas that are already present" do
+      folder_path = "#{Rails.root}/../fixtures/new_areas"
+
+      2.times { PafsCore::AreaImporter.new.import_new_areas(folder_path) }
+
+      areas = PafsCore::Area.all
+      expect(areas.size).to eq(6)
+    end
   end
 end
