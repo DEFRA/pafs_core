@@ -18,18 +18,32 @@ module PafsCore
     def import(path_to_file)
       abort("Areas already exist") if PafsCore::Area.count > 0
 
-      CSV.foreach(path_to_file, headers: true) do |row|
-        @areas << row.to_h
-      end
+      extract_csv_data(path_to_file)
 
-      abort("Headers incorrect.") unless @areas.first.keys == HEADERS
+      import_areas
+    end
 
-      areas = group_by_type(@areas)
-      PafsCore::Area::AREA_TYPES.each { |area_type| create_records(areas[area_type]) unless areas[area_type].empty? }
-      output_errors_to_console(@faulty_entries) unless @faulty_entries.empty?
+    def import_new_areas(path_to_folder)
+      new_areas_csvs = Dir["#{path_to_folder}/*.csv"]
+
+      new_areas_csvs.each { |area_csv| extract_csv_data(area_csv) }
+
+      import_areas
     end
 
     private
+
+    def extract_csv_data(path_to_file)
+      CSV.foreach(path_to_file, headers: true) { |row| @areas << row.to_h }
+    end
+
+    def import_areas
+      abort("Headers incorrect.") unless (@areas.map(&:keys).flatten.uniq - HEADERS).empty?
+
+      areas = group_by_type(@areas)
+      PafsCore::Area::AREA_TYPES.each { |area_type| create_records(areas[area_type]) unless areas[area_type].nil? }
+      output_errors_to_console(@faulty_entries) unless @faulty_entries.empty?
+    end
 
     def group_by_type(areas)
       areas.group_by { |area| area["type"] }
