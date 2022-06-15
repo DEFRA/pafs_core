@@ -19,4 +19,38 @@ RSpec.describe PafsCore::AreaImporter do
       expect(areas.size).to eq(3)
     end
   end
+
+  describe "#import_new_areas" do
+    before do
+      file_path = "#{Rails.root}/../fixtures/areas.csv"
+      PafsCore::AreaImporter.new.import(file_path)
+    end
+
+    it "should successfully import the new areas with correct data" do
+      folder_path = "#{Rails.root}/../fixtures/new_areas"
+
+      PafsCore::AreaImporter.new.import_new_areas(folder_path)
+
+      areas = PafsCore::Area.all
+      expect(areas.size).to eq(6)
+    end
+
+    it "shouldn't import areas that are already present" do
+      folder_path = "#{Rails.root}/../fixtures/new_areas"
+
+      2.times { PafsCore::AreaImporter.new.import_new_areas(folder_path) }
+
+      areas = PafsCore::Area.all
+      expect(areas.size).to eq(6)
+    end
+
+    it "shouldn't import areas that have faulty data" do
+      folder_path = "#{Rails.root}/../fixtures/new_areas_with_faults"
+
+      PafsCore::AreaImporter.new.import_new_areas(folder_path)
+
+      areas = PafsCore::Area.all
+      expect(areas.size).to eq(5)
+    end
+  end
 end
