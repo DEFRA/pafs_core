@@ -11,7 +11,7 @@ module PafsCore
                "sub type"].freeze
 
     def initialize
-      @areas = []
+      @areas_to_be_imported = []
       @faulty_entries = []
     end
 
@@ -34,15 +34,15 @@ module PafsCore
     private
 
     def extract_csv_data(path_to_file)
-      CSV.foreach(path_to_file, headers: true) { |row| @areas << row.to_h }
+      CSV.foreach(path_to_file, headers: true) { |row| @areas_to_be_imported << row.to_h }
     end
 
     def import_areas
-      abort("Headers incorrect.") unless (@areas.map(&:keys).flatten.uniq - HEADERS).empty?
+      abort("Headers incorrect.") unless (@areas_to_be_imported.first.keys - HEADERS).empty?
 
       remove_areas_that_have_already_been_imported
 
-      areas = group_by_type(@areas)
+      areas = group_by_type(@areas_to_be_imported)
       PafsCore::Area::AREA_TYPES.each { |area_type| create_records(areas[area_type]) unless areas[area_type].nil? }
       output_errors_to_console(@faulty_entries) unless @faulty_entries.empty?
     end
@@ -50,7 +50,7 @@ module PafsCore
     def remove_areas_that_have_already_been_imported
       existing_areas = PafsCore::Area.pluck(:name, :area_type)
 
-      @areas.delete_if { |area| existing_areas.include? [area[:name], area[:area_type]] }
+      @areas_to_be_imported.delete_if { |area| existing_areas.include? [area[:name], area[:area_type]] }
     end
 
     def group_by_type(areas)

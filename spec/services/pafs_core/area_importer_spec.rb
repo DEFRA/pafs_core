@@ -43,5 +43,14 @@ RSpec.describe PafsCore::AreaImporter do
       areas = PafsCore::Area.all
       expect(areas.size).to eq(6)
     end
+
+    it "shouldn't import areas that have faulty data" do
+      folder_path = "#{Rails.root}/../fixtures/new_areas_with_faults"
+
+      PafsCore::AreaImporter.new.import_new_areas(folder_path)
+
+      areas = PafsCore::Area.all
+      expect(areas.size).to eq(5)
+    end
   end
 end
