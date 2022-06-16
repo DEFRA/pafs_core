@@ -109,6 +109,24 @@ class PafsCore::Camc3Presenter
                        om4f: fcerm1_presenter.improve_river_amount,
                        om4g: fcerm1_presenter.improve_habitat_amount,
                        om4h: fcerm1_presenter.create_habitat_amount
+                     },
+                     natural_flood_risk_measures: {
+                       river_restoration: project.river_restoration,
+                       floodplain_restoration: project.floodplain_restoration,
+                       leaky_barriers: project.leaky_barriers,
+                       offline_flood_storage_areas: project.offline_flood_storage_areas,
+                       cross_slope_woodland: project.cross_slope_woodland,
+                       catchment_woodland: project.catchment_woodland,
+                       riparian_woodland: project.riparian_woodland,
+                       floodplain_woodland: project.floodplain_woodland,
+                       soil_and_land_management: project.soil_and_land_management,
+                       land_and_headwater_drainage_management: project.land_and_headwater_drainage_management,
+                       runoff_pathway_management: project.runoff_pathway_management,
+                       saltmarsh_mudflats_and_managed_realignment: project.saltmarsh_mudflats_and_managed_realignment,
+                       sand_dunes: project.sand_dunes,
+                       beach_nourishment: project.beach_nourishment,
+                       other_flood_measures: project.other_flood_measures,
+                       natural_flood_risk_measures_cost: project.natural_flood_risk_measures_cost
                      }
                    }
                  )
