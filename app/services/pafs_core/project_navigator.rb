@@ -96,11 +96,10 @@ module PafsCore
         { summary_91: :standard_of_protection },
         { summary_10: :approach },
         { summary_11: :environmental_outcomes },
-        { summary_12: :natural_flood_risk_measure_included },
-        { summary_13: :urgency },
-        { summary_14: :funding_calculator },
-        { summary_15: :confidence },
-        { summary_16: :carbon }
+        { summary_12: :urgency },
+        { summary_13: :funding_calculator },
+        { summary_14: :confidence },
+        { summary_15: :carbon }
       ]
     end
 
@@ -194,27 +193,22 @@ module PafsCore
         s.add :fish_or_eel_amount, if: :removes_fish_or_eel_barrier?
         s.add :summary_11
 
-        s.add :natural_flood_risk_measures_included
-        s.add :natural_flood_risk_measures, if: :natural_flood_risk_measures_included?
-        s.add :natural_flood_risk_measures_cost, if: :natural_flood_risk_measures_included?
-        s.add :summary_12
-
         s.add :urgency
         s.add :urgency_details, if: :urgent?
-        s.add :summary_13
+        s.add :summary_12
 
         s.add :funding_calculator, unless: ->(p) { p.funding_calculator_file_name.present? }
         s.add :funding_calculator_summary
-        s.add :summary_14
+        s.add :summary_13
 
         s.add :confidence_homes_better_protected
         s.add :confidence_homes_by_gateway_four
         s.add :confidence_secured_partnership_funding
-        s.add :summary_15
+        s.add :summary_14
 
         s.add :carbon_cost_build
         s.add :carbon_cost_operation
-        s.add :summary_16
+        s.add :summary_15
       end
     end
     # rubocop:enable Metrics/AbcSize

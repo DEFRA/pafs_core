@@ -10,7 +10,6 @@ module PafsCore
     include PafsCore::Outcomes
     include PafsCore::Risks
     include PafsCore::FundingSources
-    include PafsCore::NaturalFloodRiskMeasures
 
     include PafsCore::ProjectsHelper
 

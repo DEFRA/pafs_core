@@ -192,17 +192,5 @@ FactoryBot.define do
     factory :confidence_secured_partnership_funding_step, class: PafsCore::ConfidenceSecuredPartnershipFundingStep do
       confidence_secured_partnership_funding { "high" }
     end
-
-    factory :natural_flood_risk_measures_step, class: PafsCore::NaturalFloodRiskMeasuresStep do
-      river_restoration { true }
-    end
-
-    factory :natural_flood_risk_measures_included_step, class: PafsCore::NaturalFloodRiskMeasuresIncludedStep do
-      natural_flood_risk_measures_included { true }
-    end
-
-    factory :natural_flood_risk_measures_cost_step, class: PafsCore::NaturalFloodRiskMeasuresCostStep do
-      natural_flood_risk_measures_cost { 12.23 }
-    end
   end
 end

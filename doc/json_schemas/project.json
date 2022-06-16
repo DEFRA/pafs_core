@@ -51,54 +51,33 @@
         "example": "NWO014E/000A/060A"
       },
       "pafs_ons_region": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "pafs_region_and_coastal_commitee": {
         "type": "string",
         "example": "North West"
       },
       "pafs_ea_area": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "Greater Manchester Merseyside and Cheshire"
       },
       "lrma_name": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "PSO Greater Manchester"
       },
       "lrma_type": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "email": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "matt@example.com",
         "description": "Email address of user account that created this project"
       },
       "coastal_group": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "risk_source": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "River Flooding"
       },
       "moderation_code": {
@@ -106,51 +85,30 @@
         "example": "Not Urgent"
       },
       "constituency": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "West Bromwich East"
       },
       "pafs_county": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "earliest_funding_profile_date": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "04/2015"
       },
       "aspirational_gateway_1": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "09/2016"
       },
       "aspirational_gateway_3": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "04/2017"
       },
       "aspirational_start_of_construction": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "04/2017"
       },
       "aspirational_gateway_4": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "03/2022"
       },
       "problem_and_proposed_solution": {
@@ -158,40 +116,25 @@
         "example": "Linked to Black Brook, Chapel en le frith FRM Scheme"
       },
       "flooding_standard_of_protection_before": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "0.5% or lower"
       },
       "flooding_standard_of_protection_after": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "0.5% or lower"
       },
       "coastal_erosion_standard_of_protection_before": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "coastal_erosion_standard_of_protection_after": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "strategic_approach": {
         "type": "string",
         "example": "N"
       },
       "duration_of_benefits": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "funding_sources": {
         "type": "object",
@@ -215,24 +158,15 @@
                   "example": -1
                 },
                 "fcerm_gia": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
+                  "type": ["integer", "null"],
                   "example": 0
                 },
                 "local_levy": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
+                  "type": ["integer", "null"],
                   "example": 0
                 },
                 "internal_drainage_boards": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
+                  "type": ["integer", "null"],
                   "example": 0
                 },
                 "public_contributions": {
@@ -320,17 +254,11 @@
                   }
                 },
                 "growth_funding": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
+                  "type": ["integer", "null"],
                   "example": 0
                 },
                 "not_yet_identified": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
+                  "type": ["integer", "null"],
                   "example": 0
                 }
               }
@@ -339,35 +267,20 @@
         }
       },
       "national_grid_reference": {
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "example": "SK0071972583"
       },
       "shapefile": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "urgency_details": {
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       "capital_carbon": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "type": ["number", "null"]
       },
       "carbon_lifecycle": {
-        "type": [
-          "number",
-          "null"
-        ]
+        "type": ["number", "null"]
       },
       "confidence": {
         "type": "object",
@@ -378,147 +291,18 @@
         ],
         "properties": {
           "homes_better_protected": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "high",
-              "medium_high",
-              "medium_low",
-              "low",
-              "not_applicable",
-              "",
-              null
-            ]
+            "type": ["string", "null"],
+            "enum": ["high", "medium_high", "medium_low", "low", "not_applicable", "", null]
           },
           "homes_by_gateway_four": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "high",
-              "medium_high",
-              "medium_low",
-              "low",
-              "not_applicable",
-              "",
-              null
-            ]
+            "type": ["string", "null"],
+            "enum": ["high", "medium_high", "medium_low", "low", "not_applicable", "", null]
           },
           "secured_partnership_funding": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "high",
-              "medium_high",
-              "medium_low",
-              "low",
-              "not_applicable",
-              "",
-              null
-            ]
+            "type": ["string", "null"],
+            "enum": ["high", "medium_high", "medium_low", "low", "not_applicable", "", null]
           }
         }
-      },
-      "river_restoration": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "floodplain_restoration": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "leaky_barriers": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "offline_flood_storage_areas": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "cross_slope_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "catchment_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "riparian_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "floodplain_woodland": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "soil_and_land_management": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "land_and_headwater_drainage_management": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "runoff_pathway_management": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "saltmarsh_mudflats_and_managed_realignment": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "sand_dunes": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "beach_nourishment": {
-        "type": [
-          "boolean",
-          "null"
-        ]
-      },
-      "other_flood_measures": {
-        "type": [
-          "string",
-          "null"
-        ]
-      },
-      "flood_risk_measures_cost": {
-        "type": [
-          "float",
-          "null"
-        ]
       },
       "outcome_measures": {
         "type": "object",
@@ -672,59 +456,35 @@
             }
           },
           "om4a": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           },
           "om4b": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           },
           "om4c": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           },
           "om4d": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           },
           "om4e": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           },
           "om4f": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           },
           "om4g": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           },
           "om4h": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "example": 0
           }
         }

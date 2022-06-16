@@ -8,7 +8,6 @@ module PafsCore
     include PafsCore::Outcomes
     include PafsCore::Risks
     include PafsCore::FundingSources
-    include PafsCore::NaturalFloodRiskMeasures
 
     def project_status=(value)
       PafsCore::Projects::StatusUpdate.new(project, value).perform

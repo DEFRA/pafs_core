@@ -11,7 +11,6 @@ module PafsCore
     include PafsCore::Outcomes
     include PafsCore::Risks
     include PafsCore::FundingSources
-    include PafsCore::NaturalFloodRiskMeasures
 
     def location_set?
       project.grid_reference.present?
@@ -297,7 +296,6 @@ module PafsCore
          standard_of_protection
          approach
          environmental_outcomes
-         natural_flood_risk_measures
          urgency
          funding_calculator
          confidence

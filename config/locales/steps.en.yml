@@ -353,35 +353,3 @@ en:
 
         confidence_secured_partnership_funding:
           heading: Confidence in securing the required Partnership Funding
-
-# Natural flood risk measures cost
-        natural_flood_risk_measures_cost:
-          heading: What is  the total cost of your associated natural flood risk measures?
-# Natural flood risk measures included
-        natural_flood_risk_measures_included:
-          heading: Does your project include any Natural Flood risk Measures (NFM)?
-          find_out_more: Find out more about
-          advice_link: Working with natural processes to reduce flood risk - GOV.UK
-          yes: "Yes"
-          no: "No"
-
-# Natural flood risk measures
-        natural_flood_risk_measures:
-          heading: Select the natural flood risk measures that your project will include?
-          lede: Select all that apply
-          river_restoration_label: River restoration
-          floodplain_restoration_label: Floodplain restoration
-          leaky_barriers_label: Leaky barriers
-          offline_flood_storage_areas_label:  Offline flood storage areas
-          cross_slope_woodland_label: Cross slope woodland
-          catchment_woodland_label: Catchment woodland
-          riparian_woodland_label: Riparian woodland
-          floodplain_woodland_label: Floodplain woodland
-          soil_and_land_management_label: Soil and land management
-          land_and_headwater_drainage_management_label: Land & headwater drainage management
-          runoff_pathway_management_label: Runoff pathway management
-          saltmarsh_mudflats_and_managed_realignment_label: Salt marsh, mudflats and managed realignment
-          sand_dunes_label: Sand dunes
-          beach_nourishment_label: Beach nourishment
-          other_label: Other
-          other_flood_measures_label: Other natural flood measure
