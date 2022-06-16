@@ -8,12 +8,6 @@ module PafsCore
     validate :at_least_one_flood_risk_measure_has_been_selected
     validate :other_flood_measure_has_been_added
 
-    def update(params)
-      params[:natural_flood_risk_measures_step][:other_flood_measures] = nil if ["0", "false"].include? step_params(params)[:other_flood_measures_selected]
-
-      super
-    end
-
     private
 
     def step_params(params)

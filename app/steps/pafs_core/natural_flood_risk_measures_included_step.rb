@@ -34,7 +34,6 @@ module PafsCore
       end
 
       project.send("other_flood_measures=", nil)
-      project.send("other_flood_measures_selected=", nil)
       project.send("natural_flood_risk_measures_cost=", nil)
     end
   end
