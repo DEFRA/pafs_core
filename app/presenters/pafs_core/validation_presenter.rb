@@ -255,7 +255,7 @@ module PafsCore
 
       return true if project.natural_flood_risk_measures_included? && natural_flood_risk_measures_and_cost_provided?
 
-      add_error(:natural_flood_risk_measures, "^Tell us about the project's natural flood risk measures")
+      add_error(:natural_flood_risk_measures, "Tell us about the project's natural flood measures")
     end
 
     def natural_flood_risk_measures_and_cost_provided?
