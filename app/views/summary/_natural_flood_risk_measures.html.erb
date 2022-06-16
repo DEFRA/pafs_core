@@ -1,7 +1,7 @@
 <article class="summary-item" aria-labelledby="natural_flood_risk_measures">
   <% if project.natural_flood_risk_measures_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures">Natural flood measures</h2>
+      <h2 class="heading-medium" role="heading" id="risks">Natural flood measures</h2>
       <div class="grid-row">
         <div class="column-three-quarters">
           <% if project.natural_flood_risk_measures_included? %>
@@ -25,7 +25,7 @@
                   <td></td>
                 </tr>
                 <tr>
-                  <td id="total-cost-nfm">Total cost of your associated natural flood risk measures</td>
+                  <td>Total cost of your associated natural flood risk measures</td>
                   <td class="align-right"><%= number_to_currency project.natural_flood_risk_measures_cost, unit: "£", delimeter: "," %></td>
                 </tr>
               </tbody>
@@ -51,7 +51,7 @@
     <div class="add-row">
       <div class="grid-row">
         <div class="column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures">Natural flood measures</h2>
+          <h2 class="heading-medium" role="heading" id="risks">Natural flood measures</h2>
         </div>
         <div class="column-one-quarter">
           <% unless project.archived? %>
