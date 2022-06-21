@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_09_151323) do
+ActiveRecord::Schema.define(version: 2022_06_06_105448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,6 +280,24 @@ ActiveRecord::Schema.define(version: 2020_03_09_151323) do
     t.string "confidence_secured_partnership_funding"
     t.bigint "carbon_cost_build"
     t.bigint "carbon_cost_operation"
+    t.boolean "natural_flood_risk_measures_included"
+    t.boolean "river_restoration"
+    t.boolean "floodplain_restoration"
+    t.boolean "leaky_barriers"
+    t.boolean "offline_flood_storage_areas"
+    t.boolean "cross_slope_woodland"
+    t.boolean "catchment_woodland"
+    t.boolean "riparian_woodland"
+    t.boolean "floodplain_woodland"
+    t.boolean "soil_and_land_management"
+    t.boolean "land_and_headwater_drainage_management"
+    t.boolean "runoff_pathway_management"
+    t.boolean "saltmarsh_mudflats_and_managed_realignment"
+    t.boolean "sand_dunes"
+    t.boolean "beach_nourishment"
+    t.string "other_flood_measures"
+    t.float "natural_flood_risk_measures_cost"
+    t.boolean "other_flood_measures_selected"
     t.index ["reference_number", "version"], name: "index_pafs_core_projects_on_reference_number_and_version", unique: true
     t.index ["slug"], name: "index_pafs_core_projects_on_slug", unique: true
     t.index ["submitted_to_pol"], name: "index_pafs_core_projects_on_submitted_to_pol"
