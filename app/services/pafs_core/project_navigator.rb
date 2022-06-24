@@ -180,28 +180,28 @@ module PafsCore
         s.add :summary_10
 
         s.add :any_environmental_benefits
-        s.add :intertidal_habitat_created_or_enhanced
-        s.add :hectares_of_intertidal_habitat_created_or_enhanced
-        s.add :woodland_habitat_created_or_enhanced
-        s.add :hectares_of_woodland_habitat_created_or_enhanced
-        s.add :wet_woodland_habitat_created_or_enhanced
-        s.add :hectares_of_wet_woodland_habitat_created_or_enhanced
-        s.add :wetland_or_wet_grassland_habitat_created_or_enhanced
-        s.add :hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced
-        s.add :grassland_habitat_created_or_enhanced
-        s.add :hectares_of_grassland_habitat_created_or_enhanced
-        s.add :heathland_habitat_created_or_enhanced
-        s.add :hectares_of_heathland_created_or_enhanced
-        s.add :ponds_lakes_habitat_created_or_enhanced
-        s.add :hectares_of_pond_or_lake_habitat_created_or_enhanced
-        s.add :arable_land_created_or_enhanced
-        s.add :hectares_of_arable_land_lake_habitat_created_or_enhanced
-        s.add :comprehensive_restoration
-        s.add :kilometres_of_watercourse_enhanced_or_created_comprehensive
-        s.add :partial_restoration
-        s.add :kilometres_of_watercourse_enhanced_or_created_partial
-        s.add :create_habitat_watercourse
-        s.add :kilometres_of_watercourse_enhanced_or_created_single
+        s.add :intertidal_habitat_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_intertidal_habitat_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.intertidal_habitat? }
+        s.add :woodland_habitat_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_woodland_habitat_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.woodland? }
+        s.add :wet_woodland_habitat_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_wet_woodland_habitat_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.wet_woodland? }
+        s.add :wetland_or_wet_grassland_habitat_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.wetland_or_wet_grassland? }
+        s.add :grassland_habitat_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_grassland_habitat_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.grassland? }
+        s.add :heathland_habitat_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_heathland_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.heathland? }
+        s.add :ponds_lakes_habitat_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_pond_or_lake_habitat_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.ponds_lakes? }
+        s.add :arable_land_created_or_enhanced, if: :environmental_benefits?
+        s.add :hectares_of_arable_land_lake_habitat_created_or_enhanced, if: ->(p) { p.environmental_benefits? && p.arable_land? }
+        s.add :comprehensive_restoration, if: :environmental_benefits?
+        s.add :kilometres_of_watercourse_enhanced_or_created_comprehensive, if: ->(p) { p.environmental_benefits? && p.comprehensive_restoration? }
+        s.add :partial_restoration, if: :environmental_benefits?
+        s.add :kilometres_of_watercourse_enhanced_or_created_partial, if: ->(p) { p.environmental_benefits? && p.partial_restoration? }
+        s.add :create_habitat_watercourse, if: :environmental_benefits?
+        s.add :kilometres_of_watercourse_enhanced_or_created_single, if: ->(p) { p.environmental_benefits? && p.create_habitat_watercourse? }
         s.add :summary_11
 
         s.add :natural_flood_risk_measures_included
