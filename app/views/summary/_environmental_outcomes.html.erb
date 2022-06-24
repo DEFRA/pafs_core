@@ -41,7 +41,7 @@
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="change-link">
-                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :surface_and_groundwater) do -%>
+                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :any_environmental_benefits) do -%>
                   Change<span class="visually-hidden"> the <%= project.summary_label(:surface_and_groundwater_amount).downcase %></span>
                 <% end -%>
               </div>
@@ -62,7 +62,7 @@
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
-                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :surface_and_groundwater) do -%>
+                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :any_environmental_benefits) do -%>
                   Add<span class="visually-hidden"> <%= project.summary_label(:environmental_outcomes_title).downcase %></span>
                 <% end -%>
               </div>

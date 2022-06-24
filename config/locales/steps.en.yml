@@ -385,3 +385,51 @@ en:
           beach_nourishment_label: Beach nourishment
           other_label: Other
           other_flood_measures_label: Other natural flood measure
+
+  # Any Environmental benefits
+        any_environmental_benefits:
+          heading: Does the project include any environmental benefits?
+        arable_land_created_or_enhanced:
+          heading: Will the project create or enhance an arable land habitat?
+        comprehensive_restoration:
+          heading: Will the project include comprehensive restoration or creation of natural processes, habitats and/or removal of physical modifications?
+        create_habitat_watercourse:
+          heading: Will the project enhance or create a single major physical or habitat of watercourse?
+        grassland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a grassland habitat?
+        heathland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a heathland habitat?
+        hectares_of_arable_land_lake_habitat_created_or_enhanced:
+          heading: How many hectares of arable land habitat will thhe project create or enhance?
+        hectares_of_grassland_habitat_created_or_enhanced:
+          heading: How many hectares of grassland habitat will the project create or enhance?
+        hectares_of_heathland_created_or_enhanced:
+          heading: How many hectares of heathland habitat will the project create or enhance?
+        hectares_of_intertidal_habitat_created_or_enhanced:
+          heading: How many hectares of intertidal wetland habitat will the project create or enhance?
+        hectares_of_pond_or_lake_habitat_created_or_enhanced:
+          heading: How many hectares of pond and/or lake habitat will the project create or enhance?
+        hectares_of_wet_woodland_habitat_created_or_enhanced:
+          heading: How many hectares of wet woodlands habitat will the project create or enhance?
+        hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced:
+          heading: How many hectares of wet or wet grassland habitat will the project create or enhance?
+        hectares_of_woodland_habitat_created_or_enhanced:
+          heading: How many hectares of woodland habitat will the project create or enhance?
+        intertidal_habitat_created_or_enhanced:
+          heading: Will the project create or enhance an intertidal wetland habitat?
+        kilometres_of_watercourse_enhanced_or_created_comprehensive:
+          heading: How many kilometres of watercourse will be enhanced or created?
+        kilometres_of_watercourse_enhanced_or_created_partial:
+          heading: How many kilometres of watercourse will be enhanced or created?
+        kilometres_of_watercourse_enhanced_or_created_single:
+          heading: How many kilometres of watercourse will be enhanced or created?
+        partial_restoration:
+          heading: Will your project include partial restoration of natural processes, habitats and/pr partial removal of physical modifications?
+        ponds_lakes_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a pond and/or lake habitat?
+        wet_woodland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a wet woodlands habitat?
+        wetland_or_wet_grassland_habitat_created_or_enhanced:
+          heading: Will thhe project create or enhance a wetland or wet grassland habitat?
+        woodland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a woodland habitat?

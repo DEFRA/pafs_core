@@ -179,19 +179,29 @@ module PafsCore
         s.add :approach
         s.add :summary_10
 
-        s.add :surface_and_groundwater
-        s.add :surface_and_groundwater_amount, if: :improve_surface_or_groundwater?
-        s.add :improve_spa_or_sac
-        s.add :improve_sssi, unless: :improve_spa_or_sac?
-        s.add :improve_hpi, unless: ->(p) { p.improve_spa_or_sac || p.improve_sssi }
-        s.add :improve_habitat_amount, if: :improves_habitat?
-        s.add :improve_river, if: :improves_habitat?
-        s.add :improve_river_amount, if: :improve_river?
-        s.add :habitat_creation
-        s.add :habitat_creation_amount, if: :create_habitat?
-        s.add :remove_fish_barrier
-        s.add :remove_eel_barrier
-        s.add :fish_or_eel_amount, if: :removes_fish_or_eel_barrier?
+        s.add :any_environmental_benefits
+        s.add :intertidal_habitat_created_or_enhanced
+        s.add :hectares_of_intertidal_habitat_created_or_enhanced
+        s.add :woodland_habitat_created_or_enhanced
+        s.add :hectares_of_woodland_habitat_created_or_enhanced
+        s.add :wet_woodland_habitat_created_or_enhanced
+        s.add :hectares_of_wet_woodland_habitat_created_or_enhanced
+        s.add :wetland_or_wet_grassland_habitat_created_or_enhanced
+        s.add :hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced
+        s.add :grassland_habitat_created_or_enhanced
+        s.add :hectares_of_grassland_habitat_created_or_enhanced
+        s.add :heathland_habitat_created_or_enhanced
+        s.add :hectares_of_heathland_created_or_enhanced
+        s.add :ponds_lakes_habitat_created_or_enhanced
+        s.add :hectares_of_pond_or_lake_habitat_created_or_enhanced
+        s.add :arable_land_created_or_enhanced
+        s.add :hectares_of_arable_land_lake_habitat_created_or_enhanced
+        s.add :comprehensive_restoration
+        s.add :kilometres_of_watercourse_enhanced_or_created_comprehensive
+        s.add :partial_restoration
+        s.add :kilometres_of_watercourse_enhanced_or_created_partial
+        s.add :create_habitat_watercourse
+        s.add :kilometres_of_watercourse_enhanced_or_created_single
         s.add :summary_11
 
         s.add :natural_flood_risk_measures_included
