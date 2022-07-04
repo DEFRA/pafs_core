@@ -63,6 +63,6 @@ en:
       heathland: Hectares of heathland habitat the project will create or enhance
       ponds_lakes: Hectares of pond and/or lake habitat the project will create or enhance
       arable_land: Hectares of arable land habitat the project will create or enhance
-      comprehensive_restoration: Kilometres of watercourse the project will create or enhance
-      partial_restoration: Kilometres of watercourse the project will create or enhance
-      create_habitat_watercourse: Kilometres of watercourse the project will create or enhance
+      comprehensive_restoration: Kilometres of comprehensive river restoration the project will create or enhance
+      partial_restoration: Kilometres of partial restoration the project will create or enhance
+      create_habitat_watercourse: Kilometres of single major phhysical improvement the project will create or enhance
