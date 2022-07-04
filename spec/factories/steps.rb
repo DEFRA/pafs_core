@@ -152,5 +152,97 @@ FactoryBot.define do
     factory :natural_flood_risk_measures_cost_step, class: PafsCore::NaturalFloodRiskMeasuresCostStep do
       natural_flood_risk_measures_cost { 12.23 }
     end
+
+    factory :any_environmental_benefits_step, class: PafsCore::AnyEnvironmentalBenefitsStep do
+      environmental_benefits { true }
+    end
+
+    factory :intertidal_habitat_created_or_enhanced_step, class: PafsCore::IntertidalHabitatCreatedOrEnhancedStep do
+      intertidal_habitat { true }
+    end
+
+    factory :hectares_of_intertidal_habitat_created_or_enhanced_step, class: PafsCore::HectaresOfIntertidalHabitatCreatedOrEnhancedStep do
+      hectares_of_intertidal_habitat_created_or_enhanced { 12 }
+    end
+
+    factory :woodland_habitat_created_or_enhanced_step, class: PafsCore::WoodlandHabitatCreatedOrEnhancedStep do
+      woodland { true }
+    end
+
+    factory :hectares_of_woodland_habitat_created_or_enhanced_step, class: PafsCore::HectaresOfWoodlandHabitatCreatedOrEnhancedStep do
+      hectares_of_woodland_habitat_created_or_enhanced { 12 }
+    end
+
+    factory :wet_woodland_habitat_created_or_enhanced_step, class: PafsCore::WetWoodlandHabitatCreatedOrEnhancedStep do
+      wet_woodland { true }
+    end
+
+    factory :hectares_of_wet_woodland_habitat_created_or_enhanced_step, class: PafsCore::HectaresOfWetWoodlandHabitatCreatedOrEnhancedStep do
+      hectares_of_wet_woodland_habitat_created_or_enhanced { 12 }
+    end
+
+    factory :wetland_or_wet_grassland_habitat_created_or_enhanced_step, class: PafsCore::WetlandOrWetGrasslandHabitatCreatedOrEnhancedStep do
+      wetland_or_wet_grassland { true }
+    end
+
+    factory :hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced_step, class: PafsCore::HectaresOfWetlandOrWetGrasslandHabitatCreatedOrEnhancedStep do
+      hectares_of_wetland_or_wet_grassland_created_or_enhanced { 12 }
+    end
+
+    factory :grassland_habitat_created_or_enhanced_step, class: PafsCore::GrasslandHabitatCreatedOrEnhancedStep do
+      grassland { true }
+    end
+
+    factory :hectares_of_grassland_habitat_created_or_enhanced_step, class: PafsCore::HectaresOfGrasslandHabitatCreatedOrEnhancedStep do
+      hectares_of_grassland_habitat_created_or_enhanced { 12 }
+    end
+
+    factory :heathland_habitat_created_or_enhanced_step, class: PafsCore::HeathlandHabitatCreatedOrEnhancedStep do
+      heathland { true }
+    end
+
+    factory :hectares_of_heathland_created_or_enhanced_step, class: PafsCore::HectaresOfHeathlandCreatedOrEnhancedStep do
+      hectares_of_heathland_created_or_enhanced { 12 }
+    end
+
+    factory :ponds_lakes_habitat_created_or_enhanced_step, class: PafsCore::PondsLakesHabitatCreatedOrEnhancedStep do
+      ponds_lakes { true }
+    end
+
+    factory :hectares_of_pond_or_lake_habitat_created_or_enhanced_step, class: PafsCore::HectaresOfPondOrLakeHabitatCreatedOrEnhancedStep do
+      hectares_of_pond_or_lake_habitat_created_or_enhanced { 12 }
+    end
+
+    factory :arable_land_created_or_enhanced_step, class: PafsCore::ArableLandCreatedOrEnhancedStep do
+      arable_land { true }
+    end
+
+    factory :hectares_of_arable_land_lake_habitat_created_or_enhanced_step, class: PafsCore::HectaresOfArableLandLakeHabitatCreatedOrEnhancedStep do
+      hectares_of_arable_land_lake_habitat_created_or_enhanced { 12 }
+    end
+
+    factory :comprehensive_restoration_step, class: PafsCore::ComprehensiveRestorationStep do
+      comprehensive_restoration { true }
+    end
+
+    factory :kilometres_of_watercourse_enhanced_or_created_comprehensive_step, class: PafsCore::KilometresOfWatercourseEnhancedOrCreatedComprehensiveStep do
+      kilometres_of_watercourse_enhanced_or_created_comprehensive { 12 }
+    end
+
+    factory :partial_restoration_step, class: PafsCore::PartialRestorationStep do
+      partial_restoration { true }
+    end
+
+    factory :kilometres_of_watercourse_enhanced_or_created_partial_step, class: PafsCore::KilometresOfWatercourseEnhancedOrCreatedPartialStep do
+      kilometres_of_watercourse_enhanced_or_created_partial { 12 }
+    end
+
+    factory :create_habitat_watercourse_step, class: PafsCore::CreateHabitatWatercourseStep do
+      create_habitat_watercourse { true }
+    end
+
+    factory :kilometres_of_watercourse_enhanced_or_created_single_step, class: PafsCore::KilometresOfWatercourseEnhancedOrCreatedSingleStep do
+      kilometres_of_watercourse_enhanced_or_created_single { 12 }
+    end
   end
 end
