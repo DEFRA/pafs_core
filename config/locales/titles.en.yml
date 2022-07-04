@@ -78,3 +78,25 @@ en:
     natural_flood_risk_measures_included: Natural flood measures included
     natural_flood_risk_measures: Natural flood risk measures
     natural_flood_risk_measures_cost: Natural flood risk measures cost
+    any_environmental_benefits: Does the project include any environmental benefits?
+    intertidal_habitat_created_or_enhanced: Will the project create or enhance an intertidal wetland habitat?
+    hectares_of_intertidal_habitat_created_or_enhanced: How many hectares of intertidal wetland habitat will the project create or enhance?
+    woodland_habitat_created_or_enhanced: Will the project create or enhance a woodland habitat?
+    hectares_of_woodland_habitat_created_or_enhanced: How many hectares of woodland habitat will the project create or enhance?
+    wet_woodland_habitat_created_or_enhanced: Will the project create or enhance a wet woodlands habitat?
+    hectares_of_wet_woodland_habitat_created_or_enhanced: How many hectares of wet woodlands habitat will the project create or enhance?
+    wetland_or_wet_grassland_habitat_created_or_enhanced: Will the project create or enhance a wetland or wet grassland habitat?
+    hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced: How many hectares of wet or wet grassland habitat will the project create or enhance?
+    grassland_habitat_created_or_enhanced: Will the project create or enhance a grassland habitat?
+    hectares_of_grassland_habitat_created_or_enhanced: How many hectares of grassland habitat will the project create or enhance?
+    heathland_habitat_created_or_enhanced: Will the project create or enhance a heathland habitat?
+    hectares_of_heathland_created_or_enhanced: How many hectares of heathland habitat will the project create or enhance?
+    ponds_lakes_habitat_created_or_enhanced: Will the project create or enhance a pond and/or lake habitat?
+    hectares_of_pond_or_lake_habitat_created_or_enhanced: How many hectares of pond and/or lake habitat will the project create or enhance?
+    arable_land_created_or_enhanced: Will the project create or enhance an arable land habitat?
+    hectares_of_arable_land_lake_habitat_created_or_enhanced: How many hectares of arable land habitat will the project create or enhance?
+    comprehensive_restoration: Will the project include comprehensive restoration or creation of natural processes, habitats and/or removal of physical modifications?
+    kilometres_of_watercourse_enhanced_or_created_comprehensive: How many kilometres of comprehensive river restoration will be enhanced or created?
+    partial_restoration: Will your project include partial restoration of natural processes, habitats and/or partial removal of physical modifications?
+    kilometres_of_watercourse_enhanced_or_created_partial: How many kilometres of partial restoration will be enhanced or created?
+    create_habitat_watercourse: Will the project enhance or create a single major physical or habitat of watercourse?
