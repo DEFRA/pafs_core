@@ -55,3 +55,14 @@ en:
       coastal_erosion_protection_outcomes_detail_lede: "Houses built or converted after 1 January 2012 aren't included."
       households_protected_from_loss_in_next_20_years_label: "Of the households in column A, how many will be protected from loss within the next 20 years."
       households_total_label: "Total"
+      intertidal_habitat: Hectares of intertidal wetland habitat the project will create or enhance
+      woodland: hectares of woodland habitat the project will create or enhance
+      wet_woodland: Hectares of wet woodlands habitat the project will create or enhance
+      wetland_or_wet_grassland: Hectares of wet or wet grassland habitat the project will create or enhance
+      grassland: Hectares of grassland habitat the project will create or enhance
+      heathland: Hectares of heathland habitat the project will create or enhance
+      ponds_lakes: Hectares of pond and/or lake habitat the project will create or enhance
+      arable_land: Hectares of arable land habitat the project will create or enhance
+      comprehensive_restoration: Kilometres of watercourse the project will create or enhance
+      partial_restoration: Kilometres of watercourse the project will create or enhance
+      create_habitat_watercourse: Kilometres of watercourse the project will create or enhance

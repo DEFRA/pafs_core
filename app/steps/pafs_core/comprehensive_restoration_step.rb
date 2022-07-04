@@ -7,6 +7,12 @@ module PafsCore
 
     validate :a_choice_has_been_made
 
+    def update(params)
+      project.send(:kilometres_of_watercourse_enhanced_or_created_comprehensive=, nil) if step_params(params)[:comprehensive_restoration] == "false"
+
+      super
+    end
+
     private
 
     def step_params(params)

@@ -275,6 +275,18 @@ module PafsCore
       "<em>Not provided</em>".html_safe
     end
 
+    def hectares_created_or_enhanced(attribute)
+      return not_provided if send(attribute).nil?
+
+      "#{send(attribute)} hectares"
+    end
+
+    def kilometres_created_or_enhanced(attribute)
+      return not_provided if send(attribute).nil?
+
+      "#{send(attribute)} kilometres"
+    end
+
     private
 
     def project

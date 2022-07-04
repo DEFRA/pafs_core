@@ -7,6 +7,12 @@ module PafsCore
 
     validate :a_choice_has_been_made
 
+    def update(params)
+      project.send(:hectares_of_arable_land_lake_habitat_created_or_enhanced=, nil) if step_params(params)[:arable_land] == "false"
+
+      super
+    end
+
     private
 
     def step_params(params)

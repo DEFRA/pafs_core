@@ -386,7 +386,7 @@ en:
           other_label: Other
           other_flood_measures_label: Other natural flood measure
 
-  # Any Environmental benefits
+# Any Environmental benefits
         any_environmental_benefits:
           heading: Does the project include any environmental benefits?
         arable_land_created_or_enhanced:

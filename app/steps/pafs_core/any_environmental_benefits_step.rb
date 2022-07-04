@@ -27,7 +27,7 @@ module PafsCore
     end
 
     def reset_om4_attributes_to_nil
-      selected_om4_attributes.each do |om4_attribute|
+      OM4_ATTRIBUTES.each do |om4_attribute|
         project.send("#{om4_attribute}=", nil)
       end
     end
