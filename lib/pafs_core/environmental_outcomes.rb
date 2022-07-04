@@ -39,9 +39,5 @@ module PafsCore
     def selected_om4_attributes
       OM4_ATTRIBUTES.select { |r| send("#{r}?") }
     end
-
-    def environmental_outcomes_started?
-      !environmental_benefits.nil?
-    end
   end
 end

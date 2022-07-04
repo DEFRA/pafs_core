@@ -1,5 +1,5 @@
 <article class="summary-item" aria-labelledby="environmental-outcomes">
-  <% if !project.environmental_benefits.nil?  %>
+  <% if project.environmental_outcomes_started?  %>
     <div class="summary-item-content">
       <h2 class="heading-medium" role="heading" id="environmental-outcomes">
         <%= project.summary_label(:environmental_outcomes_title) %>

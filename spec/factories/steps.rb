@@ -113,58 +113,6 @@ FactoryBot.define do
       approach { "We will go left and then turn right for a bit" }
     end
 
-    factory :surface_and_groundwater_step, class: PafsCore::SurfaceAndGroundwaterStep do
-      improve_surface_or_groundwater { true }
-    end
-
-    factory :surface_and_groundwater_amount_step, class: PafsCore::SurfaceAndGroundwaterAmountStep do
-      improve_surface_or_groundwater_amount { 50.25 }
-    end
-
-    factory :improve_river_step, class: PafsCore::ImproveRiverStep do
-      improve_river { true }
-    end
-
-    factory :improve_spa_or_sac_step, class: PafsCore::ImproveSpaOrSacStep do
-      improve_spa_or_sac { true }
-    end
-
-    factory :improve_sssi_step, class: PafsCore::ImproveSssiStep do
-      improve_sssi { true }
-    end
-
-    factory :improve_hpi_step, class: PafsCore::ImproveHpiStep do
-      improve_hpi { true }
-    end
-
-    factory :improve_habitat_amount_step, class: PafsCore::ImproveHabitatAmountStep do
-      improve_habitat_amount { 1.23 }
-    end
-
-    factory :improve_river_amount_step, class: PafsCore::ImproveRiverAmountStep do
-      improve_river_amount { 21.7 }
-    end
-
-    factory :habitat_creation_step, class: PafsCore::HabitatCreationStep do
-      create_habitat { true }
-    end
-
-    factory :habitat_creation_amount_step, class: PafsCore::HabitatCreationAmountStep do
-      create_habitat_amount { 2.5 }
-    end
-
-    factory :remove_fish_barrier_step, class: PafsCore::RemoveFishBarrierStep do
-      remove_fish_barrier { true }
-    end
-
-    factory :remove_eel_barrier_step, class: PafsCore::RemoveEelBarrierStep do
-      remove_eel_barrier { true }
-    end
-
-    factory :fish_or_eel_amount_step, class: PafsCore::FishOrEelAmountStep do
-      fish_or_eel_amount { 22 }
-    end
-
     factory :urgency_step, class: PafsCore::UrgencyStep do
       urgency_reason { "health_and_safety" }
       urgency_details { "This is the description" }

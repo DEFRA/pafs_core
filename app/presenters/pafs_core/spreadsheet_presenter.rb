@@ -213,68 +213,6 @@ module PafsCore
       project.kilometres_of_protected_river_improved || 0
     end
 
-    def designated_site
-      if improve_spa_or_sac?
-        "SPA/SAC"
-      elsif improve_sssi?
-        "SSSI"
-      else
-        "None"
-      end
-    end
-
-    def improve_surface_or_groundwater_amount
-      if improve_surface_or_groundwater?
-        project.improve_surface_or_groundwater_amount || 0
-      else
-        0
-      end
-    end
-
-    def remove_fish_or_eel_barrier
-      if remove_fish_barrier? && remove_eel_barrier?
-        "Both"
-      elsif remove_fish_barrier?
-        "Fish"
-      elsif remove_eel_barrier?
-        "Eel"
-      else
-        "None"
-      end
-    end
-
-    def fish_or_eel_amount
-      if removes_fish_or_eel_barrier?
-        project.fish_or_eel_amount || 0
-      else
-        0
-      end
-    end
-
-    def improve_river_amount
-      if improve_river?
-        project.improve_river_amount || 0
-      else
-        0
-      end
-    end
-
-    def improve_habitat_amount
-      if improves_habitat?
-        project.improve_habitat_amount || 0
-      else
-        0
-      end
-    end
-
-    def create_habitat_amount
-      if create_habitat?
-        project.create_habitat_amount || 0
-      else
-        0
-      end
-    end
-
     def project_status
       status_label_for(project.status)
     end

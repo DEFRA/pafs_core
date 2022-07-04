@@ -145,10 +145,7 @@ module PafsCore
     end
 
     def environmental_outcomes_started?
-      !improve_surface_or_groundwater.nil? || !improve_spa_or_sac.nil? ||
-        !improve_sssi.nil? || !improve_hpi.nil? || !improve_river.nil? ||
-        !create_habitat.nil? || !remove_fish_barrier.nil? ||
-        !remove_eel_barrier.nil?
+      !environmental_benefits.nil?
     end
 
     def surface_and_groundwater_size
