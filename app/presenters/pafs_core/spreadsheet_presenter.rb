@@ -201,16 +201,25 @@ module PafsCore
       sum_coastal_erosion_protection_for(year, :households_protected_from_loss_in_20_percent_most_deprived)
     end
 
-    def hectares_of_net_water_dependent_habitat_created
-      project.hectares_of_net_water_dependent_habitat_created || 0
+    def total_hectares_of_habitat_created_or_enhanced
+      [
+        hectares_of_intertidal_habitat_created_or_enhanced,
+        hectares_of_woodland_habitat_created_or_enhanced,
+        hectares_of_wet_woodland_habitat_created_or_enhanced,
+        hectares_of_wetland_or_wet_grassland_created_or_enhanced,
+        hectares_of_grassland_habitat_created_or_enhanced,
+        hectares_of_heathland_created_or_enhanced,
+        hectares_of_pond_or_lake_habitat_created_or_enhanced,
+        hectares_of_arable_land_lake_habitat_created_or_enhanced
+      ].compact.sum
     end
 
-    def hectares_of_net_water_intertidal_habitat_created
-      project.hectares_of_net_water_intertidal_habitat_created || 0
-    end
-
-    def kilometres_of_protected_river_improved
-      project.kilometres_of_protected_river_improved || 0
+    def total_kilometres_of_watercourse_created_or_enhanced
+      [
+        kilometres_of_watercourse_enhanced_or_created_comprehensive,
+        kilometres_of_watercourse_enhanced_or_created_partial,
+        kilometres_of_watercourse_enhanced_or_created_single
+      ].compact.sum
     end
 
     def project_status
