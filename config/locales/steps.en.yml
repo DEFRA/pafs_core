@@ -8,6 +8,9 @@ en:
       secured_label: Is the funding secured?
       time_constrained_label: Is the funding Time Constrained?
       total_label: Total (£)
+    environmental_benefits_partnership_funding_information:
+      find_out_more: Find out more about
+      find_out_more_link: partnership funding eligibility for environmental benefits (opens in new window or tab)
 
   pafs_core:
     projects:
@@ -385,3 +388,62 @@ en:
           beach_nourishment_label: Beach nourishment
           other_label: Other
           other_flood_measures_label: Other natural flood measure
+
+# Any Environmental benefits
+        any_environmental_benefits:
+          heading: Does the project include any environmental benefits?
+        arable_land_created_or_enhanced:
+          heading: Will the project create or enhance an arable land habitat?
+          lede: This is land under cultivation, it includes temporary grass leys.
+        comprehensive_restoration:
+          heading: Will the project include comprehensive restoration or creation of natural processes, habitats and/or removal of physical modifications?
+          lede: This includes creating new channels with minor physical modifications that do not inhibit natural river processes.
+        create_habitat_watercourse:
+          heading: Will the project enhance or create a single major physical or habitat of watercourse?
+        grassland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a grassland habitat?
+          lede: This is land under permanent-natural or semit-natural grassland, dominated by  grassland species with very little or no dwarf shrub, wetland or wooded species within the sward.
+        heathland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a heathland habitat?
+          lede: This is habitat thhat covers the full altitudinal range of heathlands and has at least 25% cover of the heathers and other swarf shrubs, or previously heathland in a degraded state below this.
+        hectares_of_arable_land_lake_habitat_created_or_enhanced:
+          heading: How many hectares of arable land habitat will the project create or enhance?
+        hectares_of_grassland_habitat_created_or_enhanced:
+          heading: How many hectares of grassland habitat will the project create or enhance?
+        hectares_of_heathland_created_or_enhanced:
+          heading: How many hectares of heathland habitat will the project create or enhance?
+        hectares_of_intertidal_habitat_created_or_enhanced:
+          heading: How many hectares of intertidal wetland habitat will the project create or enhance?
+        hectares_of_pond_or_lake_habitat_created_or_enhanced:
+          heading: How many hectares of pond and/or lake habitat will the project create or enhance?
+        hectares_of_wet_woodland_habitat_created_or_enhanced:
+          heading: How many hectares of wet woodlands habitat will the project create or enhance?
+        hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced:
+          heading: How many hectares of wetland or wet grassland habitat will the project create or enhance?
+        hectares_of_woodland_habitat_created_or_enhanced:
+          heading: How many hectares of woodland habitat will the project create or enhance?
+        intertidal_habitat_created_or_enhanced:
+          heading: Will the project create or enhance an intertidal wetland habitat?
+          lede: Intertidal wetland habitats are found between the high and low tide marks. The habitats most associated withh FCERM works are salt marshes and mud flats.
+        kilometres_of_watercourse_enhanced_or_created_comprehensive:
+          heading: How many kilometres of comprehensive river restoration will be enhanced or created?
+        kilometres_of_watercourse_enhanced_or_created_partial:
+          heading: How many kilometres of partial restoration will be enhanced or created?
+        kilometres_of_watercourse_enhanced_or_created_single:
+          heading: How many kilometres of single major physical improvement the project will be enhanced or created?
+        partial_restoration:
+          heading: Will your project include partial restoration of natural processes, habitats and/or partial removal of physical modifications?
+          lede: This includes creating new channels withh some physical modifications and partial functioning of natural processes.
+        ponds_lakes_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a pond and/or lake habitat?
+          lede: Lakes are generally all bodies of water over 2 hectares in area. Ponds are all bodies of water up to 1 hectare.
+        wet_woodland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a wet woodlands habitat?
+          lede: Wet woodland habitats have trees associated with wet soils such as alder, birch and willow.
+        wetland_or_wet_grassland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a wetland or wet grassland habitat?
+          lede: Wetlands and wet grassland habitats include flood plains, wetlands mosaics, reed beds and bogs.
+        woodland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a woodland habitat?
+          lede: Woodlands are areas of vegetation dominated by trees that are more than 5m high when mature, which forms a canopy (areas of trees with a canopy greater than 20%).
+            This includes felled, young or newly planted woodland.

@@ -135,61 +135,101 @@ module PafsCore
     end
 
     def environmental_outcomes_complete?
-      check_surface_or_groundwater &&
-        check_spa_sac_and_sssi &&
-        check_improves_habitat &&
-        check_create_habitat &&
-        check_fish_and_eels
+      return outcomes_error if environmental_benefits.nil?
+
+      return true if environmental_benefits.false?
+
+      check_intertidal && check_woodland && check_wet_woodland && check_wetland_or_wet_grassland &&
+      check_grassland && check_heathland && check_pond_or_lake && check_arable_land &&
+      check_comprehensive_watercourse && check_partial_watercourse && check_single_watercourse
     end
 
-    def check_surface_or_groundwater
-      if improve_surface_or_groundwater.nil?
-        outcomes_error
-      elsif improve_surface_or_groundwater? && improve_surface_or_groundwater_amount.nil?
-        outcomes_error
-      else
-        true
-      end
-    end
+    def check_intertidal
+      return outcomes_error if intertidal.nil?
 
-    def check_spa_sac_and_sssi
-      return outcomes_error if improve_spa_or_sac.nil?
+      return outcomes_error if intertidal? && hectares_of_intertidal_habitat_created_or_enhanced.nil?
 
-      unless improve_spa_or_sac?
-        return outcomes_error if improve_sssi.nil?
-
-        unless improve_sssi?
-          return outcomes_error if improve_hpi.nil?
-        end
-      end
       true
     end
 
-    def check_improves_habitat
-      if improves_habitat?
-        if improve_habitat_amount.nil? || improve_river.nil? || (improve_river? && improve_river_amount.nil?)
-          return outcomes_error
-        end
-      end
+    def check_woodland
+      return outcomes_error if woodland.nil?
+
+      return outcomes_error if woodland? && hectares_of_woodland_habitat_created_or_enhanced.nil?
+
       true
     end
 
-    def check_create_habitat
-      if create_habitat.nil? || (create_habitat? && create_habitat_amount.nil?)
-        outcomes_error
-      else
-        true
-      end
+    def check_wet_woodland
+      return outcomes_error if wet_woodland.nil
+
+      return outcomes_error if wet_woodland? && hectares_of_wet_woodland_habitat_created_or_enhanced.nil?
+
+      true
     end
 
-    def check_fish_and_eels
-      if remove_fish_barrier.nil? || remove_eel_barrier.nil?
-        outcomes_error
-      elsif (remove_fish_barrier? || remove_eel_barrier?) && fish_or_eel_amount.nil?
-        outcomes_error
-      else
-        true
-      end
+    def check_wetland_or_wet_grassland
+      return outcomes_error if wetland_or_wet_grassland.nil
+
+      return outcomes_error if wetland_or_wet_grassland? && hectares_of_wetland_or_wet_grassland_created_or_enhanced.nil?
+
+      true
+    end
+
+    def check_grassland
+      return outcomes_error if grassland.nil
+
+      return outcomes_error if grassland? && hectares_of_grassland_habitat_created_or_enhanced.nil?
+
+      true
+    end
+
+    def check_heathland
+      return outcomes_error if heathland.nil
+
+      return outcomes_error if heathland? && hectares_of_heathland_created_or_enhanced.nil?
+
+      true
+    end
+
+    def check_pond_or_lake
+      return outcomes_error if ponds_lakes.nil
+
+      return outcomes_error if ponds_lakes? && hectares_of_pond_or_lake_habitat_created_or_enhanced.nil?
+
+      true
+    end
+
+    def check_arable_land
+      return outcomes_error if arable.nil
+
+      return outcomes_error if arable? && hectares_of_arable_land_lake_habitat_created_or_enhanced.nil?
+
+      true
+    end
+
+    def check_comprehensive_watercourse
+      return outcomes_error if comprehensive_restoration.nil
+
+      return outcomes_error if comprehensive_restoration? && kilometres_of_watercourse_enhanced_or_created_comprehensive.nil?
+
+      true
+    end
+
+    def check_partial_watercourse
+      return outcomes_error if partial_restoration.nil
+
+      return outcomes_error if partial_restoration? && kilometres_of_watercourse_enhanced_or_created_partial.nil?
+
+      true
+    end
+
+    def check_single_watercourse
+      return outcomes_error if create_habitat_watercourse.nil
+
+      return outcomes_error if  create_habitat_watercourse? && kilometres_of_watercourse_enhanced_or_created_single.nil?
+
+      true
     end
 
     def urgency_complete?

@@ -532,13 +532,7 @@
           "om3b",
           "om3c",
           "om4a",
-          "om4b",
-          "om4c",
-          "om4d",
-          "om4e",
-          "om4f",
-          "om4g",
-          "om4h"
+          "om4b"
         ],
         "properties": {
           "om2": {
@@ -681,48 +675,6 @@
             "example": 0
           },
           "om4b": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4c": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4d": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4e": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4f": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4g": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4h": {
             "type": [
               "number",
               "null"

@@ -1,0 +1,9 @@
+<%= render partial: 'shared/yes_no_form',
+  locals: {
+    project: @project,
+    yes_no_field: :environmental_benefits,
+    heading: t(".heading")
+  }
+%>
+
+<%= render 'shared/environmental_benefits_partnership_funding_information' %>

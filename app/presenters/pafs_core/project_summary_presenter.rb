@@ -145,10 +145,7 @@ module PafsCore
     end
 
     def environmental_outcomes_started?
-      !improve_surface_or_groundwater.nil? || !improve_spa_or_sac.nil? ||
-        !improve_sssi.nil? || !improve_hpi.nil? || !improve_river.nil? ||
-        !create_habitat.nil? || !remove_fish_barrier.nil? ||
-        !remove_eel_barrier.nil?
+      !environmental_benefits.nil?
     end
 
     def surface_and_groundwater_size
@@ -273,6 +270,18 @@ module PafsCore
 
     def not_provided
       "<em>Not provided</em>".html_safe
+    end
+
+    def hectares_created_or_enhanced(attribute)
+      return not_provided if send(attribute).nil?
+
+      "#{send(attribute)} hectares"
+    end
+
+    def kilometres_created_or_enhanced(attribute)
+      return not_provided if send(attribute).nil?
+
+      "#{send(attribute)} kilometres"
     end
 
     private
