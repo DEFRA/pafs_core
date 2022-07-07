@@ -23,17 +23,17 @@
             <tbody>
             <% project.current_flood_protection_outcomes.each do |fo| %>
                 <tr>
-                  <td class="financial_year">
+                  <td id=<%= "financial_year_#{fo.financial_year}" %> class="financial_year">
                     <%= formatted_financial_year(fo.financial_year) %>
                   </td>
-                  <td class="<%= funding_table_cell(fo.financial_year, fo.households_at_reduced_risk) %>">
+                  <td id=<%= "households_at_reduced_risk_#{fo.financial_year}" %> class="<%= funding_table_cell(fo.financial_year, fo.households_at_reduced_risk) %>">
                     <%= number_with_delimiter fo.households_at_reduced_risk %>
                   </td>
-                  <td class="<%= funding_table_cell(fo.financial_year, fo.moved_from_very_significant_and_significant_to_moderate_or_low) %> significant-to-low-risk">
+                  <td id=<%= "moved_from_very_significant_and_significant_to_moderate_or_low_#{fo.financial_year}" %> class="<%= funding_table_cell(fo.financial_year, fo.moved_from_very_significant_and_significant_to_moderate_or_low) %> significant-to-low-risk">
                     <%= number_with_delimiter fo.moved_from_very_significant_and_significant_to_moderate_or_low %>
 
                   </td>
-                  <td class="<%= funding_table_cell(fo.financial_year, fo.households_protected_from_loss_in_20_percent_most_deprived) %>">
+                  <td id=<%= "households_protected_from_loss_in_20_percent_most_deprived_#{fo.financial_year}" %> class="<%= funding_table_cell(fo.financial_year, fo.households_protected_from_loss_in_20_percent_most_deprived) %>">
                     <%= number_with_delimiter fo.households_protected_from_loss_in_20_percent_most_deprived %>
 
                   </td>
@@ -43,9 +43,9 @@
             <tfoot>
             <tr>
               <td><%= project.summary_label(:total_label) %></td>
-              <td class="numeric households-at-reduced-risk-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:households_at_reduced_risk)%></td>
-              <td class="numeric moved-from-very-significant-and-significant-to-moderate-or-low-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:moved_from_very_significant_and_significant_to_moderate_or_low)%></td>
-              <td class="numeric households-protected-from-loss-in-20-percent-most-deprived-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:households_protected_from_loss_in_20_percent_most_deprived)%></td>
+              <td id="households_at_reduced_risk" class="numeric households-at-reduced-risk-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:households_at_reduced_risk)%></td>
+              <td id="moved_from_very_significant_and_significant_to_moderate_or_low" class="numeric moved-from-very-significant-and-significant-to-moderate-or-low-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:moved_from_very_significant_and_significant_to_moderate_or_low)%></td>
+              <td id="households_protected_from_loss_in_20_percent_most_deprived" class="numeric households-protected-from-loss-in-20-percent-most-deprived-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:households_protected_from_loss_in_20_percent_most_deprived)%></td>
             </tr>
             </tfoot>
           </table>
