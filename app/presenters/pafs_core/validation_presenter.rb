@@ -137,7 +137,9 @@ module PafsCore
     def environmental_outcomes_complete?
       return outcomes_error if environmental_benefits.nil?
 
-      return true if environmental_benefits.false?
+      return true unless environmental_benefits?
+
+      return false if selected_om4_attributes.empty?
 
       check_intertidal && check_woodland && check_wet_woodland && check_wetland_or_wet_grassland &&
       check_grassland && check_heathland && check_pond_or_lake && check_arable_land &&
@@ -145,9 +147,9 @@ module PafsCore
     end
 
     def check_intertidal
-      return outcomes_error if intertidal.nil?
+      return outcomes_error if intertidal_habitat.nil?
 
-      return outcomes_error if intertidal? && hectares_of_intertidal_habitat_created_or_enhanced.nil?
+      return outcomes_error if intertidal_habitat? && hectares_of_intertidal_habitat_created_or_enhanced.nil?
 
       true
     end
@@ -161,7 +163,7 @@ module PafsCore
     end
 
     def check_wet_woodland
-      return outcomes_error if wet_woodland.nil
+      return outcomes_error if wet_woodland.nil?
 
       return outcomes_error if wet_woodland? && hectares_of_wet_woodland_habitat_created_or_enhanced.nil?
 
@@ -169,7 +171,7 @@ module PafsCore
     end
 
     def check_wetland_or_wet_grassland
-      return outcomes_error if wetland_or_wet_grassland.nil
+      return outcomes_error if wetland_or_wet_grassland.nil?
 
       return outcomes_error if wetland_or_wet_grassland? && hectares_of_wetland_or_wet_grassland_created_or_enhanced.nil?
 
@@ -177,7 +179,7 @@ module PafsCore
     end
 
     def check_grassland
-      return outcomes_error if grassland.nil
+      return outcomes_error if grassland.nil?
 
       return outcomes_error if grassland? && hectares_of_grassland_habitat_created_or_enhanced.nil?
 
@@ -185,7 +187,7 @@ module PafsCore
     end
 
     def check_heathland
-      return outcomes_error if heathland.nil
+      return outcomes_error if heathland.nil?
 
       return outcomes_error if heathland? && hectares_of_heathland_created_or_enhanced.nil?
 
@@ -193,7 +195,7 @@ module PafsCore
     end
 
     def check_pond_or_lake
-      return outcomes_error if ponds_lakes.nil
+      return outcomes_error if ponds_lakes.nil?
 
       return outcomes_error if ponds_lakes? && hectares_of_pond_or_lake_habitat_created_or_enhanced.nil?
 
@@ -201,15 +203,15 @@ module PafsCore
     end
 
     def check_arable_land
-      return outcomes_error if arable.nil
+      return outcomes_error if arable_land.nil?
 
-      return outcomes_error if arable? && hectares_of_arable_land_lake_habitat_created_or_enhanced.nil?
+      return outcomes_error if arable_land? && hectares_of_arable_land_lake_habitat_created_or_enhanced.nil?
 
       true
     end
 
     def check_comprehensive_watercourse
-      return outcomes_error if comprehensive_restoration.nil
+      return outcomes_error if comprehensive_restoration.nil?
 
       return outcomes_error if comprehensive_restoration? && kilometres_of_watercourse_enhanced_or_created_comprehensive.nil?
 
@@ -217,7 +219,7 @@ module PafsCore
     end
 
     def check_partial_watercourse
-      return outcomes_error if partial_restoration.nil
+      return outcomes_error if partial_restoration.nil?
 
       return outcomes_error if partial_restoration? && kilometres_of_watercourse_enhanced_or_created_partial.nil?
 
@@ -225,7 +227,7 @@ module PafsCore
     end
 
     def check_single_watercourse
-      return outcomes_error if create_habitat_watercourse.nil
+      return outcomes_error if create_habitat_watercourse.nil?
 
       return outcomes_error if  create_habitat_watercourse? && kilometres_of_watercourse_enhanced_or_created_single.nil?
 

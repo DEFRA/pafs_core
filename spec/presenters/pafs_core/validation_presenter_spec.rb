@@ -273,7 +273,56 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#approach_complete?"
 
-  describe "#environmental_outcomes_complete?"
+  describe "#environmental_outcomes_complete?" do
+    context "when environmental_benefits is set to nil" do
+      before(:each) { subject.environmental_benefits = nil }
+
+      it "returns false" do
+        expect(subject.environmental_outcomes_complete?).to eq false
+      end
+    end
+
+    context "when environmental_benefits is set to false" do
+      before(:each) { subject.environmental_benefits = false }
+
+      it "returns true" do
+        expect(subject.environmental_outcomes_complete?).to eq true
+      end
+    end
+
+    context "when environmental_benefits is set to true" do
+      before(:each) { subject.environmental_benefits = true }
+
+      context "and no environmental benefits have been selected" do
+        it "returns false" do
+          expect(subject.environmental_outcomes_complete?).to eq false
+        end
+      end
+
+      context "and at least one environmental benefit has been elected" do
+        before(:each) do
+          subject.arable_land = true
+          %i[intertidal_habitat grassland woodland wet_woodland wetland_or_wet_grassland heathland ponds_lakes comprehensive_restoration partial_restoration create_habitat_watercourse].each do |benefit|
+            subject.send("#{benefit}=", false)
+          end
+        end
+
+        context "and the figure hasn't been provided" do
+          it "returns false" do
+            expect(subject.environmental_outcomes_complete?).to eq false
+          end
+        end
+
+        context "and the figure has been provided" do
+          before(:each) { subject.hectares_of_arable_land_lake_habitat_created_or_enhanced = 12 }
+
+          it "returns true" do
+            expect(subject.environmental_outcomes_complete?).to eq true
+          end
+        end
+      end
+    end
+  end
 
   describe "#urgency_complete?"
 
