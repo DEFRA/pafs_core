@@ -101,8 +101,8 @@ class PafsCore::Camc3Presenter
                        om3: coastal_households_at_reduced_risk,
                        om3b: coastal_households_protected_from_loss_in_next_20_years,
                        om3c: coastal_households_protected_from_loss_in_20_percent_most_deprived,
-                       om4a: fcerm1_presenter.total_hectares_of_habitat_created_or_enhanced,
-                       om4b: fcerm1_presenter.total_kilometres_of_watercourse_created_or_enhanced
+                       om4a: fcerm1_presenter.hectares_of_habitat_created_or_enhanced,
+                       om4b: fcerm1_presenter.kilometres_of_watercourse_created_or_enhanced
                      },
                      natural_flood_risk_measures: {
                        river_restoration: project.river_restoration,

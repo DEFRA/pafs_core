@@ -201,25 +201,25 @@ module PafsCore
       sum_coastal_erosion_protection_for(year, :households_protected_from_loss_in_20_percent_most_deprived)
     end
 
-    def total_hectares_of_habitat_created_or_enhanced
-      [
-        hectares_of_intertidal_habitat_created_or_enhanced,
-        hectares_of_woodland_habitat_created_or_enhanced,
-        hectares_of_wet_woodland_habitat_created_or_enhanced,
-        hectares_of_wetland_or_wet_grassland_created_or_enhanced,
-        hectares_of_grassland_habitat_created_or_enhanced,
-        hectares_of_heathland_created_or_enhanced,
-        hectares_of_pond_or_lake_habitat_created_or_enhanced,
-        hectares_of_arable_land_lake_habitat_created_or_enhanced
-      ].compact.sum
+    def hectares_of_habitat_created_or_enhanced
+      {
+        om4a_hectares_intertidal: hectares_of_intertidal_habitat_created_or_enhanced,
+        om4a_hectares_woodland: hectares_of_woodland_habitat_created_or_enhanced,
+        om4a_hectares_wet_woodland: hectares_of_wet_woodland_habitat_created_or_enhanced,
+        om4a_hectares_wetland_or_wet_grassland: hectares_of_wetland_or_wet_grassland_created_or_enhanced,
+        om4a_hectares_grassland: hectares_of_grassland_habitat_created_or_enhanced,
+        om4a_hectares_heathland: hectares_of_heathland_created_or_enhanced,
+        om4a_hectares_ponds_lakes: hectares_of_pond_or_lake_habitat_created_or_enhanced,
+        om4a_hectares_arable_land: hectares_of_arable_land_lake_habitat_created_or_enhanced
+      }
     end
 
-    def total_kilometres_of_watercourse_created_or_enhanced
-      [
-        kilometres_of_watercourse_enhanced_or_created_comprehensive,
-        kilometres_of_watercourse_enhanced_or_created_partial,
-        kilometres_of_watercourse_enhanced_or_created_single
-      ].compact.sum
+    def kilometres_of_watercourse_created_or_enhanced
+      {
+        om4b_kilometres_of_watercourse_comprehensive: kilometres_of_watercourse_enhanced_or_created_comprehensive,
+        om4b_kilometres_of_watercourse_partial: kilometres_of_watercourse_enhanced_or_created_partial,
+        om4b_kilometres_of_watercourse_single: kilometres_of_watercourse_enhanced_or_created_single
+      }
     end
 
     def project_status
