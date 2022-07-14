@@ -39,6 +39,24 @@ class PafsCore::Camc3Presenter
     end
   end
 
+  def households_protected_through_plp_measures
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.households_protected_through_plp_measures(year)
+      }
+    end
+  end
+
+  def non_residential_properties
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.non_residential_properties(year)
+      }
+    end
+  end
+
   def coastal_households_at_reduced_risk
     financial_years.collect do |year|
       {
@@ -98,6 +116,8 @@ class PafsCore::Camc3Presenter
                        om2: households_at_reduced_risk,
                        om2b: moved_from_very_significant_and_significant_to_moderate_or_low,
                        om2c: households_protected_from_loss_in_20_percent_most_deprived,
+                       om2d: households_protected_through_plp_measures,
+                       om2e: non_residential_properties,
                        om3: coastal_households_at_reduced_risk,
                        om3b: coastal_households_protected_from_loss_in_next_20_years,
                        om3c: coastal_households_protected_from_loss_in_20_percent_most_deprived,

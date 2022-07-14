@@ -189,6 +189,14 @@ module PafsCore
       sum_flood_protection_for(year, :households_protected_from_loss_in_20_percent_most_deprived)
     end
 
+    def households_protected_through_plp_measures(year)
+      sum_flood_protection_for(year, :households_protected_through_plp_measures)
+    end
+
+    def non_residential_properties(year)
+      sum_flood_protection_for(year, :non_residential_properties)
+    end
+
     def coastal_households_at_reduced_risk(year)
       sum_coastal_erosion_protection_for(year, :households_at_reduced_risk)
     end

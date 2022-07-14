@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_11_112507) do
+ActiveRecord::Schema.define(version: 2022_07_08_103222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(version: 2022_06_11_112507) do
     t.integer "households_at_reduced_risk"
     t.integer "moved_from_very_significant_and_significant_to_moderate_or_low"
     t.integer "households_protected_from_loss_in_20_percent_most_deprived"
+    t.integer "households_protected_through_plp_measures"
+    t.integer "non_residential_properties"
   end
 
   create_table "pafs_core_funding_contributors", id: :serial, force: :cascade do |t|

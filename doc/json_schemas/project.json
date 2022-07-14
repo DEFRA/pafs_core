@@ -528,6 +528,8 @@
           "om2",
           "om2b",
           "om2c",
+          "om2d",
+          "om2e",
           "om3",
           "om3b",
           "om3c",
@@ -580,6 +582,50 @@
             }
           },
           "om2c": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2d": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2e": {
             "type": "array",
             "minItems": 0,
             "uniqueItems": true,
