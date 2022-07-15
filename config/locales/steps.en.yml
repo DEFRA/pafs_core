@@ -240,6 +240,30 @@ en:
           households_moved_from_very_significant_and_significant_to_moderate_or_low_label: Of the households in column A, the households that have moved out of the very significant or significant category to the moderate or low category
           households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, the households that are in the 20% most deprived areas
           households_protected_through_plp_measures: Households that are protected through Property Level Protection (PLP) measures by 2049
+          non_residential_properties: The number of non-residential properties better protected from flood risk?
+          total_label: Total
+# flood protection 2040 outcomes
+        flood_protection_outcomes2040:
+          heading: How many additional properties affected by flooding by 2040 is the project likely to benefit?
+          lede: |
+            These are properties that  are identified as being at risk today but are identified as being at risk by 2040
+            from the effects of climate change.
+            Don't include houses built or converted after 1 January 2012.
+          no_properties_affected_by_flooding_2040_label: My project does not move any households to a lower flood risk category
+          financial_year_label: Financial year (April to March)
+          households_at_reduced_risk_label: How many households will move to a lower flood risk category?
+          households_moved_from_very_significant_and_significant_to_moderate_or_low_label: Of the households in column A, how many will move out of the very significant or significant category to the moderate or low category?
+          households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, how many are in the 20% most deprived areas?
+          non_residential_properties: The number of non-residential properties better protected from flood risk?
+          total_label: Total
+# flood protection 2040 outcomes summary
+        flood_protection_outcomes2040_summary:
+          heading: Confirm the number of households affected by flooding that the project will benefit
+          financial_year_label: Financial year (April to March)
+          households_at_reduced_risk_label: Households moved to a lower flood risk category
+          households_moved_from_very_significant_and_significant_to_moderate_or_low_label: Of the households in column A, the households that have moved out of the very significant or significant category to the moderate or low category
+          households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, the households that are in the 20% most deprived areas
+          non_residential_properties: The number of non-residential properties better protected from flood risk?
           total_label: Total
 # coastal erosion protection outcomes
         coastal_erosion_protection_outcomes:
