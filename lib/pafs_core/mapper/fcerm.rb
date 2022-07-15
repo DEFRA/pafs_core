@@ -129,6 +129,14 @@ module PafsCore
         project.households_protected_from_loss_in_20_percent_most_deprived(year)
       end
 
+      def households_protected_through_plp_measures(year)
+        project.households_protected_through_plp_measures(year)
+      end
+
+      def non_residential_properties(year)
+        project.non_residential_properties(year)
+      end
+
       def coastal_households_at_reduced_risk(year)
         project.coastal_households_at_reduced_risk(year)
       end

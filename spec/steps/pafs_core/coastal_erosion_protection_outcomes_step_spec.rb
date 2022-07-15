@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
   before(:each) do
     @project = FactoryBot.create(:project)
-    @project.project_end_financial_year = 2022
+    @project.project_end_financial_year = 2027
     @project.coastal_erosion = true
     @cepo1 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2017, project_id: @project.id)
     @cepo2 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2020, project_id: @project.id)

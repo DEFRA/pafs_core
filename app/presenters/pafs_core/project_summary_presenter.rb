@@ -230,6 +230,18 @@ module PafsCore
       total_fpo_for(:households_protected_from_loss_in_20_percent_most_deprived)
     end
 
+    def total_for_flooding_d
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo_for(:households_protected_through_plp_measures)
+    end
+
+    def total_for_flooding_e
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo_for(:non_residential_properties)
+    end
+
     def total_for_coastal_a
       return not_provided unless coastal_erosion_protection_outcomes_entered?
 

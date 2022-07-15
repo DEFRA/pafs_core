@@ -195,6 +195,14 @@ module PafsCore
       populate_flood_protection_outcome_for(:households_protected_from_loss_in_20_percent_most_deprived, values)
     end
 
+    def households_protected_through_plp_measures=(values)
+      populate_flood_protection_outcome_for(:households_protected_through_plp_measures, values)
+    end
+
+    def non_residential_properties=(values)
+      populate_flood_protection_outcome_for(:non_residential_properties, values)
+    end
+
     def coastal_households_at_reduced_risk=(values)
       populate_coastal_erosion_outcome_for(:households_at_reduced_risk, values)
     end
