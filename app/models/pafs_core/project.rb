@@ -21,11 +21,13 @@ module PafsCore
     has_many :funding_values, dependent: :destroy
     has_many :funding_contributors, through: :funding_values
     has_many :flood_protection_outcomes, dependent: :destroy
+    has_many :flood_protection2040_outcomes, class_name: "::PafsCore::FloodProtection2040Outcome", dependent: :destroy
     has_many :coastal_erosion_protection_outcomes, dependent: :destroy
     has_one :state, inverse_of: :project, dependent: :destroy
     has_many :asite_submissions, inverse_of: :project, dependent: :destroy
     accepts_nested_attributes_for :funding_values, allow_destroy: true
     accepts_nested_attributes_for :flood_protection_outcomes, allow_destroy: true
+    accepts_nested_attributes_for :flood_protection2040_outcomes, allow_destroy: true
     accepts_nested_attributes_for :coastal_erosion_protection_outcomes, allow_destroy: true
     accepts_nested_attributes_for :funding_contributors
 

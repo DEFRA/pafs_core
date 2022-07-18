@@ -242,6 +242,30 @@ module PafsCore
       total_fpo_for(:non_residential_properties)
     end
 
+    def total_for_flooding_2040_a
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:households_at_reduced_risk)
+    end
+
+    def total_for_flooding_2040_b
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:moved_from_very_significant_and_significant_to_moderate_or_low)
+    end
+
+    def total_for_flooding_2040_c
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:households_protected_from_loss_in_20_percent_most_deprived)
+    end
+
+    def total_for_flooding_2040_d
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:non_residential_properties)
+    end
+
     def total_for_coastal_a
       return not_provided unless coastal_erosion_protection_outcomes_entered?
 

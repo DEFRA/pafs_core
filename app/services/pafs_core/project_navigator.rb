@@ -159,6 +159,10 @@ module PafsCore
               if: ->(p) { p.protects_against_flooding? }
         s.add :flood_protection_outcomes_summary,
               if: ->(p) { p.protects_against_flooding? && p.javascript_disabled? }
+        s.add :flood_protection_outcomes2040,
+              if: ->(p) { p.protects_against_flooding? }
+        s.add :flood_protection_outcomes2040_summary,
+              if: ->(p) { p.protects_against_flooding? && p.javascript_disabled? }
         s.add :coastal_erosion_protection_outcomes,
               if: ->(p) { p.protects_against_coastal_erosion? }
         s.add :coastal_erosion_protection_outcomes_summary,

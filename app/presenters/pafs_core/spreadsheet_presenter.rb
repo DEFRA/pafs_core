@@ -197,6 +197,22 @@ module PafsCore
       sum_flood_protection_for(year, :non_residential_properties)
     end
 
+    def households_at_reduced_risk_2040(year)
+      sum_flood_protection_2040_for(year, :households_at_reduced_risk)
+    end
+
+    def moved_from_very_significant_and_significant_to_moderate_or_low_2040(year)
+      sum_flood_protection_2040_for(year, :moved_from_very_significant_and_significant_to_moderate_or_low)
+    end
+
+    def households_protected_from_loss_in_20_percent_most_deprived_2040(year)
+      sum_flood_protection_2040_for(year, :households_protected_from_loss_in_20_percent_most_deprived)
+    end
+
+    def non_residential_properties_2040(year)
+      sum_flood_protection_2040_for(year, :non_residential_properties)
+    end
+
     def coastal_households_at_reduced_risk(year)
       sum_coastal_erosion_protection_for(year, :households_at_reduced_risk)
     end
@@ -302,6 +318,16 @@ module PafsCore
       end
     end
 
+    def flood_protection_2040_for(year)
+      if year > 2026
+        # sum up 2027 onwards for spreadsheet
+        t = PafsCore::FloodProtectionOutcome.arel_table
+        project.flood_protection2040_outcomes.where(t[:financial_year].gt(year - 1))
+      else
+        project.flood_protection2040_outcomes.where(financial_year: year)
+      end
+    end
+
     def coastal_erosion_protection_for(year)
       if year > 2026
         # sum up 2027 onwards for spreadsheet
@@ -316,6 +342,12 @@ module PafsCore
       return 0 if year > project.project_end_financial_year
 
       flood_protection_for(year).sum(category)
+    end
+
+    def sum_flood_protection_2040_for(year, category)
+      return 0 if year > project.project_end_financial_year
+
+      flood_protection_2040_for(year).sum(category)
     end
 
     def sum_coastal_erosion_protection_for(year, category)

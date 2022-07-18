@@ -530,6 +530,10 @@
           "om2c",
           "om2d",
           "om2e",
+          "om2f",
+          "om2g",
+          "om2h",
+          "om2i",
           "om3",
           "om3b",
           "om3c",
@@ -626,6 +630,94 @@
             }
           },
           "om2e": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2f": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2g": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2h": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2i": {
             "type": "array",
             "minItems": 0,
             "uniqueItems": true,
