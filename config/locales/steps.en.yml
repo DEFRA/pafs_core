@@ -431,10 +431,10 @@ en:
           heading: Will the project enhance or create a single major physical or habitat of watercourse?
         grassland_habitat_created_or_enhanced:
           heading: Will the project create or enhance a grassland habitat?
-          lede: This is land under permanent-natural or semit-natural grassland, dominated by  grassland species with very little or no dwarf shrub, wetland or wooded species within the sward.
+          lede: This is land under permanent-natural or semi-natural grassland, dominated by  grassland species with very little or no dwarf shrub, wetland or wooded species within the sward.
         heathland_habitat_created_or_enhanced:
           heading: Will the project create or enhance a heathland habitat?
-          lede: This is habitat that covers the full altitudinal range of heathlands and has at least 25% cover of the heathers and other swarf shrubs, or previously heathland in a degraded state below this.
+          lede: This is habitat that covers the full altitudinal range of heathlands and has at least 25% cover of the heathers and other dwarf shrubs, or previously heathland in a degraded state below this.
         hectares_of_arable_land_lake_habitat_created_or_enhanced:
           heading: How many hectares of arable land habitat will the project create or enhance?
         hectares_of_grassland_habitat_created_or_enhanced:
@@ -453,7 +453,7 @@ en:
           heading: How many hectares of woodland habitat will the project create or enhance?
         intertidal_habitat_created_or_enhanced:
           heading: Will the project create or enhance an intertidal wetland habitat?
-          lede: Intertidal wetland habitats are found between the high and low tide marks. The habitats most associated withh FCERM works are salt marshes and mud flats.
+          lede: Intertidal wetland habitats are found between the high and low tide marks. The habitats most associated with FCERM works are salt marshes and mud flats.
         kilometres_of_watercourse_enhanced_or_created_comprehensive:
           heading: How many kilometres of comprehensive river restoration will be enhanced or created?
         kilometres_of_watercourse_enhanced_or_created_partial:
