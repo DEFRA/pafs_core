@@ -73,7 +73,7 @@ module PafsCore
       unless d_too_big.empty?
         errors.add(
           :base,
-          "The number of households that are protected through Property Level Protection (PLP) measures (column D) must be lower thhan or equal to \
+          "The number of households that are protected through Property Level Protection (PLP) measures (column D) must be lower than or equal to \
           to the number of households moved from very significant \
           or significant to the moderate or low flood risk category (column B)."
         )

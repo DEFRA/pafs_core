@@ -40,7 +40,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
                                               households_protected_through_plp_measures: 100)
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:base]).to include
-      "The number of households that are protected through Property Level Protection (PLP) measures (column D) must be lower thhan or equal to \
+      "The number of households that are protected through Property Level Protection (PLP) measures (column D) must be lower than or equal to \
       to the number of households moved from very significant \
       or significant to the moderate or low flood risk category (column B)."
     end
