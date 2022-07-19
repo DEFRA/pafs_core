@@ -49,6 +49,8 @@ en:
     main_risk: "Main risk"
     flood_protection_outcomes: "Households benefiting flooding"
     flood_protection_outcomes_summary: "Total households benefiting flooding"
+    flood_protection2040_outcomes: "Households benefiting flooding by 2040"
+    flood_protection2040_outcomes_summary: "Total households benefiting flooding by 2040"
     coastal_erosion_protection_outcomes: "Households benefiting coastal erosion"
     coastal_erosion_protection_outcomes_summary: "Total households benefiting coastal erosion"
     standard_of_protection: "Current flood risk"
