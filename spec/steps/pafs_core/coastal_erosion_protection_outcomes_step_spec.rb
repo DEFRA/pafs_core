@@ -53,7 +53,7 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
       "In the applicable year(s), tell us how many households are at a reduced risk of coastal erosion."
     end
 
-    it "validates that number of propertiess is less than or equal to 1 million" do
+    it "validates that number of properties is less than or equal to 1 million" do
       subject.coastal_erosion_protection_outcomes.build(financial_year: 2020,
                                                         households_at_reduced_risk: 1_000_001,
                                                         households_protected_from_loss_in_next_20_years: 1_000_001,
