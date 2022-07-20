@@ -101,7 +101,7 @@
             <table class="full-table">
               <thead>
                 <tr>
-                  <th class="visuallyhidden">Households benefitting</th>
+                  <th class="visuallyhidden">Properties benefitting</th>
                   <th class="visuallyhidden">Total</th>
                 </tr>
               </thead>
@@ -118,6 +118,10 @@
                   <td><%= project.summary_label(:coastal_outcome_c) %></td>
                   <td class="align-right"><%= number_with_delimiter project.total_for_coastal_c %></td>
                 </tr>
+                <tr>
+                  <td><%= project.summary_label(:coastal_outcome_d) %></td>
+                  <td class="align-right"><%= number_with_delimiter project.total_for_coastal_d %></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -127,7 +131,7 @@
             <div class="column-two-thirds">
               <details>
                 <summary class="half-indent-with-top-margin" role="button" aria-controls="show_risks and households benefitting detail">
-                  <span class="summary"> View households affected by coastal erosion detail </span>
+                  <span class="summary"> View properties affected by coastal erosion detail </span>
                 </summary>
                 <div id="show_risks and households benefitting detail" class="panel panel-indent panel-border-narrow">
                   <%= render partial: "summary/coastal_erosion_protection_outcomes_detail", locals: {project: @project} %>

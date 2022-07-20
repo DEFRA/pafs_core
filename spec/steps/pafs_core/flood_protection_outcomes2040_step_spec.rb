@@ -139,7 +139,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
   describe "#before_view" do
     subject { PafsCore::FloodProtectionOutcomesStep.new @project }
     it "builds flood_protection_outcome records for any missing years" do
-      expect { subject.before_view({}) }.to change { subject.flood_protection_outcomes.length }.by(7)
+      expect { subject.before_view({}) }.to change { subject.flood_protection_outcomes.length }.by(8)
     end
   end
 end

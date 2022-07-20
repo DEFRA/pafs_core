@@ -537,6 +537,7 @@
           "om3",
           "om3b",
           "om3c",
+          "om3d",
           "om4a",
           "om4b"
         ],
@@ -784,6 +785,28 @@
             }
           },
           "om3c": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "number",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om3d": {
             "type": "array",
             "minItems": 0,
             "uniqueItems": true,

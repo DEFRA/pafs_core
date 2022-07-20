@@ -14,12 +14,14 @@
                     <th class="data-column protection-outcomes"><%= t(".households_at_reduced_risk_label") %></th>
                     <th class="data-column protection-outcomes significant-to-low-risk"><%= t(".households_protected_from_loss_in_next_20_years_label") %></th>
                     <th class="data-column protection-outcomes most-deprived"><%= t(".households_protected_from_loss_in_20_percent_most_deprived_label") %></th>
+                    <th class="data-column protection-outcomes non-residential-properties"><%= t(".non_residential_properties_label") %></th>
                   </tr>
                   <tr>
                     <th></th>
                     <th class="data-column protection-outcomes-subheading">A</th>
                     <th class="data-column protection-outcomes-subheading">B</th>
                     <th class="data-column protection-outcomes-subheading">C</th>
+                    <th class="data-column protection-outcomes-subheading">D</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,6 +39,9 @@
                       <td class="<%= funding_table_cell(cepo.financial_year, cepo.households_protected_from_loss_in_20_percent_most_deprived) %>">
                         <%= number_with_delimiter cepo.send(:households_protected_from_loss_in_20_percent_most_deprived) %>
                       </td>
+                      <td class="<%= funding_table_cell(cepo.financial_year, cepo.non_residential_properties) %>">
+                        <%= number_with_delimiter cepo.send(:non_residential_properties) %>
+                      </td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -51,6 +56,9 @@
                     </td>
                     <td class="numeric">
                       <%= number_with_delimiter @project.total_ce_for(:households_protected_from_loss_in_20_percent_most_deprived) %>
+                    </td>
+                    <td class="numeric">
+                      <%= number_with_delimiter @project.total_ce_for(:non_residential_properties) %>
                     </td>
                   </tr>
                 </tfoot>

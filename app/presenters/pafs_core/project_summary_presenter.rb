@@ -284,6 +284,12 @@ module PafsCore
       total_ce_for(:households_protected_from_loss_in_20_percent_most_deprived)
     end
 
+    def total_for_coastal_d
+      return not_provided unless coastal_erosion_protection_outcomes_entered?
+
+      total_ce_for(:non_residential_properties)
+    end
+
     def funding_calculator_uploaded?
       funding_calculator_file_name.present?
     end
