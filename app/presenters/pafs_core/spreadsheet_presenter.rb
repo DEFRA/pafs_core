@@ -225,6 +225,10 @@ module PafsCore
       sum_coastal_erosion_protection_for(year, :households_protected_from_loss_in_20_percent_most_deprived)
     end
 
+    def coastal_non_residential_properties(year)
+      sum_coastal_erosion_protection_for(year, :non_residential_properties)
+    end
+
     def hectares_of_habitat_created_or_enhanced
       {
         om4a_hectares_intertidal: hectares_of_intertidal_habitat_created_or_enhanced,

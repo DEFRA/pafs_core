@@ -120,6 +120,15 @@ class PafsCore::Camc3Presenter
     end
   end
 
+  def coastal_non_residential_properties
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.coastal_non_residential_properties(year)
+      }
+    end
+  end
+
   def base64_shapefile
     @base64_shapefile ||= PafsCore::ShapefileSerializer.serialize(project)
   end
@@ -161,6 +170,7 @@ class PafsCore::Camc3Presenter
                        om3: coastal_households_at_reduced_risk,
                        om3b: coastal_households_protected_from_loss_in_next_20_years,
                        om3c: coastal_households_protected_from_loss_in_20_percent_most_deprived,
+                       om3d: coastal_non_residential_properties,
                        om4a: fcerm1_presenter.hectares_of_habitat_created_or_enhanced,
                        om4b: fcerm1_presenter.kilometres_of_watercourse_created_or_enhanced
                      },

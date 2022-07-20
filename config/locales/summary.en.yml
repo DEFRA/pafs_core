@@ -29,6 +29,7 @@ en:
       coastal_outcome_a: "Households at a lower risk of coastal erosion"
       coastal_outcome_b: "Households that have are protected from loss within the next 20 years"
       coastal_outcome_c: "Households that are in the 20% most deprived areas"
+      coastal_outcome_d: "Non-residential properties at a reduced risk of coastal erosion"
       approach_title: "How the project will achieve its goals"
       environmental_outcomes_title: "Environmental benefits"
       surface_and_groundwater_amount: "Surface water or groundwater the project is likely to protect or improve"
@@ -60,6 +61,7 @@ en:
       coastal_erosion_protection_outcomes_detail_heading: "Households affected by coastal erosion benefited by the project"
       coastal_erosion_protection_outcomes_detail_lede: "Houses built or converted after 1 January 2012 aren't included."
       households_protected_from_loss_in_next_20_years_label: "Of the households in column A, how many will be protected from loss within the next 20 years."
+      non_residential_properties_at_reduced_risk_coastal_erosion_label: Non-residental properties at a reduced risk of coastal erosion
       households_total_label: "Total"
       intertidal_habitat: Hectares of intertidal wetland habitat the project will create or enhance
       woodland: Hectares of woodland habitat the project will create or enhance

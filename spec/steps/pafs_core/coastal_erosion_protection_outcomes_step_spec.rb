@@ -53,18 +53,22 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
       "In the applicable year(s), tell us how many households are at a reduced risk of coastal erosion."
     end
 
-    it "validates that number of households is less than or equal to 1 million" do
+    it "validates that number of properties is less than or equal to 1 million" do
       subject.coastal_erosion_protection_outcomes.build(financial_year: 2020,
                                                         households_at_reduced_risk: 1_000_001,
                                                         households_protected_from_loss_in_next_20_years: 1_000_001,
-                                                        households_protected_from_loss_in_20_percent_most_deprived: 1_000_001)
+                                                        households_protected_from_loss_in_20_percent_most_deprived: 1_000_001,
+                                                        non_residential_properties: 1_000_001)
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:base]).to include
-      "The number of households at reduced risk must be less than or equal to 1 million."
+      "The number of properties at reduced risk must be less than or equal to 1 million."
       expect(subject.errors.messages[:base]).to include
-      "The number of households protected from loss in the next 20 years must be less than or equal to 1 million."
+      "The number of properties protected from loss in the next 20 years must be less than or equal to 1 million."
       expect(subject.errors.messages[:base]).to include
-      "The number of households protected from loss in the 20 percent most deprived must be \
+      "The number of properties protected from loss in the 20 percent most deprived must be \
+      less than or equal to 1 million."
+      expect(subject.errors.messages[:base]).to include
+      "The number of non-residential properties protected from loss must be \
       less than or equal to 1 million."
     end
   end
@@ -79,7 +83,8 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
             [{ financial_year: 2020,
                households_at_reduced_risk: 2000,
                households_protected_from_loss_in_next_20_years: 1000,
-               households_protected_from_loss_in_20_percent_most_deprived: 500 }] } }
+               households_protected_from_loss_in_20_percent_most_deprived: 500,
+               non_residential_properties: 1000 }] } }
       )
     end
 
@@ -90,7 +95,8 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
             [{ financial_year: 2020,
                households_at_reduced_risk: 1000,
                households_protected_from_loss_in_next_20_years: 2000,
-               households_protected_from_loss_in_20_percent_most_deprived: 5000 }] } }
+               households_protected_from_loss_in_20_percent_most_deprived: 5000,
+               non_residential_properties: 1000 }] } }
       )
     end
 
@@ -112,6 +118,7 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
         expect(coastal_erosion_protection_outcome.households_at_reduced_risk).to eq 2000
         expect(coastal_erosion_protection_outcome.households_protected_from_loss_in_next_20_years).to eq 1000
         expect(coastal_erosion_protection_outcome.households_protected_from_loss_in_20_percent_most_deprived).to eq 500
+        expect(coastal_erosion_protection_outcome.non_residential_properties).to eq 1000
       end
 
       it "returns true" do
@@ -138,7 +145,7 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
       # project_end_financial_year = 2022
       # funding_values records run until 2019
       # so expect 3 placeholders to be built for 2020, 2021 and 2022
-      expect { subject.before_view({}) }.to change { subject.coastal_erosion_protection_outcomes.length }.by(7)
+      expect { subject.before_view({}) }.to change { subject.coastal_erosion_protection_outcomes.length }.by(8)
     end
   end
 end
