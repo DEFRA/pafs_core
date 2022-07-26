@@ -74,3 +74,8 @@ en:
       comprehensive_restoration: Kilometres of comprehensive river restoration the project will create or enhance
       partial_restoration: Kilometres of partial restoration the project will create or enhance
       create_habitat_watercourse: Kilometres of single major physical improvement the project will create or enhance
+      natural_flood_risk_measures:
+        title: Natural flood measures
+        flood_risk_measures: "Flood risk measures:"
+        total_cost: Total cost of your associated natural flood risk measures
+        not_included: The project does not include any flood risk measures

@@ -1,37 +1,48 @@
 <article class="summary-item" aria-labelledby="natural-flood-risk-measures">
   <% if project.natural_flood_risk_measures_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures">Natural flood measures</h2>
+      <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures"><%= t(".title", scope: "pafs_core.summary.natural_flood_risk_measures")%></h2>
       <div class="grid-row">
         <div class="column-three-quarters">
           <% if project.natural_flood_risk_measures_included? %>
-            Flood risk measures in your project:
-            <ul class="summary-list list-bullet">
-              <% project.selected_natural_flood_risk_measures.each do |risk_measure| %>
-                <li>
-                  <%= t("#{risk_measure}_label", scope: "pafs_core.projects.steps.natural_flood_risk_measures") %>
-                </li>
-              <% end %>
-              <% unless project.other_flood_measures.blank? %>
-               <li>
-                  <%= project.other_flood_measures %>
-                </li>
-              <% end %>
-            </ul>
+            <% unless project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>
+              <%= t(".flood_risk_measures", scope: "pafs_core.summary.natural_flood_risk_measures")%>
+              <ul class="summary-list list-bullet">
+                <% project.selected_natural_flood_risk_measures.each do |risk_measure| %>
+                  <li>
+                    <%= t("#{risk_measure}_label", scope: "pafs_core.projects.steps.natural_flood_risk_measures") %>
+                  </li>
+                <% end %>
+                <% unless project.other_flood_measures.blank? %>
+                  <li>
+                    <%= project.other_flood_measures %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
             <table class="full-table">
               <tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
+                  <% if project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>
+                    <td><%= t(".flood_risk_measures", scope: "pafs_core.summary.natural_flood_risk_measures")%></td>
+                    <td class="align-right"><%= t("not_provided") %></td>
+                  <% else %>
+                    <td></td>
+                    <td></td>
+                  <% end %>
                 </tr>
                 <tr>
-                  <td id="total-cost-nfm">Total cost of your associated natural flood risk measures</td>
-                  <td class="align-right"><%= number_to_currency project.natural_flood_risk_measures_cost, unit: "£", delimeter: "," %></td>
+                  <td id="total-cost-nfm"><%= t(".total_cost", scope: "pafs_core.summary.natural_flood_risk_measures")%><</td>
+                  <% if project.natural_flood_risk_measures_cost.nil? %>
+                    <td class="align-right"><%= t("not_provided") %></td>
+                  <% else %>
+                    <td class="align-right"><%= number_to_currency project.natural_flood_risk_measures_cost, unit: "£", delimeter: "," %></td>
+                  <% end %>
                 </tr>
               </tbody>
             </table>
           <% else %>
-            <p>The project does not include any flood risk measures</p>
+            <p><%= t(".not_included", scope: "pafs_core.summary.natural_flood_risk_measures")%></p>
           <% end %>
         </div>
         <div class="column-one-quarter">
