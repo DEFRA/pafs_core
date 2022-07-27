@@ -67,6 +67,7 @@ en:
       start_construction_label: "Start construction"
       ready_for_service_label: "Ready for service"
   external_link_message: "- (this link will open in a new window)"
+  not_provided: Not provided
 
   activemodel:
     errors:
