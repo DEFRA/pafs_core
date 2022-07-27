@@ -1,12 +1,12 @@
 <article class="summary-item" aria-labelledby="natural-flood-risk-measures">
   <% if project.natural_flood_risk_measures_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures"><%= t(".title", scope: "pafs_core.summary.natural_flood_risk_measures")%></h2>
+      <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures"><%= t(".title", scope: "pafs_core")%></h2>
       <div class="grid-row">
         <div class="column-three-quarters">
           <% if project.natural_flood_risk_measures_included? %>
             <% unless project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>
-              <%= t(".flood_risk_measures", scope: "pafs_core.summary.natural_flood_risk_measures")%>
+              <%= t(".flood_risk_measures", scope: "pafs_core")%>
               <ul class="summary-list list-bullet">
                 <% project.selected_natural_flood_risk_measures.each do |risk_measure| %>
                   <li>
@@ -24,7 +24,7 @@
               <tbody>
                 <tr>
                   <% if project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>
-                    <td><%= t(".flood_risk_measures", scope: "pafs_core.summary.natural_flood_risk_measures")%></td>
+                    <td><%= t(".flood_risk_measures", scope: "pafs_core")%></td>
                     <td class="align-right"><%= t("not_provided") %></td>
                   <% else %>
                     <td></td>
@@ -32,7 +32,7 @@
                   <% end %>
                 </tr>
                 <tr>
-                  <td id="total-cost-nfm"><%= t(".total_cost", scope: "pafs_core.summary.natural_flood_risk_measures")%><</td>
+                  <td id="total-cost-nfm"><%= t(".total_cost", scope: "pafs_core")%></td>
                   <% if project.natural_flood_risk_measures_cost.nil? %>
                     <td class="align-right"><%= t("not_provided") %></td>
                   <% else %>
@@ -42,7 +42,7 @@
               </tbody>
             </table>
           <% else %>
-            <p><%= t(".not_included", scope: "pafs_core.summary.natural_flood_risk_measures")%></p>
+            <p><%= t(".not_included", scope: "pafs_core")%></p>
           <% end %>
         </div>
         <div class="column-one-quarter">
