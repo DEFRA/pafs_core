@@ -204,22 +204,6 @@ class PafsCore::Camc3Presenter
   attr_accessor :funding_sources_mapper
 
   def financial_years
-    [
-      -1,
-      2015,
-      2016,
-      2017,
-      2018,
-      2019,
-      2020,
-      2021,
-      2022,
-      2023,
-      2024,
-      2025,
-      2026,
-      2027,
-      2028
-    ]
+    [-1] + (2015..project.project_end_financial_year).to_a
   end
 end
