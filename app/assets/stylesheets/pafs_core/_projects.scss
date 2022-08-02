@@ -229,20 +229,12 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     text-align: right;
   }
 
-  .significant-to-low-risk {
-    width: 11.5em;
-  }
-
-  .most-deprived {
-    width: 7.5em;
+  .significant-to-low-risk, .non-residential-properties, .most-deprived, .plp-measures, .households-protected {
+    width: 6em;
   }
 
   .protection-value {
     text-align: right;
-  }
-
-  .households-protected {
-    width: 6em;
   }
 
   .data-total {
