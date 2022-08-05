@@ -15,7 +15,7 @@ en:
       coastal_protection_after: "Length of time before coastal erosion affects the area, when the project is complete"
       location_title: "Location"
       map_link: "See this location on a map"
-      flooding_outcome_title: "Households affected by flooding that benefit from the project"
+      flooding_outcome_title: "Properties affected by flooding that benefit from the project"
       flooding_outcome_a: "Households that will move to a lower flood risk category"
       flooding_outcome_b: "Households that have moved out of the very significant or significant or intermediate category to the moderate or low category"
       flooding_outcome_c: "Households that are in 20% of the most deprived areas"
@@ -25,7 +25,7 @@ en:
       flooding_2040_outcome_b: "Households that have modes out of the very significant, significant or intermediate category to the moderate or low category by 2040"
       flooding_2040_outcome_c: Households that are in 20% of the most deprived areas by 2040
       flooding_2040_outcome_d: Non-residential properties that are better protected from flood risk by 2040
-      coastal_outcome_title: "Households affected by coastal erosion that benefit from the project"
+      coastal_outcome_title: "Properties affected by coastal erosion that benefit from the project"
       coastal_outcome_a: "Households at a lower risk of coastal erosion"
       coastal_outcome_b: "Households that have are protected from loss within the next 20 years"
       coastal_outcome_c: "Households that are in the 20% most deprived areas"
