@@ -326,7 +326,51 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#urgency_complete?"
 
-  describe "#funding_calculator_complete?"
+  describe "#funding_calculator_complete?" do
+    subject { PafsCore::ValidationPresenter.new(project) }
+    let(:project) { FactoryBot.create(:full_project) }
+
+    context "with no PFC attached" do
+      it "returns false" do
+        expect(subject.funding_calculator_complete?).to eq false
+      end
+    end
+
+    context "with a PFC attached" do
+      before(:each) do
+        file_path =  File.join(Rails.root, "..", "fixtures", "calculators", filename)
+        file = File.open file_path
+        storage = PafsCore::DevelopmentFileStorageService.new
+        dest_file = File.join(project.storage_path, filename)
+        storage.upload(file, dest_file)
+        project.funding_calculator_file_name = filename
+      end
+
+      context "with a v8 PFC attached" do
+        let(:filename) { "v8.xlsx" }
+
+        it "returns true" do
+          expect(subject.funding_calculator_complete?).to eq true
+        end
+      end
+
+      context "with a 2020 v1 PFC attached" do
+        let(:filename) { "v9old.xlsx" }
+
+        it "returns false" do
+          expect(subject.funding_calculator_complete?).to eq false
+        end
+      end
+
+      context "withh a 2020 v2 PFC attached" do
+        let(:filename) { "v9.xlsx" }
+
+        it "returns true" do
+          expect(subject.funding_calculator_complete?).to eq true
+        end
+      end
+    end
+  end
 
   def make_flood_outcome(year, project_id)
     FactoryBot.create(:flood_protection_outcomes,
