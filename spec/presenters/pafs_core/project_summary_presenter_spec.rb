@@ -369,27 +369,27 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
           it "returns the formatted answer" do
             subject.hectares_of_intertidal_habitat_created_or_enhanced = 14
 
-            expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, required: true)).to eq "14.0 hectares"
+            expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, applicable: true)).to eq "14.0 hectares"
           end
         end
 
         context "and a figure has not been provided" do
           it "returns 'Not provided'" do
-            expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, required: nil)).to eq "<em>Not provided</em>".html_safe
+            expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, applicable: nil)).to eq "<em>Not provided</em>".html_safe
           end
         end
       end
 
       context "and the answer is no" do
         it "returns N/A" do
-          expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, required: false)).to eq "<em>N/A</em>".html_safe
+          expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, applicable: false)).to eq "<em>N/A</em>".html_safe
         end
       end
     end
 
     context "when an answer has not been provided" do
       it "returns 'Not provided'" do
-        expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, required: nil)).to eq "<em>Not provided</em>".html_safe
+        expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, applicable: nil)).to eq "<em>Not provided</em>".html_safe
       end
     end
   end
@@ -401,27 +401,27 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
           it "returns the formatted answer" do
             subject.kilometres_of_watercourse_enhanced_or_created_comprehensive = 14
 
-            expect(subject.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, required: true)).to eq "14.0 kilometres"
+            expect(subject.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, applicable: true)).to eq "14.0 kilometres"
           end
         end
 
         context "and a figure has not been provided" do
           it "returns 'Not provided'" do
-            expect(subject.hectares_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, required: true)).to eq "<em>Not provided</em>".html_safe
+            expect(subject.hectares_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, applicable: true)).to eq "<em>Not provided</em>".html_safe
           end
         end
       end
 
       context "and the answer is no" do
         it "returns N/A" do
-          expect(subject.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, required: false)).to eq "<em>N/A</em>".html_safe
+          expect(subject.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, applicable: false)).to eq "<em>N/A</em>".html_safe
         end
       end
     end
 
     context "when an answer has not been provided" do
       it "returns 'Not provided'" do
-        expect(subject.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, required: nil)).to eq "<em>Not provided</em>".html_safe
+        expect(subject.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, applicable: nil)).to eq "<em>Not provided</em>".html_safe
       end
     end
   end

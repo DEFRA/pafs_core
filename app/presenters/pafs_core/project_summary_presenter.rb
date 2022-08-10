@@ -318,16 +318,16 @@ module PafsCore
       "<em>N/A</em>".html_safe
     end
 
-    def hectares_created_or_enhanced(attribute:, required:)
-      return not_applicable if required == false
+    def hectares_created_or_enhanced(attribute:, applicable:)
+      return not_applicable if applicable == false
 
       return not_provided if send(attribute).nil?
 
       "#{send(attribute)} hectares"
     end
 
-    def kilometres_created_or_enhanced(attribute:, required: false)
-      return not_applicable if required == false
+    def kilometres_created_or_enhanced(attribute:, applicable: false)
+      return not_applicable if applicable == false
 
       return not_provided if send(attribute).nil?
 

@@ -17,47 +17,47 @@
             <tbody>
               <tr>
                 <td><%= project.summary_label(:intertidal_habitat) %></td>
-                <td id="hectares_of_intertidal_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, required: project.intertidal_habitat) %></td>
+                <td id="hectares_of_intertidal_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, applicable: project.intertidal_habitat) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:woodland) %></td>
-                <td id="hectares_of_woodland_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_woodland_habitat_created_or_enhanced, required: project.woodland) %></td>
+                <td id="hectares_of_woodland_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_woodland_habitat_created_or_enhanced, applicable: project.woodland) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:wet_woodland) %></td>
-                <td id="hectares_of_wet_woodland_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_wet_woodland_habitat_created_or_enhanced, required: project.wet_woodland) %></td>
+                <td id="hectares_of_wet_woodland_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_wet_woodland_habitat_created_or_enhanced, applicable: project.wet_woodland) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:wetland_or_wet_grassland) %></td>
-                <td id="hectares_of_wetland_or_wet_grassland_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_wetland_or_wet_grassland_created_or_enhanced, required: project.wetland_or_wet_grassland) %></td>
+                <td id="hectares_of_wetland_or_wet_grassland_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_wetland_or_wet_grassland_created_or_enhanced, applicable: project.wetland_or_wet_grassland) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:grassland) %></td>
-                <td id="hectares_of_grassland_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_grassland_habitat_created_or_enhanced, required: project.grassland) %></td>
+                <td id="hectares_of_grassland_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_grassland_habitat_created_or_enhanced, applicable: project.grassland) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:heathland) %></td>
-                <td id="hectares_of_heathland_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_heathland_created_or_enhanced, required: project.heathland) %></td>
+                <td id="hectares_of_heathland_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_heathland_created_or_enhanced, applicable: project.heathland) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:ponds_lakes) %></td>
-                <td id="hectares_of_pond_or_lake_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_pond_or_lake_habitat_created_or_enhanced, required: project.ponds_lakes) %></td>
+                <td id="hectares_of_pond_or_lake_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_pond_or_lake_habitat_created_or_enhanced, applicable: project.ponds_lakes) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:arable_land) %></td>
-                <td id="hectares_of_arable_land_lake_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_arable_land_lake_habitat_created_or_enhanced, required: project.arable_land) %></td>
+                <td id="hectares_of_arable_land_lake_habitat_created_or_enhanced" class="align-right"><%= project.hectares_created_or_enhanced(attribute: :hectares_of_arable_land_lake_habitat_created_or_enhanced, applicable: project.arable_land) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:comprehensive_restoration) %></td>
-                <td id="kilometres_of_watercourse_enhanced_or_created_comprehensive" class="align-right"><%= project.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, required: project.comprehensive_restoration) %></td>
+                <td id="kilometres_of_watercourse_enhanced_or_created_comprehensive" class="align-right"><%= project.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, applicable: project.comprehensive_restoration) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:partial_restoration) %></td>
-                <td id="kilometres_of_watercourse_enhanced_or_created_partial" class="align-right"><%= project.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_partial, required: project.partial_restoration) %></td>
+                <td id="kilometres_of_watercourse_enhanced_or_created_partial" class="align-right"><%= project.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_partial, applicable: project.partial_restoration) %></td>
               </tr>
               <tr>
                 <td><%= project.summary_label(:create_habitat_watercourse) %></td>
-                <td id="kilometres_of_watercourse_enhanced_or_created_single" class="align-right"><%= project.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_single, required: project.create_habitat_watercourse) %></td>
+                <td id="kilometres_of_watercourse_enhanced_or_created_single" class="align-right"><%= project.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_single, applicable: project.create_habitat_watercourse) %></td>
               </tr>
             </tbody>
           </table>
