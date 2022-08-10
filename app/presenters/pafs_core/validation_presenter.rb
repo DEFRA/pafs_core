@@ -5,6 +5,8 @@ module PafsCore
   class ValidationPresenter < PafsCore::ProjectSummaryPresenter
     include PafsCore::FundingSources
     include PafsCore::NaturalFloodRiskMeasures
+    include PafsCore::Files
+    include PafsCore::FundingCalculatorVersion
 
     def complete?
       result = true
@@ -245,11 +247,10 @@ module PafsCore
     end
 
     def funding_calculator_complete?
-      if funding_calculator_file_name.blank?
-        add_error(:funding_calculator, "^Upload the project's partnership funding calculator")
-      else
-        true
-      end
+      return add_error(:funding_calculator, "^Upload the project's partnership funding calculator") if funding_calculator_file_name.blank?
+      return add_error(:funding_calculator, "^Upload a valid version of the partnership funding calculator") unless funding_calculator_correct_version?
+
+      true
     end
 
     def articles_to_validate
@@ -309,6 +310,20 @@ module PafsCore
                 "^Tell us the risks the project protects against "\
                 "and the households benefiting.")
       false
+    end
+
+    private
+
+    def funding_calculator_correct_version?
+      tfile = Tempfile.new(["funding_calculator", ".xlsx"])
+      tfile.write IO.read fetch_funding_calculator_for(project).path
+      xlsx = Roo::Spreadsheet.open tfile.path
+      sheet = xlsx.sheet(xlsx.sheets.grep(/PF Calculator/i).first)
+      calculator_version = Check.new(sheet).calculator_version
+
+      tfile.unlink
+
+      Check::VERSION_MAP.include? calculator_version
     end
   end
 end
