@@ -308,7 +308,7 @@ module PafsCore
     def risks_error
       add_error(:risks,
                 "^Tell us the risks the project protects against "\
-                "and the households benefiting.")
+                "and the households benefitting.")
       false
     end
 

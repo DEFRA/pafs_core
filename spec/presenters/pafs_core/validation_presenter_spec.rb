@@ -181,7 +181,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       it "sets an error message" do
         subject.risks_complete?
         expect(subject.errors[:risks]).to include "^Tell us the risks the project"\
-          " protects against and the households benefiting."
+          " protects against and the households benefitting."
       end
     end
 
@@ -218,7 +218,7 @@ RSpec.describe PafsCore::ValidationPresenter do
           it "sets an error message" do
             subject.risks_complete?
             expect(subject.errors[:risks]).to include "^Tell us the risks the "\
-              "project protects against and the households benefiting."
+              "project protects against and the households benefitting."
           end
         end
       end
