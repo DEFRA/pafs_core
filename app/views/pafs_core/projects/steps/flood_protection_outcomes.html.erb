@@ -14,7 +14,7 @@
                 <thead>
                   <tr>
                     <th class="financial-year-column"><%= t(".financial_year_label") %></th>
-                    <th class="data-column protection-outcomes"><%= t(".households_at_reduced_risk_label") %></th>
+                    <th class="data-column protection-outcomes reduced-risk"><%= t(".households_at_reduced_risk_label") %></th>
                     <th class="data-column protection-outcomes significant-to-low-risk"><%= t(".households_moved_from_very_significant_and_significant_to_moderate_or_low_label") %></th>
                     <th class="data-column protection-outcomes most-deprived"><%= t(".households_protected_from_loss_in_20_percent_most_deprived_label") %></th>
                     <th class="data-column protection-outcomes plp-measures"><%= t(".households_protected_through_plp_measures") %></th>
@@ -42,7 +42,7 @@
                           <%= "Column A #{ formatted_financial_year(builder.object.financial_year) }" -%>
                         <% end -%>
                         <%= builder.number_field_without_label :households_at_reduced_risk,
-                          class: "protection-value households-protected",
+                          class: "protection-value reduced-risk",
                           min: 0,
                           step: 1 %>
                       </td>

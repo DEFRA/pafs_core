@@ -5,7 +5,7 @@
 $icon-outline-colour: rgba(11, 12, 12, 0.1);
 $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 
-.space-kids > * {
+.space-kids>* {
   margin-right: 0.5em;
 
   @include media(mobile) {
@@ -36,7 +36,10 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     margin-left: 0;
   }
 
-  &:link, &:hover, &:focus, &:visited {
+  &:link,
+  &:hover,
+  &:focus,
+  &:visited {
     color: $white;
   }
 
@@ -44,7 +47,8 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     background-color: $link-colour;
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $purple;
   }
 }
@@ -57,7 +61,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 
   margin-left: 0.5em;
   margin-top: 0.5em;
-  }
+}
 
 .column-three-quarters {
   @include grid-column(3 / 4);
@@ -105,7 +109,9 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   }
 
   &.hidden-totals {
-    tbody td:last-child, th:last-child {
+
+    tbody td:last-child,
+    th:last-child {
       display: none;
     }
   }
@@ -191,7 +197,8 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     text-align: right;
   }
 
-  .secured, .constrained {
+  .secured,
+  .constrained {
     fieldset {
       white-space: nowrap;
       margin-top: -20px;
@@ -202,12 +209,16 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     margin-bottom: 0;
   }
 
-  tfoot td, .row-total {
+  tfoot td,
+  .row-total {
     font-weight: bold;
   }
 }
 
-.funding-table, .funding-table-summary, .protection-outcomes-table, .protection-outcomes-table-summary {
+.funding-table,
+.funding-table-summary,
+.protection-outcomes-table,
+.protection-outcomes-table-summary {
   th {
     vertical-align: top;
   }
@@ -230,9 +241,18 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     text-align: right;
   }
 
-  .significant-to-low-risk, .non-residential-properties, .most-deprived, .plp-measures, .households-protected {
+  .significant-to-low-risk,
+  .plp-measures,
+  .households-protected {
     min-width: 6em;
     width: 10em;
+  }
+
+  .reduced-risk,
+  .non-residential-properties,
+  .most-deprived {
+    min-width: 5em;
+    width: 8em;
   }
 
   .protection-value {
@@ -250,12 +270,13 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     width: 6em;
   }
 
-  tfoot td, .row-total {
+  tfoot td,
+  .row-total {
     font-weight: bold;
   }
 
   &.hidden-totals {
-    tfoot > tr {
+    tfoot>tr {
       display: none;
     }
   }
@@ -311,6 +332,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 
 .map-link {
   margin-bottom: 1.5em;
+
   // scss-lint:disable QualifyingElement
   a[rel="external"]::after {
     background-position-y: 2px;
@@ -433,7 +455,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 }
 
 .full-table {
-  tr:last-child > td {
+  tr:last-child>td {
     border-bottom: none;
   }
 }
@@ -646,7 +668,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 }
 
 .search-bar {
-    margin-bottom: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 .error-page {
@@ -670,11 +692,12 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     text-decoration: none;
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: $link-hover-colour;
     text-decoration: underline;
 
-    + .sortable-arrow {
+    +.sortable-arrow {
       color: $link-hover-colour;
     }
   }
