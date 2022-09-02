@@ -15,7 +15,7 @@
               <% project.funding.each do |f| %>
                   <tr>
                     <td><%= f[:name] %></td>
-                    <td class="align-right">£<%= number_with_delimiter f[:value] %></td>
+                    <td id=<%= "funding-#{f[:name].downcase.gsub(" ", "-")}" %> class="align-right">£<%= number_with_delimiter f[:value] %></td>
                   </tr>
               <% end %>
               </tbody>

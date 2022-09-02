@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
   before(:each) do
     @project = FactoryBot.create(:project)
-    @project.project_end_financial_year = 2022
+    @project.project_end_financial_year = 2027
     @project.fluvial_flooding = true
     @fpo1 = FactoryBot.create(:flood_protection_outcomes, financial_year: 2017, project_id: @project.id)
     @fpo2 = FactoryBot.create(:flood_protection_outcomes, financial_year: 2020, project_id: @project.id)
@@ -30,6 +30,18 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
       expect(subject.errors.messages[:base]).to include
       "The number of households in the 20% most deprived areas (column C) must be lower than \
       or equal to the number of households moved from very significant \
+      or significant to the moderate or low flood risk category (column B)."
+    end
+
+    it "validates that value D is smaller than B" do
+      subject.flood_protection_outcomes.build(financial_year: 2020,
+                                              households_at_reduced_risk: 100,
+                                              moved_from_very_significant_and_significant_to_moderate_or_low: 50,
+                                              households_protected_through_plp_measures: 100)
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:base]).to include
+      "The number of households that are protected through Property Level Protection (PLP) measures (column D) must be lower than or equal to \
+      to the number of households moved from very significant \
       or significant to the moderate or low flood risk category (column B)."
     end
 
@@ -142,7 +154,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
       # project_end_financial_year = 2022
       # funding_values records run until 2019
       # so expect 3 placeholders to be built for 2020, 2021 and 2022
-      expect { subject.before_view({}) }.to change { subject.flood_protection_outcomes.length }.by(7)
+      expect { subject.before_view({}) }.to change { subject.flood_protection_outcomes.length }.by(8)
     end
   end
 end

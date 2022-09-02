@@ -15,14 +15,21 @@ en:
       coastal_protection_after: "Length of time before coastal erosion affects the area, when the project is complete"
       location_title: "Location"
       map_link: "See this location on a map"
-      flooding_outcome_title: "Households affected by flooding that benefit from the project"
-      flooding_outcome_a: "Households moved to a lower flood risk category"
-      flooding_outcome_b: "Households that have moved out of the very significant or significant category to the moderate or low category"
-      flooding_outcome_c: "Households that are in the 20% most deprived areas"
-      coastal_outcome_title: "Households affected by coastal erosion that benefit from the project"
+      flooding_outcome_title: "Properties affected by flooding that benefit from the project"
+      flooding_outcome_a: "Households that will move to a lower flood risk category"
+      flooding_outcome_b: "Households that have moved out of the very significant or significant or intermediate category to the moderate or low category"
+      flooding_outcome_c: "Households that are in 20% of the most deprived areas"
+      flooding_outcome_d: "Households that are protected through Property Level Protection (PLP) measures"
+      flooding_outcome_e: "Non-residential properties that are better protected from flood risk"
+      flooding_2040_outcome_a: "Households that will move to a lower flood risk category by 2040"
+      flooding_2040_outcome_b: "Households that have moved out of the very significant, significant or intermediate category to the moderate or low category by 2040"
+      flooding_2040_outcome_c: Households that are in 20% of the most deprived areas by 2040
+      flooding_2040_outcome_d: Non-residential properties that are better protected from flood risk by 2040
+      coastal_outcome_title: "Properties affected by coastal erosion that benefit from the project"
       coastal_outcome_a: "Households at a lower risk of coastal erosion"
       coastal_outcome_b: "Households that have are protected from loss within the next 20 years"
       coastal_outcome_c: "Households that are in the 20% most deprived areas"
+      coastal_outcome_d: "Non-residential properties at a reduced risk of coastal erosion"
       approach_title: "How the project will achieve its goals"
       environmental_outcomes_title: "Environmental benefits"
       surface_and_groundwater_amount: "Surface water or groundwater the project is likely to protect or improve"
@@ -46,12 +53,29 @@ en:
       growth_funding_label: "Additional Grant-in-Aid"
       not_yet_identified_label: "Not yet identified"
       total_label: "Total (£)"
-      flood_protection_outcomes_detail_heading: "Households affected by flooding benefited by the project"
+      flood_protection_outcomes_detail_heading: "Households affected by flooding beneffited by the project"
       flood_protection_outcomes_detail_lede: "Houses built or converted after 1 January 2012 aren't included."
       households_at_reduced_risk_label: "Households that will move to a lower flood risk category."
       households_moved_from_very_significant_and_significant_to_moderate_or_low_label: "Of the households in column A, how many will move out of the very significant or significant category to the moderate or low category."
       households_protected_from_loss_in_20_percent_most_deprived_label: "Of the households in column B, how many are in the 20% most deprived areas."
-      coastal_erosion_protection_outcomes_detail_heading: "Households affected by coastal erosion benefited by the project"
+      coastal_erosion_protection_outcomes_detail_heading: "Households affected by coastal erosion beneffited by the project"
       coastal_erosion_protection_outcomes_detail_lede: "Houses built or converted after 1 January 2012 aren't included."
       households_protected_from_loss_in_next_20_years_label: "Of the households in column A, how many will be protected from loss within the next 20 years."
+      non_residential_properties_at_reduced_risk_coastal_erosion_label: Non-residental properties at a reduced risk of coastal erosion
       households_total_label: "Total"
+      intertidal_habitat: Hectares of intertidal wetland habitat the project will create or enhance
+      woodland: Hectares of woodland habitat the project will create or enhance
+      wet_woodland: Hectares of wet woodlands habitat the project will create or enhance
+      wetland_or_wet_grassland: Hectares of wetland or wet grassland habitat the project will create or enhance
+      grassland: Hectares of grassland habitat the project will create or enhance
+      heathland: Hectares of heathland habitat the project will create or enhance
+      ponds_lakes: Hectares of pond and/or lake habitat the project will create or enhance
+      arable_land: Hectares of arable land habitat the project will create or enhance
+      comprehensive_restoration: Kilometres of comprehensive river restoration the project will create or enhance
+      partial_restoration: Kilometres of partial restoration the project will create or enhance
+      create_habitat_watercourse: Kilometres of single major physical improvement the project will create or enhance
+      natural_flood_risk_measures:
+        title: Natural flood measures
+        flood_risk_measures: "Flood risk measures:"
+        total_cost: Total cost of your associated natural flood risk measures
+        not_included: The project does not include any flood risk measures

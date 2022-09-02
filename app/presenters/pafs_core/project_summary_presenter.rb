@@ -145,10 +145,7 @@ module PafsCore
     end
 
     def environmental_outcomes_started?
-      !improve_surface_or_groundwater.nil? || !improve_spa_or_sac.nil? ||
-        !improve_sssi.nil? || !improve_hpi.nil? || !improve_river.nil? ||
-        !create_habitat.nil? || !remove_fish_barrier.nil? ||
-        !remove_eel_barrier.nil?
+      !environmental_benefits.nil?
     end
 
     def surface_and_groundwater_size
@@ -233,6 +230,42 @@ module PafsCore
       total_fpo_for(:households_protected_from_loss_in_20_percent_most_deprived)
     end
 
+    def total_for_flooding_d
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo_for(:households_protected_through_plp_measures)
+    end
+
+    def total_for_flooding_e
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo_for(:non_residential_properties)
+    end
+
+    def total_for_flooding_2040_a
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:households_at_reduced_risk)
+    end
+
+    def total_for_flooding_2040_b
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:moved_from_very_significant_and_significant_to_moderate_or_low)
+    end
+
+    def total_for_flooding_2040_c
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:households_protected_from_loss_in_20_percent_most_deprived)
+    end
+
+    def total_for_flooding_2040_d
+      return not_provided unless flood_protection_outcomes_entered?
+
+      total_fpo2040_for(:non_residential_properties)
+    end
+
     def total_for_coastal_a
       return not_provided unless coastal_erosion_protection_outcomes_entered?
 
@@ -249,6 +282,12 @@ module PafsCore
       return not_provided unless coastal_erosion_protection_outcomes_entered?
 
       total_ce_for(:households_protected_from_loss_in_20_percent_most_deprived)
+    end
+
+    def total_for_coastal_d
+      return not_provided unless coastal_erosion_protection_outcomes_entered?
+
+      total_ce_for(:non_residential_properties)
     end
 
     def funding_calculator_uploaded?
@@ -273,6 +312,26 @@ module PafsCore
 
     def not_provided
       "<em>Not provided</em>".html_safe
+    end
+
+    def not_applicable
+      "<em>N/A</em>".html_safe
+    end
+
+    def hectares_created_or_enhanced(attribute:, applicable:)
+      return not_applicable if applicable == false
+
+      return not_provided if send(attribute).nil?
+
+      "#{send(attribute)} hectares"
+    end
+
+    def kilometres_created_or_enhanced(attribute:, applicable: false)
+      return not_applicable if applicable == false
+
+      return not_provided if send(attribute).nil?
+
+      "#{send(attribute)} kilometres"
     end
 
     private

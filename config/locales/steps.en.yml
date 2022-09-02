@@ -8,6 +8,9 @@ en:
       secured_label: Is the funding secured?
       time_constrained_label: Is the funding Time Constrained?
       total_label: Total (£)
+    environmental_benefits_partnership_funding_information:
+      find_out_more: Find out more about
+      find_out_more_link: partnership funding eligibility for environmental benefits (opens in new window or tab)
 
   pafs_core:
     projects:
@@ -217,13 +220,17 @@ en:
           heading: The uploaded partnership funding calculator
 # flood protection outcomes
         flood_protection_outcomes:
-          heading: How many households affected by flooding is the project likely to benefit?
-          lede: Don't include houses built or converted after 1 January 2012.
-          reduced_risk_of_households_for_floods_label: My project does not move any households to a lower flood risk category
+          heading: How many properties affected by flooding is the project likely to benefit?
+          lede: |
+            These are properties that  are identified as being at risk today.
+            Don't include properties built or converted after 1 January 2012.
+          reduced_risk_of_households_for_floods_label: My project does not move any properties to a lower flood risk category
           financial_year_label: Financial year (April to March)
           households_at_reduced_risk_label: How many households will move to a lower flood risk category?
           households_moved_from_very_significant_and_significant_to_moderate_or_low_label: Of the households in column A, how many will move out of the very significant or significant category to the moderate or low category?
           households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, how many are in the 20% most deprived areas?
+          households_protected_through_plp_measures: Of the households in column B, how many are protected through Property Level Protection (PLP) measures?
+          non_residential_properties: The number of non-residential properties better protected from flood risk?
           total_label: Total
 # flood protection outcomes summary
         flood_protection_outcomes_summary:
@@ -232,16 +239,42 @@ en:
           households_at_reduced_risk_label: Households moved to a lower flood risk category
           households_moved_from_very_significant_and_significant_to_moderate_or_low_label: Of the households in column A, the households that have moved out of the very significant or significant category to the moderate or low category
           households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, the households that are in the 20% most deprived areas
+          households_protected_through_plp_measures: Households that are protected through Property Level Protection (PLP) measures by 2049
+          non_residential_properties: The number of non-residential properties better protected from flood risk?
+          total_label: Total
+# flood protection 2040 outcomes
+        flood_protection_outcomes2040:
+          heading: How many additional properties affected by flooding by 2040 is the project likely to benefit?
+          lede: |
+            These are properties that are not at risk today but are identified as being at risk by 2040
+            from the effects of climate change.
+            Don't include properties built or converted after 1 January 2012.
+          no_properties_affected_by_flooding_2040_label: My project does not move any properties to a lower flood risk category
+          financial_year_label: Financial year (April to March)
+          households_at_reduced_risk_label: How many households will move to a lower flood risk category?
+          households_moved_from_very_significant_and_significant_to_moderate_or_low_label: Of the households in column A, how many will move out of the very significant or significant category to the moderate or low category?
+          households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, how many are in the 20% most deprived areas?
+          non_residential_properties: The number of non-residential properties better protected from flood risk?
+          total_label: Total
+# flood protection 2040 outcomes summary
+        flood_protection_outcomes2040_summary:
+          heading: Confirm the number of households at risk of being affected by flooding by 2040 that the project will benefit
+          financial_year_label: Financial year (April to March)
+          households_at_reduced_risk_label: Households moved to a lower flood risk category
+          households_moved_from_very_significant_and_significant_to_moderate_or_low_label: Of the households in column A, the households that have moved out of the very significant or significant category to the moderate or low category
+          households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, the households that are in the 20% most deprived areas
+          non_residential_properties: The number of non-residential properties better protected from flood risk?
           total_label: Total
 # coastal erosion protection outcomes
         coastal_erosion_protection_outcomes:
-          heading: How many households affected coastal erosion is the project likely to benefit?
-          lede: Don't include houses built or converted after 1 January 2012.
-          reduced_risk_of_households_for_coastal_erosion_label: My project does not reduce the risk of coastal erosion for any households
+          heading: How many properties affected coastal erosion is the project likely to benefit?
+          lede: Don't include properties built or converted after 1 January 2012.
+          reduced_risk_of_households_for_coastal_erosion_label: My project does not reduce the risk of coastal erosion for any properties
           financial_year_label: Financial year (April to March)
           households_at_reduced_risk_label: How many households will be at a reduced risk of coastal erosion?
           households_protected_from_loss_in_next_20_years_label: Of the households in column A, how many will be protected from loss within the next 20 years?
           households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in column B, how many are in the 20% most deprived areas?
+          non_residential_properties_label: How many non-residential properties will be at reduced risk of coastal erosion?
           total_label: Total
 # coastal erosion protection outcomes summary
         coastal_erosion_protection_outcomes_summary:
@@ -250,6 +283,7 @@ en:
           households_at_reduced_risk_label: Households are at a reduced risk of coastal erosion
           households_protected_from_loss_in_next_20_years_label: Of the households in A, the households that are protected from loss within the next 20 years
           households_protected_from_loss_in_20_percent_most_deprived_label: Of the households in B, the households that are in the 20% most deprived areas
+          non_residential_properties_label: How many non-residential properties will be at reduced risk of coastal erosion?
           total_label: Total
 # standard of protection
         standard_of_protection:
@@ -385,3 +419,62 @@ en:
           beach_nourishment_label: Beach nourishment
           other_label: Other
           other_flood_measures_label: Other natural flood measure
+
+# Any Environmental benefits
+        any_environmental_benefits:
+          heading: Does the project include any environmental benefits?
+        arable_land_created_or_enhanced:
+          heading: Will the project create or enhance an arable land habitat?
+          lede: This is land under cultivation, it includes temporary grass leys.
+        comprehensive_restoration:
+          heading: Will the project include comprehensive restoration or creation of natural processes, habitats and/or removal of physical modifications?
+          lede: This includes creating new channels with minor physical modifications that do not inhibit natural river processes.
+        create_habitat_watercourse:
+          heading: Will the project enhance or create a single major physical or habitat of watercourse?
+        grassland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a grassland habitat?
+          lede: This is land under permanent-natural or semi-natural grassland, dominated by  grassland species with very little or no dwarf shrub, wetland or wooded species within the sward.
+        heathland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a heathland habitat?
+          lede: This is habitat that covers the full altitudinal range of heathlands and has at least 25% cover of the heathers and other dwarf shrubs, or previously heathland in a degraded state below this.
+        hectares_of_arable_land_lake_habitat_created_or_enhanced:
+          heading: How many hectares of arable land habitat will the project create or enhance?
+        hectares_of_grassland_habitat_created_or_enhanced:
+          heading: How many hectares of grassland habitat will the project create or enhance?
+        hectares_of_heathland_created_or_enhanced:
+          heading: How many hectares of heathland habitat will the project create or enhance?
+        hectares_of_intertidal_habitat_created_or_enhanced:
+          heading: How many hectares of intertidal wetland habitat will the project create or enhance?
+        hectares_of_pond_or_lake_habitat_created_or_enhanced:
+          heading: How many hectares of pond and/or lake habitat will the project create or enhance?
+        hectares_of_wet_woodland_habitat_created_or_enhanced:
+          heading: How many hectares of wet woodlands habitat will the project create or enhance?
+        hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced:
+          heading: How many hectares of wetland or wet grassland habitat will the project create or enhance?
+        hectares_of_woodland_habitat_created_or_enhanced:
+          heading: How many hectares of woodland habitat will the project create or enhance?
+        intertidal_habitat_created_or_enhanced:
+          heading: Will the project create or enhance an intertidal wetland habitat?
+          lede: Intertidal wetland habitats are found between the high and low tide marks. The habitats most associated with FCERM works are salt marshes and mud flats.
+        kilometres_of_watercourse_enhanced_or_created_comprehensive:
+          heading: How many kilometres of comprehensive river restoration will be enhanced or created?
+        kilometres_of_watercourse_enhanced_or_created_partial:
+          heading: How many kilometres of partial restoration will be enhanced or created?
+        kilometres_of_watercourse_enhanced_or_created_single:
+          heading: How many kilometres of single major physical improvement the project will be enhanced or created?
+        partial_restoration:
+          heading: Will the project include partial restoration of natural processes, habitats and/or partial removal of physical modifications?
+          lede: This includes creating new channels with some physical modifications and partial functioning of natural processes.
+        ponds_lakes_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a pond and/or lake habitat?
+          lede: Lakes are generally all bodies of water over 2 hectares in area. Ponds are all bodies of water up to 1 hectare.
+        wet_woodland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a wet woodlands habitat?
+          lede: Wet woodland habitats have trees associated with wet soils such as alder, birch and willow.
+        wetland_or_wet_grassland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a wetland or wet grassland habitat?
+          lede: Wetlands and wet grassland habitats include flood plains, wetlands mosaics, reed beds and bogs.
+        woodland_habitat_created_or_enhanced:
+          heading: Will the project create or enhance a woodland habitat?
+          lede: Woodlands are areas of vegetation dominated by trees that are more than 5m high when mature, which forms a canopy (areas of trees with a canopy greater than 20%).
+            This includes felled, young or newly planted woodland.

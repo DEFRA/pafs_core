@@ -39,6 +39,60 @@ class PafsCore::Camc3Presenter
     end
   end
 
+  def households_protected_through_plp_measures
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.households_protected_through_plp_measures(year)
+      }
+    end
+  end
+
+  def non_residential_properties
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.non_residential_properties(year)
+      }
+    end
+  end
+
+  def households_at_reduced_risk_2040
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.households_at_reduced_risk(year)
+      }
+    end
+  end
+
+  def moved_from_very_significant_and_significant_to_moderate_or_low_2040
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.moved_from_very_significant_and_significant_to_moderate_or_low(year)
+      }
+    end
+  end
+
+  def households_protected_from_loss_in_20_percent_most_deprived_2040
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.households_protected_from_loss_in_20_percent_most_deprived(year)
+      }
+    end
+  end
+
+  def non_residential_properties_2040
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.non_residential_properties(year)
+      }
+    end
+  end
+
   def coastal_households_at_reduced_risk
     financial_years.collect do |year|
       {
@@ -62,6 +116,15 @@ class PafsCore::Camc3Presenter
       {
         year: year,
         value: fcerm1_presenter.coastal_households_protected_from_loss_in_20_percent_most_deprived(year)
+      }
+    end
+  end
+
+  def coastal_non_residential_properties
+    financial_years.collect do |year|
+      {
+        year: year,
+        value: fcerm1_presenter.coastal_non_residential_properties(year)
       }
     end
   end
@@ -98,17 +161,18 @@ class PafsCore::Camc3Presenter
                        om2: households_at_reduced_risk,
                        om2b: moved_from_very_significant_and_significant_to_moderate_or_low,
                        om2c: households_protected_from_loss_in_20_percent_most_deprived,
+                       om2d: households_protected_through_plp_measures,
+                       om2nrp: non_residential_properties,
+                       om2Ba: households_at_reduced_risk_2040,
+                       om2Bb: moved_from_very_significant_and_significant_to_moderate_or_low_2040,
+                       om2Bc: households_protected_from_loss_in_20_percent_most_deprived_2040,
+                       om2Bnrp: non_residential_properties_2040,
                        om3: coastal_households_at_reduced_risk,
                        om3b: coastal_households_protected_from_loss_in_next_20_years,
                        om3c: coastal_households_protected_from_loss_in_20_percent_most_deprived,
-                       om4a: fcerm1_presenter.hectares_of_net_water_dependent_habitat_created,
-                       om4b: fcerm1_presenter.hectares_of_net_water_intertidal_habitat_created,
-                       om4c: fcerm1_presenter.kilometres_of_protected_river_improved,
-                       om4d: fcerm1_presenter.improve_surface_or_groundwater_amount,
-                       om4e: fcerm1_presenter.fish_or_eel_amount,
-                       om4f: fcerm1_presenter.improve_river_amount,
-                       om4g: fcerm1_presenter.improve_habitat_amount,
-                       om4h: fcerm1_presenter.create_habitat_amount
+                       om3nrp: coastal_non_residential_properties,
+                       om4a: fcerm1_presenter.hectares_of_habitat_created_or_enhanced,
+                       om4b: fcerm1_presenter.kilometres_of_watercourse_created_or_enhanced
                      },
                      natural_flood_risk_measures: {
                        river_restoration: project.river_restoration,
@@ -140,22 +204,6 @@ class PafsCore::Camc3Presenter
   attr_accessor :funding_sources_mapper
 
   def financial_years
-    [
-      -1,
-      2015,
-      2016,
-      2017,
-      2018,
-      2019,
-      2020,
-      2021,
-      2022,
-      2023,
-      2024,
-      2025,
-      2026,
-      2027,
-      2028
-    ]
+    [-1] + (2015..project.project_end_financial_year).to_a
   end
 end

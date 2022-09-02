@@ -181,7 +181,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       it "sets an error message" do
         subject.risks_complete?
         expect(subject.errors[:risks]).to include "^Tell us the risks the project"\
-          " protects against and the households benefiting."
+          " protects against and the households benefitting."
       end
     end
 
@@ -218,7 +218,7 @@ RSpec.describe PafsCore::ValidationPresenter do
           it "sets an error message" do
             subject.risks_complete?
             expect(subject.errors[:risks]).to include "^Tell us the risks the "\
-              "project protects against and the households benefiting."
+              "project protects against and the households benefitting."
           end
         end
       end
@@ -273,11 +273,104 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#approach_complete?"
 
-  describe "#environmental_outcomes_complete?"
+  describe "#environmental_outcomes_complete?" do
+    context "when environmental_benefits is set to nil" do
+      before(:each) { subject.environmental_benefits = nil }
+
+      it "returns false" do
+        expect(subject.environmental_outcomes_complete?).to eq false
+      end
+    end
+
+    context "when environmental_benefits is set to false" do
+      before(:each) { subject.environmental_benefits = false }
+
+      it "returns true" do
+        expect(subject.environmental_outcomes_complete?).to eq true
+      end
+    end
+
+    context "when environmental_benefits is set to true" do
+      before(:each) { subject.environmental_benefits = true }
+
+      context "and no environmental benefits have been selected" do
+        it "returns false" do
+          expect(subject.environmental_outcomes_complete?).to eq false
+        end
+      end
+
+      context "and at least one environmental benefit has been elected" do
+        before(:each) do
+          subject.arable_land = true
+          %i[intertidal_habitat grassland woodland wet_woodland wetland_or_wet_grassland heathland ponds_lakes comprehensive_restoration partial_restoration create_habitat_watercourse].each do |benefit|
+            subject.send("#{benefit}=", false)
+          end
+        end
+
+        context "and the figure hasn't been provided" do
+          it "returns false" do
+            expect(subject.environmental_outcomes_complete?).to eq false
+          end
+        end
+
+        context "and the figure has been provided" do
+          before(:each) { subject.hectares_of_arable_land_lake_habitat_created_or_enhanced = 12 }
+
+          it "returns true" do
+            expect(subject.environmental_outcomes_complete?).to eq true
+          end
+        end
+      end
+    end
+  end
 
   describe "#urgency_complete?"
 
-  describe "#funding_calculator_complete?"
+  describe "#funding_calculator_complete?" do
+    subject { PafsCore::ValidationPresenter.new(project) }
+    let(:project) { FactoryBot.create(:full_project) }
+
+    context "with no PFC attached" do
+      it "returns false" do
+        expect(subject.funding_calculator_complete?).to eq false
+      end
+    end
+
+    context "with a PFC attached" do
+      before(:each) do
+        file_path =  File.join(Rails.root, "..", "fixtures", "calculators", filename)
+        file = File.open file_path
+        storage = PafsCore::DevelopmentFileStorageService.new
+        dest_file = File.join(project.storage_path, filename)
+        storage.upload(file, dest_file)
+        project.funding_calculator_file_name = filename
+      end
+
+      context "with a v8 PFC attached" do
+        let(:filename) { "v8.xlsx" }
+
+        it "returns true" do
+          expect(subject.funding_calculator_complete?).to eq true
+        end
+      end
+
+      context "with a 2020 v1 PFC attached" do
+        let(:filename) { "v9old.xlsx" }
+
+        it "returns false" do
+          expect(subject.funding_calculator_complete?).to eq false
+        end
+      end
+
+      context "withh a 2020 v2 PFC attached" do
+        let(:filename) { "v9.xlsx" }
+
+        it "returns true" do
+          expect(subject.funding_calculator_complete?).to eq true
+        end
+      end
+    end
+  end
 
   def make_flood_outcome(year, project_id)
     FactoryBot.create(:flood_protection_outcomes,

@@ -11,7 +11,7 @@ RSpec.describe PafsCore::Camc3Presenter do
       :ea_area,
       :with_no_shapefile,
       {
-        project_end_financial_year: 2027,
+        project_end_financial_year: 2032,
         funding_calculator_file_name: calculator_file
       }
     )
@@ -68,7 +68,11 @@ RSpec.describe PafsCore::Camc3Presenter do
       { year: 2025, value: 0 },
       { year: 2026, value: 0 },
       { year: 2027, value: 0 },
-      { year: 2028, value: 0 }
+      { year: 2028, value: 0 },
+      { year: 2029, value: 0 },
+      { year: 2030, value: 0 },
+      { year: 2031, value: 0 },
+      { year: 2032, value: 0 }
     ]
   end
 

@@ -78,14 +78,17 @@ module PafsCore
       a_insensible = []
       b_insensible = []
       c_insensible = []
+      d_insensible = []
       coastal_erosion_protection_outcomes.each do |cepo|
         a = cepo.households_at_reduced_risk.to_i
         b = cepo.households_protected_from_loss_in_next_20_years.to_i
         c = cepo.households_protected_from_loss_in_20_percent_most_deprived.to_i
+        d = cepo.non_residential_properties.to_i
 
         a_insensible.push cepo.id if a > limit
         b_insensible.push cepo.id if b > limit
         c_insensible.push cepo.id if c > limit
+        d_insensible.push cepo.id if d > limit
       end
 
       unless a_insensible.empty?
@@ -109,6 +112,14 @@ module PafsCore
           be less than or equal to 1 million."
         )
       end
+
+      unless d_insensible.empty?
+        errors.add(
+          :base,
+          "The number of non-residential properties must \
+          be less than or equal to 1 million."
+        )
+      end
     end
 
     def step_params(params)
@@ -121,6 +132,7 @@ module PafsCore
                                       households_at_reduced_risk
                                       households_protected_from_loss_in_next_20_years
                                       households_protected_from_loss_in_20_percent_most_deprived
+                                      non_residential_properties
                                     ])
     end
 
@@ -131,7 +143,7 @@ module PafsCore
       #   previous years
       #   current financial year to :project_end_financial_year
       years = [-1]
-      years.concat((2015..project_end_financial_year).to_a)
+      years.concat((2021..project_end_financial_year).to_a)
       years.each { |y| build_missing_year(y) }
     end
 

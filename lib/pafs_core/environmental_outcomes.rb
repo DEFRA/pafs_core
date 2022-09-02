@@ -2,32 +2,42 @@
 
 module PafsCore
   module EnvironmentalOutcomes
-    delegate :improve_spa_or_sac?,
-             :improve_spa_or_sac, :improve_spa_or_sac=,
-             :improve_sssi?,
-             :improve_sssi, :improve_sssi=,
-             :improve_hpi?,
-             :improve_hpi, :improve_hpi=,
-             :improve_habitat_amount, :improve_habitat_amount=,
-             :improve_river?,
-             :improve_river, :improve_river=,
-             :improve_river_amount, :improve_river_amount=,
-             :create_habitat?,
-             :create_habitat, :create_habitat=,
-             :create_habitat_amount, :create_habitat_amount=,
-             :remove_fish_barrier?,
-             :remove_fish_barrier, :remove_fish_barrier=,
-             :remove_eel_barrier?,
-             :remove_eel_barrier, :remove_eel_barrier=,
-             :fish_or_eel_amount, :fish_or_eel_amount=,
-             to: :project
+    OM4_ATTRIBUTES = %i[
+      intertidal_habitat
+      hectares_of_intertidal_habitat_created_or_enhanced
+      woodland
+      hectares_of_woodland_habitat_created_or_enhanced
+      wet_woodland
+      hectares_of_wet_woodland_habitat_created_or_enhanced
+      wetland_or_wet_grassland
+      hectares_of_wetland_or_wet_grassland_created_or_enhanced
+      grassland
+      hectares_of_grassland_habitat_created_or_enhanced
+      heathland
+      hectares_of_heathland_created_or_enhanced
+      ponds_lakes
+      hectares_of_pond_or_lake_habitat_created_or_enhanced
+      arable_land
+      hectares_of_arable_land_lake_habitat_created_or_enhanced
+      comprehensive_restoration
+      kilometres_of_watercourse_enhanced_or_created_comprehensive
+      partial_restoration
+      kilometres_of_watercourse_enhanced_or_created_partial
+      create_habitat_watercourse
+      kilometres_of_watercourse_enhanced_or_created_single
+    ].freeze
 
-    def improves_habitat?
-      improve_spa_or_sac? || improve_sssi? || improve_hpi?
+    OM4_ATTRIBUTES.each do |r|
+      delegate r, "#{r}=", "#{r}?", to: :project
     end
 
-    def removes_fish_or_eel_barrier?
-      remove_fish_barrier? || remove_eel_barrier?
+    delegate  :environmental_benefits,
+              :environmental_benefits=,
+              :environmental_benefits?,
+              to: :project
+
+    def selected_om4_attributes
+      OM4_ATTRIBUTES.select { |r| send("#{r}?") }
     end
   end
 end

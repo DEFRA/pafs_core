@@ -528,17 +528,18 @@
           "om2",
           "om2b",
           "om2c",
+          "om2d",
+          "om2nrp",
+          "om2Ba",
+          "om2Bb",
+          "om2Bc",
+          "om2Bnrp",
           "om3",
           "om3b",
           "om3c",
+          "om3nrp",
           "om4a",
-          "om4b",
-          "om4c",
-          "om4d",
-          "om4e",
-          "om4f",
-          "om4g",
-          "om4h"
+          "om4b"
         ],
         "properties": {
           "om2": {
@@ -586,6 +587,138 @@
             }
           },
           "om2c": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2d": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2nrp": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2Ba": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2Bb": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2Bc": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            }
+          },
+          "om2Bnrp": {
             "type": "array",
             "minItems": 0,
             "uniqueItems": true,
@@ -673,61 +806,129 @@
               }
             }
           },
+          "om3nrp": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "year",
+                "value"
+              ],
+              "properties": {
+                "year": {
+                  "type": "integer",
+                  "example": -1
+                },
+                "value": {
+                  "type": "number",
+                  "example": 0
+                }
+              }
+            }
+          },
           "om4a": {
-            "type": [
-              "number",
-              "null"
+            "type": "object",
+            "required": [
+              "om4a_hectares_intertidal",
+              "om4a_hectares_woodland",
+              "om4a_hectares_wet_woodland",
+              "om4a_hectares_wetland_or_wet_grassland",
+              "om4a_hectares_grassland",
+              "om4a_hectares_heathland",
+              "om4a_hectares_ponds_lakes",
+              "om4a_hectares_arable_land"
             ],
-            "example": 0
+            "properties": {
+              "om4a_hectares_intertidal": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4a_hectares_woodland": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4a_hectares_wet_woodland": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4a_hectares_wetland_or_wet_grassland": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4a_hectares_grassland": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4a_hectares_heathland": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4a_hectares_ponds_lakes": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4a_hectares_arable_land": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              }
+            }
           },
           "om4b": {
-            "type": [
-              "number",
-              "null"
+            "type": "object",
+            "required": [
+              "om4b_kilometres_of_watercourse_comprehensive",
+              "om4b_kilometres_of_watercourse_partial",
+              "om4b_kilometres_of_watercourse_single"
             ],
-            "example": 0
-          },
-          "om4c": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4d": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4e": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4f": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4g": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
-          },
-          "om4h": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "example": 0
+            "properties": {
+              "om4b_kilometres_of_watercourse_comprehensive": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4b_kilometres_of_watercourse_partial": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              },
+              "om4b_kilometres_of_watercourse_single": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "example": 0
+              }
+            }
           }
         }
       }

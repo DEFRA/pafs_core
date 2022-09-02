@@ -5,6 +5,9 @@ module PafsCore
     delegate :flood_protection_outcomes,
              :flood_protection_outcomes=,
              :flood_protection_outcomes_attributes=,
+             :flood_protection2040_outcomes,
+             :flood_protection2040_outcomes=,
+             :flood_protection2040_outcomes_attributes=,
              :coastal_erosion_protection_outcomes,
              :coastal_erosion_protection_outcomes=,
              :coastal_erosion_protection_outcomes_attributes=,
@@ -15,6 +18,14 @@ module PafsCore
       # if this is a db query we lose inputted data when there are errors
       # and we send the user back to fix it
       flood_protection_outcomes.select do |fpo|
+        fpo.financial_year <= project_end_financial_year
+      end.sort_by(&:financial_year)
+    end
+
+    def current_flood_protection2040_outcomes
+      # if this is a db query we lose inputted data when there are errors
+      # and we send the user back to fix it
+      flood_protection2040_outcomes.select do |fpo|
         fpo.financial_year <= project_end_financial_year
       end.sort_by(&:financial_year)
     end
@@ -31,12 +42,20 @@ module PafsCore
       current_flood_protection_outcomes.reduce(0) { |sum, fpo| sum + (fpo.send(value) || 0) }
     end
 
+    def total_fpo2040_for(value)
+      current_flood_protection2040_outcomes.reduce(0) { |sum, fpo| sum + (fpo.send(value) || 0) }
+    end
+
     def total_ce_for(value)
       current_coastal_erosion_protection_outcomes.reduce(0) { |sum, cepo| sum + (cepo.send(value) || 0) }
     end
 
     def flooding_total_protected_households
       current_flood_protection_outcomes.map(&:households_at_reduced_risk).compact.sum
+    end
+
+    def flooding_total_protected_households_2040
+      current_flood_protection2040_outcomes.map(&:households_at_reduced_risk).compact.sum
     end
 
     def coastal_total_protected_households

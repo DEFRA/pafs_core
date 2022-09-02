@@ -448,13 +448,13 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
       context "saving the environmental outcomes" do
         let(:params) do
           {
-            remove_eel_barrier_step: {
+            kilometres_of_watercourse_enhanced_or_created_single_step: {
               id: "4",
-              remove_eel_barrier: "false"
+              kilometres_of_watercourse_enhanced_or_created_single: "100"
             },
             commit: "Save and continue",
             id: project.to_param,
-            step: "remove_eel_barrier"
+            step: "kilometres_of_watercourse_enhanced_or_created_single"
           }
         end
 
