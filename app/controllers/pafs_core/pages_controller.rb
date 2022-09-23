@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class PagesController < ApplicationController
+  class PagesController < PafsCore::ApplicationController
     helper_method :previous_page
 
     def cookies; end

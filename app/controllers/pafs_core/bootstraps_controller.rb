@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class BootstrapsController < ApplicationController
+  class BootstrapsController < PafsCore::ApplicationController
     # NOTE: this should be added via a decorator in consuming qpp if needed
     # before_action :authenticate_user!
 

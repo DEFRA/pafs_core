@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class DownloadsController < ApplicationController
+  class DownloadsController < PafsCore::ApplicationController
     include PafsCore::Files
 
     def index

@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class ArchivesController < ApplicationController
+  class ArchivesController < PafsCore::ApplicationController
     def index
       page = params.fetch(:page, 1)
       projects_per_page = params.fetch(:per, 10)
