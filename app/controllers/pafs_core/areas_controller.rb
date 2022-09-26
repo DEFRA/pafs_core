@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class AreasController < ApplicationController
+  class AreasController < PafsCore::ApplicationController
     # NOTE: this should be added via a decorator in consuming qpp if needed
     # before_action :authenticate_user!
 

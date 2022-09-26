@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class ErrorsController < ApplicationController
+  class ErrorsController < PafsCore::ApplicationController
     def show
       @exception = ENV["action_dispatch.exception"]
       action = request.path[1..-1].gsub(/[^0-9]/, "")
