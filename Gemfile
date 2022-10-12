@@ -24,15 +24,13 @@ group :development, :test do
   gem "byebug"
   gem "climate_control"
   gem "defra_ruby_style"
-  gem "guard-rspec", require: false
   gem "json_schemer"
   gem "pry"
   gem "rails-controller-testing"
-  gem "rails5-spec-converter"
+  gem "rubocop-rspec"
 end
 
 group :test do
-  gem "codeclimate-test-reporter", "~> 0.6", require: false
   gem "database_cleaner"
   gem "memory_profiler"
 end
