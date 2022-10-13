@@ -68,6 +68,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
       risk category (column A)."
     end
 
+    # rubocop:disable Lint/Void
     it "validates that number of households is less than or equal to 1 million" do
       subject.flood_protection_outcomes.build(financial_year: 2020,
                                               households_at_reduced_risk: 1_000_001,
@@ -83,6 +84,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
       "The number of households protected from loss in the 20 percent most deprived must be \
       less than or equal to 1 million."
     end
+    # rubocop:enable Lint/Void
   end
 
   describe "#update" do

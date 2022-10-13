@@ -23,9 +23,9 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
 
     it "validates that value C is smaller than B" do
       subject.flood_protection2040_outcomes.build(financial_year: 2020,
-                                              households_at_reduced_risk: 100,
-                                              moved_from_very_significant_and_significant_to_moderate_or_low: 50,
-                                              households_protected_from_loss_in_20_percent_most_deprived: 100)
+                                                  households_at_reduced_risk: 100,
+                                                  moved_from_very_significant_and_significant_to_moderate_or_low: 50,
+                                                  households_protected_from_loss_in_20_percent_most_deprived: 100)
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:base]).to include
       "The number of households in the 20% most deprived areas (column C) must be lower than \
@@ -35,8 +35,8 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
 
     it "validates that value B is smaller than A" do
       subject.flood_protection2040_outcomes.build(financial_year: 2020,
-                                              households_at_reduced_risk: 100,
-                                              moved_from_very_significant_and_significant_to_moderate_or_low: 200)
+                                                  households_at_reduced_risk: 100,
+                                                  moved_from_very_significant_and_significant_to_moderate_or_low: 200)
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:base]).to include
       "The number of households moved from very significant or significant to \
@@ -48,7 +48,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
       @project.flood_protection2040_outcomes = []
       @project.save
       subject.flood_protection2040_outcomes.build(financial_year: 2020,
-                                              households_at_reduced_risk: 0)
+                                                  households_at_reduced_risk: 0)
 
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:base]).to include
@@ -56,11 +56,12 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
       risk category (column A)."
     end
 
+    # rubocop:disable Lint/Void
     it "validates that number of households is less than or equal to 1 million" do
       subject.flood_protection2040_outcomes.build(financial_year: 2024,
-                                              households_at_reduced_risk: 1_000_001,
-                                              moved_from_very_significant_and_significant_to_moderate_or_low: 1_000_001,
-                                              households_protected_from_loss_in_20_percent_most_deprived: 1_000_001)
+                                                  households_at_reduced_risk: 1_000_001,
+                                                  moved_from_very_significant_and_significant_to_moderate_or_low: 1_000_001,
+                                                  households_protected_from_loss_in_20_percent_most_deprived: 1_000_001)
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:base]).to include
       "The number of households at reduced risk must be less than or equal to 1 million."
@@ -71,6 +72,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
       "The number of households protected from loss in the 20 percent most deprived must be \
       less than or equal to 1 million."
     end
+    # rubocop:enable Lint/Void
   end
 
   describe "#update" do

@@ -15,7 +15,7 @@ module PafsCore
     end
 
     def serialize
-      return nil unless has_shapefile?
+      return nil unless shapefile?
 
       Base64.strict_encode64(shapefile_data)
     end
@@ -32,7 +32,7 @@ module PafsCore
       @shapefile_data ||= shapefile_temp_file.read
     end
 
-    def has_shapefile?
+    def shapefile?
       project.benefit_area_file_name.present?
     end
   end

@@ -18,7 +18,7 @@ module PafsCore
 
     # rubocop:disable Style/HashSyntax
     def submission_state
-      machine = Bstard.define do |fsm|
+      Bstard.define do |fsm|
         fsm.initial status
         fsm.event :deliver, :created => :sent
         fsm.event :confirm, :sent => :succeeded

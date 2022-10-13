@@ -5,23 +5,23 @@ module PafsCore
     delegate :content_tag, :tag, :safe_join, to: :@template
 
     def error_header(heading = nil, description = nil, sort_order = nil)
-      if @object.errors.any?
-        h = heading || I18n.t(:error_heading)
-        d = description || I18n.t(:error_description)
+      return unless @object.errors.any?
 
-        contents = [error_heading(h)]
-        contents << error_description(d) unless d.blank?
-        contents << if sort_order.nil?
-                      error_list
-                    else
-                      sorted_error_list(sort_order)
-                    end
+      h = heading || I18n.t(:error_heading)
+      d = description || I18n.t(:error_description)
 
-        content_tag(:div, class: "error-summary", role: "group",
-                          aria: { labelledby: "error-summary-heading" },
-                          tabindex: "-1") do
-          safe_join(contents, "\n")
-        end
+      contents = [error_heading(h)]
+      contents << error_description(d) unless d.blank?
+      contents << if sort_order.nil?
+                    error_list
+                  else
+                    sorted_error_list(sort_order)
+                  end
+
+      content_tag(:div, class: "error-summary", role: "group",
+                        aria: { labelledby: "error-summary-heading" },
+                        tabindex: "-1") do
+        safe_join(contents, "\n")
       end
     end
 
@@ -29,6 +29,7 @@ module PafsCore
       super record_name, record_object, fields_options.merge(builder: self.class), &block
     end
 
+    # rubocop:disable Style/ExplicitBlockArgument
     def form_group(name)
       name = name.to_sym
       content = []
@@ -40,7 +41,9 @@ module PafsCore
                     safe_join(content, "\n")
                   end
     end
+    # rubocop:enable Style/ExplicitBlockArgument
 
+    # rubocop:disable Style/ExplicitBlockArgument
     def check_box(attribute, options = {})
       attribute = attribute.to_sym
       label_opts = { class: error_class(attribute, "block-label") }
@@ -66,6 +69,7 @@ module PafsCore
         end
       end
     end
+    # rubocop:enable Style/ExplicitBlockArgument
 
     def percent_field(attribute, options = {})
       def_opts = {
@@ -197,15 +201,15 @@ module PafsCore
     end
 
     def error_message(attribute)
-      if @object.errors.include? attribute
-        content = []
-        @object.errors.full_messages_for(attribute).each_with_index do |message, i|
-          content << content_tag(:p, error_trim(message).html_safe,
-                                 class: "error-message",
-                                 id: error_id(attribute, i))
-        end
-        safe_join(content, "\n")
+      return unless @object.errors.include? attribute
+
+      content = []
+      @object.errors.full_messages_for(attribute).each_with_index do |message, i|
+        content << content_tag(:p, error_trim(message).html_safe,
+                               class: "error-message",
+                               id: error_id(attribute, i))
       end
+      safe_join(content, "\n")
     end
 
     %i[

@@ -41,8 +41,8 @@ module PafsCore
       STANDARD_OF_PROTECTION_FLOODING
     end
 
-    def flood_risk_symbol(n)
-      STANDARD_OF_PROTECTION_FLOODING[n]
+    def flood_risk_symbol(symbol)
+      STANDARD_OF_PROTECTION_FLOODING[symbol]
     end
 
     # coastal erosion protection levels are stored as integers that correlate to
@@ -55,8 +55,8 @@ module PafsCore
       STANDARD_OF_PROTECTION_COASTAL_BEFORE
     end
 
-    def coastal_risk_before_symbol(n)
-      STANDARD_OF_PROTECTION_COASTAL_BEFORE[n]
+    def coastal_risk_before_symbol(value)
+      STANDARD_OF_PROTECTION_COASTAL_BEFORE[value]
     end
 
     # coastal erosion protection levels are stored as integers that correlate to
@@ -69,12 +69,12 @@ module PafsCore
       STANDARD_OF_PROTECTION_COASTAL_AFTER
     end
 
-    def coastal_risk_after_symbol(n)
-      STANDARD_OF_PROTECTION_COASTAL_AFTER[n]
+    def coastal_risk_after_symbol(value)
+      STANDARD_OF_PROTECTION_COASTAL_AFTER[value]
     end
 
-    def standard_of_protection_label(t)
-      I18n.t(t, scope: "pafs_core.standard_of_protection")
+    def standard_of_protection_label(value)
+      I18n.t(value, scope: "pafs_core.standard_of_protection")
     end
 
     # validation for flood protection

@@ -17,12 +17,12 @@ module PafsCore
     def amount_is_present_and_correct
       if kilometres_of_watercourse_enhanced_or_created_comprehensive.blank?
         errors.add(:kilometres_of_watercourse_enhanced_or_created_comprehensive,
-                    "^You must include the number of kilometres "\
-                    "your project will create.")
+                   "^You must include the number of kilometres "\
+                   "your project will create.")
       elsif kilometres_of_watercourse_enhanced_or_created_comprehensive <= 0
         errors.add(:kilometres_of_watercourse_enhanced_or_created_comprehensive,
-                    "^You must include the number of kilometres "\
-                    "your project will create.")
+                   "^You must include the number of kilometres "\
+                   "your project will create.")
       end
     end
   end

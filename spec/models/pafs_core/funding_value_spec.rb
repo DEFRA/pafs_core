@@ -48,7 +48,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
     it "returns records upto and including the specified year" do
       records = described_class.to_financial_year(2018)
       expect(records.count).to eq 3
-      expect(records).to include *@values[0...-1]
+      expect(records).to include(*@values[0...-1])
     end
   end
 

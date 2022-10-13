@@ -19,7 +19,7 @@ module PafsCore
         @states ||= PafsCore::State.where(project_id: project.id)
       end
 
-      def has_duplicate_state?
+      def duplicate_state?
         states.size > 1
       end
 
@@ -30,7 +30,7 @@ module PafsCore
       end
 
       def perform
-        return unless has_duplicate_state?
+        return unless duplicate_state?
 
         duplicate_states.map(&:destroy)
       end

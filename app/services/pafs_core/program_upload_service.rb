@@ -3,6 +3,7 @@
 # require "rubyXL"
 require "roo"
 
+# rubocop:disable Lint/DuplicateMethods
 module PafsCore
   class ProgramUploadService
     include PafsCore::Files
@@ -61,6 +62,7 @@ module PafsCore
 
         # Roo has an odd offset so we have to take 2 off our zero-based
         # FIRST_DATA_ROW value
+        # rubocop:disable Metrics/BlockLength
         xlsx.sheet(0).each_row_streaming(pad_cells: true,
                                          offset: FIRST_DATA_ROW - 1) do |row|
           next if row.nil? || row[0].blank?
@@ -85,7 +87,7 @@ module PafsCore
             calc_financial_year_for(project) if project.project_end_financial_year.nil?
             # check if we need to set :improve_hpi
             project.improve_hpi = (project.create_habitat_amount.present? &&
-                                   project.create_habitat_amount > 0 &&
+                                   project.create_habitat_amount.positive? &&
                                    !(project.improve_spa_or_sac? ||
                                      project.improve_sssi?))
 
@@ -114,6 +116,7 @@ module PafsCore
             funding_value.funding_contributors.destroy_all
           end
         end
+        # rubocop:enable Metrics/BlockLength
 
         PafsCore::Spreadsheet::Contributors::ImportAll.new(xlsx).import
 
@@ -241,8 +244,8 @@ module PafsCore
       project.project_end_financial_year = project.funding_values.maximum(:financial_year) || 2027
     end
 
-    def copy_project_errors(project, clear_attrs_with_errors = false)
-      project.errors.keys.each do |key|
+    def copy_project_errors(project, clear_attrs_with_errors: false)
+      project.errors.each_key do |key|
         errors[key] = trimmed_error_messages(project.errors.full_messages_for(key)).join("|")
         project.send("#{key}=", nil) if clear_attrs_with_errors &&
                                         project.respond_to?("#{key}=")
@@ -269,3 +272,4 @@ module PafsCore
     end
   end
 end
+# rubocop:enable Lint/DuplicateMethods

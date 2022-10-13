@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PafsCore
   class FloodProtection2040Outcome < ApplicationRecord
     belongs_to :project

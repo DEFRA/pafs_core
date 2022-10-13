@@ -16,7 +16,7 @@ module PafsCore
     end
 
     def import(path_to_file)
-      abort("Areas already exist") if PafsCore::Area.count > 0
+      abort("Areas already exist") if PafsCore::Area.count.positive?
 
       extract_csv_data(path_to_file)
 

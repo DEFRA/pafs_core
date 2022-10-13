@@ -54,6 +54,7 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+# rubocop:disable Style/StringConcatenation
 def escape_xpath_quotes(str)
   if str =~ /'/
     %[concat('] + str.gsub(/'/, %(', "'", ')) + %[')]
@@ -61,6 +62,7 @@ def escape_xpath_quotes(str)
     %('#{str}')
   end
 end
+# rubocop:enable Style/StringConcatenation
 
 # removes last word part from symbol
 # eg. takes :award_contract_year and returns :award_contract

@@ -16,7 +16,7 @@ module PafsCore
       def binary_value(value)
         return false if value.nil?
 
-        value.casecmp("yes") == 0
+        value.casecmp("yes").zero?
       end
     end
   end

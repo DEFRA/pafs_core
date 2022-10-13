@@ -8,7 +8,7 @@
             <% project.selected_risks.each do |risk| %>
               <li>
                 <%= t("#{risk}_label", scope: "pafs_core.projects.steps.risks") %>
-                <% if @project.protects_against_multiple_risks? && @project.is_main_risk?(risk) %>
+                <% if @project.protects_against_multiple_risks? && @project.main_risk?(risk) %>
                   <span class="main-risk"> - Main source of risk</span>
                 <% end %>
               </li>

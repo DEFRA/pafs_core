@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 PafsCore::Engine.routes.draw do
   resources :bootstraps do
     collection do
@@ -63,3 +64,4 @@ PafsCore::Engine.routes.draw do
 
   get "/cookies", to: "pages#cookies"
 end
+# rubocop:enable Metrics/BlockLength

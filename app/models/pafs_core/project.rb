@@ -64,7 +64,7 @@ module PafsCore
 
     # rubocop:disable Style/HashSyntax
     def submission_state
-      machine = Bstard.define do |fsm|
+      Bstard.define do |fsm|
         fsm.initial current_state
         fsm.event :archived, :draft => :archived
         fsm.event :complete, :draft => :completed, :updatable => :updated
@@ -111,10 +111,10 @@ module PafsCore
       current_state.to_sym
     end
 
-    def total_for_funding_source(fs)
+    def total_for_funding_source(source)
       source_total = 0
       funding_values.each do |fv|
-        source_total += fv.public_send("#{fs}_total")
+        source_total += fv.public_send("#{source}_total")
       end
       source_total
     end

@@ -50,6 +50,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
         expect(@output).to have_css("p", text: "Some errors here")
       end
 
+      # rubocop:disable Style/HashEachMethods
       it "displays a link for each error" do
         project.errors.keys.each do |k|
           project.errors.full_messages_for(k).each_with_index do |msg, i|
@@ -59,6 +60,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
           end
         end
       end
+      # rubocop:enable Style/HashEachMethods
     end
 
     context "when the project has no errors" do
@@ -251,7 +253,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
     end
 
     context "when options do not contain a :label key" do
-      let(:items) {[{ value: "true" }, { value: "false" }]}
+      let(:items) { [{ value: "true" }, { value: "false" }] }
       let(:output) { builder.radio_button_group(:could_start_early, items) }
 
       before do

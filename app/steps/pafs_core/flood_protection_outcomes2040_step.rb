@@ -15,7 +15,7 @@ module PafsCore
 
     validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
 
-    validate :has_values, if: :no_properties_affected_by_flooding_2040?
+    validate :values?, if: :no_properties_affected_by_flooding_2040?
 
     def before_view(_params)
       setup_flood_protection_outcomes
@@ -23,19 +23,22 @@ module PafsCore
 
     private
 
-    def has_values
+    def values?
       values = flood_protection2040_outcomes.collect do |outcome|
-        if outcome.households_at_reduced_risk.present? || outcome.moved_from_very_significant_and_significant_to_moderate_or_low.present? || outcome.households_protected_from_loss_in_20_percent_most_deprived.present?
-          true
-        end
+        next unless outcome.households_at_reduced_risk.present? ||
+                    outcome.moved_from_very_significant_and_significant_to_moderate_or_low.present? ||
+                    outcome.households_protected_from_loss_in_20_percent_most_deprived.present?
+
+        true
       end.compact!
 
-      if values.present? && values.include?(true)
-        errors.add(
-          :base,
-          "In the applicable year(s), tell us how many households moved to a lower flood risk category (column A), OR if this does not apply select the checkbox."
-        )
-      end
+      return unless values.present? && values.include?(true)
+
+      errors.add(
+        :base,
+        "In the applicable year(s), tell us how many households moved to a lower flood risk category (column A), " \
+        "OR if this does not apply select the checkbox."
+      )
     end
 
     def values_make_sense
@@ -59,23 +62,25 @@ module PafsCore
         )
       end
 
-      unless c_too_big.empty?
-        errors.add(
-          :base,
-          "The number of households in the 20% most deprived areas (column C) must be lower than or equal \
-          to the number of households moved from very significant \
-          or significant to the moderate or low flood risk category (column B)."
-        )
-      end
+      return if c_too_big.empty?
+
+      errors.add(
+        :base,
+        "The number of households in the 20% most deprived areas (column C) must be lower than or equal \
+        to the number of households moved from very significant \
+        or significant to the moderate or low flood risk category (column B)."
+      )
     end
 
     def at_least_one_value
-      if flooding_total_protected_households_2040.zero? && !project.no_properties_affected_by_flooding_2040?
-        errors.add(
-          :base,
-          "In the applicable year(s), tell us how many households moved to a lower flood risk category (column A), OR if this does not apply select the checkbox."
-        )
-      end
+      return unless flooding_total_protected_households_2040.zero? &&
+                    !project.no_properties_affected_by_flooding_2040?
+
+      errors.add(
+        :base,
+        "In the applicable year(s), tell us how many households moved to a lower flood risk category (column A), \
+        OR if this does not apply select the checkbox."
+      )
     end
 
     def sensible_number_of_houses
@@ -120,13 +125,13 @@ module PafsCore
         )
       end
 
-      unless d_insensible.empty?
-        errors.add(
-          :base,
-          "The number of non-residential properties must be \
-          less than or equal to 1 million."
-        )
-      end
+      return if d_insensible.empty?
+
+      errors.add(
+        :base,
+        "The number of non-residential properties must be \
+        less than or equal to 1 million."
+      )
     end
 
     def step_params(params)
@@ -156,9 +161,9 @@ module PafsCore
     end
 
     def build_missing_year(year)
-      unless flood_protection2040_outcomes.exists?(financial_year: year)
-        flood_protection2040_outcomes.build(financial_year: year)
-      end
+      return if flood_protection2040_outcomes.exists?(financial_year: year)
+
+      flood_protection2040_outcomes.build(financial_year: year)
     end
   end
 end

@@ -73,7 +73,7 @@ module PafsCore
     end
 
     def consented=(value)
-      project.consented = (value == "Y" || value == "y")
+      project.consented = %w[Y y].include?(value)
     end
 
     def grid_reference=(value)
@@ -221,7 +221,7 @@ module PafsCore
     end
 
     def improve_surface_or_groundwater_amount=(value)
-      project.improve_surface_or_groundwater = !(value.nil? || value.to_i == 0)
+      project.improve_surface_or_groundwater = !(value.nil? || value.to_i.zero?)
       project.improve_surface_or_groundwater_amount = value
     end
 
@@ -237,7 +237,7 @@ module PafsCore
     # fish_or_eel_amount straight map
 
     def improve_river_amount=(value)
-      if value.nil? || value.to_i == 0
+      if value.nil? || value.to_i.zero?
         project.improve_river = false
         project.improve_river_amount = 0
       else
@@ -249,7 +249,7 @@ module PafsCore
     # improve_habitat_amount - straight map
 
     def create_habitat_amount=(value)
-      if value.nil? || value.to_i == 0
+      if value.nil? || value.to_i.zero?
         project.create_habitat = false
         project.create_habitat_amount = 0
       else
@@ -283,11 +283,12 @@ module PafsCore
         project.send("#{sym}_year=", value.year)
       else
         d = value.split("/")
-        if d.size == 3
+        case d.size
+        when 3
           # day / month /year
           project.send("#{sym}_month=", d[1])
           project.send("#{sym}_year=", d[2])
-        elsif d.size == 2
+        when 2
           # month / year
           project.send("#{sym}_month=", d[0])
           project.send("#{sym}_year=", d[1])
@@ -306,7 +307,7 @@ module PafsCore
         fv.send("#{fv_type}=", values[i])
         fv.save
       end
-      project.send("#{fv_type}=", (values.sum > 0))
+      project.send("#{fv_type}=", values.sum.positive?)
     end
 
     def populate_flood_protection_outcome_for(fpo_type, values)

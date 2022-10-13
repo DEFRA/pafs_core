@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
+  # rubocop:disable Lint/BinaryOperatorWithIdenticalOperands
   module MappingTransforms
     NGR_CODES = [
       %w[HL HM HN HO HP JL JM JN],
@@ -41,14 +42,14 @@ module PafsCore
     # grid_ref should be upper case and not contain spaces
     def grid_reference_to_eastings_and_northings(grid_ref)
       gr = get_os_grid_ref(grid_ref)
-      unless gr.nil?
-        n = grid_ref[2..-1]
-        hl = n.length / 2
-        {
-          easting: "#{gr[0]}#{n[0..hl - 1]}".ljust(6, "0").to_i,
-          northing: "#{gr[1]}#{n[hl..-1]}".ljust(6, "0").to_i
-        }
-      end
+      return if gr.nil?
+
+      n = grid_ref[2..-1]
+      hl = n.length / 2
+      {
+        easting: "#{gr[0]}#{n[0..hl - 1]}".ljust(6, "0").to_i,
+        northing: "#{gr[1]}#{n[hl..-1]}".ljust(6, "0").to_i
+      }
     end
 
     # Converts easting/northing coords into WGS84 latitude/longitude
@@ -57,7 +58,7 @@ module PafsCore
       osgb36_to_wgs84(osgb36[:latitude], osgb36[:longitude])
     end
 
-    # rubocop:disable Style/SpaceAroundOperators, Style/ExtraSpacing, Metrics/AbcSize
+    # rubocop:disable Style/SpaceAroundOperators, Style/ExtraSpacing, Lint/UnderscorePrefixedVariableName
     # Converts easting/northing coords into OSGB36 latitude/longitude
     def easting_northing_to_osgb36(easting, northing)
       osbg_f0   = 0.9996012717
@@ -76,7 +77,7 @@ module PafsCore
       _m        = 0.0
       phi_prime = ((nrth - n0) / (_a * osbg_f0)) + phi0
 
-      begin
+      loop do
         _m = (_b * osbg_f0)\
           * (((1 + _n + ((5.0 / 4.0) * _n * _n) + ((5.0 / 4.0) * _n * _n * _n))\
               * (phi_prime - phi0))\
@@ -91,7 +92,8 @@ module PafsCore
              * Math.cos(3.0 * (phi_prime + phi0))))
 
         phi_prime += (nrth - n0 - _m) / (_a * osbg_f0)
-      end while ((nrth - n0 - _m) >= 0.001)
+        break unless (nrth - n0 - _m) >= 0.001
+      end
 
       _v = _a * osbg_f0 * ((1.0 - e_squared * sin_pow_2(phi_prime)) ** -0.5)
       _rho = _a * osbg_f0 * (1.0 - e_squared) * ((1.0 - e_squared * sin_pow_2(phi_prime)) ** -1.5)
@@ -178,7 +180,7 @@ module PafsCore
 
       { latitude: _phi_b.round(6), longitude: _lambda_b.round(6) }
     end
-    # rubocop:enable Style/SpaceAroundOperators, Style/ExtraSpacing, Metrics/AbcSize
+    # rubocop:enable Style/SpaceAroundOperators, Style/ExtraSpacing, Lint/UnderscorePrefixedVariableName
 
     private # Some math helpers
 
@@ -186,24 +188,25 @@ module PafsCore
       degrees / 180.0 * Math::PI
     end
 
-    def rad_to_deg(r)
-      (r / Math::PI) * 180
+    def rad_to_deg(rad)
+      (rad / Math::PI) * 180
     end
 
-    def sin_pow_2(x)
-      Math.sin(x) * Math.sin(x)
+    def sin_pow_2(angle)
+      Math.sin(angle) * Math.sin(angle)
     end
 
-    def cos_pow_2(x)
-      Math.cos(x) * Math.cos(x)
+    def cos_pow_2(angle)
+      Math.cos(angle) * Math.cos(angle)
     end
 
-    def tan_pow_2(x)
-      Math.tan(x) * Math.tan(x)
+    def tan_pow_2(angle)
+      Math.tan(angle) * Math.tan(angle)
     end
 
-    def sec(x)
-      1.0 / Math.cos(x)
+    def sec(angle)
+      1.0 / Math.cos(angle)
     end
   end
+  # rubocop:enable Lint/BinaryOperatorWithIdenticalOperands
 end

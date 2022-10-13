@@ -644,7 +644,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     end
   end
 
-  describe "#is_main_risk?" do
+  describe "#main_risk?" do
     before(:each) do
       subject.surface_water_flooding = true
       subject.groundwater_flooding = true
@@ -653,16 +653,16 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
 
     context "when the param equals the :main_risk" do
       it "returns true" do
-        expect(subject.is_main_risk?(:groundwater_flooding)).to be true
+        expect(subject.main_risk?(:groundwater_flooding)).to be true
       end
     end
 
     context "when the param is not equal to the :main_risk" do
       it "returns false" do
-        expect(subject.is_main_risk?(:surface_water_flooding)).to be false
-        expect(subject.is_main_risk?(:coastal_erosion)).to be false
-        expect(subject.is_main_risk?(nil)).to be false
-        expect(subject.is_main_risk?(:discarded_false_teeth)).to be false
+        expect(subject.main_risk?(:surface_water_flooding)).to be false
+        expect(subject.main_risk?(:coastal_erosion)).to be false
+        expect(subject.main_risk?(nil)).to be false
+        expect(subject.main_risk?(:discarded_false_teeth)).to be false
       end
     end
   end

@@ -338,7 +338,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "with a PFC attached" do
       before(:each) do
-        file_path =  File.join(Rails.root, "..", "fixtures", "calculators", filename)
+        file_path = File.join(Rails.root, "..", "fixtures", "calculators", filename)
         file = File.open file_path
         storage = PafsCore::DevelopmentFileStorageService.new
         dest_file = File.join(project.storage_path, filename)

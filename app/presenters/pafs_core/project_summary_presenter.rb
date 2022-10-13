@@ -126,11 +126,11 @@ module PafsCore
     end
 
     def flood_protection_outcomes_entered?
-      flood_protection_outcomes.count > 0
+      flood_protection_outcomes.count.positive?
     end
 
     def coastal_erosion_protection_outcomes_entered?
-      coastal_erosion_protection_outcomes.count > 0
+      coastal_erosion_protection_outcomes.count.positive?
     end
 
     def carbon_started?
@@ -182,16 +182,16 @@ module PafsCore
       end
     end
 
-    def km(n)
-      return not_provided if n.blank?
+    def km(num)
+      return not_provided if num.blank?
 
-      "#{number_with_delimiter squish_int_float(n)} kilometres"
+      "#{number_with_delimiter squish_int_float(num)} kilometres"
     end
 
-    def ha(n)
-      return not_provided if n.blank?
+    def ha(num)
+      return not_provided if num.blank?
 
-      "#{number_with_delimiter squish_int_float(n)} hectares"
+      "#{number_with_delimiter squish_int_float(num)} hectares"
     end
 
     def funding
@@ -208,7 +208,7 @@ module PafsCore
       "Proposal not submitted"
     end
 
-    def is_main_risk?(risk)
+    def main_risk?(risk)
       main_risk.present? && main_risk == risk.to_s
     end
 
@@ -340,8 +340,8 @@ module PafsCore
       __getobj__
     end
 
-    def squish_int_float(v)
-      (v.to_int if v.is_a?(Float) && v % 1 == 0) || v
+    def squish_int_float(val)
+      (val.to_int if val.is_a?(Float) && (val % 1).zero?) || val
     end
 
     def all_articles

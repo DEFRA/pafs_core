@@ -22,7 +22,7 @@ module PafsCore
     end
 
     def risks_started?
-      selected_risks.count > 0
+      selected_risks.count.positive?
     end
 
     def protects_against_multiple_risks?

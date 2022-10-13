@@ -27,10 +27,12 @@ module PafsCore
     end
 
     def at_least_one_value
-      contributors = funding_contributors.to_a.select { |x| x.contributor_type == contributor_type.to_s }.group_by(&:name)
+      contributors = funding_contributors.to_a.select do |x|
+        x.contributor_type == contributor_type.to_s
+      end.group_by(&:name)
       contributors = contributors.values.map { |v| v.map(&:amount).compact.reduce(&:+) }
 
-      return true if contributors.select { |total| total == 0 }.empty?
+      return true if contributors.select(&:zero?).empty?
 
       errors.add(:base, "Please ensure you enter at least one value for every contributor")
       false

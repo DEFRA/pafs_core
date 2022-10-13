@@ -2,15 +2,15 @@
 
 require "rails_helper"
 
+STATUS_MAP = {
+  'Draft': :draft,
+  'Review': :completed,
+  'Submitted': :submitted,
+  'Archived': :archived
+}.freeze
+
 RSpec.describe PafsCore::Projects::StatusUpdate do
   describe "with a valid new status" do
-    STATUS_MAP = {
-      'Draft': :draft,
-      'Review': :completed,
-      'Submitted': :submitted,
-      'Archived': :archived
-    }.freeze
-
     let(:project) { create(:project) }
 
     STATUS_MAP.each do |k, v|

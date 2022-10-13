@@ -15,7 +15,8 @@ module PafsCore
     end
 
     def funding_contributors_to_delete(params)
-      @funding_contributors_to_delete ||= current_funding_contributors - step_params(params).map { |e| e[:current].strip }
+      @funding_contributors_to_delete ||= current_funding_contributors -
+                                          step_params(params).map { |e| e[:current].strip }
     end
 
     def delete_removed_contributors(params)
