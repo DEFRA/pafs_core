@@ -11,6 +11,7 @@ RSpec.describe PafsCore::StartOutlineBusinessCaseDateStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:start_outline_business_case_date_step) }
+
     let(:params) do
       ActionController::Parameters.new({
                                          start_outline_business_case_date_step: {

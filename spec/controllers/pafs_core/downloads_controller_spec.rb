@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PafsCore::DownloadsController, type: :controller do
   routes { PafsCore::Engine.routes }
 
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     @country = FactoryBot.create(:country, :with_full_hierarchy)
     @area = PafsCore::Area.rma_areas.last
@@ -37,7 +37,7 @@ RSpec.describe PafsCore::DownloadsController, type: :controller do
   end
 
   describe "GET funding_calculator" do
-    context "given a file has been stored previously" do
+    context "with a file has been stored previously" do
       let(:navigator) { double("navigator") }
       let(:step) { double("funding_calculator_step") }
       let(:data) { "This is the file data" }
@@ -62,7 +62,7 @@ RSpec.describe PafsCore::DownloadsController, type: :controller do
   end
 
   describe "GET delete_funding_calculator" do
-    context "given a file has been stored previously" do
+    context "with a file has been stored previously" do
       let(:navigator) { double("navigator") }
       let(:filename) { "my_upload.xls" }
       let(:content_type) { "text/plain" }
@@ -80,7 +80,7 @@ RSpec.describe PafsCore::DownloadsController, type: :controller do
   end
 
   describe "GET benefit_area" do
-    context "given a file has been stored previously" do
+    context "with a file has been stored previously" do
       let(:navigator) { double("navigator") }
       let(:step) { double("benefit_area_file_summary_step") }
       let(:data) { "This is the file data" }
@@ -103,7 +103,7 @@ RSpec.describe PafsCore::DownloadsController, type: :controller do
   end
 
   describe "GET delete_benefit_area" do
-    context "given a file has been stored previously" do
+    context "with a file has been stored previously" do
       let(:navigator) { double("navigator") }
       let(:step) { double("benefit_area_file_summary_step") }
       let(:filename) { "my_upload.xls" }
@@ -122,7 +122,7 @@ RSpec.describe PafsCore::DownloadsController, type: :controller do
   end
 
   describe "GET moderation" do
-    context "given the project is urgent" do
+    context "when the project is urgent" do
       let(:navigator) { double("navigator") }
       let(:presenter) { double("moderation_presenter") }
       let(:filename) { "moderation.txt" }

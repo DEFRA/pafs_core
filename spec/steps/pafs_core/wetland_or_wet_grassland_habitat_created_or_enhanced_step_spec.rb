@@ -29,6 +29,8 @@ RSpec.describe PafsCore::WetlandOrWetGrasslandHabitatCreatedOrEnhancedStep, type
     end
 
     context "when updating :wet_woodland from true to false" do
+      subject { FactoryBot.create(:wetland_or_wet_grassland_habitat_created_or_enhanced_step, project: project) }
+
       let(:project) do
         FactoryBot.create(
           :project,
@@ -36,8 +38,6 @@ RSpec.describe PafsCore::WetlandOrWetGrasslandHabitatCreatedOrEnhancedStep, type
           hectares_of_wetland_or_wet_grassland_created_or_enhanced: 12
         )
       end
-
-      subject { FactoryBot.create(:wetland_or_wet_grassland_habitat_created_or_enhanced_step, project: project) }
 
       it "resets :hectares_of_wetland_or_wet_grassland_created_or_enhancedto nil" do
         subject.update(false_params)

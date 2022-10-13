@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::FloodProtectionOutcomesSummaryStep, type: :model do
-  before(:each) do
+  before do
     @project = FactoryBot.create(:project)
     @project.project_end_financial_year = 2022
     @project.fluvial_flooding = true
@@ -24,7 +24,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesSummaryStep, type: :model do
   describe "when counts of protected households are available" do
     subject { @project }
 
-    it "should return the correct totals for the three columns" do
+    it "returns the correct totals for the three columns" do
       expect(subject.total_households_flood_protected_by_category(:households_at_reduced_risk)).to eq 400
       expect(subject\
 .total_households_flood_protected_by_category(:moved_from_very_significant_and_significant_to_moderate_or_low)).to eq 200

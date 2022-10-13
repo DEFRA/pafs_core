@@ -33,7 +33,7 @@ describe PafsCore::FundingContributorsStep, type: :model do
     end
   end
 
-  context "not changing the selected contributors" do
+  context "when not changing the selected contributors" do
     let(:contributor_names) do
       {
         "0" => { previous: project.funding_contributors.first.name, current: project.funding_contributors.first.name },
@@ -48,7 +48,7 @@ describe PafsCore::FundingContributorsStep, type: :model do
     end
   end
 
-  context "removing a funding contributor" do
+  context "when removing a funding contributor" do
     let(:contributor_names) do
       {
         "0" => { previous: project.funding_contributors.first.name, current: project.funding_contributors.first.name }
@@ -62,7 +62,7 @@ describe PafsCore::FundingContributorsStep, type: :model do
     end
   end
 
-  context "adding a funding contributor" do
+  context "when adding a funding contributor" do
     let!(:project) do
       create(
         :project,
@@ -95,7 +95,7 @@ describe PafsCore::FundingContributorsStep, type: :model do
     end
   end
 
-  context "changing a funding contributor" do
+  context "when changing a funding contributor" do
     let(:contributor_names) do
       {
         "0" => { previous: project.funding_contributors.first.name, current: project.funding_contributors.first.name },

@@ -5,7 +5,7 @@ require "rails_helper"
 module PafsCore
   RSpec.describe AsiteMailer, type: :mailer do
     describe "submit_project" do
-      before(:each) do
+      before do
         ENV["DEVISE_MAIL_SENDER"] = "no-reply@example.com"
         ENV["BACKUP_MAIL_RECIPIENT"] = "backup@example.com"
       end

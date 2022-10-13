@@ -58,7 +58,7 @@ module PafsCore
       osgb36_to_wgs84(osgb36[:latitude], osgb36[:longitude])
     end
 
-    # rubocop:disable Style/SpaceAroundOperators, Style/ExtraSpacing, Lint/UnderscorePrefixedVariableName
+    # rubocop:disable Layout/SpaceAroundOperators, Layout/ExtraSpacing, Lint/UnderscorePrefixedVariableName
     # Converts easting/northing coords into OSGB36 latitude/longitude
     def easting_northing_to_osgb36(easting, northing)
       osbg_f0   = 0.9996012717
@@ -180,7 +180,7 @@ module PafsCore
 
       { latitude: _phi_b.round(6), longitude: _lambda_b.round(6) }
     end
-    # rubocop:enable Style/SpaceAroundOperators, Style/ExtraSpacing, Lint/UnderscorePrefixedVariableName
+    # rubocop:enable Layout/SpaceAroundOperators, Layout/ExtraSpacing, Lint/UnderscorePrefixedVariableName
 
     private # Some math helpers
 

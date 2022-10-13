@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :area, class: PafsCore::Area do
+  factory :area, class: "PafsCore::Area" do
     sequence :name do |n|
       PafsCore::PSO_RFCC_MAP.keys[n % PafsCore::PSO_RFCC_MAP.keys.size]
     end
@@ -11,19 +11,19 @@ FactoryBot.define do
 
       trait :with_ea_areas do
         after(:create) do |country|
-          2.times { FactoryBot.create(:ea_area, parent_id: country.id) }
+          FactoryBot.create_list(:ea_area, 2, parent_id: country.id)
         end
       end
 
       trait :with_ea_and_pso_areas do
         after(:create) do |country|
-          2.times { FactoryBot.create(:ea_area, :with_pso_areas, parent_id: country.id) }
+          FactoryBot.create_list(:ea_area, 2, :with_pso_areas, parent_id: country.id)
         end
       end
 
       trait :with_full_hierarchy do
         after(:create) do |country|
-          2.times { FactoryBot.create(:ea_area, :with_pso_and_rma_areas, parent_id: country.id) }
+          FactoryBot.create_list(:ea_area, 2, :with_pso_and_rma_areas, parent_id: country.id)
         end
       end
 
@@ -40,13 +40,13 @@ FactoryBot.define do
 
       trait :with_pso_areas do
         after(:create) do |area|
-          2.times { FactoryBot.create(:pso_area, parent_id: area.id) }
+          FactoryBot.create_list(:pso_area, 2, parent_id: area.id)
         end
       end
 
       trait :with_pso_and_rma_areas do
         after(:create) do |area|
-          2.times { FactoryBot.create(:pso_area, :with_rma_areas, parent_id: area.id) }
+          FactoryBot.create_list(:pso_area, 2, :with_rma_areas, parent_id: area.id)
         end
       end
 
@@ -63,7 +63,7 @@ FactoryBot.define do
 
       trait :with_rma_areas do
         after(:create) do |pso_area|
-          2.times { FactoryBot.create(:rma_area, :with_project, parent_id: pso_area.id) }
+          FactoryBot.create_list(:rma_area, 2, :with_project, parent_id: pso_area.id)
         end
       end
 

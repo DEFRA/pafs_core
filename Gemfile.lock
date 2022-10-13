@@ -347,7 +347,7 @@ DEPENDENCIES
   json_schemer
   memory_profiler
   pafs_core!
-  pg (= 0.20.0)
+  pg
   pry
   pry-rails
   rails-controller-testing

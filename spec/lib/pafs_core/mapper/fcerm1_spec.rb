@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::Mapper::Fcerm1 do
-  subject { PafsCore::Mapper::Fcerm1.new(project: presenter) }
+  subject { described_class.new(project: presenter) }
 
   let(:project) { FactoryBot.create(:full_project) }
   let(:presenter) { PafsCore::SpreadsheetPresenter.new(project) }
@@ -130,7 +130,7 @@ RSpec.describe PafsCore::Mapper::Fcerm1 do
   end
 
   describe "#households_at_reduced_risk" do
-    before(:each) do
+    before do
       funding_values.each do |hash|
         project.flood_protection_outcomes.create(
           households_at_reduced_risk: hash[:value],
@@ -147,7 +147,7 @@ RSpec.describe PafsCore::Mapper::Fcerm1 do
   end
 
   describe "#moved_from_very_significant_and_significant_to_moderate_or_low" do
-    before(:each) do
+    before do
       funding_values.each do |hash|
         project.flood_protection_outcomes.create(
           moved_from_very_significant_and_significant_to_moderate_or_low: hash[:value],
@@ -164,7 +164,7 @@ RSpec.describe PafsCore::Mapper::Fcerm1 do
   end
 
   describe "#households_protected_from_loss_in_20_percent_most_deprived" do
-    before(:each) do
+    before do
       funding_values.each do |hash|
         project.flood_protection_outcomes.create(
           households_protected_from_loss_in_20_percent_most_deprived: hash[:value],
@@ -181,7 +181,7 @@ RSpec.describe PafsCore::Mapper::Fcerm1 do
   end
 
   describe "#coastal_households_at_reduced_risk" do
-    before(:each) do
+    before do
       funding_values.each do |hash|
         project.flood_protection_outcomes.create(
           households_at_reduced_risk: hash[:value],
@@ -198,7 +198,7 @@ RSpec.describe PafsCore::Mapper::Fcerm1 do
   end
 
   describe "#coastal_households_protected_from_loss_in_next_20_years" do
-    before(:each) do
+    before do
       funding_values.each do |hash|
         project.flood_protection_outcomes.create(
           households_protected_from_loss_in_20_percent_most_deprived: hash[:value],

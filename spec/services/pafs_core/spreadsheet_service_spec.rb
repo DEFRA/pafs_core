@@ -8,10 +8,15 @@ class SpreadsheetMapperHelper
 end
 
 RSpec.describe PafsCore::SpreadsheetService do
-  subject { PafsCore::SpreadsheetService.new }
+  subject { described_class.new }
 
   xdescribe "#generate_multi_xlsx" do
     let(:program_upload) { PafsCore::ProgramUploadService.new }
+    let(:first_row) { expected.worksheets[0][6] }
+    let(:second_row) { expected.worksheets[0][7] }
+    let(:third_row) { expected.worksheets[0][8] }
+    let(:fourth_row) { expected.worksheets[0][9] }
+    let(:fifth_row) { expected.worksheets[0][10] }
     let(:filename) { "expected_program_spreadsheet.xlsx" }
     let(:content_type) { "text/plain" }
 
@@ -40,7 +45,7 @@ RSpec.describe PafsCore::SpreadsheetService do
     let(:pso_area) { PafsCore::Area.find_by(name: "PSO Test Area") }
     let(:rma_area) { PafsCore::Area.find_by(name: "RMA Test Area") }
 
-    before(:each) do
+    before do
       file_path = "#{Rails.root}/../fixtures/test_areas.csv"
       PafsCore::AreaImporter.new.import(file_path)
 
@@ -51,12 +56,6 @@ RSpec.describe PafsCore::SpreadsheetService do
 
       pso_area.area_projects.create(project: test_project_1, owner: true)
     end
-
-    let(:first_row) { expected.worksheets[0][6] }
-    let(:second_row) { expected.worksheets[0][7] }
-    let(:third_row) { expected.worksheets[0][8] }
-    let(:fourth_row) { expected.worksheets[0][9] }
-    let(:fifth_row) { expected.worksheets[0][10] }
 
     it "includes the project reference number" do
       expect(first_row[SpreadsheetMapperHelper.column_index("A")].value).to eql(spreadsheet_presenter_1.reference_number)
@@ -71,15 +70,11 @@ RSpec.describe PafsCore::SpreadsheetService do
     end
 
     it "includes column BL" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("BL")].value).to eql(0)
+      expect(first_row[SpreadsheetMapperHelper.column_index("BL")].value).to be(0)
     end
 
     it "includes column BM" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("BL")].value).to eql(0)
-    end
-
-    it "includes column BM" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("BL")].value).to eql(0)
+      expect(first_row[SpreadsheetMapperHelper.column_index("BM")].value).to be(0)
     end
 
     it "includes column JS" do

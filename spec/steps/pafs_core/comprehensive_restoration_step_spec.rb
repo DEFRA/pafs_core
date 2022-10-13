@@ -29,6 +29,8 @@ RSpec.describe PafsCore::ComprehensiveRestorationStep, type: :model do
     end
 
     context "when updating :arable_land from true to false" do
+      subject { FactoryBot.create(:comprehensive_restoration_step, project: project) }
+
       let(:project) do
         FactoryBot.create(
           :project,
@@ -36,8 +38,6 @@ RSpec.describe PafsCore::ComprehensiveRestorationStep, type: :model do
           kilometres_of_watercourse_enhanced_or_created_comprehensive: 12
         )
       end
-
-      subject { FactoryBot.create(:comprehensive_restoration_step, project: project) }
 
       it "resets :kilometres_of_watercourse_enhanced_or_created_comprehensive to nil" do
         subject.update(false_params)

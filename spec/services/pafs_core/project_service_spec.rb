@@ -4,14 +4,15 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ProjectService do
+  subject { described_class.new(user) }
+
   let(:pso_area_1) { create(:pso_area) }
   let(:rma_area_1) { create(:rma_area, parent_id: pso_area_1.id) }
   let(:user) { create(:user) }
 
-  before(:each) do
+  before do
     user.user_areas.create(area_id: rma_area_1.id, primary: true)
   end
-  subject { PafsCore::ProjectService.new(user) }
 
   describe "#search" do
     it "returns all projects for a given user" do
@@ -48,7 +49,7 @@ RSpec.describe PafsCore::ProjectService do
     let(:project) { subject.new_project }
 
     it "builds a new project model without saving to the database" do
-      expect { project }.to_not change { PafsCore::Project.count }
+      expect { project }.not_to change { PafsCore::Project.count }
     end
 
     it "builds the correct type of object" do
@@ -75,14 +76,14 @@ RSpec.describe PafsCore::ProjectService do
         .to change { PafsCore::Project.count }.by(1)
 
       expect(p).to be_a PafsCore::Project
-      expect(p.reference_number).to_not be_nil
+      expect(p.reference_number).not_to be_nil
       expect(p.version).to eq(1)
       expect(p.creator_id).to eq(user.id)
     end
   end
 
   describe "#find_project" do
-    before(:each) do
+    before do
       @project = subject.create_project
     end
 
@@ -108,53 +109,56 @@ RSpec.describe PafsCore::ProjectService do
     let(:rma_area_3) { pso_area_2.children.first }
     let(:rma_area_4) { pso_area_3.children.first }
 
-    context "as a country" do
-      it "should see the correct number of projects" do
+    context "with a country" do
+      it "sees the correct number of projects" do
         expect(subject.all_projects_for(country).size).to eq(8)
       end
     end
-    context "as an EA area" do
-      it "should see the correct number of projects" do
+
+    context "with an EA area" do
+      it "sees the correct number of projects" do
         expect(subject.all_projects_for(ea_area_1).size).to eq(4)
       end
 
-      it "should not see another EA area's projects" do
-        expect(subject.all_projects_for(ea_area_1)).to_not include(subject.all_projects_for(ea_area_2))
+      it "does not see another EA area's projects" do
+        expect(subject.all_projects_for(ea_area_1)).not_to include(subject.all_projects_for(ea_area_2))
       end
 
-      it "should not see shared projects from outside the EA area" do
+      it "does not see shared projects from outside the EA area" do
         project = rma_area_4.projects.first
         rma_area_1.area_projects.create(project_id: project.id)
 
-        expect(subject.all_projects_for(ea_area_1)).to_not include(project)
+        expect(subject.all_projects_for(ea_area_1)).not_to include(project)
       end
     end
-    context "as a PSO area" do
-      it "should see the correct number of projects" do
+
+    context "with a PSO area" do
+      it "sees the correct number of projects" do
         expect(subject.all_projects_for(pso_area_1).size).to eq(2)
       end
 
-      it "should not see another PSO area's projects" do
-        expect(subject.all_projects_for(pso_area_1)).to_not include(subject.all_projects_for(pso_area_2))
+      it "does not see another PSO area's projects" do
+        expect(subject.all_projects_for(pso_area_1)).not_to include(subject.all_projects_for(pso_area_2))
       end
 
-      it "should not see shared projects from outside the PSO area" do
+      it "does not see shared projects from outside the PSO area" do
         project = rma_area_3.projects.first
         rma_area_1.area_projects.create(project_id: project.id)
 
-        expect(subject.all_projects_for(pso_area_1)).to_not include(project)
+        expect(subject.all_projects_for(pso_area_1)).not_to include(project)
       end
     end
-    context "as an RMA area" do
-      it "should see the correct number of projects" do
+
+    context "with an RMA area" do
+      it "sees the correct number of projects" do
         expect(subject.all_projects_for(rma_area_1).size).to eq(1)
       end
 
-      it "should not see another RMA area's projects" do
-        expect(subject.all_projects_for(rma_area_1)).to_not include(subject.all_projects_for(rma_area_2))
+      it "does not see another RMA area's projects" do
+        expect(subject.all_projects_for(rma_area_1)).not_to include(subject.all_projects_for(rma_area_2))
       end
 
-      it "should see another RMA's shared project" do
+      it "sees another RMA's shared project" do
         project = rma_area_2.projects.first
         rma_area_1.area_projects.create(project_id: project.id)
 
@@ -180,8 +184,8 @@ RSpec.describe PafsCore::ProjectService do
     let(:rma_area_7) { pso_area_4.children.first }
     let(:rma_area_8) { pso_area_4.children.second }
 
-    context "as a country" do
-      it "should return the area :ids in my tree" do
+    context "with a country" do
+      it "returns the area :ids in my tree" do
         user.user_areas.first.update(area_id: country.id)
         user.touch
         areas = [country.id,
@@ -194,8 +198,8 @@ RSpec.describe PafsCore::ProjectService do
       end
     end
 
-    context "as an EA area" do
-      it "should return the area :ids in my sub-tree" do
+    context "with an EA area" do
+      it "returns the area :ids in my sub-tree" do
         user.user_areas.first.update(area_id: ea_area_1.id)
         user.touch
         areas = [ea_area_1.id,
@@ -205,8 +209,8 @@ RSpec.describe PafsCore::ProjectService do
       end
     end
 
-    context "as a PSO area" do
-      it "should return the area :ids in my sub-tree" do
+    context "with a PSO area" do
+      it "returns the area :ids in my sub-tree" do
         user.user_areas.first.update(area_id: pso_area_1.id)
         user.touch
         areas = [pso_area_1.id,
@@ -215,8 +219,8 @@ RSpec.describe PafsCore::ProjectService do
       end
     end
 
-    context "as an RMA area" do
-      it "should return the area :ids in my sub-tree" do
+    context "with an RMA area" do
+      it "returns the area :ids in my sub-tree" do
         user.user_areas.first.update(area_id: rma_area_1.id)
         user.touch
         areas = [rma_area_1.id]

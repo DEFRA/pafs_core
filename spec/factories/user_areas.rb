@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :user_area, class: PafsCore::UserArea do
+  factory :user_area, class: "PafsCore::UserArea" do
     user
     area factory: :ea_area
     primary { true }

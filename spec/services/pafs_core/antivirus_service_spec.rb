@@ -8,7 +8,7 @@ RSpec.describe PafsCore::AntivirusService do
   describe "#service_available?" do
     context "when virus service unavailable" do
       it "returns false" do
-        expect(clamav).to receive(:execute) { false }
+        expect(clamav).to receive(:execute).and_return(false)
         expect(ClamAV::Client).to receive(:new) { clamav }
         expect(subject.service_available?).to be false
       end
@@ -16,7 +16,7 @@ RSpec.describe PafsCore::AntivirusService do
 
     context "when the virus service is available" do
       it "returns true" do
-        expect(clamav).to receive(:execute) { true }
+        expect(clamav).to receive(:execute).and_return(true)
         expect(ClamAV::Client).to receive(:new) { clamav }
         expect(subject.service_available?).to be true
       end

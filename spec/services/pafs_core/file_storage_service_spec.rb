@@ -9,9 +9,9 @@ RSpec.describe PafsCore::FileStorageService do
   let(:dst_file) { "1-2-3-4/1/file.xls" }
 
   describe "#upload" do
-    context "given a virus free file" do
+    context "with a virus free file" do
       it "virus checks the requested file then puts into storage" do
-        expect(antivirus).to receive(:scan).with(src_file) { true }
+        expect(antivirus).to receive(:scan).with(src_file).and_return(true)
         expect(storage).to receive(:put_object)
         expect(Aws::S3::Client).to receive(:new) { storage }
         expect(PafsCore::AntivirusService).to receive(:new) { antivirus }
@@ -20,7 +20,8 @@ RSpec.describe PafsCore::FileStorageService do
         expect { subject.upload(src_file, dst_file) }.not_to raise_error
       end
     end
-    context "given an infected file" do
+
+    context "with an infected file" do
       it "virus checks the file, raises an error and does not store the file" do
         expect(antivirus).to receive(:scan).with(src_file) do
           raise PafsCore::VirusFoundError.new(src_file, "Evil_WiGwAm")
@@ -35,7 +36,7 @@ RSpec.describe PafsCore::FileStorageService do
   end
 
   describe "#download" do
-    context "given a valid source file key" do
+    context "with a valid source file key" do
       it "gets the requested file from storage" do
         expect(storage).to receive(:get_object)
           .with(bucket: nil, key: dst_file, response_target: src_file)
@@ -43,7 +44,8 @@ RSpec.describe PafsCore::FileStorageService do
         expect { subject.download(dst_file, src_file) }.not_to raise_error
       end
     end
-    context "given an invalid source file key" do
+
+    context "with an invalid source file key" do
       it "raises an error" do
         expect(storage).to receive(:get_object) do
           raise Aws::S3::Errors::NoSuchKey.new("context", "Not there")

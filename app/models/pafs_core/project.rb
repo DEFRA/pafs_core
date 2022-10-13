@@ -7,11 +7,11 @@ module PafsCore
     validates :reference_number, presence: true, uniqueness: { scope: :version }
     # broaden validation to cope with initial bulk import of existing projects
     # with subtly non-standard formatting
-    # rubocop:disable Metrics/LineLength
+    # rubocop:disable Layout/LineLength
     validates :reference_number,
               format: { with: %r{\A(AC|AE|AN|NO|NW|SN|SO|SW|TH|TR|TS|WX|YO)[A-Z]\d{3,4}[A-Z]?/\d{2,3}[A-Z]?/\d{2,4}[A-Z]{1,2}\z},
                         message: "has an invalid format" }
-    # rubocop:enable Metrics/LineLength
+    # rubocop:enable Layout/LineLength
 
     validates :version, presence: true
 

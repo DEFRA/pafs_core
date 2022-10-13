@@ -54,9 +54,9 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
 
       it "correctly calculates the total" do
         perform
-        expect(project.total_for_funding_source(:public_contributions)).to eql(1110)
-        expect(project.total_for_funding_source(:private_contributions)).to eql(0)
-        expect(project.total_for_funding_source(:other_ea_contributions)).to eql(0)
+        expect(project.total_for_funding_source(:public_contributions)).to be(1110)
+        expect(project.total_for_funding_source(:private_contributions)).to be(0)
+        expect(project.total_for_funding_source(:other_ea_contributions)).to be(0)
       end
 
       it "creates the correct number of public contributions" do
@@ -103,9 +103,9 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
 
       it "correctly calculates the total" do
         perform
-        expect(project.total_for_funding_source(:public_contributions)).to eql(0)
-        expect(project.total_for_funding_source(:private_contributions)).to eql(1110)
-        expect(project.total_for_funding_source(:other_ea_contributions)).to eql(0)
+        expect(project.total_for_funding_source(:public_contributions)).to be(0)
+        expect(project.total_for_funding_source(:private_contributions)).to be(1110)
+        expect(project.total_for_funding_source(:other_ea_contributions)).to be(0)
       end
 
       it "creates the correct number of public contributions" do
@@ -119,6 +119,7 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
           perform
         end.to change { project.reload.funding_contributors.where(contributor_type: "private_contributions").count }.by(3)
       end
+
       it "creates the correct number of other ea contributions" do
         expect do
           perform
@@ -151,9 +152,9 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
 
       it "correctly calculates the total" do
         perform
-        expect(project.total_for_funding_source(:public_contributions)).to eql(0)
-        expect(project.total_for_funding_source(:private_contributions)).to eql(0)
-        expect(project.total_for_funding_source(:other_ea_contributions)).to eql(1110)
+        expect(project.total_for_funding_source(:public_contributions)).to be(0)
+        expect(project.total_for_funding_source(:private_contributions)).to be(0)
+        expect(project.total_for_funding_source(:other_ea_contributions)).to be(1110)
       end
 
       it "creates the correct number of public contributions" do
@@ -167,6 +168,7 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
           perform
         end.not_to change { project.reload.funding_contributors.where(contributor_type: "private_contributions").count }
       end
+
       it "creates the correct number of other_ea contributions" do
         expect do
           perform

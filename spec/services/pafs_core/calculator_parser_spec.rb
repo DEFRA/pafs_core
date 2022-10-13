@@ -129,7 +129,7 @@ RSpec.describe PafsCore::CalculatorParser do
 
       let(:file_path) { File.join(Rails.root, "..", "fixtures", "calculators", "invalid_filetype.txt") }
 
-      it "should check that the calculator is an xlsx file" do
+      it "checks that the calculator is an xlsx file" do
         expect { perform }.to raise_error("require an xlsx file")
       end
     end

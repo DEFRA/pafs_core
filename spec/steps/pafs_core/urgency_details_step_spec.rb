@@ -3,14 +3,14 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::UrgencyDetailsStep, type: :model do
-  before(:each) do
+  subject { @project }
+
+  before do
     @project = FactoryBot.build(:urgency_details_step)
     # required to be valid
     @project.project.update(urgency_reason: "health_and_safety")
     @project.project.save
   end
-
-  subject { @project }
 
   describe "attributes" do
     it_behaves_like "a project step"

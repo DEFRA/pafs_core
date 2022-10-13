@@ -24,7 +24,7 @@ RSpec.describe PafsCore::BootstrapsController, type: :controller do
   end
 
   describe "GET step" do
-    before(:each) { @project = FactoryBot.create(:bootstrap) }
+    before { @project = FactoryBot.create(:bootstrap) }
 
     it "assigns @project with the appropriate step class" do
       get :step, params: { id: @project.to_param, step: "project_name" }
@@ -38,7 +38,7 @@ RSpec.describe PafsCore::BootstrapsController, type: :controller do
   end
 
   describe "PATCH save" do
-    before(:each) do
+    before do
       @pso = FactoryBot.create(:pso_area, parent_id: 1)
       @rma = FactoryBot.create(:rma_area, parent_id: @pso.id)
       @user = FactoryBot.create(:user)
@@ -61,14 +61,12 @@ RSpec.describe PafsCore::BootstrapsController, type: :controller do
       end
 
       it "redirects to the next step" do
-        expect(subject).to receive(:navigator).exactly(3).times { @nav }
         patch :save, params: { id: @project.to_param, step: "project_name", project_name_step: { name: "Haystack" } }
         expect(response).to redirect_to bootstrap_step_path(id: @project.to_param, step: "project_type")
       end
 
       context "when the last step is saved" do
         it "redirects to the project summary page" do
-          expect(subject).to receive(:navigator).exactly(4).times { @nav }
           patch :save, params: { id: @project.to_param, step: "financial_year", financial_year_step: { project_end_financial_year: "2025" } }
           proj = PafsCore::Project.last
           expect(response).to redirect_to project_path(id: proj.to_param)

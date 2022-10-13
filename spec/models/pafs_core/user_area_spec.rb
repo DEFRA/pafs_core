@@ -8,7 +8,7 @@ RSpec.describe PafsCore::UserArea, type: :model do
     subject { FactoryBot.create(:user_area) }
 
     it "validates presence of" do
-      expect(subject).to_not validate_presence_of :primary
+      expect(subject).not_to validate_presence_of :primary
     end
 
     it do

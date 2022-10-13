@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
-  before(:each) do
+  before do
     @project = FactoryBot.create(:project)
     @project.project_end_financial_year = 2027
     @project.fluvial_flooding = true
@@ -18,7 +18,8 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
   end
 
   describe "attributes" do
-    subject { PafsCore::FloodProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
+
     it_behaves_like "a project step"
 
     it "validates that value C is smaller than B" do
@@ -88,7 +89,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
   end
 
   describe "#update" do
-    subject { PafsCore::FloodProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
 
     let(:params) do
       ActionController::Parameters.new(
@@ -139,19 +140,21 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
   end
 
   describe "#current_flood_protection_outcomes" do
-    subject { PafsCore::FloodProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
     # subject.project.coastal_erosion_protection_outcomes << [@cepo1, @cepo2, @cepo3]
-    it "should include the coastal erosion protection outcomes before the project end financial year" do
+
+    it "includes the coastal erosion protection outcomes before the project end financial year" do
       expect(subject.current_flood_protection_outcomes).to include(@fpo1, @fpo2)
     end
 
-    it "should not include the coastal erosion protection outcomes after the project end financial year" do
+    it "does not include the coastal erosion protection outcomes after the project end financial year" do
       expect(subject.current_flood_protection_outcomes).not_to include(@fpo3)
     end
   end
 
   describe "#before_view" do
-    subject { PafsCore::FloodProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
+
     it "builds flood_protection_outcome records for any missing years" do
       # project_end_financial_year = 2022
       # funding_values records run until 2019

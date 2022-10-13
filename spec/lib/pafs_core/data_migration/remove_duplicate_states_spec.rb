@@ -17,10 +17,10 @@ RSpec.describe PafsCore::DataMigration::RemoveDuplicateStates do
   end
 
   describe "#perform" do
+    subject { described_class.new(project) }
+
     let!(:project) { create(:project, state: state) }
     let(:state) { create(:state, state: "draft") }
-
-    subject { described_class.new(project) }
 
     context "without a duplicated status in the project" do
       it "does not delete the state" do

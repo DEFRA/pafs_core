@@ -29,6 +29,8 @@ RSpec.describe PafsCore::ArableLandCreatedOrEnhancedStep, type: :model do
     end
 
     context "when updating :arable_land from true to false" do
+      subject { FactoryBot.create(:arable_land_created_or_enhanced_step, project: project) }
+
       let(:project) do
         FactoryBot.create(
           :project,
@@ -36,8 +38,6 @@ RSpec.describe PafsCore::ArableLandCreatedOrEnhancedStep, type: :model do
           hectares_of_arable_land_lake_habitat_created_or_enhanced: 12
         )
       end
-
-      subject { FactoryBot.create(:arable_land_created_or_enhanced_step, project: project) }
 
       it "resets :hectares_of_arable_land_lake_habitat_created_or_enhanced to nil" do
         subject.update(false_params)

@@ -7,9 +7,7 @@ RSpec.describe PafsCore::DataMigration::GenerateFundingContributorFcerm do
   let(:user) { create(:user, :pso) }
 
   before do
-    100.times do
-      create(:full_project, :with_funding_values, public_contribution_names: %w[Matt Test])
-    end
+    create_list(:full_project, 100, :with_funding_values, public_contribution_names: %w[Matt Test])
   end
 
   describe "#perform" do

@@ -27,7 +27,7 @@ RSpec.describe PafsCore::Projects::StatusUpdate do
 
     it "sets the project status to draft when an invalid status is received" do
       described_class.new(project, "INVALID").perform
-      expect(project.reload.status).to eql(:draft)
+      expect(project.reload.status).to be(:draft)
     end
   end
 end

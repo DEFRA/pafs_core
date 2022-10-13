@@ -4,13 +4,14 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ProjectNavigator do
-  before(:each) do
+  subject { described_class.new @user }
+
+  before do
     @pso = FactoryBot.create(:pso_area, parent_id: 1)
     @rma = FactoryBot.create(:rma_area, parent_id: @pso.id)
     @user = FactoryBot.create(:user)
     @user.user_areas.create(area_id: @rma.id, primary: true)
   end
-  subject { PafsCore::ProjectNavigator.new @user }
 
   describe "#first_step" do
     it "returns the identifier of first step in the journey" do
@@ -34,6 +35,7 @@ RSpec.describe PafsCore::ProjectNavigator do
 
   describe "#find_project_step" do
     let(:project) { subject.start_new_project }
+
     it "finds a project by :reference_number wrapped in the requested :step of the process" do
       p = subject.find_project_step(project.to_param, subject.first_step)
       expect(p).to respond_to :reference_number

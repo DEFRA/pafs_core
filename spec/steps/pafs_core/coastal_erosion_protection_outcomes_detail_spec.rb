@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::Project, type: :model do
-  before(:each) do
+  before do
     @project = FactoryBot.create(:project)
     @project.project_end_financial_year = 2022
     @project.coastal_erosion = true
@@ -24,7 +24,7 @@ RSpec.describe PafsCore::Project, type: :model do
   describe "when counts of protected households are available" do
     subject { @project }
 
-    it "should return the correct totals for the three columns" do
+    it "returns the correct totals for the three columns" do
       expect(subject.total_households_coastal_protected_by_category(:households_at_reduced_risk)).to eq 400
       expect(subject\
 .total_households_coastal_protected_by_category(:households_protected_from_loss_in_next_20_years)).to eq 200

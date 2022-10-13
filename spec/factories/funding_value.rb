@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :funding_value, class: PafsCore::FundingValue do
+  factory :funding_value, class: "PafsCore::FundingValue" do
     project
     financial_year { 2020 }
     fcerm_gia { 120_000 }

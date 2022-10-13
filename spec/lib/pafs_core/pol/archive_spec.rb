@@ -70,13 +70,19 @@ describe PafsCore::Pol::Archive, :vcr do
       end.not_to raise_exception
     end
 
-    context "on successful submission" do
+    context "with successful submission" do
       before do
         stub_request(:put, "https://example.com/test").to_return(status: 200)
       end
+
+      it "does not raise an exception" do
+        expect do
+          perform
+        end.not_to raise_exception
+      end
     end
 
-    context "on unsuccessful submission" do
+    context "with unsuccessful submission" do
       before do
         stub_request(:put, "https://example.com/test").to_return(status: 401)
       end

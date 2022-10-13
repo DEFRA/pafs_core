@@ -10,6 +10,8 @@ RSpec.describe PafsCore::StartConstructionDateStep, type: :model do
   end
 
   describe "#update" do
+    subject { FactoryBot.create(:start_construction_date_step, project: project) }
+
     let(:project) do
       FactoryBot.create(
         :project,
@@ -17,8 +19,6 @@ RSpec.describe PafsCore::StartConstructionDateStep, type: :model do
         award_contract_year: 2012
       )
     end
-
-    subject { FactoryBot.create(:start_construction_date_step, project: project) }
     let(:params) do
       ActionController::Parameters.new({
                                          start_construction_date_step: {
@@ -27,7 +27,6 @@ RSpec.describe PafsCore::StartConstructionDateStep, type: :model do
                                          }
                                        })
     end
-
     let(:invalid_month_params) do
       ActionController::Parameters.new({
                                          start_construction_date_step: {
@@ -36,7 +35,6 @@ RSpec.describe PafsCore::StartConstructionDateStep, type: :model do
                                          }
                                        })
     end
-
     let(:invalid_year_params) do
       ActionController::Parameters.new({
                                          start_construction_date_step: {
@@ -45,7 +43,6 @@ RSpec.describe PafsCore::StartConstructionDateStep, type: :model do
                                          }
                                        })
     end
-
     let(:invalid_date_params) do
       ActionController::Parameters.new({
                                          start_construction_date_step: {
