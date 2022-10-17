@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "pafs_core/natural_flood_risk_measures"
 
 module PafsCore
@@ -112,18 +113,16 @@ module PafsCore
     end
 
     def standard_of_protection_complete?
-      if protects_against_flooding?
-        if flood_protection_before.nil? || flood_protection_after.nil?
-          return add_error(:standard_of_protection,
-                           "^Tell us the standard of protection the project will provide")
-        end
+      if protects_against_flooding? &&
+         flood_protection_before.nil? || flood_protection_after.nil?
+        return add_error(:standard_of_protection,
+                         "^Tell us the standard of protection the project will provide")
       end
 
-      if protects_against_coastal_erosion?
-        if coastal_protection_before.nil? || coastal_protection_after.nil?
-          return add_error(:standard_of_protection,
-                           "^Tell us the standard of protection the project will provide")
-        end
+      if protects_against_coastal_erosion? &&
+         coastal_protection_before.nil? || coastal_protection_after.nil?
+        return add_error(:standard_of_protection,
+                         "^Tell us the standard of protection the project will provide")
       end
       true
     end
@@ -144,8 +143,8 @@ module PafsCore
       return false if selected_om4_attributes.empty?
 
       check_intertidal && check_woodland && check_wet_woodland && check_wetland_or_wet_grassland &&
-      check_grassland && check_heathland && check_pond_or_lake && check_arable_land &&
-      check_comprehensive_watercourse && check_partial_watercourse && check_single_watercourse
+        check_grassland && check_heathland && check_pond_or_lake && check_arable_land &&
+        check_comprehensive_watercourse && check_partial_watercourse && check_single_watercourse
     end
 
     def check_intertidal
@@ -175,7 +174,8 @@ module PafsCore
     def check_wetland_or_wet_grassland
       return outcomes_error if wetland_or_wet_grassland.nil?
 
-      return outcomes_error if wetland_or_wet_grassland? && hectares_of_wetland_or_wet_grassland_created_or_enhanced.nil?
+      return outcomes_error if wetland_or_wet_grassland? &&
+                               hectares_of_wetland_or_wet_grassland_created_or_enhanced.nil?
 
       true
     end
@@ -215,7 +215,8 @@ module PafsCore
     def check_comprehensive_watercourse
       return outcomes_error if comprehensive_restoration.nil?
 
-      return outcomes_error if comprehensive_restoration? && kilometres_of_watercourse_enhanced_or_created_comprehensive.nil?
+      return outcomes_error if comprehensive_restoration? &&
+                               kilometres_of_watercourse_enhanced_or_created_comprehensive.nil?
 
       true
     end
@@ -231,7 +232,7 @@ module PafsCore
     def check_single_watercourse
       return outcomes_error if create_habitat_watercourse.nil?
 
-      return outcomes_error if  create_habitat_watercourse? && kilometres_of_watercourse_enhanced_or_created_single.nil?
+      return outcomes_error if create_habitat_watercourse? && kilometres_of_watercourse_enhanced_or_created_single.nil?
 
       true
     end
@@ -247,8 +248,13 @@ module PafsCore
     end
 
     def funding_calculator_complete?
-      return add_error(:funding_calculator, "^Upload the project's partnership funding calculator") if funding_calculator_file_name.blank?
-      return add_error(:funding_calculator, "^Upload a valid version of the partnership funding calculator") unless funding_calculator_correct_version?
+      if funding_calculator_file_name.blank?
+        return add_error(:funding_calculator, "^Upload the project's partnership funding calculator")
+      end
+
+      unless funding_calculator_correct_version?
+        return add_error(:funding_calculator, "^Upload a valid version of the partnership funding calculator")
+      end
 
       true
     end
@@ -264,7 +270,7 @@ module PafsCore
     def funding_values_complete?
       return false unless selected_funding_sources.present?
 
-      selected_funding_sources.all? { |fs| total_for(fs) > 0 }
+      selected_funding_sources.all? { |fs| total_for(fs).positive? }
     end
 
     def add_error(attr, msg)
@@ -278,7 +284,7 @@ module PafsCore
     end
 
     def check_flooding
-      if flooding_total_protected_households > 0 || project.reduced_risk_of_households_for_floods?
+      if flooding_total_protected_households.positive? || project.reduced_risk_of_households_for_floods?
         true
       else
         risks_error
@@ -286,7 +292,7 @@ module PafsCore
     end
 
     def check_coastal_erosion
-      if coastal_total_protected_households > 0 || project.reduced_risk_of_households_for_coastal_erosion?
+      if coastal_total_protected_households.positive? || project.reduced_risk_of_households_for_coastal_erosion?
         true
       else
         risks_error
@@ -302,7 +308,8 @@ module PafsCore
     end
 
     def natural_flood_risk_measures_and_cost_provided?
-      (selected_natural_flood_risk_measures.count > 0 || !project.other_flood_measures.blank?) && !project.natural_flood_risk_measures_cost.nil?
+      (selected_natural_flood_risk_measures.count.positive? || !project.other_flood_measures.blank?) &&
+        !project.natural_flood_risk_measures_cost.nil?
     end
 
     def risks_error

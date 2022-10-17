@@ -10,7 +10,7 @@ module PafsCore
 
     # rubocop:disable Style/HashSyntax
     def documentation_state
-      machine = Bstard.define do |fsm|
+      Bstard.define do |fsm|
         fsm.initial current_status
         fsm.event :generate, :empty => :generating, :ready => :generating, :failed => :generating
         fsm.event :complete, :generating => :ready

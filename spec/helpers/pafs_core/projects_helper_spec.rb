@@ -28,6 +28,7 @@ module PafsCore
           expect(helper.str_year(-1)).to eq "previous"
         end
       end
+
       it "converts a year into a string" do
         expect(helper.str_year(2016)).to eq "2016"
       end
@@ -39,13 +40,14 @@ module PafsCore
           expect(helper.formatted_financial_year(-1)).to eq "Previous years"
         end
       end
+
       it "returns the financial year range as a string" do
         expect(helper.formatted_financial_year(2016)).to eq "2016 to 2017"
       end
     end
 
     describe "#location_search_results_for" do
-      it "should return the correct sentence" do
+      it "returns the correct sentence" do
         query = "Oxford"
         results = ["Oxford"]
         word = "result"
@@ -61,7 +63,7 @@ module PafsCore
     end
 
     describe "#compound_standard_of_protection_label" do
-      it "should return the correct label" do
+      it "returns the correct label" do
         option = :very_significant
         label = "<span class=\"bold-small\">Very significant</span><div>5% or greater in any given year</div>"
         expect(helper.compound_standard_of_protection_label(option)).to eq label
@@ -72,7 +74,7 @@ module PafsCore
       let(:search_string) { "The search" }
       let(:result) { { eastings: 201_212, northings: 121_212 } }
 
-      it "should return the correct string result" do
+      it "returns the correct string result" do
         expect(helper.search_result_label(nil, result)).to eq "201212,121212"
 
         expect(helper.search_result_label(search_string, result)).to eq "The search"
@@ -82,7 +84,7 @@ module PafsCore
     describe "#file_extension" do
       let(:file_name) { "filename.ext" }
 
-      it "should return the correct file extension in upper case" do
+      it "returns the correct file extension in upper case" do
         expect(helper.file_extension(file_name)).to eq "EXT"
       end
     end

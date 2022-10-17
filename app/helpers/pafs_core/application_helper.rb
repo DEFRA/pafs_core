@@ -24,7 +24,7 @@ module PafsCore
     def current_resource
       resource = nil
       if Object.const_defined?("Devise")
-        Devise.mappings.values.each do |m|
+        Devise.mappings.each_value do |m|
           resource = send("current_#{m.name}") if send("#{m.name}_signed_in?")
         end
       end
@@ -34,11 +34,11 @@ module PafsCore
     # Sortable columns helper method: this one just takes the current sort order (asc or desc) and
     # returns the appropriate html entity code for the arrow to display.
     def get_arrow(curr_sort_order)
-      arrow = if curr_sort_order == "desc"
-                "&#9660;"
-              else
-                "&#9650;" # default is ascending which is the up arrow.
-              end
+      if curr_sort_order == "desc"
+        "&#9660;"
+      else
+        "&#9650;" # default is ascending which is the up arrow.
+      end
     end
 
     # Sortable columns helper method: this one works out the sort properties to
@@ -83,8 +83,7 @@ module PafsCore
         arrow = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" # Not the currently sorted column, so display no arrow.
         next_sort_order = "asc" # Starting sort order should be asc
       end
-      sort_properties_for_col = { next_sort_order: next_sort_order, curr_arrow: arrow }
-      sort_properties_for_col
+      { next_sort_order: next_sort_order, curr_arrow: arrow }
     end
   end
 end

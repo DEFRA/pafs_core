@@ -26,6 +26,7 @@ RSpec.describe PafsCore::StandardOfProtectionAfterStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:standard_of_protection_after_step) }
+
     let(:params) do
       ActionController::Parameters.new({
                                          standard_of_protection_after_step: {
@@ -55,7 +56,7 @@ RSpec.describe PafsCore::StandardOfProtectionAfterStep, type: :model do
   describe "#flood_risk_options" do
     subject { FactoryBot.build(:standard_of_protection_after_step) }
 
-    it "should return an array of options" do
+    it "returns an array of options" do
       array_of_options = %i[very_significant significant moderate low]
 
       expect(subject.flood_risk_options).to eq array_of_options

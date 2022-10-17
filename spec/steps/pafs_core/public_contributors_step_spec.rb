@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::PublicContributorsStep, type: :model do
-  let(:project) { create(:project) }
   subject { described_class.new(project) }
+
+  let(:project) { create(:project) }
 
   describe "attributes" do
     it_behaves_like "a project step"

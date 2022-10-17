@@ -34,7 +34,7 @@ module PafsCore
 
     def at_least_one_risk_is_selected
       errors.add(:base, "Select the risks your project protects against") unless
-        selected_risks.count > 0
+        selected_risks.count.positive?
     end
   end
 end

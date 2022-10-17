@@ -6,9 +6,6 @@ ENV["RAILS_ENV"] ||= "test"
 require "simplecov"
 SimpleCov.start "rails"
 
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
 require File.expand_path("dummy/config/environment", __dir__)
 
 # Prevent database truncation if the environment is production
@@ -21,7 +18,6 @@ require "shoulda-matchers"
 require "vcr"
 require "webmock/rspec"
 require "spec_helper"
-require "climate_control"
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -44,7 +40,12 @@ Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  puts e.to_s.strip
+  exit 1
+end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -53,6 +54,7 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+# rubocop:disable Style/StringConcatenation
 def escape_xpath_quotes(str)
   if str =~ /'/
     %[concat('] + str.gsub(/'/, %(', "'", ')) + %[')]
@@ -60,6 +62,7 @@ def escape_xpath_quotes(str)
     %('#{str}')
   end
 end
+# rubocop:enable Style/StringConcatenation
 
 # removes last word part from symbol
 # eg. takes :award_contract_year and returns :award_contract
@@ -105,7 +108,6 @@ VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
   config.configure_rspec_metadata!
-  config.ignore_hosts "codeclimate.com"
   config.default_cassette_options = {
     match_requests_on: %i[method host path]
   }

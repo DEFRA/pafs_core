@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ConfidenceHomesByGatewayFourStep, type: :model do
-  let(:project) { build(:project) }
   subject { FactoryBot.build(:confidence_homes_by_gateway_four_step) }
+
+  let(:project) { build(:project) }
 
   describe "attributes" do
     it_behaves_like "a project step"

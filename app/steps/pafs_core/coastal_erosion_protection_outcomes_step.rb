@@ -15,7 +15,7 @@ module PafsCore
 
     validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
 
-    validate :has_values, if: :reduced_risk_of_households_for_coastal_erosion?
+    validate :values?, if: :reduced_risk_of_households_for_coastal_erosion?
 
     def before_view(_params)
       setup_coastal_erosion_protection_outcomes
@@ -23,13 +23,16 @@ module PafsCore
 
     private
 
-    def has_values
+    def values?
       coastal_erosion_protection_outcomes.each do |outcome|
-        %i[households_at_reduced_risk households_protected_from_loss_in_next_20_years households_protected_from_loss_in_20_percent_most_deprived].each do |attr|
-          if outcome.send(attr).to_i > 0
+        %i[households_at_reduced_risk
+           households_protected_from_loss_in_next_20_years
+           households_protected_from_loss_in_20_percent_most_deprived].each do |attr|
+          if outcome.send(attr).to_i.positive?
             return errors.add(
               :base,
-              "In the applicable year(s), tell us how many households moved to a lower flood risk category (column A), OR if this does not apply select the checkbox."
+              "In the applicable year(s), tell us how many households moved to a lower flood risk category \
+              (column A), OR if this does not apply select the checkbox."
             )
           end
         end
@@ -55,22 +58,23 @@ module PafsCore
         )
       end
 
-      unless c_too_big.empty?
-        errors.add(
-          :base,
-          "The number of households in the 20% most deprived areas (column C) must be lower than or \
-          equal to the number of households protected from loss within the next 20 years (column B)."
-        )
-      end
+      return if c_too_big.empty?
+
+      errors.add(
+        :base,
+        "The number of households in the 20% most deprived areas (column C) must be lower than or \
+        equal to the number of households protected from loss within the next 20 years (column B)."
+      )
     end
 
     def at_least_one_value
-      if coastal_total_protected_households.zero? && !project.reduced_risk_of_households_for_coastal_erosion?
-        errors.add(
-          :base,
-          "In the applicable year(s), tell us how many households are at a reduced risk of coastal erosion (column A), OR if this does not apply select the checkbox."
-        )
-      end
+      return unless coastal_total_protected_households.zero? && !project.reduced_risk_of_households_for_coastal_erosion?
+
+      errors.add(
+        :base,
+        "In the applicable year(s), tell us how many households are at a reduced risk of coastal erosion (column A), " \
+        "OR if this does not apply select the checkbox."
+      )
     end
 
     def sensible_number_of_houses
@@ -113,13 +117,13 @@ module PafsCore
         )
       end
 
-      unless d_insensible.empty?
-        errors.add(
-          :base,
-          "The number of non-residential properties must \
-          be less than or equal to 1 million."
-        )
-      end
+      return if d_insensible.empty?
+
+      errors.add(
+        :base,
+        "The number of non-residential properties must \
+        be less than or equal to 1 million."
+      )
     end
 
     def step_params(params)
@@ -148,9 +152,9 @@ module PafsCore
     end
 
     def build_missing_year(year)
-      unless coastal_erosion_protection_outcomes.exists?(financial_year: year)
-        coastal_erosion_protection_outcomes.build(financial_year: year)
-      end
+      return if coastal_erosion_protection_outcomes.exists?(financial_year: year)
+
+      coastal_erosion_protection_outcomes.build(financial_year: year)
     end
   end
 end

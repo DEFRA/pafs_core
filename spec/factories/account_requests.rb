@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :account_request, class: PafsCore::AccountRequest do
+  factory :account_request, class: "PafsCore::AccountRequest" do
     first_name { "Big" }
     last_name { "Nev" }
     email { "neville.southall@example.com" }

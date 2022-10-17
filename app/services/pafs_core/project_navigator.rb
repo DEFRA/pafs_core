@@ -79,7 +79,7 @@ module PafsCore
     private
 
     def step_anchors
-      @anchor_steps ||= define_step_anchors
+      @step_anchors ||= define_step_anchors
     end
 
     def define_step_anchors
@@ -108,7 +108,8 @@ module PafsCore
       @sequence ||= define_sequence
     end
 
-    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/BlockLength
+    # rubocop:disable Layout/LineLength
     def define_sequence
       Dibble.sequence do |s|
         s.add :project_name
@@ -231,7 +232,8 @@ module PafsCore
         s.add :summary_16
       end
     end
-    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Layout/LineLength
+    # rubocop:enable Metrics/BlockLength
 
     def check_step(step)
       raise ActiveRecord::RecordNotFound, "Unknown step [#{step}]" unless sequence.include? step.to_sym

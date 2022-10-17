@@ -5,6 +5,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::MapStep, type: :model do
   before(:all) { @tempfile = Tempfile.new }
+
   after(:all) { @tempfile.close! }
 
   describe "attributes" do
@@ -17,13 +18,13 @@ RSpec.describe PafsCore::MapStep, type: :model do
     subject { FactoryBot.build(:map_step) }
 
     context "when there is a defined benefit_area" do
-      it "should get the correct benefit area" do
+      it "gets the correct benefit area" do
         expect(subject.benefit_area).to eq("[[432123, 132453], [444444, 134444], [456543, 123432]]")
       end
     end
 
     context "when the benefit_area is set to nil" do
-      it "should get \"[[[]]]\"" do
+      it "gets \"[[[]]]\"" do
         subject.benefit_area = nil
         expect(subject.benefit_area).to eq "[[[]]]"
       end
@@ -34,13 +35,13 @@ RSpec.describe PafsCore::MapStep, type: :model do
     subject { FactoryBot.build(:map_step) }
 
     context "when the benefit_area_centre is set" do
-      it "should get the correct benefit_area_centre" do
+      it "gets the correct benefit_area_centre" do
         expect(subject.benefit_area_centre).to eq %w[457733 221751]
       end
     end
 
     context "when the benefit_area_centre is not set" do
-      it "should get project_location instead" do
+      it "gets project_location instead" do
         subject.benefit_area_centre = nil
         subject.project.project_location = [457_736, 221_754]
         subject.project.save
@@ -89,9 +90,10 @@ RSpec.describe PafsCore::MapStep, type: :model do
   end
 
   describe "#delete_benefit_area_file" do
+    subject { FactoryBot.build(:map_step) }
+
     let(:benefit_area_file) { fixture_file_upload("shapefile.zip", "application/zip") }
     let(:params) { ActionController::Parameters.new(map_step: { benefit_area_file: benefit_area_file }) }
-    subject { FactoryBot.build(:map_step) }
 
     context "when an uploaded file exists" do
       it "removes the file from storage" do

@@ -20,10 +20,9 @@ module PafsCore
     end
 
     def a_choice_has_been_made
-      if environmental_benefits.nil?
-        errors.add(:environmental_benefits,
-                   "^You must select yes or no")
-      end
+      return unless environmental_benefits.nil?
+
+      errors.add(:environmental_benefits, "^You must select yes or no")
     end
 
     def reset_om4_attributes_to_nil

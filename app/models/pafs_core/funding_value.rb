@@ -4,10 +4,15 @@ module PafsCore
   class FundingValue < ApplicationRecord
     belongs_to :project
 
+    CLASS_NAME = "PafsCore::FundingContributor"
+
     has_many :funding_contributors, dependent: :destroy
-    has_many :public_contributions, -> { where(contributor_type: FundingSources::PUBLIC_CONTRIBUTIONS) }, class_name: "PafsCore::FundingContributor"
-    has_many :private_contributions, -> { where(contributor_type: FundingSources::PRIVATE_CONTRIBUTIONS) }, class_name: "PafsCore::FundingContributor"
-    has_many :other_ea_contributions, -> { where(contributor_type: FundingSources::EA_CONTRIBUTIONS) }, class_name: "PafsCore::FundingContributor"
+    has_many :public_contributions, -> { where(contributor_type: FundingSources::PUBLIC_CONTRIBUTIONS) },
+             class_name: CLASS_NAME
+    has_many :private_contributions, -> { where(contributor_type: FundingSources::PRIVATE_CONTRIBUTIONS) },
+             class_name: CLASS_NAME
+    has_many :other_ea_contributions, -> { where(contributor_type: FundingSources::EA_CONTRIBUTIONS) },
+             class_name: CLASS_NAME
 
     validates :fcerm_gia,
               :local_levy,

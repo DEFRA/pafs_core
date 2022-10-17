@@ -29,6 +29,8 @@ RSpec.describe PafsCore::AnyEnvironmentalBenefitsStep, type: :model do
     end
 
     context "when updating :environmental_benefits from true to false" do
+      subject { FactoryBot.create(:any_environmental_benefits_step, project: project) }
+
       let(:project) do
         FactoryBot.create(
           :project,
@@ -36,8 +38,6 @@ RSpec.describe PafsCore::AnyEnvironmentalBenefitsStep, type: :model do
           hectares_of_woodland_habitat_created_or_enhanced: 12
         )
       end
-
-      subject { FactoryBot.create(:any_environmental_benefits_step, project: project) }
 
       it "resets the project's om4 attributes to nil" do
         subject.update(false_params)

@@ -90,8 +90,8 @@ module PafsCore
       # now we can open the temporary zipfile
       Zip::File.open(tmpfile.path, Zip::File::CREATE) do |zf|
         projects.each do |project|
-          fetch_benefit_area_file_for(project) do |data, filename, _content_type|
-            zf.get_output_stream(filename) { |f| f.write(data) }
+          fetch_benefit_area_file_for(project) do |data, project_filename, _content_type|
+            zf.get_output_stream(project_filename) { |f| f.write(data) }
           end
         end
       end
@@ -149,88 +149,87 @@ module PafsCore
     end
 
     def fetch_benefit_area_file_for(project)
-      if project.benefit_area_file_name
-        t = Tempfile.new
-        storage.download(File.join(project.storage_path, project.benefit_area_file_name), t.path)
-        t.rewind
+      return unless project.benefit_area_file_name
 
-        if block_given?
-          filename = make_benefit_area_file_name(project.reference_number, project.benefit_area_file_name)
-          yield t.read, filename, project.benefit_area_content_type
-          t.close!
-        else
-          t
-        end
+      t = Tempfile.new
+      storage.download(File.join(project.storage_path, project.benefit_area_file_name), t.path)
+      t.rewind
+
+      if block_given?
+        filename = make_benefit_area_file_name(project.reference_number, project.benefit_area_file_name)
+        yield t.read, filename, project.benefit_area_content_type
+        t.close!
+      else
+        t
       end
     end
 
     def delete_benefit_area_file_for(project)
-      if project.benefit_area_file_name
-        storage.delete(File.join(project.storage_path, project.benefit_area_file_name))
-        project.benefit_area_file_name = nil
-        project.benefit_area_content_type = nil
-        project.benefit_area_file_size = nil
-        project.benefit_area_file_updated_at = nil
-        project.save!
-      end
+      return unless project.benefit_area_file_name
+
+      storage.delete(File.join(project.storage_path, project.benefit_area_file_name))
+      project.benefit_area_file_name = nil
+      project.benefit_area_content_type = nil
+      project.benefit_area_file_size = nil
+      project.benefit_area_file_updated_at = nil
+      project.save!
     end
 
     def fetch_funding_calculator_for(project)
-      if project.funding_calculator_file_name
-        t = Tempfile.new
-        storage.download(File.join(project.storage_path, project.funding_calculator_file_name), t.path)
-        t.rewind
+      return unless project.funding_calculator_file_name
 
-        if block_given?
-          filename = pfcalc_filename(project.reference_number, project.funding_calculator_file_name)
-          yield t.read, filename, project.funding_calculator_content_type
-          t.close!
-        else
-          t
-        end
+      t = Tempfile.new
+      storage.download(File.join(project.storage_path, project.funding_calculator_file_name), t.path)
+      t.rewind
+
+      if block_given?
+        filename = pfcalc_filename(project.reference_number, project.funding_calculator_file_name)
+        yield t.read, filename, project.funding_calculator_content_type
+        t.close!
+      else
+        t
       end
     end
 
     def delete_funding_calculator_for(project)
-      if project.funding_calculator_file_name
-        storage.delete(File.join(project.storage_path, project.funding_calculator_file_name))
-        project.funding_calculator_file_name = nil
-        project.funding_calculator_content_type = nil
-        project.funding_calculator_file_size = nil
-        project.funding_calculator_updated_at = nil
-        project.save!
-      end
+      return unless project.funding_calculator_file_name
+
+      storage.delete(File.join(project.storage_path, project.funding_calculator_file_name))
+      project.funding_calculator_file_name = nil
+      project.funding_calculator_content_type = nil
+      project.funding_calculator_file_size = nil
+      project.funding_calculator_updated_at = nil
+      project.save!
     end
 
     def generate_moderation_for(project)
       project = PafsCore::ModerationPresenter.new(project)
-      if project.urgent?
-        t = Tempfile.new
-        t.write project.body
-        t.rewind
+      return unless project.urgent?
 
-        if block_given?
-          yield t.read, moderation_filename(project.reference_number,
-                                            project.urgency_code), "text/plain"
-          t.close!
-        else
-          t
-        end
+      t = Tempfile.new
+      t.write project.body
+      t.rewind
+
+      if block_given?
+        yield t.read, moderation_filename(project.reference_number, project.urgency_code), "text/plain"
+        t.close!
+      else
+        t
       end
     end
 
     def fetch_file(filename)
-      if filename
-        t = Tempfile.new
-        storage.download(filename, t.path)
-        t.rewind
+      return unless filename
 
-        if block_given?
-          yield t.read, filename
-          t.close!
-        else
-          t
-        end
+      t = Tempfile.new
+      storage.download(filename, t.path)
+      t.rewind
+
+      if block_given?
+        yield t.read, filename
+        t.close!
+      else
+        t
       end
     end
 

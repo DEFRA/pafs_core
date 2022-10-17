@@ -5,14 +5,15 @@ require "rails_helper"
 
 module PafsCore
   RSpec.describe ReferenceCounter, type: :model do
-    around(:each) do |spec|
-      PafsCore::ReferenceCounter.transaction do
+    around do |spec|
+      described_class.transaction do
         spec.run
       end
     end
 
     describe ".next_sequence_number" do
       let(:rfcc_code) { PafsCore::RFCC_CODES.first }
+
       it "returns the next sequence number for the given RFCC code" do
         sequence_nos = described_class.next_sequence_for(rfcc_code)
         expect(sequence_nos[0]).to eq 0

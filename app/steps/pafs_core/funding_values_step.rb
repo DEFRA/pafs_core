@@ -32,6 +32,7 @@ module PafsCore
       selected_funding_sources - AGGREGATE_SOURCES
     end
 
+    # rubocop:disable Style/MultilineBlockChain
     def at_least_one_value
       values = funding_values.map { |x| x.attributes.slice(*funding_values_to_check.map(&:to_s)) }
       zero_valued = values.each_with_object({}) do |e, a|
@@ -42,13 +43,14 @@ module PafsCore
                    v.to_i
                  end
         end
-      end.select { |_k, v| v == 0 }
+      end.select { |_k, v| v.zero? }
 
       return if zero_valued.empty?
 
       errors.add(:base, "Please ensure at least one value is added for each funding source")
       false
     end
+    # rubocop:enable Style/MultilineBlockChain
 
     def step_params(params)
       params.require(:funding_values_step).permit(

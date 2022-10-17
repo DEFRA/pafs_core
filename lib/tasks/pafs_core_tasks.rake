@@ -1,6 +1,7 @@
 # Play nice with Ruby 3 (and rubocop)
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 namespace :pafs do
   task bulk_export_to_pol: :environment do
     PafsCore::DataMigration::ExportToPol.perform
@@ -35,3 +36,4 @@ namespace :pafs do
     PafsCore::DataMigration::UpdatePolSubmissionDate.perform
   end
 end
+# rubocop:enable Metrics/BlockLength

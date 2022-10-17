@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :area_download, class: PafsCore::AreaDownload do
+  factory :area_download, class: "PafsCore::AreaDownload" do
     area
     user
 

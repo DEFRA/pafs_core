@@ -16,9 +16,7 @@ module PafsCore
              to: :project
 
     attr_reader :funding_calculator
-    attr_accessor :virus_info
-    attr_accessor :uploaded_file
-    attr_accessor :expected_version
+    attr_accessor :virus_info, :uploaded_file, :expected_version
 
     validate :virus_free_funding_calculator_present
     validate :validate_calculator_sheet_present
@@ -122,7 +120,8 @@ module PafsCore
       return if calculator_version.to_s == expected_version && calculator_version.present?
 
       self.funding_calculator_file_name = ""
-      errors.add(:base, "The uploaded calculator is the incorrect version. You must submit the #{expected_version_name} calculator.")
+      errors.add(:base, "The uploaded calculator is the incorrect version. " \
+                        "You must submit the #{expected_version_name} calculator.")
     end
   end
 end

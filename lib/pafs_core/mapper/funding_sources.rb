@@ -42,8 +42,8 @@ module PafsCore
           {
             name: contributor.name,
             amount: contributor.amount.to_i,
-            secured: !!contributor.secured,
-            constrained: !!contributor.constrained
+            secured: !contributor.secured.nil?,
+            constrained: !contributor.constrained.nil?
           }
         end
       end

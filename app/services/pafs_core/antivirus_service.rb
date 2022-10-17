@@ -27,11 +27,10 @@ module PafsCore
 
       results = scanner.execute(ClamAV::Commands::ScanCommand.new(file))
       results.each do |result|
-        if result.instance_of? ClamAV::VirusResponse
-          raise PafsCore::VirusFoundError.new(result.file, result.virus_name)
-        elsif result.instance_of? ClamAV::ErrorResponse
-          raise PafsCore::VirusScannerError, result.error_str
-        end
+
+        raise PafsCore::VirusFoundError.new(result.file, result.virus_name) if result.instance_of? ClamAV::VirusResponse
+
+        raise PafsCore::VirusScannerError, result.error_str if result.instance_of? ClamAV::ErrorResponse
       end
       true
     end

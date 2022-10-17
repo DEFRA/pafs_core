@@ -25,7 +25,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
   end
 
   describe ".previous_years" do
-    before(:each) do
+    before do
       @values = FactoryBot.create(:funding_value, :previous_year, project: project)
     end
 
@@ -36,7 +36,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
   end
 
   describe ".to_financial_year" do
-    before(:each) do
+    before do
       @values = [
         FactoryBot.create(:funding_value, :previous_year, project: project),
         FactoryBot.create(:funding_value, project: project, financial_year: 2017),
@@ -48,7 +48,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
     it "returns records upto and including the specified year" do
       records = described_class.to_financial_year(2018)
       expect(records.count).to eq 3
-      expect(records).to include *@values[0...-1]
+      expect(records).to include(*@values[0...-1])
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
     end
 
     it "calculates the total" do
-      expect { subject.save }.to change { subject.total }.to(3_503_600)
+      expect { subject.save }.to change(subject, :total).to(3_503_600)
     end
   end
 end

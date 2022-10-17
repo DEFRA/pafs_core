@@ -1,3 +1,49 @@
 inherit_gem:
   defra_ruby_style:
     - default.yml
+require:
+  - rubocop-rspec
+
+# TODO Resolve these legacy Rubocop offenses
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/BeforeAfterAll:
+  Enabled: false
+RSpec/LetSetup:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/SubjectStub:
+  Enabled: false
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+# Resolving the following legacy offenses would require disproportionate effort:
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/InstanceVariable:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
+RSpec/StubbedMock:
+  Enabled: false

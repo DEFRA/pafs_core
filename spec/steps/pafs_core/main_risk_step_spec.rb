@@ -5,13 +5,14 @@ require "rails_helper"
 # require_relative "./shared_step_spec"
 
 RSpec.describe PafsCore::MainRiskStep, type: :model do
-  before(:each) do
+  subject { @project }
+
+  before do
     @project = FactoryBot.build(:main_risk_step)
     # required to be valid
     @project.project.update(groundwater_flooding: true)
     @project.project.save
   end
-  subject { @project }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -31,8 +32,8 @@ RSpec.describe PafsCore::MainRiskStep, type: :model do
   end
 
   describe "#update" do
-    context "a project that does protect households" do
-      context "protecting against flooding" do
+    context "with a project that does protect households" do
+      context "with protecting against flooding" do
         let(:params) do
           ActionController::Parameters.new({
                                              main_risk_step: {
@@ -57,8 +58,9 @@ RSpec.describe PafsCore::MainRiskStep, type: :model do
           expect(subject.update(error_params)).to eq false
         end
       end
-      context "protecting against coastal erosion" do
-        before(:each) do
+
+      context "with protecting against coastal erosion" do
+        before do
           @project.project.update(groundwater_flooding: false, coastal_erosion: true)
         end
 
@@ -69,6 +71,7 @@ RSpec.describe PafsCore::MainRiskStep, type: :model do
                                              }
                                            })
         end
+
         it "saves the state of valid params" do
           expect(subject.update(params)).to be true
           expect(subject.main_risk).to eq "coastal_erosion"

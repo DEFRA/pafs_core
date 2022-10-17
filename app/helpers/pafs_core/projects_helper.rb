@@ -25,7 +25,7 @@ module PafsCore
     end
 
     def skip_pso_confirmation?
-      ENV.fetch("SKIP_PSO_CONFIRMATION", false) == 'True'
+      ENV.fetch("SKIP_PSO_CONFIRMATION", false) == "True"
     end
 
     def force_pso_to_use_pol?
@@ -78,16 +78,16 @@ module PafsCore
       out.compact.join.html_safe
     end
 
-    def funding_value_label(fv)
-      t("#{fv}_label", scope: "pafs_core.projects.steps.funding_values")
+    def funding_value_label(fvl)
+      t("#{fvl}_label", scope: "pafs_core.projects.steps.funding_values")
     end
 
     def class_for_summary_list(underline_all)
       "summary-list underlined-#{underline_all ? 'all-' : ''}items"
     end
 
-    def flood_class_for_sop(p)
-      if p.protects_against_coastal_erosion?
+    def flood_class_for_sop(proj)
+      if proj.protects_against_coastal_erosion?
         " with-seperator"
       else
         ""
@@ -95,7 +95,7 @@ module PafsCore
     end
 
     def str_year(year)
-      if year < 0
+      if year.negative?
         "previous"
       else
         year.to_s
@@ -103,7 +103,7 @@ module PafsCore
     end
 
     def formatted_financial_year(year)
-      if year < 0
+      if year.negative?
         t("previous_years_label")
       else
         "#{year} to #{year + 1}"
@@ -119,7 +119,7 @@ module PafsCore
     end
 
     def formatted_financial_month_and_year(year)
-      if year < 0
+      if year.negative?
         t("previous_years_label")
       else
         "April #{year} to March #{year + 1}"
@@ -151,14 +151,14 @@ module PafsCore
       I18n.t("#{reason}_label", scope: "pafs_core.urgency_reasons")
     end
 
-    def format_date(dt)
-      return "" if dt.nil?
+    def format_date(date)
+      return "" if date.nil?
 
-      dt.strftime("%-d %B %Y")
+      date.strftime("%-d %B %Y")
     end
 
-    def project_type_label(pt)
-      I18n.t("#{pt.downcase}_label", scope: "pafs_core.projects.steps.project_type") unless pt.nil?
+    def project_type_label(project_type)
+      I18n.t("#{project_type.downcase}_label", scope: "pafs_core.projects.steps.project_type") unless project_type.nil?
     end
 
     def location_search_results_for(results, query, word, description)

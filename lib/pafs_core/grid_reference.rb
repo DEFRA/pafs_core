@@ -15,10 +15,10 @@ module PafsCore
     end
 
     def to_lat_lon
-      if valid?
-        en = grid_reference_to_eastings_and_northings(@ngr)
-        easting_northing_to_latitude_longitude(en[:easting], en[:northing])
-      end
+      return unless valid?
+
+      en = grid_reference_to_eastings_and_northings(@ngr)
+      easting_northing_to_latitude_longitude(en[:easting], en[:northing])
     end
 
     def to_s

@@ -8,7 +8,9 @@ module PafsCore
     validate :a_choice_has_been_made
 
     def update(params)
-      reset_natural_flood_risk_measure_attributes_to_nil if step_params(params)[:natural_flood_risk_measures_included] == "false"
+      if step_params(params)[:natural_flood_risk_measures_included] == "false"
+        reset_natural_flood_risk_measure_attributes_to_nil
+      end
 
       super
     end
@@ -22,10 +24,9 @@ module PafsCore
     end
 
     def a_choice_has_been_made
-      if natural_flood_risk_measures_included.nil?
-        errors.add(:natural_flood_risk_measures_included,
-                   "You must select yes or no")
-      end
+      return unless natural_flood_risk_measures_included.nil?
+
+      errors.add(:natural_flood_risk_measures_included, "You must select yes or no")
     end
 
     def reset_natural_flood_risk_measure_attributes_to_nil

@@ -29,13 +29,13 @@ module PafsCore
       dt1 = Date.new(start_outline_business_case_year, start_outline_business_case_month, 1)
       dt2 = Date.new(award_contract_year, award_contract_month, 1)
 
-      if dt1 > dt2
-        errors.add(
-          :award_contract,
-          "^You expect to submit your outline business case for approval on #{dt1.month} #{dt1.year}. \
-          The date you expect to award the project's main contract must come after this date."
-        )
-      end
+      return unless dt1 > dt2
+
+      errors.add(
+        :award_contract,
+        "^You expect to submit your outline business case for approval on #{dt1.month} #{dt1.year}. \
+        The date you expect to award the project's main contract must come after this date."
+      )
     end
 
     def date_is_present_and_in_range

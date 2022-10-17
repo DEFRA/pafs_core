@@ -15,8 +15,15 @@ Gem::Specification.new do |s|
   s.summary     = "Project Application and Funding Service core shared functionality"
   s.description = "Project Application and Funding Service core shared functionality"
   s.license     = "The Open Government Licence (OGL) Version 3"
+  s.required_ruby_version = ">= 2.4"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "spec/factories/**/*", "spec/support/**/*", "LICENSE", "Rakefile", "README.md"]
+  s.files = Dir[
+    "{app,config,db,lib}/**/*",
+    "spec/factories/**/*",
+    "spec/support/**/*",
+    "LICENSE",
+    "Rakefile",
+    "README.md"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "aws-sdk-s3", "~> 1.67"
@@ -36,17 +43,16 @@ Gem::Specification.new do |s|
 
   # Provided by GDS - Template gives us a master layout into which
   # we can inject our content using yield and content_for
-  s.add_dependency "govuk_template"
-  s.add_dependency "govuk_frontend_toolkit"
   s.add_dependency "govuk_elements_rails"
+  s.add_dependency "govuk_frontend_toolkit"
+  s.add_dependency "govuk_template"
 
   s.add_development_dependency "capybara"
   s.add_development_dependency "climate_control"
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "dotenv"
   s.add_development_dependency "factory_bot_rails"
-  s.add_development_dependency "overcommit"
-  s.add_development_dependency "pg", "0.20.0"
+  s.add_development_dependency "pg"
   s.add_development_dependency "pry-rails"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "shoulda-matchers"

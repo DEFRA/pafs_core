@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ProjectSummaryPresenter do
-  subject { PafsCore::ProjectSummaryPresenter.new(FactoryBot.build(:project)) }
+  subject { described_class.new(FactoryBot.build(:project)) }
 
   let(:flood_options) do
     ["Very significant",
@@ -33,6 +33,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.location_set?).to eq true
       end
     end
+
     context "when the project location has not been set" do
       it "returns false" do
         subject.grid_reference = nil
@@ -127,19 +128,23 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         subject.start_outline_business_case_month = 3
         expect(subject.key_dates_started?).to eq true
       end
+
       it "returns true when award_contract set" do
         subject.award_contract_month = 5
         expect(subject.key_dates_started?).to eq true
       end
+
       it "returns true when start_construction date set" do
         subject.start_construction_month = 7
         expect(subject.key_dates_started?).to eq true
       end
+
       it "returns true when ready_for_service date set" do
         subject.ready_for_service_month = 9
         expect(subject.key_dates_started?).to eq true
       end
     end
+
     context "when none of the important dates have been set" do
       it "returns false" do
         expect(subject.key_dates_started?).to eq false
@@ -148,13 +153,14 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   end
 
   describe "#funding_sources_started?" do
-    context "once the funding_sources page has been visited" do
+    context "when the funding_sources page has been visited" do
       it "returns true" do
         subject.funding_sources_visited = true
         expect(subject.funding_sources_started?).to eq true
       end
     end
-    context "before the user has completed the funding_sources" do
+
+    context "when the user has not yet completed the funding_sources" do
       it "returns false" do
         subject.funding_sources_visited = false
         expect(subject.funding_sources_started?).to eq false
@@ -172,6 +178,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.earliest_start_started?).to eq true
       end
     end
+
     context "when could_start_early has not been set" do
       it "returns false" do
         subject.could_start_early = nil
@@ -202,24 +209,28 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.standard_of_protection_started?).to eq true
       end
     end
+
     context "when :flood_protection_after set" do
       it "returns true" do
         subject.flood_protection_after = 1
         expect(subject.standard_of_protection_started?).to eq true
       end
     end
+
     context "when :coastal_protection_before set" do
       it "returns true" do
         subject.coastal_protection_before = 1
         expect(subject.standard_of_protection_started?).to eq true
       end
     end
+
     context "when :coastal_protection_after set" do
       it "returns true" do
         subject.coastal_protection_after = 1
         expect(subject.standard_of_protection_started?).to eq true
       end
     end
+
     context "when none of the standard of protection attributes have values" do
       it "returns false" do
         expect(subject.standard_of_protection_started?).to eq false
@@ -234,6 +245,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.standard_of_protection_step).to eq :standard_of_protection
       end
     end
+
     context "when the project does not protect against flooding" do
       context "when the project protects against coastal erosion" do
         it "returns :standard_of_protection_coastal" do
@@ -241,6 +253,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
           expect(subject.standard_of_protection_step).to eq :standard_of_protection_coastal
         end
       end
+
       context "when the project does not protect against coastal erosion" do
         it "raises an error" do
           expect { subject.standard_of_protection_step }
@@ -259,6 +272,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         end
       end
     end
+
     context "when :flood_protection_before is nil" do
       it "returns not provided text" do
         expect(subject.flood_protection_before_percentage).to eq not_provided_text
@@ -275,6 +289,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         end
       end
     end
+
     context "when :flood_protection_after is nil" do
       it "returns not provided text" do
         expect(subject.flood_protection_after_percentage).to eq not_provided_text
@@ -291,6 +306,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         end
       end
     end
+
     context "when :coastal_protection_before is nil" do
       it "returns not provided text" do
         expect(subject.coastal_protection_before_years).to eq not_provided_text
@@ -307,6 +323,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         end
       end
     end
+
     context "when :coastal_protection_after is nil" do
       it "returns not provided text" do
         expect(subject.coastal_protection_after_years).to eq not_provided_text
@@ -317,10 +334,11 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   describe "#flood_protection_outcomes_entered?" do
     context "when flood protection outcomes have been set" do
       it "returns true" do
-        expect(subject).to receive(:flood_protection_outcomes) { [1, 2, 3] }
+        expect(subject).to receive(:flood_protection_outcomes).and_return([1, 2, 3])
         expect(subject.flood_protection_outcomes_entered?).to eq true
       end
     end
+
     context "when flood protection outcomes have not been set" do
       it "returns false" do
         expect(subject.flood_protection_outcomes_entered?).to eq false
@@ -331,10 +349,11 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   describe "#coastal_erosion_protection_outcomes_entered?" do
     context "when coastal erosion protection outcomes have been set" do
       it "returns true" do
-        expect(subject).to receive(:coastal_erosion_protection_outcomes) { [1, 2, 3] }
+        expect(subject).to receive(:coastal_erosion_protection_outcomes).and_return([1, 2, 3])
         expect(subject.coastal_erosion_protection_outcomes_entered?).to eq true
       end
     end
+
     context "when coastal erosion protection outcomes have not been set" do
       it "returns false" do
         expect(subject.coastal_erosion_protection_outcomes_entered?).to eq false
@@ -364,8 +383,8 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
 
   describe "#hectares_created_or_enhanced" do
     context "when an answer has been provided" do
-      context "and the answer is yes" do
-        context "and a figure has been provided" do
+      context "when the answer is yes" do
+        context "when a figure has been provided" do
           it "returns the formatted answer" do
             subject.hectares_of_intertidal_habitat_created_or_enhanced = 14
 
@@ -373,14 +392,14 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
           end
         end
 
-        context "and a figure has not been provided" do
+        context "when a figure has not been provided" do
           it "returns 'Not provided'" do
             expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, applicable: nil)).to eq "<em>Not provided</em>".html_safe
           end
         end
       end
 
-      context "and the answer is no" do
+      context "when the answer is no" do
         it "returns N/A" do
           expect(subject.hectares_created_or_enhanced(attribute: :hectares_of_intertidal_habitat_created_or_enhanced, applicable: false)).to eq "<em>N/A</em>".html_safe
         end
@@ -396,8 +415,8 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
 
   describe "#kilometres_created_or_enhanced" do
     context "when an answer has been provided" do
-      context "and the answer is yes" do
-        context "and a figure has been provided" do
+      context "when the answer is yes" do
+        context "when a figure has been provided" do
           it "returns the formatted answer" do
             subject.kilometres_of_watercourse_enhanced_or_created_comprehensive = 14
 
@@ -405,14 +424,14 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
           end
         end
 
-        context "and a figure has not been provided" do
+        context "when a figure has not been provided" do
           it "returns 'Not provided'" do
             expect(subject.hectares_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, applicable: true)).to eq "<em>Not provided</em>".html_safe
           end
         end
       end
 
-      context "and the answer is no" do
+      context "when the answer is no" do
         it "returns N/A" do
           expect(subject.kilometres_created_or_enhanced(attribute: :kilometres_of_watercourse_enhanced_or_created_comprehensive, applicable: false)).to eq "<em>N/A</em>".html_safe
         end
@@ -438,8 +457,9 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.total_for_flooding_a).to eq not_provided_text
       end
     end
+
     context "when flood protection outcomes have been entered" do
-      before(:each) do
+      before do
         subject.project_end_financial_year = 2035
         subject.save
         outcomes = [make_flood_outcome(2017, subject.id),
@@ -461,8 +481,9 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.total_for_flooding_b).to eq not_provided_text
       end
     end
+
     context "when flood protection outcomes have been entered" do
-      before(:each) do
+      before do
         subject.project_end_financial_year = 2035
         subject.save
         outcomes = [make_flood_outcome(2017, subject.id),
@@ -484,8 +505,9 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.total_for_flooding_c).to eq not_provided_text
       end
     end
+
     context "when flood protection outcomes have been entered" do
-      before(:each) do
+      before do
         subject.project_end_financial_year = 2035
         subject.save
         outcomes = [make_flood_outcome(2017, subject.id),
@@ -507,8 +529,9 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.total_for_coastal_a).to eq not_provided_text
       end
     end
+
     context "when coastal erosion protection outcomes have been entered" do
-      before(:each) do
+      before do
         subject.project_end_financial_year = 2035
         subject.save
         outcomes = [make_coastal_outcome(2017, subject.id),
@@ -530,8 +553,9 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.total_for_coastal_b).to eq not_provided_text
       end
     end
+
     context "when coastal erosion protection outcomes have been entered" do
-      before(:each) do
+      before do
         subject.project_end_financial_year = 2035
         subject.save
         outcomes = [make_coastal_outcome(2017, subject.id),
@@ -553,8 +577,9 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.total_for_coastal_c).to eq not_provided_text
       end
     end
+
     context "when coastal erosion protection outcomes have been entered" do
-      before(:each) do
+      before do
         subject.project_end_financial_year = 2035
         subject.save
         outcomes = [make_coastal_outcome(2017, subject.id),
@@ -577,6 +602,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
         expect(subject.funding_calculator_uploaded?).to eq true
       end
     end
+
     context "when a file has not been uploaded" do
       it "returns false" do
         subject.funding_calculator_file_name = nil
@@ -594,21 +620,24 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
 
   describe "#articles" do
     context "when project protects households" do
-      before(:each) { subject.project_type = "CM" }
+      before { subject.project_type = "CM" }
+
       context "when risks have been entered" do
         it "returns the list of articles" do
           subject.fluvial_flooding = true
           expect(subject.articles).to eq subject.send(:all_articles)
         end
       end
+
       context "when risks have not been entered" do
         it "returns the list of articles without :standard_of_protection" do
           expect(subject.articles).not_to include :standard_of_protection
         end
       end
     end
+
     context "when project does not protect households" do
-      it "should return the list or articles without :risks or :standard_of_protection" do
+      it "returns the list or articles without :risks or :standard_of_protection" do
         subject.project_type = "ENV_WITHOUT_HOUSEHOLDS"
         expect(subject.articles).not_to include %i[risks standard_of_protection]
       end
@@ -644,8 +673,8 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     end
   end
 
-  describe "#is_main_risk?" do
-    before(:each) do
+  describe "#main_risk?" do
+    before do
       subject.surface_water_flooding = true
       subject.groundwater_flooding = true
       subject.main_risk = :groundwater_flooding
@@ -653,16 +682,16 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
 
     context "when the param equals the :main_risk" do
       it "returns true" do
-        expect(subject.is_main_risk?(:groundwater_flooding)).to be true
+        expect(subject.main_risk?(:groundwater_flooding)).to be true
       end
     end
 
     context "when the param is not equal to the :main_risk" do
       it "returns false" do
-        expect(subject.is_main_risk?(:surface_water_flooding)).to be false
-        expect(subject.is_main_risk?(:coastal_erosion)).to be false
-        expect(subject.is_main_risk?(nil)).to be false
-        expect(subject.is_main_risk?(:discarded_false_teeth)).to be false
+        expect(subject.main_risk?(:surface_water_flooding)).to be false
+        expect(subject.main_risk?(:coastal_erosion)).to be false
+        expect(subject.main_risk?(nil)).to be false
+        expect(subject.main_risk?(:discarded_false_teeth)).to be false
       end
     end
   end

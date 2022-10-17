@@ -45,6 +45,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:financial_year_step) }
+
     let(:params) { ActionController::Parameters.new({ financial_year_step: { project_end_financial_year: "2028" } }) }
     let(:error_params) { ActionController::Parameters.new({ financial_year_step: { project_end_financial_year: "1983" } }) }
 
@@ -62,7 +63,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
   describe "#financial_year_options" do
     subject { FactoryBot.build(:financial_year_step) }
 
-    it "should return the correct set of financial year options" do
+    it "returns the correct set of financial year options" do
       current_financial_year = Time.current.uk_financial_year
       expect(subject.financial_year_options).to eq current_financial_year..current_financial_year + 5
     end

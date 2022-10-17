@@ -12,7 +12,7 @@ module PafsCore
     validate :grid_reference_is_supplied
 
     def update(params)
-      @javascript_enabled = !!params.fetch(:js_enabled, false)
+      @javascript_enabled = !params.fetch(:js_enabled, false).nil?
       assign_attributes(step_params(params))
       result = false
       if valid?

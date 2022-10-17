@@ -9,7 +9,7 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
   let(:area) { project.areas.first }
   let(:user) { create(:user, area: area) }
 
-  before(:each) do
+  before do
     allow(subject).to receive(:current_resource) { user }
   end
 
@@ -22,9 +22,9 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
 
   describe "GET proposals" do
     context "without a generated programme" do
-      let!(:area_download) { create(:area_download, :failed, area: area) }
+      before { create(:area_download, :failed, area: area) }
 
-      it "should redirect back to the multi downloads page" do
+      it "redirects back to the multi downloads page" do
         get :proposals
         expect(response).to redirect_to(multi_downloads_path)
       end
@@ -38,7 +38,7 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
         allow(PafsCore::AreaDownloadService).to receive(:new).and_return(download_service)
       end
 
-      it "should redirect to the file download" do
+      it "redirects to the file download" do
         get :proposals
         expect(response).to redirect_to("/test_fcrm1.xlsx")
       end
@@ -47,9 +47,9 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
 
   describe "GET funding_calculators" do
     context "without a generated programme" do
-      let!(:area_download) { create(:area_download, :failed, area: area) }
+      before { create(:area_download, :failed, area: area) }
 
-      it "should redirect back to the multi downloads page" do
+      it "redirects back to the multi downloads page" do
         get :funding_calculators
         expect(response).to redirect_to(multi_downloads_path)
       end
@@ -63,7 +63,7 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
         allow(PafsCore::AreaDownloadService).to receive(:new).and_return(download_service)
       end
 
-      it "should redirect to the file download" do
+      it "redirects to the file download" do
         get :funding_calculators
         expect(response).to redirect_to("/fc.zip")
       end
@@ -72,9 +72,9 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
 
   describe "GET benefit_areas" do
     context "without a generated programme" do
-      let!(:area_download) { create(:area_download, :failed, area: area) }
+      before { create(:area_download, :failed, area: area) }
 
-      it "should redirect back to the multi downloads page" do
+      it "redirects back to the multi downloads page" do
         get :benefit_areas
         expect(response).to redirect_to(multi_downloads_path)
       end
@@ -88,7 +88,7 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
         allow(PafsCore::AreaDownloadService).to receive(:new).and_return(download_service)
       end
 
-      it "should redirect to the file download" do
+      it "redirects to the file download" do
         get :benefit_areas
         expect(response).to redirect_to("/ba.zip")
       end
@@ -97,9 +97,9 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
 
   describe "GET moderations" do
     context "without a generated programme" do
-      let!(:area_download) { create(:area_download, :failed, area: area) }
+      before { create(:area_download, :failed, area: area) }
 
-      it "should redirect back to the multi downloads page" do
+      it "redirects back to the multi downloads page" do
         get :moderations
         expect(response).to redirect_to(multi_downloads_path)
       end
@@ -113,7 +113,7 @@ RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
         allow(PafsCore::AreaDownloadService).to receive(:new).and_return(download_service)
       end
 
-      it "should redirect to the file download" do
+      it "redirects to the file download" do
         get :moderations
         expect(response).to redirect_to("/mo.zip")
       end

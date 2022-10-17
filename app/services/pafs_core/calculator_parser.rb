@@ -26,15 +26,13 @@ module PafsCore
     end
 
     def self.parse(file, project)
-      if File.extname(file.path) == ".xlsx"
-        begin
-          calculator = Roo::Excelx.new(file.path)
-          new(calculator, project).extract_data
-        rescue StandardError => e
-          puts e
-        end
-      else
-        raise "require an xlsx file"
+      raise "require an xlsx file" unless File.extname(file.path) == ".xlsx"
+
+      begin
+        calculator = Roo::Excelx.new(file.path)
+        new(calculator, project).extract_data
+      rescue StandardError => e
+        puts e
       end
     end
 
@@ -51,7 +49,7 @@ module PafsCore
     end
 
     def binary_value(value)
-      value.casecmp("yes") == 0
+      value.casecmp("yes").zero?
     end
   end
 end

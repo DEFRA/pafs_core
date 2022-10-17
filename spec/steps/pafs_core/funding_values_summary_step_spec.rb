@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::FundingValuesSummaryStep, type: :model do
-  before(:each) do
+  before do
     @project = FactoryBot.create(:project)
     @project.fcerm_gia = true
     @project.project_end_financial_year = 2022
@@ -22,7 +22,7 @@ RSpec.describe PafsCore::FundingValuesSummaryStep, type: :model do
   end
 
   describe "#update" do
-    subject { PafsCore::FundingValuesSummaryStep.new @project }
+    subject { described_class.new @project }
 
     it "returns true" do
       expect(subject.update({})).to eq true
@@ -30,7 +30,7 @@ RSpec.describe PafsCore::FundingValuesSummaryStep, type: :model do
   end
 
   describe "#selected_funding_sources" do
-    subject { PafsCore::FundingValuesSummaryStep.new @project }
+    subject { described_class.new @project }
 
     it "returns which funding_sources have been selected" do
       expect(subject.selected_funding_sources).to eq [:fcerm_gia]
@@ -38,7 +38,8 @@ RSpec.describe PafsCore::FundingValuesSummaryStep, type: :model do
   end
 
   describe "#current_funding_values" do
-    subject { PafsCore::FundingValuesSummaryStep.new @project }
+    subject { described_class.new @project }
+
     it "returns funding_values without any that are later than the project_end_financial_year" do
       outside_values = FactoryBot.create(:funding_value, project: @project, financial_year: 2021)
       subject.project.funding_values << outside_values
@@ -50,14 +51,16 @@ RSpec.describe PafsCore::FundingValuesSummaryStep, type: :model do
   end
 
   describe "#total_for" do
-    subject { PafsCore::FundingValuesSummaryStep.new @project }
+    subject { described_class.new @project }
+
     it "returns the sum of values for a funding source" do
       expect(subject.total_for(:fcerm_gia)).to eq 600_000
     end
   end
 
   describe "#grand_total" do
-    subject { PafsCore::FundingValuesSummaryStep.new @project }
+    subject { described_class.new @project }
+
     it "returns the sum of values for all selected funding sources" do
       expect(subject.grand_total).to eq 600_000
     end

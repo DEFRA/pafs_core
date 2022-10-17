@@ -8,7 +8,9 @@ module PafsCore
     validate :a_choice_has_been_made
 
     def update(params)
-      project.send(:kilometres_of_watercourse_enhanced_or_created_comprehensive=, nil) if step_params(params)[:comprehensive_restoration] == "false"
+      if step_params(params)[:comprehensive_restoration] == "false"
+        project.send(:kilometres_of_watercourse_enhanced_or_created_comprehensive=, nil)
+      end
 
       super
     end
@@ -20,10 +22,10 @@ module PafsCore
     end
 
     def a_choice_has_been_made
-      if comprehensive_restoration.nil?
-        errors.add(:comprehensive_restoration,
-                   "^You must select yes or no")
-      end
+      return unless comprehensive_restoration.nil?
+
+      errors.add(:comprehensive_restoration,
+                 "^You must select yes or no")
     end
   end
 end

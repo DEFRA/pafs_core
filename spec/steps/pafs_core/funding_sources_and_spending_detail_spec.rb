@@ -16,7 +16,7 @@ describe PafsCore::Project, type: :model do
     )
   end
 
-  let!(:funding_value_1) do
+  before do
     create(
       :funding_value,
       :with_public_contributor,
@@ -30,9 +30,6 @@ describe PafsCore::Project, type: :model do
       internal_drainage_boards: 1000,
       not_yet_identified: 1000
     )
-  end
-
-  let!(:funding_value_2) do
     create(
       :funding_value,
       :with_public_contributor,
@@ -48,7 +45,7 @@ describe PafsCore::Project, type: :model do
   end
 
   describe "when spends are available" do
-    it "should return the correct totals for the funding sources" do
+    it "returns the correct totals for the funding sources" do
       expect(subject.total_for_funding_source(:fcerm_gia)).to eq 3000
       expect(subject.total_for_funding_source(:local_levy)).to eq 3000
       expect(subject.total_for_funding_source(:public_contributions)).to eq 2000

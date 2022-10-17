@@ -20,10 +20,9 @@ module PafsCore
     end
 
     def a_choice_has_been_made
-      if heathland.nil?
-        errors.add(:heathland,
-                   "^You must select yes or no")
-      end
+      return unless heathland.nil?
+
+      errors.add(:heathland, "^You must select yes or no")
     end
   end
 end

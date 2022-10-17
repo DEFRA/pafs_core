@@ -19,6 +19,7 @@ RSpec.describe PafsCore::FundingSourcesStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:funding_sources_step) }
+
     let(:params) do
       ActionController::Parameters.new({ funding_sources_step: { growth_funding: "1" } })
     end

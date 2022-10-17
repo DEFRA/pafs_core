@@ -48,25 +48,25 @@ module PafsCore
     end
 
     def download
-      if benefit_area_file_name.present?
-        t = Tempfile.new
-        storage.download(File.join(storage_path, benefit_area_file_name), t.path)
-        t.rewind
+      return unless benefit_area_file_name.present?
 
-        if block_given?
-          yield t.read, benefit_area_file_name, benefit_area_content_type
-          t.close!
-        else
-          t
-        end
+      t = Tempfile.new
+      storage.download(File.join(storage_path, benefit_area_file_name), t.path)
+      t.rewind
+
+      if block_given?
+        yield t.read, benefit_area_file_name, benefit_area_content_type
+        t.close!
+      else
+        t
       end
     end
 
     def delete_benefit_area_file
-      if benefit_area_file_name.present?
-        storage.delete(File.join(storage_path, benefit_area_file_name))
-        reset_file_attributes
-      end
+      return unless benefit_area_file_name.present?
+
+      storage.delete(File.join(storage_path, benefit_area_file_name))
+      reset_file_attributes
     end
 
     def before_view(_params)
@@ -122,13 +122,13 @@ module PafsCore
     end
 
     def virus_free_benefit_area_file_present
-      if benefit_area_file.present?
-        if virus_info.present?
-          Rails.logger.error virus_info
-          errors.add(:base, "The file was rejected because it may contain a virus. Check the file and try again")
-        elsif benefit_area_file_name.blank?
-          errors.add(:base, "Upload a file that outlines the area of protection")
-        end
+      return unless benefit_area_file.present?
+
+      if virus_info.present?
+        Rails.logger.error virus_info
+        errors.add(:base, "The file was rejected because it may contain a virus. Check the file and try again")
+      elsif benefit_area_file_name.blank?
+        errors.add(:base, "Upload a file that outlines the area of protection")
       end
     end
 

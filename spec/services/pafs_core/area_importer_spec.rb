@@ -5,16 +5,16 @@ require "rails_helper"
 
 RSpec.describe PafsCore::AreaImporter do
   describe "#import" do
-    it "should successfully import the areas with correct data" do
+    it "successfully imports the areas with correct data" do
       file_path = "#{Rails.root}/../fixtures/areas.csv"
-      PafsCore::AreaImporter.new.import(file_path)
+      described_class.new.import(file_path)
       areas = PafsCore::Area.all
       expect(areas.size).to eq(4)
     end
 
-    it "should not import faulty data" do
+    it "does not import faulty data" do
       file_path = "#{Rails.root}/../fixtures/faulty_areas_data.csv"
-      PafsCore::AreaImporter.new.import(file_path)
+      described_class.new.import(file_path)
       areas = PafsCore::Area.all
       expect(areas.size).to eq(3)
     end
@@ -23,31 +23,31 @@ RSpec.describe PafsCore::AreaImporter do
   describe "#import_new_areas" do
     before do
       file_path = "#{Rails.root}/../fixtures/areas.csv"
-      PafsCore::AreaImporter.new.import(file_path)
+      described_class.new.import(file_path)
     end
 
-    it "should successfully import the new areas with correct data" do
+    it "successfully imports the new areas with correct data" do
       folder_path = "#{Rails.root}/../fixtures/new_areas"
 
-      PafsCore::AreaImporter.new.import_new_areas(folder_path)
+      described_class.new.import_new_areas(folder_path)
 
       areas = PafsCore::Area.all
       expect(areas.size).to eq(6)
     end
 
-    it "shouldn't import areas that are already present" do
+    it "does not import areas that are already present" do
       folder_path = "#{Rails.root}/../fixtures/new_areas"
 
-      2.times { PafsCore::AreaImporter.new.import_new_areas(folder_path) }
+      2.times { described_class.new.import_new_areas(folder_path) }
 
       areas = PafsCore::Area.all
       expect(areas.size).to eq(6)
     end
 
-    it "shouldn't import areas that have faulty data" do
+    it "does not import areas that have faulty data" do
       folder_path = "#{Rails.root}/../fixtures/new_areas_with_faults"
 
-      PafsCore::AreaImporter.new.import_new_areas(folder_path)
+      described_class.new.import_new_areas(folder_path)
 
       areas = PafsCore::Area.all
       expect(areas.size).to eq(5)

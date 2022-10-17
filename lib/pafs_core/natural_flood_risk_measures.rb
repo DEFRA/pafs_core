@@ -22,10 +22,16 @@ module PafsCore
     NATURAL_FLOOD_RISK_MEASURES.each do |r|
       delegate r, "#{r}=", "#{r}?", to: :project
     end
-    delegate :other_flood_measures_selected, :other_flood_measures_selected=, to: :project
-    delegate :other_flood_measures, :other_flood_measures=, to: :project
-    delegate :natural_flood_risk_measures_included, :natural_flood_risk_measures_included=, :natural_flood_risk_measures_included?, to: :project
-    delegate :natural_flood_risk_measures_cost, :natural_flood_risk_measures_cost=, to: :project
+    delegate :other_flood_measures_selected,
+             :other_flood_measures_selected=,
+             :other_flood_measures,
+             :other_flood_measures=,
+             :natural_flood_risk_measures_included,
+             :natural_flood_risk_measures_included=,
+             :natural_flood_risk_measures_included?,
+             :natural_flood_risk_measures_cost,
+             :natural_flood_risk_measures_cost=,
+             to: :project
 
     def selected_natural_flood_risk_measures
       NATURAL_FLOOD_RISK_MEASURES.select { |r| send("#{r}?") }
