@@ -1,16 +1,23 @@
 # frozen_string_literal: true
 
-module PafsCore::Spreadsheet::Contributors::Coerce
-  class FinancialYear < Base
-    def perform
-      return -1 if value == "Previous years"
-      raise("unknown year") if matches.nil?
+module PafsCore
+  module Spreadsheet
+    module Contributors
+      module Coerce
+        class FinancialYear < Base
+          def perform
+            return -1 if value == "Previous years"
 
-      matches[0]
-    end
+            raise("unknown year") if matches.nil?
 
-    def matches
-      @matches = value.match(/(\d+) - (\d+)/)
+            matches[0]
+          end
+
+          def matches
+            @matches = value.match(/(\d+) - (\d+)/)
+          end
+        end
+      end
     end
   end
 end

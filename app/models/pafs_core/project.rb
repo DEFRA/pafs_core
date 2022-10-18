@@ -7,11 +7,11 @@ module PafsCore
     validates :reference_number, presence: true, uniqueness: { scope: :version }
     # broaden validation to cope with initial bulk import of existing projects
     # with subtly non-standard formatting
-    # rubocop:disable Metrics/LineLength
+    # rubocop:disable Layout/LineLength
     validates :reference_number,
               format: { with: %r{\A(AC|AE|AN|NO|NW|SN|SO|SW|TH|TR|TS|WX|YO)[A-Z]\d{3,4}[A-Z]?/\d{2,3}[A-Z]?/\d{2,4}[A-Z]{1,2}\z},
                         message: "has an invalid format" }
-    # rubocop:enable Metrics/LineLength
+    # rubocop:enable Layout/LineLength
 
     validates :version, presence: true
 
@@ -64,7 +64,7 @@ module PafsCore
 
     # rubocop:disable Style/HashSyntax
     def submission_state
-      machine = Bstard.define do |fsm|
+      Bstard.define do |fsm|
         fsm.initial current_state
         fsm.event :archived, :draft => :archived
         fsm.event :complete, :draft => :completed, :updatable => :updated
@@ -111,10 +111,10 @@ module PafsCore
       current_state.to_sym
     end
 
-    def total_for_funding_source(fs)
+    def total_for_funding_source(source)
       source_total = 0
       funding_values.each do |fv|
-        source_total += fv.public_send("#{fs}_total")
+        source_total += fv.public_send("#{source}_total")
       end
       source_total
     end

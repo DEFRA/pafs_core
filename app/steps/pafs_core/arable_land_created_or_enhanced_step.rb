@@ -8,7 +8,9 @@ module PafsCore
     validate :a_choice_has_been_made
 
     def update(params)
-      project.send(:hectares_of_arable_land_lake_habitat_created_or_enhanced=, nil) if step_params(params)[:arable_land] == "false"
+      if step_params(params)[:arable_land] == "false"
+        project.send(:hectares_of_arable_land_lake_habitat_created_or_enhanced=, nil)
+      end
 
       super
     end
@@ -20,10 +22,9 @@ module PafsCore
     end
 
     def a_choice_has_been_made
-      if arable_land.nil?
-        errors.add(:arable_land,
-                   "^You must select yes or no")
-      end
+      return unless arable_land.nil?
+
+      errors.add(:arable_land, "^You must select yes or no")
     end
   end
 end

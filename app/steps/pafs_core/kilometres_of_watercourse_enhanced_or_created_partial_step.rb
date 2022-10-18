@@ -21,8 +21,8 @@ module PafsCore
                   "your project will create.")
       elsif kilometres_of_watercourse_enhanced_or_created_partial <= 0
         errors.add(:kilometres_of_watercourse_enhanced_or_created_partial,
-                    "^You must include the number of kilometres "\
-                    "your project will create.")
+                   "^You must include the number of kilometres "\
+                   "your project will create.")
       end
     end
   end

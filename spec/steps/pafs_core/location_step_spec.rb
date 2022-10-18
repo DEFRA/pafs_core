@@ -3,6 +3,8 @@
 
 require "rails_helper"
 
+# TODO: Define the LocationStep factory and complete these specs
+# rubocop:disable RSpec/EmptyExampleGroup
 RSpec.describe PafsCore::LocationStep, type: :model do
   # describe "attributes" do
   #   subject { FactoryBot.build(:location_step) }
@@ -14,7 +16,7 @@ RSpec.describe PafsCore::LocationStep, type: :model do
   #   subject { FactoryBot.create(:location_step) }
   #
   #   context "with a defined benefit_area" do
-  #     it "should return the benefit_area" do
+  #     it "returns the benefit_area" do
   #       subject.project.benefit_area = "[[[457736,221754]]]"
   #       subject.project.save
   #
@@ -23,7 +25,7 @@ RSpec.describe PafsCore::LocationStep, type: :model do
   #   end
   #
   #   context "when benefit_area is nil" do
-  #     it "should return \"[[[]]]\"" do
+  #     it "returns \"[[[]]]\"" do
   #       expect(subject.benefit_area).to eq "[[[]]]"
   #     end
   #   end
@@ -61,3 +63,4 @@ RSpec.describe PafsCore::LocationStep, type: :model do
   #   end
   # end
 end
+# rubocop:enable RSpec/EmptyExampleGroup

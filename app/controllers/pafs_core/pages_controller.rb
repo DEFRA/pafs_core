@@ -9,7 +9,7 @@ module PafsCore
     protected
 
     def previous_page
-      request.referer.presence ? request.referer : '/'
+      request.referer.presence ? request.referer : "/"
     end
   end
 end

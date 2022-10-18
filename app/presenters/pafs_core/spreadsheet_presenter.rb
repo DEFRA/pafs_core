@@ -24,10 +24,10 @@ module PafsCore
 
     def ea_area
       owning_area = owner
-      if owning_area
-        owning_area = owning_area.parent until owning_area.ea_area?
-        owning_area.name
-      end
+      return unless owning_area
+
+      owning_area = owning_area.parent until owning_area.ea_area?
+      owning_area.name
     end
 
     def rma_name
@@ -41,13 +41,13 @@ module PafsCore
     end
 
     def coastal_group
-      if coastal_erosion? || sea_flooding? || tidal_flooding?
-        owning_area = owner
-        if owning_area
-          owning_area = owning_area.parent if owning_area.rma?
-          PSO_TO_COASTAL_GROUP_MAP.fetch(owning_area.name, nil)
-        end
-      end
+      return unless coastal_erosion? || sea_flooding? || tidal_flooding?
+
+      owning_area = owner
+      return unless owning_area
+
+      owning_area = owning_area.parent if owning_area.rma?
+      PSO_TO_COASTAL_GROUP_MAP.fetch(owning_area.name, nil)
     end
 
     def project_type
@@ -342,14 +342,14 @@ module PafsCore
       coastal_erosion_protection_for(year).sum(category)
     end
 
-    def format_2_part_date(dt)
-      if project.send("#{dt}_month") && project.send("#{dt}_year")
-        format("%02d/%d", project.send("#{dt}_month"), project.send("#{dt}_year"))
-      end
+    def format_2_part_date(date)
+      return unless project.send("#{date}_month") && project.send("#{date}_year")
+
+      format("%<month>02d/%<year>d", month: project.send("#{date}_month"), year: project.send("#{date}_year"))
     end
 
-    def squish_int_float(v)
-      (v.to_int if v.is_a?(Float) && v % 1 == 0) || v
+    def squish_int_float(val)
+      (val.to_int if val.is_a?(Float) && (val % 1).zero?) || val
     end
 
     def presentable_date(name)

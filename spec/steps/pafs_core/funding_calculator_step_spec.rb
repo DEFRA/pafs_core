@@ -28,7 +28,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
       allow(subject).to receive(:expected_version).and_return("v9")
       allow(subject).to receive(:uploaded_file).and_return(v9_calculator_file)
 
-      expect(subject.valid?).to be_truthy
+      expect(subject).to be_valid
     end
 
     it "validates the calculator version" do
@@ -41,7 +41,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
         .to include "The uploaded calculator is the incorrect version. You must submit the v8 2014 calculator."
     end
 
-    context "virus found" do
+    context "when a virus is found" do
       it "does not validate the calculator version" do
         allow(subject)
           .to receive(:virus_info)
@@ -57,6 +57,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.build(:funding_calculator_step) }
+
     let(:filename) { "new_file.xlsx" }
     let(:content_type) { "text/plain" }
     let(:temp_file) do
@@ -84,9 +85,10 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
     context "when a virus free file is selected" do
       let(:storage) { double("storage") }
-      before(:each) do
+
+      before do
         allow(PafsCore::DevelopmentFileStorageService).to receive(:new) { storage }
-        allow(storage).to receive(:upload) { true }
+        allow(storage).to receive(:upload).and_return(true)
         subject.funding_calculator_file_name = nil
       end
 
@@ -102,15 +104,12 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
         expect(subject.funding_calculator_updated_at).to be_within(1.second).of(Time.zone.now)
       end
 
-      it "returns true" do
-        expect(subject.update(params)).to eq true
-      end
-
       context "when an uploaded file already exists" do
         let(:new_file) { "my_file.xlsx" }
+
         it "deletes the previous file" do
           subject.funding_calculator_file_name = new_file
-          expect(storage).to receive(:delete).with(File.join(subject.storage_path, new_file)) { true }
+          expect(storage).to receive(:delete).with(File.join(subject.storage_path, new_file)).and_return(true)
           expect(subject.update(params)).to eq true
         end
       end
@@ -124,7 +123,8 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
     context "when a virus infected file is selected" do
       let(:storage) { double("storage") }
-      before(:each) do
+
+      before do
         allow(PafsCore::DevelopmentFileStorageService).to receive(:new) { storage }
         allow(storage).to receive(:upload) do
           raise PafsCore::VirusFoundError.new(v8_calculator_file.path, "nAsTyVirus")
@@ -132,7 +132,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
       end
 
       it "does not save the file details" do
-        expect { subject.update(params) }.not_to change { subject.funding_calculator_file_name }
+        expect { subject.update(params) }.not_to change(subject, :funding_calculator_file_name)
       end
 
       it "returns false" do
@@ -142,15 +142,16 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
     context "when a virus scanner issue prevented the file from being scanned" do
       let(:storage) { double("storage") }
-      before(:each) do
-        expect(PafsCore::DevelopmentFileStorageService).to receive(:new) { storage }
-        expect(storage).to receive(:upload) do
+
+      before do
+        allow(PafsCore::DevelopmentFileStorageService).to receive(:new) { storage }
+        allow(storage).to receive(:upload) do
           raise PafsCore::VirusScannerError, "A problem occurred"
         end
       end
 
       it "does not save the file details" do
-        expect { subject.update(params) }.not_to change { subject.funding_calculator_file_name }
+        expect { subject.update(params) }.not_to change(subject, :funding_calculator_file_name)
       end
 
       it "returns false" do

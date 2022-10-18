@@ -8,8 +8,11 @@ module PafsCore
 
     describe "#pafs_form_for" do
       it "invokes form_for" do
-        expect(helper).to receive(:form_for)
+        allow(helper).to receive(:form_for)
+
         helper.pafs_form_for(project, url: pafs_core.projects_path) {}
+
+        expect(helper).to have_received(:form_for)
       end
 
       it "wraps the form in a div with the class 'pafs_form'" do

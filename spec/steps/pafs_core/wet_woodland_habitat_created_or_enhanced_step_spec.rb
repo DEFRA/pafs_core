@@ -29,6 +29,8 @@ RSpec.describe PafsCore::WetWoodlandHabitatCreatedOrEnhancedStep, type: :model d
     end
 
     context "when updating :wet_woodland from true to false" do
+      subject { FactoryBot.create(:wet_woodland_habitat_created_or_enhanced_step, project: project) }
+
       let(:project) do
         FactoryBot.create(
           :project,
@@ -36,8 +38,6 @@ RSpec.describe PafsCore::WetWoodlandHabitatCreatedOrEnhancedStep, type: :model d
           hectares_of_wet_woodland_habitat_created_or_enhanced: 12
         )
       end
-
-      subject { FactoryBot.create(:wet_woodland_habitat_created_or_enhanced_step, project: project) }
 
       it "resets :hectares_of_wet_woodland_habitat_created_or_enhanced to nil" do
         subject.update(false_params)

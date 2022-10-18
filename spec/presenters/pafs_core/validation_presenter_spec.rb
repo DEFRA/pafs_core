@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ValidationPresenter do
-  subject { PafsCore::ValidationPresenter.new(FactoryBot.build(:full_project)) }
+  subject { described_class.new(FactoryBot.build(:full_project)) }
 
   let(:flood_options) do
     ["Very significant",
@@ -46,7 +46,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#location_complete?" do
     context "when location has been set" do
-      before(:each) { subject.grid_reference = "ST 58198 72725" }
+      before { subject.grid_reference = "ST 58198 72725" }
 
       context "when a benefit area file has been uploaded" do
         it "returns true" do
@@ -56,11 +56,12 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       context "when a benefit area file has not been uploaded" do
-        before(:each) { subject.benefit_area_file_name = nil }
+        before { subject.benefit_area_file_name = nil }
 
         it "returns false" do
           expect(subject.location_complete?).to eq false
         end
+
         it "sets an error on the project" do
           subject.location_complete?
           expect(subject.errors[:location]).to include "^Tell us the location of the project"
@@ -69,10 +70,12 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "when location has not been set" do
-      before(:each) { subject.project_location = nil }
+      before { subject.project_location = nil }
+
       it "returns false" do
         expect(subject.location_complete?).to eq false
       end
+
       it "sets an error on the project" do
         subject.location_complete?
         expect(subject.errors[:location]).to include "^Tell us the location of the project"
@@ -81,7 +84,7 @@ RSpec.describe PafsCore::ValidationPresenter do
   end
 
   describe "#key_dates_complete?" do
-    before(:each) do
+    before do
       subject.start_outline_business_case_month = 12
       subject.start_outline_business_case_year = 2016
       subject.award_contract_month = 12
@@ -138,7 +141,7 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "when could_start_early is true" do
-      before(:each) { subject.could_start_early = true }
+      before { subject.could_start_early = true }
 
       context "when earliest_start_year is present" do
         it "returns true" do
@@ -158,7 +161,7 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "when could_start_early is false" do
-      before(:each) { subject.could_start_early = false }
+      before { subject.could_start_early = false }
 
       it "returns true" do
         expect(subject.earliest_start_complete?).to eq true
@@ -168,7 +171,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#risks_complete?" do
     context "when no risks have been selected" do
-      before(:each) do
+      before do
         PafsCore::Risks::RISKS.each do |r|
           subject.send("#{r}=", nil)
         end
@@ -186,7 +189,7 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "when risks are selected" do
-      before(:each) do
+      before do
         PafsCore::Risks::RISKS.each do |r|
           subject.send("#{r}=", nil)
         end
@@ -201,16 +204,19 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       context "when multiple risks are selected" do
-        before(:each) { subject.tidal_flooding = true }
+        before { subject.tidal_flooding = true }
+
         context "when a main risk is set" do
-          before(:each) { subject.main_risk = "tidal_flooding" }
+          before { subject.main_risk = "tidal_flooding" }
+
           it "returns true" do
             expect(subject.risks_complete?).to eq true
           end
         end
 
         context "when a main risk has not been set" do
-          before(:each) { subject.main_risk = nil }
+          before { subject.main_risk = nil }
+
           it "returns false" do
             expect(subject.risks_complete?).to eq false
           end
@@ -227,14 +233,15 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#natural_flood_risk_measures_complete?" do
     context "when the natural flood risk measures have not been set" do
-      before(:each) { subject.natural_flood_risk_measures_included = nil }
+      before { subject.natural_flood_risk_measures_included = nil }
 
       it "returns false" do
         expect(subject.natural_flood_risk_measures_complete?).to eq false
       end
     end
+
     context "when the project includes no natural flood risk measures" do
-      before(:each) { subject.natural_flood_risk_measures_included = false }
+      before { subject.natural_flood_risk_measures_included = false }
 
       it "returns true" do
         expect(subject.natural_flood_risk_measures_complete?).to eq true
@@ -242,15 +249,16 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "when the project includes natural flood risk measures" do
-      before(:each) { subject.natural_flood_risk_measures_included = true }
+      before { subject.natural_flood_risk_measures_included = true }
 
-      context "and no flood risk measures have been selected" do
+      context "when no flood risk measures have been selected" do
         it "returns false" do
           expect(subject.natural_flood_risk_measures_complete?).to eq false
         end
       end
-      context "and flood risk measures have been selected" do
-        before(:each) { subject.river_restoration = true }
+
+      context "when flood risk measures have been selected" do
+        before { subject.river_restoration = true }
 
         context "when no cost has been provided" do
           it "returns false" do
@@ -259,7 +267,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         end
 
         context "when the cost has been provided" do
-          before(:each) { subject.natural_flood_risk_measures_cost = 123.45 }
+          before { subject.natural_flood_risk_measures_cost = 123.45 }
 
           it "returns true" do
             expect(subject.natural_flood_risk_measures_complete?).to eq true
@@ -275,7 +283,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#environmental_outcomes_complete?" do
     context "when environmental_benefits is set to nil" do
-      before(:each) { subject.environmental_benefits = nil }
+      before { subject.environmental_benefits = nil }
 
       it "returns false" do
         expect(subject.environmental_outcomes_complete?).to eq false
@@ -283,7 +291,7 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "when environmental_benefits is set to false" do
-      before(:each) { subject.environmental_benefits = false }
+      before { subject.environmental_benefits = false }
 
       it "returns true" do
         expect(subject.environmental_outcomes_complete?).to eq true
@@ -291,30 +299,30 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "when environmental_benefits is set to true" do
-      before(:each) { subject.environmental_benefits = true }
+      before { subject.environmental_benefits = true }
 
-      context "and no environmental benefits have been selected" do
+      context "when no environmental benefits have been selected" do
         it "returns false" do
           expect(subject.environmental_outcomes_complete?).to eq false
         end
       end
 
-      context "and at least one environmental benefit has been elected" do
-        before(:each) do
+      context "when at least one environmental benefit has been elected" do
+        before do
           subject.arable_land = true
           %i[intertidal_habitat grassland woodland wet_woodland wetland_or_wet_grassland heathland ponds_lakes comprehensive_restoration partial_restoration create_habitat_watercourse].each do |benefit|
             subject.send("#{benefit}=", false)
           end
         end
 
-        context "and the figure hasn't been provided" do
+        context "when the figure hasn't been provided" do
           it "returns false" do
             expect(subject.environmental_outcomes_complete?).to eq false
           end
         end
 
-        context "and the figure has been provided" do
-          before(:each) { subject.hectares_of_arable_land_lake_habitat_created_or_enhanced = 12 }
+        context "when the figure has been provided" do
+          before { subject.hectares_of_arable_land_lake_habitat_created_or_enhanced = 12 }
 
           it "returns true" do
             expect(subject.environmental_outcomes_complete?).to eq true
@@ -327,7 +335,8 @@ RSpec.describe PafsCore::ValidationPresenter do
   describe "#urgency_complete?"
 
   describe "#funding_calculator_complete?" do
-    subject { PafsCore::ValidationPresenter.new(project) }
+    subject { described_class.new(project) }
+
     let(:project) { FactoryBot.create(:full_project) }
 
     context "with no PFC attached" do
@@ -337,8 +346,8 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
 
     context "with a PFC attached" do
-      before(:each) do
-        file_path =  File.join(Rails.root, "..", "fixtures", "calculators", filename)
+      before do
+        file_path = File.join(Rails.root, "..", "fixtures", "calculators", filename)
         file = File.open file_path
         storage = PafsCore::DevelopmentFileStorageService.new
         dest_file = File.join(project.storage_path, filename)
@@ -362,7 +371,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         end
       end
 
-      context "withh a 2020 v2 PFC attached" do
+      context "with a 2020 v2 PFC attached" do
         let(:filename) { "v9.xlsx" }
 
         it "returns true" do

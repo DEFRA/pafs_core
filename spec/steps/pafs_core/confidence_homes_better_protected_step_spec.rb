@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ConfidenceHomesBetterProtectedStep, type: :model do
-  let(:project) { build(:project) }
   subject { FactoryBot.build(:confidence_homes_better_protected_step) }
+
+  let(:project) { build(:project) }
 
   describe "attributes" do
     it_behaves_like "a project step"

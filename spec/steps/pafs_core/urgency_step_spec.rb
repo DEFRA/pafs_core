@@ -29,6 +29,7 @@ RSpec.describe PafsCore::UrgencyStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:urgency_step) }
+
     let(:params) { ActionController::Parameters.new({ urgency_step: { urgency_reason: "legal_need" } }) }
     let(:error_params) { ActionController::Parameters.new({ urgency_step: { urgency_reason: "ABC" } }) }
 
@@ -41,7 +42,7 @@ RSpec.describe PafsCore::UrgencyStep, type: :model do
     it "does not change the urgency_details when urgent" do
       expect do
         subject.update(params)
-      end.not_to change { subject.urgency_details }
+      end.not_to change(subject, :urgency_details)
     end
 
     context "when setting the project to not_urgent" do
@@ -50,7 +51,7 @@ RSpec.describe PafsCore::UrgencyStep, type: :model do
       it "clears the urgency_details from the project" do
         expect do
           subject.update(params)
-        end.to change { subject.urgency_details }.to nil
+        end.to change(subject, :urgency_details).to nil
       end
     end
 

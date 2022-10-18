@@ -49,6 +49,7 @@ RSpec.describe PafsCore::EarliestDateStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:earliest_date_step) }
+
     let(:valid_params) do
       ActionController::Parameters.new(
         { earliest_date_step:

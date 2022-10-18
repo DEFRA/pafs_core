@@ -5,7 +5,7 @@ FactoryBot.define do
     "person#{n}@example.com"
   end
 
-  factory :user, class: PafsCore::User do
+  factory :user, class: "PafsCore::User" do
     first_name { "Ray" }
     last_name { "Clemence" }
     email

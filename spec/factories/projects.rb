@@ -4,7 +4,7 @@
 require File.join(PafsCore::Engine.root, "spec", "support", "shapefile_upload")
 
 FactoryBot.define do
-  factory :project, class: PafsCore::Project do
+  factory :project, class: "PafsCore::Project" do
     reference_number { PafsCore::ProjectService.generate_reference_number("TH") }
     version { 0 }
     project_end_financial_year { 2022 }

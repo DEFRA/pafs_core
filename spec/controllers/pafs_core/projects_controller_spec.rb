@@ -6,11 +6,11 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
   routes { PafsCore::Engine.routes }
 
   let(:user) { create(:user) }
-  let!(:country) { create(:country, :with_full_hierarchy) }
   let(:area) { PafsCore::Area.last }
   let(:project) { create(:project) }
 
-  before(:each) do
+  before do
+    create(:country, :with_full_hierarchy)
     user.user_areas.create(area_id: area.id, primary: true)
     project.area_projects.create(area_id: area.id)
 
@@ -85,8 +85,8 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
       end
     end
 
-    context "user completes a section" do
-      context "saving the project name" do
+    context "when user completes a section" do
+      context "when saving the project name" do
         let(:params) do
           {
             id: project.to_param,
@@ -103,7 +103,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the project type" do
+      context "when saving the project type" do
         let(:params) do
           {
             project_type_step: {
@@ -122,7 +122,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the financial year" do
+      context "when saving the financial year" do
         let(:params) do
           {
             "financial_year_step": {
@@ -141,7 +141,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the location" do
+      context "when saving the location" do
         let(:params) do
           {
             commit: "Save and continue",
@@ -156,7 +156,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the important dates" do
+      context "when saving the important dates" do
         let(:params) do
           {
             ready_for_service_date_step: {
@@ -178,7 +178,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the funding source" do
+      context "when saving the funding source" do
         let(:step_params) do
           {
             funding_sources_step: {
@@ -274,7 +274,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
           )
         end
 
-        before(:each) do
+        before do
           patch :save, params: step_params
         end
 
@@ -286,7 +286,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the earliest start" do
+      context "when saving the earliest start" do
         let(:params) do
           {
             earliest_date_step: {
@@ -305,7 +305,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the risks" do
+      context "when saving the risks" do
         let(:first_flood_project_outcome) do
           project.flood_protection_outcomes.create(
             financial_year: "-1",
@@ -408,7 +408,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving a standard of protection" do
+      context "when saving a standard of protection" do
         let(:params) do
           {
             standard_of_protection_after_step: {
@@ -427,7 +427,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving an approach" do
+      context "when saving an approach" do
         let(:params) do
           {
             approach_step: {
@@ -445,7 +445,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving the environmental outcomes" do
+      context "when saving the environmental outcomes" do
         let(:params) do
           {
             kilometres_of_watercourse_enhanced_or_created_single_step: {
@@ -464,7 +464,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving a project urgency" do
+      context "when saving a project urgency" do
         let(:params) do
           {
             urgency_step: {
@@ -483,7 +483,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving a project calculator" do
+      context "when saving a project calculator" do
         let(:params) do
           {
             commit: "Save and continue",
@@ -498,7 +498,7 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
         end
       end
 
-      context "saving a project confidence assessment" do
+      context "when saving a project confidence assessment" do
         let(:params) do
           {
             confidence_secured_partnership_funding_step: {

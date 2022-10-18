@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
-  before(:each) do
+  before do
     @project = FactoryBot.create(:project)
     @project.project_end_financial_year = 2027
     @project.coastal_erosion = true
@@ -18,7 +18,8 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
   end
 
   describe "attributes" do
-    subject { PafsCore::CoastalErosionProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
+
     it_behaves_like "a project step"
 
     it "validates that value C is smaller than B" do
@@ -53,6 +54,7 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
       "In the applicable year(s), tell us how many households are at a reduced risk of coastal erosion."
     end
 
+    # rubocop:disable Lint/Void
     it "validates that number of properties is less than or equal to 1 million" do
       subject.coastal_erosion_protection_outcomes.build(financial_year: 2020,
                                                         households_at_reduced_risk: 1_000_001,
@@ -71,10 +73,11 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
       "The number of non-residential properties protected from loss must be \
       less than or equal to 1 million."
     end
+    # rubocop:enable Lint/Void
   end
 
   describe "#update" do
-    subject { PafsCore::CoastalErosionProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
 
     let(:params) do
       ActionController::Parameters.new(
@@ -128,19 +131,21 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
   end
 
   describe "#current_coastal_erosion_protection_outcomes" do
-    subject { PafsCore::CoastalErosionProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
     # subject.project.coastal_erosion_protection_outcomes << [@cepo1, @cepo2, @cepo3]
-    it "should include the coastal erosion protection outcomes before the project end financial year" do
+
+    it "includes the coastal erosion protection outcomes before the project end financial year" do
       expect(subject.current_coastal_erosion_protection_outcomes).to include(@cepo1, @cepo2)
     end
 
-    it "should not include the coastal erosion protection outcomes after the project end financial year" do
+    it "does not include the coastal erosion protection outcomes after the project end financial year" do
       expect(subject.current_coastal_erosion_protection_outcomes).not_to include(@cepo3)
     end
   end
 
   describe "#before_view" do
-    subject { PafsCore::CoastalErosionProtectionOutcomesStep.new @project }
+    subject { described_class.new @project }
+
     it "builds coastal_erosion_protection_outcome records for any missing years" do
       # project_end_financial_year = 2022
       # funding_values records run until 2019

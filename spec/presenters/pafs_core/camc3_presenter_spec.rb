@@ -16,20 +16,10 @@ RSpec.describe PafsCore::Camc3Presenter do
       }
     )
   end
-
-  before(:each) do
-    allow_any_instance_of(PafsCore::Files)
-      .to receive(:fetch_funding_calculator_for)
-      .with(project)
-      .and_yield(pfc_file.read, calculator_file, project.funding_calculator_content_type)
-  end
-
   let(:pfc_file) { File.open(File.join(Rails.root, "..", "fixtures", "calculators", calculator_file)) }
-
   let(:calculator_file) do
     "v8.xlsx"
   end
-
   let(:funding_values) do
     [
       { year: -1, value: 2000 },
@@ -51,7 +41,6 @@ RSpec.describe PafsCore::Camc3Presenter do
       2020
     ]
   end
-
   let(:outcome_measurements) do
     [
       { year: -1,   value: 2000 },
@@ -75,15 +64,21 @@ RSpec.describe PafsCore::Camc3Presenter do
       { year: 2032, value: 0 }
     ]
   end
-
   let(:json) { subject.attributes.to_json }
+
+  before do
+    allow_any_instance_of(PafsCore::Files)
+      .to receive(:fetch_funding_calculator_for)
+      .with(project)
+      .and_yield(pfc_file.read, calculator_file, project.funding_calculator_content_type)
+  end
 
   context "without a calculator_file" do
     before do
       allow(project).to receive(:funding_calculator_file_name).and_return(nil)
     end
 
-    it "should create a valid json response" do
+    it "creates a valid json response" do
       expect(json).to match_json_schema("camc3")
     end
   end
@@ -92,12 +87,12 @@ RSpec.describe PafsCore::Camc3Presenter do
     context "with a v9 calculator" do
       let(:calculator_file) { "v9.xlsx" }
 
-      it "should create a valid json response" do
+      it "creates a valid json response" do
         expect(json).to match_json_schema("camc3")
       end
     end
 
-    it "should create a valid json response" do
+    it "creates a valid json response" do
       expect(json).to match_json_schema("camc3")
     end
 
@@ -111,7 +106,7 @@ RSpec.describe PafsCore::Camc3Presenter do
           upload.perform
         end
 
-        it "should create a valid json response" do
+        it "creates a valid json response" do
           expect(json).to match_json_schema("camc3")
         end
 
@@ -125,7 +120,7 @@ RSpec.describe PafsCore::Camc3Presenter do
       end
 
       context "without a shapefile attached" do
-        it "should create a valid json response" do
+        it "creates a valid json response" do
           expect(json).to match_json_schema("camc3")
         end
 
@@ -172,7 +167,7 @@ RSpec.describe PafsCore::Camc3Presenter do
     end
 
     describe "#households_at_reduced_risk" do
-      before(:each) do
+      before do
         funding_values.each do |hash|
           project.flood_protection_outcomes.create(
             households_at_reduced_risk: hash[:value],
@@ -187,7 +182,7 @@ RSpec.describe PafsCore::Camc3Presenter do
     end
 
     describe "#moved_from_very_significant_and_significant_to_moderate_or_low" do
-      before(:each) do
+      before do
         funding_values.each do |hash|
           project.flood_protection_outcomes.create(
             moved_from_very_significant_and_significant_to_moderate_or_low: hash[:value],
@@ -202,7 +197,7 @@ RSpec.describe PafsCore::Camc3Presenter do
     end
 
     describe "#households_protected_from_loss_in_20_percent_most_deprived" do
-      before(:each) do
+      before do
         funding_values.each do |hash|
           project.flood_protection_outcomes.create(
             households_protected_from_loss_in_20_percent_most_deprived: hash[:value],
@@ -218,7 +213,7 @@ RSpec.describe PafsCore::Camc3Presenter do
     end
 
     describe "#coastal_households_at_reduced_risk" do
-      before(:each) do
+      before do
         funding_values.each do |hash|
           project.coastal_erosion_protection_outcomes.create(
             households_at_reduced_risk: hash[:value],
@@ -233,7 +228,7 @@ RSpec.describe PafsCore::Camc3Presenter do
     end
 
     describe "#coastal_households_protected_from_loss_in_20_percent_most_deprived" do
-      before(:each) do
+      before do
         funding_values.each do |hash|
           project.coastal_erosion_protection_outcomes.create(
             households_protected_from_loss_in_20_percent_most_deprived: hash[:value],
@@ -242,7 +237,7 @@ RSpec.describe PafsCore::Camc3Presenter do
         end
       end
 
-      it "should collect a forecast over 13 years" do
+      it "collects a forecast over 13 years" do
         expect(subject.coastal_households_protected_from_loss_in_20_percent_most_deprived).to eql(outcome_measurements)
       end
     end

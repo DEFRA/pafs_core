@@ -25,6 +25,7 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:natural_flood_risk_measures_step) }
+
     let(:params) do
       ActionController::Parameters.new(
         { natural_flood_risk_measures_step: {

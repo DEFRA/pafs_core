@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::FundingValuesStep, type: :model do
-  before(:each) do
+  before do
     @project = FactoryBot.create(:project)
     @project.fcerm_gia = true
     @project.project_end_financial_year = 2022
@@ -22,7 +22,7 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
   end
 
   describe "#update" do
-    subject { PafsCore::FundingValuesStep.new @project }
+    subject { described_class.new @project }
 
     let(:params) do
       ActionController::Parameters.new(
@@ -69,7 +69,8 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
   end
 
   describe "#current_funding_values" do
-    subject { PafsCore::FundingValuesStep.new @project }
+    subject { described_class.new @project }
+
     it "returns funding_values without any that are later than the project_end_financial_year" do
       outside_values = FactoryBot.create(:funding_value, project: @project, financial_year: 2021)
       subject.project.funding_values << outside_values
@@ -81,7 +82,8 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
   end
 
   describe "#before_view" do
-    subject { PafsCore::FundingValuesStep.new @project }
+    subject { described_class.new @project }
+
     it "builds funding_value records for any missing years" do
       # project_end_financial_year = 2022
       # funding_values records run until 2019

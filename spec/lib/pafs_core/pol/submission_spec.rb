@@ -75,7 +75,7 @@ describe PafsCore::Pol::Submission, :vcr do
       end.not_to raise_exception
     end
 
-    context "on successful submission" do
+    context "with successful submission" do
       before do
         stub_request(:post, "https://example.com/test").to_return(status: 200)
       end
@@ -87,7 +87,7 @@ describe PafsCore::Pol::Submission, :vcr do
       end
     end
 
-    context "on unsuccessful submission" do
+    context "with unsuccessful submission" do
       before do
         stub_request(:post, "https://example.com/test").to_return(status: 401)
       end

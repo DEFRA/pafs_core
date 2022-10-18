@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :flood_protection2040_outcomes, class: PafsCore::FloodProtection2040Outcome do
+  factory :flood_protection2040_outcomes, class: "PafsCore::FloodProtection2040Outcome" do
     project_id { 1 }
     financial_year { 2022 }
     households_at_reduced_risk { 100 }

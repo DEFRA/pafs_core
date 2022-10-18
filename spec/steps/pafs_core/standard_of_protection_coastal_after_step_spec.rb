@@ -29,6 +29,7 @@ RSpec.describe PafsCore::StandardOfProtectionCoastalAfterStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:standard_of_protection_coastal_after_step) }
+
     let(:params) do
       ActionController::Parameters.new({
                                          standard_of_protection_coastal_after_step: {
@@ -58,7 +59,7 @@ RSpec.describe PafsCore::StandardOfProtectionCoastalAfterStep, type: :model do
   describe "#coastal_erosion_after_options" do
     subject { FactoryBot.build(:standard_of_protection_coastal_after_step) }
 
-    it "should return an array of options" do
+    it "returns an array of options" do
       array_of_options = %i[
         less_than_ten_years
         ten_to_nineteen_years

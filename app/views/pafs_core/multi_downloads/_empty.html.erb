@@ -1,4 +1,4 @@
-<% if @downloads.count > 0 %>
+<% if @downloads.count.positive? %>
 <div class="grid-row">
   <div class="column-two-thirds">
     <%= link_to "Generate programme", pafs_core.generate_multi_downloads_path,

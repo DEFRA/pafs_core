@@ -42,16 +42,16 @@ module PafsCore
       FUNDING_SOURCES - selected_funding_sources
     end
 
-    def total_for(fs)
-      current_funding_values.reduce(0) { |sum, fv| sum + fv.send("#{fs}_total") }
+    def total_for(source)
+      current_funding_values.reduce(0) { |sum, fv| sum + fv.send("#{source}_total") }
     end
 
     def grand_total
       selected_funding_sources.reduce(0) { |sum, fs| sum + total_for(fs) }
     end
 
-    def funding_source_label(fs)
-      I18n.t(fs, scope: "funding_sources")
+    def funding_source_label(source)
+      I18n.t(source, scope: "funding_sources")
     end
 
     def clean_unselected_funding_sources

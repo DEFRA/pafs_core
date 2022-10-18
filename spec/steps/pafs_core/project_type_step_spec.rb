@@ -29,6 +29,7 @@ RSpec.describe PafsCore::ProjectTypeStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:project_type_step) }
+
     let(:params) { ActionController::Parameters.new({ project_type_step: { project_type: "STR" } }) }
     let(:error_params) { ActionController::Parameters.new({ project_type_step: { project_type: "ABC" } }) }
 

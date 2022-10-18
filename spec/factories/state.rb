@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :state, class: PafsCore::State do
+  factory :state, class: "PafsCore::State" do
     state { "draft" }
 
     PafsCore::State::VALID_STATES.each do |valid_state|

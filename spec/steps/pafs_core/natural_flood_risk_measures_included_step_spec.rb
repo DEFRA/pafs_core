@@ -29,6 +29,8 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresIncludedStep, type: :model do
     end
 
     context "when updating :natural_flood_risk_measures from true to false" do
+      subject { FactoryBot.create(:natural_flood_risk_measures_included_step, project: project) }
+
       let(:project) do
         FactoryBot.create(
           :project,
@@ -36,8 +38,6 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresIncludedStep, type: :model do
           other_flood_measures: "a flood measure"
         )
       end
-
-      subject { FactoryBot.create(:natural_flood_risk_measures_included_step, project: project) }
 
       it "resets the project's natural flood risk measures attributes to nil" do
         subject.update(false_params)

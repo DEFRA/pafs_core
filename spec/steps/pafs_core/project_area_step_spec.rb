@@ -15,7 +15,7 @@ RSpec.describe PafsCore::ProjectAreaStep, type: :model do
 
   describe "#valid?" do
 
-    context "RMA name not set" do
+    context "with RMA name not set" do
       subject { FactoryBot.build(:project_area_step, rma_name: nil) }
 
       it "must have a RMA name" do

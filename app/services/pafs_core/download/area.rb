@@ -6,6 +6,7 @@ module PafsCore
       attr_reader :user
 
       def initialize(requesting_user:)
+        super
         @user = requesting_user
       end
 

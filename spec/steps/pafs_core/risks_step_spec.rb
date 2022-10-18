@@ -17,6 +17,7 @@ RSpec.describe PafsCore::RisksStep, type: :model do
 
   describe "#update" do
     subject { FactoryBot.create(:risks_step) }
+
     let(:params) do
       ActionController::Parameters.new(
         { risks_step: {

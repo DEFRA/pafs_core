@@ -10,9 +10,8 @@ module PafsCore
     def update(params)
       old_details = urgency_details
       result = super
-      if result
-        project.update(urgency_details_updated_at: Time.zone.now) if urgency_details != old_details
-      end
+
+      project.update(urgency_details_updated_at: Time.zone.now) if result && urgency_details != old_details
       result
     end
 
@@ -23,12 +22,12 @@ module PafsCore
     end
 
     def urgency_details_are_present
-      unless urgency_details.present?
-        errors.add(
-          :urgency_details,
-          I18n.t("#{urgency_reason}_error", scope: "pafs_core.urgency_details")
-        )
-      end
+      return if urgency_details.present?
+
+      errors.add(
+        :urgency_details,
+        I18n.t("#{urgency_reason}_error", scope: "pafs_core.urgency_details")
+      )
     end
   end
 end

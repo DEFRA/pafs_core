@@ -9,7 +9,7 @@ RSpec.describe PafsCore::HectaresOfPondOrLakeHabitatCreatedOrEnhancedStep, type:
     it_behaves_like "a project step"
 
     it "validates that :hectares_of_pond_or_lake_habitat_created_or_enhanced has been set" do
-      subject.hectares_of_pond_or_lake_habitat_created_or_enhanced= nil
+      subject.hectares_of_pond_or_lake_habitat_created_or_enhanced = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:hectares_of_pond_or_lake_habitat_created_or_enhanced])
         .to include "^You must include the number of hectares your project will create."

@@ -10,6 +10,8 @@ RSpec.describe PafsCore::ReadyForServiceDateStep, type: :model do
   end
 
   describe "#update" do
+    subject { FactoryBot.create(:ready_for_service_date_step, project: project) }
+
     let(:project) do
       FactoryBot.create(
         :project,
@@ -17,8 +19,6 @@ RSpec.describe PafsCore::ReadyForServiceDateStep, type: :model do
         start_construction_year: 2012
       )
     end
-
-    subject { FactoryBot.create(:ready_for_service_date_step, project: project) }
     let(:params) do
       ActionController::Parameters.new({
                                          ready_for_service_date_step: {
@@ -27,13 +27,11 @@ RSpec.describe PafsCore::ReadyForServiceDateStep, type: :model do
                                          }
                                        })
     end
-
     let(:invalid_month_params) do
       ActionController::Parameters.new({
                                          ready_for_service_date_step: { ready_for_service_month: "83", ready_for_service_year: "1999" }
                                        })
     end
-
     let(:invalid_year_params) do
       ActionController::Parameters.new({
                                          ready_for_service_date_step: { ready_for_service_month: "12", ready_for_service_year: "2000" }

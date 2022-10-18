@@ -8,7 +8,9 @@ module PafsCore
     validate :a_choice_has_been_made
 
     def update(params)
-      project.send(:kilometres_of_watercourse_enhanced_or_created_partial=, nil) if step_params(params)[:partial_restoration] == "false"
+      if step_params(params)[:partial_restoration] == "false"
+        project.send(:kilometres_of_watercourse_enhanced_or_created_partial=, nil)
+      end
 
       super
     end
@@ -20,10 +22,9 @@ module PafsCore
     end
 
     def a_choice_has_been_made
-      if partial_restoration.nil?
-        errors.add(:partial_restoration,
-                   "^You must select yes or no")
-      end
+      return unless partial_restoration.nil?
+
+      errors.add(:partial_restoration, "^You must select yes or no")
     end
   end
 end

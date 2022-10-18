@@ -54,10 +54,12 @@ module PafsCore
       PafsCore::Project.find_by!(slug: id.to_s.upcase)
     end
 
+    # rubocop:disable Style/FormatString
     def self.generate_reference_number(rfcc_code)
       sequence_nos = PafsCore::ReferenceCounter.next_sequence_for(rfcc_code)
       "#{rfcc_code}C501E/%03dA/%03dA" % sequence_nos
     end
+    # rubocop:enable Style/FormatString
 
     def search(options = {})
       areas = area_ids_for_user(user)

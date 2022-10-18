@@ -29,6 +29,8 @@ RSpec.describe PafsCore::HeathlandHabitatCreatedOrEnhancedStep, type: :model do
     end
 
     context "when updating :intertidal from true to false" do
+      subject { FactoryBot.create(:heathland_habitat_created_or_enhanced_step, project: project) }
+
       let(:project) do
         FactoryBot.create(
           :project,
@@ -36,8 +38,6 @@ RSpec.describe PafsCore::HeathlandHabitatCreatedOrEnhancedStep, type: :model do
           hectares_of_heathland_created_or_enhanced: 12
         )
       end
-
-      subject { FactoryBot.create(:heathland_habitat_created_or_enhanced_step, project: project) }
 
       it "resets :hectares_of_heathland_created_or_enhanced to nil" do
         subject.update(false_params)

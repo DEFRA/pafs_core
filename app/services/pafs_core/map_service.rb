@@ -8,24 +8,22 @@ module PafsCore
   class MapService
     def fetch_location_data(latitude, longitude)
       response = connection.get("/postcodes?lat=#{latitude}&lon=#{longitude}&limit=1")
-      if response.status == 200
-        data = JSON.parse(response.body)
-        if data && data["result"]
-          data = data["result"].first
-          {
-            region: data["region"],
-            parliamentary_constituency: data["parliamentary_constituency"],
-            county: data["admin_county"]
-          }
-        else
-          {
-            region: nil,
-            parliamentary_constituency: nil,
-            county: nil
-          }
-        end
+      raise MapServiceError, "MapService error: #{response.status}" unless response.status == 200
+
+      data = JSON.parse(response.body)
+      if data && data["result"]
+        data = data["result"].first
+        {
+          region: data["region"],
+          parliamentary_constituency: data["parliamentary_constituency"],
+          county: data["admin_county"]
+        }
       else
-        raise MapServiceError, "MapService error: #{response.status}"
+        {
+          region: nil,
+          parliamentary_constituency: nil,
+          county: nil
+        }
       end
     rescue Faraday::Error => e
       raise MapServiceError, e

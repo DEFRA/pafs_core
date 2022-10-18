@@ -16,11 +16,11 @@ module PafsCore
     end
 
     def urgency_reason_is_present_and_correct
-      if urgency_reason.blank? || !URGENCY_REASONS.include?(urgency_reason)
-        errors.add(:urgency_reason,
-                   "^If your project is urgent, select a reason. "\
-                   "If it isn't urgent, select the first option.")
-      end
+      return unless urgency_reason.blank? || !URGENCY_REASONS.include?(urgency_reason)
+
+      errors.add(:urgency_reason,
+                 "^If your project is urgent, select a reason. "\
+                "If it isn't urgent, select the first option.")
     end
   end
 end
