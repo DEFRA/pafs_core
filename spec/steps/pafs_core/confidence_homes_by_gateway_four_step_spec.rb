@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ConfidenceHomesByGatewayFourStep, type: :model do
-  subject { FactoryBot.build(:confidence_homes_by_gateway_four_step) }
+  subject { build(:confidence_homes_by_gateway_four_step) }
 
   let(:project) { build(:project) }
 

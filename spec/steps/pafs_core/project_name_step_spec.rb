@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::ProjectNameStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:project_name_step) }
+    subject { build(:project_name_step) }
 
     it_behaves_like "a project step"
 
@@ -12,7 +12,7 @@ RSpec.describe PafsCore::ProjectNameStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:project_name_step) }
+    subject { create(:project_name_step) }
 
     let(:params) { ActionController::Parameters.new({ project_name_step: { name: "Wigwam waste water" } }) }
     let(:error_params) { ActionController::Parameters.new({ project_name_step: { name: nil } }) }
@@ -24,7 +24,7 @@ RSpec.describe PafsCore::ProjectNameStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

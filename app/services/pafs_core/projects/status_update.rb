@@ -6,10 +6,10 @@ module PafsCore
       attr_reader :project, :status
 
       STATUS_MAP = {
-        'Draft': :draft,
-        'Review': :completed,
-        'Submitted': :submitted,
-        'Archived': :archived
+        Draft: :draft,
+        Review: :completed,
+        Submitted: :submitted,
+        Archived: :archived
       }.freeze
 
       def initialize(project, status)

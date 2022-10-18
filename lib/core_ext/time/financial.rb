@@ -5,8 +5,10 @@ module CoreExtensions
   module Time
     module Financial
       def uk_financial_year
-        if month < 4 then year - 1
-        else year
+        if month < 4
+          year - 1
+        else
+          year
         end
       end
     end

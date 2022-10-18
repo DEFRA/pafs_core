@@ -14,7 +14,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
       template.extend ActionView::Context
     end
   end
-  let(:project) { FactoryBot.build :project_name_step, name: nil }
+  let(:project) { build(:project_name_step, name: nil) }
   let(:builder) { described_class.new project.step, project, helper, {} }
 
   describe "#error_header" do
@@ -50,7 +50,6 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
         expect(@output).to have_css("p", text: "Some errors here")
       end
 
-      # rubocop:disable Style/HashEachMethods
       it "displays a link for each error" do
         project.errors.attribute_names.each do |k|
           project.errors.full_messages_for(k).each_with_index do |msg, i|
@@ -60,7 +59,6 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
           end
         end
       end
-      # rubocop:enable Style/HashEachMethods
     end
 
     context "when the project has no errors" do
@@ -71,7 +69,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
       end
 
       it "does not output any content" do
-        expect(@output).to be nil
+        expect(@output).to be_nil
       end
     end
   end
@@ -110,7 +108,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#check_box" do
-    let(:project) { FactoryBot.build :funding_sources_step }
+    let(:project) { build :funding_sources_step }
 
     before do
       allow(helper).to receive(:t).and_return("my label")
@@ -167,7 +165,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#radio_button" do
-    let(:project) { FactoryBot.build :earliest_start_step }
+    let(:project) { build :earliest_start_step }
 
     before do
       allow(helper).to receive(:t).and_return("my label")
@@ -218,7 +216,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#radio_button_group" do
-    let(:project) { FactoryBot.build :earliest_start_step }
+    let(:project) { build :earliest_start_step }
 
     before do
       allow(helper).to receive(:t).and_return("my label")
@@ -284,7 +282,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#percent_field" do
-    let(:project) { FactoryBot.build :standard_of_protection_step }
+    let(:project) { build :standard_of_protection_step }
 
     before do
       project.valid?
@@ -310,7 +308,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#month_and_year" do
-    let(:project) { FactoryBot.build :earliest_date_step }
+    let(:project) { build :earliest_date_step }
 
     before do
       project.valid?
@@ -393,7 +391,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#error_message" do
-    let(:project) { FactoryBot.build :project_name_step }
+    let(:project) { build :project_name_step }
 
     context "when the attribute has errors" do
       before do
@@ -412,7 +410,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#text_area" do
-    let(:project) { FactoryBot.build :project_name_step }
+    let(:project) { build :project_name_step }
     let(:options) { { rows: "2", cols: "40" } }
 
     before do

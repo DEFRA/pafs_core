@@ -5,6 +5,9 @@ require "faraday"
 module PafsCore
   module Pol
     class Archive
+
+      delegate :status, to: :result
+
       def self.perform(project)
         new(project).perform
       end
@@ -13,10 +16,6 @@ module PafsCore
 
       def initialize(project)
         @project = project
-      end
-
-      def status
-        result.status
       end
 
       def response
@@ -45,8 +44,8 @@ module PafsCore
 
       def payload
         @payload ||= {
-          "NPN": project.reference_number,
-          "Status": "Archived"
+          NPN: project.reference_number,
+          Status: "Archived"
         }.to_json
       end
 
@@ -67,7 +66,7 @@ module PafsCore
       end
 
       def enabled?
-        !url.blank?
+        url.present?
       end
     end
   end

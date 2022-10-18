@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PafsCore::Mapper::Fcerm1 do
   subject { described_class.new(project: presenter) }
 
-  let(:project) { FactoryBot.create(:full_project) }
+  let(:project) { create(:full_project) }
   let(:presenter) { PafsCore::SpreadsheetPresenter.new(project) }
   let(:funding_values) do
     [

@@ -4,13 +4,13 @@ require "rails_helper"
 
 RSpec.describe PafsCore::StandardOfProtectionStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:standard_of_protection_step) }
+    subject { build(:standard_of_protection_step) }
 
     it_behaves_like "a project step"
 
     it "validates that :flood_protection_before is present" do
       subject.flood_protection_before = nil
-      expect(subject.valid?).to eq false
+      expect(subject.valid?).to be false
       expect(subject.errors.messages[:flood_protection_before]).to include
       "^Select the option that shows the current risk of flooding to the area likely to benefit from the project."
     end
@@ -18,14 +18,14 @@ RSpec.describe PafsCore::StandardOfProtectionStep, type: :model do
     it "validates that :flood_protection_before is not greater than :flood_protection_after" do
       subject.flood_protection_before = 3
       subject.project.flood_protection_after = 1
-      expect(subject.valid?).to eq false
+      expect(subject.valid?).to be false
       expect(subject.errors.messages[:flood_protection_before]).to include
       "^Once the project is complete the flood risk must be less than it is now"
     end
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:standard_of_protection_step) }
+    subject { create(:standard_of_protection_step) }
 
     let(:params) do
       ActionController::Parameters.new({
@@ -49,12 +49,12 @@ RSpec.describe PafsCore::StandardOfProtectionStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 
   describe "#flood_risk_options" do
-    subject { FactoryBot.build(:standard_of_protection_step) }
+    subject { build(:standard_of_protection_step) }
 
     it "returns an array of options" do
       array_of_options = %i[very_significant significant moderate low]

@@ -4,6 +4,9 @@ require "faraday"
 
 module PafsCore
   module Pol
+
+    delegate :status, to: :result
+
     class Submission
       def self.perform(project)
         new(project).perform
@@ -13,10 +16,6 @@ module PafsCore
 
       def initialize(project)
         @project = project
-      end
-
-      def status
-        result.status
       end
 
       def response
@@ -69,7 +68,7 @@ module PafsCore
       end
 
       def submission_enabled?
-        !url.blank?
+        url.present?
       end
     end
   end

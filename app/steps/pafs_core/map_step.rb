@@ -48,7 +48,7 @@ module PafsCore
     end
 
     def download
-      return unless benefit_area_file_name.present?
+      return if benefit_area_file_name.blank?
 
       t = Tempfile.new
       storage.download(File.join(storage_path, benefit_area_file_name), t.path)
@@ -63,7 +63,7 @@ module PafsCore
     end
 
     def delete_benefit_area_file
-      return unless benefit_area_file_name.present?
+      return if benefit_area_file_name.blank?
 
       storage.delete(File.join(storage_path, benefit_area_file_name))
       reset_file_attributes
@@ -122,7 +122,7 @@ module PafsCore
     end
 
     def virus_free_benefit_area_file_present
-      return unless benefit_area_file.present?
+      return if benefit_area_file.blank?
 
       if virus_info.present?
         Rails.logger.error virus_info

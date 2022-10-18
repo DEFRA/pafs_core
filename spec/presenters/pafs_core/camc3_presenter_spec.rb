@@ -6,7 +6,7 @@ RSpec.describe PafsCore::Camc3Presenter do
   subject { described_class.new(project: project) }
 
   let(:project) do
-    FactoryBot.create(
+    create(
       :full_project,
       :ea_area,
       :with_no_shapefile,
@@ -16,7 +16,7 @@ RSpec.describe PafsCore::Camc3Presenter do
       }
     )
   end
-  let(:pfc_file) { File.open(File.join(Rails.root, "..", "fixtures", "calculators", calculator_file)) }
+  let(:pfc_file) { Rails.root.join("..", "fixtures", "calculators", calculator_file).open }
   let(:calculator_file) do
     "v8.xlsx"
   end

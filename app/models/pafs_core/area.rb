@@ -9,10 +9,10 @@ module PafsCore
       RMA_AREA     = "RMA"
     ].freeze
 
-    validates_presence_of :name, :area_type
-    validates_uniqueness_of :name
+    validates :name, :area_type, presence: true
+    validates :name, uniqueness: true
     validate :parentage
-    validates_inclusion_of :area_type, in: AREA_TYPES
+    validates :area_type, inclusion: { in: AREA_TYPES }
     validates :sub_type, presence: true, if: :rma?
 
     belongs_to :parent, class_name: "Area", optional: true

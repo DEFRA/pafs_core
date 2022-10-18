@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class ConfirmationController < ActionController::Base
+  class ConfirmationController < PafsCore::ApplicationController
     include CustomHeaders
 
     protect_from_forgery with: :null_session

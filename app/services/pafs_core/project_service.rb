@@ -23,7 +23,7 @@ module PafsCore
     end
 
     def find_project_area(project)
-      project.rma_name ? PafsCore::Area.find_by_name(project.rma_name) : project.creator.primary_area
+      project.rma_name ? PafsCore::Area.find_by(name: project.rma_name) : project.creator.primary_area
     end
 
     def find_project(id)
@@ -86,9 +86,7 @@ module PafsCore
       end
 
       query = query.joins(:state).merge(PafsCore::State.where(state: options[:state])) unless options[:state].nil?
-      unless options[:state] == "archived"
-        query = query.joins(:state).and(PafsCore::State.where.not(state: "archived"))
-      end
+      query = query.joins(:state).and(PafsCore::State.where.not(state: "archived")) unless options[:state] == "archived"
 
       query.order("#{sort_col}": sort_order)
     end

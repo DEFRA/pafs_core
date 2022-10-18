@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::PartialRestorationStep, type: :model do
-  subject { FactoryBot.build(:partial_restoration_step) }
+  subject { build(:partial_restoration_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -29,10 +29,10 @@ RSpec.describe PafsCore::PartialRestorationStep, type: :model do
     end
 
     context "when updating :partial_restoration from true to false" do
-      subject { FactoryBot.create(:partial_restoration_step, project: project) }
+      subject { create(:partial_restoration_step, project: project) }
 
       let(:project) do
-        FactoryBot.create(
+        create(
           :project,
           partial_restoration: true,
           kilometres_of_watercourse_enhanced_or_created_partial: 12
@@ -43,7 +43,7 @@ RSpec.describe PafsCore::PartialRestorationStep, type: :model do
         subject.update(false_params)
         project.reload
 
-        expect(project.kilometres_of_watercourse_enhanced_or_created_partial).to be nil
+        expect(project.kilometres_of_watercourse_enhanced_or_created_partial).to be_nil
       end
     end
 

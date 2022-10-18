@@ -6,12 +6,12 @@ RSpec.describe PafsCore::DownloadsController, type: :controller do
   routes { PafsCore::Engine.routes }
 
   before do
-    @user = FactoryBot.create(:user)
-    @country = FactoryBot.create(:country, :with_full_hierarchy)
+    @user = create(:user)
+    @country = create(:country, :with_full_hierarchy)
     @area = PafsCore::Area.rma_areas.last
     @user.user_areas.create(area_id: @area.id, primary: true)
     # @project = PafsCore::Project.last
-    @project = FactoryBot.create(:full_project)
+    @project = create(:full_project)
     @project.area_projects.create(area_id: @area.id)
     allow(subject).to receive(:current_resource) { @user }
   end

@@ -7,7 +7,7 @@ RSpec.describe PafsCore::BootstrapsController, type: :controller do
 
   describe "GET new" do
     it "creates a new bootstrap project" do
-      expect { get :new }.to change { PafsCore::Bootstrap.count }.by 1
+      expect { get :new }.to change(PafsCore::Bootstrap, :count).by 1
     end
 
     it "assigns @project to the new project" do
@@ -24,7 +24,7 @@ RSpec.describe PafsCore::BootstrapsController, type: :controller do
   end
 
   describe "GET step" do
-    before { @project = FactoryBot.create(:bootstrap) }
+    before { @project = create(:bootstrap) }
 
     it "assigns @project with the appropriate step class" do
       get :step, params: { id: @project.to_param, step: "project_name" }
@@ -39,10 +39,10 @@ RSpec.describe PafsCore::BootstrapsController, type: :controller do
 
   describe "PATCH save" do
     before do
-      @pso = FactoryBot.create(:pso_area, parent_id: 1)
-      @rma = FactoryBot.create(:rma_area, parent_id: @pso.id)
-      @user = FactoryBot.create(:user)
-      @project = FactoryBot.create(:bootstrap, creator: @user)
+      @pso = create(:pso_area, parent_id: 1)
+      @rma = create(:rma_area, parent_id: @pso.id)
+      @user = create(:user)
+      @project = create(:bootstrap, creator: @user)
       @user.user_areas.create(area_id: @rma.id, primary: true)
       @nav = PafsCore::BootstrapNavigator.new(@user)
 

@@ -4,14 +4,14 @@ require "rails_helper"
 
 RSpec.describe PafsCore::FundingValuesStep, type: :model do
   before do
-    @project = FactoryBot.create(:project)
+    @project = create(:project)
     @project.fcerm_gia = true
     @project.project_end_financial_year = 2022
-    @fv1 = FactoryBot.create(:funding_value, :blank, :previous_year, project: @project)
-    @fv2 = FactoryBot.create(:funding_value, :blank, project: @project, financial_year: 2016)
-    @fv3 = FactoryBot.create(:funding_value, :blank, project: @project, financial_year: 2017)
-    @fv4 = FactoryBot.create(:funding_value, :blank, project: @project, financial_year: 2018)
-    @fv5 = FactoryBot.create(:funding_value, :blank, project: @project, financial_year: 2019)
+    @fv1 = create(:funding_value, :blank, :previous_year, project: @project)
+    @fv2 = create(:funding_value, :blank, project: @project, financial_year: 2016)
+    @fv3 = create(:funding_value, :blank, project: @project, financial_year: 2017)
+    @fv4 = create(:funding_value, :blank, project: @project, financial_year: 2018)
+    @fv5 = create(:funding_value, :blank, project: @project, financial_year: 2019)
     @project.funding_values << @fv1
     @project.funding_values << @fv2
     @project.funding_values << @fv3
@@ -41,17 +41,17 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
     end
 
     it "returns true" do
-      expect(subject.update(params)).to eq true
+      expect(subject.update(params)).to be true
     end
 
     context "when funding_values exist for years after the :project_end_financial_year" do
       it "destroys those funding_values records" do
-        outside_values = FactoryBot.create(:funding_value, project: @project, financial_year: 2021)
+        outside_values = create(:funding_value, project: @project, financial_year: 2021)
         subject.project.funding_values << outside_values
         subject.project.project_end_financial_year = 2020
         subject.project.save
         # adds new record and removes outside_values record
-        expect(subject.update(params)).to eq true
+        expect(subject.update(params)).to be true
         subject.project.reload
         expect(subject.funding_values).not_to include outside_values
       end
@@ -61,7 +61,7 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
       it "removes those amounts" do
         @fv2.update(local_levy: 2_000_000, growth_funding: 1_500)
         # adds new record and removes outside_values record
-        expect(subject.update(params)).to eq true
+        expect(subject.update(params)).to be true
         expect(@fv2.local_levy).to be_nil
         expect(@fv2.growth_funding).to be_nil
       end
@@ -72,7 +72,7 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
     subject { described_class.new @project }
 
     it "returns funding_values without any that are later than the project_end_financial_year" do
-      outside_values = FactoryBot.create(:funding_value, project: @project, financial_year: 2021)
+      outside_values = create(:funding_value, project: @project, financial_year: 2021)
       subject.project.funding_values << outside_values
       subject.project.project_end_financial_year = 2020
       subject.project.save

@@ -33,6 +33,8 @@ module PafsCore
 
     before_validation :set_slug, on: :create
 
+    delegate :archived?, :draft?, :completed?, :submitted?, :updatable?, :updated?, :finished?, to: :submission_state
+
     def self.submitted
       joins(:state).merge(PafsCore::State.submitted)
     end
@@ -78,34 +80,6 @@ module PafsCore
       end
     end
     # rubocop:enable Style/HashSyntax
-
-    def archived?
-      submission_state.archived?
-    end
-
-    def draft?
-      submission_state.draft?
-    end
-
-    def completed?
-      submission_state.completed?
-    end
-
-    def submitted?
-      submission_state.submitted?
-    end
-
-    def updatable?
-      submission_state.updatable?
-    end
-
-    def updated?
-      submission_state.updated?
-    end
-
-    def finished?
-      submission_state.finished?
-    end
 
     def status
       current_state.to_sym

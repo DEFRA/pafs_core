@@ -119,15 +119,15 @@ module PafsCore
     end
 
     def public_contributors=(value)
-      project.public_contributions = !value&.strip.blank?
+      project.public_contributions = value&.strip.present?
     end
 
     def private_contributors=(value)
-      project.private_contributions = !value&.strip.blank?
+      project.private_contributions = value&.strip.present?
     end
 
     def other_ea_contributors=(value)
-      project.other_ea_contributions = !value&.strip.blank?
+      project.other_ea_contributions = value&.strip.present?
     end
 
     def earliest_start_date=(value)

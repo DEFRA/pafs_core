@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ValidationPresenter do
-  subject { described_class.new(FactoryBot.build(:full_project)) }
+  subject { described_class.new(build(:full_project)) }
 
   let(:flood_options) do
     ["Very significant",
@@ -28,19 +28,19 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#project_name_complete?" do
     it "always returns true" do
-      expect(subject.project_name_complete?).to eq true
+      expect(subject.project_name_complete?).to be true
     end
   end
 
   describe "#project_type_complete?" do
     it "always returns true" do
-      expect(subject.project_type_complete?).to eq true
+      expect(subject.project_type_complete?).to be true
     end
   end
 
   describe "#financial_year_complete?" do
     it "always returns true" do
-      expect(subject.financial_year_complete?).to eq true
+      expect(subject.financial_year_complete?).to be true
     end
   end
 
@@ -51,7 +51,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       context "when a benefit area file has been uploaded" do
         it "returns true" do
           subject.benefit_area_file_name = "my_file.jpg"
-          expect(subject.location_complete?).to eq true
+          expect(subject.location_complete?).to be true
         end
       end
 
@@ -59,7 +59,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         before { subject.benefit_area_file_name = nil }
 
         it "returns false" do
-          expect(subject.location_complete?).to eq false
+          expect(subject.location_complete?).to be false
         end
 
         it "sets an error on the project" do
@@ -73,7 +73,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.project_location = nil }
 
       it "returns false" do
-        expect(subject.location_complete?).to eq false
+        expect(subject.location_complete?).to be false
       end
 
       it "sets an error on the project" do
@@ -97,7 +97,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when the key dates are all present" do
       it "returns true" do
-        expect(subject.key_dates_complete?).to eq true
+        expect(subject.key_dates_complete?).to be true
       end
     end
 
@@ -113,7 +113,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         dates.each do |date|
           m = "#{date}="
           subject.send(m, nil)
-          expect(subject.key_dates_complete?).to eq false
+          expect(subject.key_dates_complete?).to be false
           subject.send(m, 12)
         end
       end
@@ -136,7 +136,7 @@ RSpec.describe PafsCore::ValidationPresenter do
     context "when could_start_early is nil" do
       it "returns false" do
         subject.could_start_early = nil
-        expect(subject.earliest_start_complete?).to eq false
+        expect(subject.earliest_start_complete?).to be false
       end
     end
 
@@ -147,7 +147,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         it "returns true" do
           subject.earliest_start_month = 2
           subject.earliest_start_year = 2017
-          expect(subject.earliest_start_complete?).to eq true
+          expect(subject.earliest_start_complete?).to be true
         end
       end
 
@@ -155,7 +155,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         it "returns false" do
           subject.earliest_start_month = nil
           subject.earliest_start_year = nil
-          expect(subject.earliest_start_complete?).to eq false
+          expect(subject.earliest_start_complete?).to be false
         end
       end
     end
@@ -164,7 +164,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.could_start_early = false }
 
       it "returns true" do
-        expect(subject.earliest_start_complete?).to eq true
+        expect(subject.earliest_start_complete?).to be true
       end
     end
   end
@@ -178,13 +178,13 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       it "returns false" do
-        expect(subject.risks_complete?).to eq false
+        expect(subject.risks_complete?).to be false
       end
 
       it "sets an error message" do
         subject.risks_complete?
-        expect(subject.errors[:risks]).to include "^Tell us the risks the project"\
-          " protects against and the households benefitting."
+        expect(subject.errors[:risks]).to include "^Tell us the risks the project " \
+                                                  "protects against and the households benefitting."
       end
     end
 
@@ -194,12 +194,12 @@ RSpec.describe PafsCore::ValidationPresenter do
           subject.send("#{r}=", nil)
         end
         subject.fluvial_flooding = true
-        subject.flood_protection_outcomes << FactoryBot.build(:flood_protection_outcomes)
+        subject.flood_protection_outcomes << build(:flood_protection_outcomes)
       end
 
       context "when a single risk is selected" do
         it "returns true" do
-          expect(subject.risks_complete?).to eq true
+          expect(subject.risks_complete?).to be true
         end
       end
 
@@ -210,7 +210,7 @@ RSpec.describe PafsCore::ValidationPresenter do
           before { subject.main_risk = "tidal_flooding" }
 
           it "returns true" do
-            expect(subject.risks_complete?).to eq true
+            expect(subject.risks_complete?).to be true
           end
         end
 
@@ -218,13 +218,13 @@ RSpec.describe PafsCore::ValidationPresenter do
           before { subject.main_risk = nil }
 
           it "returns false" do
-            expect(subject.risks_complete?).to eq false
+            expect(subject.risks_complete?).to be false
           end
 
           it "sets an error message" do
             subject.risks_complete?
-            expect(subject.errors[:risks]).to include "^Tell us the risks the "\
-              "project protects against and the households benefitting."
+            expect(subject.errors[:risks]).to include "^Tell us the risks the " \
+                                                      "project protects against and the households benefitting."
           end
         end
       end
@@ -236,7 +236,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.natural_flood_risk_measures_included = nil }
 
       it "returns false" do
-        expect(subject.natural_flood_risk_measures_complete?).to eq false
+        expect(subject.natural_flood_risk_measures_complete?).to be false
       end
     end
 
@@ -244,7 +244,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.natural_flood_risk_measures_included = false }
 
       it "returns true" do
-        expect(subject.natural_flood_risk_measures_complete?).to eq true
+        expect(subject.natural_flood_risk_measures_complete?).to be true
       end
     end
 
@@ -253,7 +253,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
       context "when no flood risk measures have been selected" do
         it "returns false" do
-          expect(subject.natural_flood_risk_measures_complete?).to eq false
+          expect(subject.natural_flood_risk_measures_complete?).to be false
         end
       end
 
@@ -262,7 +262,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
         context "when no cost has been provided" do
           it "returns false" do
-            expect(subject.natural_flood_risk_measures_complete?).to eq false
+            expect(subject.natural_flood_risk_measures_complete?).to be false
           end
         end
 
@@ -270,7 +270,7 @@ RSpec.describe PafsCore::ValidationPresenter do
           before { subject.natural_flood_risk_measures_cost = 123.45 }
 
           it "returns true" do
-            expect(subject.natural_flood_risk_measures_complete?).to eq true
+            expect(subject.natural_flood_risk_measures_complete?).to be true
           end
         end
       end
@@ -286,7 +286,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.environmental_benefits = nil }
 
       it "returns false" do
-        expect(subject.environmental_outcomes_complete?).to eq false
+        expect(subject.environmental_outcomes_complete?).to be false
       end
     end
 
@@ -294,7 +294,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.environmental_benefits = false }
 
       it "returns true" do
-        expect(subject.environmental_outcomes_complete?).to eq true
+        expect(subject.environmental_outcomes_complete?).to be true
       end
     end
 
@@ -303,7 +303,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
       context "when no environmental benefits have been selected" do
         it "returns false" do
-          expect(subject.environmental_outcomes_complete?).to eq false
+          expect(subject.environmental_outcomes_complete?).to be false
         end
       end
 
@@ -317,7 +317,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
         context "when the figure hasn't been provided" do
           it "returns false" do
-            expect(subject.environmental_outcomes_complete?).to eq false
+            expect(subject.environmental_outcomes_complete?).to be false
           end
         end
 
@@ -325,7 +325,7 @@ RSpec.describe PafsCore::ValidationPresenter do
           before { subject.hectares_of_arable_land_lake_habitat_created_or_enhanced = 12 }
 
           it "returns true" do
-            expect(subject.environmental_outcomes_complete?).to eq true
+            expect(subject.environmental_outcomes_complete?).to be true
           end
         end
       end
@@ -337,17 +337,17 @@ RSpec.describe PafsCore::ValidationPresenter do
   describe "#funding_calculator_complete?" do
     subject { described_class.new(project) }
 
-    let(:project) { FactoryBot.create(:full_project) }
+    let(:project) { create(:full_project) }
 
     context "with no PFC attached" do
       it "returns false" do
-        expect(subject.funding_calculator_complete?).to eq false
+        expect(subject.funding_calculator_complete?).to be false
       end
     end
 
     context "with a PFC attached" do
       before do
-        file_path = File.join(Rails.root, "..", "fixtures", "calculators", filename)
+        file_path = Rails.root.join("..", "fixtures", "calculators", filename)
         file = File.open file_path
         storage = PafsCore::DevelopmentFileStorageService.new
         dest_file = File.join(project.storage_path, filename)
@@ -359,7 +359,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         let(:filename) { "v8.xlsx" }
 
         it "returns true" do
-          expect(subject.funding_calculator_complete?).to eq true
+          expect(subject.funding_calculator_complete?).to be true
         end
       end
 
@@ -367,7 +367,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         let(:filename) { "v9old.xlsx" }
 
         it "returns false" do
-          expect(subject.funding_calculator_complete?).to eq false
+          expect(subject.funding_calculator_complete?).to be false
         end
       end
 
@@ -375,21 +375,21 @@ RSpec.describe PafsCore::ValidationPresenter do
         let(:filename) { "v9.xlsx" }
 
         it "returns true" do
-          expect(subject.funding_calculator_complete?).to eq true
+          expect(subject.funding_calculator_complete?).to be true
         end
       end
     end
   end
 
   def make_flood_outcome(year, project_id)
-    FactoryBot.create(:flood_protection_outcomes,
-                      financial_year: year,
-                      project_id: project_id)
+    create(:flood_protection_outcomes,
+           financial_year: year,
+           project_id: project_id)
   end
 
   def make_coastal_outcome(year, project_id)
-    FactoryBot.create(:coastal_erosion_protection_outcomes,
-                      financial_year: year,
-                      project_id: project_id)
+    create(:coastal_erosion_protection_outcomes,
+           financial_year: year,
+           project_id: project_id)
   end
 end

@@ -3,12 +3,12 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ComprehensiveRestorationStep, type: :model do
-  subject { FactoryBot.build(:comprehensive_restoration_step) }
+  subject { build(:comprehensive_restoration_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
 
-    it "validates that :comprehensive_restoration  has been set" do
+    it "validates that :comprehensive_restoration has been set" do
       subject.comprehensive_restoration = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:comprehensive_restoration])
@@ -29,10 +29,10 @@ RSpec.describe PafsCore::ComprehensiveRestorationStep, type: :model do
     end
 
     context "when updating :arable_land from true to false" do
-      subject { FactoryBot.create(:comprehensive_restoration_step, project: project) }
+      subject { create(:comprehensive_restoration_step, project: project) }
 
       let(:project) do
-        FactoryBot.create(
+        create(
           :project,
           comprehensive_restoration: true,
           kilometres_of_watercourse_enhanced_or_created_comprehensive: 12
@@ -43,7 +43,7 @@ RSpec.describe PafsCore::ComprehensiveRestorationStep, type: :model do
         subject.update(false_params)
         project.reload
 
-        expect(project.kilometres_of_watercourse_enhanced_or_created_comprehensive).to be nil
+        expect(project.kilometres_of_watercourse_enhanced_or_created_comprehensive).to be_nil
       end
     end
 

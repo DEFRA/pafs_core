@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::AnyEnvironmentalBenefitsStep, type: :model do
-  subject { FactoryBot.build(:any_environmental_benefits_step) }
+  subject { build(:any_environmental_benefits_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -29,10 +29,10 @@ RSpec.describe PafsCore::AnyEnvironmentalBenefitsStep, type: :model do
     end
 
     context "when updating :environmental_benefits from true to false" do
-      subject { FactoryBot.create(:any_environmental_benefits_step, project: project) }
+      subject { create(:any_environmental_benefits_step, project: project) }
 
       let(:project) do
-        FactoryBot.create(
+        create(
           :project,
           woodland: true,
           hectares_of_woodland_habitat_created_or_enhanced: 12
@@ -43,8 +43,8 @@ RSpec.describe PafsCore::AnyEnvironmentalBenefitsStep, type: :model do
         subject.update(false_params)
         project.reload
 
-        expect(project.woodland).to be nil
-        expect(project.hectares_of_woodland_habitat_created_or_enhanced).to be nil
+        expect(project.woodland).to be_nil
+        expect(project.hectares_of_woodland_habitat_created_or_enhanced).to be_nil
       end
     end
 

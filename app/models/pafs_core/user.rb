@@ -26,7 +26,7 @@ module PafsCore
 
     def rfcc_code(area_name = nil)
       area = if area_name
-               PafsCore::Area.find_by_name(area_name)
+               PafsCore::Area.find_by(name: area_name)
              else
                # find the PSO area under which this user belongs
                primary_area

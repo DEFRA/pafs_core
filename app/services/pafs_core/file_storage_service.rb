@@ -83,15 +83,15 @@ module PafsCore
     end
 
     def aws_access_key
-      ENV["FILE_UPLOAD_ACCESS_KEY"]
+      ENV.fetch("FILE_UPLOAD_ACCESS_KEY", nil)
     end
 
     def aws_secret_key
-      ENV["FILE_UPLOAD_SECRET_KEY"]
+      ENV.fetch("FILE_UPLOAD_SECRET_KEY", nil)
     end
 
     def bucket_name
-      ENV["FILE_UPLOAD_BUCKET"]
+      ENV.fetch("FILE_UPLOAD_BUCKET", nil)
     end
   end
 end

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ProjectSummaryPresenter do
-  subject { described_class.new(FactoryBot.build(:project)) }
+  subject { described_class.new(build(:project)) }
 
   let(:flood_options) do
     ["Very significant",
@@ -30,14 +30,14 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when the location has been set" do
       it "returns true" do
         subject.grid_reference = "ST 58198 72725"
-        expect(subject.location_set?).to eq true
+        expect(subject.location_set?).to be true
       end
     end
 
     context "when the project location has not been set" do
       it "returns false" do
         subject.grid_reference = nil
-        expect(subject.location_set?).to eq false
+        expect(subject.location_set?).to be false
       end
     end
   end
@@ -126,28 +126,28 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when one or more important date has been set" do
       it "returns true when start_outline_business_case date set" do
         subject.start_outline_business_case_month = 3
-        expect(subject.key_dates_started?).to eq true
+        expect(subject.key_dates_started?).to be true
       end
 
       it "returns true when award_contract set" do
         subject.award_contract_month = 5
-        expect(subject.key_dates_started?).to eq true
+        expect(subject.key_dates_started?).to be true
       end
 
       it "returns true when start_construction date set" do
         subject.start_construction_month = 7
-        expect(subject.key_dates_started?).to eq true
+        expect(subject.key_dates_started?).to be true
       end
 
       it "returns true when ready_for_service date set" do
         subject.ready_for_service_month = 9
-        expect(subject.key_dates_started?).to eq true
+        expect(subject.key_dates_started?).to be true
       end
     end
 
     context "when none of the important dates have been set" do
       it "returns false" do
-        expect(subject.key_dates_started?).to eq false
+        expect(subject.key_dates_started?).to be false
       end
     end
   end
@@ -156,14 +156,14 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when the funding_sources page has been visited" do
       it "returns true" do
         subject.funding_sources_visited = true
-        expect(subject.funding_sources_started?).to eq true
+        expect(subject.funding_sources_started?).to be true
       end
     end
 
     context "when the user has not yet completed the funding_sources" do
       it "returns false" do
         subject.funding_sources_visited = false
-        expect(subject.funding_sources_started?).to eq false
+        expect(subject.funding_sources_started?).to be false
       end
     end
   end
@@ -172,17 +172,17 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when could_start_early has been set" do
       it "returns true" do
         subject.could_start_early = true
-        expect(subject.earliest_start_started?).to eq true
+        expect(subject.earliest_start_started?).to be true
 
         subject.could_start_early = false
-        expect(subject.earliest_start_started?).to eq true
+        expect(subject.earliest_start_started?).to be true
       end
     end
 
     context "when could_start_early has not been set" do
       it "returns false" do
         subject.could_start_early = nil
-        expect(subject.earliest_start_started?).to eq false
+        expect(subject.earliest_start_started?).to be false
       end
     end
   end
@@ -191,13 +191,13 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when risks have been selected" do
       it "returns true" do
         subject.fluvial_flooding = true
-        expect(subject.risks_started?).to eq true
+        expect(subject.risks_started?).to be true
       end
     end
 
     context "when risks have not been selected" do
       it "returns false" do
-        expect(subject.risks_started?).to eq false
+        expect(subject.risks_started?).to be false
       end
     end
   end
@@ -206,34 +206,34 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when :flood_protection_before set" do
       it "returns true" do
         subject.flood_protection_before = 1
-        expect(subject.standard_of_protection_started?).to eq true
+        expect(subject.standard_of_protection_started?).to be true
       end
     end
 
     context "when :flood_protection_after set" do
       it "returns true" do
         subject.flood_protection_after = 1
-        expect(subject.standard_of_protection_started?).to eq true
+        expect(subject.standard_of_protection_started?).to be true
       end
     end
 
     context "when :coastal_protection_before set" do
       it "returns true" do
         subject.coastal_protection_before = 1
-        expect(subject.standard_of_protection_started?).to eq true
+        expect(subject.standard_of_protection_started?).to be true
       end
     end
 
     context "when :coastal_protection_after set" do
       it "returns true" do
         subject.coastal_protection_after = 1
-        expect(subject.standard_of_protection_started?).to eq true
+        expect(subject.standard_of_protection_started?).to be true
       end
     end
 
     context "when none of the standard of protection attributes have values" do
       it "returns false" do
-        expect(subject.standard_of_protection_started?).to eq false
+        expect(subject.standard_of_protection_started?).to be false
       end
     end
   end
@@ -266,7 +266,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   describe "#flood_protection_before_percentage" do
     context "when :flood_protection_before is set" do
       it "looks up the value and returns the correct label" do
-        (0..3).each do |n|
+        4.times do |n|
           subject.flood_protection_before = n.to_s
           expect(subject.flood_protection_before_percentage).to eq(flood_options[n])
         end
@@ -283,7 +283,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   describe "#flood_protection_after_percentage" do
     context "when :flood_protection_after is set" do
       it "looks up the value and returns the correct label" do
-        (0..3).each do |n|
+        4.times do |n|
           subject.flood_protection_after = n.to_s
           expect(subject.flood_protection_after_percentage).to eq(flood_options[n])
         end
@@ -300,7 +300,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   describe "#coastal_protection_before_years" do
     context "when :coastal_protection_before is set" do
       it "looks up the value and returns the correct label" do
-        (0..3).each do |n|
+        4.times do |n|
           subject.coastal_protection_before = n.to_s
           expect(subject.coastal_protection_before_years).to eq(coastal_before_options[n])
         end
@@ -317,7 +317,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   describe "#coastal_protection_after_years" do
     context "when :coastal_protection_after is set" do
       it "looks up the value and returns the correct label" do
-        (0..3).each do |n|
+        4.times do |n|
           subject.coastal_protection_after = n.to_s
           expect(subject.coastal_protection_after_years).to eq(coastal_after_options[n])
         end
@@ -335,13 +335,13 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when flood protection outcomes have been set" do
       it "returns true" do
         expect(subject).to receive(:flood_protection_outcomes).and_return([1, 2, 3])
-        expect(subject.flood_protection_outcomes_entered?).to eq true
+        expect(subject.flood_protection_outcomes_entered?).to be true
       end
     end
 
     context "when flood protection outcomes have not been set" do
       it "returns false" do
-        expect(subject.flood_protection_outcomes_entered?).to eq false
+        expect(subject.flood_protection_outcomes_entered?).to be false
       end
     end
   end
@@ -350,13 +350,13 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when coastal erosion protection outcomes have been set" do
       it "returns true" do
         expect(subject).to receive(:coastal_erosion_protection_outcomes).and_return([1, 2, 3])
-        expect(subject.coastal_erosion_protection_outcomes_entered?).to eq true
+        expect(subject.coastal_erosion_protection_outcomes_entered?).to be true
       end
     end
 
     context "when coastal erosion protection outcomes have not been set" do
       it "returns false" do
-        expect(subject.coastal_erosion_protection_outcomes_entered?).to eq false
+        expect(subject.coastal_erosion_protection_outcomes_entered?).to be false
       end
     end
   end
@@ -599,14 +599,14 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     context "when a file has been uploaded" do
       it "returns true" do
         subject.funding_calculator_file_name = "wigwam.xls"
-        expect(subject.funding_calculator_uploaded?).to eq true
+        expect(subject.funding_calculator_uploaded?).to be true
       end
     end
 
     context "when a file has not been uploaded" do
       it "returns false" do
         subject.funding_calculator_file_name = nil
-        expect(subject.funding_calculator_uploaded?).to eq false
+        expect(subject.funding_calculator_uploaded?).to be false
       end
     end
   end
@@ -697,14 +697,14 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
   end
 
   def make_flood_outcome(year, project_id)
-    FactoryBot.create(:flood_protection_outcomes,
-                      financial_year: year,
-                      project_id: project_id)
+    create(:flood_protection_outcomes,
+           financial_year: year,
+           project_id: project_id)
   end
 
   def make_coastal_outcome(year, project_id)
-    FactoryBot.create(:coastal_erosion_protection_outcomes,
-                      financial_year: year,
-                      project_id: project_id)
+    create(:coastal_erosion_protection_outcomes,
+           financial_year: year,
+           project_id: project_id)
   end
 end

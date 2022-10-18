@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::EarliestStartStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:earliest_start_step) }
+    subject { build(:earliest_start_step) }
 
     it_behaves_like "a project step"
 
@@ -16,7 +16,7 @@ RSpec.describe PafsCore::EarliestStartStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:earliest_start_step) }
+    subject { create(:earliest_start_step) }
 
     let(:true_params) { ActionController::Parameters.new({ earliest_start_step: { could_start_early: "true" } }) }
     let(:false_params) { ActionController::Parameters.new({ earliest_start_step: { could_start_early: "false" } }) }

@@ -8,7 +8,7 @@ module PafsCore
 
     validates :approach, presence: {
       message: "^Tell us about the work the project plans to do to achieve " \
-      "its benefits."
+               "its benefits."
     }
 
     private

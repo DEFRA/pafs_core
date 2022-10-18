@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ConfidenceSecuredPartnershipFundingStep, type: :model do
-  subject { FactoryBot.build(:confidence_secured_partnership_funding_step) }
+  subject { build(:confidence_secured_partnership_funding_step) }
 
   let(:project) { build(:project) }
 

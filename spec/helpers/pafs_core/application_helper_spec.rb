@@ -4,7 +4,7 @@ require "rails_helper"
 
 module PafsCore
   RSpec.describe PafsCore::ApplicationHelper, type: :helper do
-    let(:project) { FactoryBot.build(:project) }
+    let(:project) { build(:project) }
 
     describe "#pafs_form_for" do
       it "invokes form_for" do

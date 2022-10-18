@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     "LICENSE",
     "Rakefile",
     "README.md"]
-  s.test_files = Dir["spec/**/*"]
+  s.metadata["rubygems_mfa_required"] = "true"
 
   s.add_dependency "aws-sdk-s3", "~> 1.67"
   s.add_dependency "bstard"
@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "capybara"
   s.add_development_dependency "climate_control"
   s.add_development_dependency "database_cleaner"
+  s.add_development_dependency "defra_ruby_style"
   s.add_development_dependency "dotenv"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "pg"

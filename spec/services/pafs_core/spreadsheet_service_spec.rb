@@ -20,7 +20,7 @@ RSpec.describe PafsCore::SpreadsheetService do
     let(:filename) { "expected_program_spreadsheet.xlsx" }
     let(:content_type) { "text/plain" }
 
-    let(:file_path) { File.join(Rails.root, "..", "fixtures", filename) }
+    let(:file_path) { Rails.root.join("..", "fixtures", filename) }
     let(:file) { File.open(file_path) }
     let(:projects) { PafsCore::Project.all.order(:name) }
     let(:expected) { subject.generate_multi_xlsx(projects) }
@@ -46,7 +46,7 @@ RSpec.describe PafsCore::SpreadsheetService do
     let(:rma_area) { PafsCore::Area.find_by(name: "RMA Test Area") }
 
     before do
-      file_path = "#{Rails.root}/../fixtures/test_areas.csv"
+      file_path = Rails.root.join("../fixtures/test_areas.csv")
       PafsCore::AreaImporter.new.import(file_path)
 
       VCR.use_cassette("process_spreadsheet_with_postcodes") do

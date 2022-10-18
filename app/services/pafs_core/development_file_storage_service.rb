@@ -63,7 +63,7 @@ module PafsCore
     private
 
     def file_path(path)
-      Rails.root.join("public", "tmp", path)
+      Rails.public_path.join("tmp", path)
     end
   end
 end

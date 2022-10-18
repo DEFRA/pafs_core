@@ -29,7 +29,7 @@ FactoryBot.define do
 
       trait :with_full_hierarchy_and_projects do
         after(:create) do |country|
-          FactoryBot.create(:ea_area, :with_pso_rma_areas_and_full_projects, parent_id: country.id)
+          create(:ea_area, :with_pso_rma_areas_and_full_projects, parent_id: country.id)
         end
       end
     end
@@ -52,7 +52,7 @@ FactoryBot.define do
 
       trait :with_pso_rma_areas_and_full_projects do
         after(:create) do |area|
-          FactoryBot.create(:pso_area, :with_rma_areas_and_projects, parent_id: area.id)
+          create(:pso_area, :with_rma_areas_and_projects, parent_id: area.id)
         end
       end
     end
@@ -69,22 +69,22 @@ FactoryBot.define do
 
       trait :with_rma_areas_and_projects do
         after(:create) do |pso_area|
-          FactoryBot.create(:rma_area, :with_full_projects, parent_id: pso_area.id)
+          create(:rma_area, :with_full_projects, parent_id: pso_area.id)
         end
 
         after(:create) do |pso_area|
           5.times do
-            FactoryBot.create(:full_project)
+            create(:full_project)
             project = PafsCore::Project.last
             pso_area.area_projects.create(project: project, owner: true)
-            FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: -1, project_id: project.id)
-            FactoryBot.create(:flood_protection_outcomes, financial_year: -1, project_id: project.id)
-            FactoryBot.create(:funding_value, :previous_year, project: project)
-            (0..11).each do |n|
+            create(:coastal_erosion_protection_outcomes, financial_year: -1, project_id: project.id)
+            create(:flood_protection_outcomes, financial_year: -1, project_id: project.id)
+            create(:funding_value, :previous_year, project: project)
+            12.times do |n|
               year = 2016 + n
-              FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: year, project_id: project.id)
-              FactoryBot.create(:flood_protection_outcomes, financial_year: year, project_id: project.id)
-              FactoryBot.create(:funding_value, financial_year: year, project: project)
+              create(:coastal_erosion_protection_outcomes, financial_year: year, project_id: project.id)
+              create(:flood_protection_outcomes, financial_year: year, project_id: project.id)
+              create(:funding_value, financial_year: year, project: project)
             end
           end
         end
@@ -113,17 +113,17 @@ FactoryBot.define do
       trait :with_full_projects do
         after(:create) do |rma_area|
           5.times do
-            FactoryBot.create(:full_project)
+            create(:full_project)
             project = PafsCore::Project.last
             rma_area.area_projects.create(project: project, owner: true)
-            FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: -1, project_id: project.id)
-            FactoryBot.create(:flood_protection_outcomes, financial_year: -1, project_id: project.id)
-            FactoryBot.create(:funding_value, :previous_year, project: project)
-            (0..11).each do |n|
+            create(:coastal_erosion_protection_outcomes, financial_year: -1, project_id: project.id)
+            create(:flood_protection_outcomes, financial_year: -1, project_id: project.id)
+            create(:funding_value, :previous_year, project: project)
+            12.times do |n|
               year = 2016 + n
-              FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: year, project_id: project.id)
-              FactoryBot.create(:flood_protection_outcomes, financial_year: year, project_id: project.id)
-              FactoryBot.create(:funding_value, financial_year: year, project: project)
+              create(:coastal_erosion_protection_outcomes, financial_year: year, project_id: project.id)
+              create(:flood_protection_outcomes, financial_year: year, project_id: project.id)
+              create(:funding_value, financial_year: year, project: project)
             end
           end
         end

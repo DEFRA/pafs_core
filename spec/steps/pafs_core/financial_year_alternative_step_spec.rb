@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::FinancialYearAlternativeStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:financial_year_alternative_step) }
+    subject { build(:financial_year_alternative_step) }
 
     it_behaves_like "a project step"
 
@@ -39,7 +39,7 @@ RSpec.describe PafsCore::FinancialYearAlternativeStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:financial_year_alternative_step) }
+    subject { create(:financial_year_alternative_step) }
 
     let(:params) do
       ActionController::Parameters.new({
@@ -64,7 +64,7 @@ RSpec.describe PafsCore::FinancialYearAlternativeStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

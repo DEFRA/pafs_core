@@ -13,13 +13,13 @@ namespace :pafs do
 
   task update_areas: :environment do
     PafsCore::DataMigration::UpdateAreas.perform(
-      File.join(Rails.root, "lib", "fixtures", "area_migration.csv")
+      Rails.root.join("lib/fixtures/area_migration.csv")
     )
   end
 
   task update_project_areas: :environment do
     PafsCore::DataMigration::UpdateProjects.perform(
-      File.join(Rails.root, "lib", "fixtures", "project_area_migration.csv")
+      Rails.root.join("lib/fixtures/project_area_migration.csv")
     )
   end
 

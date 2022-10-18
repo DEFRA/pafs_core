@@ -8,7 +8,7 @@ RSpec.describe PafsCore::MainRiskStep, type: :model do
   subject { @project }
 
   before do
-    @project = FactoryBot.build(:main_risk_step)
+    @project = build(:main_risk_step)
     # required to be valid
     @project.project.update(groundwater_flooding: true)
     @project.project.save
@@ -55,7 +55,7 @@ RSpec.describe PafsCore::MainRiskStep, type: :model do
         end
 
         it "returns false when validation fails" do
-          expect(subject.update(error_params)).to eq false
+          expect(subject.update(error_params)).to be false
         end
       end
 

@@ -3,14 +3,14 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::CalculatorParser do
-  let(:project) { FactoryBot.create(:project) }
+  let(:project) { create(:project) }
   let(:file) { File.open(file_path) }
 
   describe "#parse" do
     let(:perform) { described_class.parse(file, project) }
 
     context "with a v8 PFC" do
-      let(:file_path) { File.join(Rails.root, "..", "fixtures", "calculators", "v8.xlsx") }
+      let(:file_path) { Rails.root.join("../fixtures/calculators/v8.xlsx") }
 
       it "parses and saves the strategic approach" do
         expect do
@@ -68,7 +68,7 @@ RSpec.describe PafsCore::CalculatorParser do
     end
 
     context "with a v9 PFC" do
-      let(:file_path) { File.join(Rails.root, "..", "fixtures", "calculators", "v9.xlsx") }
+      let(:file_path) { Rails.root.join("../fixtures/calculators/v9.xlsx") }
 
       it "parses and saves the strategic approach" do
         expect do
@@ -127,7 +127,7 @@ RSpec.describe PafsCore::CalculatorParser do
 
     context "with an invalid filetype" do
 
-      let(:file_path) { File.join(Rails.root, "..", "fixtures", "calculators", "invalid_filetype.txt") }
+      let(:file_path) { Rails.root.join("../fixtures/calculators/invalid_filetype.txt") }
 
       it "checks that the calculator is an xlsx file" do
         expect { perform }.to raise_error("require an xlsx file")

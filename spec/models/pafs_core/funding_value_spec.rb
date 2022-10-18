@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::FundingValue, type: :model do
   let(:project) do
-    FactoryBot.create(
+    create(
       :project,
       internal_drainage_boards: true,
       fcerm_gia: true,
@@ -15,7 +15,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
   end
 
   describe "attributes" do
-    subject { FactoryBot.create(:funding_value) }
+    subject { create(:funding_value) }
 
     it { is_expected.to validate_numericality_of(:fcerm_gia).allow_nil }
     it { is_expected.to validate_numericality_of(:local_levy).allow_nil }
@@ -26,7 +26,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
 
   describe ".previous_years" do
     before do
-      @values = FactoryBot.create(:funding_value, :previous_year, project: project)
+      @values = create(:funding_value, :previous_year, project: project)
     end
 
     it "returns records with :financial_year set to -1" do
@@ -38,10 +38,10 @@ RSpec.describe PafsCore::FundingValue, type: :model do
   describe ".to_financial_year" do
     before do
       @values = [
-        FactoryBot.create(:funding_value, :previous_year, project: project),
-        FactoryBot.create(:funding_value, project: project, financial_year: 2017),
-        FactoryBot.create(:funding_value, project: project, financial_year: 2018),
-        FactoryBot.create(:funding_value, project: project, financial_year: 2019)
+        create(:funding_value, :previous_year, project: project),
+        create(:funding_value, project: project, financial_year: 2017),
+        create(:funding_value, project: project, financial_year: 2018),
+        create(:funding_value, project: project, financial_year: 2019)
       ]
     end
 
@@ -54,7 +54,7 @@ RSpec.describe PafsCore::FundingValue, type: :model do
 
   describe "saving" do
     subject do
-      FactoryBot.build(
+      build(
         :funding_value,
         project: project,
         fcerm_gia: 2_500_000,

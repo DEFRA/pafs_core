@@ -5,13 +5,13 @@ require "rails_helper"
 # require_relative "./shared_step_spec"
 
 RSpec.describe PafsCore::BasicStep, type: :model do
-  subject { FactoryBot.build(:basic_step) }
+  subject { build(:basic_step) }
 
   it_behaves_like "a project step"
 
   describe "#completed?" do
     it "returns true as there are no validations for a BasicStep" do
-      expect(subject.completed?).to eq true
+      expect(subject.completed?).to be true
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe PafsCore::BasicStep, type: :model do
 
   describe "#disabled?" do
     it "returns false as a default for the subclasses" do
-      expect(subject.disabled?).to eq false
+      expect(subject.disabled?).to be false
     end
   end
 
@@ -40,10 +40,10 @@ RSpec.describe PafsCore::BasicStep, type: :model do
   end
 
   describe "#save!" do
-    subject { FactoryBot.build(:basic_step) }
+    subject { build(:basic_step) }
 
     it "saves the record when validations passed" do
-      expect { subject.save! }.to change { PafsCore::Project.count }
+      expect { subject.save! }.to change(PafsCore::Project, :count)
     end
 
     it "raises ActiveRecord::RecordInvalid when validation fails" do

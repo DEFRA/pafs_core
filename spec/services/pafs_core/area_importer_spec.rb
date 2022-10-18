@@ -6,14 +6,14 @@ require "rails_helper"
 RSpec.describe PafsCore::AreaImporter do
   describe "#import" do
     it "successfully imports the areas with correct data" do
-      file_path = "#{Rails.root}/../fixtures/areas.csv"
+      file_path = Rails.root.join("../fixtures/areas.csv")
       described_class.new.import(file_path)
       areas = PafsCore::Area.all
       expect(areas.size).to eq(4)
     end
 
     it "does not import faulty data" do
-      file_path = "#{Rails.root}/../fixtures/faulty_areas_data.csv"
+      file_path = Rails.root.join("../fixtures/faulty_areas_data.csv")
       described_class.new.import(file_path)
       areas = PafsCore::Area.all
       expect(areas.size).to eq(3)
@@ -22,12 +22,12 @@ RSpec.describe PafsCore::AreaImporter do
 
   describe "#import_new_areas" do
     before do
-      file_path = "#{Rails.root}/../fixtures/areas.csv"
+      file_path = Rails.root.join("../fixtures/areas.csv")
       described_class.new.import(file_path)
     end
 
     it "successfully imports the new areas with correct data" do
-      folder_path = "#{Rails.root}/../fixtures/new_areas"
+      folder_path = Rails.root.join("../fixtures/new_areas")
 
       described_class.new.import_new_areas(folder_path)
 
@@ -36,7 +36,7 @@ RSpec.describe PafsCore::AreaImporter do
     end
 
     it "does not import areas that are already present" do
-      folder_path = "#{Rails.root}/../fixtures/new_areas"
+      folder_path = Rails.root.join("../fixtures/new_areas")
 
       2.times { described_class.new.import_new_areas(folder_path) }
 
@@ -45,7 +45,7 @@ RSpec.describe PafsCore::AreaImporter do
     end
 
     it "does not import areas that have faulty data" do
-      folder_path = "#{Rails.root}/../fixtures/new_areas_with_faults"
+      folder_path = Rails.root.join("../fixtures/new_areas_with_faults")
 
       described_class.new.import_new_areas(folder_path)
 

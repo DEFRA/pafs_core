@@ -3,8 +3,8 @@
 module PafsCore
   class ErrorsController < PafsCore::ApplicationController
     def show
-      @exception = ENV["action_dispatch.exception"]
-      action = request.path[1..-1].gsub(/[^0-9]/, "")
+      @exception = ENV.fetch("action_dispatch.exception", nil)
+      action = request.path[1..].gsub(/[^0-9]/, "")
       action = 500 if action.blank?
 
       status_code =

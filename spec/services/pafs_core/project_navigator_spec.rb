@@ -7,9 +7,9 @@ RSpec.describe PafsCore::ProjectNavigator do
   subject { described_class.new @user }
 
   before do
-    @pso = FactoryBot.create(:pso_area, parent_id: 1)
-    @rma = FactoryBot.create(:rma_area, parent_id: @pso.id)
-    @user = FactoryBot.create(:user)
+    @pso = create(:pso_area, parent_id: 1)
+    @rma = create(:rma_area, parent_id: @pso.id)
+    @user = create(:user)
     @user.user_areas.create(area_id: @rma.id, primary: true)
   end
 
@@ -28,7 +28,7 @@ RSpec.describe PafsCore::ProjectNavigator do
   describe "#start_new_project" do
     it "creates a new project wrapped in the first step of the process" do
       p = nil
-      expect { p = subject.start_new_project }.to change { PafsCore::Project.count }.by(1)
+      expect { p = subject.start_new_project }.to change(PafsCore::Project, :count).by(1)
       expect(p).to respond_to :reference_number
     end
   end
@@ -54,9 +54,9 @@ RSpec.describe PafsCore::ProjectNavigator do
   end
 
   describe "#build_project_step" do
-    let(:raw_project) { FactoryBot.build(:project) }
+    let(:raw_project) { build(:project) }
     let(:project_step) { subject.start_new_project }
-    let(:user) { FactoryBot.build(:user) }
+    let(:user) { build(:user) }
 
     it "wraps a project record with the requested :step" do
       expect(raw_project).to be_a PafsCore::Project

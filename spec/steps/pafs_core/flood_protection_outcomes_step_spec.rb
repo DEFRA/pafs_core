@@ -4,12 +4,12 @@ require "rails_helper"
 
 RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
   before do
-    @project = FactoryBot.create(:project)
+    @project = create(:project)
     @project.project_end_financial_year = 2027
     @project.fluvial_flooding = true
-    @fpo1 = FactoryBot.create(:flood_protection_outcomes, financial_year: 2017, project_id: @project.id)
-    @fpo2 = FactoryBot.create(:flood_protection_outcomes, financial_year: 2020, project_id: @project.id)
-    @fpo3 = FactoryBot.create(:flood_protection_outcomes, financial_year: 2030, project_id: @project.id)
+    @fpo1 = create(:flood_protection_outcomes, financial_year: 2017, project_id: @project.id)
+    @fpo2 = create(:flood_protection_outcomes, financial_year: 2020, project_id: @project.id)
+    @fpo3 = create(:flood_protection_outcomes, financial_year: 2030, project_id: @project.id)
     @project.flood_protection_outcomes << @fpo1
     @project.flood_protection_outcomes << @fpo2
     @project.flood_protection_outcomes << @fpo3
@@ -115,7 +115,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
 
     context "when params are invalid" do
       it "returns false" do
-        expect(subject.update(error_params)).to eq false
+        expect(subject.update(error_params)).to be false
       end
 
       it "does not save the changes" do
@@ -134,7 +134,7 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
       end
 
       it "returns true" do
-        expect(subject.update(params)).to eq true
+        expect(subject.update(params)).to be true
       end
     end
   end

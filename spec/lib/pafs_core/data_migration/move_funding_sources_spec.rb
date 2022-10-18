@@ -30,7 +30,7 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
       it "creates no funding contributors" do
         expect do
           perform
-        end.not_to change { PafsCore::FundingContributor.count }
+        end.not_to change(PafsCore::FundingContributor, :count)
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
       it "creates a funding_contributor for each financial year" do
         expect do
           perform
-        end.to change { PafsCore::FundingContributor.count }.by(3)
+        end.to change(PafsCore::FundingContributor, :count).by(3)
       end
 
       it "correctly calculates the total" do
@@ -98,7 +98,7 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
       it "creates a funding_contributor for each financial year" do
         expect do
           perform
-        end.to change { PafsCore::FundingContributor.count }.by(3)
+        end.to change(PafsCore::FundingContributor, :count).by(3)
       end
 
       it "correctly calculates the total" do
@@ -147,7 +147,7 @@ RSpec.describe PafsCore::DataMigration::MoveFundingSources do
       it "creates a funding_contributor for each financial year" do
         expect do
           perform
-        end.to change { PafsCore::FundingContributor.count }.by(3)
+        end.to change(PafsCore::FundingContributor, :count).by(3)
       end
 
       it "correctly calculates the total" do

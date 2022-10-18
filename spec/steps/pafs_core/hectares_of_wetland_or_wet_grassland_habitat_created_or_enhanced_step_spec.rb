@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::HectaresOfWetlandOrWetGrasslandHabitatCreatedOrEnhancedStep, type: :model do
-  subject { FactoryBot.build(:hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced_step) }
+  subject { build(:hectares_of_wetland_or_wet_grassland_habitat_created_or_enhanced_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"

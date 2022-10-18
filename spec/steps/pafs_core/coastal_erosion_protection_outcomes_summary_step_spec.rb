@@ -4,12 +4,12 @@ require "rails_helper"
 
 RSpec.describe PafsCore::CoastalErosionProtectionOutcomesSummaryStep, type: :model do
   before do
-    @project = FactoryBot.create(:project)
+    @project = create(:project)
     @project.project_end_financial_year = 2022
     @project.coastal_erosion = true
-    @cepo1 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2017, project_id: @project.id)
-    @cepo2 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2020, project_id: @project.id)
-    @cepo3 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2030, project_id: @project.id)
+    @cepo1 = create(:coastal_erosion_protection_outcomes, financial_year: 2017, project_id: @project.id)
+    @cepo2 = create(:coastal_erosion_protection_outcomes, financial_year: 2020, project_id: @project.id)
+    @cepo3 = create(:coastal_erosion_protection_outcomes, financial_year: 2030, project_id: @project.id)
     @project.coastal_erosion_protection_outcomes << @cepo1
     @project.coastal_erosion_protection_outcomes << @cepo2
     @project.coastal_erosion_protection_outcomes << @cepo3
@@ -30,7 +30,7 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesSummaryStep, type: :mod
     subject { described_class.new @project }
 
     it "returns true" do
-      expect(subject.update({})).to eq true
+      expect(subject.update({})).to be true
     end
   end
 

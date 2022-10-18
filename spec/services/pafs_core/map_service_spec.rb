@@ -6,7 +6,7 @@
 #   subject { PafsCore::MapService.new }
 #
 #   describe "#find" do
-#     let(:project) { FactoryBot.create(:location_step) }
+#     let(:project) { create(:location_step) }
 #     it "returns a valid result" do
 #       result = subject.find("", project.project_location)
 #       expect(result).to eq([{eastings: "457733", northings: "221751"}])

@@ -68,7 +68,7 @@ module PafsCore
 
     def create_child_records(areas_grouped_by_parent)
       areas_grouped_by_parent.each do |parent, children|
-        parent = Area.find_by_name(parent)
+        parent = Area.find_by(name: parent)
 
         children.each do |child|
           area = {

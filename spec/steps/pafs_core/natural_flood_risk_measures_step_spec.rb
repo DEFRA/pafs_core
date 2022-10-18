@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::NaturalFloodRiskMeasuresStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:natural_flood_risk_measures_step) }
+    subject { build(:natural_flood_risk_measures_step) }
 
     it_behaves_like "a project step"
 
@@ -24,7 +24,7 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:natural_flood_risk_measures_step) }
+    subject { create(:natural_flood_risk_measures_step) }
 
     let(:params) do
       ActionController::Parameters.new(
@@ -51,11 +51,11 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
 
     context "when a user sets other_flood_measures_selected to false" do
-      subject { FactoryBot.create(:natural_flood_risk_measures_step, other_flood_measures_selected: "1", other_flood_measures: "Another flood measure") }
+      subject { create(:natural_flood_risk_measures_step, other_flood_measures_selected: "1", other_flood_measures: "Another flood measure") }
 
       let(:params) do
         ActionController::Parameters.new(

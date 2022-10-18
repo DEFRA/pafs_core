@@ -6,7 +6,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::EarliestDateStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:earliest_date_step) }
+    subject { build(:earliest_date_step) }
 
     it_behaves_like "a project step"
 
@@ -48,7 +48,7 @@ RSpec.describe PafsCore::EarliestDateStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:earliest_date_step) }
+    subject { create(:earliest_date_step) }
 
     let(:valid_params) do
       ActionController::Parameters.new(

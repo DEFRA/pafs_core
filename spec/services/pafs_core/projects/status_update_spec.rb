@@ -3,10 +3,10 @@
 require "rails_helper"
 
 STATUS_MAP = {
-  'Draft': :draft,
-  'Review': :completed,
-  'Submitted': :submitted,
-  'Archived': :archived
+  Draft: :draft,
+  Review: :completed,
+  Submitted: :submitted,
+  Archived: :archived
 }.freeze
 
 RSpec.describe PafsCore::Projects::StatusUpdate do

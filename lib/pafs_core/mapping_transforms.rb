@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module PafsCore
-  # rubocop:disable Lint/BinaryOperatorWithIdenticalOperands
   module MappingTransforms
     NGR_CODES = [
       %w[HL HM HN HO HP JL JM JN],
@@ -44,11 +43,11 @@ module PafsCore
       gr = get_os_grid_ref(grid_ref)
       return if gr.nil?
 
-      n = grid_ref[2..-1]
+      n = grid_ref[2..]
       hl = n.length / 2
       {
         easting: "#{gr[0]}#{n[0..hl - 1]}".ljust(6, "0").to_i,
-        northing: "#{gr[1]}#{n[hl..-1]}".ljust(6, "0").to_i
+        northing: "#{gr[1]}#{n[hl..]}".ljust(6, "0").to_i
       }
     end
 
@@ -78,25 +77,25 @@ module PafsCore
       phi_prime = ((nrth - n0) / (_a * osbg_f0)) + phi0
 
       loop do
-        _m = (_b * osbg_f0)\
-          * (((1 + _n + ((5.0 / 4.0) * _n * _n) + ((5.0 / 4.0) * _n * _n * _n))\
-              * (phi_prime - phi0))\
-          - (((3 * _n) + (3 * _n * _n) + ((21.0 / 8.0) * _n * _n * _n))\
-             * Math.sin(phi_prime - phi0)\
-             * Math.cos(phi_prime + phi0))\
-          + ((((15.0 / 8.0) * _n * _n) + ((15.0 / 8.0) * _n * _n * _n))\
-             * Math.sin(2.0 * (phi_prime - phi0))\
-             * Math.cos(2.0 * (phi_prime + phi0)))\
-          - (((35.0 / 24.0) * _n * _n * _n)\
-             * Math.sin(3.0 * (phi_prime - phi0))\
+        _m = (_b * osbg_f0) \
+          * (((1 + _n + ((5.0 / 4.0) * _n * _n) + ((5.0 / 4.0) * _n * _n * _n)) \
+              * (phi_prime - phi0)) \
+          - (((3 * _n) + (3 * _n * _n) + ((21.0 / 8.0) * _n * _n * _n)) \
+             * Math.sin(phi_prime - phi0) \
+             * Math.cos(phi_prime + phi0)) \
+          + ((((15.0 / 8.0) * _n * _n) + ((15.0 / 8.0) * _n * _n * _n)) \
+             * Math.sin(2.0 * (phi_prime - phi0)) \
+             * Math.cos(2.0 * (phi_prime + phi0))) \
+          - (((35.0 / 24.0) * _n * _n * _n) \
+             * Math.sin(3.0 * (phi_prime - phi0)) \
              * Math.cos(3.0 * (phi_prime + phi0))))
 
         phi_prime += (nrth - n0 - _m) / (_a * osbg_f0)
         break unless (nrth - n0 - _m) >= 0.001
       end
 
-      _v = _a * osbg_f0 * ((1.0 - e_squared * sin_pow_2(phi_prime)) ** -0.5)
-      _rho = _a * osbg_f0 * (1.0 - e_squared) * ((1.0 - e_squared * sin_pow_2(phi_prime)) ** -1.5)
+      _v = _a * osbg_f0 * ((1.0 - (e_squared * sin_pow_2(phi_prime))) ** -0.5)
+      _rho = _a * osbg_f0 * (1.0 - e_squared) * ((1.0 - (e_squared * sin_pow_2(phi_prime))) ** -1.5)
 
       eta_squared = (_v / _rho) - 1.0
 
@@ -143,11 +142,11 @@ module PafsCore
 
       _phi = deg_to_rad(latitude)
       _lambda = deg_to_rad(longitude)
-      _v = _a / Math.sqrt(1 - e_squared * sin_pow_2(_phi))
+      _v = _a / Math.sqrt(1 - (e_squared * sin_pow_2(_phi)))
       _h = 0
       _x = (_v + _h) * Math.cos(_phi) * Math.cos(_lambda)
       _y = (_v + _h) * Math.cos(_phi) * Math.sin(_lambda)
-      _z = ((1 - e_squared) * _v + _h) * Math.sin(_phi)
+      _z = (((1 - e_squared) * _v) + _h) * Math.sin(_phi)
 
       _tx =        446.448
       _ty =       -124.157
@@ -171,7 +170,7 @@ module PafsCore
       _phi_n = Math.atan(_zb / (_p * (1 - e_squared)))
 
       (1..10).each do |_i|
-        _v = _a / Math.sqrt(1 - e_squared * sin_pow_2(_phi_n))
+        _v = _a / Math.sqrt(1 - (e_squared * sin_pow_2(_phi_n)))
         _phi_n1 = Math.atan((_zb + (e_squared * _v * Math.sin(_phi_n))) / _p)
         _phi_n = _phi_n1
       end
@@ -208,5 +207,4 @@ module PafsCore
       1.0 / Math.cos(angle)
     end
   end
-  # rubocop:enable Lint/BinaryOperatorWithIdenticalOperands
 end

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::KilometresOfWatercourseEnhancedOrCreatedPartialStep, type: :model do
-  subject { FactoryBot.build(:kilometres_of_watercourse_enhanced_or_created_partial_step) }
+  subject { build(:kilometres_of_watercourse_enhanced_or_created_partial_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"

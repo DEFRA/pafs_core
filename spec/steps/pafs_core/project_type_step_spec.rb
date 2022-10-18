@@ -6,7 +6,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::ProjectTypeStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:project_type_step) }
+    subject { build(:project_type_step) }
 
     it_behaves_like "a project step"
 
@@ -28,7 +28,7 @@ RSpec.describe PafsCore::ProjectTypeStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:project_type_step) }
+    subject { create(:project_type_step) }
 
     let(:params) { ActionController::Parameters.new({ project_type_step: { project_type: "STR" } }) }
     let(:error_params) { ActionController::Parameters.new({ project_type_step: { project_type: "ABC" } }) }
@@ -40,7 +40,7 @@ RSpec.describe PafsCore::ProjectTypeStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

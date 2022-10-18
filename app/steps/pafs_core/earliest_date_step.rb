@@ -29,7 +29,7 @@ module PafsCore
 
     def validate_month
       m = earliest_start_month
-      return unless m.present?
+      return if m.blank?
 
       mon = m.to_i
       return unless mon < 1 || mon > 12 || (m.to_s != mon.to_s)
@@ -39,7 +39,7 @@ module PafsCore
 
     def validate_year
       y = earliest_start_year
-      return unless y.present?
+      return if y.blank?
 
       year = y.to_i
       return unless (year < 2000 || year > 2100) || (year.to_s != y.to_s)
