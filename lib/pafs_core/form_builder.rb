@@ -298,7 +298,7 @@ module PafsCore
 
     def error_list
       el = []
-      @object.errors.keys.sort.each do |k|
+      @object.errors.attribute_names.sort.each do |k|
         @object.errors.full_messages_for(k).each_with_index do |message, i|
           el << error_item(k, message, i)
         end

@@ -87,7 +87,7 @@ module PafsCore
 
       query = query.joins(:state).merge(PafsCore::State.where(state: options[:state])) unless options[:state].nil?
       unless options[:state] == "archived"
-        query = query.joins(:state).merge(PafsCore::State.where.not(state: "archived"))
+        query = query.joins(:state).and(PafsCore::State.where.not(state: "archived"))
       end
 
       query.order("#{sort_col}": sort_order)

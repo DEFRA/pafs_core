@@ -52,7 +52,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
 
       # rubocop:disable Style/HashEachMethods
       it "displays a link for each error" do
-        project.errors.keys.each do |k|
+        project.errors.attribute_names.each do |k|
           project.errors.full_messages_for(k).each_with_index do |msg, i|
             msg = msg.split("^")[1] if msg =~ /\^/
             expect(@output).to have_css("li a[href='##{project.step}-#{k}-error-#{i}']",

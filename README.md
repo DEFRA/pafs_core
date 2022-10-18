@@ -8,7 +8,7 @@ For a full breakdown of the PAFS documentation, technical and non technical plea
 
 ## Versions
 
-The project is currently using Ruby version 2.3.0 and Rails 4.2.7.1.
+The project is currently using Ruby version 3.1.2 and Rails 6.1.7.
 
 ## Installation
 

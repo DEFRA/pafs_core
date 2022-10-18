@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.summary     = "Project Application and Funding Service core shared functionality"
   s.description = "Project Application and Funding Service core shared functionality"
   s.license     = "The Open Government Licence (OGL) Version 3"
-  s.required_ruby_version = ">= 2.4"
+  s.required_ruby_version = ">= 3.1"
 
   s.files = Dir[
     "{app,config,db,lib}/**/*",
@@ -31,9 +31,10 @@ Gem::Specification.new do |s|
   s.add_dependency "clamav-client"
   s.add_dependency "faraday"
   s.add_dependency "kaminari"
+  s.add_dependency "net-smtp"
   s.add_dependency "nokogiri"
   s.add_dependency "rack-cors"
-  s.add_dependency "rails", ">= 6.0", "< 6.1"
+  s.add_dependency "rails", "~> 6.1"
   s.add_dependency "roo"
   s.add_dependency "rubyXL"
   s.add_dependency "secure_headers"
