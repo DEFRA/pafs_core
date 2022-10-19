@@ -5,6 +5,8 @@ module PafsCore
     class Base
       include PafsCore::Files
 
+      def initialize(_opts = nil); end
+
       def self.perform(*opts)
         new(*opts).tap(&:perform)
       end
