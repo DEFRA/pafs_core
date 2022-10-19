@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::CreateHabitatWatercourseStep, type: :model do
-  subject { FactoryBot.build(:create_habitat_watercourse_step) }
+  subject { build(:create_habitat_watercourse_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -29,10 +29,10 @@ RSpec.describe PafsCore::CreateHabitatWatercourseStep, type: :model do
     end
 
     context "when updating :arable_land from true to false" do
-      subject { FactoryBot.create(:create_habitat_watercourse_step, project: project) }
+      subject { create(:create_habitat_watercourse_step, project: project) }
 
       let(:project) do
-        FactoryBot.create(
+        create(
           :project,
           create_habitat_watercourse: true,
           kilometres_of_watercourse_enhanced_or_created_single: 12
@@ -43,7 +43,7 @@ RSpec.describe PafsCore::CreateHabitatWatercourseStep, type: :model do
         subject.update(false_params)
         project.reload
 
-        expect(project.kilometres_of_watercourse_enhanced_or_created_single).to be nil
+        expect(project.kilometres_of_watercourse_enhanced_or_created_single).to be_nil
       end
     end
 

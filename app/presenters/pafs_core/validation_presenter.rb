@@ -113,14 +113,14 @@ module PafsCore
     end
 
     def standard_of_protection_complete?
-      if protects_against_flooding? &&
-         flood_protection_before.nil? || flood_protection_after.nil?
+      if (protects_against_flooding? &&
+         flood_protection_before.nil?) || flood_protection_after.nil?
         return add_error(:standard_of_protection,
                          "^Tell us the standard of protection the project will provide")
       end
 
-      if protects_against_coastal_erosion? &&
-         coastal_protection_before.nil? || coastal_protection_after.nil?
+      if (protects_against_coastal_erosion? &&
+         coastal_protection_before.nil?) || coastal_protection_after.nil?
         return add_error(:standard_of_protection,
                          "^Tell us the standard of protection the project will provide")
       end
@@ -238,9 +238,7 @@ module PafsCore
     end
 
     def urgency_complete?
-      if urgency_reason.nil?
-        add_error(:urgency, "^Tell us whether the project is urgent")
-      elsif urgent? && urgency_details.blank?
+      if urgency_reason.nil? || (urgent? && urgency_details.blank?)
         add_error(:urgency, "^Tell us whether the project is urgent")
       else
         true
@@ -268,7 +266,7 @@ module PafsCore
     end
 
     def funding_values_complete?
-      return false unless selected_funding_sources.present?
+      return false if selected_funding_sources.blank?
 
       selected_funding_sources.all? { |fs| total_for(fs).positive? }
     end
@@ -308,13 +306,13 @@ module PafsCore
     end
 
     def natural_flood_risk_measures_and_cost_provided?
-      (selected_natural_flood_risk_measures.count.positive? || !project.other_flood_measures.blank?) &&
+      (selected_natural_flood_risk_measures.count.positive? || project.other_flood_measures.present?) &&
         !project.natural_flood_risk_measures_cost.nil?
     end
 
     def risks_error
       add_error(:risks,
-                "^Tell us the risks the project protects against "\
+                "^Tell us the risks the project protects against " \
                 "and the households benefitting.")
       false
     end
@@ -323,7 +321,7 @@ module PafsCore
 
     def funding_calculator_correct_version?
       tfile = Tempfile.new(["funding_calculator", ".xlsx"])
-      tfile.write IO.read fetch_funding_calculator_for(project).path
+      tfile.write File.read fetch_funding_calculator_for(project).path
       xlsx = Roo::Spreadsheet.open tfile.path
       sheet = xlsx.sheet(xlsx.sheets.grep(/PF Calculator/i).first)
       calculator_version = Check.new(sheet).calculator_version

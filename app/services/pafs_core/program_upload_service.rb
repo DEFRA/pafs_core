@@ -39,12 +39,12 @@ module PafsCore
             record.errors.add(:base, e.message)
           end
         else
-          record.errors.add(:base, "This file type is not supported. Please upload "\
-                            "the annual refresh FCERM1 Excel file (.xlsx)")
+          record.errors.add(:base, "This file type is not supported. Please upload " \
+                                   "the annual refresh FCERM1 Excel file (.xlsx)")
         end
       else
-        record.errors.add(:base, "Select a program refresh FCERM1 Excel file "\
-                          "(.xlsx) to import")
+        record.errors.add(:base, "Select a program refresh FCERM1 Excel file " \
+                                 "(.xlsx) to import")
       end
       record
     end
@@ -72,7 +72,7 @@ module PafsCore
           project = build_project_from_row(row)
           item = create_upload_item(upload_record, project)
 
-          if project.project_end_financial_year && project.project_end_financial_year < Date.today.year
+          if project.project_end_financial_year && project.project_end_financial_year < Time.zone.today.year
             errors[:project_end_financial_year] = "Financial year is in the past"
             next
           end

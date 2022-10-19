@@ -4,13 +4,13 @@ require "rails_helper"
 
 RSpec.describe PafsCore::BenefitAreaFileStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:benefit_area_file_step) }
+    subject { build(:benefit_area_file_step) }
 
     it_behaves_like "a project step"
   end
 
   describe "#update" do
-    subject { FactoryBot.build(:benefit_area_file_step) }
+    subject { build(:benefit_area_file_step) }
 
     let(:antivirus) { double(:antivirus) }
     let(:params) do

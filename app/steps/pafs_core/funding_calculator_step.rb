@@ -116,7 +116,7 @@ module PafsCore
 
     def validate_calculator_version
       return if virus_info.present?
-      return unless calculator_sheet_name.present?
+      return if calculator_sheet_name.blank?
       return if calculator_version.to_s == expected_version && calculator_version.present?
 
       self.funding_calculator_file_name = ""

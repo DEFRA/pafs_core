@@ -14,7 +14,7 @@ module PafsCore
       end
 
       def ids
-        @ids ||= File.readlines(File.join(Rails.root, "ids.txt")).map(&:strip)
+        @ids ||= Rails.root.join("ids.txt").readlines.map(&:strip)
       end
 
       def projects
@@ -23,31 +23,31 @@ module PafsCore
 
       def perform
         projects.find_each do |project|
-          begin
-            submission = PafsCore::Pol::Submission.new(project)
-            submission.perform
 
-            results << {
-              id: project.reference_number,
-              status: submission.status,
-              response: submission.response
-            }
+          submission = PafsCore::Pol::Submission.new(project)
+          submission.perform
 
-            if submission.success?
-              puts "[OK] #{project.reference_number}"
-            else
-              puts "[ERROR] #{project.reference_number}"
-            end
-          rescue StandardError => e
+          results << {
+            id: project.reference_number,
+            status: submission.status,
+            response: submission.response
+          }
+
+          if submission.success?
+            puts "[OK] #{project.reference_number}"
+          else
             puts "[ERROR] #{project.reference_number}"
-            results << {
-              id: project.reference_number,
-              exception: e
-            }
           end
+        rescue StandardError => e
+          puts "[ERROR] #{project.reference_number}"
+          results << {
+            id: project.reference_number,
+            exception: e
+          }
+
         end
 
-        File.open(File.join(Rails.root, "results.txt"), "w").write(results.inspect)
+        Rails.root.join("results.txt").write(results.inspect)
         puts results.inspect
       end
     end

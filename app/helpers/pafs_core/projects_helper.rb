@@ -144,7 +144,7 @@ module PafsCore
 
     def strategic_officer_link
       link_to t("strategic_officer_label"), t("strategic_officer_link"),
-              rel: "external", target: "_blank"
+              rel: "external noopener", target: "_blank"
     end
 
     def urgency_reason_text(reason)
@@ -186,7 +186,7 @@ module PafsCore
             scope: ["pafs_core", "confidence", confidence_type, option]
           )
         )
-      ].join("").html_safe
+      ].join.html_safe
     end
 
     def compound_standard_of_protection_label(option)
@@ -206,14 +206,14 @@ module PafsCore
             scope: "pafs_core.standard_of_protection"
           )
         )
-      ].join("").html_safe
+      ].join.html_safe
     end
 
     def search_result_label(search_string, result)
-      if !search_string.nil?
-        search_string
-      else
+      if search_string.nil?
         [result[:eastings], result[:northings]].join(",")
+      else
+        search_string
       end
     end
 

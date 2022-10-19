@@ -9,9 +9,14 @@ module PafsCore
         self.project = project
       end
 
-      def name
-        project.name
-      end
+      delegate :name, :coastal_group, :moderation_code, :package_reference, :strategic_approach,
+               :duration_of_benefits, :households_at_reduced_risk,
+               :moved_from_very_significant_and_significant_to_moderate_or_low,
+               :households_protected_from_loss_in_20_percent_most_deprived,
+               :households_protected_through_plp_measures,
+               :non_residential_properties, :coastal_households_at_reduced_risk,
+               :coastal_households_protected_from_loss_in_20_percent_most_deprived,
+               to: :project
 
       def type
         project.project_type
@@ -45,20 +50,8 @@ module PafsCore
         project.rma_type
       end
 
-      def coastal_group
-        project.coastal_group
-      end
-
       def risk_source
         project.main_risk
-      end
-
-      def moderation_code
-        project.moderation_code
-      end
-
-      def package_reference
-        project.package_reference
       end
 
       def constituency
@@ -107,42 +100,6 @@ module PafsCore
 
       def coastal_erosion_standard_of_protection_after
         project.coastal_protection_after
-      end
-
-      def strategic_approach
-        project.strategic_approach
-      end
-
-      def duration_of_benefits
-        project.duration_of_benefits
-      end
-
-      def households_at_reduced_risk(year)
-        project.households_at_reduced_risk(year)
-      end
-
-      def moved_from_very_significant_and_significant_to_moderate_or_low(year)
-        project.moved_from_very_significant_and_significant_to_moderate_or_low(year)
-      end
-
-      def households_protected_from_loss_in_20_percent_most_deprived(year)
-        project.households_protected_from_loss_in_20_percent_most_deprived(year)
-      end
-
-      def households_protected_through_plp_measures(year)
-        project.households_protected_through_plp_measures(year)
-      end
-
-      def non_residential_properties(year)
-        project.non_residential_properties(year)
-      end
-
-      def coastal_households_at_reduced_risk(year)
-        project.coastal_households_at_reduced_risk(year)
-      end
-
-      def coastal_households_protected_from_loss_in_20_percent_most_deprived(year)
-        project.coastal_households_protected_from_loss_in_20_percent_most_deprived(year)
       end
 
       def attributes

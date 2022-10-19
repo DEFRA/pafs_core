@@ -7,13 +7,13 @@ require "rails_helper"
 # rubocop:disable RSpec/EmptyExampleGroup
 RSpec.describe PafsCore::LocationStep, type: :model do
   # describe "attributes" do
-  #   subject { FactoryBot.build(:location_step) }
+  #   subject { build(:location_step) }
   #
   #   it_behaves_like "a project step"
   # end
 
   # describe "#benefit_area" do
-  #   subject { FactoryBot.create(:location_step) }
+  #   subject { create(:location_step) }
   #
   #   context "with a defined benefit_area" do
   #     it "returns the benefit_area" do
@@ -32,7 +32,7 @@ RSpec.describe PafsCore::LocationStep, type: :model do
   # end
 
   # describe "#update", :vcr do
-  #   subject { FactoryBot.create(:location_step) }
+  #   subject { create(:location_step) }
   #   let(:params) {
   #     ActionController::Parameters.new({
   #       location_step: {

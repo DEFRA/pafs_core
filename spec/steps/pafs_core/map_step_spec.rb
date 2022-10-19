@@ -9,13 +9,13 @@ RSpec.describe PafsCore::MapStep, type: :model do
   after(:all) { @tempfile.close! }
 
   describe "attributes" do
-    subject { FactoryBot.build(:map_step) }
+    subject { build(:map_step) }
 
     it_behaves_like "a project step"
   end
 
   describe "#benefit_area" do
-    subject { FactoryBot.build(:map_step) }
+    subject { build(:map_step) }
 
     context "when there is a defined benefit_area" do
       it "gets the correct benefit area" do
@@ -32,7 +32,7 @@ RSpec.describe PafsCore::MapStep, type: :model do
   end
 
   describe "#benefit_area_centre" do
-    subject { FactoryBot.build(:map_step) }
+    subject { build(:map_step) }
 
     context "when the benefit_area_centre is set" do
       it "gets the correct benefit_area_centre" do
@@ -52,7 +52,7 @@ RSpec.describe PafsCore::MapStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:map_step) }
+    subject { create(:map_step) }
 
     let(:params) do
       ActionController::Parameters.new({
@@ -90,7 +90,7 @@ RSpec.describe PafsCore::MapStep, type: :model do
   end
 
   describe "#delete_benefit_area_file" do
-    subject { FactoryBot.build(:map_step) }
+    subject { build(:map_step) }
 
     let(:benefit_area_file) { fixture_file_upload("shapefile.zip", "application/zip") }
     let(:params) { ActionController::Parameters.new(map_step: { benefit_area_file: benefit_area_file }) }

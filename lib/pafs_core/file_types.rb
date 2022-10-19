@@ -32,7 +32,7 @@ module PafsCore
     end
 
     def benefit_area_file_types
-      PafsCore::BENEFIT_AREA_FILE_TYPES.map { |t| t[1..-1] }.join(", ").reverse.sub(",", "ro ").reverse
+      PafsCore::BENEFIT_AREA_FILE_TYPES.map { |t| t[1..] }.join(", ").reverse.sub(",", "ro ").reverse
     end
 
     def program_upload_file_types

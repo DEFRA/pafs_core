@@ -4,16 +4,16 @@ require "rails_helper"
 
 RSpec.describe PafsCore::ReadyForServiceDateStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:ready_for_service_date_step) }
+    subject { build(:ready_for_service_date_step) }
 
     it_behaves_like "a project step"
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:ready_for_service_date_step, project: project) }
+    subject { create(:ready_for_service_date_step, project: project) }
 
     let(:project) do
-      FactoryBot.create(
+      create(
         :project,
         start_construction_month: 1,
         start_construction_year: 2012
@@ -55,8 +55,8 @@ RSpec.describe PafsCore::ReadyForServiceDateStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(invalid_month_params)).to eq false
-      expect(subject.update(invalid_year_params)).to eq false
+      expect(subject.update(invalid_month_params)).to be false
+      expect(subject.update(invalid_year_params)).to be false
       # expect(subject.update(invalid_date_params)).to eq false
     end
   end

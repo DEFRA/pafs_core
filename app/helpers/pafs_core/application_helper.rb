@@ -4,13 +4,11 @@
 module PafsCore
   module ApplicationHelper
     # for our form builder
-    def pafs_form_for(name, *args, &block)
+    def pafs_form_for(name, *args, &)
       options = args.extract_options!
 
       content_tag(:div,
-                  form_for(name,
-                           *(args << options.merge(builder: PafsCore::FormBuilder)),
-                           &block),
+                  form_for(name, *(args << options.merge(builder: PafsCore::FormBuilder)), &),
                   class: "pafs_form")
     end
 

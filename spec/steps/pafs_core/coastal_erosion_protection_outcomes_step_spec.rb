@@ -4,12 +4,12 @@ require "rails_helper"
 
 RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
   before do
-    @project = FactoryBot.create(:project)
+    @project = create(:project)
     @project.project_end_financial_year = 2027
     @project.coastal_erosion = true
-    @cepo1 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2017, project_id: @project.id)
-    @cepo2 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2020, project_id: @project.id)
-    @cepo3 = FactoryBot.create(:coastal_erosion_protection_outcomes, financial_year: 2030, project_id: @project.id)
+    @cepo1 = create(:coastal_erosion_protection_outcomes, financial_year: 2017, project_id: @project.id)
+    @cepo2 = create(:coastal_erosion_protection_outcomes, financial_year: 2020, project_id: @project.id)
+    @cepo3 = create(:coastal_erosion_protection_outcomes, financial_year: 2030, project_id: @project.id)
     @project.coastal_erosion_protection_outcomes << @cepo1
     @project.coastal_erosion_protection_outcomes << @cepo2
     @project.coastal_erosion_protection_outcomes << @cepo3
@@ -105,7 +105,7 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
 
     context "when params are invalid" do
       it "returns false" do
-        expect(subject.update(error_params)).to eq false
+        expect(subject.update(error_params)).to be false
       end
 
       it "does not save the changes" do
@@ -125,7 +125,7 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
       end
 
       it "returns true" do
-        expect(subject.update(params)).to eq true
+        expect(subject.update(params)).to be true
       end
     end
   end

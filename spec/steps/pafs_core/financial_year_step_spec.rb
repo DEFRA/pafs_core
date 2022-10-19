@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::FinancialYearStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:financial_year_step) }
+    subject { build(:financial_year_step) }
 
     it_behaves_like "a project step"
 
@@ -44,7 +44,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:financial_year_step) }
+    subject { create(:financial_year_step) }
 
     let(:params) { ActionController::Parameters.new({ financial_year_step: { project_end_financial_year: "2028" } }) }
     let(:error_params) { ActionController::Parameters.new({ financial_year_step: { project_end_financial_year: "1983" } }) }
@@ -56,12 +56,12 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 
   describe "#financial_year_options" do
-    subject { FactoryBot.build(:financial_year_step) }
+    subject { build(:financial_year_step) }
 
     it "returns the correct set of financial year options" do
       current_financial_year = Time.current.uk_financial_year

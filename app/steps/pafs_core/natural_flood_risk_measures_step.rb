@@ -40,7 +40,7 @@ module PafsCore
     end
 
     def at_least_one_flood_risk_measure_has_been_selected
-      return if selected_natural_flood_risk_measures.count.positive? || !other_flood_measures.blank?
+      return if selected_natural_flood_risk_measures.count.positive? || other_flood_measures.present?
 
       errors.add(:base, "The project must include at least one flood risk measure")
     end
@@ -48,7 +48,7 @@ module PafsCore
     def other_flood_measure_has_been_added
       return unless other_flood_measures_selected
 
-      return unless other_flood_measures.blank?
+      return if other_flood_measures.present?
 
       errors.add(:other_flood_measures, "^You must give your other flood risk measure a name")
     end

@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::NaturalFloodRiskMeasuresCostStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:natural_flood_risk_measures_cost_step) }
+    subject { build(:natural_flood_risk_measures_cost_step) }
 
     it_behaves_like "a project step"
 

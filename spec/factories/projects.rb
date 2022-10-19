@@ -66,7 +66,7 @@ FactoryBot.define do
 
     after(:create) do |project, builder|
       if builder.create_funding_values
-        (2015..builder.project_end_financial_year || 2023).to_a.push(-1).each do |fy|
+        (2015..(builder.project_end_financial_year || 2023)).to_a.push(-1).each do |fy|
           create(
             :funding_value,
             public_contribution_names: builder.public_contribution_names,
@@ -80,7 +80,7 @@ FactoryBot.define do
     end
 
     after(:create) do |project, _builder|
-      unless project.benefit_area_file_name.blank?
+      if project.benefit_area_file_name.present?
         ShapefileUpload::Upload.new(project, project.benefit_area_file_name).perform
       end
     end

@@ -6,7 +6,7 @@ RSpec.describe PafsCore::UrgencyDetailsStep, type: :model do
   subject { @project }
 
   before do
-    @project = FactoryBot.build(:urgency_details_step)
+    @project = build(:urgency_details_step)
     # required to be valid
     @project.project.update(urgency_reason: "health_and_safety")
     @project.project.save
@@ -47,7 +47,7 @@ RSpec.describe PafsCore::UrgencyDetailsStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

@@ -3,23 +3,23 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
-  let(:v8_calculator_file) { File.open(File.join(Rails.root, "..", "fixtures", "calculators", "v8.xlsx")) }
-  let(:v9_calculator_file) { File.open(File.join(Rails.root, "..", "fixtures", "calculators", "v9.xlsx")) }
+  let(:v8_calculator_file) { Rails.root.join("../fixtures/calculators/v8.xlsx").open }
+  let(:v9_calculator_file) { Rails.root.join("../fixtures/calculators/v9.xlsx").open }
 
   describe "attributes" do
-    subject { FactoryBot.build(:funding_calculator_step) }
+    subject { build(:funding_calculator_step) }
 
     it_behaves_like "a project step"
 
     it "validates that a file has been selected" do
       subject.funding_calculator_file_name = nil
-      expect(subject.valid?).to eq false
+      expect(subject.valid?).to be false
       expect(subject.errors[:base]).to include "Upload the completed partnership funding calculator .xslx file"
     end
 
     it "validates that the file passed a virus check" do
       subject.virus_info = "Found a nasty virus"
-      expect(subject.valid?).to eq false
+      expect(subject.valid?).to be false
       expect(subject.errors[:base])
         .to include "The file was rejected because it may contain a virus. Check the file and try again"
     end
@@ -56,7 +56,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.build(:funding_calculator_step) }
+    subject { build(:funding_calculator_step) }
 
     let(:filename) { "new_file.xlsx" }
     let(:content_type) { "text/plain" }
@@ -79,7 +79,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
     context "when 'Continue' button selected" do
       it "returns true" do
-        expect(subject.update(continue_params)).to eq true
+        expect(subject.update(continue_params)).to be true
       end
     end
 
@@ -93,7 +93,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
       end
 
       it "uploads the file" do
-        expect(subject.update(params)).to eq true
+        expect(subject.update(params)).to be true
       end
 
       it "saves the file details" do
@@ -110,14 +110,14 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
         it "deletes the previous file" do
           subject.funding_calculator_file_name = new_file
           expect(storage).to receive(:delete).with(File.join(subject.storage_path, new_file)).and_return(true)
-          expect(subject.update(params)).to eq true
+          expect(subject.update(params)).to be true
         end
       end
     end
 
     context "when a valid file has already been uploaded" do
       it "returns false when no new file is selected" do
-        expect(subject.update(empty_params)).to eq false
+        expect(subject.update(empty_params)).to be false
       end
     end
 
@@ -136,7 +136,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
       end
 
       it "returns false" do
-        expect(subject.update(params)).to eq false
+        expect(subject.update(params)).to be false
       end
     end
 
@@ -155,14 +155,14 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
       end
 
       it "returns false" do
-        expect(subject.update(params)).to eq false
+        expect(subject.update(params)).to be false
       end
     end
   end
 
   # describe "#download" do
   #   let(:storage) { double("storage") }
-  #   subject { FactoryBot.build(:funding_calculator_step) }
+  #   subject { build(:funding_calculator_step) }
   #   before(:each) do
   #     @upload_path = File.join(subject.storage_path, subject.funding_calculator_file_name)
   #     expect(PafsCore::FileStorageService).to receive(:new) { storage }
@@ -198,7 +198,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
   # describe "#delete_calculator" do
   #   let(:storage) { double("storage") }
-  #   subject { FactoryBot.build(:funding_calculator_step) }
+  #   subject { build(:funding_calculator_step) }
   #   before(:each) do
   #     expect(PafsCore::FileStorageService).to receive(:new) { storage }
   #   end

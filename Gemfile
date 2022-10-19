@@ -27,6 +27,8 @@ group :development, :test do
   gem "json_schemer"
   gem "pry"
   gem "rails-controller-testing"
+  gem "rubocop"
+  gem "rubocop-rails"
   gem "rubocop-rspec"
 end
 

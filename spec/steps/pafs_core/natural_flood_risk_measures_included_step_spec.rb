@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::NaturalFloodRiskMeasuresIncludedStep, type: :model do
-  subject { FactoryBot.build(:natural_flood_risk_measures_included_step) }
+  subject { build(:natural_flood_risk_measures_included_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -29,10 +29,10 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresIncludedStep, type: :model do
     end
 
     context "when updating :natural_flood_risk_measures from true to false" do
-      subject { FactoryBot.create(:natural_flood_risk_measures_included_step, project: project) }
+      subject { create(:natural_flood_risk_measures_included_step, project: project) }
 
       let(:project) do
-        FactoryBot.create(
+        create(
           :project,
           river_restoration: true,
           other_flood_measures: "a flood measure"
@@ -43,8 +43,8 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresIncludedStep, type: :model do
         subject.update(false_params)
         project.reload
 
-        expect(project.river_restoration).to be nil
-        expect(project.other_flood_measures).to be nil
+        expect(project.river_restoration).to be_nil
+        expect(project.other_flood_measures).to be_nil
       end
     end
 

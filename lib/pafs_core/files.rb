@@ -85,9 +85,6 @@ module PafsCore
 
     def generate_benefit_areas_file(projects, filename)
       tmpfile = Tempfile.new
-      # make tmpfile an empty Zipfile
-      Zip::OutputStream.open(tmpfile) { |_| }
-      # now we can open the temporary zipfile
       Zip::File.open(tmpfile.path, Zip::File::CREATE) do |zf|
         projects.each do |project|
           fetch_benefit_area_file_for(project) do |data, project_filename, _content_type|
@@ -105,9 +102,6 @@ module PafsCore
 
     def generate_proposals_funding_calculator_file(projects, filename)
       tmpfile = Tempfile.new
-      # make tmpfile an empty Zipfile
-      Zip::OutputStream.open(tmpfile) { |_| }
-      # now we can open the temporary zipfile
       Zip::File.open(tmpfile.path, Zip::File::CREATE) do |zf|
         projects.each do |project|
           fetch_funding_calculator_for(project) do |data, project_filename, _content_type|
@@ -125,9 +119,6 @@ module PafsCore
 
     def generate_moderations_file(projects, filename)
       tmpfile = Tempfile.new
-      # make tmpfile an empty Zipfile
-      Zip::OutputStream.open(tmpfile) { |_| }
-      # now we can open the temporary zipfile
       Zip::File.open(tmpfile.path, Zip::File::CREATE) do |zf|
         projects.each do |project|
           generate_moderation_for(project) do |data, project_filename, _content_type|

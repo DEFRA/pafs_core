@@ -36,7 +36,7 @@ Rails.backtrace_cleaner.remove_silencers!
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
+Dir["./spec/support/**/*.rb"].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -67,7 +67,7 @@ end
 # removes last word part from symbol
 # eg. takes :award_contract_year and returns :award_contract
 def parent_symbol(symbol)
-  symbol.to_s.split("_")[0...-1].join("_").to_sym
+  symbol.to_s.split("_")[0...].join("_").to_sym
 end
 
 RSpec.configure do |config|

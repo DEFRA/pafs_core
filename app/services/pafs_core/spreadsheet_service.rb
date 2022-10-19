@@ -64,21 +64,21 @@ module PafsCore
       # HACK: for some reason the formula in column BJ, BI, BL-BX are not recognised by RubyXL
       #       so we'll poke in the correct formula here
       formulae_map = [
-        { 'BJ': ["JO"] },
-        { 'BI': ["JN"] },
-        { 'BL': %w[BZ CN DB DP ED ER FF FT] },
-        { 'BM': %w[CA CO DC DQ EE ES FG FU] },
-        { 'BN': %w[CB CP DD DR EF ET FH FV] },
-        { 'BO': %w[CC CQ DE DS EG EU FI FW] },
-        { 'BP': %w[CD CR DF DT EH EV FJ FX] },
-        { 'BQ': %w[CE CS DG DU EI EW FK FY] },
-        { 'BR': %w[CF CT DH DV EJ EX FL FZ] },
-        { 'BS': %w[CG CU DI DW EK EY FM GA] },
-        { 'BT': %w[CH CV DJ DX EL EZ FN GB] },
-        { 'BU': %w[CI CW DK DY EM FA FO GC] },
-        { 'BV': %w[CJ CX DL DZ EN FB FP GD] },
-        { 'BW': %w[CK CY DM EA EO FC FQ GE] },
-        { 'BX': %w[CL CZ DN EB EP FD FR GF] }
+        { BJ: ["JO"] },
+        { BI: ["JN"] },
+        { BL: %w[BZ CN DB DP ED ER FF FT] },
+        { BM: %w[CA CO DC DQ EE ES FG FU] },
+        { BN: %w[CB CP DD DR EF ET FH FV] },
+        { BO: %w[CC CQ DE DS EG EU FI FW] },
+        { BP: %w[CD CR DF DT EH EV FJ FX] },
+        { BQ: %w[CE CS DG DU EI EW FK FY] },
+        { BR: %w[CF CT DH DV EJ EX FL FZ] },
+        { BS: %w[CG CU DI DW EK EY FM GA] },
+        { BT: %w[CH CV DJ DX EL EZ FN GB] },
+        { BU: %w[CI CW DK DY EM FA FO GC] },
+        { BV: %w[CJ CX DL DZ EN FB FP GD] },
+        { BW: %w[CK CY DM EA EO FC FQ GE] },
+        { BX: %w[CL CZ DN EB EP FD FR GF] }
       ]
       formulae_map.each do |formula_hash|
         column = formula_hash.keys.first.to_s
@@ -131,8 +131,8 @@ module PafsCore
             value = use_value ? project.send(col[:field_name]) : 0
             sheet[row_no][column_index(col[:column])].change_contents(value)
           rescue StandardError
-            raise "Boom - Project (#{project.slug}) Row no (#{row_no}) col (#{col})" \
-                  " field_name (#{col[:field_name]}) value (#{value})"
+            raise "Boom - Project (#{project.slug}) Row no (#{row_no}) col (#{col}) " \
+                  "field_name (#{col[:field_name]}) value (#{value})"
           end
         end
       end

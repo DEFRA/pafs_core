@@ -4,7 +4,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::FundingSourcesStep, type: :model do
-  subject { FactoryBot.build(:funding_sources_step) }
+  subject { build(:funding_sources_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -18,7 +18,7 @@ RSpec.describe PafsCore::FundingSourcesStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:funding_sources_step) }
+    subject { create(:funding_sources_step) }
 
     let(:params) do
       ActionController::Parameters.new({ funding_sources_step: { growth_funding: "1" } })
@@ -33,7 +33,7 @@ RSpec.describe PafsCore::FundingSourcesStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

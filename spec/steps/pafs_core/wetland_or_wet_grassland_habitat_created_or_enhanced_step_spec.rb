@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::WetlandOrWetGrasslandHabitatCreatedOrEnhancedStep, type: :model do
-  subject { FactoryBot.build(:wetland_or_wet_grassland_habitat_created_or_enhanced_step) }
+  subject { build(:wetland_or_wet_grassland_habitat_created_or_enhanced_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -29,10 +29,10 @@ RSpec.describe PafsCore::WetlandOrWetGrasslandHabitatCreatedOrEnhancedStep, type
     end
 
     context "when updating :wet_woodland from true to false" do
-      subject { FactoryBot.create(:wetland_or_wet_grassland_habitat_created_or_enhanced_step, project: project) }
+      subject { create(:wetland_or_wet_grassland_habitat_created_or_enhanced_step, project: project) }
 
       let(:project) do
-        FactoryBot.create(
+        create(
           :project,
           wetland_or_wet_grassland: true,
           hectares_of_wetland_or_wet_grassland_created_or_enhanced: 12
@@ -43,7 +43,7 @@ RSpec.describe PafsCore::WetlandOrWetGrasslandHabitatCreatedOrEnhancedStep, type
         subject.update(false_params)
         project.reload
 
-        expect(project.hectares_of_wetland_or_wet_grassland_created_or_enhanced).to be nil
+        expect(project.hectares_of_wetland_or_wet_grassland_created_or_enhanced).to be_nil
       end
     end
 

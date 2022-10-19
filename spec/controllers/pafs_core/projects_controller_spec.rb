@@ -125,13 +125,13 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
       context "when saving the financial year" do
         let(:params) do
           {
-            "financial_year_step": {
-              "id": "4",
-              "project_end_financial_year": Date.today.year
+            financial_year_step: {
+              id: "4",
+              project_end_financial_year: Time.zone.today.year
             },
-            "commit": "Save and continue",
-            "id": project.to_param,
-            "step": "financial_year"
+            commit: "Save and continue",
+            id: project.to_param,
+            step: "financial_year"
           }
         end
 
@@ -356,35 +356,35 @@ RSpec.describe PafsCore::ProjectsController, type: :controller do
             flood_protection_outcomes_step: {
               reduced_risk_of_households_for_floods: "1",
               flood_protection_outcomes_attributes: {
-                '0': {
+                "0": {
                   financial_year: first_flood_project_outcome.financial_year,
                   id: first_flood_project_outcome.id,
                   households_at_reduced_risk: first_flood_project_outcome.households_at_reduced_risk,
                   moved_from_very_significant_and_significant_to_moderate_or_low: first_flood_project_outcome.moved_from_very_significant_and_significant_to_moderate_or_low,
                   households_protected_from_loss_in_20_percent_most_deprived: first_flood_project_outcome.households_protected_from_loss_in_20_percent_most_deprived
                 },
-                '1': {
+                "1": {
                   financial_year: second_flood_project_outcome.financial_year,
                   id: second_flood_project_outcome.id,
                   households_at_reduced_risk: second_flood_project_outcome.households_at_reduced_risk,
                   moved_from_very_significant_and_significant_to_moderate_or_low: second_flood_project_outcome.moved_from_very_significant_and_significant_to_moderate_or_low,
                   households_protected_from_loss_in_20_percent_most_deprived: second_flood_project_outcome.households_protected_from_loss_in_20_percent_most_deprived
                 },
-                '2': {
+                "2": {
                   financial_year: third_flood_project_outcome.financial_year,
                   id: third_flood_project_outcome.id,
                   households_at_reduced_risk: third_flood_project_outcome.households_at_reduced_risk,
                   moved_from_very_significant_and_significant_to_moderate_or_low: third_flood_project_outcome.moved_from_very_significant_and_significant_to_moderate_or_low,
                   households_protected_from_loss_in_20_percent_most_deprived: third_flood_project_outcome.households_protected_from_loss_in_20_percent_most_deprived
                 },
-                '3': {
+                "3": {
                   financial_year: fourth_flood_project_outcome.financial_year,
                   id: fourth_flood_project_outcome.id,
                   households_at_reduced_risk: fourth_flood_project_outcome.households_at_reduced_risk,
                   moved_from_very_significant_and_significant_to_moderate_or_low: fourth_flood_project_outcome.moved_from_very_significant_and_significant_to_moderate_or_low,
                   households_protected_from_loss_in_20_percent_most_deprived: fourth_flood_project_outcome.households_protected_from_loss_in_20_percent_most_deprived
                 },
-                '4': {
+                "4": {
                   financial_year: fifth_flood_project_outcome.financial_year,
                   id: fifth_flood_project_outcome.id,
                   households_at_reduced_risk: fifth_flood_project_outcome.households_at_reduced_risk,

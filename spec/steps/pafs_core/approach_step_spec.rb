@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ApproachStep, type: :model do
-  subject { FactoryBot.build(:approach_step) }
+  subject { build(:approach_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -40,7 +40,7 @@ RSpec.describe PafsCore::ApproachStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

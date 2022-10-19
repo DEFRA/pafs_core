@@ -4,13 +4,13 @@ require "rails_helper"
 
 RSpec.describe PafsCore::StartOutlineBusinessCaseDateStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:start_outline_business_case_date_step) }
+    subject { build(:start_outline_business_case_date_step) }
 
     it_behaves_like "a project step"
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:start_outline_business_case_date_step) }
+    subject { create(:start_outline_business_case_date_step) }
 
     let(:params) do
       ActionController::Parameters.new({
@@ -38,7 +38,7 @@ RSpec.describe PafsCore::StartOutlineBusinessCaseDateStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

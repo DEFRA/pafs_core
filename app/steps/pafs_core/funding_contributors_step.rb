@@ -80,7 +80,7 @@ module PafsCore
     private
 
     def unique_names(params)
-      return true if step_params(params).map { |e| e[:current] }.uniq.size == step_params(params).size
+      return true if step_params(params).pluck(:current).uniq.size == step_params(params).size
 
       errors.add(:base, "Please add each contributor only once")
       false

@@ -4,16 +4,16 @@ require "rails_helper"
 
 RSpec.describe PafsCore::AwardContractDateStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:award_contract_date_step) }
+    subject { build(:award_contract_date_step) }
 
     it_behaves_like "a project step"
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:award_contract_date_step, project: project) }
+    subject { create(:award_contract_date_step, project: project) }
 
     let(:project) do
-      FactoryBot.create(
+      create(
         :project,
         start_outline_business_case_month: 1,
         start_outline_business_case_year: 2012
@@ -62,9 +62,9 @@ RSpec.describe PafsCore::AwardContractDateStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(invalid_month_params)).to eq false
-      expect(subject.update(invalid_year_params)).to eq false
-      expect(subject.update(invalid_date_params)).to eq false
+      expect(subject.update(invalid_month_params)).to be false
+      expect(subject.update(invalid_year_params)).to be false
+      expect(subject.update(invalid_date_params)).to be false
     end
   end
 end

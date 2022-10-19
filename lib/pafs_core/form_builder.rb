@@ -11,7 +11,7 @@ module PafsCore
       d = description || I18n.t(:error_description)
 
       contents = [error_heading(h)]
-      contents << error_description(d) unless d.blank?
+      contents << error_description(d) if d.present?
       contents << if sort_order.nil?
                     error_list
                   else
@@ -25,8 +25,8 @@ module PafsCore
       end
     end
 
-    def fields_for(record_name, record_object = nil, fields_options = {}, &block)
-      super record_name, record_object, fields_options.merge(builder: self.class), &block
+    def fields_for(record_name, record_object = nil, fields_options = {}, &)
+      super record_name, record_object, fields_options.merge(builder: self.class), &
     end
 
     # rubocop:disable Style/ExplicitBlockArgument
@@ -149,7 +149,7 @@ module PafsCore
       end
     end
 
-    def select(attribute, choices = nil, options = {}, html_options = {}, &block)
+    def select(attribute, choices = nil, options = {}, html_options = {}, &)
       attribute = attribute.to_sym
       contents = []
       label_val = options.delete(:label) if options.include? :label
@@ -298,7 +298,7 @@ module PafsCore
 
     def error_list
       el = []
-      @object.errors.keys.sort.each do |k|
+      @object.errors.attribute_names.sort.each do |k|
         @object.errors.full_messages_for(k).each_with_index do |message, i|
           el << error_item(k, message, i)
         end

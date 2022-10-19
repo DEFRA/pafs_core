@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::PondsLakesHabitatCreatedOrEnhancedStep, type: :model do
-  subject { FactoryBot.build(:ponds_lakes_habitat_created_or_enhanced_step) }
+  subject { build(:ponds_lakes_habitat_created_or_enhanced_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -29,10 +29,10 @@ RSpec.describe PafsCore::PondsLakesHabitatCreatedOrEnhancedStep, type: :model do
     end
 
     context "when updating :ponds_lakes from true to false" do
-      subject { FactoryBot.create(:ponds_lakes_habitat_created_or_enhanced_step, project: project) }
+      subject { create(:ponds_lakes_habitat_created_or_enhanced_step, project: project) }
 
       let(:project) do
-        FactoryBot.create(
+        create(
           :project,
           ponds_lakes: true,
           hectares_of_pond_or_lake_habitat_created_or_enhanced: 12
@@ -43,7 +43,7 @@ RSpec.describe PafsCore::PondsLakesHabitatCreatedOrEnhancedStep, type: :model do
         subject.update(false_params)
         project.reload
 
-        expect(project.hectares_of_pond_or_lake_habitat_created_or_enhanced).to be nil
+        expect(project.hectares_of_pond_or_lake_habitat_created_or_enhanced).to be_nil
       end
     end
 

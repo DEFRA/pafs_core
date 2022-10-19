@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe PafsCore::UrgencyStep, type: :model do
   describe "attributes" do
-    subject { FactoryBot.build(:urgency_step) }
+    subject { build(:urgency_step) }
 
     it_behaves_like "a project step"
 
@@ -28,7 +28,7 @@ RSpec.describe PafsCore::UrgencyStep, type: :model do
   end
 
   describe "#update" do
-    subject { FactoryBot.create(:urgency_step) }
+    subject { create(:urgency_step) }
 
     let(:params) { ActionController::Parameters.new({ urgency_step: { urgency_reason: "legal_need" } }) }
     let(:error_params) { ActionController::Parameters.new({ urgency_step: { urgency_reason: "ABC" } }) }
@@ -56,7 +56,7 @@ RSpec.describe PafsCore::UrgencyStep, type: :model do
     end
 
     it "returns false when validation fails" do
-      expect(subject.update(error_params)).to eq false
+      expect(subject.update(error_params)).to be false
     end
   end
 end

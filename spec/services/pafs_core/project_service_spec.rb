@@ -49,7 +49,7 @@ RSpec.describe PafsCore::ProjectService do
     let(:project) { subject.new_project }
 
     it "builds a new project model without saving to the database" do
-      expect { project }.not_to change { PafsCore::Project.count }
+      expect { project }.not_to change(PafsCore::Project, :count)
     end
 
     it "builds the correct type of object" do
@@ -72,8 +72,7 @@ RSpec.describe PafsCore::ProjectService do
   describe "#create_project" do
     it "creates a new project and saves to the database" do
       p = nil
-      expect { p = subject.create_project }
-        .to change { PafsCore::Project.count }.by(1)
+      expect { p = subject.create_project }.to change(PafsCore::Project, :count).by(1)
 
       expect(p).to be_a PafsCore::Project
       expect(p.reference_number).not_to be_nil
@@ -98,7 +97,7 @@ RSpec.describe PafsCore::ProjectService do
   end
 
   describe "#all_projects_for" do
-    let(:country) { FactoryBot.create(:country, :with_full_hierarchy) }
+    let(:country) { create(:country, :with_full_hierarchy) }
     let(:ea_area_1) { country.children.first }
     let(:ea_area_2) { country.children.second }
     let(:pso_area_1) { ea_area_1.children.first }
@@ -168,7 +167,7 @@ RSpec.describe PafsCore::ProjectService do
   end
 
   describe "#area_ids_for_user" do
-    let(:country) { FactoryBot.create(:country, :with_full_hierarchy) }
+    let(:country) { create(:country, :with_full_hierarchy) }
     let(:ea_area_1) { country.children.first }
     let(:ea_area_2) { country.children.second }
     let(:pso_area_1) { ea_area_1.children.first }
