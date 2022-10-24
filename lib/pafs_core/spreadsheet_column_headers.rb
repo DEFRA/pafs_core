@@ -29,7 +29,7 @@ module PafsCore
     lead_rma: "Lead Risk Management Authority - Name",
     lead_rma_type: "Lead Risk Management Authority - Type",
     grid_ref: "National Grid Reference",
-    project_location: "Project Location (Town\, River\, SSSI etc)",
+    project_location: "Project Location (Town, River, SSSI etc)",
     ea_area: "EA Area",
     gia_total: "GiA - PROJECT TOTAL",
     levy_total: "Local Levy - PROJECT TOTAL",
