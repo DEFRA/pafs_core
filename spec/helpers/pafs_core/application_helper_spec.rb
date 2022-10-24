@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module PafsCore
-  RSpec.describe PafsCore::ApplicationHelper, type: :helper do
+  RSpec.describe PafsCore::ApplicationHelper do
     let(:project) { build(:project) }
 
     describe "#pafs_form_for" do

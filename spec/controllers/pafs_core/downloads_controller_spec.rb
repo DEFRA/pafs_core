@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::DownloadsController, type: :controller do
+RSpec.describe PafsCore::DownloadsController do
   routes { PafsCore::Engine.routes }
 
   before do

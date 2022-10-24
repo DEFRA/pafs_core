@@ -3,7 +3,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::UserArea, type: :model do
+RSpec.describe PafsCore::UserArea do
   describe "attributes" do
     subject { create(:user_area) }
 

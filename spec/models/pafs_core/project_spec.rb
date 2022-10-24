@@ -3,7 +3,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::Project, type: :model do
+RSpec.describe PafsCore::Project do
   describe "attributes" do
     subject { create(:project) }
 

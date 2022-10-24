@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::ProgramUploadItem, type: :model do
+RSpec.describe PafsCore::ProgramUploadItem do
   describe "attributes" do
     subject { create(:program_upload_item_success) }
 

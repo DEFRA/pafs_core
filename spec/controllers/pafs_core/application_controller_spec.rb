@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::ApplicationController, type: :controller do
+RSpec.describe PafsCore::ApplicationController do
   controller do
     def index
       render plain: "Hello World"

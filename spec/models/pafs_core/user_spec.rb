@@ -3,7 +3,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::User, type: :model do
+RSpec.describe PafsCore::User do
   describe "attributes" do
     subject { create(:user) }
 

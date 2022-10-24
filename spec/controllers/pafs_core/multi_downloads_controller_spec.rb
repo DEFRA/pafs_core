@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::MultiDownloadsController, type: :controller do
+RSpec.describe PafsCore::MultiDownloadsController do
   routes { PafsCore::Engine.routes }
 
   let(:project) { create(:project, :pso_area) }

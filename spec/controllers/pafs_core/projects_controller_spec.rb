@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::ProjectsController, type: :controller do
+RSpec.describe PafsCore::ProjectsController do
   routes { PafsCore::Engine.routes }
 
   let(:user) { create(:user) }

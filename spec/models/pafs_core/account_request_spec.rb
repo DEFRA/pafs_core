@@ -4,7 +4,7 @@
 require "rails_helper"
 
 module PafsCore
-  RSpec.describe AccountRequest, type: :model do
+  RSpec.describe AccountRequest do
     describe "attributes" do
       subject { create(:account_request) }
 
