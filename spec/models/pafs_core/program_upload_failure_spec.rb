@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::ProgramUploadFailure, type: :model do
+RSpec.describe PafsCore::ProgramUploadFailure do
   describe "attributes" do
     subject { create(:program_upload_failure) }
 

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module PafsCore
-  RSpec.describe ProjectsHelper, type: :helper do
+  RSpec.describe ProjectsHelper do
     before(:all) { PafsCore::ReferenceCounter.seed_counters }
 
     describe "#financial_year_end_for" do

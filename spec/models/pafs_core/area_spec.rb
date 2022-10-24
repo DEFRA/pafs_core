@@ -3,7 +3,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::Area, type: :model do
+RSpec.describe PafsCore::Area do
   describe "attributes" do
     area_levels = [
       {

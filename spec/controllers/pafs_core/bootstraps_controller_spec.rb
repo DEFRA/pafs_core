@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::BootstrapsController, type: :controller do
+RSpec.describe PafsCore::BootstrapsController do
   routes { PafsCore::Engine.routes }
 
   describe "GET new" do

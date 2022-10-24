@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::FundingValue, type: :model do
+RSpec.describe PafsCore::FundingValue do
   let(:project) do
     create(
       :project,

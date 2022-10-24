@@ -4,7 +4,7 @@
 require "rails_helper"
 
 module PafsCore
-  RSpec.describe ReferenceCounter, type: :model do
+  RSpec.describe ReferenceCounter do
     around do |spec|
       described_class.transaction do
         spec.run

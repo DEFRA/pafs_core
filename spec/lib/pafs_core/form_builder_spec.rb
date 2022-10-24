@@ -108,7 +108,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#check_box" do
-    let(:project) { build :funding_sources_step }
+    let(:project) { build(:funding_sources_step) }
 
     before do
       allow(helper).to receive(:t).and_return("my label")
@@ -165,7 +165,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#radio_button" do
-    let(:project) { build :earliest_start_step }
+    let(:project) { build(:earliest_start_step) }
 
     before do
       allow(helper).to receive(:t).and_return("my label")
@@ -216,7 +216,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#radio_button_group" do
-    let(:project) { build :earliest_start_step }
+    let(:project) { build(:earliest_start_step) }
 
     before do
       allow(helper).to receive(:t).and_return("my label")
@@ -282,7 +282,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#percent_field" do
-    let(:project) { build :standard_of_protection_step }
+    let(:project) { build(:standard_of_protection_step) }
 
     before do
       project.valid?
@@ -308,7 +308,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#month_and_year" do
-    let(:project) { build :earliest_date_step }
+    let(:project) { build(:earliest_date_step) }
 
     before do
       project.valid?
@@ -391,7 +391,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#error_message" do
-    let(:project) { build :project_name_step }
+    let(:project) { build(:project_name_step) }
 
     context "when the attribute has errors" do
       before do
@@ -410,7 +410,7 @@ RSpec.describe PafsCore::FormBuilder, type: :feature do
   end
 
   describe "#text_area" do
-    let(:project) { build :project_name_step }
+    let(:project) { build(:project_name_step) }
     let(:options) { { rows: "2", cols: "40" } }
 
     before do
