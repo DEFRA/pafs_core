@@ -74,7 +74,7 @@ module PafsCore
         EXPECTED_EXTENSIONS.each do |ext|
           next if entries.select { |entry| entry.match(/\.#{ext}$/) }.any?
 
-          errors.add(:base, "The selected file must be a zip file," \
+          errors.add(:base, "The selected file must be a zip file, " \
                             "containing the following mandatory files: dbf. shx. shp. prj.")
           return false
         end
