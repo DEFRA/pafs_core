@@ -1,9 +1,11 @@
+<% content_for :title, t(".heading") %>
+
 <div class="step-container">
   <div class="grid-row">
     <div class="column-two-thirds">
       <div class="step-form">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-          <%= f.error_header %>
+          <%= form_error_header(f) %>
           <h1 class="heading-large"><%= heading %></h1>
           <% if local_assigns.has_key? :lede %>
             <p><%= lede %></p>

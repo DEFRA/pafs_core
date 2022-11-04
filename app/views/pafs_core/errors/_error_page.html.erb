@@ -1,5 +1,6 @@
+<% content_for :title, "#{heading} #{response.status}" %>
+
 <% heading = "Sorry, we're experiencing technical difficulties" unless local_assigns.include?(:heading) %>
-<% content_for :page_title, make_page_title(heading) + " (#{response.status})" %>
 <div class="error-page">
   <h1 class="heading-large"><%= heading %></h1>
   <div class="message1">

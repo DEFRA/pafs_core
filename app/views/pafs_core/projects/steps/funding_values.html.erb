@@ -1,8 +1,10 @@
+<% content_for :title, t(".heading") %>
+
 <div class="step-container">
   <div class="grid-row">
     <div class="column-three-quarters">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= f.error_header %>
+        <%= form_error_header(f) %>
         <h1 class="heading-large"><%= t('.heading') %></h1>
         <p><%= t('.lede') %></p>
         <div class="step-form">

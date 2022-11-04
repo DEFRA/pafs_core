@@ -1,82 +1,76 @@
 en:
   page_titles:
-    start: "Start"
-    sign_in: "Sign in"
-    reset_password: "Password reset"
-    reset_password_confirmation: "Reset password confirmation"
-    password_entry: "Password entry"
-    request_an_account: "Account request"
-    account_request_submitted: "Account request confirmation"
-    dashboard: "Your proposals"
-    archive_dashboard: "archive"
-    grant_in_aid: "Grant in aid funding"
-    local_levy: "Local levy funding"
-    pipeline: "Funding after 2021"
-    reference_number: "Number"
-    project_name: "Name"
-    project_area: "Area"
-    project_type: "Type"
-    financial_year: "Last financial year to %{year}"
-    financial_year_alternative: "Last financial year after %{year}"
-    location: "Location"
-    benefit_area_file: "Benefit area upload"
-    location_results: "Location results"
-    location_confirmation: "Location confirmation"
-    start_outline_business_case_date: "Outline business case date"
-    award_contract_date: "Award contract date"
-    start_construction_date: "Start construction date"
-    ready_for_service_date: "Ready for service date"
-    funding_sources: "Funding sources"
-    public_contributors: "Public contributors"
-    private_contributors: "Private contributors"
-    other_ea_contributors: "Environment Agency contributors"
-    funding_values: "Funding values"
-    private_contributor_values: "Private Contributor Values"
-    public_contributor_values: "Public Contributor Values"
-    other_ea_contributor_values: "Other EA Contributor Values"
-    funding_values_summary: "Funding values"
-    confidence_homes_better_protected: "Confidence"
-    confidence_homes_by_gateway_four: "Confidence"
-    confidence_secured_partnership_funding: "Confidence"
-    carbon_cost_build: "Carbon Assessment"
-    carbon_cost_operation: "Carbon Assessment"
-    earliest_start: "Earliest start"
-    earliest_date: "Earliest start date"
-    location: "Location"
-    map: "Map"
-    benefit_area_file_summary: "Benefit area upload summary"
-    risks: "The risks the project will protect against"
-    main_risk: "The main source of risk the project will protect against"
-    flood_protection_outcomes: "Properties affected by flooding that the project likely to benefit"
-    flood_protection_outcomes_summary: "Total properties affected by flooding that the project likely to benefit"
-    flood_protection_outcomes2040: "Additional properties affected by flooding by 2040 that the project likely to benefit"
-    flood_protection_outcomes2040_summary: "Confirm the number of households at risk of being affected by flooding by 2040 that the project will benefit"
-    coastal_erosion_protection_outcomes: "Households affected coastal erosion that the project likely to benefit"
-    coastal_erosion_protection_outcomes_summary: "Confirm how many properties affected coastal erosion is the project likely to benefit"
-    standard_of_protection: "Current flood risk"
-    standard_of_protection_after: "Future flood risk"
-    standard_of_protection_coastal: "Current erosion risk"
-    standard_of_protection_coastal_after: "Future erosion risk"
-    approach: "Approach"
-    surface_and_groundwater: "Surface and groundwater"
-    surface_and_groundwater_amount: "Surface and groundwater outcome"
-    improve_river: "River or priority river habitat protected or improved"
-    improve_river_amount: "River or priority river habitat protected or improved outcome"
-    improve_spa_or_sac: "Special protected area or special area of conservation"
-    improve_sssi: "Site of special scientific interest"
-    improve_hpi: "Habitat of principal importance"
-    improve_habitat_amount: "Habitat protected or improved"
-    habitat_creation: "Habitat creation"
-    habitat_creation_amount: "Habitat creation outcome"
-    remove_fish_barrier: "Fish barrier"
-    remove_eel_barrier: "Eel barrier"
-    fish_or_eel_amount: "Fish and eel barrier outcome"
-    urgency: "Project urgency"
-    urgency_details: "Urgency reason detail"
-    funding_calculator: "Partnership funding calculator"
-    funding_calculator_summary: "Partnership funding calculator upload"
-    proposal_overview: "Proposal overview"
-    proposal_submitted: "Proposal submitted"
+    start: Start
+    sign_in: Sign in
+    reset_password: Password reset
+    reset_password_confirmation: Reset password confirmation
+    password_entry: Password entry
+    request_an_account: Account request
+    account_request_submitted: Account request confirmation
+    dashboard: Your proposals
+    archive_dashboard: archive
+    grant_in_aid: Grant in aid funding
+    local_levy: Local levy funding
+    pipeline: Funding after 2021
+    reference_number: Number
+    project_name: Name
+    project_area: Area
+    project_type: Type
+    location: Location
+    benefit_area_file: Benefit area upload
+    location_results: Location results
+    start_outline_business_case_date: Outline business case date
+    award_contract_date: Award contract date
+    start_construction_date: Start construction date
+    ready_for_service_date: Ready for service date
+    funding_sources: Funding sources
+    public_contributors: Public contributors
+    private_contributors: Private contributors
+    other_ea_contributors: Environment Agency contributors
+    funding_values: Funding values
+    private_contributor_values: Private Contributor Values
+    public_contributor_values: Public Contributor Values
+    other_ea_contributor_values: Other EA Contributor Values
+    funding_values_summary: Funding values
+    carbon_cost_build: Carbon Assessment
+    carbon_cost_operation: Carbon Assessment
+    earliest_start: Earliest start
+    earliest_date: Earliest start date
+    location: Location
+    map: Map
+    benefit_area_file_summary: Benefit area upload summary
+    risks: The risks the project will protect against
+    main_risk: The main source of risk the project will protect against
+    flood_protection_outcomes: Properties affected by flooding that the project likely to benefit
+    flood_protection_outcomes_summary: Total properties affected by flooding that the project likely to benefit
+    flood_protection_outcomes2040: Additional properties affected by flooding by 2040 that the project likely to benefit
+    flood_protection_outcomes2040_summary: Confirm the number of households at risk of being affected by flooding by 2040 that the project will benefit
+    coastal_erosion_protection_outcomes: Households affected coastal erosion that the project likely to benefit
+    coastal_erosion_protection_outcomes_summary: Confirm how many properties affected coastal erosion is the project likely to benefit
+    standard_of_protection: Current flood risk
+    standard_of_protection_after: Future flood risk
+    standard_of_protection_coastal: Current erosion risk
+    standard_of_protection_coastal_after: Future erosion risk
+    approach: Approach
+    surface_and_groundwater: Surface and groundwater
+    surface_and_groundwater_amount: Surface and groundwater outcome
+    improve_river: River or priority river habitat protected or improved
+    improve_river_amount: River or priority river habitat protected or improved outcome
+    improve_spa_or_sac: Special protected area or special area of conservation
+    improve_sssi: Site of special scientific interest
+    improve_hpi: Habitat of principal importance
+    improve_habitat_amount: Habitat protected or improved
+    habitat_creation: Habitat creation
+    habitat_creation_amount: Habitat creation outcome
+    remove_fish_barrier: Fish barrier
+    remove_eel_barrier: Eel barrier
+    fish_or_eel_amount: Fish and eel barrier outcome
+    urgency: Project urgency
+    urgency_details: Urgency reason detail
+    funding_calculator: Partnership funding calculator
+    funding_calculator_summary: Partnership funding calculator upload
+    proposal_overview: Proposal overview
+    proposal_submitted: Proposal submitted
     natural_flood_risk_measures_included: Natural flood measures included
     natural_flood_risk_measures: Natural flood risk measures
     natural_flood_risk_measures_cost: Natural flood risk measures cost

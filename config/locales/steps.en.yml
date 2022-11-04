@@ -17,7 +17,7 @@ en:
       steps:
 # project name
         project_name:
-          heading: What is the project's name?
+          heading: What is the project’s name?
           description: The project name should be meaningful and understandable and shouldn't include abbreviations. For example, South Chesham River Colne Flood Alleviation Scheme or Clacton-on-Sea Coastal Erosion Project Phase 4.
           project_name_label: Project name
         project_area:
@@ -50,13 +50,13 @@ en:
           heading: What are the estimated dates for important milestones of your proposed project?
 # start outline business case date
         start_outline_business_case_date:
-          heading: When do you expect to start the project's outline business case?
+          heading: When do you expect to start the project’s outline business case?
           month_label: Month
           year_label: Year
           example_text: For example, 3 2019
 # award contract date
         award_contract_date:
-          heading: When do you expect to award the project's main contract?
+          heading: When do you expect to award the project’s main contract?
           month_label: Month
           year_label: Year
           example_text: For example, 1 2020
@@ -92,10 +92,10 @@ en:
           example_text: For example, a local authority such as Bristol City Council.
         private_contributors:
           heading: Who are the expected private sector contributors?
-          example_text: "For example, a local business such as Llanmoor Development Company."
+          example_text: For example, a local business such as Llanmoor Development Company.
         other_ea_contributors:
-          heading: "What are the expected contributions from other Environment Agency sources?"
-          example_text: "These are Environment Agency functions or funding streams. For example, Water Framework Directive or Water Resources."
+          heading: What are the expected contributions from other Environment Agency sources?
+          example_text: These are Environment Agency functions or funding streams. For example, Water Framework Directive or Water Resources.
 # funding values
         funding_values:
           heading: What is the estimated spend for each financial year?
@@ -129,11 +129,11 @@ en:
 # location
         location:
           heading: Where is the project located?
-          example_text: "Enter a National Grid Reference. This should consist of 2 letters followed by 10 digits, for example ST 58198 72725"
+          example_text: Enter a National Grid Reference. This should consist of 2 letters followed by 10 digits, for example ST 58198 72725
           search:
             heading: Where is the project located?
-            example_text: "For example, an address, postcode or National Grid Reference"
-            search_label: "Search"
+            example_text: For example, an address, postcode or National Grid Reference
+            search_label: Search
             confirm_and_continue: Confirm and continue
             select_location: Select location
           results:
@@ -167,10 +167,10 @@ en:
             draw_outline_instead: I would like to draw an outline on a map instead
 # benefit area file
         benefit_area_file:
-          heading: "What area is the project likely to benefit?"
-          description: "Upload a shapefile. The shapefile should show the approximate area the project is likely to benefit. Draw as many separate areas as necessary, but make sure they don't overlap."
-          acceptable_file_formats: "Your shapefile files should be in a single compressed folder or zipfile (.zip) to upload successfully"
-          benefit_area_file_label: "Upload a shapefile"
+          heading: What area is the project likely to benefit?
+          description: Upload a shapefile. The shapefile should show the approximate area the project is likely to benefit. Draw as many separate areas as necessary, but make sure they don't overlap.
+          acceptable_file_formats: Your shapefile files should be in a single compressed folder or zipfile (.zip) to upload successfully
+          benefit_area_file_label: Upload a shapefile
 # benefit area file summary
         benefit_area_file_summary:
           heading: The uploaded shapefile
@@ -362,7 +362,7 @@ en:
           urgency_proposal_need_agree: Urgency proposals must be agreed with your local Partnership and Strategic Overview (PSO) officer before submission.
 # urgency details
         urgency_details:
-          heading: Why is your project urgent?
+          heading: "Why is your project urgent?"
           lede: "You previously told us that your proposed project is urgent because:"
           example_text: Limit your answer to 700 characters or fewer
 
