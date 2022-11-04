@@ -1,5 +1,5 @@
 <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step), html: { multipart: true } do |f| %>
-  <%= f.error_header %>
+  <%= form_error_header(f) %>
 <h1 class="heading-large"><%= t('.heading') %></h1>
 <p><%= t(".description") %></p>
 <p><%= t(".acceptable_file_formats") %></p>

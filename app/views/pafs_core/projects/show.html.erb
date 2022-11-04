@@ -1,8 +1,8 @@
-<% content_for :page_title, make_page_title(t("proposal_overview", scope: "page_titles")) %>
+<% content_for :title, t("proposal_overview", scope: "page_titles") %>
 
 <section id="project-summary" class="font-xsmall project-summary">
   <%= pafs_form_for @project do |f| %>
-    <%= f.error_header("Check your proposal details", "", @project.articles) %>
+    <%= form_error_header(f, "Check your proposal details", "", @project.articles) %>
     <header class="summary-heading">
       <div class="grid-row">
         <div class="column-one-half">

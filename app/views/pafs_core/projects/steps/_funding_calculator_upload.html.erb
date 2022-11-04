@@ -1,7 +1,7 @@
 <% scope = "pafs_core.projects.steps.funding_calculator" %>
 <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step), html: { multipart: true } do |f| %>
   <%= f.hidden_field :funding_calculator_file_name %>
-  <%= f.error_header %>
+  <%= form_error_header(f) %>
   <div class="step-form">
     <h1 class="heading-large"><%= t('heading', scope: scope) %></h1>
     <p><%= t('lede', scope: scope) %></p>

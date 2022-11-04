@@ -1,13 +1,11 @@
+<% content_for :title, t(".heading") %>
+
 <% last_year = @project.financial_year_options.last + 1 %>
-<% content_for :page_title,
-    make_page_title(t("financial_year",
-                      year: last_year,
-                      scope: "page_titles")) %>
 <div class="step-container">
   <div class="grid-row">
     <div class="column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
-        <%= f.error_header %>
+        <%= form_error_header(f) %>
         <h1 class="heading-large"><%= t('.heading') %></h1>
         <p><%= t('.lede') %></p>
         <div class="step-form">
