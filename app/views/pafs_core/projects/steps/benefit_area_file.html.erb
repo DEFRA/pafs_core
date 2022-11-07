@@ -1,3 +1,5 @@
+<% content_for :title, t(".heading") %>
+
 <div class="grid-row">
   <div class="column-two-thirds">
     <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step), html: { multipart: true } do |f| %>
