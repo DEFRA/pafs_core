@@ -1,4 +1,4 @@
-<% content_for :title, t(".heading") %>
+<% content_for :title, t(".heading"), flush: true if I18n.exists?(".heading") %>
 
 <div class="step-container">
   <div class="grid-row">
