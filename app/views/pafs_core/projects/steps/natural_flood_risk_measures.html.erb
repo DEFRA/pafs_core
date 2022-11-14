@@ -10,7 +10,7 @@
         <div class="step-form">
           <fieldset>
             <legend class="visuallyhidden"><%= t(".heading") %></legend>
-            <%= f.form_group :base do %>
+            <%= form_group(@project.step, :base) do %>
               <%= f.error_message(:base) %>
               <%= f.check_box :river_restoration %>
               <%= f.check_box :floodplain_restoration %>

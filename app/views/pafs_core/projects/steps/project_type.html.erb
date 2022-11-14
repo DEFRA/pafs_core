@@ -11,7 +11,7 @@
           <fieldset>
             <legend class="visuallyhidden">Select the type of your proposed project</legend>
             <p><%= t('.project_type_supporting_text') %></p>
-            <%= f.form_group(:project_type) do %>
+            <%= form_group(@project.step, :project_type) do %>
               <%= f.error_message(:project_type) %>
               <% PafsCore::PROJECT_TYPES.each do |pt| %>
                 <%= f.radio_button :project_type, pt.to_s, label: project_type_label(pt) %>

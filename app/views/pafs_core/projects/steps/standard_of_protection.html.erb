@@ -8,7 +8,7 @@
           <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
           <%= f.hidden_field :id %>
           <h1 class="heading-large"><%= t('.heading') %></h1>
-          <%= f.form_group(:flood_protection_before) do %>
+          <%= form_group(@project.step, :flood_protection_before) do %>
             <%= f.error_message(:flood_protection_before) %>
             <fieldset>
               <legend class="visuallyhidden"><%= t(".heading") %></legend>

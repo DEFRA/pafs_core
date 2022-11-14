@@ -10,7 +10,7 @@
           <% if local_assigns.has_key? :lede %>
             <p><%= lede %></p>
           <% end %>
-          <%= f.form_group(numeric_field) do %>
+          <%= form_group(@project.step, numeric_field) do %>
             <%= f.error_message(numeric_field) %>
             <%= f.label(numeric_field, heading, class: "visuallyhidden") %>
 

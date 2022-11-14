@@ -7,7 +7,7 @@
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
         <h1 class="heading-large"><%= t('.heading') %></h1>
         <div class="step-form">
-          <%= f.form_group(:grid_reference) do %>
+          <%= form_group(@project.step, :grid_reference) do %>
             <p class="form-hint"><%= t('.example_text') %></p>
             <p class="form-hint">
               For projects over;

@@ -9,7 +9,7 @@
         <div class="step-form">
           <fieldset>
             <legend class="visuallyhidden"><%= t('.heading') %></legend>
-            <%= f.form_group :base do %>
+            <%= form_group(@project.step, :base) do %>
               <%= f.error_message(:base) %>
               <%= f.label(:natural_flood_risk_measures_cost, t('.heading'), class: "visuallyhidden") %>
               <div class="currency-field">

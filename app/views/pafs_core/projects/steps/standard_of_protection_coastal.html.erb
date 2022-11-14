@@ -9,7 +9,7 @@
           <%= f.hidden_field :id %>
           <h1 class="heading-large"><%= t('.heading') %></h1>
           <p><%= t(".description") %></p>
-          <%= f.form_group(:coastal_protection_before) do %>
+          <%= form_group(@project.step, :coastal_protection_before) do %>
             <%= f.error_message(:coastal_protection_before) %>
             <fieldset>
               <legend class="visuallyhidden"><%= t(".heading") %></legend>

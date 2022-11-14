@@ -10,7 +10,7 @@
         <p><%= t('.description') %></p>
         <div class="step-form">
           <fieldset>
-            <%= f.form_group :rma_name do %>
+            <%= form_group@project.step, :rma_name) do %>
               <%= f.error_message(:rma_name) %>
               <% current_resource.areas.each do |user_area| %>
                 <%= f.radio_button :rma_name, user_area.name.to_s, label: user_area.name %>

@@ -2,7 +2,7 @@
   <div class="form-group">
     <h1 class="heading-large"><%= t('.heading') %></h1>
     <p class="form-hint"><%= t('.example_text') %></p>
-    <%= f.form_group(:base) do %>
+    <%= form_group(@project.step, :base) do %>
       <%= f.error_message(:base) %>
       <%= text_field_tag :q, params[:q], label: nil , class: "form-control"%>
     <% end %>

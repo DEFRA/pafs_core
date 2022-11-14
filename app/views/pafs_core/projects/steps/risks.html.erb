@@ -10,7 +10,7 @@
         <div class="step-form">
           <fieldset>
             <legend class="visuallyhidden">Select which risks your project protects against</legend>
-            <%= f.form_group :base do %>
+            <%= form_group(@project.step, :base) do %>
               <%= f.error_message(:base) %>
               <%= f.check_box :fluvial_flooding %>
               <%= f.check_box :tidal_flooding %>

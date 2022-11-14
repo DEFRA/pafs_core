@@ -11,7 +11,7 @@
           <p><%= t('.urgency_proposal_need_agree') %></p>
           <fieldset>
             <legend class="visuallyhidden">Select the reason why your project is urgent</legend>
-            <%= f.form_group(:urgency_reason) do %>
+            <%= form_group(@project.step, :urgency_reason) do %>
               <%= f.error_message(:urgency_reason) %>
               <% PafsCore::Urgency::URGENCY_REASONS.each do |r| %>
                 <%= f.radio_button :urgency_reason,

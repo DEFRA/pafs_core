@@ -8,7 +8,7 @@
         <h1 class="heading-large"><%= t('.heading') %></h1>
         <p><%= t('.lede') %></p>
         <div class="step-form">
-          <%= f.form_group :base do %>
+          <%= form_group(@project.step, :base) do %>
             <%= f.error_message(:base) %>
             <div class="scroll-horz">
               <%= f.check_box :no_properties_affected_by_flooding_2040 %>
