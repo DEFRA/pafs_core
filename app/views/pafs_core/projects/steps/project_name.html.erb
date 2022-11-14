@@ -5,12 +5,12 @@
     <div class="column-two-thirds">
       <%#= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
         <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
-          <%= form_error_header(f) %>
+          <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
           <h1 class="heading-large"><%= t('.heading') %></h1>
           <p><%= t('.description') %></p>
           <div class="step-form">
             <%= f.label :name, t('.project_name_label'), class: "visuallyhidden" %>
-            <%= f.text_field_without_label :name, class: "form-control form-wide" %>
+            <%= f.text_field :name, class: "form-control form-wide" %>
           </div>
           <div class="step-form">
             <%= f.submit t("save_and_continue_label"), class: 'button' %>

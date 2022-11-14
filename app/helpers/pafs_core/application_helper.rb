@@ -3,22 +3,70 @@
 
 module PafsCore
   module ApplicationHelper
-    # for our form builder
     def pafs_form_for(name, *args, &)
       options = args.extract_options!
 
       content_tag(:div,
-                  form_for(name, *(args << options.merge(builder: PafsCore::FormBuilder)), &),
+                  form_for(name, *(args << options.merge(builder: GOVUKDesignSystemFormBuilder::FormBuilder)), &),
                   class: "pafs_form")
     end
 
-    # wrap the formbuilder method here in order to set content for page title
-    def form_error_header(form, heading = nil, description = nil, sort_order = nil)
-      error_header = form.error_header(heading, description, sort_order)
-      return if error_header.blank?
+    def month_and_year(project, attribute, options = {})
+      m_key = "#{attribute}_month".to_sym
+      y_key = "#{attribute}_year".to_sym
 
-      content_for :error_title, "Error", flush: true
-      error_header
+      contents = []
+      contents << heading_text(options.delete(:heading)) if options.include? :heading
+      contents << content_tag(:p, options.delete(:hint), class: "form-hint") if options.include? :hint
+      # need to handle the 2 fields as one for errors
+      contents << content_tag(:div, class: "form-date") do
+        safe_join([
+                    content_tag(:div, class: "form-group form-group-month") do
+                      safe_join([
+                                  label_tag("#{project.step}_step_#{m_key}",
+                                            I18n.t("month_label"),
+                                            class: "form-label"),
+                                  text_field_tag("#{project.step}_step[#{m_key}]", 
+                                                 project.send(m_key),
+                                                 maxlength: 2,
+                                                 min: 1,
+                                                 max: 12,
+                                                 size: 2,
+                                                 type: "number",
+                                                 class: "form-control form-month")
+                                ], "\n")
+                    end,
+                    content_tag(:div, class: "form-group form-group-year") do
+                      safe_join([
+                                  label_tag("#{project.step}_step_#{m_key}",
+                                            I18n.t("year_label"),
+                                            class: "form-label"),
+                                  text_field_tag("#{project.step}_step[#{y_key}]",
+                                                 project.send(y_key),
+                                                 maxlength: 4,
+                                                 min: 2000,
+                                                 max: 2100,
+                                                 size: 4,
+                                                 type: "number",
+                                                 class: "form-control form-year")
+                                ], "\n")
+                    end
+                  ], "\n")
+      end
+
+      safe_join(contents, "\n")
+    end
+
+    def form_group(form, name)
+      content = []
+      content << content_tag(:div) { yield } if block_given?
+      content_tag(:div, class: "form-group", id: content_id(form, name.to_sym)) do
+        safe_join(content, "\n")
+      end
+    end
+
+    def content_id(form, attribute)
+      "#{form}-#{attribute}-content"
     end
 
     def title

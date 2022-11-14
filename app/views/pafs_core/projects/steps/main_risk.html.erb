@@ -5,7 +5,7 @@
     <div class="column-two-thirds">
       <div class="step-form">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-          <%= form_error_header(f) %>
+          <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
           <h1 class="heading-large"><%= t('.heading') %></h1>
           <fieldset>
             <legend class="visuallyhidden">Select the main risk your proposed project wull protect against</legend>

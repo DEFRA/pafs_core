@@ -4,7 +4,7 @@
   <div class="grid-row">
     <%= pafs_form_for project, url: save_project_step_path(id: project.to_param, step: project.step) do |f| %>
       <div class="column-two-thirds">
-        <%= form_error_header(f) %>
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
         <h1 class="heading-large"><%= heading %></h1>
         <p><%= t(".description") %></p>
         <p><%= t(".more_detail") %></p>

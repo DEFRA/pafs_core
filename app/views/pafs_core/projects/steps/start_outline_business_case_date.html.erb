@@ -4,14 +4,13 @@
   <div class="grid-row">
     <div class="column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= form_error_header(f) %>
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
         <h1 class="heading-large"><%= t('.heading') %></h1>
         <div class="step-form vertical-squash">
           <div class="form-group">
             <fieldset>
               <legend class="visuallyhidden"><%= t('.heading') %></legend>
-              <%= f.month_and_year(:start_outline_business_case,
-                                   hint: t(".example_text")) %>
+              <%= month_and_year(@project, :start_outline_business_case, hint: t(".example_text")) %>
             </fieldset>
           </div>
           <%= f.submit t("save_and_continue_label"), class: 'button' %>

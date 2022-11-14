@@ -2,7 +2,7 @@
 
 <section id="project-summary" class="font-xsmall project-summary">
   <%= pafs_form_for @project do |f| %>
-    <%= form_error_header(f, "Check your proposal details", "", @project.articles) %>
+    <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
     <header class="summary-heading">
       <div class="grid-row">
         <div class="column-one-half">
@@ -37,10 +37,7 @@
 
     <% @project.articles.each do |item| %>
       <div class="project-part">
-        <%= f.form_group item do %>
-          <%= f.error_message item %>
-          <%= render partial: "summary/#{item}", locals: { project: @project } %>
-        <% end -%>
+        <%= render partial: "summary/#{item}", locals: { project: @project } %>
       </div>
     <% end %>
 
