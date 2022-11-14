@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
 
   # GOV.UK styling
   s.add_dependency "defra_ruby_template"
+  s.add_dependency "govuk_design_system_formbuilder"
 
   s.add_development_dependency "capybara"
   s.add_development_dependency "climate_control"

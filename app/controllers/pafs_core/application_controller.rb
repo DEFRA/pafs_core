@@ -12,6 +12,8 @@ module PafsCore
 
     rescue_from ActionController::InvalidAuthenticityToken, with: :handle_invalid_authenticity_token
 
+    default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
+
     private
 
     def raise_not_found

@@ -12,6 +12,8 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
+gem "govuk_design_system_formbuilder"
+
 gem "dibble", "~> 0.1",
     git: "https://github.com/tonyheadford/dibble",
     branch: "develop"
