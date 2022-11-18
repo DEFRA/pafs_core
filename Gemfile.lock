@@ -13,9 +13,9 @@ PATH
       bstard
       clamav-client
       defra_ruby_alert (~> 2.1)
-      defra_ruby_template
+      defra_ruby_template (~> 3)
       faraday
-      govuk_design_system_formbuilder
+      govuk_design_system_formbuilder (~> 3)
       kaminari
       net-smtp
       nokogiri
