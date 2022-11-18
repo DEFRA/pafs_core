@@ -1,77 +1,74 @@
 <% content_for :title, t(".heading"), flush: true if I18n.exists?(".heading") %>
 
 <div class="step-container">
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-body">
     <%= pafs_form_for project, url: save_project_step_path(id: project.to_param, step: project.step) do |f| %>
       <div class="govuk-grid-column-two-thirds">
+
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="govuk-heading-l"><%= heading %></h1>
-        <p><%= t(".description") %></p>
-        <p><%= t(".more_detail") %></p>
+
+        <%= f.govuk_fieldset legend: { text: heading, size: 'l' } do %>
+          <%= form_group(project.step, project.step) do %>
+            <p><%= t(".description") %></p>
+            <p><%= t(".more_detail") %></p>
+          <% end %>
+        <% end %>
       </div>
       <div class="govuk-grid-column-three-quarters">
-        <div class="step-form">
-          <% f.object.funding_contributors.where(contributor_type: funding_source).order(:id).map(&:name).uniq.each do |contributor_name| %>
-            <div class="contributor_values">
-              <h3 class="heading-small"><%= contributor_name %></h3>
-                <div class="scroll-horz">
-                  <fieldset>
-                    <legend class="govuk-visually-hidden">What is the estimated spend for each financial year</legend>
-                    <table class="funding-contributor-table">
-                      <thead>
-                        <tr>
-                          <th class="financial-year-column"><%= t(".financial_year_label") %></th>
-                          <th class="estimated-spend"><%= t(".estimated_spend_label") %></th>
-                          <th class="secured"><%= t(".secured_label") %></th>
-                          <th class="time-constrained-column"><%= t(".time_constrained_label") %></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% 
-                            contributors = f.object.funding_contributors.to_a.select do |x| 
-                              x.name == contributor_name && x.contributor_type == funding_source.to_s
-                            end.sort { |a, b| a.funding_value.financial_year <=> b.funding_value.financial_year}
-                        %>
+        <% f.object.funding_contributors.where(contributor_type: funding_source).order(:id).map(&:name).uniq.each do |contributor_name| %>
+          <div class="contributor_values">
+            <h3 class="heading-small"><%= contributor_name %></h3>
+              <div class="scroll-horz">
+                <legend class="govuk-visually-hidden">What is the estimated spend for each financial year</legend>
+                <table class="funding-contributor-table">
+                  <thead>
+                    <tr>
+                      <th class="financial-year-column"><%= t(".financial_year_label") %></th>
+                      <th class="estimated-spend"><%= t(".estimated_spend_label") %></th>
+                      <th class="secured"><%= t(".secured_label") %></th>
+                      <th class="time-constrained-column"><%= t(".time_constrained_label") %></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% 
+                      contributors = f.object.funding_contributors.to_a.select do |x| 
+                        x.name == contributor_name && x.contributor_type == funding_source.to_s
+                        end.sort { |a, b| a.funding_value.financial_year <=> b.funding_value.financial_year}
+                    %>
 
-                        <% contributors.each do |contributor| %>
-                          <%= f.fields_for :funding_contributors, contributor do |builder| %>
-                            <tr>
-                              <td class="financial_year">
-                                <%= formatted_financial_year(builder.object.funding_value.financial_year) %>
-                              </td>
-                              <td class="amount numeric">
-                                <%= builder.number_field_without_label :amount, class: 'funding-value', min: 0, step: 1 %>
-                              </td>
-                              <td class="secured">
-                                <fieldset>
-                                  <%= builder.check_box :secured, label: '' %>
-                                </fieldset>
-                              </td>
-                              <td class="constrained">
-                                <fieldset>
-                                  <%= builder.check_box :constrained, label: '' %>
-                                </fieldset>
-                              </td>
-                            </tr>
-                          <% end %>
-                        <% end %>
-                      </tbody>
-                      <tfoot>
+                    <% contributors.each do |contributor| %>
+                      <%= f.fields_for :funding_contributors, contributor do |builder| %>
                         <tr>
-                          <td class='data-total'><%= t(".total_label") %></td>
-                          <td class="numeric grand-total">Total</td>
-                          <td></td>
-                          <td></td>
+                          <td class="financial_year">
+                            <%= formatted_financial_year(builder.object.funding_value.financial_year) %>
+                          </td>
+                          <td class="amount numeric">
+                            <%= builder.govuk_number_field :amount, class: 'funding-value', min: 0, step: 1, label: nil %>
+                          </td>
+                          <td class="secured">
+                            <%= builder.check_box :secured, label: '' %>
+                          </td>
+                          <td class="constrained">
+                            <%= builder.check_box :constrained, label: '' %>
+                          </td>
                         </tr>
-                      </tfoot>
-                    </table>
-                  </fieldset>
-                </div>
+                      <% end %>
+                    <% end %>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td class='data-total'><%= t(".total_label") %></td>
+                      <td class="numeric grand-total">Total</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+                </table>
             </div>
-          <% end %>
-          <div class="form-group">
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         </div>
       </div>
     <% end %>

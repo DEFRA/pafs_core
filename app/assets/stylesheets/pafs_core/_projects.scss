@@ -118,7 +118,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   }
 }
 
-.funding-table, .protection-outcomes-table, .funding-calculator-summary {
+.funding-table, .protection-outcomes-table, .funding-contributor-table, .funding-calculator-summary {
 
   tr {
     line-height: 25px;
@@ -300,6 +300,10 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   .funding-value {
     text-align: right;
     width: 6em;
+  }
+
+  tbody td {
+    text-align: right;
   }
 
   tfoot td {
