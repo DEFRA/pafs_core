@@ -1,9 +1,9 @@
 <%= pafs_form_for @project, url: project_step_path(id: @project.to_param, step: @project.step), method: :get do |f| %>
   <div class="form-group">
-    <h1 class="heading-large"><%= t('.heading') %></h1>
+    <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
     <p class="form-hint"><%= t('.example_text') %></p>
     <%= form_group(@project.step, :base) do %>
-      <%= f.error_message(:base) %>
+      <%= age(f, :base) %>
       <%= text_field_tag :q, params[:q], label: nil , class: "form-control"%>
     <% end %>
   </div>

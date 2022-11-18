@@ -1,46 +1,56 @@
 <% content_for :title, "Your project proposals" %>
 
 <div id="dashboard">
-  <h1 class="heading-large">Your proposals</h1>
 
-  <% if rma_user? %>
-    <div class="grid-row">
-      <div class="column-two-thirds">
-        <div class="panel panel-indent panel-border-narrow panel-border-short">
-          For submission deadlines please contact your local partnership and strategic overview officer.
+  <div class="govuk-grid-row govuk-body">
+
+    <h1 class="govuk-heading-l">Your proposals</h1>
+
+    <% if rma_user? %>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <div class="govuk-details__text">
+            For submission deadlines please contact your local partnership and strategic overview officer.
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-three-quarters">
+          <p>
+          <%= form_tag(pafs_core.projects_path, method: "get", class: "search-bar") do %>
+            <%= text_field_tag(:q,
+                               params[:q] || "",
+                               placeholder: "Enter a project number or name",
+                               minlength: 1,
+                               maxlength: 30,
+                               class: "govuk-input govuk-!-width-one-half") %>
+            <%= submit_tag("Search", class: "govuk-button") %>
+          <% end %>
         </div>
       </div>
-    </div>
-  <% end %>
-
-  <div class="column-three-quarters">
-    <%= form_tag(pafs_core.projects_path, method: "get", class: "search-bar") do %>
-      <%= text_field_tag(:q, params[:q] || "", placeholder: "Enter a project number or name", minlength: 1, maxlength: 30, class: "form-control") %>
-      <%= submit_tag("Search", class: "button button-secondary") %>
     <% end %>
-  </div>
 
-  <% if ea_user? %>
-    <div class="download-all-proposals-link">
-      <%= link_to t('download_all_proposals_label'), pafs_core.multi_downloads_path %>
-    </div>
-  <% else %>
-    <% if can_create_project? %>
-      <div class="create-new-project">
-        <%= link_to t('create_a_new_project_label'), pafs_core.new_bootstrap_path, class: "button" %>
+    <% if ea_user? %>
+      <div class="download-all-proposals-link">
+        <%= link_to t('download_all_proposals_label'), pafs_core.multi_downloads_path %>
       </div>
     <% else %>
-      <div class="column-three-quarters create-new-project">
-        To create a new EA-Led proposal please <a href="https://aimspd.sharepoint.com/sites/pwa">go to AIMS\:PD</a>
-        <br/>
-        RMA-led projects are to be created by the RMA, by logging into PAFS.
-      </div>
+      <% if can_create_project? %>
+        <div class="create-new-project">
+          <%= link_to t('create_a_new_project_label'), pafs_core.new_bootstrap_path, class: "govuk-button" %>
+        </div>
+      <% else %>
+        <div class="govuk-grid-column-three-quarters create-new-project">
+          To create a new EA-Led proposal please <a href="https://aimspd.sharepoint.com/sites/pwa">go to AIMS\:PD</a>
+          <br/>
+          RMA-led projects are to be created by the RMA, by logging into PAFS.
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  <div>
 
   <section>
     <% unless @projects.empty? %>
-      <table class="dashboard">
+      <table class="dashboard govuk-body-s">
         <thead>
           <tr>
             <th scope="col" class="project-number">National project number</th>
@@ -80,18 +90,19 @@
         </tbody>
       </table>
     <% end %>
-    <div class="grid-row page-nav">
-      <div class="pagination column-one-third">
+
+    <div class="govuk-grid-row govuk-body-s page-nav">
+      <div class="pagination govuk-grid-column-one-third">
         <%= page_entries_info @projects %>
       </div>
-      <div class="column-two-thirds">
+      <div class="govuk-grid-column-one-third">
         <div class="pagination-area">
           <%= paginate @projects, left: 0, right: 0, window: 2 %>
-          <%= link_to('Show All', pafs_core.projects_path(all: true), class: "button") %>
+          <%= link_to('Show All', pafs_core.projects_path(all: true), class: "govuk-button") %>
         </div>
       </div>
       <% if @projects.empty? %>
-        <div class="column-three-quarters">
+        <div class="govuk-grid-column-three-quarters">
           <p>Please try</p>
           <ul class="list list-bullet">
             <li>a different search</li>

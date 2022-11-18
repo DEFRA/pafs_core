@@ -18,7 +18,7 @@ module PafsCore
       if kilometres_of_watercourse_enhanced_or_created_single.blank? ||
          kilometres_of_watercourse_enhanced_or_created_single <= 0
         errors.add(:kilometres_of_watercourse_enhanced_or_created_single,
-                   "^You must include the number of kilometres " \
+                   "You must include the number of kilometres " \
                    "your project will create.")
       end
     end

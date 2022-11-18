@@ -1,23 +1,22 @@
 <% content_for :title, t(".heading"), flush: true if I18n.exists?(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
+  <div class="govuk-grid-row">
     <%= pafs_form_for project, url: save_project_step_path(id: project.to_param, step: project.step) do |f| %>
-      <div class="column-two-thirds">
+      <div class="govuk-grid-column-two-thirds">
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= heading %></h1>
+        <h1 class="govuk-heading-l"><%= heading %></h1>
         <p><%= t(".description") %></p>
         <p><%= t(".more_detail") %></p>
       </div>
-      <div class="column-three-quarters">
+      <div class="govuk-grid-column-three-quarters">
         <div class="step-form">
           <% f.object.funding_contributors.where(contributor_type: funding_source).order(:id).map(&:name).uniq.each do |contributor_name| %>
             <div class="contributor_values">
               <h3 class="heading-small"><%= contributor_name %></h3>
-                <%= f.error_message(:base) %>
                 <div class="scroll-horz">
                   <fieldset>
-                    <legend class="visuallyhidden">What is the estimated spend for each financial year</legend>
+                    <legend class="govuk-visually-hidden">What is the estimated spend for each financial year</legend>
                     <table class="funding-contributor-table">
                       <thead>
                         <tr>
@@ -71,7 +70,7 @@
             </div>
           <% end %>
           <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           </div>
         </div>
       </div>

@@ -1,30 +1,28 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <p><%= t('.lede') %></p>
-        <div class="step-form">
-          <fieldset>
-            <legend class="visuallyhidden">Select which risks your project protects against</legend>
-            <%= form_group(@project.step, :base) do %>
-              <%= f.error_message(:base) %>
-              <%= f.check_box :fluvial_flooding %>
-              <%= f.check_box :tidal_flooding %>
-              <%= f.check_box :groundwater_flooding %>
-              <%= f.check_box :surface_water_flooding %>
-              <%= f.check_box :sea_flooding %>
-              <%= f.check_box :reservoir_flooding %>
-              <%= f.check_box :coastal_erosion %>
-            <% end %>
-        </fieldset>
-        </div>
-        <div class="form-group">
-          <%= f.submit t("save_and_continue_label"), class: 'button' %>
-        </div>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <p><%= t('.lede') %></p>
+          <legend class="govuk-visually-hidden">Select which risks your project protects against</legend>
+          <% i18n_scope = "pafs_core.fcerm1.risks" %>
+          <%= form_group(:risks, :base) do %>
+            <%= govuk_checkbox_for f, :fluvial_flooding, i18n_scope %>
+            <%= govuk_checkbox_for f, :tidal_flooding, i18n_scope %>
+            <%= govuk_checkbox_for f, :groundwater_flooding, i18n_scope %>
+            <%= govuk_checkbox_for f, :surface_water_flooding, i18n_scope %>
+            <%= govuk_checkbox_for f, :sea_flooding, i18n_scope %>
+            <%= govuk_checkbox_for f, :reservoir_flooding, i18n_scope %>
+            <%= govuk_checkbox_for f, :coastal_erosion, i18n_scope %>
+          <% end %>
+          <p>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+        <% end %>
       <% end %>
     </div>
   </div>

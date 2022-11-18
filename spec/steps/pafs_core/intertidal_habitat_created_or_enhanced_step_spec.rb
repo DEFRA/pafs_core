@@ -12,7 +12,7 @@ RSpec.describe PafsCore::IntertidalHabitatCreatedOrEnhancedStep, type: :model do
       subject.intertidal_habitat = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:intertidal_habitat])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

@@ -1,15 +1,14 @@
 <% if @downloads.count.positive? %>
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row govuk-body">
+  <div class="govuk-grid-column-two-thirds">
     <%= link_to "Generate programme", pafs_core.generate_multi_downloads_path,
         class: "button headroom-smaller", role: "button" %>
-  </div>
-</div>
-<div class="grid-row">
-  <div class="column-two-thirds">
-    <details class="headroom">
-      <summary><span class="summary">Why do I need to generate programme?</span></summary>
-      <div class="panel panel-border-narrow">
+
+    <details class="headroom govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">Why do I need to generate programme?</span>
+      </summary>
+      <div class="govuk-details__text">
         <p>
           By generating the programme you ensure that the latest proposals are included in the FCERM1 file,
           alongside their supporting shapefiles and moderation forms.

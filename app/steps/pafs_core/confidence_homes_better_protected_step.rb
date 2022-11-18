@@ -7,10 +7,10 @@ module PafsCore
     delegate :confidence_homes_better_protected, :confidence_homes_better_protected=,
              to: :project
 
-    validates :confidence_homes_better_protected, presence: { message: "^Select the confidence level" }
+    validates :confidence_homes_better_protected, presence: { message: "Select the confidence level" }
     validates :confidence_homes_better_protected, inclusion: {
       in: PafsCore::Confidence::CONFIDENCE_VALUES,
-      message: "^Chosen level must be one of the valid values"
+      message: "Chosen level must be one of the valid values"
     }, if: -> { confidence_homes_better_protected.present? }
 
     private

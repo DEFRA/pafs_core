@@ -12,7 +12,7 @@ RSpec.describe PafsCore::PondsLakesHabitatCreatedOrEnhancedStep, type: :model do
       subject.ponds_lakes = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:ponds_lakes])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

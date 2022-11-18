@@ -2,11 +2,11 @@
 
 <% last_year = @project.financial_year_options.last + 1 %>
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
+        <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
         <p><%= t('.lede') %></p>
         <div class="step-form">
           <%= f.number_field :project_end_financial_year,
@@ -16,7 +16,7 @@
             label: t(".financial_year_label"),
             label_class: "form-label" %>
 
-          <%= f.submit t("save_and_continue_label"), class: 'button' %>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       </div>
     </div>

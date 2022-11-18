@@ -19,10 +19,10 @@ module PafsCore
       if v.blank? || v.zero? || v.nil?
         errors.add(
           :project_end_financial_year,
-          "^Tell us the financial year when the project will stop spending funds."
+          "Tell us the financial year when the project will stop spending funds."
         )
       elsif v < current_financial_year
-        errors.add(:project_end_financial_year, "^The financial year must be in the future")
+        errors.add(:project_end_financial_year, "The financial year must be in the future")
       elsif v > 2100
         errors.add(:project_end_financial_year, "must be 2100 or earlier")
       end

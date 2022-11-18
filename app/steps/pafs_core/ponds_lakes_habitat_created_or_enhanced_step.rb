@@ -24,7 +24,7 @@ module PafsCore
     def a_choice_has_been_made
       return unless ponds_lakes.nil?
 
-      errors.add(:ponds_lakes, "^You must select yes or no")
+      errors.add(:ponds_lakes, "You must select yes or no")
     end
   end
 end

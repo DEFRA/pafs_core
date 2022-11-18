@@ -1,16 +1,17 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-three-quarters">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-three-quarters">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <p><%= t('.lede') %></p>
-        <div class="step-form">
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <%= form_group(@project.step, :base) do %>
-            <div class="scroll-horz">
-              <fieldset>
+            <%= error_message(f.object, :base) %>
+            <p><%= t('.lede') %></p>
+            <div class="scroll-horz govuk-body-s">
                 <legend class="govuk-visually-hidden">What is the estimated spend for each financial year</legend>
                 <table class="funding-table hidden-totals">
                   <thead>
@@ -40,13 +41,11 @@
                               <%= builder.label fs, class: "govuk-visually-hidden" do -%>
                                 <%= "#{t(".#{fs}_label")} #{ formatted_financial_year(builder.object.financial_year) }" -%>
                               <% end -%>
-                              <%= builder.govuk_text_field(fs,
-                                                           class: "funding-value",
-                                                           pattern: "[0-9]*",
-                                                           inputmode: "numeric",
-                                                           label: nil,
-                                                           value: builder.object.send(fs).to_i)
-                                                           %>
+                              <%= builder.govuk_number_field(fs,
+                                                             class: "funding-value",
+                                                             label: nil,
+                                                             value: builder.object.send(fs).to_i)
+                                                             %>
                             </td>
                           <% end %>
                         <% end %>
@@ -66,14 +65,12 @@
                     </tr>
                   </tfoot>
                 </table>
-              </fieldset>
             </div>
-            <% end %>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
+            <p>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

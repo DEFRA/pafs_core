@@ -11,7 +11,7 @@ RSpec.describe PafsCore::EarliestStartStep, type: :model do
     it "validates that :could_start_early has been set" do
       subject.could_start_early = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:could_start_early]).to include "^Tell us if the project can start earlier"
+      expect(subject.errors.messages[:could_start_early]).to include "Tell us if the project can start earlier"
     end
   end
 

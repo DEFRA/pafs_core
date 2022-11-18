@@ -1,27 +1,32 @@
 <% content_for :title, t('download_all_proposals_label') %>
 
-<h1 class="heading-large"><%= t('download_all_proposals_label') %></h1>
-<div class="sub-heading">
-  <% if @downloads.count == 1 %>
-    There is <span class="bold-small">1</span> proposal available for the programme.
-  <% else %>
-    <p>
-      There are <span class="bold-small"><%= @downloads.count %></span> proposals available for the programme of which:
-    </p>
-    <dl>
-      <dt>
-        <%= @submitted.nil? ? 0 : @submitted.count %> are status Submitted</ br>
-      </dt>
-      <dt>
-        <%= @drafts.nil? ? 0 : @drafts.count %> are status Draft</ br>
-      </dt>
-      <dt>
-        <%= @review.nil? ? 0 : @review.count %> are status Review</ br>
-      </dt>
-      <dt>
-        <%= @archived.nil? ? 0 : @archived.count %> are status Archived</ br>
-      </dt>
-    </dl>
-  <% end %>
+<div class="govuk-grid-row govuk-body">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t('download_all_proposals_label') %></h1>
+    <div class="sub-heading">
+      <% if @downloads.count == 1 %>
+       There is <span><b>1</b></span> proposal available for the programme.
+      <% else %>
+        <p>
+          There are <span><b><%= @downloads.count %></b></span> proposals available for the programme of which:
+        </p>
+        <dl>
+          <dt>
+            <%= @submitted.nil? ? 0 : @submitted.count %> are status Submitted</ br>
+          </dt>
+          <dt>
+            <%= @drafts.nil? ? 0 : @drafts.count %> are status Draft</ br>
+          </dt>
+          <dt>
+            <%= @review.nil? ? 0 : @review.count %> are status Review</ br>
+          </dt>
+          <dt>
+            <%= @archived.nil? ? 0 : @archived.count %> are status Archived</ br>
+          </dt>
+        </dl>
+      <% end %>
+    </div>
+  </div>
 </div>
+
 <%= render partial: @downloads.documentation_state.current_state.to_s, locals: { downloads: @downloads } %>

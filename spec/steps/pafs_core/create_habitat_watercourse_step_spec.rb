@@ -12,7 +12,7 @@ RSpec.describe PafsCore::CreateHabitatWatercourseStep, type: :model do
       subject.create_habitat_watercourse = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:create_habitat_watercourse])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

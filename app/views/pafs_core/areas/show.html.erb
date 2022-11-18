@@ -1,13 +1,13 @@
-<h1 class="heading-large"><%= "#{@area.name} (#{@area.area_type})" %></h1>
+<h1 class="govuk-heading-l"><%= "#{@area.name} (#{@area.area_type})" %></h1>
 <% unless @area.area_type == PafsCore::Area::AREA_TYPES[0] %>
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= link_to "Up a level", pafs_core.area_path(@area.parent_id) %>
     </div>
   </div>
 <% end %>
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
   <table class="table">
     <tr>
       <th>Type</th>

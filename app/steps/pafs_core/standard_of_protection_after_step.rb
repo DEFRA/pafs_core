@@ -6,7 +6,7 @@ module PafsCore
     include PafsCore::Risks
 
     validates :flood_protection_after, presence: {
-      message: "^Select the option that shows the potential risk of flooding \
+      message: "Select the option that shows the potential risk of flooding \
       to the area after the project is complete."
     }
 

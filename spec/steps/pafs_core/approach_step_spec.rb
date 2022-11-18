@@ -12,7 +12,7 @@ RSpec.describe PafsCore::ApproachStep, type: :model do
       subject.approach = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:approach]).to include
-      "^Tell us the work the project plans to do to achieve its outcomes."
+      "Tell us the work the project plans to do to achieve its outcomes."
     end
   end
 

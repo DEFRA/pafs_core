@@ -3,7 +3,7 @@
   url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
   <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
   <div class="step-form">
-    <h1 class="heading-large" id="file-context"><%= t('.heading') %></h1>
+    <h1 class="govuk-heading-l" id="file-context"><%= t('.heading') %></h1>
     <div class="form-group">
       <table>
         <thead>
@@ -32,6 +32,6 @@
         </tbody>
       </table>
     </div>
-    <%= f.submit t("continue_label"), class: 'button' %>
+    <%= f.govuk_submit t("continue_label"), class: 'button' %>
   </div>
 <% end %>

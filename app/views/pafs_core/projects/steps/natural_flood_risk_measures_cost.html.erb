@@ -1,29 +1,28 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <div class="step-form">
-          <fieldset>
-            <legend class="visuallyhidden"><%= t('.heading') %></legend>
-            <%= form_group(@project.step, :base) do %>
-              <%= f.error_message(:base) %>
-              <%= f.label(:natural_flood_risk_measures_cost, t('.heading'), class: "visuallyhidden") %>
-              <div class="currency-field">
-                <%= f.number_field_without_label(:natural_flood_risk_measures_cost,
-                    class: "form-control form-large",
-                    step: 0.01
-                    ) %>
-              </div>
-            <% end %>
-          </fieldset>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
-        </div>
+
+        <%= f.govuk_fieldset(legend: { text: t('.heading') }) do %>
+
+          <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
+          <%= f.label(:natural_flood_risk_measures_cost, t('.heading'), class: "govuk-visually-hidden") %>
+
+          <%= f.govuk_text_field(:natural_flood_risk_measures_cost,
+                                 pattern: "[0-9]*",
+                                 inputmode: "numeric",
+                                 prefix_text: '£',
+                                 label: nil,
+                                 step: 0.01,
+                                 width: "one-half"
+                                 ) %>
+        <% end %>
+
+        <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
       <% end %>
     </div>
   </div>

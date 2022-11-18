@@ -13,7 +13,7 @@ RSpec.describe PafsCore::ProjectTypeStep, type: :model do
     it "validates that :project_type is present" do
       subject.project_type = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:project_type]).to include "^Select a project type"
+      expect(subject.errors.messages[:project_type]).to include "Select a project type"
     end
 
     it "validates that the selected :project_type is valid" do
@@ -23,7 +23,7 @@ RSpec.describe PafsCore::ProjectTypeStep, type: :model do
       end
       subject.project_type = "Peanuts"
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:project_type]).to include "^Select a project type"
+      expect(subject.errors.messages[:project_type]).to include "Select a project type"
     end
   end
 

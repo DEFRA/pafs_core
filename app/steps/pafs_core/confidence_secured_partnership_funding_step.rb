@@ -7,10 +7,10 @@ module PafsCore
     delegate :confidence_secured_partnership_funding, :confidence_secured_partnership_funding=,
              to: :project
 
-    validates :confidence_secured_partnership_funding, presence: { message: "^Select the confidence level" }
+    validates :confidence_secured_partnership_funding, presence: { message: "Select the confidence level" }
     validates :confidence_secured_partnership_funding, inclusion: {
       in: PafsCore::Confidence::CONFIDENCE_VALUES,
-      message: "^Chosen level must be one of the valid values"
+      message: "Chosen level must be one of the valid values"
     }, if: -> { confidence_secured_partnership_funding.present? }
 
     private

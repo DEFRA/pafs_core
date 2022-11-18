@@ -33,7 +33,7 @@ module PafsCore
 
       errors.add(
         :start_construction,
-        "^You expect to award the project's main contract on #{dt1.month} #{dt1.year}. \
+        "You expect to award the project's main contract on #{dt1.month} #{dt1.year}. \
         The date you expect to start the work must come after this date."
       )
     end
@@ -49,7 +49,7 @@ module PafsCore
              (2000..2100).cover?(yv.to_i)
         errors.add(
           :start_construction,
-          "^Enter the date you expect to start the work "
+          "Enter the date you expect to start the work "
         )
       end
     end

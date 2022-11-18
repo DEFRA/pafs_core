@@ -1,7 +1,7 @@
 <% content_for :title, "Archived Proposals" %>
 
-<div id="dashboard">
-  <h1 class="heading-large">Archived Proposals</h1>
+<div id="dashboard" class="govuk-body">
+  <h1 class="govuk-heading-l">Archived Proposals</h1>
 
   <section>
     <% unless @projects.empty? %>
@@ -44,17 +44,17 @@
         </tbody>
       </table>
     <% end %>
-    <div class="grid-row page-nav">
-      <div class="pagination column-one-third">
+    <div class="govuk-grid-row page-nav">
+      <div class="pagination govuk-grid-column-one-third">
         <%= page_entries_info @projects %>
       </div>
-      <div class="column-two-thirds">
+      <div class="govuk-grid-column-two-thirds">
         <div class="pagination-area">
           <%= paginate @projects, left: 0, right: 0, window: 2 %>
         </div>
       </div>
       <% if @projects.empty? %>
-        <div class="column-three-quarters">
+        <div class="govuk-grid-column-three-quarters">
           <p>Archive a project in the proposal overview</p>
           <p>Return to <%= link_to("Your proposals", projects_path) %></p>
         </div>

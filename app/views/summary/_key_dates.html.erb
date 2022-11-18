@@ -2,13 +2,13 @@
   <% if project.key_dates_started? %>
     <div class="summary-item-content">
       <h2 class="heading-medium" role="heading" id="key-dates">Important dates</h2>
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <table class="full-table">
             <thead>
               <tr>
-                <th class="visuallyhidden">Important date</th>
-                <th class="visuallyhidden">Date</th>
+                <th class="govuk-visually-hidden">Important date</th>
+                <th class="govuk-visually-hidden">Date</th>
               </tr>
             </thead>
             <tbody>
@@ -31,12 +31,12 @@
             </tbody>
           </table>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="change-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :start_outline_business_case_date) do -%>
-                  Change<span class="visually-hidden"> the <%= t(".start_outline_business_case_label").downcase %></span>
+                  Change<span class="govuk-visually-hidden"> the <%= t(".start_outline_business_case_label").downcase %></span>
                 <% end -%>
               </div>
             <% end -%>
@@ -46,16 +46,16 @@
     </div>
   <% else %>
     <div class="add-row">
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <h2 class="heading-medium" role="heading" id="key-dates">Important dates</h2>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :start_outline_business_case_date) do -%>
-                  Add<span class="visually-hidden"> the important dates</span>
+                  Add<span class="govuk-visually-hidden"> the important dates</span>
                 <% end -%>
               </div>
             <% end -%>

@@ -1,21 +1,21 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
         <%= f.hidden_field :id %>
         <% heading = I18n.t("#{@project.urgency_reason}_label", scope: "pafs_core.urgency_details") %>
-        <h1 class="heading-large"><%= heading %></h1>
+        <h1 class="govuk-heading-l"><%= heading %></h1>
         <div class="step-form">
           <fieldset>
-            <legend class="visuallyhidden">Explain why your project is urgent</legend>
-            <%= f.label :urgency_details, heading, class: "visuallyhidden" %>
+            <legend class="govuk-visually-hidden">Explain why your project is urgent</legend>
+            <%= f.label :urgency_details, heading, class: "govuk-visually-hidden" %>
             <%= f.text_area :urgency_details, class: "form-control form-wide", cols: 30, rows: 10, hint: t(".example_text"), label: :none %>
           </fieldset>
           <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           </div>
         </div>
       <% end %>

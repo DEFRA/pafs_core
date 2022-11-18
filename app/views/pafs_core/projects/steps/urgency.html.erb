@@ -1,32 +1,31 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
         <%= f.hidden_field :id %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <div class="step-form">
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <p><%= t('.urgency_proposal_need_agree') %></p>
-          <fieldset>
-            <legend class="visuallyhidden">Select the reason why your project is urgent</legend>
-            <%= form_group(@project.step, :urgency_reason) do %>
-              <%= f.error_message(:urgency_reason) %>
-              <% PafsCore::Urgency::URGENCY_REASONS.each do |r| %>
-                <%= f.radio_button :urgency_reason,
-                                   r.to_s,
-                                   label: urgency_reason_text(r) %>
-                <% if r == "not_urgent" %>
-                  <div class="control-text-block">or</div>
-                <% end %>
+          <legend class="govuk-visually-hidden">Select the reason why your project is urgent</legend>
+          <%= form_group(@project.step, :urgency_reason) do %>
+            <%= error_message(f.object, :urgency_reason) %>
+            <% PafsCore::Urgency::URGENCY_REASONS.each do |r| %>
+              <%= f.govuk_radio_button :urgency_reason,
+                                      r.to_s,
+                                      label: { text: urgency_reason_text(r) } %>
+              <% if r == "not_urgent" %>
+                <div class="control-text-block">or</div>
               <% end %>
             <% end %>
-          </fieldset>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
-        </div>
+            <p>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

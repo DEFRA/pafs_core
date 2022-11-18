@@ -1,23 +1,25 @@
 <% scope = "pafs_core.projects.steps.funding_calculator" %>
 <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step), html: { multipart: true } do |f| %>
   <%= f.hidden_field :funding_calculator_file_name %>
+
   <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-  <div class="step-form">
-    <h1 class="heading-large"><%= t('heading', scope: scope) %></h1>
-    <p><%= t('lede', scope: scope) %></p>
-    <p><%= t('version_statement', scope: scope) %></p>
-    <p class="bold-small"><%= t('version_question', scope: scope) %></p>
 
-    <div class="form-group">
+    <%= f.govuk_fieldset legend: { text: t('heading', scope: scope), size: 'l' } do %>
+      <p><%= t('lede', scope: scope) %></p>
+      <p><%= t('version_statement', scope: scope) %></p>
+      <p><b><%= t('version_question', scope: scope) %></b></p>
+
       <%= form_group(@project.step, :base) do %>
-        <%= f.error_message(:base) %>
+        <legend class="govuk-visually-hidden">Version</legend>
 
-        <fieldset class="inline">
-          <legend class="visuallyhidden">Version</legend>
-          <%= f.radio_button_group(:expected_version,
-                                    [ { value: "v9", options: { label: t(:yes_option) } },
-                                      { value: "v8", options: { label: t(:no_option) } }]) %>
-        </fieldset>
+        <% radio_struct = Struct.new(:value, :text) %>
+        <%= f.govuk_collection_radio_buttons(:expected_version,
+                                                  [radio_struct.new("v9", t(:yes_option)),
+                                                   radio_struct.new("v8", t(:no_option))],
+                                                   :value,
+                                                   :text,
+                                                   legend: nil,
+                                                   inline: true) %>
 
         <%= render partial: 'pafs_core/projects/steps/funding_calculator_upload_version/v8' %>
         <%= render partial: 'pafs_core/projects/steps/funding_calculator_upload_version/v9' %>
@@ -25,26 +27,26 @@
         <div class='upload-section'>
           <h3 class="heading-medium" id="file-upload"><%= t("upload_heading", scope: scope) %></h3>
 
-          <%= f.file_field :funding_calculator,
-                          accept: @project.acceptable_funding_calculator_types,
-                          aria: { labelledby: "file-upload" } %>
+          <%= f.govuk_file_field :funding_calculator,
+                                 accept: @project.acceptable_funding_calculator_types,
+                                 aria: { labelledby: "file-upload" },
+                                 label: nil %>
         </div>
       <% end %>
-    </div>
+    <% end %>
+
     <div class='upload-section'>
-      <%= f.submit t("upload_and_continue_label"), class: 'button' %>
+      <%= f.govuk_submit t("upload_and_continue_label"), class: 'button' %>
     </div>
-    <div class="grid-row headroom">
-      <div class="column-two-thirds">
+    <div class="govuk-grid-row headroom">
+      <div class="govuk-grid-column-two-thirds">
         <p><%= t('version_guidance', scope: scope).html_safe %></p>
-
-        <details>
-          <summary role="button" aria-controls="calc-help-needed">
-            <span class="summary"><%= t('if_you_need_help', scope: scope) %></span>
+        <details class="headroom govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text"><%= t('if_you_need_help', scope: scope) %></span>
           </summary>
-          <div class="panel panel-indent panel-border-narrow" id="calc-help-needed">
+          <div class="govuk-details__text" id="calc-help-needed">
             <p><%= t('contact_your_pso', scope: scope) %> </p>
-
           </div>
         </details>
       </div>

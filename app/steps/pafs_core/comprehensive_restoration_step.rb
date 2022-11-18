@@ -25,7 +25,7 @@ module PafsCore
       return unless comprehensive_restoration.nil?
 
       errors.add(:comprehensive_restoration,
-                 "^You must select yes or no")
+                 "You must select yes or no")
     end
   end
 end

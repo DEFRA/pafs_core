@@ -1,16 +1,16 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
+        <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
         <div class="step-form">
           <div class ="form-group">
             <%= f.hidden_field :id %>
             <fieldset>
-              <legend class="visuallyhidden"><%= t(".heading") %></legend>
+              <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
               <% PafsCore::Confidence::CONFIDENCE_VALUES.each do |value| %>
                 <%= f.radio_button :confidence_homes_by_gateway_four, 
                       value,
@@ -20,7 +20,7 @@
             </fieldset>
           </div>
           <div class ="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           </div>
         <% end %>
       </div>

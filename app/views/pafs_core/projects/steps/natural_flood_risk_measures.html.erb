@@ -1,43 +1,43 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
+        <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
         <p><%= t('.lede') %></p>
         <div class="step-form">
           <fieldset>
-            <legend class="visuallyhidden"><%= t(".heading") %></legend>
+            <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
             <%= form_group(@project.step, :base) do %>
-              <%= f.error_message(:base) %>
-              <%= f.check_box :river_restoration %>
-              <%= f.check_box :floodplain_restoration %>
-              <%= f.check_box :leaky_barriers %>
-              <%= f.check_box :offline_flood_storage_areas %>
-              <%= f.check_box :cross_slope_woodland %>
-              <%= f.check_box :catchment_woodland %>
-              <%= f.check_box :riparian_woodland %>
-              <%= f.check_box :floodplain_woodland %>
-              <%= f.check_box :soil_and_land_management %>
-              <%= f.check_box :land_and_headwater_drainage_management %>
-              <%= f.check_box :runoff_pathway_management %>
-              <%= f.check_box :saltmarsh_mudflats_and_managed_realignment %>
-              <%= f.check_box :sand_dunes %>
-              <%= f.check_box :beach_nourishment %>
-              <div class="multiple-choice">
+              <%= govuk_checkbox_for f, :river_restoration %>
+              <%= govuk_checkbox_for f, :floodplain_restoration %>
+              <%= govuk_checkbox_for f, :leaky_barriers %>
+              <%= govuk_checkbox_for f, :offline_flood_storage_areas %>
+              <%= govuk_checkbox_for f, :cross_slope_woodland %>
+              <%= govuk_checkbox_for f, :catchment_woodland %>
+              <%= govuk_checkbox_for f, :riparian_woodland %>
+              <%= govuk_checkbox_for f, :floodplain_woodland %>
+              <%= govuk_checkbox_for f, :soil_and_land_management %>
+              <%= govuk_checkbox_for f, :land_and_headwater_drainage_management %>
+              <%= govuk_checkbox_for f, :runoff_pathway_management %>
+              <%= govuk_checkbox_for f, :saltmarsh_mudflats_and_managed_realignment %>
+              <%= govuk_checkbox_for f, :sand_dunes %>
+              <%= govuk_checkbox_for f, :beach_nourishment %>
+              <div class="govuk-checkboxes__item">
                 <input name="natural_flood_risk_measures_step[other_flood_measures_selected]" type="hidden" value="0">
                 <% if f.object.other_flood_measures_selected %>
-                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="1" checked onclick="toggleBoxVisibility()">
+                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="other_flood_measures_selected" checked onclick="toggleBoxVisibility()">
                 <% else %>
-                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="1" onclick="toggleBoxVisibility()">
+                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="other_flood_measures_selected" onclick="toggleBoxVisibility()">
                 <% end %>
-                <label for="natural_flood_risk_measures_step_other_flood_measures_selected">Other</label>
+                <label for="natural_flood_risk_measures_step_other_flood_measures_selected" class="govuk-label govuk-checkboxes__label">
+                  Other
+                </label>
               </div>
 
             <% end %>
-            <%= f.error_message(:other_flood_measures) %>
             <div id="other-flood-measures" class="panel">
               <label class="form-label" for="natural_flood_risk_measures_step_other_flood_measures"><%= t(".other_flood_measures_label") %></label>
               <input type="text" name="natural_flood_risk_measures_step[other_flood_measures]" id="natural_flood_risk_measures_step_other_flood_measures" value=<%= f.object.other_flood_measures %>>
@@ -45,7 +45,7 @@
         </fieldset>
         </div>
         <div class="form-group">
-          <%= f.submit t("save_and_continue_label"), class: 'button' %>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         </div>
       <% end %>
     </div>

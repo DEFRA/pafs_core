@@ -18,7 +18,7 @@ module PafsCore
       if hectares_of_heathland_created_or_enhanced.blank? ||
          hectares_of_heathland_created_or_enhanced <= 0
         errors.add(:hectares_of_heathland_created_or_enhanced,
-                   "^You must include the number of hectares " \
+                   "You must include the number of hectares " \
                    "your project will create.")
       end
     end

@@ -2,16 +2,16 @@
   <% if project.location_set? %>
     <div class="summary-item-content">
       <h2 class="heading-medium" role="heading" id="location"><%= project.summary_label(:location_title) %></h2>
-      <div class="grid-row">
-        <div class="column-one-half">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
           <h3 class="column-heading-small">National Grid Reference</h3>
         </div>
       </div>
-      <div class="grid-row">
-        <div class="column-one-quarter aslign-right">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter aslign-right">
           <%= project.grid_reference %>
         </div>
-        <div class="column-one-half">
+        <div class="govuk-grid-column-one-half">
           <div class="map-link">
             <%= link_to t("see_this_location_link_label"),
               project.grid_reference_link,
@@ -19,12 +19,12 @@
               target: "_blank" %>
           </div>
         </div>
-        <div class="column-one-quarter align-right">
+        <div class="govuk-grid-column-one-quarter align-right">
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="change-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :location) do -%>
-                  Change<span class="visually-hidden"> <%= project.summary_label(:location_title).downcase %></span>
+                  Change<span class="govuk-visually-hidden"> <%= project.summary_label(:location_title).downcase %></span>
                 <% end -%>
               </div>
             <% end -%>
@@ -32,8 +32,8 @@
         </div>
       </div>
       <% if project.show_location_data? %>
-        <div class="grid-row">
-          <div class="column-two-thirds">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
             <p><strong>Region:</strong> <%= project.region %><br/>
               <strong>County:</strong> <%= project.county %><br/>
               <strong>Constituency:</strong> <%= project.parliamentary_constituency %></p>
@@ -41,8 +41,8 @@
         </div>
       <% end -%>
       <% if project.benefit_area_file_uploaded? %>
-        <div class="grid-row">
-          <div class="column-two-thirds">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
             <h3 class="column-heading-small">Project benefit area</h3>
             <div class="attachment">
               <div class="attachment-thumb">
@@ -55,7 +55,7 @@
                 <h3 class="title">
                   <%= link_to benefit_area_downloads_path(project.to_param),
                     aria: { described_by: "location" } do -%>
-                    <span class="visually-hidden">Download your benefit area file </span>
+                    <span class="govuk-visually-hidden">Download your benefit area file </span>
                     <%= project.benefit_area_file_name %>
                   <% end %>
                 </h3>
@@ -70,13 +70,13 @@
           </div>
         </div>
       <% else %>
-        <div class="grid-row">
-          <div class="column-two-thirds">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
             <h3 class="column-heading-small">Project benefit area</h3>
           </div>
         </div>
-        <div class="grid-row">
-          <div class="column-two-thirds">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
             <div class="footroom">
               <%= project.not_provided %>
             </div>
@@ -86,18 +86,18 @@
     </div>
   <% else %>
     <div class="add-row">
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <h2 class="heading-medium" role="heading" id="location">
             <%= project.summary_label(:location_title) %>
           </h2>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :location) do -%>
-                  Add<span class="visually-hidden"> <%= project.summary_label(:location_title).downcase %></span>
+                  Add<span class="govuk-visually-hidden"> <%= project.summary_label(:location_title).downcase %></span>
                 <% end -%>
               </div>
             <% end -%>

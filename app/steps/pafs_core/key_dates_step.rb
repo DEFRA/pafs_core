@@ -38,7 +38,7 @@ module PafsCore
     #         y = "#{attr}_year"
     #         mv = send(m)
     #         yv = send(y)
-    #         errors.add(attr, "^Enter a valid date") unless mv.present? &&
+    #         errors.add(attr, "Enter a valid date") unless mv.present? &&
     #                                                        yv.present? &&
     #                                                        (1..12).cover?(mv.to_i) &&
     #                                                        (2000..2100).cover?(yv.to_i)

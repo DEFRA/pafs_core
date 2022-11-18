@@ -12,7 +12,7 @@ RSpec.describe PafsCore::StandardOfProtectionAfterStep, type: :model do
       subject.flood_protection_after = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:flood_protection_after]).to include
-      "^Select the option that shows the potential risk of flooding to the area after the project is complete."
+      "Select the option that shows the potential risk of flooding to the area after the project is complete."
     end
 
     it "validates that :flood_protection_before is not greater than :flood_protection_after" do
@@ -20,7 +20,7 @@ RSpec.describe PafsCore::StandardOfProtectionAfterStep, type: :model do
       subject.flood_protection_after = 1
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:flood_protection_after]).to include
-      "^Once the project is complete the flood risk must be less than it is now"
+      "Once the project is complete the flood risk must be less than it is now"
     end
   end
 

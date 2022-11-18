@@ -11,45 +11,31 @@ module PafsCore
                   class: "pafs_form")
     end
 
-    def month_and_year(project, attribute, options = {})
+    def month_and_year(form, _project, attribute, options = {})
       m_key = "#{attribute}_month".to_sym
       y_key = "#{attribute}_year".to_sym
-
       contents = []
       contents << heading_text(options.delete(:heading)) if options.include? :heading
-      contents << content_tag(:p, options.delete(:hint), class: "form-hint") if options.include? :hint
+      contents << content_tag(:p, options.delete(:hint), class: "govuk-hint") if options.include? :hint
       # need to handle the 2 fields as one for errors
+      contents << error_message(form.object, attribute)
       contents << content_tag(:div, class: "form-date") do
         safe_join([
                     content_tag(:div, class: "form-group form-group-month") do
-                      safe_join([
-                                  label_tag("#{project.step}_step_#{m_key}",
-                                            I18n.t("month_label"),
-                                            class: "form-label"),
-                                  text_field_tag("#{project.step}_step[#{m_key}]", 
-                                                 project.send(m_key),
-                                                 maxlength: 2,
-                                                 min: 1,
-                                                 max: 12,
-                                                 size: 2,
-                                                 type: "number",
-                                                 class: "form-control form-month")
-                                ], "\n")
+                      form.govuk_number_field(
+                        m_key,
+                        width: 2, maxlength: 2, min: 1, max: 12,
+                        label: { text: t("month_label") },
+                        class: "form-group-month"
+                      )
                     end,
                     content_tag(:div, class: "form-group form-group-year") do
-                      safe_join([
-                                  label_tag("#{project.step}_step_#{m_key}",
-                                            I18n.t("year_label"),
-                                            class: "form-label"),
-                                  text_field_tag("#{project.step}_step[#{y_key}]",
-                                                 project.send(y_key),
-                                                 maxlength: 4,
-                                                 min: 2000,
-                                                 max: 2100,
-                                                 size: 4,
-                                                 type: "number",
-                                                 class: "form-control form-year")
-                                ], "\n")
+                      form.govuk_number_field(
+                        y_key,
+                        width: 4, maxlength: 4, min: 2000, max: 2100,
+                        label: { text: t("year_label") },
+                        class: "form-group-year"
+                      )
                     end
                   ], "\n")
       end
@@ -57,16 +43,46 @@ module PafsCore
       safe_join(contents, "\n")
     end
 
-    def form_group(form, name)
+    def error_message(object, attribute)
+      return unless object.errors.include? attribute
+
       content = []
-      content << content_tag(:div) { yield } if block_given?
-      content_tag(:div, class: "form-group", id: content_id(form, name.to_sym)) do
-        safe_join(content, "\n")
+      object.errors.full_messages_for(attribute).each_with_index do |message, i|
+        content << content_tag(:p, trim_error_message(attribute, message),
+                               class: "govuk-error-message",
+                               id: "#{attr_name(attribute)}-error-#{i}")
+      end
+      safe_join(content, "\n")
+    end
+
+    # This is a workaround to allow the legacy PAFS error setup to work with GOVUK FormBuilder error handling.
+    def trim_error_message(attribute, message)
+      message.delete_prefix(attribute.to_s.humanize)
+    end
+
+    def form_group(step, name, &)
+      content_tag(:div, class: "form-group", id: content_id(step, name.to_sym)) do
+        content_tag(:div, &) if block_given?
       end
     end
 
     def content_id(form, attribute)
       "#{form}-#{attribute}-content"
+    end
+
+    # rubocop:disable Rails/HelperInstanceVariable
+    def attr_name(attribute)
+      "#{@object_name}-#{attribute}"
+    end
+    # rubocop:enable Rails/HelperInstanceVariable
+
+    def govuk_checkbox_for(form, attribute, scope = ".")
+      form.govuk_check_box(
+        attribute,
+        attribute,
+        label: { text: t(attribute, scope: scope) },
+        multiple: false
+      )
     end
 
     def title

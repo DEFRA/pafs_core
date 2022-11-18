@@ -18,7 +18,7 @@ module PafsCore
     def natural_flood_risk_measures_cost_entered
       return unless natural_flood_risk_measures_cost.nil?
 
-      errors.add(:base,
+      errors.add(:natural_flood_risk_measures_cost,
                  "You must include a total cost for your flood risk measures")
     end
   end

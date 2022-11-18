@@ -1,9 +1,9 @@
 <% content_for :title, t(".heading") %>
 
 <% map_centre = results.first %>
-<div class="grid-row">
+<div class="govuk-grid-row">
   <div class="column-three-thirds">
-    <h1 class="heading-large"><%= t('.heading') %></h1>
+    <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
     <p><%= t('.description') %></p>
     <div id="map"
       class="location"
@@ -22,5 +22,5 @@
     <%= f.hidden_field :project_location_zoom_level %>
   </div>
 
-  <%= f.submit t("confirm_and_continue_label"), class: 'button', id: 'locationSaveButton' %>
+  <%= f.govuk_submit t("confirm_and_continue_label"), class: 'button', id: 'locationSaveButton' %>
 <% end %>

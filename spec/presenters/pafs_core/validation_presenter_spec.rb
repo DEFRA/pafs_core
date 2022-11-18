@@ -64,7 +64,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
         it "sets an error on the project" do
           subject.location_complete?
-          expect(subject.errors[:location]).to include "^Tell us the location of the project"
+          expect(subject.errors[:location]).to include "Tell us the location of the project"
         end
       end
     end
@@ -78,7 +78,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
       it "sets an error on the project" do
         subject.location_complete?
-        expect(subject.errors[:location]).to include "^Tell us the location of the project"
+        expect(subject.errors[:location]).to include "Tell us the location of the project"
       end
     end
   end
@@ -123,7 +123,7 @@ RSpec.describe PafsCore::ValidationPresenter do
           m = "#{date}="
           subject.send(m, nil)
           subject.key_dates_complete?
-          expect(subject.errors[:key_dates]).to include "^Tell us the project's important dates"
+          expect(subject.errors[:key_dates]).to include "Tell us the project's important dates"
           subject.send(m, 12)
         end
       end
@@ -183,7 +183,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
       it "sets an error message" do
         subject.risks_complete?
-        expect(subject.errors[:risks]).to include "^Tell us the risks the project " \
+        expect(subject.errors[:risks]).to include "Tell us the risks the project " \
                                                   "protects against and the households benefitting."
       end
     end
@@ -223,7 +223,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
           it "sets an error message" do
             subject.risks_complete?
-            expect(subject.errors[:risks]).to include "^Tell us the risks the " \
+            expect(subject.errors[:risks]).to include "Tell us the risks the " \
                                                       "project protects against and the households benefitting."
           end
         end

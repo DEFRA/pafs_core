@@ -1,29 +1,31 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
+
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <div class="step-form">
-          <div class ="form-group">
-            <%= f.hidden_field :id %>
-            <fieldset>
-              <legend class="visuallyhidden"><%= t(".heading") %></legend>
+
+        <%= f.hidden_field :id %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :confidence_homes_better_protected) do %>
+            <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
+
+            <%= f.govuk_radio_buttons_fieldset(:confidence_homes_better_protected, legend: nil) do %>
               <% PafsCore::Confidence::CONFIDENCE_VALUES.each do |value| %>
-                <%= f.radio_button :confidence_homes_better_protected, 
-                      value,
-                      label: confidence_band_label(:homes_better_protected, value) 
+                <%= f.govuk_radio_button :confidence_homes_better_protected, 
+                                         value,
+                                         label: { text: confidence_band_label(:homes_better_protected, value), tag: 'b' }
                 %>
               <% end %>
-            </fieldset>
-          </div>
-          <div class ="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
+            <% end %>
+          <% end %>
+          <p>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

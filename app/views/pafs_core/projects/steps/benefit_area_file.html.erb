@@ -1,40 +1,48 @@
 <% content_for :title, t(".heading") %>
 
-<div class="grid-row">
-  <div class="column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step), html: { multipart: true } do |f| %>
+
       <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-      <h1 class="heading-large" id="benefit-area"><%= t('.heading') %></h1>
-      <p><%= t(".description") %></p>
-      <p><%= t(".acceptable_file_formats") %></p>
-      <%= form_group(@project.step, :base) do %>
-        <%= f.error_message(:base) %>
-        <%= f.label :benefit_area_file, t('.benefit_area_file_label'),
-          class: "visuallyhidden" %>
-        <%= f.file_field :benefit_area_file,
-          accept: @project.acceptable_benefit_area_types,
-          aria: { labelledby: "benefit-area" } %>
-        <%= f.hidden_field :id %>
+
+      <%= f.govuk_fieldset(legend: { text: t('.heading') }) do %>
+      
+        <%= form_group(@project.step, :base) do %>
+          <div class="govuk-hint">
+            <p><%= t(".description") %></p>
+            <p><%= t(".acceptable_file_formats") %></p>
+          </div>
+
+          <%= f.label :benefit_area_file, t('.benefit_area_file_label'), class: "govuk-visually-hidden" %>
+
+          <%= f.govuk_file_field :benefit_area_file, label: nil,
+            accept: @project.acceptable_benefit_area_types,
+            aria: { labelledby: "benefit-area" } %>
+          <%= f.hidden_field :id %>
+        <% end %>
       <% end %>
-      <%= f.submit t("upload_and_continue_label"), class: 'button' %>
+
+      <%= f.govuk_submit t("upload_and_continue_label"), class: 'button' %>
     <% end %>
   </div>
 </div>
-<div class="grid-row headroom">
-  <div class="column-two-thirds">
-    <details role="group">
-      <summary role="button" aria-controls="shapefile-instructions">
-        <span class="summary">Free mapping tool</span>
+
+<div class="govuk-grid-row headroom">
+  <div class="govuk-grid-column-two-thirds">
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">Free mapping tool</span>
       </summary>
-      <div class="panel panel-indent panel-border-narrow" id="shapefile-instructions">
+      <div class="govuk-details__text" id="shapefile-instructions">
         <p>You can use your own mapping tool or our recommended tool - Magic Map (free to use) - to draw your project’s benefit area</p>
         <p><a href='https://magic.defra.gov.uk/magicmap.aspx', target='_blank', rel='noopener'>Magic Map (opens in a new window)</a></p>
 
-        <details role="group">
-          <summary role="button" aria-controls="polygon-instructions">
-            <span class="summary">Here are simple steps to draw your polygon in Magic Map</span>
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">Here are simple steps to draw your polygon in Magic Map</span>
           </summary>
-          <div class="panel panel-indent panel-border-narrow" id="polygon-instructions">
+          <div class="govuk-details__text" id="polygon-instructions">
             <p>Follow these simple steps to create and upload your polygon:</p>
             <ol class="instructions">
               <li>Click on the Mapping tool link above to open the Magic Map tool</li>
@@ -56,11 +64,11 @@
       </div>
     </details>
 
-    <details role="group">
-      <summary role="button" aria-controls="shapefile-help">
-        <span class="summary">Unable to create a shapefile</span>
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">Unable to create a shapefile</span>
       </summary>
-      <div class="panel panel-indent panel-border-narrow" id="shapefile-help">
+      <div class="govuk-details__text" id="shapefile-help">
         <p>If you are unable to upload or create a shapefile, contact your local partnership and strategic overview
         officer and they will be able to help you.</p>
       </div>

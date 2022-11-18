@@ -1,7 +1,7 @@
 <% if @project.map_centre.size == 1 %>
   <% map_centre = @project.map_centre.first %>
-  <div class="grid-row">
-    <h1 class="heading-large"><%= t('.heading') %></h1>
+  <div class="govuk-grid-row">
+    <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
     <p><%= t(".description") %></p>
     <div class="form-group">
       <div class="map-buttons">
@@ -27,7 +27,7 @@
       <%= f.hidden_field :benefit_area, value: @project.benefit_area.to_json %>
       <%= f.hidden_field :benefit_area_centre %>
       <%= f.hidden_field :benefit_area_zoom_level %>
-      <%= f.submit t("save_and_continue_label"), class: 'button', id: 'benefitAreaSaveButton' %>
+      <%= f.govuk_submit t("save_and_continue_label"), class: 'button', id: 'benefitAreaSaveButton' %>
     </div>
   <% end %>
   <%= link_to t(".link_to_upload_file_page"), project_step_path(id: @project.to_param, step: @project.step, upload_file: "1") %>

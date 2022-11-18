@@ -13,13 +13,13 @@ RSpec.describe PafsCore::ConfidenceHomesBetterProtectedStep, type: :model do
     it "validates that at a confidence is selected" do
       subject.confidence_homes_better_protected = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:confidence_homes_better_protected]).to include "^Select the confidence level"
+      expect(subject.errors.messages[:confidence_homes_better_protected]).to include "Select the confidence level"
     end
 
     it "validates that the confidence is a valid value" do
       subject.confidence_homes_better_protected = "Invalid"
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:confidence_homes_better_protected]).to include "^Chosen level must be one of the valid values"
+      expect(subject.errors.messages[:confidence_homes_better_protected]).to include "Chosen level must be one of the valid values"
     end
   end
 

@@ -12,7 +12,7 @@ RSpec.describe PafsCore::HectaresOfWetWoodlandHabitatCreatedOrEnhancedStep, type
       subject.hectares_of_wet_woodland_habitat_created_or_enhanced = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:hectares_of_wet_woodland_habitat_created_or_enhanced])
-        .to include "^You must include the number of hectares your project will create."
+        .to include "You must include the number of hectares your project will create."
     end
   end
 end

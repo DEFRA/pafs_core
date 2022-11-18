@@ -1,28 +1,30 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <div class="step-form">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
           <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
           <%= f.hidden_field :id %>
-          <h1 class="heading-large"><%= t('.heading') %></h1>
-          <%= form_group(@project.step, :flood_protection_before) do %>
-            <%= f.error_message(:flood_protection_before) %>
-            <fieldset>
-              <legend class="visuallyhidden"><%= t(".heading") %></legend>
-              <% @project.flood_risk_options.each_with_index do |option, index| %>
-                <%= f.radio_button :flood_protection_before, index,
-                  label: compound_standard_of_protection_label(option) %>
+
+          <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+            <%= form_group(@project.step, :flood_protection_before) do %>
+              <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
+
+              <%= f.govuk_radio_buttons_fieldset(:flood_protection_before, legend: nil) do %>
+                <% @project.flood_risk_options.each_with_index do |option, index| %>
+                  <%= f.govuk_radio_button :flood_protection_before,
+                                           index,
+                                           label: { text: compound_standard_of_protection_label(option) } %>
+                <% end %>
               <% end %>
-            </fieldset>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

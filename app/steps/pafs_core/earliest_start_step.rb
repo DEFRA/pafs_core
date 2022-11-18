@@ -15,7 +15,7 @@ module PafsCore
     end
 
     def a_choice_has_been_made
-      errors.add(:could_start_early, "^Tell us if the project can start earlier") if could_start_early.nil?
+      errors.add(:could_start_early, "Tell us if the project can start earlier") if could_start_early.nil?
     end
   end
 end

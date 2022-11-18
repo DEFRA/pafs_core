@@ -12,7 +12,7 @@ RSpec.describe PafsCore::WetWoodlandHabitatCreatedOrEnhancedStep, type: :model d
       subject.wet_woodland = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:wet_woodland])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

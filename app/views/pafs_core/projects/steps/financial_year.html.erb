@@ -2,31 +2,34 @@
 
 <% last_year = @project.financial_year_options.last + 1 %>
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
+
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <p><%= t('.lede') %></p>
-        <div class="step-form">
-          <div class ="form-group">
-            <%= f.hidden_field :id %>
-            <fieldset>
-              <legend class="visuallyhidden"><%= t(".heading") %></legend>
-              <% @project.financial_year_options.each do |year| %>
-                <%= f.radio_button :project_end_financial_year, year, label: "April #{year} to March #{year + 1}" %>
-              <% end %>
-            </fieldset>
-          </div>
-          <div class="form-group">
-            <%= link_to t('.next_step_link_text', year: last_year),
-              action: "step",
+
+        <div class="form-group">
+          <%= f.hidden_field :id %>
+
+          <%= f.govuk_fieldset(legend: { text: t('.heading'), size: 'l' }) do %>
+            <p class="govuk-hint"><%= t('.lede') %></p>
+
+            <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
+
+            <% @project.financial_year_options.each do |year| %>
+              <%= f.govuk_radio_button :project_end_financial_year, year, label: { text: "April #{year} to March #{year + 1}" } %>
+            <% end %>
+          <% end %>
+
+          <div class="headroom"></div>
+          <%= link_to t('.next_step_link_text', year: last_year),
+            { action: "step",
               id: @project,
-              step: :financial_year_alternative %>
-          </div>
-          <div class ="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
+              step: :financial_year_alternative },
+            class: "govuk-link govuk-body-m" %>
+
+          <div class="headroom"></div>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       </div>
     </div>

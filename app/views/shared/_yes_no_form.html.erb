@@ -1,27 +1,36 @@
 <% content_for :title, t(".heading"), flush: true if I18n.exists?(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-two-thirds">
       <div class="step-form">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
           <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-          <h1 class="heading-large"><%= heading %></h1>
-          <% if local_assigns.has_key? :lede %>
-            <p><%= lede %></p>
+
+          <%= f.govuk_fieldset legend: { text: heading, size: 'l' } do %>
+            <%= form_group(@project.step, yes_no_field) do %>
+
+            <% if local_assigns.has_key? :lede %>
+              <p><%= lede %></p>
+            <% end %>
+
+            <%= f.hidden_field :id %>
+
+            <legend class="govuk-visually-hidden"><%= heading %></legend>
+            <% radio_struct = Struct.new(:value, :text) %>
+            <%= f.govuk_collection_radio_buttons(yes_no_field,
+                                     [ radio_struct.new("true", t("yes_option")),
+                                       radio_struct.new("false", t("no_option"))],
+                                     :value,
+                                     :text,
+                                     legend: nil,
+                                     inline: true) %>
+
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
-          <%= f.hidden_field :id %>
-          <fieldset class="inline">
-            <legend class="visuallyhidden"><%= heading %></legend>
-            <%= f.radio_button_group(yes_no_field,
-                                     [ { value: "true", options: { label: t("yes_option") } },
-                                       { value: "false", options: { label: t("no_option") } }]) %>
-          </fieldset>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
