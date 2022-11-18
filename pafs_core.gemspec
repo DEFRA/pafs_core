@@ -43,8 +43,8 @@ Gem::Specification.new do |s|
   s.add_dependency "defra_ruby_alert", "~> 2.1"
 
   # GOV.UK styling
-  s.add_dependency "defra_ruby_template"
-  s.add_dependency "govuk_design_system_formbuilder"
+  s.add_dependency "defra_ruby_template", "~> 3"
+  s.add_dependency "govuk_design_system_formbuilder", "~> 3"
 
   s.add_development_dependency "capybara"
   s.add_development_dependency "climate_control"

@@ -7,6 +7,7 @@
   <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
     <div class="form-group govuk-body-s">
       <table class="funding-calculator-summary">
+        <caption class="govuk-visually-hidden"><%= t(".heading") %></caption>
         <thead>
           <tr>
             <th><%= t("filename_title", scope: scope) %></th>

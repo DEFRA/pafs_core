@@ -5,10 +5,10 @@
     <h1 class="govuk-heading-l"><%= t('download_all_proposals_label') %></h1>
     <div class="sub-heading">
       <% if @downloads.count == 1 %>
-       There is <span><b>1</b></span> proposal available for the programme.
+       There is <span><strong>1</strong></span> proposal available for the programme.
       <% else %>
         <p>
-          There are <span><b><%= @downloads.count %></b></span> proposals available for the programme of which:
+          There are <span><strong><%= @downloads.count %></strong></span> proposals available for the programme of which:
         </p>
         <dl>
           <dt>
