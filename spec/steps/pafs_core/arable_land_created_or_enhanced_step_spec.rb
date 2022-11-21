@@ -12,7 +12,7 @@ RSpec.describe PafsCore::ArableLandCreatedOrEnhancedStep, type: :model do
       subject.arable_land = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:arable_land])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

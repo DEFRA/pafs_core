@@ -4,14 +4,14 @@
       <h2 class="heading-medium" role="heading" id="environmental-outcomes">
         <%= project.summary_label(:environmental_outcomes_title) %>
       </h2>
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <% if project.environmental_benefits? %>
           <table class="full-table">
             <thead>
                <tr>
-                <th class="visuallyhidden">Benefit</th>
-                <th class="visuallyhidden">Amount</th>
+                <th class="govuk-visually-hidden">Benefit</th>
+                <th class="govuk-visually-hidden">Amount</th>
               </tr>
             </thead>
             <tbody>
@@ -65,12 +65,12 @@
             This project does not include any environmental benefits
           <% end %>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="change-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :any_environmental_benefits) do -%>
-                  Change<span class="visually-hidden"> the <%= project.summary_label(:surface_and_groundwater_amount).downcase %></span>
+                  Change<span class="govuk-visually-hidden"> the <%= project.summary_label(:surface_and_groundwater_amount).downcase %></span>
                 <% end -%>
               </div>
             <% end -%>
@@ -80,18 +80,18 @@
     </div>
   <% else %>
     <div class="add-row">
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <h2 class="heading-medium" role="heading" id="environmental-outcomes">
             <%= project.summary_label(:environmental_outcomes_title) %>
           </h2>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :any_environmental_benefits) do -%>
-                  Add<span class="visually-hidden"> <%= project.summary_label(:environmental_outcomes_title).downcase %></span>
+                  Add<span class="govuk-visually-hidden"> <%= project.summary_label(:environmental_outcomes_title).downcase %></span>
                 <% end -%>
               </div>
             <% end -%>

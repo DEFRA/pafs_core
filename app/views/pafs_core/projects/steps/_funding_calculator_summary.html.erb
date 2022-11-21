@@ -1,11 +1,13 @@
 <% scope = "pafs_core.projects.steps.funding_calculator" %>
 <%= pafs_form_for @project,
   url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-  <%= form_error_header(f) %>
-  <div class="step-form">
-    <h1 class="heading-large" id="file-context"><%= t('.heading') %></h1>
-    <div class="form-group">
-      <table>
+
+  <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+  <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+    <div class="form-group govuk-body-s">
+      <table class="funding-calculator-summary">
+        <caption class="govuk-visually-hidden"><%= t(".heading") %></caption>
         <thead>
           <tr>
             <th><%= t("filename_title", scope: scope) %></th>
@@ -32,6 +34,6 @@
         </tbody>
       </table>
     </div>
-    <%= f.submit t("continue_label"), class: 'button' %>
-  </div>
+    <%= f.govuk_submit t("continue_label"), class: 'button' %>
+  <% end %>
 <% end %>

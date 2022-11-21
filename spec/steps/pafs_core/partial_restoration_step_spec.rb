@@ -12,7 +12,7 @@ RSpec.describe PafsCore::PartialRestorationStep, type: :model do
       subject.partial_restoration = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:partial_restoration])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

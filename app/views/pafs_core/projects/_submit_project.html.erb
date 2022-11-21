@@ -1,25 +1,25 @@
 <% if @project.draft? %>
   <section aria-labelledby="submission">
-    <div class="grid-row submission">
+    <div class="govuk-grid-row govuk-body-s submission">
       <% if can_change_project_state?(@project) %>
-        <div class="column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="submission">
+        <div class="govuk-grid-column-three-quarters">
+          <h2 class="govuk-heading-m" role="heading" id="submission">
             <%= @project.summary_label(:submission_title) %>
           </h2>
         </div>
-        <div class="column-two-thirds">
+        <div class="govuk-grid-column-two-thirds">
             <p><%= @project.summary_label(:submission_notice) %></p>
             <%= render partial: "summary/data_notice", locals: { project: @project } %>
             <% if skip_pso_confirmation? %>
               <%= link_to t("submit_project_label"),
-                submit_project_path(id: @project.to_param), class: "button submit-proposal" %>
+                submit_project_path(id: @project.to_param), class: "govuk-button submit-proposal" %>
             <% else %>
               <%= link_to t("complete_project_label"),
-                complete_project_path(id: @project.to_param), class: "button submit-proposal" %>
+                complete_project_path(id: @project.to_param), class: "govuk-button submit-proposal" %>
             <% end %>
         </div>
       <% else %>
-        <div class="column-three-quarters">
+        <div class="govuk-grid-column-three-quarters">
           <h2 class="heading-medium" role="heading" id="submission">
             <p>EA Projects are now managed in PoL</p>
           </h2>
@@ -29,8 +29,8 @@
   </section>
 <% elsif pso_user? && can_change_project_state?(project) && @project.completed? %>
   <section aria-label="controls">
-    <div class="grid-row">
-      <div class="column-two-thirds space-kids">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds space-kids">
         <%= link_to t("submit_project_label"),
           submit_project_path(id: @project.to_param), class: "button submit-proposal" %>
         <%= link_to t("unlock_project_label"),
@@ -40,8 +40,8 @@
   </section>
 <% elsif pso_user? && can_revert_to_draft?(project) && @project.submitted? %>
   <section aria-label="controls">
-    <div class="grid-row">
-      <div class="column-two-thirds">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
         <%# link_to t("unlock_project_label"),
           unlock_project_path(id: @project.to_param), class: "button submit-proposal" %>
       </div>

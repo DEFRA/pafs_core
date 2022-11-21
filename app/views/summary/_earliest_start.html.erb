@@ -2,8 +2,8 @@
   <% if project.earliest_start_started? %>
     <div class="summary-item-content">
       <h2 class="heading-medium" role="heading" id="earliest-start">Earliest start</h2>
-      <div class="grid-row">
-        <div class="column-two-thirds">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
           <% if project.could_start_early? %>
             <% if project.earliest_start_month.nil? %>
               <p><em>The earliest date the project could start has not been provided</em><p>
@@ -14,12 +14,12 @@
                 <p>The project cannot start earlier without impacting deliverability or outcomes.</p>
               <% end %>
         </div>
-        <div class="column-one-third">
+        <div class="govuk-grid-column-one-third">
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="change-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :earliest_start) do -%>
-                  Change<span class="visually-hidden"> whether the project could start earlier without impacting deliverability or outcomes</span>
+                  Change<span class="govuk-visually-hidden"> whether the project could start earlier without impacting deliverability or outcomes</span>
                 <% end -%>
               </div>
             <% end -%>
@@ -29,16 +29,16 @@
     </div>
   <% else %>
     <div class="add-row">
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <h2 class="heading-medium" role="heading" id="earliest-start">Earliest start</h2>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :earliest_start) do -%>
-                  Add<span class="visually-hidden"> whether the project could start earlier without impacting deliverability or outcomes</span>
+                  Add<span class="govuk-visually-hidden"> whether the project could start earlier without impacting deliverability or outcomes</span>
                 <% end -%>
               </div>
             <% end -%>

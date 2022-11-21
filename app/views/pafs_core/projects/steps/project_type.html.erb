@@ -1,27 +1,31 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
-        <%= form_error_header(f) %>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
         <%= f.hidden_field :id %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <div class="step-form">
-          <fieldset>
-            <legend class="visuallyhidden">Select the type of your proposed project</legend>
-            <p><%= t('.project_type_supporting_text') %></p>
-            <%= f.form_group(:project_type) do %>
-              <%= f.error_message(:project_type) %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :project_type) do %>
+            <p class="govuk-hint"><%= t('.project_type_supporting_text') %></p>
+
+            <legend class="govuk-visually-hidden">Select the type of your proposed project</legend>
+
+            <%= f.govuk_radio_buttons_fieldset(:project_type, legend: nil) do %>
               <% PafsCore::PROJECT_TYPES.each do |pt| %>
-                <%= f.radio_button :project_type, pt.to_s, label: project_type_label(pt) %>
+                <%= f.govuk_radio_button :project_type, pt.to_s, label: { text: project_type_label(pt) } %>
               <% end %>
             <% end %>
-          </fieldset>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
-        </div>
+
+          <% end %>
+        <% end %>
+
+        <p>
+        <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
       <% end %>
     </div>
   </div>

@@ -171,14 +171,16 @@ module PafsCore
 
     def confidence_band_label(confidence_type, option)
       [
-        content_tag(
-          :span,
-          I18n.t(
-            :label,
-            scope: ["pafs_core", "confidence", confidence_type, option]
-          ),
-          class: "bold-small"
-        ),
+        content_tag(:strong) do
+          content_tag(
+            :span,
+            I18n.t(
+              :label,
+              scope: ["pafs_core", "confidence", confidence_type, option]
+            ),
+            class: "bold-small"
+          )
+        end,
         content_tag(
           :div,
           I18n.t(
@@ -191,14 +193,15 @@ module PafsCore
 
     def compound_standard_of_protection_label(option)
       [
-        content_tag(
-          :span,
-          I18n.t(
-            option,
-            scope: "pafs_core.standard_of_protection"
-          ),
-          class: "bold-small"
-        ),
+        content_tag(:strong) do
+          content_tag(
+            :span,
+            I18n.t(
+              option,
+              scope: "pafs_core.standard_of_protection"
+            )
+          )
+        end,
         content_tag(
           :div,
           I18n.t(

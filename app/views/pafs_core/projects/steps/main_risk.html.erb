@@ -1,29 +1,30 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <div class="step-form">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-          <%= form_error_header(f) %>
-          <h1 class="heading-large"><%= t('.heading') %></h1>
-          <fieldset>
-            <legend class="visuallyhidden">Select the main risk your proposed project wull protect against</legend>
-            <%= f.hidden_field :main_risk %>
-            <%= f.radio_button_group(:main_risk,
-                                     @project.selected_risks.map do |r|
-                                        { value: r.to_s,
-                                          options: {
-                                            label: t("#{r}_label", scope: "pafs_core.projects.steps.risks")
-                                          }
-                                        }
-                                      end) %>
-          </fieldset>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
+
+          <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+          <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+            <%= form_group(@project.step, :main_risk) do %>
+              <legend class="govuk-visually-hidden">Select the main risk your proposed project wull protect against</legend>
+              <%= f.hidden_field :main_risk %>
+
+              <% radio_struct = Struct.new(:value, :text) %>
+              <%= f.govuk_collection_radio_buttons(:main_risk,
+                                                  @project.selected_risks.map do |r|
+                                                    radio_struct.new(r.to_s, t("#{r}_label", scope: "pafs_core.projects.steps.risks"))
+                                                  end,
+                                                  :value,
+                                                  :text,
+                                                  legend: nil) %>
+              <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

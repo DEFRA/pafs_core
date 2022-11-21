@@ -2,7 +2,7 @@
 
 <% heading = "Sorry, we're experiencing technical difficulties" unless local_assigns.include?(:heading) %>
 <div class="error-page">
-  <h1 class="heading-large"><%= heading %></h1>
+  <h1 class="govuk-heading-l"><%= heading %></h1>
   <div class="message1">
     <% if local_assigns.include?(:message1) %>
       <p><%= message1 %></p>

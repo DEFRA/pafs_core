@@ -17,7 +17,7 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresStep, type: :model do
     it "validates that a flood risk measure has been named if other_flood_risk_measure_selected is true" do
       subject.other_flood_measures_selected = true
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:other_flood_measures]).to include "^You must give your other flood risk measure a name"
+      expect(subject.errors.messages[:other_flood_measures]).to include "You must give your other flood risk measure a name"
       subject.other_flood_measures = "Another flood measure"
       expect(subject.valid?).to be true
     end

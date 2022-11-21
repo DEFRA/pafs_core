@@ -5,7 +5,7 @@ module PafsCore
     include PafsCore::StandardOfProtection
 
     validates :coastal_protection_before, presence: {
-      message: "^Select the option that shows the length of time before coastal \
+      message: "Select the option that shows the length of time before coastal \
       erosion affects the area likely to benefit from the project."
     }
 

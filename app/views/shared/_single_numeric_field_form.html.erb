@@ -1,31 +1,36 @@
 <% content_for :title, t(".heading"), flush: true if I18n.exists?(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-two-thirds">
       <div class="step-form">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-          <%= form_error_header(f) %>
-          <h1 class="heading-large"><%= heading %></h1>
-          <% if local_assigns.has_key? :lede %>
-            <p><%= lede %></p>
-          <% end %>
-          <%= f.form_group(numeric_field) do %>
-            <%= f.error_message(numeric_field) %>
-            <%= f.label(numeric_field, heading, class: "visuallyhidden") %>
 
-            <% min = local_assigns.has_key?(:min) ? min : 0.01 %>
-            <% step = local_assigns.has_key?(:step) ? step : 0.01 %>
+          <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
-            <%= f.number_field_without_label(numeric_field,
-                  class: "form-control form-medium", min: min, step: step) %>
-            <% if local_assigns.has_key? :units %>
-              <span><%= units %></span>
+          <%= f.govuk_fieldset legend: { text: heading, size: 'l' } do %>
+            <%= form_group(@project.step, numeric_field) do %>
+
+              <% if local_assigns.has_key? :lede %>
+                <p><%= lede %></p>
+              <% end %>
+
+              <%= f.label(numeric_field, heading, class: "govuk-visually-hidden") %>
+
+              <% min = local_assigns.has_key?(:min) ? min : 0.01 %>
+              <% step = local_assigns.has_key?(:step) ? step : 0.01 %>
+
+              <%= f.govuk_number_field(numeric_field,
+                  class: "form-control form-medium",
+                  min: min,
+                  step: step,
+                  label: nil,
+                  suffix_text: units
+                  ) %>
+
+              <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
             <% end %>
           <% end %>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
         <% end %>
       </div>
     </div>

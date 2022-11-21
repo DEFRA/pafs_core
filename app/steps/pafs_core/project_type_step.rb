@@ -7,7 +7,7 @@ module PafsCore
 
     validates :project_type,
               inclusion: { in: PafsCore::PROJECT_TYPES,
-                           message: "^Select a project type" }
+                           message: "Select a project type" }
 
     private
 

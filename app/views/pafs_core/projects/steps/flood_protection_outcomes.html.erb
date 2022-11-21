@@ -1,17 +1,19 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
+  <div class="govuk-grid-row govuk-body">
     <div class="column">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= form_error_header(f) %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <p><%= t('.lede') %></p>
-        <div class="step-form">
-          <%= f.form_group :base do %>
-            <%= f.error_message(:base) %>
-            <div class="scroll-horz">
-              <%= f.check_box :reduced_risk_of_households_for_floods %>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :base) do %>
+            <%= error_message(f.object, :base) %>
+            <p><%= t('.lede') %></p>
+            <div class="scroll-horz govuk-body-s">
+              <%= govuk_checkbox_for f, :reduced_risk_of_households_for_floods, "pafs_core.projects.steps.flood_protection_outcomes" %>
+              <p>
               <table class="protection-outcomes-table hidden-totals">
                 <thead>
                   <tr>
@@ -40,49 +42,54 @@
                         <%= formatted_financial_year(builder.object.financial_year) %>
                       </td>
                       <td class="<%= funding_table_cell(builder.object.financial_year, builder.object.households_at_reduced_risk) %>">
-                        <%= builder.label :households_at_reduced_risk, class: "visuallyhidden" do -%>
+                        <%= builder.label :households_at_reduced_risk, class: "govuk-visually-hidden" do -%>
                           <%= "Column A #{ formatted_financial_year(builder.object.financial_year) }" -%>
                         <% end -%>
-                        <%= builder.number_field_without_label :households_at_reduced_risk,
+                        <%= builder.govuk_number_field :households_at_reduced_risk,
                           class: "protection-value reduced-risk",
                           min: 0,
-                          step: 1 %>
+                          step: 1,
+                          label: nil %>
                       </td>
                       <td class="<%= funding_table_cell(builder.object.financial_year, builder.object.moved_from_very_significant_and_significant_to_moderate_or_low) %> significant-to-low-risk">
-                        <%= builder.label :moved_from_very_significant_and_significant_to_moderate_or_low, class: "visuallyhidden" do -%>
+                        <%= builder.label :moved_from_very_significant_and_significant_to_moderate_or_low, class: "govuk-visually-hidden" do -%>
                           <%= "Column B #{ formatted_financial_year(builder.object.financial_year) }" -%>
                         <% end -%>
-                        <%= builder.number_field_without_label :moved_from_very_significant_and_significant_to_moderate_or_low,
+                        <%= builder.govuk_number_field :moved_from_very_significant_and_significant_to_moderate_or_low,
                           class: "protection-value significant-to-low-risk",
                           min: 0,
-                          step: 1 %>
+                          step: 1,
+                          label: nil %>
                       </td>
                       <td class="<%= funding_table_cell(builder.object.financial_year, builder.object.households_protected_from_loss_in_20_percent_most_deprived) %>">
-                        <%= builder.label :households_protected_from_loss_in_20_percent_most_deprived, class: "visuallyhidden" do -%>
+                        <%= builder.label :households_protected_from_loss_in_20_percent_most_deprived, class: "govuk-visually-hidden" do -%>
                           <%= "Column C #{ formatted_financial_year(builder.object.financial_year) }" -%>
                         <% end -%>
-                        <%= builder.number_field_without_label :households_protected_from_loss_in_20_percent_most_deprived,
+                        <%= builder.govuk_number_field :households_protected_from_loss_in_20_percent_most_deprived,
                           class: "protection-value most-deprived",
                           min: 0,
-                          step: 1 %>
+                          step: 1,
+                          label: nil %>
                       </td>
                       <td class="<%= funding_table_cell(builder.object.financial_year, builder.object.households_protected_through_plp_measures) %>">
-                        <%= builder.label :households_protected_through_plp_measures, class: "visuallyhidden" do -%>
+                        <%= builder.label :households_protected_through_plp_measures, class: "govuk-visually-hidden" do -%>
                           <%= "Column D #{ formatted_financial_year(builder.object.financial_year) }" -%>
                         <% end -%>
-                        <%= builder.number_field_without_label :households_protected_through_plp_measures,
+                        <%= builder.govuk_number_field :households_protected_through_plp_measures,
                           class: "protection-value plp-measures",
                           min: 0,
-                          step: 1 %>
+                          step: 1,
+                          label: nil %>
                       </td>
                       <td class="<%= funding_table_cell(builder.object.financial_year, builder.object.non_residential_properties) %>">
-                        <%= builder.label :non_residential_properties, class: "visuallyhidden" do -%>
+                        <%= builder.label :non_residential_properties, class: "govuk-visually-hidden" do -%>
                           <%= "Column E #{ formatted_financial_year(builder.object.financial_year) }" -%>
                         <% end -%>
-                        <%= builder.number_field_without_label :non_residential_properties,
+                        <%= builder.govuk_number_field :non_residential_properties,
                           class: "protection-value non-residential-properties",
                           min: 0,
-                          step: 1 %>
+                          step: 1,
+                          label: nil %>
                       </td>
                     </tr>
                   <% end %>
@@ -99,12 +106,10 @@
                 </tfoot>
               </table>
             </div>
-            <% end %>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

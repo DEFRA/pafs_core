@@ -65,7 +65,7 @@ module PafsCore
     describe "#compound_standard_of_protection_label" do
       it "returns the correct label" do
         option = :very_significant
-        label = "<span class=\"bold-small\">Very significant</span><div>5% or greater in any given year</div>"
+        label = "<strong><span>Very significant</span></strong><div>5% or greater in any given year</div>"
         expect(helper.compound_standard_of_protection_label(option)).to eq label
       end
     end

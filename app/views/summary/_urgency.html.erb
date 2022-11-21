@@ -2,27 +2,27 @@
   <% unless project.urgency_reason.nil? %>
     <div class="summary-item-content">
       <h2 class="heading-medium" role="heading" id="urgency"><%= project.summary_label(:urgency_title) %></h2>
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <% if project.urgent? %>
             <p>Your project is urgent as there is a <%= urgency_reason_text(project.urgency_reason).downcase %></p>
           <% else %>
             <p>Your project is not urgent</p>
           <% end %>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="change-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :urgency) do -%>
-                  Change<span class="visually-hidden"> <%= project.summary_label(:urgency_title).downcase %></span>
+                  Change<span class="govuk-visually-hidden"> <%= project.summary_label(:urgency_title).downcase %></span>
                 <% end -%>
               </div>
             <% end -%>
           <% end -%>
         </div>
         <% if project.urgent? %>
-          <div class="column-three-quarters">
+          <div class="govuk-grid-column-three-quarters">
             <h3 class="column-heading-small">Urgency details</h3>
             <% if project.urgency_details? %>
               <p><%= simple_format project.urgency_details %></p>
@@ -35,16 +35,16 @@
     </div>
   <% else %>
     <div class="add-row">
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <h2 class="heading-medium" role="heading" id="urgency"><%= project.summary_label(:urgency_title) %></h2>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: :urgency) do -%>
-                  Add<span class="visually-hidden"> <%= project.summary_label(:urgency_title).downcase %></span>
+                  Add<span class="govuk-visually-hidden"> <%= project.summary_label(:urgency_title).downcase %></span>
                 <% end -%>
               </div>
             <% end -%>

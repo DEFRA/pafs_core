@@ -25,7 +25,7 @@ RSpec.describe PafsCore::ProjectAreaStep, type: :model do
       it "displays the expected validation message" do
         subject.valid?
 
-        expect(subject.errors.messages[:rma_name]).to include("^Select a lead PSO area")
+        expect(subject.errors.messages[:rma_name]).to include("Select a lead PSO area")
       end
     end
   end

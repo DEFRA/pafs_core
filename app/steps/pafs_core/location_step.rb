@@ -42,11 +42,11 @@ module PafsCore
         gr = PafsCore::GridReference.new grid_reference
         unless gr.valid?
           errors.add(:grid_reference,
-                     "^The National Grid Reference must be 2 letters " \
+                     "The National Grid Reference must be 2 letters " \
                      "followed by 10 digits")
         end
       else
-        errors.add(:grid_reference, "^Tell us the project's National Grid Reference")
+        errors.add(:grid_reference, "Tell us the project's National Grid Reference")
       end
     end
 

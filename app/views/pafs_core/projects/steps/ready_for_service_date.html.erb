@@ -1,22 +1,20 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= form_error_header(f) %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-          <p><%= t(".description") %></p>
-          <div class="step-form vertical-squash">
-          <div class="form-group">
-            <fieldset>
-              <legend class="visuallyhidden"><%= t('.heading') %></legend>
-              <%= f.month_and_year(:ready_for_service, hint: t(".example_text")) %>
-            </fieldset>
-          </div>
-          <%= f.submit t("save_and_continue_label"), class: 'button' %>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :start_outline_business_case) do %>
+            <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
+            <%= month_and_year(f, @project, :ready_for_service, hint: t(".description")) %>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

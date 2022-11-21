@@ -1,17 +1,16 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
-        <%= form_error_header(f) %>
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
         <%= f.hidden_field :id %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
+        <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
         <p><%= t('.description') %></p>
         <div class="step-form">
           <fieldset>
-            <%= f.form_group :rma_name do %>
-              <%= f.error_message(:rma_name) %>
+            <%= form_group@project.step, :rma_name) do %>
               <% current_resource.areas.each do |user_area| %>
                 <%= f.radio_button :rma_name, user_area.name.to_s, label: user_area.name %>
               <% end %>
@@ -19,7 +18,7 @@
           </fieldset>
         </div>
         <div class="step-form">
-          <%= f.submit t("save_and_continue_label"), class: 'button' %>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         </div>
       <% end %>
     </div>

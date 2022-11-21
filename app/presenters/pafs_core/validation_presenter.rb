@@ -37,7 +37,7 @@ module PafsCore
       if location_set? && benefit_area_file_uploaded?
         true
       else
-        add_error(:location, "^Tell us the location of the project")
+        add_error(:location, "Tell us the location of the project")
       end
     end
 
@@ -46,7 +46,7 @@ module PafsCore
                      confidence_homes_by_gateway_four.present? &&
                      confidence_secured_partnership_funding.present?
 
-      add_error(:confidence, "^Tell us how confident you are in the project")
+      add_error(:confidence, "Tell us how confident you are in the project")
     end
 
     def carbon_complete?
@@ -55,7 +55,7 @@ module PafsCore
                      carbon_cost_operation.present? &&
                      (carbon_cost_operation.to_i >= 0)
 
-      add_error(:carbon, "^Tell us about the carbon cost of the project")
+      add_error(:carbon, "Tell us about the carbon cost of the project")
     end
 
     def key_dates_complete?
@@ -65,24 +65,24 @@ module PafsCore
          ready_for_service_month.present?
         true
       else
-        add_error(:key_dates, "^Tell us the project's important dates")
+        add_error(:key_dates, "Tell us the project's important dates")
       end
     end
 
     def funding_sources_complete?
       return true if funding_values_complete?
 
-      add_error(:funding_sources, "^Tell us the project's funding sources and estimated spend")
+      add_error(:funding_sources, "Tell us the project's funding sources and estimated spend")
     end
 
     def earliest_start_complete?
       if could_start_early.nil?
-        add_error(:earliest_start, "^Tell us the earliest date the project can start")
+        add_error(:earliest_start, "Tell us the earliest date the project can start")
       elsif could_start_early?
         if earliest_start_month.present? && earliest_start_year.present?
           true
         else
-          add_error(:earliest_start, "^Tell us the earliest date the project can start")
+          add_error(:earliest_start, "Tell us the earliest date the project can start")
         end
       else
         true
@@ -116,20 +116,20 @@ module PafsCore
       if (protects_against_flooding? &&
          flood_protection_before.nil?) || flood_protection_after.nil?
         return add_error(:standard_of_protection,
-                         "^Tell us the standard of protection the project will provide")
+                         "Tell us the standard of protection the project will provide")
       end
 
       if (protects_against_coastal_erosion? &&
          coastal_protection_before.nil?) || coastal_protection_after.nil?
         return add_error(:standard_of_protection,
-                         "^Tell us the standard of protection the project will provide")
+                         "Tell us the standard of protection the project will provide")
       end
       true
     end
 
     def approach_complete?
       if approach.blank?
-        add_error(:approach, "^Tell us how the project will achieve its goals")
+        add_error(:approach, "Tell us how the project will achieve its goals")
       else
         true
       end
@@ -239,7 +239,7 @@ module PafsCore
 
     def urgency_complete?
       if urgency_reason.nil? || (urgent? && urgency_details.blank?)
-        add_error(:urgency, "^Tell us whether the project is urgent")
+        add_error(:urgency, "Tell us whether the project is urgent")
       else
         true
       end
@@ -247,11 +247,11 @@ module PafsCore
 
     def funding_calculator_complete?
       if funding_calculator_file_name.blank?
-        return add_error(:funding_calculator, "^Upload the project's partnership funding calculator")
+        return add_error(:funding_calculator, "Upload the project's partnership funding calculator")
       end
 
       unless funding_calculator_correct_version?
-        return add_error(:funding_calculator, "^Upload a valid version of the partnership funding calculator")
+        return add_error(:funding_calculator, "Upload a valid version of the partnership funding calculator")
       end
 
       true
@@ -278,7 +278,7 @@ module PafsCore
 
     def outcomes_error
       add_error(:environmental_outcomes,
-                "^Tell us the project’s environmental outcomes")
+                "Tell us the project’s environmental outcomes")
     end
 
     def check_flooding
@@ -302,7 +302,7 @@ module PafsCore
 
       return true if project.natural_flood_risk_measures_included? && natural_flood_risk_measures_and_cost_provided?
 
-      add_error(:natural_flood_risk_measures, "^Tell us about the project's natural flood risk measures")
+      add_error(:natural_flood_risk_measures, "Tell us about the project's natural flood risk measures")
     end
 
     def natural_flood_risk_measures_and_cost_provided?
@@ -312,7 +312,7 @@ module PafsCore
 
     def risks_error
       add_error(:risks,
-                "^Tell us the risks the project protects against " \
+                "Tell us the risks the project protects against " \
                 "and the households benefitting.")
       false
     end

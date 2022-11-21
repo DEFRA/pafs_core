@@ -50,7 +50,7 @@ module PafsCore
 
       return if other_flood_measures.present?
 
-      errors.add(:other_flood_measures, "^You must give your other flood risk measure a name")
+      errors.add(:other_flood_measures, "You must give your other flood risk measure a name")
     end
   end
 end

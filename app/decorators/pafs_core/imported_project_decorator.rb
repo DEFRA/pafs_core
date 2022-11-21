@@ -36,7 +36,7 @@ module PafsCore
       # This is the area that owns the proposal
       area = PafsCore::Area.find_by(name: value)
       if area.nil?
-        project.errors.add(:base, "^Cannot find area (rma_name: #{value})")
+        project.errors.add(:base, "Cannot find area (rma_name: #{value})")
       else
         project.area_projects.delete_all
         project.area_projects.create(area_id: area.id, owner: true)
@@ -49,7 +49,7 @@ module PafsCore
       # map the main_risk - we are going to lose any other risks here
       r = risk_from_string(value)
       if r.nil?
-        project.errors.add(:main_risk, "^No main risk specified")
+        project.errors.add(:main_risk, "No main risk specified")
       else
         project.send("#{r}=", true)
         project.main_risk = r
@@ -65,7 +65,7 @@ module PafsCore
       else
         reason = urgency_from_string(value)
         if reason.nil?
-          project.errors.add(:urgency_reason, "^Invalid urgency reason (moderation_code: #{value})")
+          project.errors.add(:urgency_reason, "Invalid urgency reason (moderation_code: #{value})")
         else
           project.urgency_reason = reason
         end
@@ -79,7 +79,7 @@ module PafsCore
     def grid_reference=(value)
       # perform lookup and update location values
       if value.blank?
-        project.errors.add(:grid_reference, "^No grid reference supplied")
+        project.errors.add(:grid_reference, "No grid reference supplied")
       else
         gr = PafsCore::GridReference.new(value)
         if gr.valid?
@@ -92,10 +92,10 @@ module PafsCore
             project.parliamentary_constituency = data[:parliamentary_constituency]
           rescue PafsCore::MapServiceError => e
             project.errors.add(:grid_reference,
-                               "^Unable to query for location information (#{e})")
+                               "Unable to query for location information (#{e})")
           end
         else
-          project.errors.add(:grid_reference, "^Invalid grid reference (#{value})")
+          project.errors.add(:grid_reference, "Invalid grid reference (#{value})")
         end
       end
     end
@@ -277,7 +277,7 @@ module PafsCore
 
     def set_date_for(sym, value)
       if value.blank?
-        project.errors.add("#{sym}_date".to_sym, "^#{sym.to_s.titlecase} date not supplied")
+        project.errors.add("#{sym}_date".to_sym, "#{sym.to_s.titlecase} date not supplied")
       elsif value.respond_to?(:month) && value.respond_to?(:year)
         project.send("#{sym}_month=", value.month)
         project.send("#{sym}_year=", value.year)
@@ -294,7 +294,7 @@ module PafsCore
           project.send("#{sym}_year=", d[1])
         else
           # an error then
-          project.errors.add("#{sym}_date".to_sym, "^#{sym.to_s.titlecase} date not recognised (#{value})")
+          project.errors.add("#{sym}_date".to_sym, "#{sym.to_s.titlecase} date not recognised (#{value})")
         end
       end
     end
@@ -333,12 +333,12 @@ module PafsCore
         val = sop_from_string(value)
         if val.nil?
           project.errors.add(category,
-                             "^Invalid '#{category.to_s.titlecase}' value (#{value})")
+                             "Invalid '#{category.to_s.titlecase}' value (#{value})")
         else
           idx = ary.find_index(val)
           if idx.nil?
             project.errors.add(category,
-                               "^Invalid '#{category.to_s.titlecase}' value (#{value})")
+                               "Invalid '#{category.to_s.titlecase}' value (#{value})")
           else
             project.send("#{category}=", idx)
           end

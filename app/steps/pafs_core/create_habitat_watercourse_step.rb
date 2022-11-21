@@ -25,7 +25,7 @@ module PafsCore
       return unless create_habitat_watercourse.nil?
 
       errors.add(:create_habitat_watercourse,
-                 "^You must select yes or no")
+                 "You must select yes or no")
     end
   end
 end

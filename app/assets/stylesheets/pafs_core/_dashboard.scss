@@ -1,4 +1,10 @@
+@import "defra_ruby_template";
+
 .dashboard {
+  tr {
+    border-bottom: 1px solid $govuk-border-colour;
+  }
+
   td, th {
     padding: 0.75em 1.25em 0.5625em 0;
   }

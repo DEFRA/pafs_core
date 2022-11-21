@@ -6,13 +6,13 @@
       </h2>
       <% if project.protects_against_flooding? %>
         <div class="<%= flood_class_for_sop(project) %> pushed-up">
-          <div class="grid-row">
-            <div class="column-three-quarters">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-three-quarters">
               <table class="full-table">
                 <thead>
                   <tr>
-                    <th class="visuallyhidden">Point in time</th>
-                    <th class="visuallyhidden">Risk</th>
+                    <th class="govuk-visually-hidden">Point in time</th>
+                    <th class="govuk-visually-hidden">Risk</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -27,12 +27,12 @@
                 </tbody>
               </table>
             </div>
-            <div class="column-one-quarter">
+            <div class="govuk-grid-column-one-quarter">
               <% if project.draft? %>
                 <% if can_edit_project_sections?(project) -%>
                   <div class="change-link">
                     <%= link_to pafs_core.project_step_path(id: project.to_param, step: :standard_of_protection) do -%>
-                      Change<span class="visually-hidden"> flooding <%= project.summary_label(:standard_of_protection_title).downcase %></span>
+                      Change<span class="govuk-visually-hidden"> flooding <%= project.summary_label(:standard_of_protection_title).downcase %></span>
                     <% end -%>
                   </div>
                 <% end -%>
@@ -42,13 +42,13 @@
         </div>
       <% end %>
       <% if project.protects_against_coastal_erosion? %>
-        <div class="grid-row">
-          <div class="column-three-quarters">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-three-quarters">
             <table class="full-table">
               <thead>
                 <tr>
-                  <th class="visuallyhidden">Point in time</th>
-                  <th class="visuallyhidden">Risk</th>
+                  <th class="govuk-visually-hidden">Point in time</th>
+                  <th class="govuk-visually-hidden">Risk</th>
                 </tr>
               </thead>
               <tbody>
@@ -63,12 +63,12 @@
               </tbody>
             </table>
           </div>
-          <div class="column-one-quarter">
+          <div class="govuk-grid-column-one-quarter">
             <% if project.draft? %>
               <% if can_edit_project_sections?(project) -%>
                 <div class="change-link">
                   <%= link_to pafs_core.project_step_path(id: project.to_param, step: :standard_of_protection_coastal) do -%>
-                    Change<span class="visually-hidden"> coastal erosion <%= project.summary_label(:standard_of_protection_title).downcase %></span>
+                    Change<span class="govuk-visually-hidden"> coastal erosion <%= project.summary_label(:standard_of_protection_title).downcase %></span>
                   <% end -%>
                 </div>
               <% end -%>
@@ -79,18 +79,18 @@
     </div>
   <% else %>
     <div class="add-row">
-      <div class="grid-row">
-        <div class="column-three-quarters">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
           <h2 class="heading-medium" role="heading" id="standard-of-protection">
             <%= project.summary_label(:standard_of_protection_title) %>
           </h2>
         </div>
-        <div class="column-one-quarter">
+        <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
                 <%= link_to pafs_core.project_step_path(id: project.to_param, step: project.standard_of_protection_step) do -%>
-                  Add<span class="visually-hidden"> <%= project.summary_label(:standard_of_protection_title).downcase %> details</span>
+                  Add<span class="govuk-visually-hidden"> <%= project.summary_label(:standard_of_protection_title).downcase %> details</span>
                 <% end -%>
               </div>
             <% end -%>

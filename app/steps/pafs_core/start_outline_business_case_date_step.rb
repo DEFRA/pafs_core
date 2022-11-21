@@ -28,7 +28,7 @@ module PafsCore
              (2000..2100).cover?(yv.to_i)
         errors.add(
           :start_outline_business_case,
-          "^Enter the date you expect to submit your outline business case for approval"
+          "Enter the date you expect to submit your outline business case for approval"
         )
       end
     end

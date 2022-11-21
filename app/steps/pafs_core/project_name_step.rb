@@ -4,7 +4,7 @@ module PafsCore
   class ProjectNameStep < BasicStep
     delegate :name, :name=, to: :project
 
-    validates :name, presence: { message: "^Tell us the project name" }
+    validates :name, presence: { message: "Tell us the project name" }
 
     private
 

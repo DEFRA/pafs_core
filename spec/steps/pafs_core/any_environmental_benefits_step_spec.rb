@@ -12,7 +12,7 @@ RSpec.describe PafsCore::AnyEnvironmentalBenefitsStep, type: :model do
       subject.environmental_benefits = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:environmental_benefits])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

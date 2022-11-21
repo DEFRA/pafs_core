@@ -1,77 +1,76 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-three-quarters">
-      <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= form_error_header(f) %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <p><%= t('.lede') %></p>
-        <div class="step-form">
-          <%= f.form_group :base do %>
-            <%= f.error_message(:base) %>
-            <div class="scroll-horz">
-              <fieldset>
-                <legend class="visuallyhidden">What is the estimated spend for each financial year</legend>
-                <table class="funding-table hidden-totals">
-                  <thead>
-                    <tr>
-                      <th class="financial-year-column"><%= t(".financial_year_label") %></th>
-                      <% @project.sorted_sources.each do |fs| %>
-                        <th class="data-column <%= "#{fs}-column" %>"><%= t(".#{fs}_label") %></th>
-                      <% end %>
-                      <th class="data-total"><%= t(".total_label") %></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <%= f.fields_for :funding_values, @project.current_funding_values do |builder| %>
-                      <tr>
-                        <td class="financial_year">
-                          <%= builder.hidden_field :financial_year %>
-                          <%= builder.hidden_field :id %>
-                          <%= formatted_financial_year(builder.object.financial_year) %>
-                        </td>
-                        <% @project.sorted_sources.each do |fs| %>
-                          <% if PafsCore::FundingSources::AGGREGATE_SOURCES.include?(fs) %>
-                            <td class="numeric">
-                              <%= builder.object.send(fs).sum(:amount).to_i %>
-                            </td>
-                          <% else %>
-                            <td class="<%= funding_table_cell(builder.object.financial_year, fs) %>">
-                              <%= builder.label fs, class: "visuallyhidden" do -%>
-                                <%= "#{t(".#{fs}_label")} #{ formatted_financial_year(builder.object.financial_year) }" -%>
-                              <% end -%>
-                              <%= builder.number_field_without_label(fs,
-                                                                    class: "funding-value",
-                                                                    min: 0,
-                                                                    step: 1,
-                                                                    value: builder.object.send(fs).to_i)
-                                                                    %>
-                            </td>
-                          <% end %>
-                        <% end %>
-                        <td class="row-total numeric <%= fy_total_class(builder.object.financial_year) %>">
-                          <%= builder.object.total %>
-                        </td>
-                      </tr>
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-three-quarters">
+      <div class="scroll-horz">
+        <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :base) do %>
+            <%= error_message(f.object, :base) %>
+            <p><%= t('.lede') %></p>
+            <div class="scroll-horz govuk-body-s">
+              <legend class="govuk-visually-hidden">What is the estimated spend for each financial year</legend>
+              <table class="funding-table hidden-totals">
+                <thead>
+                  <tr>
+                    <th class="financial-year-column"><%= t(".financial_year_label") %></th>
+                    <% @project.sorted_sources.each do |fs| %>
+                      <th class="data-column <%= "#{fs}-column" %>"><%= t(".#{fs}_label") %></th>
                     <% end %>
-                  </tbody>
-                  <tfoot>
+                    <th class="data-total"><%= t(".total_label") %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%= f.fields_for :funding_values, @project.current_funding_values do |builder| %>
                     <tr>
-                      <td><%= t(".total_label") %></td>
-                      <% @project.selected_funding_sources.each do |fs| %>
-                        <td class="numeric <%= fs %>-total">Total here</td>
+                      <td class="financial_year">
+                        <%= builder.hidden_field :financial_year %>
+                        <%= builder.hidden_field :id %>
+                        <%= formatted_financial_year(builder.object.financial_year) %>
+                      </td>
+                      <% @project.sorted_sources.each do |fs| %>
+                        <% if PafsCore::FundingSources::AGGREGATE_SOURCES.include?(fs) %>
+                          <td class="numeric">
+                            <%= builder.object.send(fs).sum(:amount).to_i %>
+                          </td>
+                        <% else %>
+                          <td class="<%= funding_table_cell(builder.object.financial_year, fs) %>">
+                            <%= builder.label fs, class: "govuk-visually-hidden" do -%>
+                              <%= "#{t(".#{fs}_label")} #{ formatted_financial_year(builder.object.financial_year) }" -%>
+                            <% end -%>
+                            <%= builder.govuk_number_field(fs,
+                                                           class: "funding-value",
+                                                           label: nil,
+                                                           value: builder.object.send(fs).to_i)
+                                                           %>
+                          </td>
+                        <% end %>
                       <% end %>
-                      <td class="numeric grand-total">Total</td>
+                      <td class="row-total numeric <%= fy_total_class(builder.object.financial_year) %>">
+                        <%= builder.object.total %>
+                      </td>
                     </tr>
-                  </tfoot>
-                </table>
-              </fieldset>
+                  <% end %>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td><%= t(".total_label") %></td>
+                    <% @project.selected_funding_sources.each do |fs| %>
+                      <td class="numeric <%= fs %>-total">Total here</td>
+                    <% end %>
+                    <td class="numeric grand-total">Total</td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
-            <% end %>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
+            <p>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
+        <% end %>
         <% end %>
       </div>
     </div>

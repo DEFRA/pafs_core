@@ -15,13 +15,13 @@ RSpec.describe PafsCore::UserArea do
       expect(subject)
         .to validate_uniqueness_of(:user_id)
         .scoped_to(:area_id)
-        .with_message("^Unable to assign area multiple times")
+        .with_message("Unable to assign area multiple times")
     end
 
     it "validates that :area_id is present" do
       subject.area_id = nil
       expect(subject.valid?).to be false
-      expect(subject.errors[:area_id]).to include "^Select an area"
+      expect(subject.errors[:area_id]).to include "Select an area"
     end
   end
 end

@@ -12,7 +12,7 @@ RSpec.describe PafsCore::ComprehensiveRestorationStep, type: :model do
       subject.comprehensive_restoration = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:comprehensive_restoration])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

@@ -33,7 +33,7 @@ module PafsCore
 
       errors.add(
         :ready_for_service,
-        "^You expect to start the work on #{dt1.month} #{dt1.year}. \
+        "You expect to start the work on #{dt1.month} #{dt1.year}. \
         The date you expect the project to start achieving its benefits must come after this date."
       )
     end
@@ -49,7 +49,7 @@ module PafsCore
              (2000..2100).cover?(yv.to_i)
         errors.add(
           :ready_for_service,
-          "^Enter the date you expect the project to start achieving its benefits"
+          "Enter the date you expect the project to start achieving its benefits"
         )
       end
     end

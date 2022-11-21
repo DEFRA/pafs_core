@@ -13,13 +13,13 @@ RSpec.describe PafsCore::ConfidenceSecuredPartnershipFundingStep, type: :model d
     it "validates that at a confidence is selected" do
       subject.confidence_secured_partnership_funding = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:confidence_secured_partnership_funding]).to include "^Select the confidence level"
+      expect(subject.errors.messages[:confidence_secured_partnership_funding]).to include "Select the confidence level"
     end
 
     it "validates that the confidence is a valid value" do
       subject.confidence_secured_partnership_funding = "Invalid"
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:confidence_secured_partnership_funding]).to include "^Chosen level must be one of the valid values"
+      expect(subject.errors.messages[:confidence_secured_partnership_funding]).to include "Chosen level must be one of the valid values"
     end
   end
 

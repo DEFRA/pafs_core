@@ -20,7 +20,7 @@ module PafsCore
 
     def earliest_start_date_is_present_and_correct
       if earliest_start_month.blank? || earliest_start_year.blank?
-        errors.add(:earliest_start, "^Tell us the earliest date the project can start")
+        errors.add(:earliest_start, "Tell us the earliest date the project can start")
       else
         validate_month
         validate_year
@@ -34,7 +34,7 @@ module PafsCore
       mon = m.to_i
       return unless mon < 1 || mon > 12 || (m.to_s != mon.to_s)
 
-      errors.add(:earliest_start, "^The month must be between 1 and 12")
+      errors.add(:earliest_start, "The month must be between 1 and 12")
     end
 
     def validate_year
@@ -44,7 +44,7 @@ module PafsCore
       year = y.to_i
       return unless (year < 2000 || year > 2100) || (year.to_s != y.to_s)
 
-      errors.add(:earliest_start, "^The year must be between 2000 and 2100")
+      errors.add(:earliest_start, "The year must be between 2000 and 2100")
     end
   end
 end

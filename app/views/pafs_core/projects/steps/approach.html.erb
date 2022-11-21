@@ -1,28 +1,35 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= form_error_header(f) %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-          <p><%= t(".description") %>:
-            <ul class="list list-bullet indent">
-              <li><%=t(".example1")%></li>
-              <li><%=t(".example2")%></li>
-            </ul>
-          </p>
-          <div class="step-form">
-          <fieldset>
-            <legend class="visuallyhidden">Explain how your project will achieve the outcomes</legend>
-            <%= f.label :approach, t('.heading'), class: "visuallyhidden" %>
-            <%= f.text_area :approach, class: "form-control form-wide", cols: 30, rows: 10,
-              hint: t(".example_text"), label: :none, group_class: "form-group" %>
-          </fieldset>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
-          </div>
-        </div>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :start_outline_business_case) do %>
+
+            <p><%= t(".description") %>:
+              <ul class="list list-bullet indent">
+                <li><%=t(".example1")%></li>
+                <li><%=t(".example2")%></li>
+              </ul>
+            </p>
+
+            <legend class="govuk-visually-hidden">Explain how your project will achieve the outcomes</legend>
+            <%= f.label :approach, t('.heading'), class: "govuk-visually-hidden" %>
+            <%= f.govuk_text_area :approach,
+                                  class: "form-control form-wide",
+                                  cols: 30,
+                                  rows: 10,
+                                  hint: { text: t(".example_text") },
+                                  label: nil,
+                                  group_class: "form-group" %>
+
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

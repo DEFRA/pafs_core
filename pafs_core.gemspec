@@ -42,11 +42,9 @@ Gem::Specification.new do |s|
   # defra_ruby_alert is a gem we created to manage airbrake across projects
   s.add_dependency "defra_ruby_alert", "~> 2.1"
 
-  # Provided by GDS - Template gives us a master layout into which
-  # we can inject our content using yield and content_for
-  s.add_dependency "govuk_elements_rails"
-  s.add_dependency "govuk_frontend_toolkit"
-  s.add_dependency "govuk_template"
+  # GOV.UK styling
+  s.add_dependency "defra_ruby_template", "~> 3"
+  s.add_dependency "govuk_design_system_formbuilder", "~> 3"
 
   s.add_development_dependency "capybara"
   s.add_development_dependency "climate_control"

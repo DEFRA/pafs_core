@@ -12,7 +12,7 @@ RSpec.describe PafsCore::HeathlandHabitatCreatedOrEnhancedStep, type: :model do
       subject.heathland = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:heathland])
-        .to include "^You must select yes or no"
+        .to include "You must select yes or no"
     end
   end
 

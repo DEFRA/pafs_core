@@ -7,7 +7,7 @@ module PafsCore
     belongs_to :project, inverse_of: :state, optional: true
     validates :state, inclusion: { in: VALID_STATES }
 
-    def self.submitted
+    def self.govuk_submitted
       where(state: "submitted")
     end
 

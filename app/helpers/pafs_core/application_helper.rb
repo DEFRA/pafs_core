@@ -3,22 +3,86 @@
 
 module PafsCore
   module ApplicationHelper
-    # for our form builder
     def pafs_form_for(name, *args, &)
       options = args.extract_options!
 
       content_tag(:div,
-                  form_for(name, *(args << options.merge(builder: PafsCore::FormBuilder)), &),
+                  form_for(name, *(args << options.merge(builder: GOVUKDesignSystemFormBuilder::FormBuilder)), &),
                   class: "pafs_form")
     end
 
-    # wrap the formbuilder method here in order to set content for page title
-    def form_error_header(form, heading = nil, description = nil, sort_order = nil)
-      error_header = form.error_header(heading, description, sort_order)
-      return if error_header.blank?
+    def month_and_year(form, _project, attribute, options = {})
+      m_key = "#{attribute}_month".to_sym
+      y_key = "#{attribute}_year".to_sym
+      contents = []
+      contents << heading_text(options.delete(:heading)) if options.include? :heading
+      contents << content_tag(:p, options.delete(:hint), class: "govuk-hint") if options.include? :hint
+      # need to handle the 2 fields as one for errors
+      contents << error_message(form.object, attribute)
+      contents << content_tag(:div, class: "form-date") do
+        safe_join([
+                    content_tag(:div, class: "form-group form-group-month") do
+                      form.govuk_number_field(
+                        m_key,
+                        width: 2, maxlength: 2, min: 1, max: 12,
+                        label: { text: t("month_label") },
+                        class: "form-group-month"
+                      )
+                    end,
+                    content_tag(:div, class: "form-group form-group-year") do
+                      form.govuk_number_field(
+                        y_key,
+                        width: 4, maxlength: 4, min: 2000, max: 2100,
+                        label: { text: t("year_label") },
+                        class: "form-group-year"
+                      )
+                    end
+                  ], "\n")
+      end
 
-      content_for :error_title, "Error", flush: true
-      error_header
+      safe_join(contents, "\n")
+    end
+
+    def error_message(object, attribute)
+      return unless object.errors.include? attribute
+
+      content = []
+      object.errors.full_messages_for(attribute).each_with_index do |message, i|
+        content << content_tag(:p, trim_error_message(attribute, message),
+                               class: "govuk-error-message",
+                               id: "#{attr_name(attribute)}-error-#{i}")
+      end
+      safe_join(content, "\n")
+    end
+
+    # This is a workaround to allow the legacy PAFS error setup to work with GOVUK FormBuilder error handling.
+    def trim_error_message(attribute, message)
+      message.delete_prefix(attribute.to_s.humanize)
+    end
+
+    def form_group(step, name, &)
+      content_tag(:div, class: "form-group", id: content_id(step, name.to_sym)) do
+        content_tag(:div, &) if block_given?
+      end
+    end
+
+    def content_id(form, attribute)
+      "#{form}-#{attribute}-content"
+    end
+
+    # rubocop:disable Rails/HelperInstanceVariable
+    def attr_name(attribute)
+      "#{@object_name}-#{attribute}"
+    end
+    # rubocop:enable Rails/HelperInstanceVariable
+
+    def govuk_checkbox_for(form, attribute, scope = ".")
+      form.govuk_check_box(
+        attribute,
+        attribute,
+        label: { text: t(attribute, scope: scope) },
+        multiple: false
+      )
     end
 
     def title

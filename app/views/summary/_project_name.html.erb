@@ -1,16 +1,16 @@
 <article class="summary-item" aria-labelledby="project-name">
   <div class="summary-item-content">
     <h2 class="heading-medium" role="heading" id="project-name">Project name</h2>
-    <div class="grid-row">
-      <div class="column-three-quarters">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
         <p><%= project.name %></p>
       </div>
-      <div class="column-one-quarter">
+      <div class="govuk-grid-column-one-quarter">
         <% if project.draft? %>
           <% if can_edit_project_sections?(project) -%>
             <div class="change-link">
               <%= link_to pafs_core.project_step_path(id: project.to_param, step: :project_name) do -%>
-                Change<span class="visually-hidden"> the project name</span>
+                Change<span class="govuk-visually-hidden"> the project name</span>
               <% end -%>
             </div>
           <% end -%>

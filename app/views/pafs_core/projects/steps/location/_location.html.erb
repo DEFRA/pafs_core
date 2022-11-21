@@ -1,4 +1,4 @@
-<h1 class="heading-large"><%= t('.heading') %></h1>
+<h1 class="govuk-heading-l"><%= t('.heading') %></h1>
 <p><%= location_search_results_for(results, params[:q], t(".result"), t(".description")) %> <%= %></p>
 <ul>
   <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
@@ -12,7 +12,7 @@
       <%= link_to t(".location_not_listed"), project_step_path(id: @project, step: @project.step, params: { search: "true"}) %>
     </div>
     <div class="form-group">
-      <%= f.submit t("save_and_continue_label"), class: "button" %>
+      <%= f.govuk_submit t("save_and_continue_label"), class: "button" %>
     </div>
   <% end %>
 </ul>

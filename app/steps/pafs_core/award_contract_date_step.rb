@@ -33,7 +33,7 @@ module PafsCore
 
       errors.add(
         :award_contract,
-        "^You expect to submit your outline business case for approval on #{dt1.month} #{dt1.year}. \
+        "You expect to submit your outline business case for approval on #{dt1.month} #{dt1.year}. \
         The date you expect to award the project's main contract must come after this date."
       )
     end
@@ -49,7 +49,7 @@ module PafsCore
              (2000..2100).cover?(yv.to_i)
         errors.add(
           :award_contract,
-          "^Enter the date you expect to award the project's main contract"
+          "Enter the date you expect to award the project's main contract"
         )
       end
     end

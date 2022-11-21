@@ -4,7 +4,7 @@ module PafsCore
   class ProjectAreaStep < BasicStep
     delegate :rma_name, :rma_name=, to: :project
 
-    validates :rma_name, presence: { message: "^Select a lead PSO area" }
+    validates :rma_name, presence: { message: "Select a lead PSO area" }
 
     private
 

@@ -1,14 +1,14 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
-      <h1 class="heading-large"><%= t('.heading') %></h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
       <div class="step-form">
         <div class="form-group">
           <div class="scroll-horz">
             <fieldset>
-              <legend class="visuallyhidden"><%= t('.heading') %></legend>
+              <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
               <table class="protection-outcomes-table-summary">
                 <thead>
                   <tr>
@@ -73,7 +73,7 @@
         </div>
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
           <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           </div>
         <% end %>
       </div>

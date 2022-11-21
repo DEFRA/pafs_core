@@ -11,7 +11,7 @@ RSpec.describe PafsCore::NaturalFloodRiskMeasuresCostStep, type: :model do
     it "validates that the cost has been entered" do
       subject.natural_flood_risk_measures_cost = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include "You must include a total cost for your flood risk measures"
+      expect(subject.errors.messages[:natural_flood_risk_measures_cost]).to include "You must include a total cost for your flood risk measures"
     end
   end
 end

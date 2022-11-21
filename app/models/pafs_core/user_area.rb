@@ -7,7 +7,7 @@ module PafsCore
     belongs_to :area
 
     validate :area_is_set
-    validates :user_id, uniqueness: { scope: :area_id, message: "^Unable to assign area multiple times" }
+    validates :user_id, uniqueness: { scope: :area_id, message: "Unable to assign area multiple times" }
 
     default_scope { order(primary: :desc) }
 
@@ -30,7 +30,7 @@ module PafsCore
       # the user_area, it's the area that the user will be selecting.
       # Also if we validate both we'll get error messages for both when no
       # area is selected which the user cannot do anything about from the front-end
-      errors.add(:area_id, "^Select an area") if area_id.nil?
+      errors.add(:area_id, "Select an area") if area_id.nil?
     end
   end
 end

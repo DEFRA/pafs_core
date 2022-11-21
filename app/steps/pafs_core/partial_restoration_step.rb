@@ -24,7 +24,7 @@ module PafsCore
     def a_choice_has_been_made
       return unless partial_restoration.nil?
 
-      errors.add(:partial_restoration, "^You must select yes or no")
+      errors.add(:partial_restoration, "You must select yes or no")
     end
   end
 end

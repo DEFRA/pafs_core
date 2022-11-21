@@ -35,7 +35,7 @@ module PafsCore
     private
 
     def file_selected
-      errors.add(:base, "^Select the completed FCERM program (.xlsx) file") if filename.blank?
+      errors.add(:base, "Select the completed FCERM program (.xlsx) file") if filename.blank?
     end
   end
 end

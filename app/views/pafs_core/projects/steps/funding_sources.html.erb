@@ -1,27 +1,29 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="grid-row">
-    <div class="column-two-thirds">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= form_error_header(f) %>
-        <h1 class="heading-large"><%= t('.heading') %></h1>
-        <p><%= t(".lede") %></p>
-        <div class="step-form">
-          <fieldset>
-            <legend class="visuallyhidden"><%= t('.heading') %></legend>
-            <%= f.form_group :base do %>
-              <%= f.error_message(:base) %>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <p><%= t(".lede") %></p>
+          <div class="step-form">
+            <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
+            <%= form_group(:funding_sources_step, :base) do %>
               <% PafsCore::FundingSources::FUNDING_SOURCES.each do |fs| %>
-                <%= f.check_box fs, label: @project.funding_source_label(fs) %>
+                <div class="govuk-checkboxes__item">
+                  <%= f.govuk_check_box fs, fs, multiple: false, label: { text: @project.funding_source_label(fs) } %>
+                </div>
               <% end %>
             <% end %>
-          </fieldset>
-          <div class="form-group">
-            <%= f.submit t("save_and_continue_label"), class: 'button' %>
+
+            <div class="headroom">
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

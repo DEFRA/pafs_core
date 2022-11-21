@@ -1,11 +1,10 @@
 <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step), html: { multipart: true } do |f| %>
-  <%= form_error_header(f) %>
-<h1 class="heading-large"><%= t('.heading') %></h1>
+  <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+<h1 class="govuk-heading-l"><%= t('.heading') %></h1>
 <p><%= t(".description") %></p>
 <p><%= t(".acceptable_file_formats") %></p>
 <div class="form-group">
-  <%= f.form_group(:base) do %>
-    <%= f.error_message(:base) %>
+  <%= form_group(@project.step, :base) do %>
     <%= f.file_field :benefit_area_file,
                      accept: @project.acceptable_benefit_area_types,
                      aria: { labelledby: "file-upload" } %>
@@ -14,7 +13,7 @@
   <div class="hidden form-group">
     <%= link_to t(".draw_outline_instead"), project_step_path(id: @project.to_param, step: @project.step) %>
   </div>
-  <%= f.submit t("save_and_continue_label"), class: 'button' %>
+  <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
 <% end %>
 </div>
 <details>

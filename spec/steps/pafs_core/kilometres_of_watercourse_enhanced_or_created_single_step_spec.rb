@@ -12,7 +12,7 @@ RSpec.describe PafsCore::KilometresOfWatercourseEnhancedOrCreatedSingleStep, typ
       subject.kilometres_of_watercourse_enhanced_or_created_single = nil
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:kilometres_of_watercourse_enhanced_or_created_single])
-        .to include "^You must include the number of kilometres your project will create."
+        .to include "You must include the number of kilometres your project will create."
     end
   end
 end
