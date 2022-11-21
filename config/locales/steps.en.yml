@@ -267,7 +267,7 @@ en:
           total_label: Total
 # coastal erosion protection outcomes
         coastal_erosion_protection_outcomes:
-          heading: How many properties affected coastal erosion is the project likely to benefit?
+          heading: How many properties affected by coastal erosion is the project likely to benefit?
           lede: Don't include properties built or converted after 1 January 2012.
           reduced_risk_of_households_for_coastal_erosion_label: My project does not reduce the risk of coastal erosion for any properties
           financial_year_label: Financial year (April to March)
