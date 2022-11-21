@@ -17,7 +17,7 @@
               <% PafsCore::Confidence::CONFIDENCE_VALUES.each do |value| %>
                 <%= f.govuk_radio_button :confidence_homes_better_protected, 
                                          value,
-                                         label: { text: confidence_band_label(:homes_better_protected, value), tag: 'b' }
+                                         label: { text: confidence_band_label(:homes_better_protected, value) }
                 %>
               <% end %>
             <% end %>
