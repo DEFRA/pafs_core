@@ -16,8 +16,11 @@
 
             <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
 
-            <% @project.financial_year_options.each do |year| %>
-              <%= f.govuk_radio_button :project_end_financial_year, year, label: { text: "April #{year} to March #{year + 1}" } %>
+            <%= f.govuk_radio_buttons_fieldset(:project_end_financial_year, legend: nil) do %>
+
+              <% @project.financial_year_options.each do |year| %>
+                <%= f.govuk_radio_button :project_end_financial_year, year, label: { text: "April #{year} to March #{year + 1}" } %>
+              <% end %>
             <% end %>
           <% end %>
 
