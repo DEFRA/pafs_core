@@ -12,6 +12,7 @@
           <legend class="govuk-visually-hidden">Select which risks your project protects against</legend>
           <% i18n_scope = "pafs_core.fcerm1.risks" %>
           <%= form_group(:risks, :base) do %>
+            <%= error_message(f.object, :base) %>
             <%= govuk_checkbox_for f, :fluvial_flooding, i18n_scope %>
             <%= govuk_checkbox_for f, :tidal_flooding, i18n_scope %>
             <%= govuk_checkbox_for f, :groundwater_flooding, i18n_scope %>

@@ -2,23 +2,27 @@
 
 <% last_year = @project.financial_year_options.last + 1 %>
 <div class="step-container">
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: { action: "save", id: @project.to_param, step: @project.step } do |f| %>
-        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
-        <p><%= t('.lede') %></p>
-        <div class="step-form">
-          <%= f.number_field :project_end_financial_year,
-            in: Time.now.uk_financial_year..2100,
-            class: "form-control form-year",
-            hint: t(".example_text"),
-            label: t(".financial_year_label"),
-            label_class: "form-label" %>
 
-          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :project_end_financial_year) do %>
+            <p><%= t('.lede') %></p>
+        
+            <%= f.govuk_number_field :project_end_financial_year,
+              min: Time.now.uk_financial_year,
+              max: 2100,
+              class: "form-control form-year",
+              hint: { text: t(".example_text") },
+              label: { text: t(".financial_year_label") } %>
+
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

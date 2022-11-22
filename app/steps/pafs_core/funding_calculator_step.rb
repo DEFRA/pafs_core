@@ -72,16 +72,17 @@ module PafsCore
     def filetype_valid?(file)
       return true if valid_funding_calculator_file?(file.original_filename)
 
-      errors.add(:base, I18n.t("unsupported_funding_calc_format"))
+      errors.add(:funding_calculator, I18n.t("unsupported_funding_calc_format"))
       false
     end
 
     def virus_free_funding_calculator_present
       if virus_info.present?
         Rails.logger.error virus_info
-        errors.add(:base, "The file was rejected because it may contain a virus. Check the file and try again")
+        errors.add(:funding_calculator,
+                   "The file was rejected because it may contain a virus. Check the file and try again")
       elsif funding_calculator_file_name.blank?
-        errors.add(:base, "Upload the completed partnership funding calculator .xslx file")
+        errors.add(:funding_calculator, "Upload the completed partnership funding calculator .xslx file")
       end
     end
 
@@ -111,7 +112,7 @@ module PafsCore
       return if calculator_sheet_name.present?
 
       self.funding_calculator_file_name = ""
-      errors.add(:base, "Please ensure you upload a valid partnership funding calculator")
+      errors.add(:funding_calculator, "Please ensure you upload a valid partnership funding calculator")
     end
 
     def validate_calculator_version
@@ -120,8 +121,8 @@ module PafsCore
       return if calculator_version.to_s == expected_version && calculator_version.present?
 
       self.funding_calculator_file_name = ""
-      errors.add(:base, "The uploaded calculator is the incorrect version. " \
-                        "You must submit the #{expected_version_name} calculator.")
+      errors.add(:funding_calculator, "The uploaded calculator is the incorrect version. " \
+                                      "You must submit the #{expected_version_name} calculator.")
     end
   end
 end
