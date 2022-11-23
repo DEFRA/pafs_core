@@ -11,11 +11,10 @@
           <p><%= t(".lede") %></p>
           <div class="step-form">
             <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
-            <%= form_group(:funding_sources_step, :base) do %>
+            <%= form_group(:funding_sources, :funding_sources_step) do %>
+            <%= error_message(f.object, :base) %>
               <% PafsCore::FundingSources::FUNDING_SOURCES.each do |fs| %>
-                <div class="govuk-checkboxes__item">
-                  <%= f.govuk_check_box fs, fs, multiple: false, label: { text: @project.funding_source_label(fs) } %>
-                </div>
+                <%= f.govuk_check_box fs, fs, multiple: false, label: { text: @project.funding_source_label(fs) } %>
               <% end %>
             <% end %>
 

@@ -7,7 +7,7 @@
 
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
-        <%= f.govuk_fieldset(legend: { text: t('.heading') }) do %>
+        <%= f.govuk_fieldset(legend: { text: t('.heading'), size: 'l' }) do %>
 
           <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
           <%= f.label(:natural_flood_risk_measures_cost, t('.heading'), class: "govuk-visually-hidden") %>

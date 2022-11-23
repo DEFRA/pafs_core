@@ -32,7 +32,7 @@ module PafsCore
                     content_tag(:div, class: "form-group form-group-year") do
                       form.govuk_number_field(
                         y_key,
-                        width: 4, maxlength: 4, min: 2000, max: 2100,
+                        width: 3, maxlength: 4, min: 2000, max: 2100,
                         label: { text: t("year_label") },
                         class: "form-group-year"
                       )

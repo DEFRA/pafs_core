@@ -1,52 +1,58 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
-        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
-        <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
-        <p><%= t('.lede') %></p>
-        <div class="step-form">
-          <fieldset>
-            <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
-            <%= form_group(@project.step, :base) do %>
-              <%= govuk_checkbox_for f, :river_restoration %>
-              <%= govuk_checkbox_for f, :floodplain_restoration %>
-              <%= govuk_checkbox_for f, :leaky_barriers %>
-              <%= govuk_checkbox_for f, :offline_flood_storage_areas %>
-              <%= govuk_checkbox_for f, :cross_slope_woodland %>
-              <%= govuk_checkbox_for f, :catchment_woodland %>
-              <%= govuk_checkbox_for f, :riparian_woodland %>
-              <%= govuk_checkbox_for f, :floodplain_woodland %>
-              <%= govuk_checkbox_for f, :soil_and_land_management %>
-              <%= govuk_checkbox_for f, :land_and_headwater_drainage_management %>
-              <%= govuk_checkbox_for f, :runoff_pathway_management %>
-              <%= govuk_checkbox_for f, :saltmarsh_mudflats_and_managed_realignment %>
-              <%= govuk_checkbox_for f, :sand_dunes %>
-              <%= govuk_checkbox_for f, :beach_nourishment %>
-              <div class="govuk-checkboxes__item">
-                <input name="natural_flood_risk_measures_step[other_flood_measures_selected]" type="hidden" value="0">
-                <% if f.object.other_flood_measures_selected %>
-                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="other_flood_measures_selected" checked onclick="toggleBoxVisibility()">
-                <% else %>
-                  <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="other_flood_measures_selected" onclick="toggleBoxVisibility()">
-                <% end %>
-                <label for="natural_flood_risk_measures_step_other_flood_measures_selected" class="govuk-label govuk-checkboxes__label">
-                  Other
-                </label>
-              </div>
 
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(@project.step, :natural_flood_risk_measures) do %>
+            <%= error_message(f.object, :base) %>
+            <p><%= t('.lede') %></p>
+            <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
+
+            <% %i[river_restoration
+                  floodplain_restoration
+                  leaky_barriers
+                  offline_flood_storage_areas
+                  cross_slope_woodland
+                  catchment_woodland
+                  riparian_woodland
+                  floodplain_woodland
+                  soil_and_land_management
+                  land_and_headwater_drainage_management
+                  runoff_pathway_management
+                  saltmarsh_mudflats_and_managed_realignment
+                  sand_dunes
+                  beach_nourishment
+            ].each do |measure| %>
+              <%= f.govuk_check_box(measure, measure, label: { text: t(".#{measure}_label") }, multiple: false) %>
             <% end %>
-            <div id="other-flood-measures" class="panel">
-              <label class="form-label" for="natural_flood_risk_measures_step_other_flood_measures"><%= t(".other_flood_measures_label") %></label>
-              <input type="text" name="natural_flood_risk_measures_step[other_flood_measures]" id="natural_flood_risk_measures_step_other_flood_measures" value=<%= f.object.other_flood_measures %>>
+            <div class="govuk-checkboxes__item">
+              <%# <input name="natural_flood_risk_measures_step[other_flood_measures_selected]" type="hidden" value="0"> %>
+              <% if f.object.other_flood_measures_selected %>
+                <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="other_flood_measures_selected" checked onclick="toggleBoxVisibility()">
+              <% else %>
+                <input id="natural_flood_risk_measures_step_other_flood_measures_selected" type="checkbox" name="natural_flood_risk_measures_step[other_flood_measures_selected]" class="govuk-checkboxes__input" value="other_flood_measures_selected" onclick="toggleBoxVisibility()">
+              <% end %>
+              <label for="natural_flood_risk_measures_step_other_flood_measures_selected" class="govuk-label govuk-checkboxes__label">
+                Other
+              </label>
             </div>
-        </fieldset>
-        </div>
-        <div class="form-group">
+
+          <% end %>
+          <%= error_message(f.object, :other_flood_measures) %>
+          
+          <div id="other-flood-measures" class="govuk-details__text">
+            <label class="form-label" for="natural_flood_risk_measures_step_other_flood_measures"><%= t(".other_flood_measures_label") %></label>
+            <input type="govuk_text" name="natural_flood_risk_measures_step[other_flood_measures]" id="natural_flood_risk_measures_step_other_flood_measures" value=<%= f.object.other_flood_measures %>>
+          </div>
+
+          <p>
           <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

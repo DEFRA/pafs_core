@@ -1,6 +1,4 @@
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <%= f.govuk_error_summary %>
-    <% content_for :error_title, "Error" if f.govuk_error_summary %>
-  </div>
+  <%= f.govuk_error_summary %>
+  <% content_for :error_title, "Error" if f.govuk_error_summary %>
 </div>

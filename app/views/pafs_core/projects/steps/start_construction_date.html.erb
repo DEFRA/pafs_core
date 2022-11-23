@@ -1,16 +1,17 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
 
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <p><%= t('.description') %></p>
           <%= form_group(@project.step, :start_construction_case) do %>
             <legend class="govuk-visually-hidden">Construction start date</legend>
-            <%= month_and_year(f, @project, :start_construction, hint: t(".description")) %>
+            <%= month_and_year(f, @project, :start_construction, hint: t(".example_text")) %>
             <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
         <% end %>

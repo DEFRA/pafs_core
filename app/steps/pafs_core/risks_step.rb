@@ -19,7 +19,7 @@ module PafsCore
     ].freeze
 
     def update(params)
-      assign_attributes(all_risks(step_params(params)))
+      assign_attributes(all_risks(step_params(params) || {}))
       if valid?
         self.main_risk = selected_risks.first.to_s if selected_risks.count == 1
         project.save
@@ -32,12 +32,11 @@ module PafsCore
 
     # ensure all risks not included in the selection are set to nil
     def all_risks(set_risks)
-      default_risks = RISK_ATTRIBUTES.to_h { |ra| [ra.to_s, nil] }
-      default_risks.merge(set_risks)
+      RISK_ATTRIBUTES.to_h { |ra| [ra.to_s, set_risks[ra]] }
     end
 
     def step_params(params)
-      params.require(:risks_step).permit(RISK_ATTRIBUTES)
+      params.require(:risks_step).permit(RISK_ATTRIBUTES) if params[:risks_step].present?
     end
 
     def at_least_one_risk_is_selected

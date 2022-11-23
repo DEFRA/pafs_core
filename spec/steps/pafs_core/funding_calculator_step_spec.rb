@@ -14,13 +14,13 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
     it "validates that a file has been selected" do
       subject.funding_calculator_file_name = nil
       expect(subject.valid?).to be false
-      expect(subject.errors[:base]).to include "Upload the completed partnership funding calculator .xslx file"
+      expect(subject.errors[:funding_calculator]).to include "Upload the completed partnership funding calculator .xslx file"
     end
 
     it "validates that the file passed a virus check" do
       subject.virus_info = "Found a nasty virus"
       expect(subject.valid?).to be false
-      expect(subject.errors[:base])
+      expect(subject.errors[:funding_calculator])
         .to include "The file was rejected because it may contain a virus. Check the file and try again"
     end
 
@@ -37,7 +37,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
       subject.valid?
 
-      expect(subject.errors[:base])
+      expect(subject.errors[:funding_calculator])
         .to include "The uploaded calculator is the incorrect version. You must submit the v8 2014 calculator."
     end
 

@@ -7,8 +7,6 @@
 
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
-<% Rails.logger.warn "\n>>>>>> contributors form: #{project.to_param}, #{project.step}\n" %>
-
         <%= f.govuk_fieldset legend: { text: heading, size: 'l' } do %>
           <%= form_group(project.step, project.step) do %>
 

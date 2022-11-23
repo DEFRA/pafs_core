@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-quarter aslign-right">
+        <div class="govuk-grid-column-one-quarter align-right">
           <%= project.grid_reference %>
         </div>
         <div class="govuk-grid-column-one-half">
@@ -92,7 +92,7 @@
             <%= project.summary_label(:location_title) %>
           </h2>
         </div>
-        <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-grid-column-one-quarter align-right">
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">

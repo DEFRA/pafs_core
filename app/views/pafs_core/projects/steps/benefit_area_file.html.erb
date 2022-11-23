@@ -6,7 +6,7 @@
 
       <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
-      <%= f.govuk_fieldset(legend: { text: t('.heading') }) do %>
+      <%= f.govuk_fieldset(legend: { text: t('.heading'), size: 'l' }) do %>
       
         <%= form_group(@project.step, :base) do %>
           <div class="govuk-hint">
