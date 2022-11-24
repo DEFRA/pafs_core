@@ -8,7 +8,8 @@
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
         <%= f.govuk_fieldset legend: { text: heading, size: 'l' } do %>
-          <%= form_group(project.step, project.step) do %>
+          <%= form_group(f.object, project.step, :base) do %>
+            <%= error_message(f.object, "#{project.step}-step", :base) %>
 
             <div class="contributors form-group">
               <label class='form-label-bold'>What is the Contributor Name?</label>
@@ -19,9 +20,9 @@
                 <% end %>
               <% end %>
             </div>
-
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>

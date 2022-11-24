@@ -9,11 +9,12 @@
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <p><%= t('.description') %></p>
-          <%= form_group(@project.step, :start_construction_case) do %>
+          <%= form_group(f.object, @project.step, :start_construction) do %>
             <legend class="govuk-visually-hidden">Construction start date</legend>
-            <%= month_and_year(f, @project, :start_construction, hint: t(".example_text")) %>
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+            <%= month_and_year(f, :start_construction_date_step, :start_construction, hint: t(".example_text")) %>
           <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>

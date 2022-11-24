@@ -10,7 +10,7 @@
         <%= f.hidden_field :id %>
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-          <%= form_group(@project.step, :project_type) do %>
+          <%= form_group(f.object, :project_type_step, :project_type) do %>
             <p class="govuk-hint"><%= t('.project_type_supporting_text') %></p>
 
             <legend class="govuk-visually-hidden">Select the type of your proposed project</legend>
@@ -20,12 +20,10 @@
                 <%= f.govuk_radio_button :project_type, pt.to_s, label: { text: project_type_label(pt) } %>
               <% end %>
             <% end %>
-
           <% end %>
-        <% end %>
 
-        <p>
-        <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+        <% end %>
       <% end %>
     </div>
   </div>

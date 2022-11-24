@@ -12,8 +12,8 @@
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <p><%= t('.urgency_proposal_need_agree') %></p>
           <legend class="govuk-visually-hidden">Select the reason why your project is urgent</legend>
-          <%= form_group(@project.step, :urgency_reason) do %>
-            <%= error_message(f.object, :urgency_reason) %>
+          <%= form_group(f.object, @project.step, :urgency_reason) do %>
+            <%= error_message(f.object, :urgency_step,   :urgency_reason) %>
             <% PafsCore::Urgency::URGENCY_REASONS.each do |r| %>
               <%= f.govuk_radio_button :urgency_reason,
                                       r.to_s,
@@ -22,9 +22,9 @@
                 <div class="control-text-block">or</div>
               <% end %>
             <% end %>
-            <p>
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>

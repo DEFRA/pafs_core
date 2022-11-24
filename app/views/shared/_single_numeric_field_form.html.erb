@@ -9,7 +9,7 @@
           <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
           <%= f.govuk_fieldset legend: { text: heading, size: 'l' } do %>
-            <%= form_group(@project.step, numeric_field) do %>
+            <%= form_group(f.object, @project.step, numeric_field) do %>
 
               <% if local_assigns.has_key? :lede %>
                 <p><%= lede %></p>
@@ -28,8 +28,9 @@
                   suffix_text: units
                   ) %>
 
-              <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
             <% end %>
+
+            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
         <% end %>
       </div>

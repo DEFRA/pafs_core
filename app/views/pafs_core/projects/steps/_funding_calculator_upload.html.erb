@@ -9,8 +9,8 @@
       <p><%= t('version_statement', scope: scope) %></p>
       <p><strong><%= t('version_question', scope: scope) %></strong></p>
 
-      <%= form_group(@project.step, :funding_calculator_upload) do %>
-        <%= error_message(f.object, :funding_calculator) %>
+      <%= form_group(f.object, @project.step, :funding_calculator) do %>
+        <%= error_message(f.object, :funding_calculator_step, :funding_calculator) %>
       
         <legend class="govuk-visually-hidden">Version</legend>
 

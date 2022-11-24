@@ -11,7 +11,7 @@
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <p><%= t(".description") %></p>
-          <%= form_group(@project.step, :coastal_protection_after) do %>
+          <%= form_group(f.object, @project.step, :coastal_protection_after) do %>
             <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
 
             <%= f.govuk_radio_buttons_fieldset(:coastal_protection_after, legend: nil) do %>
@@ -20,8 +20,9 @@
                   label: { text: @project.standard_of_protection_label(option) } %>
               <% end %>
             <% end %>
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>

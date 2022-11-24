@@ -8,7 +8,8 @@
         <h1 class="govuk-heading-l"><%= t('.heading') %></h1>
         <p><%= t('.lede') %></p>
         <div class="step-form">
-          <%= form_group(@project.step, :base) do %>
+          <%= form_group(f.object, @project.step, :base) do %>
+            <%= error_message(f.object, :coastal_erosion_protection_outcomes_step, :base) %>
             <div class="scroll-horz">
               <%= govuk_checkbox_for f, :reduced_risk_of_households_for_coastal_erosion %>
               <table class="protection-outcomes-table hidden-totals">

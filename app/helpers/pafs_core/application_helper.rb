@@ -11,14 +11,14 @@ module PafsCore
                   class: "pafs_form")
     end
 
-    def month_and_year(form, _project, attribute, options = {})
+    def month_and_year(form, project, attribute, options = {})
       m_key = "#{attribute}_month".to_sym
       y_key = "#{attribute}_year".to_sym
       contents = []
       contents << heading_text(options.delete(:heading)) if options.include? :heading
       contents << content_tag(:p, options.delete(:hint), class: "govuk-hint") if options.include? :hint
       # need to handle the 2 fields as one for errors
-      contents << error_message(form.object, attribute)
+      contents << error_message(form.object, project, attribute)
       contents << content_tag(:div, class: "form-date") do
         safe_join([
                     content_tag(:div, class: "form-group form-group-month") do
@@ -43,16 +43,20 @@ module PafsCore
       safe_join(contents, "\n")
     end
 
-    def error_message(object, attribute)
+    def error_message(object, prefix, attribute)
       return unless object.errors.include? attribute
 
       content = []
-      object.errors.full_messages_for(attribute).each_with_index do |message, i|
+      object.errors.full_messages_for(attribute).each do |message|
         content << content_tag(:p, trim_error_message(attribute, message),
                                class: "govuk-error-message",
-                               id: "#{attr_name(attribute)}-error-#{i}")
+                               id: error_id(prefix, attribute))
       end
       safe_join(content, "\n")
+    end
+
+    def error_id(prefix, attribute)
+      "#{attr_name(prefix, attribute).dasherize}-field-error"
     end
 
     # This is a workaround to allow the legacy PAFS error setup to work with GOVUK FormBuilder error handling.
@@ -60,21 +64,34 @@ module PafsCore
       message.delete_prefix(attribute.to_s.humanize)
     end
 
-    def form_group(step, name, &)
-      content_tag(:div, class: "form-group", id: content_id(step, name.to_sym)) do
+    def form_group(object, name, attribute, &)
+      attribute_error = object.errors.include?(attribute)
+      id = content_id(name, attribute.to_sym, attribute_error)
+      content_tag(:div,
+                  id: id,
+                  class: error_class(object, attribute, "govuk-form-group"),
+                  aria_described_by: id) do
+        if attribute_error
+          content_tag(:p, class: "govuk-error-message", id: "#{id}-error") do
+            content_tag(:span, class: "govuk-visually-hidden") { "Error: " }
+            "Tell us the project name"
+          end
+        end
         content_tag(:div, &) if block_given?
       end
     end
 
-    def content_id(form, attribute)
-      "#{form}-#{attribute}-content"
+    def content_id(form, attribute, attribute_error)
+      "#{form}-#{attribute}#{attribute_error ? '-error' : ''}".dasherize
     end
 
-    # rubocop:disable Rails/HelperInstanceVariable
-    def attr_name(attribute)
-      "#{@object_name}-#{attribute}"
+    def error_class(object, attribute, default_classes)
+      "#{default_classes || ''} #{object.errors.include?(attribute.to_sym) ? 'govuk-form-group--error' : 'no-error'}"
     end
-    # rubocop:enable Rails/HelperInstanceVariable
+
+    def attr_name(object_name, attribute)
+      "#{object_name}-#{attribute}"
+    end
 
     def govuk_checkbox_for(form, attribute, scope = ".")
       form.govuk_check_box(

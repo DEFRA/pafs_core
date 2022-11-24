@@ -9,18 +9,15 @@
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <p><%= t(".lede") %></p>
-          <div class="step-form">
-            <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
-            <%= form_group(:funding_sources, :funding_sources_step) do %>
-            <%= error_message(f.object, :base) %>
-              <% PafsCore::FundingSources::FUNDING_SOURCES.each do |fs| %>
-                <%= f.govuk_check_box fs, fs, multiple: false, label: { text: @project.funding_source_label(fs) } %>
-              <% end %>
+          <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
+          <%= form_group(f.object, :funding_sources, :funding_sources_step) do %>
+            <%= error_message(f.object, :funding_sources_step, :base) %>
+            <% PafsCore::FundingSources::FUNDING_SOURCES.each do |fs| %>
+              <%= f.govuk_check_box fs, fs, multiple: false, label: { text: @project.funding_source_label(fs) } %>
             <% end %>
+          <% end %>
 
-            <div class="headroom">
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
-          </div>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>

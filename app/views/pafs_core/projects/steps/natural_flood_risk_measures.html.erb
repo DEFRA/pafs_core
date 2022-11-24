@@ -8,8 +8,8 @@
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-          <%= form_group(@project.step, :natural_flood_risk_measures) do %>
-            <%= error_message(f.object, :base) %>
+          <%= form_group(f.object, @project.step, :base) do %>
+            <%= error_message(f.object, :natural_flood_risk_measures_step, :base) %>
             <p><%= t('.lede') %></p>
             <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
 
@@ -43,16 +43,16 @@
             </div>
 
           <% end %>
-          <%= error_message(f.object, :other_flood_measures) %>
+          <%= error_message(f.object, :natural_flood_risk_measures_step, :other_flood_measures) %>
           
           <div id="other-flood-measures" class="govuk-details__text">
             <label class="form-label" for="natural_flood_risk_measures_step_other_flood_measures"><%= t(".other_flood_measures_label") %></label>
             <input type="govuk_text" name="natural_flood_risk_measures_step[other_flood_measures]" id="natural_flood_risk_measures_step_other_flood_measures" value=<%= f.object.other_flood_measures %>>
           </div>
 
-          <p>
-          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
+
+        <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
       <% end %>
     </div>
   </div>

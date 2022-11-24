@@ -8,8 +8,8 @@
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-          <%= form_group(@project.step, :base) do %>
-            <%= error_message(f.object, :base) %>
+          <%= form_group(f.object, @project.step, :base) do %>
+            <%= error_message(f.object, :flood_protection_outcomes2040_step, :base) %>
             <p><%= t('.lede') %></p>
             <div class="scroll-horz govuk-body-s">
               <%= govuk_checkbox_for f, :no_properties_affected_by_flooding_2040, "pafs_core.projects.steps.flood_protection_outcomes2040" %>
@@ -93,8 +93,9 @@
                 </tfoot>
               </table>
             </div>
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>

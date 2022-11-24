@@ -11,8 +11,8 @@
           <p><%= t('.lede') %></p>
           <legend class="govuk-visually-hidden">Select which risks your project protects against</legend>
           <% i18n_scope = "pafs_core.fcerm1.risks" %>
-          <%= form_group(:risks, :base) do %>
-            <%= error_message(f.object, :base) %>
+          <%= form_group(f.object, :risks, :base) do %>
+            <%= error_message(f.object, "risks-step", :base) %>
             <%= govuk_checkbox_for f, :fluvial_flooding, i18n_scope %>
             <%= govuk_checkbox_for f, :tidal_flooding, i18n_scope %>
             <%= govuk_checkbox_for f, :groundwater_flooding, i18n_scope %>
@@ -21,7 +21,7 @@
             <%= govuk_checkbox_for f, :reservoir_flooding, i18n_scope %>
             <%= govuk_checkbox_for f, :coastal_erosion, i18n_scope %>
           <% end %>
-          <p>
+
           <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
