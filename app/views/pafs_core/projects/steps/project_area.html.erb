@@ -10,21 +10,19 @@
         <%= f.hidden_field :id %>
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-          <%= form_group(@project.step, :project_area) do %>
+          <%= form_group(f.object, @project.step, :rma_name) do %>
             <p><%= t('.description') %></p>
 
             <%= f.govuk_radio_buttons_fieldset(:project_area, legend: nil) do %>
-              <%= error_message(f.object, :rma_name) %>
+              <%= error_message(f.object, :project_area_step, :rma_name) %>
               <% current_resource.areas.each do |user_area| %>
                 <%= f.govuk_radio_button :rma_name, user_area.name.to_s, label: { text: user_area.name } %>
               <% end %>
-              <p>
-              <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
             <% end %>
-
           <% end %>
-        <% end %>
 
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+        <% end %>
       <% end %>
     </div>
   </div>

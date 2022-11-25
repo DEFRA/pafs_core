@@ -9,7 +9,7 @@
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
 
-          <%= form_group @project.step, :grid_reference do %>
+          <%= form_group f.object, @project.step, :grid_reference do %>
           <div class="govuk-hint">
             <p><%= t('.example_text') %></p>
             <p>

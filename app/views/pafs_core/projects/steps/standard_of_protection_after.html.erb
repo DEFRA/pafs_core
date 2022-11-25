@@ -11,19 +11,20 @@
           <%= f.hidden_field :id %>
 
           <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-            <%= form_group(@project.step, :flood_protection_after) do %>
+            <%= form_group(f.object, @project.step, :flood_protection_after) do %>
               <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
 
               <%= f.govuk_radio_buttons_fieldset(:flood_protection_after, legend: nil) do %>
                 <% @project.flood_risk_options.each_with_index do |option, index| %>
                   <%= f.govuk_radio_button :flood_protection_after, 
                                            index,
+                                           link_errors: (index == 0),
                                            label: { text: compound_standard_of_protection_label(option) } %>
                 <% end %>
               <% end %>
+            <% end %>
           
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
-          <% end %>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>

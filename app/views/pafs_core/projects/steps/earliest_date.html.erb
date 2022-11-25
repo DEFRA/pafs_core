@@ -3,21 +3,20 @@
 <div class="step-container">
   <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-two-thirds">
-      <div class="step-form">
-        <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+      <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
 
-          <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
-          <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-            <%= form_group(@project.step, :earliest_date) do %>
-              <p><%= t(".description") %></p>
-              <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
-              <%= month_and_year(f, @project, :earliest_start, hint: t(".example_text")) %>
-              <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
-            <% end %>
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(f.object, @project.step, :earliest_start) do %>
+            <p><%= t(".description") %></p>
+            <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
+            <%= month_and_year(f, :earliest_date_step, :earliest_start, hint: t(".example_text")) %>
           <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

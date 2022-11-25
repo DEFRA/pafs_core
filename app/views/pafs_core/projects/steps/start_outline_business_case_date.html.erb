@@ -8,11 +8,12 @@
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-          <%= form_group(@project.step, :start_outline_business_case) do %>
+          <%= form_group(f.object, @project.step, :start_outline_business_case) do %>
             <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
-            <%= month_and_year(f, @project, :start_outline_business_case, hint: t(".example_text")) %>
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+            <%= month_and_year(f, :start_outline_business_case_date_step, :start_outline_business_case, hint: t(".example_text")) %>
           <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>
