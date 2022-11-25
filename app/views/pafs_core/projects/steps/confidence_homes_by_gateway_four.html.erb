@@ -14,9 +14,10 @@
             <legend class="govuk-visually-hidden"><%= t(".heading") %></legend>
 
             <%= f.govuk_radio_buttons_fieldset(:confidence_homes_by_gateway_four, legend: nil) do %>
-              <% PafsCore::Confidence::CONFIDENCE_VALUES.each do |value| %>
+              <% PafsCore::Confidence::CONFIDENCE_VALUES.each_with_index do |value, index| %>
                 <%= f.govuk_radio_button :confidence_homes_by_gateway_four, 
                                          value,
+                                         link_errors: (index == 0),
                                          label: { text: confidence_band_label(:homes_by_gateway_four, value) }
                 %>
               <% end %>

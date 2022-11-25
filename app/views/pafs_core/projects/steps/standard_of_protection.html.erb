@@ -18,6 +18,7 @@
                 <% @project.flood_risk_options.each_with_index do |option, index| %>
                   <%= f.govuk_radio_button :flood_protection_before,
                                            index,
+                                           link_errors: (index == 0),
                                            label: { text: compound_standard_of_protection_label(option) } %>
                 <% end %>
               <% end %>

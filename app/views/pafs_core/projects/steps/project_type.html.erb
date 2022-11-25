@@ -16,8 +16,12 @@
             <legend class="govuk-visually-hidden">Select the type of your proposed project</legend>
 
             <%= f.govuk_radio_buttons_fieldset(:project_type, legend: nil) do %>
-              <% PafsCore::PROJECT_TYPES.each do |pt| %>
-                <%= f.govuk_radio_button :project_type, pt.to_s, label: { text: project_type_label(pt) } %>
+              <% PafsCore::PROJECT_TYPES.each_with_index do |pt, index| %>
+                <%= f.govuk_radio_button :project_type,
+                                         pt.to_s,
+                                         link_errors: (index == 0),
+                                         label: { text: project_type_label(pt) }
+                %>
               <% end %>
             <% end %>
           <% end %>
