@@ -7,7 +7,7 @@
       <p><%= project.summary_label(:coastal_erosion_protection_outcomes_detail_lede) %></p>
       <div class="step-form">
         <div class="scroll-horz">
-          <table class="coastal_erosion_protection_outcomes_detail_table">
+          <table class="coastal_erosion_protection_outcomes_detail_table" aria-describedby="<%= project.summary_label(:coastal_erosion_protection_outcomes_detail_heading) %>">
             <thead>
               <tr>
                 <th class="financial-year-column"><%= project.summary_label(:financial_year_label) %></th>
