@@ -64,17 +64,16 @@ module PafsCore
       message.delete_prefix(attribute.to_s.humanize)
     end
 
-    def form_group(object, name, attribute, &)
+    def form_group(object, name, attribute, other_class = nil, &)
       attribute_error = object.errors.include?(attribute)
       id = content_id(name, attribute.to_sym, attribute_error)
       content_tag(:div,
                   id: id,
-                  class: error_class(object, attribute, "govuk-form-group"),
+                  class: error_class(object, attribute, "govuk-form-group #{other_class || ''}"),
                   aria_described_by: id) do
         if attribute_error
           content_tag(:p, class: "govuk-error-message", id: "#{id}-error") do
             content_tag(:span, class: "govuk-visually-hidden") { "Error: " }
-            "Tell us the project name"
           end
         end
         content_tag(:div, &) if block_given?

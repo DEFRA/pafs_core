@@ -14,9 +14,9 @@
             <p><%= t(".more_detail") %></p>
 
             <% f.object.funding_contributors.where(contributor_type: funding_source).order(:id).map(&:name).uniq.each do |contributor_name| %>
-              <div class="contributor_values">
+              <div class="contributor-values">
                 <h3 class="heading-small"><%= contributor_name %></h3>
-                <div class="scroll-horz">
+                <div class="scroll-horz govuk-body-s">
                   <legend class="govuk-visually-hidden">What is the estimated spend for each financial year</legend>
                   <table class="funding-contributor-table">
                     <thead>
@@ -44,10 +44,10 @@
                               <%= builder.govuk_number_field :amount, class: 'funding-value', min: 0, step: 1, label: nil %>
                             </td>
                             <td class="secured">
-                              <%= builder.check_box :secured, label: '' %>
+                              <%= builder.govuk_check_box :secured, :secured, multiple: false, label: nil %>
                             </td>
                             <td class="constrained">
-                              <%= builder.check_box :constrained, label: '' %>
+                              <%= builder.govuk_check_box :constrained, :constrained, label: nil %>
                             </td>
                           </tr>
                         <% end %>

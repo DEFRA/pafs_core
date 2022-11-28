@@ -8,18 +8,18 @@
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
         <%= f.govuk_fieldset legend: { text: heading, size: 'l' } do %>
-          <%= form_group(f.object, project.step, :base) do %>
+          <%= form_group f.object, project.step, :base, "contributors" do %>
             <%= error_message(f.object, "#{project.step}-step", :base) %>
 
-            <div class="contributors form-group">
-              <label class='form-label-bold'>What is the Contributor Name?</label>
-              <% project.current_funding_contributors.each_with_index do |contributor, index| %>
+            <label class='form-label-bold'>What is the Contributor Name?</label>
+            <% project.current_funding_contributors.each_with_index do |contributor, index| %>
+              <div class="form-group">
                 <%= fields_for "name[#{index}]", contributor do |builder| %>
                   <%= builder.hidden_field :previous, value: contributor %>
-                  <%= builder.text_field :current, value: contributor, class: 'column-one-half' %>
+                  <%= builder.text_field :current, value: contributor, class: 'govuk-input govuk-!-width-one-half' %>
                 <% end %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           <% end %>
 
           <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
