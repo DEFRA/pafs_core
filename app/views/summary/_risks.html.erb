@@ -81,16 +81,14 @@
         </div>
         <% if !project.draft? %>
           <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds">
-              <details>
-                <summary class="half-indent-with-top-margin" role="button" aria-controls="show_risks and households benefitting detail">
-                  <span class="summary"> View households affected by flooding detail </span>
-                </summary>
-                <div id="show_risks and households benefitting detail" class="panel panel-indent panel-border-narrow">
-                  <%= render partial: "summary/flood_protection_outcomes_detail", locals: {project: @project} %>
-                </div>
-              </details>
-            </div>
+            <details class="govuk-details headroom" data-module="govuk-details">
+              <summary class="govuk-details__summary" role="button" aria-controls="show_risks and households benefitting detail">
+                <span class="details__summary-text">View households affected by flooding detail </span>
+              </summary>
+              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+                <%= render partial: "summary/flood_protection_outcomes_detail", locals: {project: @project} %>
+              </div>
+            </details>
           </div>
         <% end %>
       <% end %>
@@ -128,16 +126,14 @@
         </div>
         <% if !project.draft? %>
           <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds">
-              <details>
-                <summary class="half-indent-with-top-margin" role="button" aria-controls="show_risks and households benefitting detail">
-                  <span class="summary"> View properties affected by coastal erosion detail </span>
-                </summary>
-                <div id="show_risks and households benefitting detail" class="panel panel-indent panel-border-narrow">
-                  <%= render partial: "summary/coastal_erosion_protection_outcomes_detail", locals: {project: @project} %>
-                </div>
-              </details>
-            </div>
+            <details class="govuk-details headroom" data-module="govuk-details">
+              <summary class="govuk-details__summary" role="button" aria-controls="show_risks and households benefitting detail">
+                <span class="details__summary-text">View properties affected by coastal erosion detail </span>
+              </summary>
+              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+                <%= render partial: "summary/coastal_erosion_protection_outcomes_detail", locals: {project: @project} %>
+              </div>
+            </details>
           </div>
         <% end %>
       <% end %>

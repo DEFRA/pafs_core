@@ -115,11 +115,98 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   }
 }
 
-.funding-table, .protection-outcomes-table, .funding-contributor-table, .funding-calculator-summary, .shapefiles-table {
+.coastal_erosion_protection_outcomes_detail_table,
+.flood_protection_outcomes_detail_table,
+.funding-table,
+.funding-table-summary,
+.funding_sources_and_spending_detail_table,
+.protection-outcomes-table,
+.protection-outcomes-table-summary {
+  th {
+    text-align: left;
+    vertical-align: top;
+    padding-right: 5px;
+  }
+
+  th .protection-outcomes-subheading {
+    text-align: center !important;
+  }
+
+  .financial-year-column {
+    text-align: left;
+    min-width: 6em;
+    width: 12em;
+  }
+
+  .data-column {
+    min-width: 6em;
+    width: 8em;
+  }
+
+  .protection-outcomes {
+    text-align: left;
+  }
+
+  .significant-to-low-risk,
+  .plp-measures,
+  .households-protected {
+    min-width: 6em;
+    width: 10em;
+  }
+
+  .reduced-risk,
+  .non-residential-properties,
+  .most-deprived {
+    min-width: 5em;
+    width: 8em;
+  }
+
+  .protection-value {
+    text-align: right;
+  }
+
+  .data-total {
+    min-width: 6em;
+    text-align: right;
+    width: 8em;
+  }
+
+  .funding-value {
+    text-align: right;
+    width: 6em;
+  }
+
+  .numeric {
+    text-align: right;
+  }
+
+  tfoot td {
+    font-weight: bold;
+    text-align: right;
+  }
+
+  tfoot td:first-child {
+    text-align: left;
+  }
+
+  &.hidden-totals {
+    tfoot>tr {
+      display: none;
+    }
+  }
+}
+
+.coastal_erosion_protection_outcomes_detail_table,
+.flood_protection_outcomes_detail_table,
+.funding-calculator-summary,
+.funding-contributor-table,
+.funding_sources_and_spending_detail_table,
+.funding-table,
+.protection-outcomes-table,
+.shapefiles-table {
 
   tfoot .numeric {
     text-align: right;
-    padding-right: 1.35em;
   }
 
   tr {
@@ -192,33 +279,8 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
       background-color: white;
       box-shadow: 0 8px 8px slategray;
       outline: 5px solid lightgray;
-
-//       @include media(mobile) {
-//         height: 70px;
-//         width: 49px;
-//       }
-
-//       @include media(tablet) {
-//         height: 93px;
-//         width: 66px;
-//       }
-
-//       @include media(desktop) {
-//         height: 140px;
-//         width: 99px;
-//       }
     }
   }
-
-//   .attachment-details {
-//     .title {
-//       @include core-16;
-//     }
-
-//     a {
-//       font-size: inherit;
-//     }
-//   }
 }
 
 .metadata {
@@ -255,84 +317,6 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   tfoot td,
   .row-total {
     font-weight: bold;
-  }
-}
-
-.funding-table,
-.funding-table-summary,
-.protection-outcomes-table,
-.protection-outcomes-table-summary {
-  th {
-    vertical-align: top;
-    padding-right: 5px;
-  }
-
-  .financial-year-column {
-    text-align: left;
-    min-width: 6em;
-    width: 12em;
-  }
-
-  .data-column {
-    min-width: 6em;
-    width: 8em;
-  }
-
-  .protection-outcomes {
-    text-align: left;
-  }
-
-  .protection-outcomes-subheading {
-    padding-left: 3em;
-  }
-
-  .significant-to-low-risk,
-  .plp-measures,
-  .households-protected {
-    min-width: 6em;
-    width: 10em;
-  }
-
-  .reduced-risk,
-  .non-residential-properties,
-  .most-deprived {
-    min-width: 5em;
-    width: 8em;
-  }
-
-  .protection-value {
-    text-align: right;
-  }
-
-  .data-total {
-    min-width: 6em;
-    text-align: right;
-    width: 8em;
-  }
-
-  .funding-value {
-    text-align: right;
-    width: 6em;
-  }
-
-  .numeric tbody td {
-    text-align: right;
-  }
-
-  tfoot td {
-    font-weight: bold;
-    text-align: right;
-    padding-right: 4em;
-  }
-
-  tfoot td:first-child {
-    text-align: left;
-  }
-
-  &.hidden-totals {
-    tfoot>tr {
-      display: none;
-    }
   }
 }
 
@@ -776,7 +760,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 }
 
 .risk-summary-subheading {
-  text-align: right;
+  text-align: center !important;
 }
 
 ol.instructions {
