@@ -113,14 +113,14 @@ module PafsCore
     end
 
     def standard_of_protection_complete?
-      if (protects_against_flooding? &&
-         flood_protection_before.nil?) || flood_protection_after.nil?
+      if protects_against_flooding? &&
+         (flood_protection_before.nil? || flood_protection_after.nil?)
         return add_error(:standard_of_protection,
                          "Tell us the standard of protection the project will provide")
       end
 
-      if (protects_against_coastal_erosion? &&
-         coastal_protection_before.nil?) || coastal_protection_after.nil?
+      if protects_against_coastal_erosion? &&
+         (coastal_protection_before.nil? || coastal_protection_after.nil?)
         return add_error(:standard_of_protection,
                          "Tell us the standard of protection the project will provide")
       end
