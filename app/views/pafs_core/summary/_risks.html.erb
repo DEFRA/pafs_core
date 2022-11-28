@@ -31,7 +31,7 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
             <h3 class="heading-small summary-sub-heading"><%= project.summary_label(:flooding_outcome_title) %></h3>
-            <table class="full-table">
+            <table class="full-table" aria-labelledby="<%= project.summary_label(:flooding_outcome_title) %>">
               <thead>
                 <tr>
                   <th class="govuk-visually-hidden">Households benefitting</th>
@@ -96,7 +96,7 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
             <h3 class="heading-small summary-sub-heading"><%= project.summary_label(:coastal_outcome_title) %></h3>
-            <table class="full-table">
+            <table class="full-table"aria-labelledby="<%= project.summary_label(:coastal_outcome_title) %>">
               <thead>
                 <tr>
                   <th class="govuk-visually-hidden">Properties benefitting</th>

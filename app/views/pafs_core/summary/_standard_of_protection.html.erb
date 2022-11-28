@@ -8,7 +8,7 @@
         <div class="<%= flood_class_for_sop(project) %> pushed-up">
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-three-quarters">
-              <table class="full-table">
+              <table class="full-table" aria-describedby="<%= project.summary_label(:standard_of_protection_title) -%>">
                 <thead>
                   <tr>
                     <th class="govuk-visually-hidden">Point in time</th>
