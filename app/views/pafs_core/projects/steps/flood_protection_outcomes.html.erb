@@ -14,15 +14,15 @@
             <div class="scroll-horz govuk-body-s">
               <%= govuk_checkbox_for f, :reduced_risk_of_households_for_floods, "pafs_core.projects.steps.flood_protection_outcomes" %>
               <p>
-              <table class="protection-outcomes-table hidden-totals">
+              <table class="protection-outcomes-table hidden-totals" aria-labelledby="flood-protection-outcomes">
                 <thead>
                   <tr>
-                    <th class="financial-year-column"><%= t(".financial_year_label") %></th>
-                    <th class="data-column protection-outcomes reduced-risk"><%= t(".households_at_reduced_risk_label") %></th>
-                    <th class="data-column protection-outcomes significant-to-low-risk"><%= t(".households_moved_from_very_significant_and_significant_to_moderate_or_low_label") %></th>
-                    <th class="data-column protection-outcomes most-deprived"><%= t(".households_protected_from_loss_in_20_percent_most_deprived_label") %></th>
-                    <th class="data-column protection-outcomes plp-measures"><%= t(".households_protected_through_plp_measures_label") %></th>
-                    <th class="data-column protection-outcomes non-residential-properties"><%= t(".non_residential_properties") %></th>
+                    <th scope="col" class="financial-year-column"><%= t(".financial_year_label") %></th>
+                    <th scope="col" class="data-column protection-outcomes reduced-risk"><%= t(".households_at_reduced_risk_label") %></th>
+                    <th scope="col" class="data-column protection-outcomes significant-to-low-risk"><%= t(".households_moved_from_very_significant_and_significant_to_moderate_or_low_label") %></th>
+                    <th scope="col" class="data-column protection-outcomes most-deprived"><%= t(".households_protected_from_loss_in_20_percent_most_deprived_label") %></th>
+                    <th scope="col" class="data-column protection-outcomes plp-measures"><%= t(".households_protected_through_plp_measures_label") %></th>
+                    <th scope="col" class="data-column protection-outcomes non-residential-properties"><%= t(".non_residential_properties") %></th>
                   </tr>
                   <tr>
                     <td></td>
