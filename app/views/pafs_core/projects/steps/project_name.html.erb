@@ -11,7 +11,7 @@
           <p class="govuk-hint"><%= t('.description') %></p>
 
           <%= f.label :name, t('.project_name_label'), class: "govuk-visually-hidden" %>
-          <%= f.govuk_text_field :name, label: nil, width: "one-half" %>
+          <%= f.govuk_text_field :name, label: nil %>
         <% end %>
 
         <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>

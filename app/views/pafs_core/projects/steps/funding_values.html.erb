@@ -43,7 +43,7 @@
                                 <%= "#{t(".#{fs}_label")} #{ formatted_financial_year(builder.object.financial_year) }" -%>
                               <% end -%>
                               <%= builder.govuk_number_field(fs,
-                                                             class: "funding-value",
+                                                             class: "funding-value numeric",
                                                              label: nil,
                                                              value: builder.object.send(fs).to_i)
                                                              %>

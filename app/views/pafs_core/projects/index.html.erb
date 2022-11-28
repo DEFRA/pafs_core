@@ -13,19 +13,19 @@
             For submission deadlines please contact your local partnership and strategic overview officer.
           </div>
         </div>
+      </div>
 
-        <div class="govuk-grid-column-three-quarters">
-          <p>
-          <%= form_tag(pafs_core.projects_path, method: "get", class: "search-bar") do %>
-            <%= text_field_tag(:q,
-                               params[:q] || "",
-                               placeholder: "Enter a project number or name",
-                               minlength: 1,
-                               maxlength: 30,
-                               class: "govuk-input govuk-!-width-one-half") %>
-            <%= submit_tag("Search", class: "govuk-button") %>
-          <% end %>
-        </div>
+      <div class="govuk-grid-column-three-quarters">
+        <p>
+        <%= form_tag(pafs_core.projects_path, method: "get", class: "search-bar") do %>
+          <%= text_field_tag(:q,
+                             params[:q] || "",
+                             placeholder: "Enter a project number or name",
+                             minlength: 1,
+                              maxlength: 30,
+                             class: "govuk-input govuk-!-width-one-half") %>
+          <%= submit_tag("Search", class: "govuk-button") %>
+        <% end %>
       </div>
     <% end %>
 

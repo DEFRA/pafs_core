@@ -115,11 +115,20 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   }
 }
 
-.funding-table, .protection-outcomes-table, .funding-contributor-table, .funding-calculator-summary {
+.funding-table, .protection-outcomes-table, .funding-contributor-table, .funding-calculator-summary, .shapefiles-table {
+
+  tfoot .numeric {
+    text-align: right;
+    padding-right: 1.35em;
+  }
 
   tr {
     line-height: 25px;
     border-bottom: 1px solid $govuk-border-colour;
+  }
+
+  td {
+    padding-right: 1em;
   }
 
   td .govuk-form-group {
@@ -129,10 +138,16 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 
   td .govuk-input {
     height: 24px;
-    width: 100px;
     border: 1px ridge;
-    padding: 2px;
+    padding: 2px 5px;
+    margin-bottom: 6px;
     font-size: 16px;
+  }
+
+  td input[type="checkbox"] {
+    margin-left: 5px;
+    width: 2.5em;
+    opacity: 1;
   }
 
   tbody td:last-child,
@@ -143,6 +158,12 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   tfoot td {
     height: 48px;
     min-height: 48px;
+  }
+}
+
+.shapefiles-table {
+  th, td {
+    padding: 7px;
   }
 }
 
@@ -166,10 +187,10 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     padding-bottom: 1em;
     position: relative;
 
-//     img {
-//       background-color: $white;
-//       box-shadow: 0 2px 2px $icon-shadow-colour;
-//       outline: 5px solid $icon-outline-colour;
+    img {
+      background-color: white;
+      box-shadow: 0 8px 8px slategray;
+      outline: 5px solid lightgray;
 
 //       @include media(mobile) {
 //         height: 70px;
@@ -197,7 +218,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 //       font-size: inherit;
 //     }
 //   }
-// }
+}
 
 .metadata {
   margin-bottom: 1em;
@@ -218,20 +239,12 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 }
 
 .create-new-project {
-  margin-bottom: 1.5em;
+  margin-top: 1em;
 }
 
 .funding-contributor-table {
   .funding-value {
     text-align: right;
-  }
-
-  .secured,
-  .constrained {
-    fieldset {
-      white-space: nowrap;
-      margin-top: -20px;
-    }
   }
 
   fieldset.inline .form-group {
@@ -250,9 +263,11 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 .protection-outcomes-table-summary {
   th {
     vertical-align: top;
+    padding-right: 5px;
   }
 
   .financial-year-column {
+    text-align: left;
     min-width: 6em;
     width: 12em;
   }
@@ -299,7 +314,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     width: 6em;
   }
 
-  tbody td {
+  .numeric tbody td {
     text-align: right;
   }
 
@@ -307,6 +322,10 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     font-weight: bold;
     text-align: right;
     padding-right: 4em;
+  }
+
+  tfoot td:first-child {
+    text-align: left;
   }
 
   &.hidden-totals {
@@ -769,15 +788,12 @@ ol.instructions {
   }
 }
 
-.contributor_values {
-//   background-color: #efefef;
+.contributor-values {
+  background-color: #efefef;
   padding: 0.5em 1em;
   margin-bottom: 1em;
 }
 
-// .currency-field::before {
-//   content: "£";
-//   font-size: 30px;
-//   font-weight: bold;
-//   vertical-align: bottom;
-// }
+form .contributors .form-group {
+  margin-bottom: 30px;
+}

@@ -1,7 +1,7 @@
 <% content_for :title, t(".heading") %>
 
 <div class="step-container">
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-two-thirds">
       <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
 
