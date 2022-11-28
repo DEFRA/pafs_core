@@ -20,7 +20,7 @@
                 <% end %>
               </ul>
             <% end %>
-            <table class="full-table">
+            <table class="full-table" aria-describedby="<%= t(".title", scope: "pafs_core")%>">
               <tbody>
                 <tr>
                   <% if project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>

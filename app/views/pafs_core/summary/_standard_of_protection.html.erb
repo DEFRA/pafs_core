@@ -44,7 +44,7 @@
       <% if project.protects_against_coastal_erosion? %>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
-            <table class="full-table">
+            <table class="full-table" aria-describedby="<%= project.summary_label(:standard_of_protection_title) -%>">
               <thead>
                 <tr>
                   <th class="govuk-visually-hidden">Point in time</th>
