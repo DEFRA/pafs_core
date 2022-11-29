@@ -9,7 +9,7 @@
           <h2 class="govuk-heading-l"><%= t(".heading") %></h2>
           <p>
             <%= t(".label") %><br/>
-            <strong class="heading-medium"><%= @project.reference_number %></strong>
+            <strong class="govuk-heading-m"><%= @project.reference_number %></strong>
           </p>
         </div>
         <%= form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>

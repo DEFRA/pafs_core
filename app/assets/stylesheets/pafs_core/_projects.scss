@@ -117,6 +117,12 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 
 .coastal_erosion_protection_outcomes_detail_table,
 .flood_protection_outcomes_detail_table,
+.funding_sources_and_spending_detail_table {
+  font-size: smaller;
+}
+
+.coastal_erosion_protection_outcomes_detail_table,
+.flood_protection_outcomes_detail_table,
 .funding-table,
 .funding-table-summary,
 .funding_sources_and_spending_detail_table,
@@ -410,7 +416,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   //   padding-left: 10px;
   // }
 
-  .heading-medium {
+  .govuk-heading-m {
     margin-top: 0;
   }
 }
@@ -473,7 +479,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 .summary-item {
 //   border-bottom: 1px solid $grey-2;
 
-  .heading-medium {
+  .govuk-heading-m {
     margin-top: 0;
   }
 }
@@ -481,7 +487,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 .summary-item-content {
   margin-bottom: 1em;
 
-  .heading-medium {
+  .govuk-heading-m {
     margin-bottom: 0.5em;
     margin-top: 1.5em;
   }
@@ -491,7 +497,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
   margin-top: 1em;
 }
 
-.error .summary-item .heading-medium {
+.error .summary-item .govuk-heading-m {
   margin-top: 0;
 }
 
@@ -654,7 +660,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
     margin-bottom: 1em;
   }
 
-  .heading-medium {
+  .govuk-heading-m {
     margin-top: 0.8em;
   }
 }

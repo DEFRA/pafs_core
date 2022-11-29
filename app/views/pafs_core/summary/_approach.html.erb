@@ -1,7 +1,7 @@
 <article class="summary-item" aria-labelledby="approach">
   <% if project.approach.present? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="approach"><%= project.summary_label(:approach_title) %></h2>
+      <h2 class="govuk-heading-m" role="heading" id="approach"><%= project.summary_label(:approach_title) %></h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
           <%= simple_format project.approach %>
@@ -23,7 +23,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="approach"><%= project.summary_label(:approach_title) %></h2>
+          <h2 class="govuk-heading-m" role="heading" id="approach"><%= project.summary_label(:approach_title) %></h2>
         </div>
         <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>

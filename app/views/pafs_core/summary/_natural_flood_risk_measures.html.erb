@@ -1,12 +1,12 @@
 <article class="summary-item" aria-labelledby="natural-flood-risk-measures">
   <% if project.natural_flood_risk_measures_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures"><%= t(".title", scope: "pafs_core")%></h2>
+      <h2 class="govuk-heading-m" role="heading" id="natural-flood-risk-measures"><%= t(".title")%></h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
           <% if project.natural_flood_risk_measures_included? %>
             <% unless project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>
-              <%= t(".flood_risk_measures", scope: "pafs_core")%>
+              <%= t(".flood_risk_measures")%>
               <ul class="summary-list list-bullet">
                 <% project.selected_natural_flood_risk_measures.each do |risk_measure| %>
                   <li>
@@ -20,11 +20,11 @@
                 <% end %>
               </ul>
             <% end %>
-            <table class="full-table" aria-describedby="<%= t(".title", scope: "pafs_core")%>">
+            <table class="full-table" aria-describedby="<%= t(".title")%>">
               <tbody>
                 <tr>
                   <% if project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>
-                    <td><%= t(".flood_risk_measures", scope: "pafs_core")%></td>
+                    <td><%= t(".flood_risk_measures")%></td>
                     <td class="align-right"><%= t("not_provided") %></td>
                   <% else %>
                     <td></td>
@@ -32,7 +32,7 @@
                   <% end %>
                 </tr>
                 <tr>
-                  <td id="total-cost-nfm"><%= t(".total_cost", scope: "pafs_core")%></td>
+                  <td id="total-cost-nfm"><%= t(".total_cost")%></td>
                   <% if project.natural_flood_risk_measures_cost.nil? %>
                     <td class="align-right"><%= t("not_provided") %></td>
                   <% else %>
@@ -62,7 +62,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="natural-flood-risk-measures">Natural flood measures</h2>
+          <h2 class="govuk-heading-m" role="heading" id="natural-flood-risk-measures">Natural flood measures</h2>
         </div>
         <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
