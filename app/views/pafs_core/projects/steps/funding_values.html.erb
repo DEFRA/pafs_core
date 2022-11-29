@@ -3,7 +3,6 @@
 <div class="step-container">
   <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-three-quarters">
-      <div class="scroll-horz">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
 
           <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
@@ -72,7 +71,6 @@
             <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
           <% end %>
         <% end %>
-      </div>
     </div>
   </div>
 </div>

@@ -9,7 +9,7 @@
         <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
 
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
-          <%= form_group(@project.step, :project_end_financial_year) do %>
+          <%= form_group f.object, @project.step, :project_end_financial_year do %>
             <p><%= t('.lede') %></p>
         
             <%= f.govuk_number_field :project_end_financial_year,
@@ -19,8 +19,8 @@
               hint: { text: t(".example_text") },
               label: { text: t(".financial_year_label") } %>
 
-            <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
-          <% end %>
+            <% end %>
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
         <% end %>
       <% end %>
     </div>
