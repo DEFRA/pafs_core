@@ -21,6 +21,12 @@
               </ul>
             <% end %>
             <table class="full-table" aria-describedby="<%= t(".title")%>">
+              <thead>
+                <tr>
+                  <th class="govuk-visually-hidden">Item</th>
+                  <th class="govuk-visually-hidden">Cost</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <% if project.selected_natural_flood_risk_measures.empty? && project.other_flood_measures.nil? %>
