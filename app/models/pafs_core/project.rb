@@ -35,7 +35,7 @@ module PafsCore
 
     delegate :archived?, :draft?, :completed?, :submitted?, :updatable?, :updated?, :finished?, to: :submission_state
 
-    def self.govuk_submitted
+    def self.submitted
       joins(:state).merge(PafsCore::State.submitted)
     end
 
