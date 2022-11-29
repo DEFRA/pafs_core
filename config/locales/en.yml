@@ -56,16 +56,16 @@ en:
         info: "Your unique project application number has been saved automatically."
       status:
         archived_label: "Archived"
+    summary:
+      key_dates:
+        start_outline_business_case_label: "Outline business case start date"
+        award_contract_label: "Contract awarded"
+        start_construction_label: "Start construction"
+        ready_for_service_label: "Ready for service"
   shared:
     phase_banner:
       feedback: feedback
       heading_html: This is a new service – your %{href} will help us to improve it.
-  summary:
-    key_dates:
-      start_outline_business_case_label: "Outline business case start date"
-      award_contract_label: "Contract awarded"
-      start_construction_label: "Start construction"
-      ready_for_service_label: "Ready for service"
   external_link_message: "- (this link will open in a new window)"
   not_provided: Not provided
 

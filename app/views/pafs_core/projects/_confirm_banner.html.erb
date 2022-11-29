@@ -1,9 +1,9 @@
 <div class="govuk-panel govuk-panel--confirmation">
-  <h1 class="govuk-panel__tite"><%= title %></h1>
+  <h1 class="govuk-panel__title"><%= title %></h1>
   <% unless reference_number.nil? %>
   <span class="govuk-panel__body">The national project number is<span>
-  <div class="govuk-panel__body">
-    <strong class="govuk-heading-m"><%= reference_number %></strong>
+  <div class="govuk-panel__body headroom">
+    <strong><%= reference_number %></strong>
   </div>
   <% end %>
   </p>
