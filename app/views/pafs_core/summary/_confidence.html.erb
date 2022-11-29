@@ -1,12 +1,12 @@
 <article class="summary-item" aria-labelledby="confidence">
   <% if project.confidence_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="confidence">
+      <h2 class="govuk-heading-m" role="heading" id="confidence">
         <%= project.summary_label(:confidence_title) %>
       </h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <table class="full-table">
+          <table class="full-table" aria-labelledby="Confidence">
             <thead>
               <tr>
                 <th class="govuk-visually-hidden">Assessment</th>
@@ -46,7 +46,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="confidence">
+          <h2 class="govuk-heading-m" role="heading" id="confidence">
             <%= project.summary_label(:confidence_title) %>
           </h2>
         </div>

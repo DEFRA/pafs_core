@@ -1,10 +1,10 @@
 <article class="summary-item" aria-labelledby="funding-sources">
   <% if project.funding_sources_started? %>
       <div class="summary-item-content">
-        <h2 class="heading-medium" role="heading" id="funding-sources">Funding sources and spending</h2>
+        <h2 class="govuk-heading-m" role="heading" id="funding-sources">Funding sources and spending</h2>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
-            <table class="full-table">
+            <table class="full-table" aria-labelledby="funding-sources">
               <thead>
               <tr>
                 <th>Funding Source</th>
@@ -36,12 +36,12 @@
         <% if !project.draft? %>
             <div>
               <div>
-                <details>
-                  <summary class="half-indent-with-top-margin" role="button" aria-controls="show_funding_sources_and_spending_detail">
-                    <span class="summary"> View funding sources and spending detail </span>
+                <details class="govuk-details headroom" data-module="govuk-details">
+                  <summary class="govuk-details__summary" role="button" aria-controls="show_funding_sources_and_spending_detail">
+                    <span class="details__summary-text"> View funding sources and spending detail </span>
                   </summary>
-                  <div id="show_funding_sources_and_spending_detail" class="panel panel-indent panel-border-narrow">
-                    <%= render partial: "summary/funding_sources_and_spending_detail", locals: {project: @project} %>
+                  <div id="show_funding_sources_and_spending_detail" class="govuk-details__text">
+                    <%= render partial: "pafs_core/summary/funding_sources_and_spending_detail", locals: {project: @project} %>
                   </div>
                 </details>
               </div>
@@ -52,7 +52,7 @@
       <div class="add-row">
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
-            <h2 class="heading-medium" role="heading" id="funding-sources">Funding sources and spending</h2>
+            <h2 class="govuk-heading-m" role="heading" id="funding-sources">Funding sources and spending</h2>
           </div>
           <div class="govuk-grid-column-one-quarter">
             <% unless project.archived? %>

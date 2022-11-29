@@ -6,10 +6,10 @@
       <%= render partial: "confirm_banner",
         locals: { reference_number: @project.reference_number,
                   title: "Proposal submitted" } %>
-      <h2 class="heading-medium">What happens next?</h2>
+      <h2 class="govuk-heading-m">What happens next?</h2>
       <p>The proposal has now been marked as submitted to the Area Programming Team. They'll contact you if they need more information.</p>
 
-      <h2 class="heading-medium">If you need to change your proposal</h2>
+      <h2 class="govuk-heading-m">If you need to change your proposal</h2>
       <ul class="list list-bullet">
         <li>Return to the <%= link_to "proposal overview", project_path(@project) %> page and click the 'Revert to draft' button</li>
       </ul>

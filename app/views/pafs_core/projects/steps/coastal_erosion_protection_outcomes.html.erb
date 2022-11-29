@@ -12,21 +12,21 @@
             <%= error_message(f.object, :coastal_erosion_protection_outcomes_step, :base) %>
             <div class="scroll-horz">
               <%= govuk_checkbox_for f, :reduced_risk_of_households_for_coastal_erosion %>
-              <table class="protection-outcomes-table hidden-totals">
+              <table class="protection-outcomes-table hidden-totals" aria-labelledby="coastal-erosion-protection-outcomes">
                 <thead>
                   <tr>
-                    <th class="financial-year-column"><%= t(".financial_year_label") %></th>
-                    <th class="data-column protection-outcomes"><%= t(".households_at_reduced_risk_label") %></th>
-                    <th class="data-column protection-outcomes significant-to-low-risk"><%= t(".households_protected_from_loss_in_next_20_years_label") %></th>
-                    <th class="data-column protection-outcomes most-deprived"><%= t(".households_protected_from_loss_in_20_percent_most_deprived_label") %></th>
-                    <th class="data-column protection-outcomes non-residential-properties"><%= t(".non_residential_properties_label") %></th>
+                    <th class="financial-year-column" scope="col"><%= t(".financial_year_label") %></th>
+                    <th class="data-column protection-outcomes" scope="col"><%= t(".households_at_reduced_risk_label") %></th>
+                    <th class="data-column protection-outcomes significant-to-low-risk" scope="col"><%= t(".households_protected_from_loss_in_next_20_years_label") %></th>
+                    <th class="data-column protection-outcomes most-deprived" scope="col"><%= t(".households_protected_from_loss_in_20_percent_most_deprived_label") %></th>
+                    <th class="data-column protection-outcomes non-residential-properties" scope="col"><%= t(".non_residential_properties_label") %></th>
                   </tr>
                   <tr>
                     <td></td>
-                    <th class="data-column protection-outcomes-subheading">A</th>
-                    <th class="data-column protection-outcomes-subheading">B</th>
-                    <th class="data-column protection-outcomes-subheading">C</th>
-                    <th class="data-column protection-outcomes-subheading">D</th>
+                    <th class="data-column protection-outcomes-subheading" scope="col">A</th>
+                    <th class="data-column protection-outcomes-subheading" scope="col">B</th>
+                    <th class="data-column protection-outcomes-subheading" scope="col">C</th>
+                    <th class="data-column protection-outcomes-subheading" scope="col">D</th>
                   </tr>
                 </thead>
                 <tbody>

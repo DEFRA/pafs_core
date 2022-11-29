@@ -1,12 +1,12 @@
 <article class="summary-item" aria-labelledby="carbon">
   <% if project.carbon_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="carbon">
+      <h2 class="govuk-heading-m" role="heading" id="carbon">
         <%= project.summary_label(:carbon_title) %>
       </h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <table class="full-table">
+          <table class="full-table" aria-describedby="<%= "Carbon amount in metric tonnes" %>">
             <thead>
               <tr>
                 <th class="govuk-visually-hidden">Category</th>
@@ -42,7 +42,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="carbon">
+          <h2 class="govuk-heading-m" role="heading" id="carbon">
             <%= project.summary_label(:carbon_title) %>
           </h2>
         </div>

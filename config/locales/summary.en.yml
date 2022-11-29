@@ -42,6 +42,8 @@ en:
       submission_title: "All information needs to be completed before you can submit your proposal."
       submission_notice: "By submitting this proposal you confirm that you have read and accepted the standard data notice (below) and are happy to proceed."
       funding_sources_and_spending_detail_heading: "The estimated spend for each financial year"
+      funding_sources_and_spending_detail:
+        heading: "The estimated spend for each financial year"
       funding_sources_and_spending_detail_lede: "Spending estimates are in pounds (e.g £50,000) at current prices. Future maintenance costs aren't included."
       financial_year_label: "Financial year (April to March)"
       fcerm_gia_label: "Grant in Aid"
@@ -53,14 +55,20 @@ en:
       growth_funding_label: "Additional Grant-in-Aid"
       not_yet_identified_label: "Not yet identified"
       total_label: "Total (£)"
-      flood_protection_outcomes_detail_heading: "Households affected by flooding beneffited by the project"
+      flood_protection_outcomes_detail_heading: "Households affected by flooding benefitted by the project"
+      flood_protection_outcomes_detail:
+        heading: "Households affected by flooding benefitted by the project"
       flood_protection_outcomes_detail_lede: "Houses built or converted after 1 January 2012 aren't included."
       households_at_reduced_risk_label: "Households that will move to a lower flood risk category."
-      households_moved_from_very_significant_and_significant_to_moderate_or_low_label: "Of the households in column A, how many will move out of the very significant, significant or intermediate category to the moderate or low category?."
-      households_protected_from_loss_in_20_percent_most_deprived_label: "Of the households in column B, how many are in the 20% most deprived areas."
-      coastal_erosion_protection_outcomes_detail_heading: "Households affected by coastal erosion beneffited by the project"
+      households_moved_from_very_significant_and_significant_to_moderate_or_low_label: "Of the households in column A, how many will move out of the very significant, significant or intermediate category to the moderate or low category?"
+      households_protected_from_loss_in_20_percent_most_deprived_label: "Of the households in column B, how many are in the 20% most deprived areas?"
+      households_protected_through_plp_measures_label: Households that are protected through Property Level Protection (PLP) measures by 2049
+      non_residential_properties_label: How many non-residential properties will be at reduced risk of coastal erosion?
+      coastal_erosion_protection_outcomes_detail_heading: "Households affected by coastal erosion benefitted by the project"
+      coastal_erosion_protection_outcomes_detail:
+        heading: "Households affected by coastal erosion benefitted by the project"
       coastal_erosion_protection_outcomes_detail_lede: "Houses built or converted after 1 January 2012 aren't included."
-      households_protected_from_loss_in_next_20_years_label: "Of the households in column A, how many will be protected from loss within the next 20 years."
+      households_protected_from_loss_in_next_20_years_label: "Of the households in column A, how many will be protected from loss within the next 20 years?"
       non_residential_properties_at_reduced_risk_coastal_erosion_label: Non-residental properties at a reduced risk of coastal erosion
       households_total_label: "Total"
       intertidal_habitat: Hectares of intertidal wetland habitat the project will create or enhance

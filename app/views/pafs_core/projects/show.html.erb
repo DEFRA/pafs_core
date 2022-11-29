@@ -40,8 +40,8 @@
       <div class="govuk-grid-column govuk-body-s">
         <%= form_group(f.object, "project", item) do %>
           <%= error_message(f.object, "project", item) %>
-          <div id="project-<%= item %>-field>
-            <%= render partial: "summary/#{item}", locals: { project: @project } %>
+          <div id="project-<%= item %>-field">
+            <%= render partial: "pafs_core/summary/#{item}", locals: { project: @project } %>
           </div>
         <% end -%>
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">

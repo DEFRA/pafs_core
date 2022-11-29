@@ -1,7 +1,7 @@
 <article class="summary-item" aria-labelledby="risks">
   <% if project.risks_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="risks">Risks and properties benefitting</h2>
+      <h2 class="govuk-heading-m" role="heading" id="risks">Risks and properties benefitting</h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
           <ul class="summary-list list-bullet">
@@ -31,7 +31,7 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
             <h3 class="heading-small summary-sub-heading"><%= project.summary_label(:flooding_outcome_title) %></h3>
-            <table class="full-table">
+            <table class="full-table" aria-labelledby="<%= project.summary_label(:flooding_outcome_title) %>">
               <thead>
                 <tr>
                   <th class="govuk-visually-hidden">Households benefitting</th>
@@ -81,16 +81,14 @@
         </div>
         <% if !project.draft? %>
           <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds">
-              <details>
-                <summary class="half-indent-with-top-margin" role="button" aria-controls="show_risks and households benefitting detail">
-                  <span class="summary"> View households affected by flooding detail </span>
-                </summary>
-                <div id="show_risks and households benefitting detail" class="panel panel-indent panel-border-narrow">
-                  <%= render partial: "summary/flood_protection_outcomes_detail", locals: {project: @project} %>
-                </div>
-              </details>
-            </div>
+            <details class="govuk-details headroom" data-module="govuk-details">
+              <summary class="govuk-details__summary" role="button" aria-controls="show_risks and households benefitting detail">
+                <span class="details__summary-text">View households affected by flooding detail </span>
+              </summary>
+              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+                <%= render partial: "pafs_core/summary/flood_protection_outcomes_detail", locals: {project: @project} %>
+              </div>
+            </details>
           </div>
         <% end %>
       <% end %>
@@ -98,7 +96,7 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
             <h3 class="heading-small summary-sub-heading"><%= project.summary_label(:coastal_outcome_title) %></h3>
-            <table class="full-table">
+            <table class="full-table"aria-labelledby="<%= project.summary_label(:coastal_outcome_title) %>">
               <thead>
                 <tr>
                   <th class="govuk-visually-hidden">Properties benefitting</th>
@@ -128,16 +126,14 @@
         </div>
         <% if !project.draft? %>
           <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds">
-              <details>
-                <summary class="half-indent-with-top-margin" role="button" aria-controls="show_risks and households benefitting detail">
-                  <span class="summary"> View properties affected by coastal erosion detail </span>
-                </summary>
-                <div id="show_risks and households benefitting detail" class="panel panel-indent panel-border-narrow">
-                  <%= render partial: "summary/coastal_erosion_protection_outcomes_detail", locals: {project: @project} %>
-                </div>
-              </details>
-            </div>
+            <details class="govuk-details headroom" data-module="govuk-details">
+              <summary class="govuk-details__summary" role="button" aria-controls="show_risks and households benefitting detail">
+                <span class="details__summary-text">View properties affected by coastal erosion detail </span>
+              </summary>
+              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+                <%= render partial: "pafs_core/summary/coastal_erosion_protection_outcomes_detail", locals: {project: @project} %>
+              </div>
+            </details>
           </div>
         <% end %>
       <% end %>
@@ -146,7 +142,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="risks">Risks and properties benefitting</h2>
+          <h2 class="govuk-heading-m" role="heading" id="risks">Risks and properties benefitting</h2>
         </div>
         <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>

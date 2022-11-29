@@ -27,7 +27,7 @@
         <%= render partial: 'pafs_core/projects/steps/funding_calculator_upload_version/v9' %>
 
         <div class='upload-section'>
-          <h3 class="heading-medium" id="file-upload"><%= t("upload_heading", scope: scope) %></h3>
+          <h3 class="govuk-heading-m" id="file-upload"><%= t("upload_heading", scope: scope) %></h3>
 
           <%= f.govuk_file_field :funding_calculator,
                                  accept: @project.acceptable_funding_calculator_types,

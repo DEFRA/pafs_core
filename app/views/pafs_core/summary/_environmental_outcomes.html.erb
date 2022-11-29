@@ -1,13 +1,13 @@
 <article class="summary-item" aria-labelledby="environmental-outcomes">
   <% if project.environmental_outcomes_started?  %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="environmental-outcomes">
+      <h2 class="govuk-heading-m" role="heading" id="environmental-outcomes">
         <%= project.summary_label(:environmental_outcomes_title) %>
       </h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
           <% if project.environmental_benefits? %>
-          <table class="full-table">
+          <table class="full-table" aria-labelledby="Benefit">
             <thead>
                <tr>
                 <th class="govuk-visually-hidden">Benefit</th>
@@ -82,7 +82,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="environmental-outcomes">
+          <h2 class="govuk-heading-m" role="heading" id="environmental-outcomes">
             <%= project.summary_label(:environmental_outcomes_title) %>
           </h2>
         </div>

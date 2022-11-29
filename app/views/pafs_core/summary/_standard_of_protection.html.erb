@@ -1,14 +1,14 @@
 <article class="summary-item" aria-labelledby="standard-of-protection">
   <% if project.standard_of_protection_started? %>
     <div class="summary-item-content">
-      <h2 class="heading-medium" role="heading" id="standard-of-protection">
+      <h2 class="govuk-heading-m" role="heading" id="standard-of-protection">
         <%= project.summary_label(:standard_of_protection_title) -%>
       </h2>
       <% if project.protects_against_flooding? %>
         <div class="<%= flood_class_for_sop(project) %> pushed-up">
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-three-quarters">
-              <table class="full-table">
+              <table class="full-table" aria-describedby="<%= project.summary_label(:standard_of_protection_title) -%>">
                 <thead>
                   <tr>
                     <th class="govuk-visually-hidden">Point in time</th>
@@ -44,7 +44,7 @@
       <% if project.protects_against_coastal_erosion? %>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
-            <table class="full-table">
+            <table class="full-table" aria-describedby="<%= project.summary_label(:standard_of_protection_title) -%>">
               <thead>
                 <tr>
                   <th class="govuk-visually-hidden">Point in time</th>
@@ -81,7 +81,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="heading-medium" role="heading" id="standard-of-protection">
+          <h2 class="govuk-heading-m" role="heading" id="standard-of-protection">
             <%= project.summary_label(:standard_of_protection_title) %>
           </h2>
         </div>
