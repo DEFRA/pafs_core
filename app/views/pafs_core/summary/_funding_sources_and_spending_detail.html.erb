@@ -1,4 +1,4 @@
-<% content_for :title, t(".heading") %>
+<% content_for :title, t(".heading") unless content_for :title %>
 
 <div class="step-container">
   <div>
@@ -53,7 +53,7 @@
             !project.private_contributor_names.blank? ||
             !project.other_ea_contributor_names.blank? %>
             <div id="contributor_detail">
-              </br>
+              <br>
               <% if !project.public_contributor_names.blank? %>
                   <p></p>
                   <div>
