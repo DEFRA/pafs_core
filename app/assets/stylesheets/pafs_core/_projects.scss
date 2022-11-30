@@ -126,16 +126,19 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 .funding-table,
 .funding-table-summary,
 .funding_sources_and_spending_detail_table,
+.program-uploads,
 .protection-outcomes-table,
 .protection-outcomes-table-summary {
+
   th {
     text-align: left;
     vertical-align: top;
     padding-right: 5px;
   }
 
-  th .protection-outcomes-subheading {
-    text-align: center !important;
+  .protection-outcomes-subheading {
+    text-align: right;
+    padding-right: 1em;
   }
 
   .financial-year-column {
@@ -208,6 +211,7 @@ $icon-shadow-colour: rgba(0, 0, 0, 0.4);
 .funding-contributor-table,
 .funding_sources_and_spending_detail_table,
 .funding-table,
+.program-uploads,
 .protection-outcomes-table,
 .shapefiles-table {
 

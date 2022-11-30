@@ -11,7 +11,7 @@
           <%= form_group(f.object, @project.step, :base) do %>
             <%= error_message(f.object, :coastal_erosion_protection_outcomes_step, :base) %>
             <div class="scroll-horz">
-              <%= govuk_checkbox_for f, :reduced_risk_of_households_for_coastal_erosion %>
+              <%= govuk_checkbox_for f, :reduced_risk_of_households_for_coastal_erosion, "pafs_core.projects.steps.coastal_erosion_protection_outcomes" %>
               <table class="protection-outcomes-table hidden-totals" aria-labelledby="coastal-erosion-protection-outcomes">
                 <thead>
                   <tr>
