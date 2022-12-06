@@ -4,8 +4,6 @@ module PafsCore
   class PagesController < PafsCore::ApplicationController
     helper_method :previous_page
 
-    def cookies; end
-
     protected
 
     def previous_page

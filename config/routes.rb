@@ -62,6 +62,5 @@ PafsCore::Engine.routes.draw do
   post "confirmation" => "confirmation#receipt", as: :confirm_receipt
   match "(errors)/:status", to: "errors#show", via: :all, constraints: { status: /\d{3}/ }
 
-  get "/cookies", to: "pages#cookies"
 end
 # rubocop:enable Metrics/BlockLength
