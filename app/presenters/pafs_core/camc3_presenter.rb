@@ -62,7 +62,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.households_at_reduced_risk(year)
+          value: fcerm1_presenter.households_at_reduced_risk_2040(year)
         }
       end
     end
@@ -71,7 +71,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.moved_from_very_significant_and_significant_to_moderate_or_low(year)
+          value: fcerm1_presenter.moved_from_very_significant_and_significant_to_moderate_or_low_2040(year)
         }
       end
     end
@@ -80,7 +80,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.households_protected_from_loss_in_20_percent_most_deprived(year)
+          value: fcerm1_presenter.households_protected_from_loss_in_20_percent_most_deprived_2040(year)
         }
       end
     end
@@ -89,7 +89,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.non_residential_properties(year)
+          value: fcerm1_presenter.non_residential_properties_2040(year)
         }
       end
     end
