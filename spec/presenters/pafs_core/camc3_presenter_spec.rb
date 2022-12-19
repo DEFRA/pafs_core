@@ -166,80 +166,75 @@ RSpec.describe PafsCore::Camc3Presenter do
       end
     end
 
-    describe "#households_at_reduced_risk" do
+    shared_examples "has the expected forecast" do |outcomes_category, attribute, presenter_method = nil|
       before do
         funding_values.each do |hash|
-          project.flood_protection_outcomes.create(
-            households_at_reduced_risk: hash[:value],
+          project.send(outcomes_category).create(
+            "#{attribute}": hash[:value],
             financial_year: hash[:year]
           )
         end
       end
 
-      it "has the forecast for the households at reduced risks" do
-        expect(subject.households_at_reduced_risk).to eql(outcome_measurements)
+      it "has the forecast for #{attribute.to_s.humanize}" do
+        expect(subject.send(presenter_method || attribute)).to eql(outcome_measurements)
       end
+    end
+
+    describe "#households_at_reduced_risk" do
+      it_behaves_like "has the expected forecast", :flood_protection_outcomes,
+                      :households_at_reduced_risk
     end
 
     describe "#moved_from_very_significant_and_significant_to_moderate_or_low" do
-      before do
-        funding_values.each do |hash|
-          project.flood_protection_outcomes.create(
-            moved_from_very_significant_and_significant_to_moderate_or_low: hash[:value],
-            financial_year: hash[:year]
-          )
-        end
-      end
-
-      it "has the forecast for the households moved from very significant and significant to moderate or low" do
-        expect(subject.moved_from_very_significant_and_significant_to_moderate_or_low).to eql(outcome_measurements)
-      end
+      it_behaves_like "has the expected forecast", :flood_protection_outcomes,
+                      :moved_from_very_significant_and_significant_to_moderate_or_low
     end
 
     describe "#households_protected_from_loss_in_20_percent_most_deprived" do
-      before do
-        funding_values.each do |hash|
-          project.flood_protection_outcomes.create(
-            households_protected_from_loss_in_20_percent_most_deprived: hash[:value],
-            financial_year: hash[:year]
-          )
-        end
-      end
+      it_behaves_like "has the expected forecast", :flood_protection_outcomes,
+                      :households_protected_from_loss_in_20_percent_most_deprived
+    end
 
-      it "has the forecast for the households protected from loss in 20 percent most deprived" do
-        expect(subject.households_protected_from_loss_in_20_percent_most_deprived).to eql(outcome_measurements)
-      end
-
+    describe "#non_residential_properties" do
+      it_behaves_like "has the expected forecast", :flood_protection_outcomes,
+                      :non_residential_properties
     end
 
     describe "#coastal_households_at_reduced_risk" do
-      before do
-        funding_values.each do |hash|
-          project.coastal_erosion_protection_outcomes.create(
-            households_at_reduced_risk: hash[:value],
-            financial_year: hash[:year]
-          )
-        end
-      end
-
-      it "has the forecast for the coastal) households at reduced risk" do
-        expect(subject.coastal_households_at_reduced_risk).to eql(outcome_measurements)
-      end
+      it_behaves_like "has the expected forecast", :coastal_erosion_protection_outcomes,
+                      :households_at_reduced_risk,
+                      :coastal_households_at_reduced_risk
     end
 
     describe "#coastal_households_protected_from_loss_in_20_percent_most_deprived" do
-      before do
-        funding_values.each do |hash|
-          project.coastal_erosion_protection_outcomes.create(
-            households_protected_from_loss_in_20_percent_most_deprived: hash[:value],
-            financial_year: hash[:year]
-          )
-        end
-      end
+      it_behaves_like "has the expected forecast", :coastal_erosion_protection_outcomes,
+                      :households_protected_from_loss_in_20_percent_most_deprived,
+                      :coastal_households_protected_from_loss_in_20_percent_most_deprived
+    end
 
-      it "collects a forecast over 13 years" do
-        expect(subject.coastal_households_protected_from_loss_in_20_percent_most_deprived).to eql(outcome_measurements)
-      end
+    describe "#households_at_reduced_risk_2040" do
+      it_behaves_like "has the expected forecast", :flood_protection2040_outcomes,
+                      :households_at_reduced_risk,
+                      :households_at_reduced_risk_2040
+    end
+
+    describe "#moved_from_very_significant_and_significant_to_moderate_or_low_2040" do
+      it_behaves_like "has the expected forecast", :flood_protection2040_outcomes,
+                      :moved_from_very_significant_and_significant_to_moderate_or_low,
+                      :moved_from_very_significant_and_significant_to_moderate_or_low_2040
+    end
+
+    describe "#households_protected_from_loss_in_20_percent_most_deprived_2040" do
+      it_behaves_like "has the expected forecast", :flood_protection2040_outcomes,
+                      :households_protected_from_loss_in_20_percent_most_deprived,
+                      :households_protected_from_loss_in_20_percent_most_deprived_2040
+    end
+
+    describe "#non_residential_properties_2040" do
+      it_behaves_like "has the expected forecast", :flood_protection2040_outcomes,
+                      :non_residential_properties,
+                      :non_residential_properties_2040
     end
   end
 end
