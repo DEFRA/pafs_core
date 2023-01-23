@@ -45,18 +45,4 @@ Gem::Specification.new do |s|
   # GOV.UK styling
   s.add_dependency "defra_ruby_template", "~> 3"
   s.add_dependency "govuk_design_system_formbuilder", "~> 3"
-
-  s.add_development_dependency "capybara"
-  s.add_development_dependency "climate_control"
-  s.add_development_dependency "database_cleaner"
-  s.add_development_dependency "defra_ruby_style"
-  s.add_development_dependency "dotenv"
-  s.add_development_dependency "factory_bot_rails"
-  s.add_development_dependency "pg"
-  s.add_development_dependency "pry-rails"
-  s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "shoulda-matchers"
-  s.add_development_dependency "simplecov"
-  s.add_development_dependency "vcr"
-  s.add_development_dependency "webmock"
 end
