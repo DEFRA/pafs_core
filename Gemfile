@@ -24,14 +24,24 @@ gem "rubyzip"
 
 group :development, :test do
   gem "byebug"
+  gem "capybara"
   gem "climate_control"
   gem "defra_ruby_style"
+  gem "dotenv"
+  gem "factory_bot_rails"
   gem "json_schemer"
+  gem "pg"
   gem "pry"
+  gem "pry-rails"
   gem "rails-controller-testing"
+  gem "rspec-rails"
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  gem "shoulda-matchers"
+  gem "simplecov"
+  gem "vcr"
+  gem "webmock"
 end
 
 group :test do

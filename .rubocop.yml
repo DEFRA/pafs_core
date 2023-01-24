@@ -12,6 +12,8 @@ Style/RedundantInitialize:
   Enabled: false
 
 # TODO Resolve these legacy Rubocop offenses
+Capybara/SpecificMatcher:
+  Enabled: false
 Lint/EmptyBlock:
   Enabled: false
 Metrics/AbcSize:
@@ -41,8 +43,6 @@ Rails/SkipsModelValidations:
 RSpec/AnyInstance:
   Enabled: false
 RSpec/BeforeAfterAll:
-  Enabled: false
-RSpec/Capybara/SpecificMatcher:
   Enabled: false
 RSpec/LetSetup:
   Enabled: false
