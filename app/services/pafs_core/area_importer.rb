@@ -1,4 +1,3 @@
-# Play nice with Ruby 3 (and rubocop)
 # frozen_string_literal: true
 
 module PafsCore
@@ -15,7 +14,7 @@ module PafsCore
       @faulty_entries = []
     end
 
-    def import(path_to_file)
+    def full_import(path_to_file)
       abort("Areas already exist") if PafsCore::Area.count.positive?
 
       extract_csv_data(path_to_file)
@@ -23,10 +22,8 @@ module PafsCore
       import_areas
     end
 
-    def import_new_areas(path_to_folder)
-      new_areas_csvs = Dir["#{path_to_folder}/*.csv"]
-
-      new_areas_csvs.each { |area_csv| extract_csv_data(area_csv) }
+    def import_additional_areas(file_path)
+      extract_csv_data(file_path)
 
       import_areas
     end
