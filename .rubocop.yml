@@ -4,6 +4,7 @@ inherit_gem:
 require:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-capybara
 
 # This is required in app/services/pafs_core/download/base.rb
 # but adding a disable directive there causes rubocop to complain
