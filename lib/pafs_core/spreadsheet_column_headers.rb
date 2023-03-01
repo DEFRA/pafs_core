@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  SPREADSHEET_COLUMN_HEADERS = {
+  SPREADSHEET_COLUMN_HEADERS = { # rubocop:disable Metrics/CollectionLiteralLength
     name: "Project Name",
     reference_number: "National Project Number",
     project_type: "Project Type",
