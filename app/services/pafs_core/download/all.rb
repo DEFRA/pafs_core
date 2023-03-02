@@ -16,9 +16,11 @@ module PafsCore
       def remote_file_url
         url = expiring_url_for(FILENAME)
         Rails.logger.warn "Expiring URL for download: #{url}"
+        Airbrake.notify("Expiring URL for download: #{url}")
         url
       rescue StandardError => e
         Rails.logger.warn "Error getting URL for download: #{e.inspect}"
+        Airbrake.notify("Error getting URL for download", e)
       end
 
       def projects
@@ -28,6 +30,7 @@ module PafsCore
         Rails.logger.warn "Found #{@projects.length} projects for download"
       rescue StandardError => e
         Rails.logger.warn "Error finding projects for download: #{e.inspect}"
+        Airbrake.notify("Error finding projects for download", e)
       end
 
       def update_status(data)
@@ -41,6 +44,7 @@ module PafsCore
       def perform
         generate_multi_fcerm1(projects, FILENAME) do |total_records, current_record_index|
           Rails.logger.warn "Preparing project #{current_record_index} for download"
+          Airbrake.notify("Preparing project #{current_record_index} for download")
           if (current_record_index % 10).zero?
             update_status(status: "pending", current_record: current_record_index, total_records: total_records)
           end
