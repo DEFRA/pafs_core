@@ -5,6 +5,7 @@ module PafsCore
 
     def initialize(project_number)
       @project = Project.find_by(reference_number: project_number)
+      raise StandardError, "Project not found: #{project_number}" if @project.blank?
     end
 
     def run(new_area_name)
