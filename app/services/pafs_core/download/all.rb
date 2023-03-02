@@ -40,6 +40,7 @@ module PafsCore
 
         update_status(status: "complete")
       rescue StandardError => e
+        Rails.logger.error "Download all projects failed: #{e}"
         Airbrake.notify("Download all projects failed", e)
         update_status(status: "failed", exception: e.inspect)
       end
