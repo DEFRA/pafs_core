@@ -77,6 +77,8 @@ module PafsCore
         puts "Uploading"
         storage.upload_file(tmpfile.path, filename)
         puts "Upload complete"
+      rescue StandardError => e
+        Rails.logger.error "Error generating multi_fcerm1: #{e.inspect}"
       ensure
         tmpfile.close
         tmpfile.unlink

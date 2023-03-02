@@ -46,6 +46,8 @@ module PafsCore
         row_number += 1
       end
       workbook
+      rescue StandardError => e
+        Rails.logger.error "Error generating multi_xlsx: #{e.inspect}"
     end
 
     def generate_csv(_project)
