@@ -18,6 +18,7 @@
 
     <div class="govuk-grid-column-three-quarters">
       <%= form_tag(pafs_core.projects_path, method: "get", class: "search-bar") do %>
+        <%= label_tag :q, "Enter a project number or name", class: "govuk-visually-hidden" %>
         <%= text_field_tag(:q,
                            params[:q] || "",
                            placeholder: "Enter a project number or name",
