@@ -33,7 +33,9 @@ module PafsCore
 
       row_number = FIRST_DATA_ROW
       total_projects = projects.size
+      current_project = nil
       projects.find_each.with_index do |project, project_index|
+        current_project = project
         add_project_to_sheet(
           sheet,
           PafsCore::SpreadsheetPresenter.new(project),
@@ -44,6 +46,11 @@ module PafsCore
 
         yield(total_projects, project_index) if block_given?
         row_number += 1
+      rescue StandardError => e
+        Rails.logger.error "Download failed for project #{current_project.project_number}: #{e.inspect}"
+        Airbrake.notify(e) if defined? Airbrake
+        # re-raise the error so the UI reports the issue to the user
+        raise e
       end
       workbook
     end
