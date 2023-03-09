@@ -40,8 +40,6 @@ module PafsCore
 
         update_status(status: "complete")
       rescue StandardError => e
-        Rails.logger.error "Download failed on record #{current_record_index}: #{e.inspect}"
-        Airbrake.notify(e) if defined? Airbrake
         update_status(status: "failed", exception: e.inspect)
       end
     end
