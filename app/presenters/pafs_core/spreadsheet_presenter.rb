@@ -296,6 +296,20 @@ module PafsCore
       )
     end
 
+    def designated_site
+      return "SPA/SAC" if improve_spa_or_sac
+
+      return "SSSI" if improve_sssi
+    end
+
+    def remove_fish_or_eel_barrier
+      if project.remove_fish_barrier
+        return project.remove_eel_barrier ? "Both" : "Fish"
+      end
+
+      project.remove_eel_barrier ? "Eel" : nil
+    end
+
     private
 
     def project
