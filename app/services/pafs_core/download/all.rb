@@ -43,8 +43,6 @@ module PafsCore
 
       def perform
         generate_multi_fcerm1(projects, FILENAME) do |total_records, current_record_index|
-          Rails.logger.warn "Preparing project #{current_record_index} for download"
-          Airbrake.notify("Preparing project #{current_record_index} for download")
           if (current_record_index % 10).zero?
             update_status(status: "pending", current_record: current_record_index, total_records: total_records)
           end
