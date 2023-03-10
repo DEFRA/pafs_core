@@ -47,7 +47,7 @@ module PafsCore
         yield(total_projects, project_index) if block_given?
         row_number += 1
       rescue StandardError => e
-        Rails.logger.error "Download failed for project #{current_project.project_number}: #{e.inspect}"
+        Rails.logger.error "Download failed for project #{current_project.reference_number}: #{e.inspect}"
         Airbrake.notify(e) if defined? Airbrake
         # re-raise the error so the UI reports the issue to the user
         raise e
