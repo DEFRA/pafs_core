@@ -14,13 +14,23 @@ module PafsCore
       end
 
       def remote_file_url
-        expiring_url_for(FILENAME)
+        url = expiring_url_for(FILENAME)
+        Rails.logger.warn "Expiring URL for download: #{url}"
+        Airbrake.notify("Expiring URL for download: #{url}")
+        url
+      rescue StandardError => e
+        Rails.logger.warn "Error getting URL for download: #{e.inspect}"
+        Airbrake.notify("Error getting URL for download", e)
       end
 
       def projects
         @projects ||= PafsCore::Project.joins(:state)
                                        .joins(:area_projects)
                                        .includes(funding_contributors: :funding_value, area_projects: :area)
+        Rails.logger.warn "Found #{@projects.length} projects for download"
+      rescue StandardError => e
+        Rails.logger.warn "Error finding projects for download: #{e.inspect}"
+        Airbrake.notify("Error finding projects for download", e)
       end
 
       def update_status(data)
@@ -40,8 +50,8 @@ module PafsCore
 
         update_status(status: "complete")
       rescue StandardError => e
-        Rails.logger.error "Download failed on record #{current_record_index}: #{e.inspect}"
-        Airbrake.notify(e) if defined? Airbrake
+        Rails.logger.error "Download all projects failed: #{e.inspect}"
+        Airbrake.notify("Download all projects failed", e)
         update_status(status: "failed", exception: e.inspect)
       end
     end
