@@ -28,6 +28,7 @@ module PafsCore
                                        .joins(:area_projects)
                                        .includes(funding_contributors: :funding_value, area_projects: :area)
         Rails.logger.warn "Found #{@projects.length} projects for download"
+        @projects
       rescue StandardError => e
         Rails.logger.warn "Error finding projects for download: #{e.inspect}"
         Airbrake.notify(e, message: "Error finding projects for download")

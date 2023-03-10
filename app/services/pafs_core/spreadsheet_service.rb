@@ -55,7 +55,7 @@ module PafsCore
       workbook
     rescue StandardError => e
       Rails.logger.error "Error generating multi_xlsx: #{e.inspect}"
-      Airbrake.notify("Error generating multi_xlsx", e)
+      Airbrake.notify(e, message: "Error generating multi_xlsx")
     end
 
     def generate_csv(_project)
