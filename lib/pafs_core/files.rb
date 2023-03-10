@@ -79,7 +79,7 @@ module PafsCore
         puts "Upload complete"
       rescue StandardError => e
         Rails.logger.error "Error generating multi_fcerm1: #{e.inspect}"
-        Airbrake.notify("Error generating multi_fcerm1", e)
+        Airbrake.notify(e, message: "Error generating multi_fcerm1")
       ensure
         tmpfile.close
         tmpfile.unlink

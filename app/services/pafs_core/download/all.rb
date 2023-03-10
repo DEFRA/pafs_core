@@ -20,7 +20,7 @@ module PafsCore
         url
       rescue StandardError => e
         Rails.logger.warn "Error getting URL for download: #{e.inspect}"
-        Airbrake.notify("Error getting URL for download", e)
+        Airbrake.notify(e, message: "Error getting URL for download")
       end
 
       def projects
@@ -30,7 +30,7 @@ module PafsCore
         Rails.logger.warn "Found #{@projects.length} projects for download"
       rescue StandardError => e
         Rails.logger.warn "Error finding projects for download: #{e.inspect}"
-        Airbrake.notify("Error finding projects for download", e)
+        Airbrake.notify(e, message: "Error finding projects for download")
       end
 
       def update_status(data)
@@ -51,7 +51,7 @@ module PafsCore
         update_status(status: "complete")
       rescue StandardError => e
         Rails.logger.error "Download all projects failed: #{e.inspect}"
-        Airbrake.notify("Download all projects failed", e)
+        Airbrake.notify(e, message: "Download all projects failed")
         update_status(status: "failed", exception: e.inspect)
       end
     end
