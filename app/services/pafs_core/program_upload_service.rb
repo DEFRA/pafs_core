@@ -244,8 +244,9 @@ module PafsCore
       project.project_end_financial_year = project.funding_values.maximum(:financial_year) || 2027
     end
 
-    def copy_project_errors(project, clear_attrs_with_errors: false)
-      project.errors.each_key do |key|
+    def copy_project_errors(project, clear_attrs_with_errors = false) # rubocop:disable Style/OptionalBooleanParameter
+      project.errors.each do |error|
+        key = error.attribute
         errors[key] = trimmed_error_messages(project.errors.full_messages_for(key)).join("|")
         project.send("#{key}=", nil) if clear_attrs_with_errors &&
                                         project.respond_to?("#{key}=")

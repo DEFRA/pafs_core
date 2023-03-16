@@ -80,4 +80,38 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       end
     end
   end
+
+  describe "#last_updated" do
+    let(:project) { create(:project) }
+
+    it "returns the project's updated_at value" do
+      expect(presenter.last_updated).to eq project.updated_at.strftime("%Y-%m-%d_%H-%M-%S")
+    end
+  end
+
+  describe "#pso_name" do
+    context "when the project's creator's primary area is a PSO area" do
+      let(:project) { create(:project, :pso_area, creator: create(:user, :pso)) }
+
+      it "returns the PSO area's name" do
+        expect(presenter.pso_name).to eq project.creator.primary_area.name
+      end
+    end
+
+    context "when the project's creator's primary area is an RMA area" do
+      let(:project) { create(:project, :rma_area, creator: create(:user, :rma)) }
+
+      it "returns the RMA area's parent's name" do
+        expect(presenter.pso_name).to eq project.creator.primary_area.parent.name
+      end
+    end
+
+    context "when the project's creator is nil" do
+      let(:project) { create(:project, :rma_area, creator: nil) }
+
+      it "returns nil" do
+        expect(presenter.pso_name).to be_nil
+      end
+    end
+  end
 end
