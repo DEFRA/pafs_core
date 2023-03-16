@@ -5,7 +5,7 @@ module PafsCore
     class Area < Base
       attr_reader :user
 
-      def initialize(requesting_user:)
+      def initialize(requesting_user)
         super
         @user = requesting_user
       end
