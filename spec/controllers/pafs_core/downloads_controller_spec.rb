@@ -24,8 +24,7 @@ RSpec.describe PafsCore::DownloadsController do
   end
 
   describe "GET proposal" do
-    # TODO: Uncomment this when the updated spreadsheet template has been provided
-    xit "renders an excel spreadsheet for xlsx requests" do
+    it "renders an excel spreadsheet for xlsx requests" do
       get :proposal, params: { id: @project.to_param }, format: :xlsx
       expect(response.headers["Content-Type"]).to eq("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     end

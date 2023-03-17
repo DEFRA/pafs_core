@@ -9,7 +9,7 @@ end
 RSpec.describe PafsCore::SpreadsheetService do
   subject { described_class.new }
 
-  xdescribe "#generate_multi_xlsx" do
+  describe "#generate_multi_xlsx" do
     let(:program_upload) { PafsCore::ProgramUploadService.new }
     let(:first_row) { expected.worksheets[0][6] }
     let(:second_row) { expected.worksheets[0][7] }
@@ -25,8 +25,9 @@ RSpec.describe PafsCore::SpreadsheetService do
     let(:expected) { subject.generate_multi_xlsx(projects) }
 
     let(:test_project_1) { PafsCore::Project.find_by(name: "Test Project 1") }
-
     let(:spreadsheet_presenter_1) { PafsCore::SpreadsheetPresenter.new(test_project_1) }
+
+    let(:user) { create(:user, :rma) }
 
     let(:uploaded_file) do
       ActionDispatch::Http::UploadedFile.new(tempfile: File.open(file_path),
@@ -46,7 +47,7 @@ RSpec.describe PafsCore::SpreadsheetService do
 
     before do
       file_path = Rails.root.join("../fixtures/test_areas.csv")
-      PafsCore::AreaImporter.new.import(file_path)
+      PafsCore::AreaImporter.new.full_import(file_path)
 
       VCR.use_cassette("process_spreadsheet_with_postcodes") do
         record = program_upload.upload(program_uploads_params)
@@ -54,6 +55,10 @@ RSpec.describe PafsCore::SpreadsheetService do
       end
 
       pso_area.area_projects.create(project: test_project_1, owner: true)
+
+      # The test projects loaded from expected_program_spreadsheet.xlsx don't have owners
+      test_project_1.creator = user
+      test_project_1.save!
     end
 
     it "includes the project reference number" do
@@ -65,7 +70,7 @@ RSpec.describe PafsCore::SpreadsheetService do
     end
 
     it "includes column BI" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("BI")].value).to eql(first_row[SpreadsheetMapperHelper.column_index("JM")].value)
+      expect(first_row[SpreadsheetMapperHelper.column_index("BI")].value).to be(0)
     end
 
     it "includes column BL" do
@@ -106,6 +111,14 @@ RSpec.describe PafsCore::SpreadsheetService do
 
     it "includes column KK" do
       expect(first_row[SpreadsheetMapperHelper.column_index("KK")].value.to_s).to eql(spreadsheet_presenter_1.state.state.capitalize)
+    end
+
+    it "includes the last_updated column" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("KN")].value.to_s).to eq(spreadsheet_presenter_1.last_updated)
+    end
+
+    it "includes the pso_name column" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("KO")].value.to_s).to eq(spreadsheet_presenter_1.pso_name)
     end
   end
 end

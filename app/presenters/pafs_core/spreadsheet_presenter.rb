@@ -40,6 +40,10 @@ module PafsCore
       owning_area.sub_type if owning_area&.rma?
     end
 
+    def pso_name
+      pso? ? creator&.primary_area&.name : creator&.primary_area&.parent&.name
+    end
+
     def coastal_group
       return unless coastal_erosion? || sea_flooding? || tidal_flooding?
 
@@ -308,6 +312,10 @@ module PafsCore
       end
 
       project.remove_eel_barrier ? "Eel" : nil
+    end
+
+    def last_updated
+      updated_at.strftime("%Y-%m-%d_%H-%M-%S")
     end
 
     private
