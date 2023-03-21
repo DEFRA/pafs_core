@@ -28,6 +28,7 @@ require "pafs_core/files"
 require "pafs_core/fcerm1"
 require "pafs_core/email"
 require "pafs_core/custom_headers"
+require 'pafs_core/date_utils'
 require "pafs_core/mapper/funding_calculator_maps/base"
 require "pafs_core/mapper/funding_calculator_maps/v8"
 require "pafs_core/mapper/funding_calculator_maps/v9"

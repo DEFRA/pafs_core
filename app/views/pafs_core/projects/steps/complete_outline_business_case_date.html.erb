@@ -1,0 +1,22 @@
+<% content_for :title, t(".heading") %>
+
+<div class="step-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <%= form_group(f.object, @project.step, :complete_outline_business_case) do %>
+            <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
+            <%= month_and_year(f, :complete_outline_business_case_date_step, :complete_outline_business_case, hint: t(".example_text")) %>
+          <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
