@@ -5,9 +5,11 @@ module PafsCore
     delegate :award_contract_month, :award_contract_month=,
              :award_contract_year, :award_contract_year=,
              :start_outline_business_case_month, :start_outline_business_case_year,
+             :date_present?, :date_in_range?, :date_later_than?,
              to: :project
 
-    validate :date_is_present_and_correct
+    validate :date_is_present_and_in_range
+    validate :date_is_later_than_compjlete_outline_business_case
 
     private
 
@@ -17,6 +19,15 @@ module PafsCore
         .permit(:award_contract_month, :award_contract_year)
     end
 
+    def date_is_present_and_in_range
+      unless date_present?('award_contract') && date_in_range?('award_contract')
+        errors.add(
+          :award_contract,
+          "Enter the date you expect to award the project's main contract"
+        )
+      end
+    end
+
     def date_is_present_and_correct
       date_is_present_and_in_range
       return if errors.any?
@@ -24,31 +35,14 @@ module PafsCore
       award_contract_after_start_outline_business_case
     end
 
-    def award_contract_after_start_outline_business_case
-      dt1 = Date.new(start_outline_business_case_year, start_outline_business_case_month, 1)
-      dt2 = Date.new(award_contract_year, award_contract_month, 1)
-
-      return unless dt1 > dt2
-
-      errors.add(
-        :award_contract,
-        "You expect to submit your outline business case for approval on #{dt1.month} #{dt1.year}. \
-        The date you expect to award the project's main contract must come after this date."
-      )
-    end
-
-    def date_is_present_and_in_range
-      m = "award_contract_month"
-      y = "award_contract_year"
-      mv = send(m)
-      yv = send(y)
-      unless mv.present? &&
-             yv.present? &&
-             (1..12).cover?(mv.to_i) &&
-             (2000..2100).cover?(yv.to_i)
+    def date_is_later_than_compjlete_outline_business_case
+      if date_present?('award_contract') &&
+          date_present?('complete_outline_business_case') &&
+          date_later_than?('complete_outline_business_case', 'award_contract')
         errors.add(
           :award_contract,
-          "Enter the date you expect to award the project's main contract"
+          "You expect to complete your outline business case on #{project.complete_outline_business_case_month} #{project.complete_outline_business_case_year}." \
+          ' The date you expect to award the project’s main contract must come after this date.'
         )
       end
     end
