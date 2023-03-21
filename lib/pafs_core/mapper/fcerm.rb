@@ -70,6 +70,10 @@ module PafsCore
         project.start_business_case_date
       end
 
+      def aspirational_gateway_2
+        project.complete_business_case_date
+      end
+
       def aspirational_gateway_3
         project.award_contract_date
       end
@@ -120,6 +124,7 @@ module PafsCore
           pafs_county: pafs_county,
           earliest_funding_profile_date: earliest_funding_profile_date,
           aspirational_gateway_1: aspirational_gateway_1,
+          aspirational_gateway_2: aspirational_gateway_2,
           aspirational_gateway_3: aspirational_gateway_3,
           aspirational_start_of_construction: aspirational_start_of_construction,
           aspirational_gateway_4: aspirational_gateway_4,

@@ -18,6 +18,7 @@
       "pafs_county",
       "earliest_funding_profile_date",
       "aspirational_gateway_1",
+      "aspirational_gateway_2",
       "aspirational_gateway_3",
       "aspirational_start_of_construction",
       "aspirational_gateway_4",
@@ -126,6 +127,13 @@
         "example": "04/2015"
       },
       "aspirational_gateway_1": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "example": "09/2016"
+      },
+      "aspirational_gateway_2": {
         "type": [
           "string",
           "null"
