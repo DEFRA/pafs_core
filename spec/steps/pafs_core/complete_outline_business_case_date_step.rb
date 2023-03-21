@@ -2,21 +2,21 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::AwardContractDateStep, type: :model do
+RSpec.describe PafsCore::CompleteOutlineBusinessCaseDateStep, type: :model do
   describe "attributes" do
-    subject { build(:award_contract_date_step) }
+    subject { build(:complete_outline_business_case_date_step) }
 
     it_behaves_like "a project step"
   end
 
   describe "#update" do
-    subject { create(:award_contract_date_step, project: project) }
+    subject { create(:complete_outline_business_case_date_step, project: project) }
 
     let(:project) do
       create(
         :project,
-        complete_outline_business_case_month: 1,
-        complete_outline_business_case_year: 2012
+        start_outline_business_case_month: 1,
+        start_outline_business_case_year: 2012
       )
     end
     let(:params) do
@@ -68,3 +68,4 @@ RSpec.describe PafsCore::AwardContractDateStep, type: :model do
     end
   end
 end
+

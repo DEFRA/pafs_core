@@ -37,6 +37,11 @@ FactoryBot.define do
       start_outline_business_case_year { 2012 }
     end
 
+    factory :complete_outline_business_case_date_step, class: "PafsCore::CompleteOutlineBusinessCaseDateStep" do
+      complete_outline_business_case_month { 3 }
+      complete_outline_business_case_year { 2013 }
+    end
+
     factory :award_contract_date_step, class: "PafsCore::AwardContractDateStep" do
       award_contract_month { 4 }
       award_contract_year { 2014 }
