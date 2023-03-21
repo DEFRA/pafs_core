@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module PafsCore
   module DateUtils
-    VALID_MONTH_RANGE = (1..12).freeze
-    VALID_YEAR_RANGE = (2000..2100).freeze
+    VALID_MONTH_RANGE = (1..12)
+    VALID_YEAR_RANGE = (2000..2100)
 
     def date_present?(date_name)
       send("#{date_name}_month").present? && send("#{date_name}_year").present?

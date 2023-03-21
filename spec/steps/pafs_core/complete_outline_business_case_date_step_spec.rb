@@ -68,4 +68,3 @@ RSpec.describe PafsCore::CompleteOutlineBusinessCaseDateStep, type: :model do
     end
   end
 end
-
