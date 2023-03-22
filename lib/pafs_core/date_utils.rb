@@ -9,7 +9,7 @@ module PafsCore
       send("#{date_name}_month").present? && send("#{date_name}_year").present?
     end
 
-    def date_in_range?(date_name)
+    def date_plausible?(date_name)
       VALID_MONTH_RANGE.cover?(send("#{date_name}_month").to_i) &&
         VALID_YEAR_RANGE.cover?(send("#{date_name}_year").to_i)
     end

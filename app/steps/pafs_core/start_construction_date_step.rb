@@ -5,7 +5,7 @@ module PafsCore
     delegate :start_construction_month, :start_construction_month=,
              :start_construction_year, :start_construction_year=,
              :award_contract_month, :award_contract_year,
-             :date_present?, :date_in_range?, :date_later_than?,
+             :date_present?, :date_plausible?, :date_later_than?,
              to: :project
 
     validate :date_is_present_and_correct
@@ -19,15 +19,15 @@ module PafsCore
     end
 
     def date_is_present_and_correct
-      date_is_present_and_in_range
+      date_is_present_and_plausible
       return if errors.any?
 
       date_is_later_than_award_contract
     end
 
-    def date_is_present_and_in_range
+    def date_is_present_and_plausible
       unless date_present?("start_construction") &&
-             date_in_range?("start_construction")
+             date_plausible?("start_construction")
         errors.add(
           :award_contract,
           "Enter the date you expect to award the project's main contract"
