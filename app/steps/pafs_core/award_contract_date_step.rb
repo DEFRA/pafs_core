@@ -9,7 +9,7 @@ module PafsCore
              to: :project
 
     validate :date_is_present_and_in_range
-    validate :date_is_later_than_compjlete_outline_business_case
+    validate :date_is_later_than_complete_outline_business_case
 
     private
 
@@ -28,14 +28,7 @@ module PafsCore
       )
     end
 
-    def date_is_present_and_correct
-      date_is_present_and_in_range
-      return if errors.any?
-
-      award_contract_after_start_outline_business_case
-    end
-
-    def date_is_later_than_compjlete_outline_business_case
+    def date_is_later_than_complete_outline_business_case
       if date_present?("award_contract") &&
          date_present?("complete_outline_business_case") &&
          date_later_than?("complete_outline_business_case", "award_contract")
