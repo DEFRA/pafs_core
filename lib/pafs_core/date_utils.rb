@@ -15,8 +15,6 @@ module PafsCore
     end
 
     def date_later_than?(date_name, other_date_name)
-      return false unless date_in_range?(date_name) && date_in_range?(other_date_name)
-
       Date.new(send("#{date_name}_year").to_i, send("#{date_name}_month").to_i, 1) >
         Date.new(send("#{other_date_name}_year").to_i, send("#{other_date_name}_month").to_i, 1)
     end

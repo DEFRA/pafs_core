@@ -8,8 +8,7 @@ module PafsCore
              :date_present?, :date_in_range?, :date_later_than?,
              to: :project
 
-    validate :date_is_present_and_in_range
-    validate :date_is_later_than_complete_outline_business_case
+    validate :date_is_present_and_correct
 
     private
 
@@ -19,13 +18,21 @@ module PafsCore
         .permit(:award_contract_month, :award_contract_year)
     end
 
-    def date_is_present_and_in_range
-      return if date_present?("award_contract") && date_in_range?("award_contract")
+    def date_is_present_and_correct
+      date_is_present_and_in_range
+      return if errors.any?
 
-      errors.add(
-        :award_contract,
-        "Enter the date you expect to award the project's main contract"
-      )
+      date_is_later_than_complete_outline_business_case
+    end
+
+    def date_is_present_and_in_range
+      unless date_present?("award_contract") &&
+             date_in_range?("award_contract")
+        errors.add(
+          :award_contract,
+          "Enter the date you expect to award the project's main contract"
+        )
+      end
     end
 
     def date_is_later_than_complete_outline_business_case

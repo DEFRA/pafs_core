@@ -5,6 +5,7 @@ module PafsCore
     delegate :start_construction_month, :start_construction_month=,
              :start_construction_year, :start_construction_year=,
              :award_contract_month, :award_contract_year,
+             :date_present?, :date_in_range?, :date_later_than?,
              to: :project
 
     validate :date_is_present_and_correct
@@ -21,34 +22,28 @@ module PafsCore
       date_is_present_and_in_range
       return if errors.any?
 
-      award_contract_after_start_outline_business_case
-    end
-
-    def award_contract_after_start_outline_business_case
-      dt1 = Date.new(award_contract_year, award_contract_month, 1)
-      dt2 = Date.new(start_construction_year, start_construction_month, 1)
-
-      return unless dt1 > dt2
-
-      errors.add(
-        :start_construction,
-        "You expect to award the project's main contract on #{dt1.month} #{dt1.year}. \
-        The date you expect to start the work must come after this date."
-      )
+      date_is_later_than_award_contract
     end
 
     def date_is_present_and_in_range
-      m = "start_construction_month"
-      y = "start_construction_year"
-      mv = send(m)
-      yv = send(y)
-      unless mv.present? &&
-             yv.present? &&
-             (1..12).cover?(mv.to_i) &&
-             (2000..2100).cover?(yv.to_i)
+      unless date_present?("start_construction") &&
+             date_in_range?("start_construction")
+        errors.add(
+          :award_contract,
+          "Enter the date you expect to award the project's main contract"
+        )
+      end
+    end
+
+    def date_is_later_than_award_contract
+      if date_present?("award_contract") &&
+         date_present?("start_construction") &&
+         date_later_than?("award_contract", "start_construction")
         errors.add(
           :start_construction,
-          "Enter the date you expect to start the work "
+          "You expect to award the project's main contract on #{project.award_contract_month} " \
+          "#{project.award_contract_year}. " \
+          "The date you expect to start the work must come after this date."
         )
       end
     end
