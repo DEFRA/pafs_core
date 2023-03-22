@@ -4,6 +4,7 @@ module PafsCore
   class StartOutlineBusinessCaseDateStep < BasicStep
     delegate :start_outline_business_case_month, :start_outline_business_case_month=,
              :start_outline_business_case_year, :start_outline_business_case_year=,
+             :date_present?, :date_plausible?,
              to: :project
 
     validate :date_is_present_and_plausible

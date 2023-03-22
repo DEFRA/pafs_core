@@ -7,8 +7,7 @@ module PafsCore
              :date_present?, :date_plausible?, :date_later_than?,
              to: :project
 
-    validate :date_is_present_and_plausible
-    validate :date_is_later_than_start_outline_business_case
+    validate :date_is_present_and_correct
 
     private
 
@@ -16,6 +15,13 @@ module PafsCore
       params
         .require(:complete_outline_business_case_date_step)
         .permit(:complete_outline_business_case_month, :complete_outline_business_case_year)
+    end
+
+    def date_is_present_and_correct
+      date_is_present_and_plausible
+      return if errors.any?
+
+      date_is_later_than_start_outline_business_case
     end
 
     def date_is_present_and_plausible
