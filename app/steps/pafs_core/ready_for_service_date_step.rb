@@ -37,8 +37,8 @@ module PafsCore
 
     def date_is_later_than_start_construction
       if date_present?("start_construction") &&
-          date_present?("ready_for_service") &&
-          date_later_than?("start_construction", "ready_for_service")
+         date_present?("ready_for_service") &&
+         date_later_than?("start_construction", "ready_for_service")
         errors.add(
           :ready_for_service,
           "You expect to start the work on #{project.start_construction_month} " \
