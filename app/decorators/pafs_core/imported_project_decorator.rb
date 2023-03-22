@@ -139,6 +139,10 @@ module PafsCore
       set_date_for(:start_outline_business_case, value)
     end
 
+    def complete_business_case_date=(value)
+      set_date_for(:complete_outline_business_case, value)
+    end
+
     def award_contract_date=(value)
       set_date_for(:award_contract, value)
     end
