@@ -19,7 +19,8 @@ en:
     location: Location
     benefit_area_file: Benefit area upload
     location_results: Location results
-    start_outline_business_case_date: Outline business case date
+    start_outline_business_case_date: Outline business case start date
+    complete_outline_business_case_date: Outline business case completion date
     award_contract_date: Award contract date
     start_construction_date: Start construction date
     ready_for_service_date: Ready for service date

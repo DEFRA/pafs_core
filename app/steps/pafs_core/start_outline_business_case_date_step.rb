@@ -4,9 +4,10 @@ module PafsCore
   class StartOutlineBusinessCaseDateStep < BasicStep
     delegate :start_outline_business_case_month, :start_outline_business_case_month=,
              :start_outline_business_case_year, :start_outline_business_case_year=,
+             :date_present?, :date_plausible?,
              to: :project
 
-    validate :date_is_present_and_in_range
+    validate :date_is_present_and_plausible
 
     private
 
@@ -16,18 +17,12 @@ module PafsCore
         .permit(:start_outline_business_case_month, :start_outline_business_case_year)
     end
 
-    def date_is_present_and_in_range
-      m = "start_outline_business_case_month"
-      y = "start_outline_business_case_year"
-      mv = send(m)
-      yv = send(y)
-      unless mv.present? &&
-             yv.present? &&
-             (1..12).cover?(mv.to_i) &&
-             (2000..2100).cover?(yv.to_i)
+    def date_is_present_and_plausible
+      unless date_present?("start_outline_business_case") &&
+             date_plausible?("start_outline_business_case")
         errors.add(
-          :start_outline_business_case,
-          "Enter the date you expect to submit your outline business case for approval"
+          :award_contract,
+          "Enter the date you expect to award the project's main contract"
         )
       end
     end

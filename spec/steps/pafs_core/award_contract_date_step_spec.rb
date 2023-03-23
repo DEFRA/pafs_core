@@ -15,8 +15,8 @@ RSpec.describe PafsCore::AwardContractDateStep, type: :model do
     let(:project) do
       create(
         :project,
-        start_outline_business_case_month: 1,
-        start_outline_business_case_year: 2012
+        complete_outline_business_case_month: 1,
+        complete_outline_business_case_year: 2012
       )
     end
     let(:params) do

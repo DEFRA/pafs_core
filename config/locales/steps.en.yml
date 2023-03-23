@@ -54,6 +54,13 @@ en:
           month_label: Month
           year_label: Year
           example_text: For example, 3 2019
+# complete outline business case date
+        complete_outline_business_case_date:
+          heading: When do you expect to complete the project’s outline business case?
+          month_label: Month
+          year_label: Year
+          example_text: For example, 3 2020
+
 # award contract date
         award_contract_date:
           heading: When do you expect to award the project’s main contract?

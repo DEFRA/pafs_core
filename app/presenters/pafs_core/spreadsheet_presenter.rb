@@ -137,6 +137,10 @@ module PafsCore
       format_2_part_date(:start_outline_business_case)
     end
 
+    def complete_business_case_date
+      format_2_part_date(:complete_outline_business_case)
+    end
+
     def award_contract_date
       format_2_part_date(:award_contract)
     end

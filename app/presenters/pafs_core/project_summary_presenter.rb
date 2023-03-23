@@ -47,6 +47,10 @@ module PafsCore
       presentable_date(:start_outline_business_case)
     end
 
+    def complete_outline_business_case_date
+      presentable_date(:complete_outline_business_case)
+    end
+
     def award_contract_date
       presentable_date(:award_contract)
     end

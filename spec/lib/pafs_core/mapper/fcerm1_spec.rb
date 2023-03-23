@@ -89,6 +89,10 @@ RSpec.describe PafsCore::Mapper::Fcerm1 do
     expect(subject.aspirational_gateway_1).to eql(presenter.start_business_case_date)
   end
 
+  it "aspirational gateway 2" do
+    expect(subject.aspirational_gateway_2).to eql(presenter.complete_business_case_date)
+  end
+
   it "aspirational gateway 3" do
     expect(subject.aspirational_gateway_3).to eql(presenter.award_contract_date)
   end
