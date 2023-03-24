@@ -59,6 +59,7 @@ en:
     summary:
       key_dates:
         start_outline_business_case_label: "Outline business case start date"
+        complete_outline_business_case_label: "Outline business completion date"
         award_contract_label: "Contract awarded"
         start_construction_label: "Start construction"
         ready_for_service_label: "Ready for service"

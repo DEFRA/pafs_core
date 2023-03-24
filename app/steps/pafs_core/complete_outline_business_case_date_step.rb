@@ -42,7 +42,7 @@ module PafsCore
           :award_contract,
           "You expect to start your outline business case on #{project.start_outline_business_case_month} " \
           "#{project.start_outline_business_case_year}. " \
-          "The date you expect your outline business case must come after this date."
+          "The date you expect to complete your outline business case must come after this date."
         )
       end
     end
