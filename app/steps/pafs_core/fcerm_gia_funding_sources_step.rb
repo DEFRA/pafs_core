@@ -43,7 +43,9 @@ module PafsCore
     end
 
     def step_params(params)
-      params.require(:fcerm_gia_funding_sources_step).permit(FUNDING_SOURCES) if params[:fcerm_gia_funding_sources_step].present?
+      return if params[:fcerm_gia_funding_sources_step].blank?
+
+      params.require(:fcerm_gia_funding_sources_step).permit(FUNDING_SOURCES)
     end
 
     def at_least_one_funding_source_is_selected
