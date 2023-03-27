@@ -14,6 +14,16 @@ module PafsCore
       NOT_IDENTIFIED =        :not_yet_identified
     ].freeze
 
+    FCERM_GIA_FUNDING_SOURCES = [
+      ASSET_REPLACEMENT_ALLOWANCE = :asset_replacement_allowance,
+      ENVIRONMENT_STATUTORY_FUNDING = :environment_statutory_funding,
+      FREQUENTLY_FLOODED_COMMUNITIES = :frequently_flooded_communities,
+      OTHER_ADDITIONAL_GRANT_IN_AID = :other_additional_grant_in_aid,
+      OTHER_GOVERNMENT_DEPARTMENT = :other_government_department,
+      RECOVERY = :recovery,
+      SUMMER_ECONOMIC_FUND = :summer_economic_fund
+    ].freeze
+
     # These funding sources are stored as separeate records for each contributor
     # rather than a single total. They therefore need summing to get to the total.
     AGGREGATE_SOURCES = [
