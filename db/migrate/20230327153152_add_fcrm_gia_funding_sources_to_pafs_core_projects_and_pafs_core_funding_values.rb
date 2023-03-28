@@ -1,4 +1,4 @@
-class AddFcermGiaFundingSourcesToPafsCoreProjectsAndPafsCoreFundingValues < ActiveRecord::Migration[6.1]
+class AddFcrmGiaFundingSourcesToPafsCoreProjectsAndPafsCoreFundingValues < ActiveRecord::Migration[6.1]
   def change
     add_column :pafs_core_projects, :asset_replacement_allowance, :boolean, default: false
     add_column :pafs_core_projects, :environment_statutory_funding, :boolean, default: false

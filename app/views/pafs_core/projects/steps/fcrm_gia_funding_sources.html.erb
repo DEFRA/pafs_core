@@ -10,9 +10,9 @@
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <p><%= t(".lede") %></p>
           <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
-          <%= form_group(f.object, :fcerm_gia_funding_sources, :fcerm_gia_funding_sources_step) do %>
-            <% error_message(f.object, :fcerm_gia_funding_sources_step, :base) %>
-            <% PafsCore::FcermGiaFundingSourcesStep::FUNDING_SOURCES.each do |fs| %>
+          <%= form_group(f.object, :fcrm_gia_funding_sources, :fcrm_gia_funding_sources_step) do %>
+            <% error_message(f.object, :fcrm_gia_funding_sources_step, :base) %>
+            <% PafsCore::FcrmGiaFundingSourcesStep::FUNDING_SOURCES.each do |fs| %>
               <%= f.govuk_check_box fs, fs, multiple: false, label: { text: @project.funding_source_label(fs) } %>
             <% end %>
           <% end %>

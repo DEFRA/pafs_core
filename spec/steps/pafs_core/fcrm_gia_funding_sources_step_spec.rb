@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::FcermGiaFundingSourcesStep, type: :model do
-  subject { build(:fcerm_gia_funding_sources_step) }
+RSpec.describe PafsCore::FcrmGiaFundingSourcesStep, type: :model do
+  subject { build(:fcrm_gia_funding_sources_step) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -16,10 +16,10 @@ RSpec.describe PafsCore::FcermGiaFundingSourcesStep, type: :model do
   end
 
   describe "#update" do
-    subject { create(:fcerm_gia_funding_sources_step) }
+    subject { create(:fcrm_gia_funding_sources_step) }
 
     let(:params) do
-      ActionController::Parameters.new({ fcerm_gia_funding_sources_step: { environment_statutory_funding: "1" } })
+      ActionController::Parameters.new({ fcrm_gia_funding_sources_step: { environment_statutory_funding: "1" } })
     end
 
     let(:error_params) do

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class FcermGiaFundingSourcesStep < BasicStep
-    FUNDING_SOURCES = PafsCore::FundingSources::FCERM_GIA_FUNDING_SOURCES
+  class FcrmGiaFundingSourcesStep < BasicStep
+    FUNDING_SOURCES = PafsCore::FundingSources::FCRM_GIA_FUNDING_SOURCES
 
     include PafsCore::FundingSources
     include PafsCore::FundingValues
@@ -13,7 +13,7 @@ module PafsCore
 
     validate :at_least_one_funding_source_is_selected
 
-    FCERM_GIA_FUNDING_SOURCES = [
+    FCRM_GIA_FUNDING_SOURCES = [
       ASSET_REPLACEMENT_ALLOWANCE = :asset_replacement_allowance,
       ENVIRONMENT_STATUTORY_FUNDING = :environment_statutory_funding,
       FREQUENTLY_FLOODED_COMMUNITIES = :frequently_flooded_communities,
@@ -43,9 +43,9 @@ module PafsCore
     end
 
     def step_params(params)
-      return if params[:fcerm_gia_funding_sources_step].blank?
+      return if params[:fcrm_gia_funding_sources_step].blank?
 
-      params.require(:fcerm_gia_funding_sources_step).permit(FUNDING_SOURCES)
+      params.require(:fcrm_gia_funding_sources_step).permit(FUNDING_SOURCES)
     end
 
     def at_least_one_funding_source_is_selected

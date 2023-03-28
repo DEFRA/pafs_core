@@ -14,7 +14,7 @@ module PafsCore
       NOT_IDENTIFIED =        :not_yet_identified
     ].freeze
 
-    FCERM_GIA_FUNDING_SOURCES = [
+    FCRM_GIA_FUNDING_SOURCES = [
       ASSET_REPLACEMENT_ALLOWANCE = :asset_replacement_allowance,
       ENVIRONMENT_STATUTORY_FUNDING = :environment_statutory_funding,
       FREQUENTLY_FLOODED_COMMUNITIES = :frequently_flooded_communities,
