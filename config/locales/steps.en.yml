@@ -85,6 +85,9 @@ en:
         funding_sources:
           heading: What are the expected funding sources?
           lede: Select all that apply.
+        fcerm_gia_funding_sources:
+          heading: What are the expected additional FCRM Grant in Aid funding sources?
+          lede: Select all that apply.
           # fcerm_gia_label: Flood and coastal erosion risk management grant in aid (FCERM GiA)
           # local_levy_label: Local levy
           # internal_drainage_boards_label: Internal drainage boards (IDB) precepts

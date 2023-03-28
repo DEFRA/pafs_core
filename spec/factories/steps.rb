@@ -62,6 +62,10 @@ FactoryBot.define do
       funding_sources_visited { true }
     end
 
+    factory :fcerm_gia_funding_sources_step, class: "PafsCore::FcermGiaFundingSourcesStep" do
+      asset_replacement_allowance { true }
+    end
+
     factory :earliest_start_step, class: "PafsCore::EarliestStartStep" do
       could_start_early { true }
     end
