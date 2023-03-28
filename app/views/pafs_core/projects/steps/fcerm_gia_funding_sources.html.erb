@@ -1,0 +1,25 @@
+<% content_for :title, t(".heading") %>
+
+<div class="step-container">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-two-thirds">
+      <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
+
+        <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
+
+        <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
+          <p><%= t(".lede") %></p>
+          <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
+          <%= form_group(f.object, :fcerm_gia_funding_sources, :fcerm_gia_funding_sources_step) do %>
+            <% error_message(f.object, :fcerm_gia_funding_sources_step, :base) %>
+            <% PafsCore::FcermGiaFundingSourcesStep::FUNDING_SOURCES.each do |fs| %>
+              <%= f.govuk_check_box fs, fs, multiple: false, label: { text: @project.funding_source_label(fs) } %>
+            <% end %>
+          <% end %>
+
+          <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

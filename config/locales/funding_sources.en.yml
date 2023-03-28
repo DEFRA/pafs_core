@@ -8,6 +8,13 @@ en:
     growth_funding: "Additional FCRM Grant-in-Aid"
     internal_drainage_boards: "Funds recovered from an internal drainage board by the Environment Agency, known as a precept"
     not_yet_identified: "Other funding sources not yet identified"
+    asset_replacement_allowance: "Asset replacement allowance"
+    environment_statutory_funding: "Environment statutory funding"
+    frequently_flooded_communities: "Frequently flooded communities"
+    other_additional_grant_in_aid: "Other additional grant in aid"
+    other_government_department: "Other Government department"
+    recovery: "Recovery"
+    summer_economic_fund: "Summer economic fund"
 
     short:
       fcerm_gia: "Grant in aid"

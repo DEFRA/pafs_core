@@ -85,6 +85,9 @@ en:
         funding_sources:
           heading: What are the expected funding sources?
           lede: Select all that apply.
+        fcerm_gia_funding_sources:
+          heading: What are the expected additional FCRM Grant in Aid funding sources?
+          lede: Select all that apply.
           # fcerm_gia_label: Flood and coastal erosion risk management grant in aid (FCERM GiA)
           # local_levy_label: Local levy
           # internal_drainage_boards_label: Internal drainage boards (IDB) precepts
@@ -103,6 +106,7 @@ en:
         other_ea_contributors:
           heading: What are the expected contributions from other Environment Agency sources?
           example_text: These are Environment Agency functions or funding streams. For example, Water Framework Directive or Water Resources.
+
 # funding values
         funding_values:
           heading: What is the estimated spend for each financial year?
