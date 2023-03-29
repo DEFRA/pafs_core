@@ -136,6 +136,8 @@ module PafsCore
 
         s.add :funding_sources
 
+        s.add :fcrm_gia_funding_sources, if: ->(p) { p.project.growth_funding? }
+
         s.add :public_contributors, if: ->(p) { p.project.public_contributions? }
         s.add :public_contributor_values, if: ->(p) { p.project.public_contributions? }
 

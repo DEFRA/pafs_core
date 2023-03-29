@@ -52,7 +52,7 @@ en:
       public_contributions_label: "Public sector contributions"
       private_contributions_label: "Private sector contributions"
       other_ea_contributions_label: "Other Environment Agency contributions"
-      growth_funding_label: "Additional Grant-in-Aid"
+      growth_funding_label: "Additional FCRM Grant-in-Aid"
       not_yet_identified_label: "Not yet identified"
       total_label: "Total (£)"
       flood_protection_outcomes_detail_heading: "Households affected by flooding benefitted by the project"
