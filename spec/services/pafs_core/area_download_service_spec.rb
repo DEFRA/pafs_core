@@ -53,10 +53,26 @@ RSpec.describe PafsCore::AreaDownloadService do
   describe "#generate_downloads" do
     before { allow(PafsCore::GenerateAreaProgrammeJob).to receive(:perform_later) }
 
-    it "submits a generation job" do
-      service.generate_downloads
+    shared_examples "submits without error" do
+      it "submits a generation job" do
+        service.generate_downloads
 
-      expect(PafsCore::GenerateAreaProgrammeJob).to have_received(:perform_later)
+        expect(PafsCore::GenerateAreaProgrammeJob).to have_received(:perform_later)
+      end
+    end
+
+    context "when in the initial state" do
+      it_behaves_like "submits without error"
+    end
+
+    context "when already in 'generating' state" do
+      before do
+        info = area.create_area_download
+        info.documentation_state.generate!
+        info.save!
+      end
+
+      it_behaves_like "submits without error"
     end
   end
 end
