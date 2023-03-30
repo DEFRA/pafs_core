@@ -29,7 +29,7 @@ module PafsCore
       where(arel_table[:financial_year].lteq(year.to_i)).order(:financial_year)
     end
 
-    FundingSources::FUNDING_SOURCES.each do |source|
+    FundingSources::ALL_FUNDING_SOURCES.each do |source|
       define_method("#{source}_total") do
         return public_send(source).to_i unless FundingSources::AGGREGATE_SOURCES.include?(source)
 

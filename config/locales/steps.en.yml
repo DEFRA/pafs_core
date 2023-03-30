@@ -115,6 +115,13 @@ en:
           fcerm_gia_label: Grant in Aid
           local_levy_label: Local levy
           internal_drainage_boards_label: Internal drainage board precepts
+          asset_replacement_allowance_label: Asset replacement allowance
+          environment_statutory_funding_label: Environment statutory funding
+          frequently_flooded_communities_label: Frequently flooded communities
+          other_additional_grant_in_aid_label: Other additional grant in aid
+          other_government_department_label: Other Government department
+          recovery_label: Recovery
+          summer_economic_fund_label: Summer economic fund
           public_contributions_label: Public sector contributions
           private_contributions_label: Private sector contributions
           other_ea_contributions_label: Other Environment Agency contributions

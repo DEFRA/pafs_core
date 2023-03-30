@@ -24,6 +24,8 @@ module PafsCore
       SUMMER_ECONOMIC_FUND = :summer_economic_fund
     ].freeze
 
+    ALL_FUNDING_SOURCES = (FUNDING_SOURCES + FCRM_GIA_FUNDING_SOURCES).freeze
+
     # These funding sources are stored as separeate records for each contributor
     # rather than a single total. They therefore need summing to get to the total.
     AGGREGATE_SOURCES = [
@@ -32,7 +34,7 @@ module PafsCore
       EA_CONTRIBUTIONS
     ].freeze
 
-    FUNDING_SOURCES.each do |fs|
+    ALL_FUNDING_SOURCES.each do |fs|
       delegate fs, "#{fs}=", "#{fs}?", to: :project
     end
 
@@ -45,7 +47,7 @@ module PafsCore
     end
 
     def selected_funding_sources
-      FUNDING_SOURCES.select { |s| project.public_send "#{s}?" }
+      ALL_FUNDING_SOURCES.select { |s| project.public_send "#{s}?" }
     end
 
     def unselected_funding_sources

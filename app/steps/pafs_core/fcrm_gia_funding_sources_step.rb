@@ -13,16 +13,6 @@ module PafsCore
 
     validate :at_least_one_funding_source_is_selected
 
-    FCRM_GIA_FUNDING_SOURCES = [
-      ASSET_REPLACEMENT_ALLOWANCE = :asset_replacement_allowance,
-      ENVIRONMENT_STATUTORY_FUNDING = :environment_statutory_funding,
-      FREQUENTLY_FLOODED_COMMUNITIES = :frequently_flooded_communities,
-      OTHER_ADDITIONAL_GRANT_IN_AID = :other_additional_grant_in_aid,
-      OTHER_GOVERNMENT_DEPARTMENT = :other_government_department,
-      RECOVERY = :recovery,
-      SUMMER_ECONOMIC_FUND = :summer_economic_fund
-    ].freeze
-
     FUNDING_SOURCES.each do |fs|
       delegate fs, "#{fs}=", "#{fs}?", to: :project
     end

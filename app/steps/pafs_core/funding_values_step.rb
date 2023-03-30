@@ -7,7 +7,7 @@ module PafsCore
     include PafsCore::FinancialYear
 
     # This sorts the sources with the aggregated sources at the end of the array
-    SORTED_SOURCES = (FUNDING_SOURCES - AGGREGATE_SOURCES) + AGGREGATE_SOURCES
+    SORTED_SOURCES = (FUNDING_SOURCES + FCRM_GIA_FUNDING_SOURCES - AGGREGATE_SOURCES) + AGGREGATE_SOURCES
 
     validate :at_least_one_value
 
@@ -59,7 +59,7 @@ module PafsCore
           id
           financial_year
           total
-        ].concat(FUNDING_SOURCES - AGGREGATE_SOURCES)
+        ].concat(FUNDING_SOURCES + FCRM_GIA_FUNDING_SOURCES - AGGREGATE_SOURCES)
       )
     end
   end
