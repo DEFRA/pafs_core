@@ -222,7 +222,49 @@
                   "type": "integer",
                   "example": -1
                 },
-                "fcerm_gia": {
+                "asset_replacement_allowance": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "example": 0
+                },
+                "environment_statutory_funding": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "example": 0
+                },
+                "frequently_flooded_communities": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "example": 0
+                },
+                "other_additional_grant_in_aid": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "example": 0
+                },
+                "other_government_department": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "example": 0
+                },
+                "recovery": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "example": 0
+                },
+                "summer_economic_fund": {
                   "type": [
                     "integer",
                     "null"
