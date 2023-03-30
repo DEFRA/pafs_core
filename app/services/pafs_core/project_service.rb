@@ -62,13 +62,22 @@ module PafsCore
     # rubocop:enable Style/FormatString
 
     def search(options = {})
-      areas = area_ids_for_user(user)
+      raise StandardError, "Search option not permitted: access_all_areas" if options[:access_all_areas] && !user.admin
 
       sort_col = options[:sort_col]
       sort_order = options[:sort_order]
 
       sort_col = "updated_at" if sort_col.nil?
       sort_order = "desc" if sort_order.nil?
+
+      query = options[:access_all_areas] ? search_query_for_all(options[:q]) : search_query_for_user(user, options)
+
+      query.order("#{sort_col}": sort_order)
+    end
+
+    def search_query_for_user(user, options)
+      areas = area_ids_for_user(user)
+
       query = PafsCore::Project
               .includes(:area_projects, :areas)
               .joins(:area_projects)
@@ -87,8 +96,25 @@ module PafsCore
 
       query = query.joins(:state).merge(PafsCore::State.where(state: options[:state])) unless options[:state].nil?
       query = query.joins(:state).and(PafsCore::State.where.not(state: "archived")) unless options[:state] == "archived"
+      query
+    end
 
-      query.order("#{sort_col}": sort_order)
+    def search_query_for_all(search_term)
+      return PafsCore::Project.all if search_term.blank?
+
+      areas = PafsCore::Area.where(["lower(pafs_core_areas.name) LIKE ?", "%#{search_term.downcase}%"])
+
+      PafsCore::Project
+        .joins(:area_projects)
+        .where(
+          [
+            "lower(pafs_core_projects.name) LIKE ? OR lower(reference_number) LIKE ?",
+            "%#{search_term.downcase}%",
+            "%#{search_term.downcase}%"
+          ]
+        ).or(PafsCore::Project
+          .joins(:area_projects)
+          .merge(PafsCore::AreaProject.where(area_id: areas)))
     end
 
     def all_projects_for(area)

@@ -3,43 +3,128 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::ProjectService do
-  subject { described_class.new(user) }
+  subject(:service) { described_class.new(service_user) }
 
   let(:pso_area_1) { create(:pso_area) }
   let(:rma_area_1) { create(:rma_area, parent_id: pso_area_1.id) }
   let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let(:admin_user) { create(:user, admin: true) }
+  let(:service_user) { user }
 
   before do
     user.user_areas.create(area_id: rma_area_1.id, primary: true)
+    other_user.user_areas.create(area_id: pso_area_1.id, primary: true)
+    # the following is to support testing that an admin user can search for projects within their area as well as across all areas
+    admin_user.user_areas.create(area_id: rma_area_1.id, primary: true)
   end
 
   describe "#search" do
-    it "returns all projects for a given user" do
-      # Create 2 projects against the user
-      subject.create_project.create_state(state: :draft)
-      subject.create_project.create_state(state: :draft)
+    let!(:user_draft_project) { described_class.new(user).create_project(state: create(:state, :draft)) }
+    let!(:user_submitted_project) { described_class.new(user).create_project(state: create(:state, :submitted)) }
+    let!(:user_archived_project) { described_class.new(user).create_project(state: create(:state, :archived)) }
+    let!(:other_user_project) { described_class.new(other_user).create_project(state: create(:state, :draft)) }
+    let!(:admin_user_project) { described_class.new(admin_user).create_project(state: create(:state, :draft)) }
+    let(:search_options) { {} }
+    let(:all_search_options) { { q: search_term }.merge(search_options) }
 
-      results = subject.search
-      expect(results.count).to eq(2)
+    RSpec.shared_examples "returns only the matching project" do
+      it "returns the matching project" do
+        expect(service.search(all_search_options)).to include(matching_project)
+      end
 
-      results.each do |result|
-        expect(result.creator_id).to eq(user.id)
+      it "does not return the non-matching project" do
+        expect(service.search(all_search_options)).not_to include(non_matching_project)
       end
     end
 
-    it "returns all projects for a given user and state" do
-      # Create 2 projects against the user and set their states (projects don't
-      # get a default state)
-      draft_project = subject.create_project
-      draft_project.create_state(state: "draft")
-      submitted_project = subject.create_project
-      submitted_project.create_state(state: "submitted")
+    RSpec.shared_examples "matches on project number" do
+      let(:matching_project) { user_draft_project }
+      let(:non_matching_project) { user_submitted_project }
 
-      # Search for submitted projects for the user
-      results = subject.search(state: "submitted")
+      context "with a match by project number" do
+        let(:search_term) { user_draft_project.reference_number }
 
-      expect(results.count).to eq(1)
-      expect(results.first.status).to eq(:submitted)
+        it_behaves_like "returns only the matching project"
+      end
+    end
+
+    RSpec.shared_examples "matches on project name" do
+      let(:matching_project) { user_draft_project }
+      let(:non_matching_project) { user_submitted_project }
+
+      context "with a match by project name" do
+        let(:search_term) { user_draft_project.name[2..6] }
+
+        before { user_draft_project.update(name: Faker::Lorem.sentence) }
+
+        it_behaves_like "returns only the matching project"
+      end
+    end
+
+    context "when the user does not have admin rights" do
+      let(:service_user) { user }
+
+      it "returns all projects for the current user's area" do
+        expect(service.search.count).to eq(3)
+      end
+
+      it "does not return projects for the other user's area" do
+        service.search.each do |result|
+          expect(result.creator.primary_area.id).to eq(user.primary_area.id)
+        end
+      end
+
+      it "returns all projects for a given user and state" do
+        results = service.search(state: "submitted")
+
+        expect(results.count).to eq(1)
+        expect(results.first.status).to eq(:submitted)
+      end
+
+      context "with a search term" do
+        let(:non_matching_project) { user_submitted_project }
+
+        it_behaves_like "matches on project number"
+        it_behaves_like "matches on project name"
+      end
+
+      context "with the archived option" do
+        it "returns the archived project" do
+          results = service.search(state: "archived")
+
+          expect(results.count).to eq(1)
+          expect(results.first.status).to eq(:archived)
+        end
+      end
+
+      context "with the access_all_areas option" do
+        it "returns an error" do
+          expect { service.search(access_all_areas: true) }.to raise_error StandardError
+        end
+      end
+    end
+
+    context "when the user has admin rights with the access_all_areas option" do
+      let(:service_user) { admin_user }
+      let(:search_options) { { access_all_areas: true } }
+
+      it "returns all projects" do
+        expect(service.search(search_options).count).to eq(PafsCore::Project.count)
+      end
+
+      context "with a search term" do
+        it_behaves_like "matches on project number"
+        it_behaves_like "matches on project name"
+
+        context "with a match by RMA" do
+          let(:search_term) { rma_area_1.name[3..9] }
+          let(:matching_project) { user_draft_project }
+          let(:non_matching_project) { other_user_project }
+
+          it_behaves_like "returns only the matching project"
+        end
+      end
     end
   end
 
