@@ -10,7 +10,7 @@ module PafsCore
       status_code =
         if @exception
           trace = Rails.backtrace_cleaner.clean(@exception.backtrace)
-          Rails.logger.fatal trace.join("#\n")
+          Rails.logger.fatal "Fatal error: #{trace.join('#\n')}"
 
           ActionDispatch::ExceptionWrapper.new(ENV, @exception).status_code
         else

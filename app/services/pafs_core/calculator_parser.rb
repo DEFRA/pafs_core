@@ -31,7 +31,7 @@ module PafsCore
         calculator = Roo::Excelx.new(file.path)
         new(calculator, project).extract_data
       rescue StandardError => e
-        Rails.logger.error(e)
+        Rails.logger.error "Error parsing calculator: #{e}"
         Airbrake.notify(e) if defined? Airbrake
       end
     end
