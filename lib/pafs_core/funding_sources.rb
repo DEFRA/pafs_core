@@ -24,6 +24,10 @@ module PafsCore
       SUMMER_ECONOMIC_FUND = :summer_economic_fund
     ].freeze
 
+    REMOVED_FROM_FUNDING_VALUES = [
+      GROWTH_FUNDING
+    ]
+
     ALL_FUNDING_SOURCES = (FUNDING_SOURCES + FCRM_GIA_FUNDING_SOURCES).freeze
 
     # These funding sources are stored as separeate records for each contributor
@@ -47,7 +51,9 @@ module PafsCore
     end
 
     def selected_funding_sources
-      ALL_FUNDING_SOURCES.select { |s| project.public_send "#{s}?" }
+      ALL_FUNDING_SOURCES.select do |s|
+        project.public_send "#{s}?"
+      end
     end
 
     def unselected_funding_sources
