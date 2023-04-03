@@ -23,7 +23,7 @@ module PafsCore
     end
 
     def sorted_sources_with_values
-      SORTED_SOURCES & selected_funding_sources - REMOVED_FROM_FUNDING_VALUES
+      SORTED_SOURCES & (selected_funding_sources - REMOVED_FROM_FUNDING_VALUES)
     end
 
     private

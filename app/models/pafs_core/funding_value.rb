@@ -41,7 +41,9 @@ module PafsCore
     private
 
     def selected_funding_sources
-      (FundingSources::FUNDING_SOURCES - FundingSources::REMOVED_FROM_FUNDING_VALUES).select { |s| project.public_send "#{s}?" }
+      (FundingSources::FUNDING_SOURCES - FundingSources::REMOVED_FROM_FUNDING_VALUES).select do |s|
+        project.public_send "#{s}?"
+      end
     end
 
     def update_total

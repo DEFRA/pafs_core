@@ -13,7 +13,8 @@ module PafsCore
         end
 
         def down
-          funding_values = PafsCore::FundingValue.where.not(other_additional_grant_in_aid: nil, other_additional_grant_in_aid: 0)
+          funding_values = PafsCore::FundingValue.where.not(other_additional_grant_in_aid: nil,
+                                                            other_additional_grant_in_aid: 0)
           funding_values.each do |fv|
             fv.update(growth_funding: fv.other_additional_grant_in_aid, other_additional_grant_in_aid: nil)
           end

@@ -26,7 +26,7 @@ module PafsCore
 
     REMOVED_FROM_FUNDING_VALUES = [
       GROWTH_FUNDING
-    ]
+    ].freeze
 
     ALL_FUNDING_SOURCES = (FUNDING_SOURCES + FCRM_GIA_FUNDING_SOURCES).freeze
 
