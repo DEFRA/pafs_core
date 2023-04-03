@@ -5,39 +5,36 @@ require "rails_helper"
 RSpec.describe PafsCore::ChangeProjectAreaService do
   describe "#run" do
 
-    subject(:service) { described_class.new(project_number) }
+    subject(:service) { described_class.new(project_a) }
 
     let!(:rma_a) { create(:rma_area, name: "Allerdale Borough Council") }
     let(:rma_b) { create(:rma_area, name: "Barrow-in-Furness Borough Council") }
-    let!(:project_a) { create(:project, reference_number: project_number) }
-    let!(:area_project_a) { create(:area_project, area: rma_a, project: project_a) }
-    let(:project_number) { "NWC501E/000A/042A" }
+    let!(:project_a) { create(:project) }
+    let!(:area_project_a) { create(:area_project, area: rma_a, project: project_a, owner: true) }
 
-    context "with an invalid project number" do
-      let(:project_number) { "NWC501E/000Z/053X" }
-
-      it "raises an error" do
-        expect(service.run("foo")).to raise_error(StandardError)
-      rescue StandardError # rubocop:disable Lint/SuppressedException
-      end
-    end
+    before { allow(Airbrake).to receive(:notify) }
 
     context "when the RMA already matches the target" do
       it "does not modify the project" do
-        expect { service.run(rma_a.name) }.not_to change { project_a.areas.first }
+        expect { service.run(rma_a) }.not_to change(project_a, :owner)
       end
     end
 
-    context "when the specified target RMA does not exist" do
+    context "with an invalid RMA" do
       it "raises an error" do
-        expect(service.run("foo")).to raise_error(StandardError)
-      rescue StandardError # rubocop:disable Lint/SuppressedException
+        service.run(nil)
+
+        expect(Airbrake).to have_received(:notify)
       end
     end
 
-    context "with a valid project number and RMA" do
+    context "with a valid new RMA" do
       it "sets the RMA" do
-        expect { service.run(rma_b.name) }.to change { project_a.areas.first }.to(rma_b)
+        expect { service.run(rma_b) }.to change(project_a, :owner).to(rma_b)
+      end
+
+      it "updates the project's rma_name" do
+        expect { service.run(rma_b) }.to change(project_a, :rma_name).to(rma_b.name)
       end
     end
   end
