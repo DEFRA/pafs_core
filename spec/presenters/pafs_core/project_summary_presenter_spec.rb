@@ -648,7 +648,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
     it "returns an array of hashes, one for each selected funding source" do
       expect(subject.funding).to eq []
       count = 0
-      PafsCore::FundingSources::FUNDING_SOURCES.each do |fs|
+      (PafsCore::FundingSources::FUNDING_SOURCES - PafsCore::FundingSources::REMOVED_FROM_FUNDING_VALUES).each do |fs|
         subject.send("#{fs}=", true)
         count += 1
         entry = { name: subject.funding_source_label(fs), value: subject.total_for(fs) }
