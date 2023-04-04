@@ -59,11 +59,11 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
 
     context "when funding value amounts exist for non-selected sources" do
       it "removes those amounts" do
-        @fv2.update(local_levy: 2_000_000, growth_funding: 1_500)
+        @fv2.update(local_levy: 2_000_000, internal_drainage_boards: 1_500)
         # adds new record and removes outside_values record
         expect(subject.update(params)).to be true
         expect(@fv2.local_levy).to be_nil
-        expect(@fv2.growth_funding).to be_nil
+        expect(@fv2.internal_drainage_boards).to be_nil
       end
     end
   end

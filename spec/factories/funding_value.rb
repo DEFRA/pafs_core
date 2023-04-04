@@ -6,7 +6,6 @@ FactoryBot.define do
     financial_year { 2020 }
     fcerm_gia { 120_000 }
     local_levy { 101_010 }
-    growth_funding { 505_050 }
     internal_drainage_boards { 606_060 }
     not_yet_identified { 707_070 }
 
@@ -20,7 +19,6 @@ FactoryBot.define do
     trait :blank do
       fcerm_gia { nil }
       local_levy { nil }
-      growth_funding { nil }
       internal_drainage_boards { nil }
       not_yet_identified { nil }
     end
