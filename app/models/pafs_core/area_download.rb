@@ -11,7 +11,8 @@ module PafsCore
     def documentation_state
       Bstard.define do |fsm|
         fsm.initial current_status
-        fsm.event :generate, :empty => :generating, :ready => :generating, :failed => :generating
+        fsm.event :generate, :empty => :generating, :ready => :generating,
+                             :failed => :generating, :generating => :generating
         fsm.event :complete, :generating => :ready
         fsm.event :error, :generating => :failed
         fsm.when :any do |_event, _prev_state, new_state|

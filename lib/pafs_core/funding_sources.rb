@@ -51,9 +51,13 @@ module PafsCore
     end
 
     def selected_funding_sources
-      ALL_FUNDING_SOURCES.select do |s|
+      all_allowed_funding_sources.select do |s|
         project.public_send "#{s}?"
       end
+    end
+
+    def all_allowed_funding_sources
+      project.growth_funding? ? ALL_FUNDING_SOURCES : FUNDING_SOURCES
     end
 
     def unselected_funding_sources

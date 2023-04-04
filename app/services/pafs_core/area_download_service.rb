@@ -37,9 +37,12 @@ module PafsCore
       end
     end
 
+    # This previously returned false if the current status was "generating", in order to prevent duplicate
+    # generation jobs, but that caused issues with the status stuck at "generating" after an error.
+    # Currently allowing job submission in all cases.
+    # Leaving the method in place to allow for future restrictions such as a minimum time interval between requests.
     def can_generate_documentation?
-      ds = download_info.documentation_state
-      ds.empty? || ds.ready? || ds.failed?
+      true
     end
 
     # NOTE: Call me from a Job as I take a long time to complete

@@ -24,6 +24,13 @@ module PafsCore
           {
             financial_year: values.financial_year,
             fcerm_gia: values.fcerm_gia,
+            asset_replacement_allowance: values.asset_replacement_allowance,
+            environment_statutory_funding: values.environment_statutory_funding,
+            frequently_flooded_communities: values.frequently_flooded_communities,
+            other_additional_grant_in_aid: values.other_additional_grant_in_aid,
+            other_government_department: values.other_government_department,
+            recovery: values.recovery,
+            summer_economic_fund: values.summer_economic_fund,
             local_levy: values.local_levy,
             internal_drainage_boards: values.internal_drainage_boards,
             public_contributions: serialize_contributors(values.public_contributions),
