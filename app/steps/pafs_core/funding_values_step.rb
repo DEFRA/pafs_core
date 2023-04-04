@@ -22,14 +22,14 @@ module PafsCore
       setup_funding_values
     end
 
-    def sorted_sources
-      SORTED_SOURCES & selected_funding_sources
+    def sorted_sources_with_values
+      SORTED_SOURCES & (selected_funding_sources - REMOVED_FROM_FUNDING_VALUES)
     end
 
     private
 
     def funding_values_to_check
-      selected_funding_sources - AGGREGATE_SOURCES
+      selected_funding_sources - AGGREGATE_SOURCES - REMOVED_FROM_FUNDING_VALUES
     end
 
     # rubocop:disable Style/MultilineBlockChain

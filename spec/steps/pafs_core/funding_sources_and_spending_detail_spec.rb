@@ -26,7 +26,6 @@ describe PafsCore::Project, type: :model do
       financial_year: 2018,
       fcerm_gia: 1000,
       local_levy: 1000,
-      growth_funding: 1000,
       internal_drainage_boards: 1000,
       not_yet_identified: 1000
     )
@@ -38,7 +37,6 @@ describe PafsCore::Project, type: :model do
       project: subject,
       fcerm_gia: 2000,
       local_levy: 2000,
-      growth_funding: 2000,
       internal_drainage_boards: 2000,
       not_yet_identified: 2000
     )
@@ -51,7 +49,6 @@ describe PafsCore::Project, type: :model do
       expect(subject.total_for_funding_source(:public_contributions)).to eq 2000
       expect(subject.total_for_funding_source(:private_contributions)).to eq 2000
       expect(subject.total_for_funding_source(:other_ea_contributions)).to eq 2000
-      expect(subject.total_for_funding_source(:growth_funding)).to eq 3000
       expect(subject.total_for_funding_source(:internal_drainage_boards)).to eq 3000
       expect(subject.total_for_funding_source(:not_yet_identified)).to eq 3000
     end

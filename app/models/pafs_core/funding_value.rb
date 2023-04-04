@@ -15,7 +15,6 @@ module PafsCore
     validates :fcerm_gia,
               :local_levy,
               :internal_drainage_boards,
-              :growth_funding,
               :not_yet_identified,
               numericality: true, allow_blank: true
 
@@ -30,6 +29,8 @@ module PafsCore
     end
 
     FundingSources::ALL_FUNDING_SOURCES.each do |source|
+      next if FundingSources::REMOVED_FROM_FUNDING_VALUES.include?(source)
+
       define_method("#{source}_total") do
         return public_send(source).to_i unless FundingSources::AGGREGATE_SOURCES.include?(source)
 
@@ -40,7 +41,9 @@ module PafsCore
     private
 
     def selected_funding_sources
-      FundingSources::FUNDING_SOURCES.select { |s| project.public_send "#{s}?" }
+      (FundingSources::FUNDING_SOURCES - FundingSources::REMOVED_FROM_FUNDING_VALUES).select do |s|
+        project.public_send "#{s}?"
+      end
     end
 
     def update_total

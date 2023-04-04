@@ -199,7 +199,7 @@ module PafsCore
     end
 
     def funding
-      selected_funding_sources.map do |fs|
+      (selected_funding_sources - REMOVED_FROM_FUNDING_VALUES).map do |fs|
         {
           name: funding_source_label(fs),
           value: total_for(fs)

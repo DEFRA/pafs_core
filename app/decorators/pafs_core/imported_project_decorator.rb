@@ -159,10 +159,6 @@ module PafsCore
       populate_funding_values_for(:fcerm_gia, values)
     end
 
-    def growth_funding=(values)
-      populate_funding_values_for(:growth_funding, values)
-    end
-
     def local_levy=(values)
       populate_funding_values_for(:local_levy, values)
     end

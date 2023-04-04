@@ -9,8 +9,7 @@ RSpec.describe PafsCore::FundingValue do
       internal_drainage_boards: true,
       fcerm_gia: true,
       local_levy: true,
-      not_yet_identified: true,
-      growth_funding: true
+      not_yet_identified: true
     )
   end
 
@@ -20,7 +19,6 @@ RSpec.describe PafsCore::FundingValue do
     it { is_expected.to validate_numericality_of(:fcerm_gia).allow_nil }
     it { is_expected.to validate_numericality_of(:local_levy).allow_nil }
     it { is_expected.to validate_numericality_of(:internal_drainage_boards).allow_nil }
-    it { is_expected.to validate_numericality_of(:growth_funding).allow_nil }
     it { is_expected.to validate_numericality_of(:not_yet_identified).allow_nil }
   end
 
@@ -60,13 +58,12 @@ RSpec.describe PafsCore::FundingValue do
         fcerm_gia: 2_500_000,
         local_levy: 1_000_000,
         internal_drainage_boards: 100,
-        growth_funding: 1_000,
         not_yet_identified: 2_500
       )
     end
 
     it "calculates the total" do
-      expect { subject.save }.to change(subject, :total).to(3_503_600)
+      expect { subject.save }.to change(subject, :total).to(3_502_600)
     end
   end
 end

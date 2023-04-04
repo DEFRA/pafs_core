@@ -27,7 +27,6 @@ RSpec.describe PafsCore::Mapper::FundingSources do
             public_contributions: nil,
             private_contributions: nil,
             other_ea_contributions: nil,
-            growth_funding: values.growth_funding,
             not_yet_identified: values.not_yet_identified
           }
         end

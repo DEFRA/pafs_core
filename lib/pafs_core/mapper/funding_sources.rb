@@ -36,7 +36,6 @@ module PafsCore
             public_contributions: serialize_contributors(values.public_contributions),
             private_contributions: serialize_contributors(values.private_contributions),
             other_ea_contributions: serialize_contributors(values.other_ea_contributions),
-            growth_funding: values.growth_funding,
             not_yet_identified: values.not_yet_identified
           }
         end

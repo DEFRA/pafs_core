@@ -75,9 +75,6 @@ module PafsCore
       # GiA columns BY - CL
       { column: "BY", field_name: :fcerm_gia, date_range: true },
 
-      # Growth columns CM - CZ
-      { column: "CM", field_name: :growth_funding, date_range: true },
-
       # Local levy columns DA - DN
       { column: "DA", field_name: :local_levy, date_range: true },
 
