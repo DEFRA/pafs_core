@@ -22,11 +22,14 @@ RSpec.describe PafsCore::ProjectService do
   describe "#search" do
     let!(:user_draft_project) { described_class.new(user).create_project(state: create(:state, :draft)) }
     let!(:user_submitted_project) { described_class.new(user).create_project(state: create(:state, :submitted)) }
-    let!(:user_archived_project) { described_class.new(user).create_project(state: create(:state, :archived)) }
     let!(:other_user_project) { described_class.new(other_user).create_project(state: create(:state, :draft)) }
-    let!(:admin_user_project) { described_class.new(admin_user).create_project(state: create(:state, :draft)) }
     let(:search_options) { {} }
     let(:all_search_options) { { q: search_term }.merge(search_options) }
+
+    before do
+      described_class.new(user).create_project(state: create(:state, :archived))
+      described_class.new(admin_user).create_project(state: create(:state, :draft))
+    end
 
     RSpec.shared_examples "returns only the matching project" do
       it "returns the matching project" do

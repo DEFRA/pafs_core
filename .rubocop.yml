@@ -13,9 +13,3 @@ require:
 # about an unnecessary disable directive, so disabling it here instead.
 Style/RedundantInitialize:
   Enabled: false
-
-RSpec/LetSetup:
-  Exclude:
-    # let! it be for entities which need to exist in the database without being referenced in the spec
-    - "spec/services/pafs_core/project_service_spec.rb"
-    - "spec/services/pafs_core/change_project_area_service_spec.rb"
