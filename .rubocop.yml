@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 inherit_gem:
   defra_ruby_style:
     - default.yml
@@ -10,74 +12,4 @@ require:
 # but adding a disable directive there causes rubocop to complain
 # about an unnecessary disable directive, so disabling it here instead.
 Style/RedundantInitialize:
-  Enabled: false
-
-# TODO Resolve these legacy Rubocop offenses
-Capybara/SpecificMatcher:
-  Enabled: false
-Lint/EmptyBlock:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/MethodLength:
-  Enabled: false
-Metrics/ModuleLength:
-  Enabled: false
-Metrics/PerceivedComplexity:
-  Enabled: false
-Rails/HasManyOrHasOneDependent:
-  Enabled: false
-Rails/I18nLocaleTexts:
-  Enabled: false
-Rails/InverseOf:
-  Enabled: false
-Rails/Output:
-  Enabled: false
-Rails/OutputSafety:
-  Enabled: false
-Rails/SkipsModelValidations:
-  Enabled: false
-RSpec/AnyInstance:
-  Enabled: false
-RSpec/BeforeAfterAll:
-  Enabled: false
-RSpec/LetSetup:
-  Enabled: false
-RSpec/FilePath:
-  Enabled: false
-RSpec/NoExpectationExample:
-  Enabled: false
-RSpec/PendingWithoutReason:
-  Enabled: false
-RSpec/SubjectStub:
-  Enabled: false
-RSpec/VerifiedDoubles:
-  Enabled: false
-Style/OpenStructUse:
-  Enabled: false
-
-# Resolving the following legacy offenses would require disproportionate effort:
-Naming/VariableNumber:
-  Enabled: false
-Rails/ActiveRecordAliases:
-  Enabled: false
-RSpec/ExampleLength:
-  Enabled: false
-RSpec/InstanceVariable:
-  Enabled: false
-RSpec/MessageSpies:
-  Enabled: false
-RSpec/MultipleExpectations:
-  Enabled: false
-RSpec/MultipleMemoizedHelpers:
-  Enabled: false
-RSpec/NamedSubject:
-  Enabled: false
-RSpec/NestedGroups:
-  Enabled: false
-RSpec/StubbedMock:
   Enabled: false

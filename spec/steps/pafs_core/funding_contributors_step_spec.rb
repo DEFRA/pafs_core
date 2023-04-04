@@ -19,7 +19,7 @@ describe PafsCore::FundingContributorsStep, type: :model do
   let(:params) { { name: contributor_names } }
 
   context "when no contributors have been set (new project)" do
-    let!(:project) { create(:project, project_end_financial_year: 2020) }
+    let(:project) { create(:project, project_end_financial_year: 2020) }
     let(:contributor_names) { {} }
 
     it_behaves_like "a project step"

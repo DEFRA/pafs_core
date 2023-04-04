@@ -63,7 +63,7 @@ RSpec.describe PafsCore::Project do
   end
 
   describe "#project_protects_households?" do
-    it "is expecxted to return false if the project does not protect households" do
+    it "is expected to return false if the project does not protect households" do
       subject.project_type = "ENV_WITHOUT_HOUSEHOLDS"
 
       expect(subject.project_protects_households?).to be false
