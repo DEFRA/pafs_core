@@ -63,7 +63,7 @@ RSpec.describe PafsCore::FundingValue do
     end
 
     it "calculates the total" do
-      expect { subject.save }.to change(subject, :total).to(3_503_600)
+      expect { subject.save }.to change(subject, :total).to(3_502_600)
     end
   end
 end

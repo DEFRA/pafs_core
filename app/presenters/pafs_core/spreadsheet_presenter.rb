@@ -157,10 +157,6 @@ module PafsCore
       funding_for(year).sum(:fcerm_gia)
     end
 
-    def growth_funding(year)
-      funding_for(year).sum(:growth_funding)
-    end
-
     def local_levy(year)
       funding_for(year).sum(:local_levy)
     end
