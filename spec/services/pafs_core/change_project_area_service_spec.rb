@@ -5,20 +5,22 @@ require "rails_helper"
 RSpec.describe PafsCore::ChangeProjectAreaService do
   describe "#run" do
 
-    subject(:service) { described_class.new(project_a) }
+    subject(:service) { described_class.new(project) }
 
-    let(:rma_a) { create(:rma_area, name: "Allerdale Borough Council") }
-    let(:rma_b) { create(:rma_area, name: "Barrow-in-Furness Borough Council") }
-    let(:project_a) { create(:project) }
-
+    let(:user) { create(:user, :rma, admin: false) }
+    let(:rma_area_a) { create(:rma_area, name: "Allerdale Borough Council") }
+    let(:rma_area_b) { create(:rma_area, name: "Barrow-in-Furness Borough Council") }
+    let(:project) { create(:project, creator: user, state: create(:state, state: :draft)) }
+  
     before do
-      create(:area_project, area: rma_a, project: project_a, owner: true)
+      user.user_areas.create(area_id: rma_area_a.id, primary: true)
+      project.area_projects.create(area_id: rma_area_a.id, owner: true)
       allow(Airbrake).to receive(:notify)
     end
 
     context "when the RMA already matches the target" do
       it "does not modify the project" do
-        expect { service.run(rma_a) }.not_to change(project_a, :owner)
+        expect { service.run(rma_area_a) }.not_to change(project, :owner)
       end
     end
 
@@ -32,11 +34,17 @@ RSpec.describe PafsCore::ChangeProjectAreaService do
 
     context "with a valid new RMA" do
       it "sets the RMA" do
-        expect { service.run(rma_b) }.to change(project_a, :owner).to(rma_b)
+        expect { service.run(rma_area_b) }.to change(project, :owner).to(rma_area_b)
       end
 
       it "updates the project's rma_name" do
-        expect { service.run(rma_b) }.to change(project_a, :rma_name).to(rma_b.name)
+        expect { service.run(rma_area_b) }.to change(project, :rma_name).to(rma_area_b.name)
+      end
+
+      it "removes the project from the user's list of visible projects" do
+        service.run(rma_area_b)
+
+        expect(PafsCore::ProjectService.new.projects_for_user(user)).not_to include(project)
       end
     end
   end
