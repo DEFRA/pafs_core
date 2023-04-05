@@ -11,7 +11,7 @@ RSpec.describe PafsCore::ChangeProjectAreaService do
     let(:rma_area_a) { create(:rma_area, name: "Allerdale Borough Council") }
     let(:rma_area_b) { create(:rma_area, name: "Barrow-in-Furness Borough Council") }
     let(:project) { create(:project, creator: user, state: create(:state, state: :draft)) }
-  
+
     before do
       user.user_areas.create(area_id: rma_area_a.id, primary: true)
       project.area_projects.create(area_id: rma_area_a.id, owner: true)
