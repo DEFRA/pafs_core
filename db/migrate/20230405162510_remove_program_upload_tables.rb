@@ -1,7 +1,7 @@
 class RemoveProgramUploadTables < ActiveRecord::Migration[6.1]
   def change
-    remove_table :pafs_core_program_uploads
-    remove_table :pafs_core_program_upload_items
-    remove_table :pafs_core_program_upload_failures
+    drop_table :pafs_core_program_uploads
+    drop_table :pafs_core_program_upload_items
+    drop_table :pafs_core_program_upload_failures
   end
 end
