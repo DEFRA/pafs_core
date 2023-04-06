@@ -61,7 +61,7 @@ module PafsCore
     end
 
     def unselected_funding_sources
-      FUNDING_SOURCES - selected_funding_sources - REMOVED_FROM_FUNDING_VALUES
+      ALL_FUNDING_SOURCES - selected_funding_sources - REMOVED_FROM_FUNDING_VALUES
     end
 
     def total_for(source)
