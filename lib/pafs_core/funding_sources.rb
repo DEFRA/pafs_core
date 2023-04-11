@@ -51,7 +51,7 @@ module PafsCore
     end
 
     def selected_funding_sources
-      all_allowed_funding_sources.select do |s|
+      (all_allowed_funding_sources - REMOVED_FROM_FUNDING_VALUES).select do |s|
         project.public_send "#{s}?"
       end
     end
@@ -61,7 +61,7 @@ module PafsCore
     end
 
     def unselected_funding_sources
-      FUNDING_SOURCES - selected_funding_sources - REMOVED_FROM_FUNDING_VALUES
+      ALL_FUNDING_SOURCES - selected_funding_sources - REMOVED_FROM_FUNDING_VALUES
     end
 
     def total_for(source)
