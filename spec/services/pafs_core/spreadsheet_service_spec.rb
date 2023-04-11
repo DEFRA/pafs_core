@@ -10,7 +10,6 @@ RSpec.describe PafsCore::SpreadsheetService do
   subject { described_class.new }
 
   describe "#generate_multi_xlsx" do
-    let(:program_upload) { PafsCore::ProgramUploadService.new }
     let(:first_row) { expected.worksheets[0][6] }
     let(:second_row) { expected.worksheets[0][7] }
     let(:third_row) { expected.worksheets[0][8] }
@@ -18,29 +17,16 @@ RSpec.describe PafsCore::SpreadsheetService do
     let(:fifth_row) { expected.worksheets[0][10] }
     let(:filename) { "expected_program_spreadsheet.xlsx" }
     let(:content_type) { "text/plain" }
+    let(:test_project_1) { create(:project, :with_funding_values, name: "Test Project 1") }
 
     let(:file_path) { Rails.root.join("..", "fixtures", filename) }
     let(:file) { File.open(file_path) }
     let(:projects) { PafsCore::Project.all.order(:name) }
     let(:expected) { subject.generate_multi_xlsx(projects) }
 
-    let(:test_project_1) { PafsCore::Project.find_by(name: "Test Project 1") }
     let(:spreadsheet_presenter_1) { PafsCore::SpreadsheetPresenter.new(test_project_1) }
 
     let(:user) { create(:user, :rma) }
-
-    let(:uploaded_file) do
-      ActionDispatch::Http::UploadedFile.new(tempfile: File.open(file_path),
-                                             filename: filename.dup,
-                                             type: content_type)
-    end
-
-    let(:program_uploads_params) do
-      {
-        program_upload_file: uploaded_file,
-        reset_consented_flag: false
-      }
-    end
 
     let(:pso_area) { PafsCore::Area.find_by(name: "PSO Test Area") }
     let(:rma_area) { PafsCore::Area.find_by(name: "RMA Test Area") }
@@ -48,11 +34,6 @@ RSpec.describe PafsCore::SpreadsheetService do
     before do
       file_path = Rails.root.join("../fixtures/test_areas.csv")
       PafsCore::AreaImporter.new.full_import(file_path)
-
-      VCR.use_cassette("process_spreadsheet_with_postcodes") do
-        record = program_upload.upload(program_uploads_params)
-        program_upload.process_spreadsheet(record)
-      end
 
       pso_area.area_projects.create(project: test_project_1, owner: true)
 
