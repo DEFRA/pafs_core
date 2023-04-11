@@ -2,7 +2,7 @@
 
 <div class="step-container">
   <div class="govuk-grid-row govuk-body">
-    <div class="govuk-grid-column-three-quarters">
+    <div>
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
 
           <%= render partial: "pafs_core/error_summary", locals: { f: f } %>
