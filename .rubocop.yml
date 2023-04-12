@@ -10,6 +10,8 @@ require:
 
 AllCops:
   Exclude:
+    # Avoid pulling in gems for GitHub setup-ruby@v1 action:
+    - vendor/bundle/**/*
     # This is auto-generated:
     - spec/dummy/db/schema.rb
     # Externally sourced files:
