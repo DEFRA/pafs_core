@@ -48,7 +48,7 @@ module PafsCore
         row_number += 1
       rescue StandardError => e
         Rails.logger.error "Download failed for project #{current_project.reference_number}: #{e.inspect}"
-        Airbrake.notify(e) if defined? Airbrake
+        Airbrake.notify(e)
         # re-raise the error so the UI reports the issue to the user
         raise e
       end

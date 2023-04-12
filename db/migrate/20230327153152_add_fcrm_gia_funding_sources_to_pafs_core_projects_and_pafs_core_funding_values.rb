@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFcrmGiaFundingSourcesToPafsCoreProjectsAndPafsCoreFundingValues < ActiveRecord::Migration[6.1]
   def change
     add_column :pafs_core_projects, :asset_replacement_allowance, :boolean, default: false

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddConfidenceToProjects < ActiveRecord::Migration[4.2]
   def change
     add_column :pafs_core_projects, :confidence_homes_better_protected, :string, length: 20

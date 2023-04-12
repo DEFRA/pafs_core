@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePafsCoreFundingContributors < ActiveRecord::Migration[4.2]
   def change
     create_table :pafs_core_funding_contributors do |t|
@@ -13,6 +15,7 @@ class CreatePafsCoreFundingContributors < ActiveRecord::Migration[4.2]
 
     add_index :pafs_core_funding_contributors, :funding_value_id
     add_index :pafs_core_funding_contributors, :contributor_type
-    add_index :pafs_core_funding_contributors, [:funding_value_id, :contributor_type], name: :funding_contributors_on_funding_value_id_and_type
+    add_index :pafs_core_funding_contributors, %i[funding_value_id contributor_type],
+              name: :funding_contributors_on_funding_value_id_and_type
   end
 end

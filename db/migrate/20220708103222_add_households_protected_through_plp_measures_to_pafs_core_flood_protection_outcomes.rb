@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddHouseholdsProtectedThroughPlpMeasuresToPafsCoreFloodProtectionOutcomes < ActiveRecord::Migration[6.0]
   def change
     add_column :pafs_core_flood_protection_outcomes, :households_protected_through_plp_measures, :integer

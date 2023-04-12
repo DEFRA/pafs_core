@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency "bstard"
   s.add_dependency "clamav-client"
   s.add_dependency "faraday"
+  s.add_dependency "faraday-retry"
   s.add_dependency "kaminari"
   s.add_dependency "net-smtp"
   s.add_dependency "nokogiri"
