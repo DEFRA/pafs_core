@@ -125,7 +125,7 @@ module PafsCore
         upload_record.processing_state.complete!
       rescue StandardError => e
         upload_record.processing_state.error!
-        Airbrake.notify(e) if defined? Airbrake
+        Airbrake.notify(e)
         raise
       end
     end

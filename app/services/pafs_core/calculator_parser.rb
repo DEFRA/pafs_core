@@ -32,7 +32,7 @@ module PafsCore
         new(calculator, project).extract_data
       rescue StandardError => e
         Rails.logger.error "Error parsing calculator: #{e}"
-        Airbrake.notify(e) if defined? Airbrake
+        Airbrake.notify(e)
       end
     end
 

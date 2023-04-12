@@ -52,9 +52,9 @@ module PafsCore
       # send notification email to requestor
       PafsCore::AptNotificationMailer.area_programme_generation_complete(download_info).deliver_now
     rescue StandardError => e
+      Airbrake.notify(e)
       # send failure notification email
-      PafsCore::AptNotificationMailer.area_programme_generation_failed(download_info).deliver_now
-      Airbrake.notify(e) if defined? Airbrake
+      PafsCore::AptNotificationMailer.area_programme_generation_failed(download_info, e).deliver_now
       raise e
     end
 

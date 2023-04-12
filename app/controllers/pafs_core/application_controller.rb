@@ -20,7 +20,7 @@ module PafsCore
     end
 
     def handle_invalid_authenticity_token(exception)
-      Airbrake.notify(exception) if defined? Airbrake
+      Airbrake.notify(exception)
       Rails.logger.error "ApplicationController authenticity failed " \
                          "(browser cookies may have been disabled): #{exception}"
 
