@@ -26,9 +26,9 @@ RSpec.describe PafsCore::FloodProtectionOutcomesSummaryStep, type: :model do
 
     it "returns the correct totals for the three columns" do
       expect(subject.total_households_flood_protected_by_category(:households_at_reduced_risk)).to eq 400
-      expect(subject \
+      expect(subject
 .total_households_flood_protected_by_category(:moved_from_very_significant_and_significant_to_moderate_or_low)).to eq 200
-      expect(subject \
+      expect(subject
 .total_households_flood_protected_by_category(:households_protected_from_loss_in_20_percent_most_deprived)).to eq 100
     end
   end

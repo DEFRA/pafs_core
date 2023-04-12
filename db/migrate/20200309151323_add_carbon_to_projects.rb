@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCarbonToProjects < ActiveRecord::Migration[4.2]
   def change
     add_column :pafs_core_projects, :carbon_cost_build, :integer, limit: 8

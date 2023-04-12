@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveProgramUploadTables < ActiveRecord::Migration[6.1]
   def change
     drop_table :pafs_core_program_uploads

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddNaturalFloodMeasuresToProjects < ActiveRecord::Migration[6.0]
   def change
     add_column :pafs_core_projects, :natural_flood_risk_measures_included, :boolean
