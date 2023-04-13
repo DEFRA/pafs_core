@@ -5,6 +5,9 @@ module PafsCore
     include PafsCore::Urgency
 
     def body
+      # In the event of bad data, log an error but continue presenting
+      Airbrake.notify("Missing project owner for project #{project.reference_number}") if project.owner.blank?
+
       f = PafsCore::Engine.root.join("app", "views", "pafs_core", "projects", "downloads", "moderation.txt.erb")
       s = ERB.new(File.read(f)).result(binding)
       # make it friendly for the Winders users

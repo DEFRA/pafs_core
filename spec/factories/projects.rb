@@ -7,6 +7,8 @@ FactoryBot.define do
     reference_number { PafsCore::ProjectService.generate_reference_number("TH") }
     name { Faker::Lorem.sentence }
     version { 0 }
+    created_at { 1.day.ago }
+    updated_at { 1.day.ago }
     project_end_financial_year { 2022 }
     private_contributions { private_contribution_names.any? }
     public_contributions { public_contribution_names.any? }

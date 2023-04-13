@@ -15,10 +15,10 @@ Urgency Moderation Evidence
 <% end %>
 ------------------------------------------------------
 * Risk Management Authority
-  <%= project.owner.name %>
+  <%= project.owner&.name %>
 
 * Environment Agency Area
-  <%= project.owner.ea_parent.name %>
+  <%= project.owner&.ea_parent&.name %>
 
 * Regional Flood and Coastal Committee
   <%= PafsCore::RFCC_CODE_NAMES_MAP.fetch(project.reference_number[0..1]) %>
