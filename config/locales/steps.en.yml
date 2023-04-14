@@ -137,10 +137,13 @@ en:
         funding_values_summary:
           heading: Confirm the estimated spend for each financial year.
 # earliest start
-        earliest_start:
+        could_start_sooner:
           heading: Could the project start sooner if Grant in Aid funding was made available earlier?
 # earliest date
-        earliest_date:
+        earliest_start_date:
+          heading: What is the earliest date the project can start?
+          example_text: For example, 10 2019
+        earliest_start_date_without_impact:
           heading: What is the earliest date the project could start spending without impacting deliverables or benefits?
           description: Spend includes any funding source (e.g. local levy, contributions and GiA).
           example_text: For example, 10 2019

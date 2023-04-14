@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class EarliestDateStep < BasicStep
+  class EarliestStartDateStep < BasicStep
     delegate :could_start_early?,
              :earliest_start_month, :earliest_start_month=,
              :earliest_start_year, :earliest_start_year=,
@@ -12,14 +12,14 @@ module PafsCore
     private
 
     def step_params(params)
-      params.require(:earliest_date_step).permit(
+      params.require(:earliest_start_date_step).permit(
         :earliest_start_month, :earliest_start_year
       )
     end
 
     def earliest_start_date_is_present_and_correct
       if earliest_start_month.blank? || earliest_start_year.blank?
-        errors.add(:earliest_start, "Tell us the earliest date the project can start")
+        errors.add(:earliest_start_date, "Tell us the earliest date the project can start")
       else
         validate_month
         validate_year
@@ -33,7 +33,7 @@ module PafsCore
       mon = m.to_i
       return unless mon < 1 || mon > 12 || (m.to_s != mon.to_s)
 
-      errors.add(:earliest_start, "The month must be between 1 and 12")
+      errors.add(:earliest_start_date, "The month must be between 1 and 12")
     end
 
     def validate_year
@@ -43,7 +43,7 @@ module PafsCore
       year = y.to_i
       return unless (year < 2000 || year > 2100) || (year.to_s != y.to_s)
 
-      errors.add(:earliest_start, "The year must be between 2000 and 2100")
+      errors.add(:earliest_start_date, "The year must be between 2000 and 2100")
     end
   end
 end

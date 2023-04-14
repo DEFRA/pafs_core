@@ -133,38 +133,56 @@ RSpec.describe PafsCore::ValidationPresenter do
   describe "#funding_sources_complete?"
 
   describe "#earliest_start_complete?" do
-    context "when could_start_early is nil" do
+    context "when earliest_start_month and earliest_start_year are not present" do
+      before do
+        subject.earliest_start_month = nil
+        subject.earliest_start_year = nil
+      end
+
       it "returns false" do
-        subject.could_start_early = nil
         expect(subject.earliest_start_complete?).to be false
       end
     end
 
-    context "when could_start_early is true" do
-      before { subject.could_start_early = true }
-
-      context "when earliest_start_year is present" do
-        it "returns true" do
-          subject.earliest_start_month = 2
-          subject.earliest_start_year = 2017
-          expect(subject.earliest_start_complete?).to be true
-        end
+    context "when earliest_start_month and earliest_start_year are present" do
+      before do
+        subject.earliest_start_month = 2
+        subject.earliest_start_year = 2017
       end
 
-      context "when earliest_start_year is not present" do
+      context "when could_start_early is nil" do
         it "returns false" do
-          subject.earliest_start_month = nil
-          subject.earliest_start_year = nil
+          subject.could_start_early = nil
           expect(subject.earliest_start_complete?).to be false
         end
       end
-    end
 
-    context "when could_start_early is false" do
-      before { subject.could_start_early = false }
+      context "when could_start_early is true" do
+        before { subject.could_start_early = true }
 
-      it "returns true" do
-        expect(subject.earliest_start_complete?).to be true
+        context "when earliest_without_impact_year is present" do
+          it "returns true" do
+            subject.earliest_without_impact_month = 2
+            subject.earliest_without_impact_year = 2017
+            expect(subject.earliest_start_complete?).to be true
+          end
+        end
+
+        context "when earliest_without_impact_year is not present" do
+          it "returns false" do
+            subject.earliest_without_impact_month = nil
+            subject.earliest_without_impact_year = nil
+            expect(subject.earliest_start_complete?).to be false
+          end
+        end
+      end
+
+      context "when could_start_early is false" do
+        before { subject.could_start_early = false }
+
+        it "returns true" do
+          expect(subject.earliest_start_complete?).to be true
+        end
       end
     end
   end

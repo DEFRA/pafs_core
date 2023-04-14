@@ -90,7 +90,7 @@ module PafsCore
         { summary_4:  :location },
         { summary_5:  :key_dates },
         { summary_6:  :funding_sources },
-        { summary_7:  :earliest_start },
+        { summary_7:  :earliest_start_date },
         { summary_8:  :risks },
         { summary_9:  :standard_of_protection },
         { summary_91: :standard_of_protection },
@@ -152,8 +152,9 @@ module PafsCore
         s.add :funding_values_summary, if: :javascript_disabled?
         s.add :summary_6
 
-        s.add :earliest_start
-        s.add :earliest_date, if: :could_start_early?
+        s.add :earliest_start_date
+        s.add :could_start_sooner
+        s.add :earliest_start_date_without_impact
         s.add :summary_7
 
         s.add :risks

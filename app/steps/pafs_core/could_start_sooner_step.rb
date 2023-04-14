@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class EarliestStartStep < BasicStep
+  class CouldStartSoonerStep < BasicStep
     delegate :could_start_early, :could_start_early=, :could_start_early?,
              to: :project
 
@@ -10,7 +10,7 @@ module PafsCore
     private
 
     def step_params(params)
-      params.require(:earliest_start_step).permit(:could_start_early)
+      params.require(:could_start_sooner_step).permit(:could_start_early)
     end
 
     def a_choice_has_been_made
