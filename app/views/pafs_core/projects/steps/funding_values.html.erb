@@ -58,7 +58,7 @@
                   <tfoot>
                     <tr>
                       <td><%= t(".total_label") %></td>
-                      <% @project.selected_funding_sources.each do |fs| %>
+                      <% @project.sorted_sources_with_values.each do |fs| %>
                         <td class="numeric <%= fs %>-total">Total here</td>
                       <% end %>
                       <td class="numeric grand-total">Total</td>
