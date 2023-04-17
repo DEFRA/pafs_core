@@ -5,9 +5,10 @@ module PafsCore
     delegate :could_start_early?,
              :earliest_start_month, :earliest_start_month=,
              :earliest_start_year, :earliest_start_year=,
+             :date_present?, :date_plausible?,
              to: :project
 
-    validate :earliest_start_date_is_present_and_correct
+    validate :date_is_present_and_plausible
 
     private
 
@@ -17,33 +18,14 @@ module PafsCore
       )
     end
 
-    def earliest_start_date_is_present_and_correct
-      if earliest_start_month.blank? || earliest_start_year.blank?
-        errors.add(:earliest_start_date, "Tell us the earliest date the project can start")
-      else
-        validate_month
-        validate_year
+    def date_is_present_and_plausible
+      unless date_present?("earliest_start") &&
+             date_plausible?("earliest_start")
+        errors.add(
+          :earliest_start,
+          "Tell us the earliest date the project can start"
+        )
       end
-    end
-
-    def validate_month
-      m = earliest_start_month
-      return if m.blank?
-
-      mon = m.to_i
-      return unless mon < 1 || mon > 12 || (m.to_s != mon.to_s)
-
-      errors.add(:earliest_start_date, "The month must be between 1 and 12")
-    end
-
-    def validate_year
-      y = earliest_start_year
-      return if y.blank?
-
-      year = y.to_i
-      return unless (year < 2000 || year > 2100) || (year.to_s != y.to_s)
-
-      errors.add(:earliest_start_date, "The year must be between 2000 and 2100")
     end
   end
 end

@@ -289,19 +289,37 @@ RSpec.describe PafsCore::ProjectsController do
       context "when saving the earliest start" do
         let(:params) do
           {
-            earliest_date_step: {
+            earliest_start_date_step: {
               earliest_start_month: "2",
               earliest_start_year: "2025"
             },
             commit: "Save and continue",
             id: project.to_param,
-            step: "earliest_date"
+            step: "earliest_start_date"
           }
         end
 
         it "redirects to the earliest date" do
           patch :save, params: params
-          expect(response).to redirect_to project_path(id: project.to_param, anchor: "earliest-start")
+          expect(response).to redirect_to project_step_path(id: project.to_param, step: "could_start_sooner")
+        end
+      end
+
+      context "when saving could start sooner" do
+        let(:params) do
+          {
+            could_start_sooner_step: {
+              could_start_early: "1"
+            },
+            commit: "Save and continue",
+            id: project.to_param,
+            step: "could_start_sooner"
+          }
+        end
+
+        it "redirects to the earliest start date without impact" do
+          patch :save, params: params
+          expect(response).to redirect_to project_step_path(id: project.to_param, step: "earliest_start_date_without_impact")
         end
       end
 

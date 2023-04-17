@@ -3,9 +3,9 @@
 require "rails_helper"
 # require_relative "./shared_step_spec"
 
-RSpec.describe PafsCore::EarliestDateStep, type: :model do
+RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
   describe "attributes" do
-    subject { build(:earliest_date_step) }
+    subject { build(:earliest_start_date_step) }
 
     it_behaves_like "a project step"
 
@@ -18,13 +18,13 @@ RSpec.describe PafsCore::EarliestDateStep, type: :model do
     it "validates that :earliest_start_month is greater than 0" do
       subject.earliest_start_month = 0
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_start]).to include "The month must be between 1 and 12"
+      expect(subject.errors.messages[:earliest_start]).to include "Tell us the earliest date the project can start"
     end
 
     it "validates that :earliest_start_month is less than 13" do
       subject.earliest_start_month = 13
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_start]).to include "The month must be between 1 and 12"
+      expect(subject.errors.messages[:earliest_start]).to include "Tell us the earliest date the project can start"
     end
 
     it "validates that :earliest_start_year is present" do
@@ -36,28 +36,28 @@ RSpec.describe PafsCore::EarliestDateStep, type: :model do
     it "validates that :earliest_start_year is greater than 1999" do
       subject.earliest_start_year = 1999
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_start]).to include "The year must be between 2000 and 2100"
+      expect(subject.errors.messages[:earliest_start]).to include "Tell us the earliest date the project can start"
     end
 
     it "validates that :earliest_start_year is less than or equal to 2100" do
       subject.earliest_start_year = 2101
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_start]).to include "The year must be between 2000 and 2100"
+      expect(subject.errors.messages[:earliest_start]).to include "Tell us the earliest date the project can start"
     end
   end
 
   describe "#update" do
-    subject { create(:earliest_date_step) }
+    subject { create(:earliest_start_date_step) }
 
     let(:valid_params) do
       ActionController::Parameters.new(
-        { earliest_date_step:
+        { earliest_start_date_step:
           { earliest_start_month: "11", earliest_start_year: "2016" } }
       )
     end
     let(:error_params) do
       ActionController::Parameters.new(
-        { earliest_date_step:
+        { earliest_start_date_step:
           { earliest_start_month: "13" } }
       )
     end
