@@ -12,37 +12,37 @@ RSpec.describe PafsCore::EarliestStartDateWithoutImpactStep, type: :model do
     it "validates that :earliest_without_impact_month is present" do
       subject.earliest_without_impact_month = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_without_impact]).to include "Tell us the earliest date the project can start"
+      expect(subject.errors.messages[:earliest_without_impact_date].first).to eq "Tell us the earliest date the project can start"
     end
 
     it "validates that :earliest_without_impact_month is greater than 0" do
       subject.earliest_without_impact_month = 0
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_without_impact]).to include "Tell us the earliest date the project can start"
+      expect(subject.errors.messages[:earliest_without_impact_date].first).to eq "The month must be between 1 and 12"
     end
 
     it "validates that :earliest_without_impact_month is less than 13" do
       subject.earliest_without_impact_month = 13
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_without_impact]).to include "Tell us the earliest date the project can start"
+      expect(subject.errors.messages[:earliest_without_impact_date].first).to eq "The month must be between 1 and 12"
     end
 
     it "validates that :earliest_without_impact_year is present" do
       subject.earliest_without_impact_year = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_without_impact]).to include "Tell us the earliest date the project can start"
+      expect(subject.errors.messages[:earliest_without_impact_date].first).to eq "Tell us the earliest date the project can start"
     end
 
     it "validates that :earliest_without_impact_year is greater than 1999" do
       subject.earliest_without_impact_year = 1999
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_without_impact]).to include "Tell us the earliest date the project can start"
+      expect(subject.errors.messages[:earliest_without_impact_date].first).to eq "The year must be between 2000 and 2100"
     end
 
     it "validates that :earliest_without_impact_year is less than or equal to 2100" do
       subject.earliest_without_impact_year = 2101
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:earliest_without_impact]).to include "Tell us the earliest date the project can start"
+      expect(subject.errors.messages[:earliest_without_impact_date].first).to eq "The year must be between 2000 and 2100"
     end
   end
 
