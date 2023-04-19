@@ -6,7 +6,9 @@
         <div class="govuk-grid-column-two-thirds">
           <% if project.earliest_start_month.present? && project.earliest_start_year.present? %>
             <p>The earliest date the project could start is <%= project.earliest_start_date %><p>
-            <% end %>
+          <% else %>
+            <p><em>The earliest date the project could start hasn't been provided</em></p>
+          <% end %>
           <% if project.could_start_early? %>
             <% if project.earliest_without_impact_month.nil? %>
               <p><em>The earliest date the project could start if Grant in Aid funding was made available earlier hasn't been provided  </em><p>
