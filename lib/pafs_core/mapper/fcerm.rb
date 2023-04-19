@@ -62,8 +62,12 @@ module PafsCore
         project.county
       end
 
-      def earliest_funding_profile_date
+      def earliest_start_date
         project.earliest_start_date
+      end
+
+      def earliest_start_date_with_gia_available
+        project.earliest_start_date_with_gia_available
       end
 
       def aspirational_gateway_1
@@ -122,7 +126,8 @@ module PafsCore
           moderation_code: moderation_code,
           constituency: constituency,
           pafs_county: pafs_county,
-          earliest_funding_profile_date: earliest_funding_profile_date,
+          earliest_start_date: earliest_start_date,
+          earliest_start_date_with_gia_available: earliest_start_date_with_gia_available,
           aspirational_gateway_1: aspirational_gateway_1,
           aspirational_gateway_2: aspirational_gateway_2,
           aspirational_gateway_3: aspirational_gateway_3,
