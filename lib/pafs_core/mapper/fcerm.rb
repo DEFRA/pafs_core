@@ -62,13 +62,9 @@ module PafsCore
         project.county
       end
 
-      def earliest_start_date
-        project.earliest_start_date
-      end
+      delegate :earliest_start_date, to: :project
 
-      def earliest_start_date_with_gia_available
-        project.earliest_start_date_with_gia_available
-      end
+      delegate :earliest_start_date_with_gia_available, to: :project
 
       def aspirational_gateway_1
         project.start_business_case_date

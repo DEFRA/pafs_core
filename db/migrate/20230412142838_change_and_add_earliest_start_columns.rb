@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeAndAddEarliestStartColumns < ActiveRecord::Migration[6.1]
   def up
     rename_column :pafs_core_projects, :earliest_start_month, :earliest_with_gia_month

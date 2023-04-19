@@ -26,13 +26,12 @@ module PafsCore
         )
       end
 
-      unless month_plausible?("earliest_start")
-        errors.add(:earliest_start_date, "The month must be between 1 and 12")
-      end
+      errors.add(:earliest_start_date, "The month must be between 1 and 12") unless month_plausible?("earliest_start")
 
-      unless year_plausible?("earliest_start")
-        errors.add(:earliest_start_date, "The year must be between #{PafsCore::DateUtils::VALID_YEAR_RANGE.first} and #{PafsCore::DateUtils::VALID_YEAR_RANGE.last}")
-      end
+      return if year_plausible?("earliest_start")
+
+      errors.add(:earliest_start_date,
+                 "The year must be between #{PafsCore::DateUtils::VALID_YEAR_RANGE.first} and #{PafsCore::DateUtils::VALID_YEAR_RANGE.last}")
     end
   end
 end
