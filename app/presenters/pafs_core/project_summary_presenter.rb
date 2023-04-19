@@ -67,8 +67,8 @@ module PafsCore
       presentable_date(:earliest_start)
     end
 
-    def earliest_start_date_without_impact
-      presentable_date(:earliest_without_impact)
+    def earliest_start_date_with_gia
+      presentable_date(:earliest_with_gia)
     end
 
     def key_dates_started?

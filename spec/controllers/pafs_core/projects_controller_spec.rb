@@ -319,7 +319,7 @@ RSpec.describe PafsCore::ProjectsController do
 
         it "redirects to the earliest start date without impact" do
           patch :save, params: params
-          expect(response).to redirect_to project_step_path(id: project.to_param, step: "earliest_start_date_without_impact")
+          expect(response).to redirect_to project_step_path(id: project.to_param, step: "earliest_start_date_with_gia")
         end
       end
 

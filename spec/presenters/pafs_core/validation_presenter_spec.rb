@@ -160,18 +160,18 @@ RSpec.describe PafsCore::ValidationPresenter do
       context "when could_start_early is true" do
         before { subject.could_start_early = true }
 
-        context "when earliest_without_impact_year is present" do
+        context "when earliest_with_gia_year is present" do
           it "returns true" do
-            subject.earliest_without_impact_month = 2
-            subject.earliest_without_impact_year = 2017
+            subject.earliest_with_gia_month = 2
+            subject.earliest_with_gia_year = 2017
             expect(subject.earliest_start_complete?).to be true
           end
         end
 
-        context "when earliest_without_impact_year is not present" do
+        context "when earliest_with_gia_year is not present" do
           it "returns false" do
-            subject.earliest_without_impact_month = nil
-            subject.earliest_without_impact_year = nil
+            subject.earliest_with_gia_month = nil
+            subject.earliest_with_gia_year = nil
             expect(subject.earliest_start_complete?).to be false
           end
         end

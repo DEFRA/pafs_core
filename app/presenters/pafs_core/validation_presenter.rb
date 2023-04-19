@@ -79,7 +79,7 @@ module PafsCore
       if mandatory_earliest_start_fields_missing?
         add_earliest_start_error
       elsif could_start_early?
-        if earliest_without_impact_month.present? && earliest_without_impact_year.present?
+        if earliest_with_gia_month.present? && earliest_with_gia_year.present?
           true
         else
           add_earliest_start_error

@@ -75,9 +75,9 @@ FactoryBot.define do
       earliest_start_year { 2017 }
     end
 
-    factory :earliest_start_date_without_impact_step, class: "PafsCore::EarliestStartDateWithoutImpactStep" do
-      earliest_without_impact_month { 4 }
-      earliest_without_impact_year { 2018 }
+    factory :earliest_start_date_with_gia_step, class: "PafsCore::EarliestStartDateWithGiaStep" do
+      earliest_with_gia_month { 4 }
+      earliest_with_gia_year { 2018 }
     end
 
     factory :risks_step, class: "PafsCore::RisksStep" do
