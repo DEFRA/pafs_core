@@ -2,9 +2,9 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::EarliestStartStep, type: :model do
+RSpec.describe PafsCore::CouldStartSoonerStep, type: :model do
   describe "attributes" do
-    subject { build(:earliest_start_step) }
+    subject { build(:could_start_sooner_step) }
 
     it_behaves_like "a project step"
 
@@ -16,11 +16,11 @@ RSpec.describe PafsCore::EarliestStartStep, type: :model do
   end
 
   describe "#update" do
-    subject { create(:earliest_start_step) }
+    subject { create(:could_start_sooner_step) }
 
-    let(:true_params) { ActionController::Parameters.new({ earliest_start_step: { could_start_early: "true" } }) }
-    let(:false_params) { ActionController::Parameters.new({ earliest_start_step: { could_start_early: "false" } }) }
-    let(:error_params) { ActionController::Parameters.new({ earliest_start_step: { could_start_early: nil } }) }
+    let(:true_params) { ActionController::Parameters.new({ could_start_sooner_step: { could_start_early: "true" } }) }
+    let(:false_params) { ActionController::Parameters.new({ could_start_sooner_step: { could_start_early: "false" } }) }
+    let(:error_params) { ActionController::Parameters.new({ could_start_sooner_step: { could_start_early: nil } }) }
 
     it "saves the :could_start_early when valid" do
       expect(subject.update(true_params)).to be true

@@ -94,3 +94,8 @@ en:
         flood_risk_measures: "Flood risk measures:"
         total_cost: Total cost of your associated natural flood risk measures
         not_included: The project does not include any flood risk measures
+
+      earliest_start:
+        earliest_date_could_start: "The earliest date the project could start is %{earliest_start_date}"
+        earliest_with_gia_not_provided: The earliest date the project could start if Grant in Aid funding was made available earlier hasn't been provided
+

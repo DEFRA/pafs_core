@@ -10,8 +10,15 @@ module PafsCore
     end
 
     def date_plausible?(date_name)
-      VALID_MONTH_RANGE.cover?(send("#{date_name}_month").to_i) &&
-        VALID_YEAR_RANGE.cover?(send("#{date_name}_year").to_i)
+      month_plausible?(date_name) && year_plausible?(date_name)
+    end
+
+    def month_plausible?(date_name)
+      VALID_MONTH_RANGE.cover?(send("#{date_name}_month").to_i)
+    end
+
+    def year_plausible?(date_name)
+      VALID_YEAR_RANGE.cover?(send("#{date_name}_year").to_i)
     end
 
     def date_later_than?(date_name, other_date_name)

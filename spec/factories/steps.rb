@@ -66,13 +66,18 @@ FactoryBot.define do
       asset_replacement_allowance { true }
     end
 
-    factory :earliest_start_step, class: "PafsCore::EarliestStartStep" do
+    factory :could_start_sooner_step, class: "PafsCore::CouldStartSoonerStep" do
       could_start_early { true }
     end
 
-    factory :earliest_date_step, class: "PafsCore::EarliestDateStep" do
+    factory :earliest_start_date_step, class: "PafsCore::EarliestStartDateStep" do
       earliest_start_month { 3 }
       earliest_start_year { 2017 }
+    end
+
+    factory :earliest_start_date_with_gia_step, class: "PafsCore::EarliestStartDateWithGiaStep" do
+      earliest_with_gia_month { 4 }
+      earliest_with_gia_year { 2018 }
     end
 
     factory :risks_step, class: "PafsCore::RisksStep" do

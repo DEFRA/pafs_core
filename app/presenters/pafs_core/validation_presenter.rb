@@ -76,17 +76,25 @@ module PafsCore
     end
 
     def earliest_start_complete?
-      if could_start_early.nil?
-        add_error(:earliest_start, "Tell us the earliest date the project can start")
+      if mandatory_earliest_start_fields_missing?
+        add_earliest_start_error
       elsif could_start_early?
-        if earliest_start_month.present? && earliest_start_year.present?
+        if earliest_with_gia_month.present? && earliest_with_gia_year.present?
           true
         else
-          add_error(:earliest_start, "Tell us the earliest date the project can start")
+          add_earliest_start_error
         end
       else
         true
       end
+    end
+
+    def mandatory_earliest_start_fields_missing?
+      (earliest_start_month.blank? || earliest_start_year.blank?) || could_start_early.nil?
+    end
+
+    def add_earliest_start_error
+      add_error(:earliest_start, "Tell us the earliest date the project can start")
     end
 
     def risks_complete?

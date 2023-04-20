@@ -81,8 +81,12 @@ RSpec.describe PafsCore::Mapper::Fcerm1 do
     expect(subject.pafs_county).to eql(presenter.county)
   end
 
-  it "earliest funding profile date" do
-    expect(subject.earliest_funding_profile_date).to eql(presenter.earliest_start_date)
+  it "earliest start date" do
+    expect(subject.earliest_start_date).to eql(presenter.earliest_start_date)
+  end
+
+  it "earliest start date with gia available" do
+    expect(subject.earliest_start_date_with_gia_available).to eql(presenter.earliest_start_date_with_gia_available)
   end
 
   it "aspirational gateway 1" do

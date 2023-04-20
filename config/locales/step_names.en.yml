@@ -15,7 +15,7 @@ en:
   other_ea_contributors_step_label: "Funding sources"
   funding_values_step_label: "Funding values"
   funding_values_summary_step_label: "Funding values"
-  earliest_start_step_label: "Earliest start"
+  earliest_start_date_step_label: "Earliest start"
   earliest_date_step_label: "Earliest date"
   location_step_label: "Location"
   map_step_label: "Map"

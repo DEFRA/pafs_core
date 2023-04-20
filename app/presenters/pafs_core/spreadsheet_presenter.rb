@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 module PafsCore
   class SpreadsheetPresenter < SimpleDelegator
     include PafsCore::Carbon
@@ -130,7 +131,11 @@ module PafsCore
     end
 
     def earliest_start_date
-      format_2_part_date(:earliest_start) if could_start_early?
+      format_2_part_date(:earliest_start)
+    end
+
+    def earliest_start_date_with_gia_available
+      format_2_part_date(:earliest_with_gia) if could_start_early?
     end
 
     def start_business_case_date
@@ -397,3 +402,4 @@ module PafsCore
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

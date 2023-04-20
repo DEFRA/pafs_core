@@ -67,6 +67,10 @@ module PafsCore
       presentable_date(:earliest_start)
     end
 
+    def earliest_start_date_with_gia
+      presentable_date(:earliest_with_gia)
+    end
+
     def key_dates_started?
       start_outline_business_case_month.present? ||
         award_contract_month.present? ||
@@ -79,7 +83,7 @@ module PafsCore
     end
 
     def earliest_start_started?
-      !could_start_early.nil?
+      !could_start_early.nil? || (earliest_start_month.present? && earliest_start_year.present?)
     end
 
     def standard_of_protection_started?

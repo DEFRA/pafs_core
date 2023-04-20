@@ -35,8 +35,8 @@ en:
     funding_values_summary: Funding values
     carbon_cost_build: Carbon Assessment
     carbon_cost_operation: Carbon Assessment
-    earliest_start: Earliest start
-    earliest_date: Earliest start date
+    could_start_sooner: Earliest start
+    earliest_start_date: Earliest start date
     location: Location
     map: Map
     benefit_area_file_summary: Benefit area upload summary
