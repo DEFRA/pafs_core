@@ -154,7 +154,7 @@ module PafsCore
 
         s.add :earliest_start_date
         s.add :could_start_sooner
-        s.add :earliest_start_date_with_gia
+        s.add :earliest_start_date_with_gia, if: :could_start_early?
         s.add :summary_7
 
         s.add :risks
