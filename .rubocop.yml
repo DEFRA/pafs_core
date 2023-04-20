@@ -25,3 +25,7 @@ AllCops:
 # about an unnecessary disable directive, so disabling it here instead.
 Style/RedundantInitialize:
   Enabled: false
+
+# this rule seems overly fussy:
+RSpec/IndexedLet:
+  Enabled: false
