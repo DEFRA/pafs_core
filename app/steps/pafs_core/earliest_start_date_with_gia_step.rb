@@ -32,8 +32,11 @@ module PafsCore
 
       return if year_plausible?("earliest_with_gia")
 
-      errors.add(:earliest_with_gia_date,
-                 "The year must be between #{PafsCore::DateUtils::VALID_YEAR_RANGE.first} and #{PafsCore::DateUtils::VALID_YEAR_RANGE.last}")
+      errors.add(
+        :earliest_with_gia_date,
+        "The year must be between #{PafsCore::DateUtils::VALID_YEAR_RANGE.first} " \
+        "and #{PafsCore::DateUtils::VALID_YEAR_RANGE.last}"
+      )
     end
   end
 end
