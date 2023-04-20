@@ -54,7 +54,7 @@ module PafsCore
     rescue StandardError => e
       Airbrake.notify(e)
       # send failure notification email
-      PafsCore::AptNotificationMailer.area_programme_generation_failed(download_info, e).deliver_now
+      PafsCore::AptNotificationMailer.area_programme_generation_failed(download_info).deliver_now
       raise e
     end
 

@@ -63,12 +63,6 @@ module PafsCore
         configuration.logger = Rails.logger
         configuration.environment = ENV.fetch("AIRBRAKE_ENV_NAME", Rails.env)
       end
-
-      # Prevent Airbrake from trying to auto-load remote config from Airbrake servers
-      # as this fails (our projects are not on Airbrake) and disables Airbrake in the app
-      Airbrake.configure do |c|
-        c.remote_config = false
-      end
     end
   end
 end
