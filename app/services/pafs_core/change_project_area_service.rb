@@ -18,7 +18,7 @@ module PafsCore
         new_owning_area_project = PafsCore::AreaProject.where(project_id: @project.id, area_id: new_area.id).first ||
                                   PafsCore::AreaProject.create!(project_id: @project.id, area_id: new_area.id)
         new_owning_area_project.update(owner: true)
-        previous_owning_area_project.destroy!
+        previous_owning_area_project.destroy! unless previous_owning_area_project.nil?
 
         # The RMA name is also stored directly on the project
         @project.update(rma_name: new_area.name)
