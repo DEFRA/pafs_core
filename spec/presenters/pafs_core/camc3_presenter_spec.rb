@@ -176,6 +176,18 @@ RSpec.describe PafsCore::Camc3Presenter do
           expect(subject.attributes[:secondary_risk_sources]).to have_key(sra)
         end
       end
+
+      it "renders main risk as false in secondary list" do
+        expect(subject.attributes[:secondary_risk_sources][project.main_risk.to_sym]).to be_falsey
+      end
+
+      it "renders risk source values" do
+        PafsCore::Risks::RISKS.each do |risk|
+          next if risk == project.main_risk.to_sym
+
+          expect(subject.attributes[:secondary_risk_sources][risk]).to eql(project.send(risk))
+        end
+      end
     end
 
     shared_examples "has the expected forecast" do |outcomes_category, attribute, presenter_method = nil|
