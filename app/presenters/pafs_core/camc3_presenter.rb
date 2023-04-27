@@ -130,6 +130,10 @@ module PafsCore
       end
     end
 
+    def secondary_risk_sources
+      PafsCore::Risks::RISKS.index_with { |risk| risk.to_s != project.main_risk && project.send(risk) }
+    end
+
     def base64_shapefile
       @base64_shapefile ||= PafsCore::ShapefileSerializer.serialize(project)
     end
@@ -192,7 +196,8 @@ module PafsCore
                          beach_nourishment: project.beach_nourishment,
                          other_flood_measures: project.other_flood_measures,
                          natural_flood_risk_measures_cost: project.natural_flood_risk_measures_cost
-                       }
+                       },
+                       secondary_risk_sources: secondary_risk_sources
                      }
                    )
     end

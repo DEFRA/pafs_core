@@ -982,6 +982,50 @@
             }
           }
         }
+      },
+      "secondary_risk_sources": {
+        "fluvial_flooding": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "tidal_flooding": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "groundwater_flooding": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "surface_water_flooding": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sea_flooding": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reservoir_flooding": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "coastal_erosion": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
       }
     }
   }
