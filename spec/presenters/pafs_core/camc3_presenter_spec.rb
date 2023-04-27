@@ -166,6 +166,18 @@ RSpec.describe PafsCore::Camc3Presenter do
       end
     end
 
+    describe "secondary_risk_sources" do
+      it "renders in the generated json" do
+        expect(subject.attributes).to have_key(:secondary_risk_sources)
+      end
+
+      it "contains all the risk attributes" do
+        PafsCore::Risks::RISKS.each do |sra|
+          expect(subject.attributes[:secondary_risk_sources]).to have_key(sra)
+        end
+      end
+    end
+
     shared_examples "has the expected forecast" do |outcomes_category, attribute, presenter_method = nil|
       before do
         funding_values.each do |hash|
