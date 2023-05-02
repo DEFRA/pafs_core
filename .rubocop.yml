@@ -9,6 +9,7 @@ require:
   - rubocop-capybara
 
 AllCops:
+  TargetRubyVersion: 3.2
   Exclude:
     # Avoid pulling in gems for GitHub setup-ruby@v1 action:
     - vendor/bundle/**/*

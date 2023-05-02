@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.summary     = "Project Application and Funding Service core shared functionality"
   s.description = "Project Application and Funding Service core shared functionality"
   s.license     = "The Open Government Licence (OGL) Version 3"
-  s.required_ruby_version = ">= 3.1"
+  s.required_ruby_version = ">= 3.2"
 
   s.files = Dir[
     "{app,config,db,lib}/**/*",
