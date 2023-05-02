@@ -9,7 +9,7 @@ module PafsCore
       Airbrake.notify("Missing project owner for project #{project.reference_number}") if project.owner.blank?
 
       f = PafsCore::Engine.root.join("app", "views", "pafs_core", "projects", "downloads", "moderation.txt.erb")
-      s = ERB.new(File.read(f)).result(binding)
+      s = ERB.new(File.read(f)).result_with_hash(project:, pretty_urgency_reason: pretty_urgency_reason)
       # make it friendly for the Winders users
       s.encode(s.encoding, crlf_newline: true)
     end
