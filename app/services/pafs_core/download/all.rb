@@ -14,10 +14,7 @@ module PafsCore
       end
 
       def remote_file_url
-        url = expiring_url_for(FILENAME)
-        Rails.logger.warn "Expiring URL for download: #{url}"
-        Airbrake.notify("Expiring URL for download: #{url}")
-        url
+        expiring_url_for(FILENAME)
       rescue StandardError => e
         Rails.logger.warn "Error getting URL for download: #{e.inspect}"
         Airbrake.notify(e, message: "Error getting URL for download")
