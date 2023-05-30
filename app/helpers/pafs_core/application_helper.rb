@@ -91,10 +91,11 @@ module PafsCore
       "#{object_name}-#{attribute}"
     end
 
-    def govuk_checkbox_for(form, attribute, scope = ".")
+    def govuk_checkbox_for(form, attribute, scope = ".", unchecked_value = 0)
       form.govuk_check_box(
         attribute,
         attribute,
+        unchecked_value,
         label: { text: t(attribute, scope: scope) },
         multiple: false
       )
