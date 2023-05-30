@@ -14,12 +14,12 @@ FactoryBot.define do
     public_contributions { public_contribution_names.any? }
     other_ea_contributions { other_ea_contribution_names.any? }
 
-    state factory: %i[state draft]
+    association :state, :draft
     creator factory: :user
 
     PafsCore::State::VALID_STATES.each do |valid_state|
       trait valid_state.to_sym do
-        state
+        association :state, valid_state.to_sym
       end
     end
 
@@ -46,12 +46,12 @@ FactoryBot.define do
     end
 
     trait :submitted_to_pol do
-      state factory: %i[state submitted]
+      association :state, :submitted
       submitted_to_pol { 5.minutes.ago }
     end
 
     trait :submission_failed do
-      state factory: %i[state submitted]
+      association :state, :submitted
       submitted_to_pol { nil }
     end
 
