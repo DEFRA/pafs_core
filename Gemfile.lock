@@ -268,7 +268,7 @@ GEM
     parallel (1.23.0)
     parser (3.2.2.0)
       ast (~> 2.4.1)
-    pg (1.5.2)
+    pg (1.5.3)
     protocol-hpack (1.4.2)
     protocol-http (0.24.1)
     protocol-http1 (0.15.0)
