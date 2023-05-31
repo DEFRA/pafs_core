@@ -10,7 +10,11 @@
         <%= f.govuk_fieldset legend: { text: t('.heading'), size: 'l' } do %>
           <%= form_group(f.object, @project.step, :earliest_start) do %>
             <legend class="govuk-visually-hidden"><%= t('.heading') %></legend>
-            <%= month_and_year(f, :earliest_date_step, :earliest_start, hint: t(".example_text")) %>
+            <div class="govuk-hint">
+              <p><%= t('.hint') %></p>
+              <p><%= t('.example_text') %></p>
+            </div>
+            <%= month_and_year(f, :earliest_date_step, :earliest_start) %>
           <% end %>
 
           <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>
