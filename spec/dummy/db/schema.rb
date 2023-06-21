@@ -10,22 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_12_142838) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_06_20_214333) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "citext"
-  enable_extension "hstore"
   enable_extension "plpgsql"
 
-  create_table "old_passwords", force: :cascade do |t|
+  create_table "old_passwords", id: :serial, force: :cascade do |t|
     t.string "encrypted_password", null: false
     t.string "password_archivable_type", null: false
     t.integer "password_archivable_id", null: false
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["password_archivable_type", "password_archivable_id"], name: "index_password_archivableddu"
   end
 
-  create_table "pafs_core_account_requests", force: :cascade do |t|
+  create_table "pafs_core_account_requests", id: :serial, force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "email", default: "", null: false
@@ -35,62 +32,62 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.string "slug"
     t.boolean "terms_accepted", default: false, null: false
     t.boolean "provisioned", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["email"], name: "index_pafs_core_account_requests_on_email", unique: true
     t.index ["slug"], name: "index_pafs_core_account_requests_on_slug", unique: true
   end
 
-  create_table "pafs_core_area_downloads", force: :cascade do |t|
+  create_table "pafs_core_area_downloads", id: :serial, force: :cascade do |t|
     t.integer "area_id"
     t.integer "user_id"
-    t.datetime "requested_on"
+    t.datetime "requested_on", precision: nil
     t.integer "number_of_proposals"
     t.string "fcerm1_filename"
     t.string "benefit_areas_filename"
     t.string "moderation_filename"
     t.integer "number_of_proposals_with_moderation"
     t.string "status", default: "empty", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "funding_calculator_filename"
     t.index ["area_id"], name: "index_pafs_core_area_downloads_on_area_id"
   end
 
-  create_table "pafs_core_area_projects", force: :cascade do |t|
+  create_table "pafs_core_area_projects", id: :serial, force: :cascade do |t|
     t.integer "area_id", null: false
     t.integer "project_id", null: false
     t.boolean "owner", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["area_id"], name: "index_pafs_core_area_projects_on_area_id"
     t.index ["project_id"], name: "index_pafs_core_area_projects_on_project_id"
   end
 
-  create_table "pafs_core_areas", force: :cascade do |t|
+  create_table "pafs_core_areas", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "parent_id"
     t.string "area_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "sub_type"
     t.index ["name"], name: "index_pafs_core_areas_on_name"
   end
 
-  create_table "pafs_core_asite_files", force: :cascade do |t|
+  create_table "pafs_core_asite_files", id: :serial, force: :cascade do |t|
     t.integer "asite_submission_id"
     t.string "filename", null: false
     t.string "checksum", null: false
   end
 
-  create_table "pafs_core_asite_submissions", force: :cascade do |t|
+  create_table "pafs_core_asite_submissions", id: :serial, force: :cascade do |t|
     t.integer "project_id"
-    t.datetime "email_sent_at", null: false
-    t.datetime "confirmation_received_at"
+    t.datetime "email_sent_at", precision: nil, null: false
+    t.datetime "confirmation_received_at", precision: nil
     t.string "status", default: "created", null: false
   end
 
-  create_table "pafs_core_bootstraps", force: :cascade do |t|
+  create_table "pafs_core_bootstraps", id: :serial, force: :cascade do |t|
     t.boolean "fcerm_gia"
     t.boolean "local_levy"
     t.string "name"
@@ -98,19 +95,22 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.integer "project_end_financial_year"
     t.string "slug", null: false
     t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "rma_name"
     t.index ["slug"], name: "index_pafs_core_bootstraps_on_slug", unique: true
   end
 
-  create_table "pafs_core_coastal_erosion_protection_outcomes", force: :cascade do |t|
+  create_table "pafs_core_coastal_erosion_protection_outcomes", id: :serial, force: :cascade do |t|
     t.integer "project_id"
     t.integer "financial_year", null: false
     t.integer "households_at_reduced_risk"
     t.integer "households_protected_from_loss_in_next_20_years"
     t.integer "households_protected_from_loss_in_20_percent_most_deprived"
     t.integer "non_residential_properties"
+    t.index ["financial_year"], name: "cep_outcomes_on_financial_year"
+    t.index ["project_id", "financial_year"], name: "cep_outcomes_on_project_id_and_financial_year"
+    t.index ["project_id"], name: "cep_outcomes_on_project_id"
   end
 
   create_table "pafs_core_flood_protection2040_outcomes", force: :cascade do |t|
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.integer "non_residential_properties"
   end
 
-  create_table "pafs_core_flood_protection_outcomes", force: :cascade do |t|
+  create_table "pafs_core_flood_protection_outcomes", id: :serial, force: :cascade do |t|
     t.integer "project_id"
     t.integer "financial_year", null: false
     t.integer "households_at_reduced_risk"
@@ -130,6 +130,9 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.integer "households_protected_from_loss_in_20_percent_most_deprived"
     t.integer "households_protected_through_plp_measures"
     t.integer "non_residential_properties"
+    t.index ["financial_year"], name: "fp_outcomes_on_financial_year"
+    t.index ["project_id", "financial_year"], name: "fp_outcomes_on_project_id_and_financial_year"
+    t.index ["project_id"], name: "fp_outcomes_on_project_id"
   end
 
   create_table "pafs_core_funding_contributors", id: :serial, force: :cascade do |t|
@@ -139,14 +142,14 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.bigint "amount"
     t.boolean "secured", default: false, null: false
     t.boolean "constrained", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["contributor_type"], name: "index_pafs_core_funding_contributors_on_contributor_type"
     t.index ["funding_value_id", "contributor_type"], name: "funding_contributors_on_funding_value_id_and_type"
     t.index ["funding_value_id"], name: "index_pafs_core_funding_contributors_on_funding_value_id"
   end
 
-  create_table "pafs_core_funding_values", force: :cascade do |t|
+  create_table "pafs_core_funding_values", id: :serial, force: :cascade do |t|
     t.integer "project_id"
     t.integer "financial_year", null: false
     t.bigint "fcerm_gia"
@@ -164,14 +167,17 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.bigint "other_government_department"
     t.bigint "recovery"
     t.bigint "summer_economic_fund"
+    t.index ["financial_year"], name: "index_pafs_core_funding_values_on_financial_year"
+    t.index ["project_id", "financial_year"], name: "funding_values_on_project_id_and_financial_year"
+    t.index ["project_id"], name: "index_pafs_core_funding_values_on_project_id"
   end
 
-  create_table "pafs_core_projects", force: :cascade do |t|
+  create_table "pafs_core_projects", id: :serial, force: :cascade do |t|
     t.string "reference_number", null: false
     t.integer "version", null: false
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "project_end_financial_year"
     t.string "slug", default: "", null: false
     t.integer "start_outline_business_case_month"
@@ -206,13 +212,13 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.string "funding_calculator_file_name"
     t.string "funding_calculator_content_type"
     t.integer "funding_calculator_file_size"
-    t.datetime "funding_calculator_updated_at"
+    t.datetime "funding_calculator_updated_at", precision: nil
     t.text "project_location", default: [], array: true
     t.integer "project_location_zoom_level", default: 15
     t.text "benefit_area"
     t.text "benefit_area_centre", array: true
     t.integer "benefit_area_zoom_level"
-    t.datetime "submitted_at"
+    t.datetime "submitted_at", precision: nil
     t.integer "flood_protection_before"
     t.integer "flood_protection_after"
     t.integer "coastal_protection_before"
@@ -238,7 +244,7 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.string "benefit_area_file_name"
     t.string "benefit_area_content_type"
     t.integer "benefit_area_file_size"
-    t.datetime "benefit_area_file_updated_at"
+    t.datetime "benefit_area_file_updated_at", precision: nil
     t.boolean "sea_flooding"
     t.string "region"
     t.string "parliamentary_constituency"
@@ -252,14 +258,14 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.float "hectares_of_net_water_intertidal_habitat_created"
     t.float "kilometres_of_protected_river_improved"
     t.string "county"
-    t.datetime "urgency_details_updated_at"
+    t.datetime "urgency_details_updated_at", precision: nil
     t.string "grid_reference"
     t.boolean "reservoir_flooding"
     t.boolean "consented", default: false, null: false
     t.boolean "reduced_risk_of_households_for_floods", default: false, null: false
     t.boolean "reduced_risk_of_households_for_coastal_erosion", default: false, null: false
     t.string "rma_name"
-    t.datetime "submitted_to_pol"
+    t.datetime "submitted_to_pol", precision: nil
     t.string "confidence_homes_better_protected"
     t.string "confidence_homes_by_gateway_four"
     t.string "confidence_secured_partnership_funding"
@@ -323,25 +329,25 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.index ["submitted_to_pol"], name: "index_pafs_core_projects_on_submitted_to_pol"
   end
 
-  create_table "pafs_core_reference_counters", force: :cascade do |t|
+  create_table "pafs_core_reference_counters", id: :serial, force: :cascade do |t|
     t.string "rfcc_code", default: "", null: false
     t.integer "high_counter", default: 0, null: false
     t.integer "low_counter", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["rfcc_code"], name: "index_pafs_core_reference_counters_on_rfcc_code", unique: true
   end
 
-  create_table "pafs_core_states", force: :cascade do |t|
+  create_table "pafs_core_states", id: :serial, force: :cascade do |t|
     t.integer "project_id"
     t.string "state", default: "draft", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
-  create_table "pafs_core_user_areas", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "pafs_core_user_areas", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id", null: false
     t.integer "area_id", null: false
     t.boolean "primary", default: false
@@ -349,29 +355,29 @@ ActiveRecord::Schema.define(version: 2023_04_12_142838) do
     t.index ["user_id"], name: "index_pafs_core_user_areas_on_user_id"
   end
 
-  create_table "pafs_core_users", force: :cascade do |t|
+  create_table "pafs_core_users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
+    t.datetime "locked_at", precision: nil
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "job_title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "invitation_token"
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
+    t.datetime "invitation_created_at", precision: nil
+    t.datetime "invitation_sent_at", precision: nil
+    t.datetime "invitation_accepted_at", precision: nil
     t.integer "invitation_limit"
     t.integer "invited_by_id"
     t.string "invited_by_type"
