@@ -5,7 +5,8 @@ require "rails_helper"
 RSpec.describe PafsCore::SpreadsheetPresenter do
   subject(:presenter) { described_class.new(project) }
 
-  let(:project) { build(:project) }
+  let(:project_type) { "DEF" }
+  let(:project) { build(:project, project_type:) }
 
   describe "#moderation_code" do
     context "with an urgent project" do
@@ -112,6 +113,26 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       it "returns nil" do
         expect(presenter.pso_name).to be_nil
       end
+    end
+  end
+
+  describe "#project_type" do
+    context "when the project type is 'STR'" do
+      let(:project_type) { "STR" }
+
+      it { expect(presenter.project_type).to eq "STR" }
+    end
+
+    context "when the project type is 'ENV_WITH_HOUSEHOLDS'" do
+      let(:project_type) { "ENV_WITH_HOUSEHOLDS" }
+
+      it { expect(presenter.project_type).to eq "ENV" }
+    end
+
+    context "when the project type is 'ENV_WITHOUT_HOUSEHOLDS'" do
+      let(:project_type) { "ENV_WITHOUT_HOUSEHOLDS" }
+
+      it { expect(presenter.project_type).to eq "ENN" }
     end
   end
 end
