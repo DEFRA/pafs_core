@@ -57,7 +57,7 @@ end
 # rubocop:disable Style/StringConcatenation
 def escape_xpath_quotes(str)
   if str =~ /'/
-    %[concat('] + str.gsub(/'/, %(', "'", ')) + %[')]
+    %[concat('] + str.gsub("'", %(', "'", ')) + %[')]
   else
     %('#{str}')
   end
