@@ -32,7 +32,7 @@ module PafsCore
         true
       end.compact!
 
-      return unless values.present? && values.include?(true)
+      return false unless values.present? && values.include?(true)
 
       errors.add(
         :base,

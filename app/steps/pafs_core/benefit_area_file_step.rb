@@ -72,7 +72,7 @@ module PafsCore
         entries = zip_file.entries.map(&:name)
 
         EXPECTED_EXTENSIONS.each do |ext|
-          next if entries.select { |entry| entry.match(/\.#{ext}$/) }.any?
+          next if entries.any? { |entry| entry.match(/\.#{ext}$/) }
 
           errors.add(:base, "The selected file must be a zip file, " \
                             "containing the following mandatory files: dbf. shx. shp. prj.")

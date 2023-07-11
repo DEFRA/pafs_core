@@ -56,8 +56,11 @@ module PafsCore
     end
 
     def project_type
-      if project.project_type&.start_with?("ENV")
+      case project.project_type
+      when "ENV_WITH_HOUSEHOLDS"
         "ENV"
+      when "ENV_WITHOUT_HOUSEHOLDS"
+        "ENN"
       else
         project.project_type
       end

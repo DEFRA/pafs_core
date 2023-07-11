@@ -9,7 +9,7 @@ SimpleCov.start "rails"
 require File.expand_path("dummy/config/environment", __dir__)
 
 # Prevent database truncation if the environment is production
-# abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 require "rspec/rails"
 # require "capybara/rspec"
@@ -57,7 +57,7 @@ end
 # rubocop:disable Style/StringConcatenation
 def escape_xpath_quotes(str)
   if str =~ /'/
-    %[concat('] + str.gsub(/'/, %(', "'", ')) + %[')]
+    %[concat('] + str.gsub("'", %(', "'", ')) + %[')]
   else
     %('#{str}')
   end

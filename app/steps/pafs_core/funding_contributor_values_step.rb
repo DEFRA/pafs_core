@@ -32,7 +32,7 @@ module PafsCore
       end.group_by(&:name)
       contributors = contributors.values.map { |v| v.map(&:amount).compact.reduce(&:+) }
 
-      return true if contributors.select(&:zero?).empty?
+      return true if contributors.none?(&:zero?)
 
       errors.add(:base, "Please ensure you enter at least one value for every contributor")
       false
