@@ -26,7 +26,7 @@ FactoryBot.define do
     end
 
     factory :financial_year_alternative_step, class: "PafsCore::FinancialYearAlternativeStep" do
-      project_end_financial_year { Time.current.uk_financial_year + 1 }
+      project_end_financial_year { Date.today.uk_financial_year + 1 }
     end
 
     factory :key_dates_step, class: "PafsCore::KeyDatesStep" do
