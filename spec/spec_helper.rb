@@ -50,6 +50,7 @@ RSpec.configure do |config|
   # `:focus` metadata. When nothing is tagged with `:focus`, all examples
   # get run.
   config.filter_run :focus
+  config.example_status_persistence_file_path = "tmp/examples.txt"
   config.run_all_when_everything_filtered = true
   #   # Allows RSpec to persist some state between runs in order to support
   #   # the `--only-failures` and `--next-failure` CLI options. We recommend

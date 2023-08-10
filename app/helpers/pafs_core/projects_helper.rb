@@ -104,11 +104,11 @@ module PafsCore
     end
 
     def formatted_financial_year(year)
-      if year.negative?
-        t("previous_years_label")
-      else
-        "#{year} to #{year + 1}"
-      end
+      "#{year} to #{year + 1}"
+    end
+
+    def formatted_financial_month_and_year(year)
+      "April #{year} to March #{year + 1}"
     end
 
     def urgency_flag(project)
@@ -116,14 +116,6 @@ module PafsCore
         %(<span class="urgent">Yes</span>).html_safe
       else
         ""
-      end
-    end
-
-    def formatted_financial_month_and_year(year)
-      if year.negative?
-        t("previous_years_label")
-      else
-        "April #{year} to March #{year + 1}"
       end
     end
 
