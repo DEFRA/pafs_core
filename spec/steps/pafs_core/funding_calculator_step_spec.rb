@@ -25,15 +25,13 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
     end
 
     it "validates the calculator version when correct" do
-      allow(subject).to receive(:expected_version).and_return("v9")
-      allow(subject).to receive(:uploaded_file).and_return(v9_calculator_file)
+      allow(subject).to receive_messages(expected_version: "v9", uploaded_file: v9_calculator_file)
 
       expect(subject).to be_valid
     end
 
     it "validates the calculator version" do
-      allow(subject).to receive(:expected_version).and_return("v8")
-      allow(subject).to receive(:uploaded_file).and_return(v9_calculator_file)
+      allow(subject).to receive_messages(expected_version: "v8", uploaded_file: v9_calculator_file)
 
       subject.valid?
 

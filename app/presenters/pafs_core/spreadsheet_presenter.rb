@@ -311,7 +311,7 @@ module PafsCore
     def designated_site
       return "SPA/SAC" if improve_spa_or_sac
 
-      return "SSSI" if improve_sssi
+      "SSSI" if improve_sssi
     end
 
     def remove_fish_or_eel_barrier

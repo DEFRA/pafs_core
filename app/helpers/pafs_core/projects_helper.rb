@@ -58,7 +58,8 @@ module PafsCore
       return unless rma_user? || pso_user?
 
       return link_to("Revert to draft", unlock_project_path(id: project.to_param)) if project.archived?
-      return link_to("Archive", pafs_core.archive_project_path(project)) if project.draft?
+
+      link_to("Archive", pafs_core.archive_project_path(project)) if project.draft?
     end
 
     def project_status_line(project)
