@@ -13,7 +13,7 @@
             <p><%= t('.lede') %></p>
         
             <%= f.govuk_number_field :project_end_financial_year,
-              min: Date.today.uk_financial_year,
+              min: Time.zone.today.uk_financial_year,
               max: 2100,
               class: "form-control form-year",
               hint: { text: t(".example_text") },
