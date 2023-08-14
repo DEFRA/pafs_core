@@ -41,6 +41,7 @@ group :development, :test do
   gem "rubocop-rspec"
   gem "shoulda-matchers"
   gem "simplecov"
+  gem "timecop"
   gem "vcr"
   gem "webmock"
 end

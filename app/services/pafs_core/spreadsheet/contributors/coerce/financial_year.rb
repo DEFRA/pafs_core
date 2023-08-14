@@ -6,8 +6,6 @@ module PafsCore
       module Coerce
         class FinancialYear < Base
           def perform
-            return -1 if value == "Previous years"
-
             raise("unknown year") if matches.nil?
 
             matches[0]

@@ -27,7 +27,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
     end
 
     it "validates that :project_end_financial_year is current financial year or later" do
-      subject.project_end_financial_year = Date.today.uk_financial_year - 1
+      subject.project_end_financial_year = Time.zone.today.uk_financial_year - 1
       expect(subject.valid?).to be false
       expect(subject.errors[:project_end_financial_year]).to include(
         "The financial year must be in the future"
@@ -64,7 +64,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
     subject { build(:financial_year_step) }
 
     it "returns the correct set of financial year options" do
-      current_financial_year = Date.today.uk_financial_year
+      current_financial_year = Time.zone.today.uk_financial_year
       expect(subject.financial_year_options).to eq current_financial_year..current_financial_year + 5
     end
   end

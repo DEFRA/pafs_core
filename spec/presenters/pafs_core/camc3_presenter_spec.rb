@@ -22,7 +22,6 @@ RSpec.describe PafsCore::Camc3Presenter do
   end
   let(:funding_values) do
     [
-      { year: -1, value: 2000 },
       { year: 2015, value: 200  },
       { year: 2016, value: 250  },
       { year: 2017, value: 350  },
@@ -32,7 +31,6 @@ RSpec.describe PafsCore::Camc3Presenter do
   end
   let(:funding_years) do
     [
-      -1,
       2015,
       2016,
       2017,
@@ -43,7 +41,6 @@ RSpec.describe PafsCore::Camc3Presenter do
   end
   let(:outcome_measurements) do
     [
-      { year: -1,   value: 2000 },
       { year: 2015, value: 200 },
       { year: 2016, value: 250 },
       { year: 2017, value: 350 },
@@ -67,11 +64,16 @@ RSpec.describe PafsCore::Camc3Presenter do
   let(:json) { subject.attributes.to_json }
 
   before do
+    # These specs are for a "current" financial year of 2015
+    Timecop.freeze(Date.new(2015, 4, 1))
+
     allow_any_instance_of(PafsCore::Files)
       .to receive(:fetch_funding_calculator_for)
       .with(project)
       .and_yield(pfc_file.read, calculator_file, project.funding_calculator_content_type)
   end
+
+  after { Timecop.return }
 
   context "without a calculator_file" do
     before do

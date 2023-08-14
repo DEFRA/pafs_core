@@ -28,6 +28,7 @@
                 </thead>
                 <tbody>
                   <% @project.current_coastal_erosion_protection_outcomes.each do |cepo| %>
+                    <% next if cepo.financial_year == -1 %>
                     <tr>
                       <td class="financial_year">
                         <%= formatted_financial_year(cepo.financial_year) %>

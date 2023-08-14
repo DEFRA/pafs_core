@@ -34,8 +34,6 @@ module PafsCore
         private
 
         def financial_year(value)
-          return "Previous years" if value == -1
-
           "#{value} - #{value + 1}"
         end
 

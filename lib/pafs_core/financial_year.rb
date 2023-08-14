@@ -7,7 +7,7 @@ module PafsCore
              to: :project
 
     def current_financial_year
-      Date.today.uk_financial_year
+      Time.zone.today.uk_financial_year
     end
 
     def financial_year_options

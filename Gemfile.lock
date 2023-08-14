@@ -399,6 +399,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     thor (1.2.2)
+    timecop (0.9.6)
     timeout (0.4.0)
     timers (4.3.5)
     traces (0.8.0)
@@ -451,6 +452,7 @@ DEPENDENCIES
   simplecov
   sprockets (< 4)
   sprockets-rails
+  timecop
   vcr
   webmock
 

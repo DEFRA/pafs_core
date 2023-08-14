@@ -4,6 +4,8 @@ require "rails_helper"
 
 RSpec.describe PafsCore::FundingValuesStep, type: :model do
   before do
+    Timecop.freeze(Date.new(2015, 4, 1))
+
     @project = create(:project)
     @project.fcerm_gia = true
     @project.project_end_financial_year = 2022
@@ -20,6 +22,8 @@ RSpec.describe PafsCore::FundingValuesStep, type: :model do
 
     @project.save
   end
+
+  after { Timecop.return }
 
   describe "#update" do
     subject { described_class.new @project }

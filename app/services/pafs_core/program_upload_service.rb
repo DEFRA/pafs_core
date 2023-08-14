@@ -145,7 +145,7 @@ module PafsCore
         if range
           # handle ranges
           start_column = column
-          years = [-1].concat((2015..2027).to_a)
+          years = (Time.zone.today.uk_financial_year..2027)
           values = []
           years.each_with_index do |_year, i|
             cell = row[start_column + i]

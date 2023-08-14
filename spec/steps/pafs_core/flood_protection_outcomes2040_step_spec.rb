@@ -4,6 +4,8 @@ require "rails_helper"
 
 RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
   before do
+    Timecop.freeze(Date.new(2015, 4, 1))
+
     @project = create(:project)
     @project.project_end_financial_year = 2027
     @project.fluvial_flooding = true
@@ -16,6 +18,8 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
 
     @project.save
   end
+
+  after { Timecop.return }
 
   describe "attributes" do
     subject { described_class.new @project }
@@ -144,7 +148,11 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
     subject { PafsCore::FloodProtectionOutcomesStep.new @project }
 
     it "builds flood_protection_outcome records for any missing years" do
-      expect { subject.before_view({}) }.to change { subject.flood_protection_outcomes.length }.by(8)
+      # test start year is 2015
+      # project_end_financial_year = 2027
+      # values are initially unpopulated
+      # so expect years to be added for 2015 - 2027
+      expect { subject.before_view({}) }.to change { subject.flood_protection_outcomes.length }.by(13)
     end
   end
 end

@@ -142,11 +142,8 @@ module PafsCore
     def setup_coastal_erosion_protection_outcomes
       # need to ensure the project has the right number of funding_values entries
       # for the tables
-      # we need at least:
-      #   previous years
-      #   current financial year to :project_end_financial_year
-      years = [-1]
-      years.concat((2021..project_end_financial_year).to_a)
+      # we need current financial year to :project_end_financial_year
+      years = (Time.zone.today.uk_financial_year..project_end_financial_year)
       years.each { |y| build_missing_year(y) }
     end
 
