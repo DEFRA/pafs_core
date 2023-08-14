@@ -131,7 +131,7 @@ module PafsCore
 
         if range
           start_column = column_index(col[:column])
-          years = [-1].concat((2015..2027).to_a)
+          years = (Time.zone.today.uk_financial_year..2027)
           years.each_with_index do |year, i|
             value = use_value ? project.send(name, year) : 0
             sheet[row_no][start_column + i].change_contents(value)

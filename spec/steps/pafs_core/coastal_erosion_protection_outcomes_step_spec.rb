@@ -4,6 +4,8 @@ require "rails_helper"
 
 RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
   before do
+    Timecop.freeze(Date.new(2015, 4, 1))
+
     @project = create(:project)
     @project.project_end_financial_year = 2027
     @project.coastal_erosion = true
@@ -16,6 +18,8 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
 
     @project.save
   end
+
+  after { Timecop.return }
 
   describe "attributes" do
     subject { described_class.new @project }
@@ -147,10 +151,11 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
     subject { described_class.new @project }
 
     it "builds coastal_erosion_protection_outcome records for any missing years" do
-      # project_end_financial_year = 2022
-      # funding_values records run until 2019
-      # so expect 3 placeholders to be built for 2020, 2021 and 2022
-      expect { subject.before_view({}) }.to change { subject.coastal_erosion_protection_outcomes.length }.by(8)
+      # test start year is 2015
+      # project_end_financial_year = 2027
+      # values are initially populated for 2017, 2020, 2030
+      # so expect placeholders to be added for 2015, 2016, 2018, 2019, and 2021 - 2027
+      expect { subject.before_view({}) }.to change { subject.coastal_erosion_protection_outcomes.length }.by(11)
     end
   end
 end

@@ -51,10 +51,8 @@ require "pafs_core/pol/azure_oauth"
 require "pafs_core/pol/azure_vault_client"
 require "pafs_core/pol/archive"
 require "pafs_core/pol/submission"
-require "core_ext/time/financial"
 require "core_ext/date/financial"
 
-Time.include CoreExtensions::Time::Financial
 Date.include CoreExtensions::Date::Financial
 
 module PafsCore

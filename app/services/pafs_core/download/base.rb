@@ -7,8 +7,8 @@ module PafsCore
 
       def initialize(_opts = nil); end
 
-      def self.perform(*opts)
-        new(*opts).tap(&:perform)
+      def self.perform(*)
+        new(*).tap(&:perform)
       end
 
       def perform

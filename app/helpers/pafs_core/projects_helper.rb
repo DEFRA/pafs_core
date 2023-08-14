@@ -58,7 +58,8 @@ module PafsCore
       return unless rma_user? || pso_user?
 
       return link_to("Revert to draft", unlock_project_path(id: project.to_param)) if project.archived?
-      return link_to("Archive", pafs_core.archive_project_path(project)) if project.draft?
+
+      link_to("Archive", pafs_core.archive_project_path(project)) if project.draft?
     end
 
     def project_status_line(project)
@@ -103,11 +104,11 @@ module PafsCore
     end
 
     def formatted_financial_year(year)
-      if year.negative?
-        t("previous_years_label")
-      else
-        "#{year} to #{year + 1}"
-      end
+      "#{year} to #{year + 1}"
+    end
+
+    def formatted_financial_month_and_year(year)
+      "April #{year} to March #{year + 1}"
     end
 
     def urgency_flag(project)
@@ -115,14 +116,6 @@ module PafsCore
         %(<span class="urgent">Yes</span>).html_safe
       else
         ""
-      end
-    end
-
-    def formatted_financial_month_and_year(year)
-      if year.negative?
-        t("previous_years_label")
-      else
-        "April #{year} to March #{year + 1}"
       end
     end
 
