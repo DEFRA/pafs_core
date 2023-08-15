@@ -3,6 +3,17 @@
 FactoryBot.define do
   factory :organisation, class: "PafsCore::Organisation" do
     name { Faker::Lorem.sentence }
-    organisation_type { "RMA" }
+
+    trait :rma do
+      organisation_type { "RMA" }
+    end
+
+    trait :authority do
+      organisation_type { "Authority" }
+    end
+
+    trait :pso do
+      organisation_type { "PSO" }
+    end
   end
 end
