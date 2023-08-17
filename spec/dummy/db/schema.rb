@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_115629) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_20_214333) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -170,15 +170,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_115629) do
     t.index ["financial_year"], name: "index_pafs_core_funding_values_on_financial_year"
     t.index ["project_id", "financial_year"], name: "funding_values_on_project_id_and_financial_year"
     t.index ["project_id"], name: "index_pafs_core_funding_values_on_project_id"
-  end
-
-  create_table "pafs_core_organisations", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "organisation_type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_pafs_core_organisations_on_name"
-    t.index ["organisation_type"], name: "index_pafs_core_organisations_on_organisation_type"
   end
 
   create_table "pafs_core_projects", id: :serial, force: :cascade do |t|
