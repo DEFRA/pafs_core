@@ -402,10 +402,10 @@ en:
 
 # Confidence assessment
         confidence_homes_better_protected:
-          heading: Confidence in number of homes better protected by this project
+          heading: Confidence in number of properties better protected by this project
 
         confidence_homes_by_gateway_four:
-          heading: Confidence in homes being delivered by the project’s Gateway 4 (Readiness for Service) date
+          heading: Confidence in properties being delivered by the project’s Gateway 4 (Readiness for Service) date
 
         confidence_secured_partnership_funding:
           heading: Confidence in securing the required Partnership Funding
