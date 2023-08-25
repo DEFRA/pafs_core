@@ -24,6 +24,7 @@ module PafsCore
         @projects ||= PafsCore::Project.joins(:state)
                                        .joins(:area_projects)
                                        .includes(funding_contributors: :funding_value, area_projects: :area)
+                                       .where.not(pafs_core_states: { state: :archived })
         Rails.logger.warn "Found #{@projects.length} projects for download"
         @projects
       rescue StandardError => e
