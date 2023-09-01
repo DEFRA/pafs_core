@@ -268,7 +268,7 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
-    pg (1.5.3)
+    pg (1.5.4)
     protocol-hpack (1.4.2)
     protocol-http (0.24.7)
     protocol-http1 (0.15.1)
