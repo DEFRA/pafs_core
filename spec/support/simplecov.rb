@@ -20,6 +20,9 @@ SimpleCov.start("rails") do
   # Our db folder contains migrations and seeding, functionality we are ok not
   # to have tests for
   add_filter "/db/"
+  # The version file is simply just that, so we do not feel the need to ensure
+  # we have a test for it
+  add_filter "lib/pafs_core/version"
 
   add_group "Forms", "app/forms"
   add_group "Presenters", "app/presenters"
