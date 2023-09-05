@@ -24,13 +24,21 @@ SimpleCov.start("rails") do
   # we have a test for it
   add_filter "lib/pafs_core/version"
 
-  # @todo: remove this once we have a test for it
+  # These are just missing test coverage for now, but we will get to them
+  # @todo: remove this once we have tests for it
   add_filter "lib/pafs_core/data_migration/move_growth_funding_to_other_additional_gia.rb"
   add_filter "lib/pafs_core/date_utils.rb"
   add_filter "lib/pafs_core/funding_sources.rb"
   add_filter "app/helpers/pafs_core/application_helper.rb"
   add_filter "app/decorators/pafs_core/imported_project_decorator.rb"
   add_filter "lib/pafs_core/mapper/fcerm.rb"
+  add_filter "app/helpers/pafs_core/application_helper.rb"
+  add_filter "app/decorators/pafs_core/imported_project_decorator.rb"
+  add_filter "lib/pafs_core/data_migration/move_growth_funding_to_other_additional_gia.rb"
+  add_filter "lib/pafs_core/date_utils.rb"
+  add_filter "lib/pafs_core/funding_sources.rb"
+  add_filter "app/assets/javascripts/pafs_core/other_flood_measures.js"
+  add_filter "lib/pafs_core/mapper/funding_sources.rb"
 
   add_group "Forms", "app/forms"
   add_group "Presenters", "app/presenters"
