@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.postcodes.io/postcodes?lat=53.394421&limit=1&lon=-0.342716
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 05 Sep 2023 11:50:09 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Gnu:
+      - Michael J Blanchard
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"3dc-///vjzmDmE4mBS/7guoYXUBcMEw"
+      Cf-Cache-Status:
+      - MISS
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=ENjY2jaVnJK1CvnqtraLLAeD35oP%2BYU2f4vibleZcH072U9FGhOQzsU80NUIDV5el%2BDm%2Fi02h%2BVRFJNu6MD3V%2F1TwVioGX6APZJlXqL56SORTTa4Um4RzgvEfJ0Gai%2FezIU%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 801e40c4b92c24d8-LHR
+    body:
+      encoding: ASCII-8BIT
+      string: '{"status":200,"result":[{"postcode":"LN8 3NY","quality":1,"eastings":510341,"northings":389893,"country":"England","nhs_ha":"East
+        Midlands","longitude":-0.342117,"latitude":53.394349,"european_electoral_region":"East
+        Midlands","primary_care_trust":"Lincolnshire Teaching","region":"East Midlands","lsoa":"West
+        Lindsey 003D","msoa":"West Lindsey 003","incode":"3NY","outcode":"LN8","parliamentary_constituency":"Gainsborough","admin_district":"West
+        Lindsey","parish":"Middle Rasen","admin_county":"Lincolnshire","date_of_introduction":"200511","admin_ward":"Market
+        Rasen","ced":"Market Rasen Wolds","ccg":"NHS Lincolnshire","nuts":"Lincolnshire
+        CC","pfa":"Lincolnshire","codes":{"admin_district":"E07000142","admin_county":"E10000019","admin_ward":"E05009646","parish":"E04006018","parliamentary_constituency":"E14000707","ccg":"E38000238","ccg_id":"71E","ced":"E58000927","nuts":"TLF30","lsoa":"E01026392","msoa":"E02005494","lau2":"E07000142","pfa":"E23000020"},"distance":40.64550129}]}'
+  recorded_at: Tue, 05 Sep 2023 11:50:09 GMT
+recorded_with: VCR 6.2.0
