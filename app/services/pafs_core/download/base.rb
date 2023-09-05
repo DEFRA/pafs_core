@@ -7,9 +7,12 @@ module PafsCore
 
       def initialize(_opts = nil); end
 
-      def self.perform(*)
-        new(*).tap(&:perform)
+      # Robocop and SonarCloud disagree over the use of arguments forwarding
+      # rubocop:disable Style/ArgumentsForwarding
+      def self.perform(*opts)
+        new(*opts).tap(&:perform)
       end
+      # rubocop:enable Style/ArgumentsForwarding
 
       def perform
         raise("Override #perform in subclass")
