@@ -4,9 +4,21 @@ require "rails_helper"
 
 RSpec.describe PafsCore::LocationStep, type: :model do
   describe "attributes" do
-    subject { build(:location_step) }
+    subject { create(:location_step) }
 
     it_behaves_like "a project step"
+
+    it "validates that the grid reference is supplied" do
+      subject.grid_reference = nil
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:grid_reference]).to include "Tell us the project's National Grid Reference"
+    end
+
+    it "validates that the grid reference is of valid format" do
+      subject.grid_reference = "AA0000000000"
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:grid_reference]).to include "The National Grid Reference must be 2 letters followed by 10 digits"
+    end
   end
 
   describe "#update", :vcr do
