@@ -89,8 +89,10 @@ FactoryBot.define do
     end
 
     factory :location_step, class: "PafsCore::LocationStep" do
-      project_location { [457_733, 221_751] }
-      project_location_zoom_level { 15 }
+      grid_reference { "SK0071972583" }
+      region { "North West" }
+      county { "Greater Manchester" }
+      parliamentary_constituency { "Manchester Central" }
     end
 
     factory :benefit_area_file_step, class: "PafsCore::BenefitAreaFileStep" do

@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
-
-require "simplecov"
-SimpleCov.start "rails"
-
 require File.expand_path("dummy/config/environment", __dir__)
 
 # Prevent database truncation if the environment is production
@@ -17,7 +14,6 @@ require "factory_bot_rails"
 require "shoulda-matchers"
 require "vcr"
 require "webmock/rspec"
-require "spec_helper"
 
 Rails.backtrace_cleaner.remove_silencers!
 

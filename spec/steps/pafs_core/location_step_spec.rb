@@ -2,64 +2,73 @@
 
 require "rails_helper"
 
-# TODO: Define the LocationStep factory and complete these specs
-# rubocop:disable RSpec/EmptyExampleGroup
 RSpec.describe PafsCore::LocationStep, type: :model do
-  # describe "attributes" do
-  #   subject { build(:location_step) }
-  #
-  #   it_behaves_like "a project step"
-  # end
+  describe "attributes" do
+    subject { create(:location_step) }
 
-  # describe "#benefit_area" do
-  #   subject { create(:location_step) }
-  #
-  #   context "with a defined benefit_area" do
-  #     it "returns the benefit_area" do
-  #       subject.project.benefit_area = "[[[457736,221754]]]"
-  #       subject.project.save
-  #
-  #       expect(subject.benefit_area).to eq "[[[457736,221754]]]"
-  #     end
-  #   end
-  #
-  #   context "when benefit_area is nil" do
-  #     it "returns \"[[[]]]\"" do
-  #       expect(subject.benefit_area).to eq "[[[]]]"
-  #     end
-  #   end
-  # end
+    it_behaves_like "a project step"
 
-  # describe "#update", :vcr do
-  #   subject { create(:location_step) }
-  #   let(:params) {
-  #     ActionController::Parameters.new({
-  #       location_step: {
-  #         project_location: "[\"457736\", \"221754\"]",
-  #         project_location_zoom_level: 19
-  #       }
-  #     })
-  #   }
-  #   let(:error_params) {
-  #     ActionController::Parameters.new({
-  #       location_step: {
-  #         project_location: nil,
-  #         project_location_zoom_level: nil
-  #       }
-  #     })
-  #   }
-  #
-  #   it "saves the :project_location when valid" do
-  #     expect(subject.project_location).not_to eq %w(457736 221754)
-  #     expect(subject.project_location_zoom_level).not_to eq 19
-  #     expect(subject.update(params)).to be true
-  #     expect(subject.project_location).to eq %w(457736 221754)
-  #     expect(subject.project_location_zoom_level).to eq 19
-  #   end
-  #
-  #   it "returns false when validation fails" do
-  #     expect(subject.update(error_params)).to eq false
-  #   end
-  # end
+    it "validates that the grid reference is supplied" do
+      subject.grid_reference = nil
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:grid_reference]).to include "Tell us the project's National Grid Reference"
+    end
+
+    it "validates that the grid reference is of valid format" do
+      subject.grid_reference = "AA0000000000"
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:grid_reference]).to include "The National Grid Reference must be 2 letters followed by 10 digits"
+    end
+  end
+
+  describe "#update", :vcr do
+    subject { create(:location_step) }
+
+    let(:params) do
+      ActionController::Parameters.new(
+        {
+          location_step: {
+            grid_reference: "TF1030089900"
+          }
+        }
+      )
+    end
+    let(:error_params) do
+      ActionController::Parameters.new(
+        {
+          location_step: {
+            grid_reference: "AA0000000000"
+          }
+        }
+      )
+    end
+
+    it "saves the :grid_reference when valid" do
+      expect(subject.grid_reference).not_to eq "TF1030089900"
+      expect(subject.update(params)).to be true
+      expect(subject.grid_reference).to eq "TF1030089900"
+    end
+
+    it "saves the :region when valid" do
+      expect(subject.region).not_to eq "East Midlands"
+      expect(subject.update(params)).to be true
+      expect(subject.region).to eq "East Midlands"
+    end
+
+    it "saves the :county when valid" do
+      expect(subject.county).not_to eq "Lincolnshire"
+      expect(subject.update(params)).to be true
+      expect(subject.county).to eq "Lincolnshire"
+    end
+
+    it "saves the :parliamentary_constituency when valid" do
+      expect(subject.parliamentary_constituency).not_to eq "Gainsborough"
+      expect(subject.update(params)).to be true
+      expect(subject.parliamentary_constituency).to eq "Gainsborough"
+    end
+
+    it "returns false when validation fails" do
+      expect(subject.update(error_params)).to be false
+    end
+  end
 end
-# rubocop:enable RSpec/EmptyExampleGroup
