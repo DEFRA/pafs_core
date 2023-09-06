@@ -22,11 +22,17 @@ AllCops:
     # These files are not actively maintained but are retained for reference:
     - db/old_migrations/**/*
 
+RSpec/DescribeClass:
+  Exclude:
+  # This cop is n/a for rake tasks
+    - spec/lib/tasks/*
+
 # This is required in app/services/pafs_core/download/base.rb
 # but adding a disable directive there causes rubocop to complain
 # about an unnecessary disable directive, so disabling it here instead.
 Style/RedundantInitialize:
-  Enabled: false
+  Exclude:
+    - app/services/pafs_core/download/base.rb
 
 # this rule seems overly fussy:
 RSpec/IndexedLet:
