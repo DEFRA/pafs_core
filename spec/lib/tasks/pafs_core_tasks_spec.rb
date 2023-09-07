@@ -43,7 +43,7 @@ RSpec.describe "PafsCore::DataMigration", type: :rake do
   end
 
   describe "pafs:update_submission_date" do
-    before { allow(ENV).to receive(:fetch).with("SUBMISSION_DATE").and_return(Date.today.to_s) }
+    before { allow(ENV).to receive(:fetch).with("SUBMISSION_DATE").and_return(Time.zone.today.to_s) }
 
     it { expect { Rake::Task["pafs:update_submission_date"].invoke }.not_to raise_error }
   end
