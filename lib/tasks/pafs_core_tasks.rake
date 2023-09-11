@@ -34,5 +34,10 @@ namespace :pafs do
   task update_submission_date: :environment do
     PafsCore::DataMigration::UpdatePolSubmissionDate.perform
   end
+
+  desc "Remove data for financial years before the current financial year"
+  task remove_previous_years: :environment do
+    PafsCore::DataMigration::RemovePreviousYears.perform_all
+  end
 end
 # rubocop:enable Metrics/BlockLength
