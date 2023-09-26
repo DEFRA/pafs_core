@@ -7,7 +7,7 @@ module PafsCore
       EA_AREA      = "EA Area",
       PSO_AREA     = "PSO Area",
       RMA_AREA     = "RMA",
-      AUTHORITY_AREA = "Authority"
+      AUTHORITY = "Authority"
     ].freeze
 
     validates :name, :area_type, presence: true
@@ -40,7 +40,7 @@ module PafsCore
       where(area_type: AREA_TYPES[3])
     end
 
-    def self.authority_areas
+    def self.authorities
       where(area_type: AREA_TYPES[4])
     end
 

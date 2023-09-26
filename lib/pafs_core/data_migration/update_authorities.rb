@@ -16,19 +16,19 @@ module PafsCore
           }
 
           authorities.each do |identifier, name|
-            authority = PafsCore::Area.find_by(area_type: PafsCore::Area::AUTHORITY_AREA, identifier: identifier)
+            authority = PafsCore::Area.find_by(area_type: PafsCore::Area::AUTHORITY, identifier: identifier)
             next if authority.present?
 
             PafsCore::Area.create(
               name: name,
-              area_type: PafsCore::Area::AUTHORITY_AREA,
+              area_type: PafsCore::Area::AUTHORITY,
               identifier: identifier
             )
           end
         end
 
         def down
-          PafsCore::Area.where(area_type: PafsCore::Area::AUTHORITY_AREA).destroy_all
+          PafsCore::Area.where(area_type: PafsCore::Area::AUTHORITY).destroy_all
         end
       end
     end
