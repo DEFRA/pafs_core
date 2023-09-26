@@ -93,7 +93,7 @@ FactoryBot.define do
 
     factory :rma_area do
       area_type { "RMA" }
-      sub_type { "Local Authority" }
+      sub_type { PafsCore::Area.authorities.first&.identifier || create(:authority).identifier }
 
       parent { PafsCore::Area.country || create(:country) }
 
@@ -128,6 +128,12 @@ FactoryBot.define do
           end
         end
       end
+    end
+
+    factory :authority do
+      area_type { "Authority" }
+      name { "Local Authority" }
+      identifier { "LA" }
     end
   end
 end
