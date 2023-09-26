@@ -21,7 +21,7 @@ RSpec.describe PafsCore::SpreadsheetService do
 
     let(:file_path) { Rails.root.join("..", "fixtures", filename) }
     let(:file) { File.open(file_path) }
-    let(:projects) { PafsCore::Project.all.order(:name) }
+    let(:projects) { PafsCore::Project.order(:name) }
     let(:expected) { subject.generate_multi_xlsx(projects) }
 
     let(:spreadsheet_presenter_1) { PafsCore::SpreadsheetPresenter.new(test_project_1) }

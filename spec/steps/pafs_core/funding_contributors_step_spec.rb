@@ -112,7 +112,7 @@ describe PafsCore::FundingContributorsStep, type: :model do
     it "updates the names of the contributors" do
       expect do
         perform
-      end.to change { PafsCore::FundingContributor.all.order(:id).map(&:name).uniq }.from(
+      end.to change { PafsCore::FundingContributor.order(:id).map(&:name).uniq }.from(
         ["EnviroCo Ltd", "CWI"]
       ).to(
         ["EnviroCo Ltd", "Clean Water Initiative"]
