@@ -6,7 +6,8 @@ module PafsCore
       COUNTRY_AREA = "Country",
       EA_AREA      = "EA Area",
       PSO_AREA     = "PSO Area",
-      RMA_AREA     = "RMA"
+      RMA_AREA     = "RMA",
+      AUTHORITY_AREA = "Authority"
     ].freeze
 
     validates :name, :area_type, presence: true
@@ -39,6 +40,10 @@ module PafsCore
       where(area_type: AREA_TYPES[3])
     end
 
+    def self.authority_areas
+      where(area_type: AREA_TYPES[4])
+    end
+
     def country?
       area_type == AREA_TYPES[0]
     end
@@ -53,6 +58,10 @@ module PafsCore
 
     def rma?
       area_type == AREA_TYPES[3]
+    end
+
+    def authority?
+      area_type == AREA_TYPES[4]
     end
 
     def ea_parent
@@ -70,9 +79,9 @@ module PafsCore
     end
 
     def parentage
-      if !country? && parent_id.blank?
+      if !country? && !authority? && parent_id.blank?
         errors.add(:parent_id, "can't be blank")
-      elsif country? && parent_id.present?
+      elsif (country? || authority?) && parent_id.present?
         errors.add(:parent_id, "must be blank")
       end
     end
