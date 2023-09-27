@@ -12,6 +12,8 @@ module PafsCore
 
     validates :name, :area_type, presence: true
     validates :name, uniqueness: true
+    validates :identifier, presence: true, if: :rma? || :authority?
+    validates :identifier, uniqueness: true, if: :rma? || :authority?
     validate :parentage
     validates :area_type, inclusion: { in: AREA_TYPES }
     validates :sub_type, presence: true, if: :rma?
