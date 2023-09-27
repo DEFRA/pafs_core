@@ -78,6 +78,7 @@ module PafsCore
           if parent || child["type"] == PafsCore::Area::AREA_TYPES[0]
             begin
               a = Area.new(area)
+              a.skip_identifier_validation = true
               a.save!
             rescue StandardError => e
               report_error(e.message, child)
