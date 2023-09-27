@@ -93,6 +93,7 @@ FactoryBot.define do
 
     factory :rma_area do
       area_type { "RMA" }
+      identifier { Faker::Lorem.characters(number: 10) }
       sub_type { PafsCore::Area.authorities.first&.identifier || create(:authority).identifier }
 
       parent { PafsCore::Area.country || create(:country) }
