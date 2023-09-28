@@ -14,8 +14,8 @@ module PafsCore
 
     validates :name, :area_type, presence: true
     validates :name, uniqueness: true
-    validates :identifier, presence: true, if: :rma? || :authority?, unless: :skip_identifier_validation
-    validates :identifier, uniqueness: true, if: :rma? || :authority?, unless: :skip_identifier_validation
+    validates :identifier, presence: true, if: -> { rma? || authority? }, unless: :skip_identifier_validation
+    validates :identifier, uniqueness: true, if: -> { rma? || authority? }, unless: :skip_identifier_validation
     validate :parentage
     validates :area_type, inclusion: { in: AREA_TYPES }
     validates :sub_type, presence: true, if: :rma?
