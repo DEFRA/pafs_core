@@ -2,9 +2,7 @@
 
 FactoryBot.define do
   factory :area, class: "PafsCore::Area" do
-    sequence :name do |n|
-      PafsCore::PsoRfccService.map.keys[n % PafsCore::PsoRfccService.map.keys.size]
-    end
+    name { "Area #{Faker::Lorem.unique.sentence}" }
 
     factory :country do
       area_type { "Country" }
@@ -60,6 +58,7 @@ FactoryBot.define do
     factory :pso_area do
       area_type { "PSO Area" }
       parent { PafsCore::Area.country || create(:country) }
+      sub_type { PafsCore::RFCC_CODES.sample }
 
       trait :with_rma_areas do
         after(:create) do |pso_area|
