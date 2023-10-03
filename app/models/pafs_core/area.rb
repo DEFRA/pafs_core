@@ -18,7 +18,7 @@ module PafsCore
     validates :identifier, uniqueness: true, if: -> { rma? || authority? }, unless: :skip_identifier_validation
     validate :parentage
     validates :area_type, inclusion: { in: AREA_TYPES }
-    validates :sub_type, presence: true, if: :rma?
+    validates :sub_type, presence: true, if: -> { rma? || pso_area? }
 
     belongs_to :parent, class_name: "Area", optional: true
     has_many :children, class_name: "Area", foreign_key: "parent_id"
