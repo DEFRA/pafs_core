@@ -95,7 +95,7 @@ FactoryBot.define do
       identifier { Faker::Lorem.characters(number: 10) }
       sub_type { PafsCore::Area.authorities.first&.identifier || create(:authority).identifier }
 
-      parent { PafsCore::Area.country || create(:country) }
+      parent { PafsCore::Area.pso_areas.first || create(:pso_area) }
 
       trait :with_project do
         after(:create) do |rma_area|
