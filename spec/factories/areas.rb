@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :area, class: "PafsCore::Area" do
     sequence :name do |n|
-      PafsCore::PSO_RFCC_MAP.keys[n % PafsCore::PSO_RFCC_MAP.keys.size]
+      PafsCore::PsoRfccService.map.keys[n % PafsCore::PsoRfccService.map.keys.size]
     end
 
     factory :country do

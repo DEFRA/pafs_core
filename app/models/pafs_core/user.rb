@@ -34,7 +34,7 @@ module PafsCore
       return if area.ea_area?
 
       area = area.parent if area.rma?
-      PafsCore::PSO_RFCC_MAP.fetch(area.name)
+      PafsCore::PsoRfccService.map.fetch(area.name)
     end
 
     def primary_area

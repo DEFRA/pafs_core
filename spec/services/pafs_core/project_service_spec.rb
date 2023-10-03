@@ -132,7 +132,7 @@ RSpec.describe PafsCore::ProjectService do
   end
 
   describe "#new_project" do
-    let(:reference_number) { "#{PafsCore::PSO_RFCC_MAP[pso_area_1.name]}C501E" }
+    let(:reference_number) { "#{PafsCore::PsoRfccService.map[pso_area_1.name]}C501E" }
     let(:project) { subject.new_project }
 
     it "builds a new project model without saving to the database" do
