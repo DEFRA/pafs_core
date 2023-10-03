@@ -47,14 +47,22 @@ RSpec.describe PafsCore::Area do
       subject { create(:pso_area, parent_id: 1) }
 
       it { is_expected.to validate_presence_of :parent_id }
-      it { is_expected.not_to validate_presence_of :sub_type }
+      it { is_expected.to validate_presence_of :sub_type }
     end
 
     context "when RMA area" do
       subject { create(:rma_area, parent_id: 1) }
 
+      it { is_expected.to validate_presence_of :identifier }
       it { is_expected.to validate_presence_of :parent_id }
       it { is_expected.to validate_presence_of :sub_type }
+    end
+
+    context "when Authority" do
+      subject { create(:authority) }
+
+      it { is_expected.to validate_presence_of :identifier }
+      it { is_expected.not_to validate_presence_of :end_date }
     end
   end
 
