@@ -36,7 +36,6 @@
 
                       <% contributors.each do |contributor| %>
                         <%= f.fields_for :funding_contributors, contributor do |builder| %>
-                          <% next if builder.object.funding_value.financial_year == -1 %>
                           <tr>
                             <td class="financial_year">
                               <%= formatted_financial_year(builder.object.funding_value.financial_year) %>

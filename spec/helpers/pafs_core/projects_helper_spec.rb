@@ -35,6 +35,12 @@ module PafsCore
     end
 
     describe "#formatted_financial_year" do
+      context "when given a year less than zero" do
+        it "returns the string 'Previous years'" do
+          expect(helper.formatted_financial_year(-1)).to eq "Previous years"
+        end
+      end
+
       it "returns the financial year range as a string" do
         expect(helper.formatted_financial_year(2016)).to eq "2016 to 2017"
       end
