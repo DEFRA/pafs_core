@@ -5,61 +5,94 @@ require "rails_helper"
 RSpec.describe PafsCore::DataMigration::RemovePreviousYears do
 
   describe "#perform_all" do
-    let!(:project_1) { create(:project) }
-    let!(:project_2) { create(:project) }
-
-    before { allow(described_class).to receive(:new).and_call_original }
-
-    it "processes each project" do
-      described_class.perform_all
-
-      expect(described_class).to have_received(:new).with(project_1)
-      expect(described_class).to have_received(:new).with(project_2)
+    let(:projects_with_previous_years_data) do
+      create_list(:project, 5, funding_values: [],
+                               flood_protection_outcomes: [],
+                               flood_protection2040_outcomes: [],
+                               coastal_erosion_protection_outcomes: [])
     end
-  end
-
-  describe "#perform" do
-    let(:project) { create(:project) }
-    let(:step) { create(:funding_sources_step) }
+    let(:projects_without_previous_years_data) do
+      create_list(:project, 2, funding_values: [],
+                               flood_protection_outcomes: [],
+                               flood_protection2040_outcomes: [],
+                               coastal_erosion_protection_outcomes: [])
+    end
     let(:current_year) { Time.zone.today.uk_financial_year }
     let(:data_start_year) { current_year - 2 }
     let(:data_end_year) { current_year + 2 }
 
     before do
-      (data_start_year..data_end_year).each do |year|
-        project.funding_values <<
-          create(:funding_value, financial_year: year)
+      projects_with_previous_years_data.each do |project|
+        (data_start_year..data_end_year).each do |year|
+          add_financial_year_data(project, year)
+        end
+      end
+      projects_without_previous_years_data.each do |project|
+        (current_year..data_end_year - 1).each do |year|
+          add_financial_year_data(project, year)
+        end
+      end
+
+      allow(described_class).to receive(:new).and_call_original
+      allow(PafsCore::RemovePreviousYearsService).to receive(:new).and_call_original
+    end
+
+    context "with a project limit greater than the number of qualifying projects" do
+
+      it "processes all projects with previous years data" do
+        described_class.perform(10)
+
+        expect(PafsCore::RemovePreviousYearsService).to have_received(:new)
+          .exactly(projects_with_previous_years_data.length).times
+      end
+    end
+
+    context "with a project limit less than the number of qualifying projects" do
+
+      it "processes only the specified number of projects" do
+        described_class.perform(3)
+
+        expect(PafsCore::RemovePreviousYearsService).to have_received(:new)
+          .exactly(3).times
+      end
+    end
+
+    context "when a project has outcomes but not funding values for previous years" do
+      let(:project) { projects_without_previous_years_data.sample }
+
+      before do
         project.flood_protection_outcomes <<
-          create(:flood_protection_outcomes, financial_year: year)
-        project.flood_protection2040_outcomes <<
-          create(:flood_protection2040_outcomes, financial_year: year)
-        project.coastal_erosion_protection_outcomes <<
-          create(:coastal_erosion_protection_outcomes, financial_year: year)
+          create(:flood_protection_outcomes, project: project, financial_year: current_year - 1)
       end
 
-      described_class.new(project).perform
-    end
+      it "processes the project" do
+        described_class.perform
 
-    shared_examples "prunes year values correctly" do |attribute|
-      it "removes #{attribute} values for previous years" do
-        expect(project.public_send(attribute).pluck(:financial_year))
-          .not_to include(current_year - 2, current_year - 1)
-      end
-
-      it "does not remove #{attribute} values for the current financial year" do
-        expect(project.public_send(attribute).pluck(:financial_year))
-          .to include(current_year)
-      end
-
-      it "does not remove #{attribute} values for future financial years" do
-        expect(project.public_send(attribute).pluck(:financial_year))
-          .to include(current_year + 1, current_year + 2)
+        expect(PafsCore::RemovePreviousYearsService).to have_received(:new).with(project)
       end
     end
 
-    it_behaves_like "prunes year values correctly", :funding_values
-    it_behaves_like "prunes year values correctly", :flood_protection_outcomes
-    it_behaves_like "prunes year values correctly", :flood_protection2040_outcomes
-    it_behaves_like "prunes year values correctly", :coastal_erosion_protection_outcomes
+    context "when a project is in a submitted state" do
+      let(:submitted_project) { projects_with_previous_years_data.sample }
+
+      before { submitted_project.state.update(state: "submitted") }
+
+      it "does not call the service for the submitted project" do
+        described_class.perform
+
+        expect(PafsCore::RemovePreviousYearsService).not_to have_received(:new).with(submitted_project)
+      end
+    end
+  end
+
+  def add_financial_year_data(project, year)
+    project.funding_values <<
+      create(:funding_value, project: project, financial_year: year)
+    project.flood_protection_outcomes <<
+      create(:flood_protection_outcomes, project: project, financial_year: year)
+    project.flood_protection2040_outcomes <<
+      create(:flood_protection2040_outcomes, project: project, financial_year: year)
+    project.coastal_erosion_protection_outcomes <<
+      create(:coastal_erosion_protection_outcomes, project: project, financial_year: year)
   end
 end

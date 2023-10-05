@@ -15,7 +15,7 @@ RSpec.describe PafsCore::RemovePreviousYearsService do
     before do
 
       project.state.update(state: state)
-      
+
       (data_start_year..data_end_year).each do |year|
         project.funding_values <<
           create(:funding_value, financial_year: year)
