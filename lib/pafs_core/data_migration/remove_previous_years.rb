@@ -32,7 +32,7 @@ module PafsCore
           .where.not(pafs_core_states: { state: :submitted })
           .joins(attribute)
           .distinct
-          .where("pafs_core_#{attribute}.financial_year < ?", current_year)
+          .where(["pafs_core_#{attribute}.financial_year < ?", current_year])
           .limit(project_limit)
       end
 
