@@ -27,12 +27,14 @@ module PafsCore
       end
 
       def self.qualifying_projects(attribute, project_limit)
+        sanitized_attribute = ActiveRecord::Base.sanitize_sql(attribute)
+
         PafsCore::Project
           .joins(:state)
           .where.not(pafs_core_states: { state: :submitted })
           .joins(attribute)
           .distinct
-          .where(["pafs_core_#{attribute}.financial_year < ?", current_year])
+          .where(["pafs_core_#{sanitized_attribute}.financial_year < ?", current_year])
           .limit(project_limit)
       end
 
