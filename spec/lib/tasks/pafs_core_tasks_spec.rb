@@ -52,11 +52,11 @@ RSpec.describe "PafsCore::DataMigration", type: :rake do
     subject(:task) { Rake::Task["pafs:remove_previous_years"] }
 
     it "runs without error" do
-      allow(PafsCore::DataMigration::RemovePreviousYears).to receive(:perform_all)
+      allow(PafsCore::DataMigration::RemovePreviousYears).to receive(:perform)
 
       expect { task.invoke }.not_to raise_error
 
-      expect(PafsCore::DataMigration::RemovePreviousYears).to have_received(:perform_all)
+      expect(PafsCore::DataMigration::RemovePreviousYears).to have_received(:perform)
     end
   end
 end

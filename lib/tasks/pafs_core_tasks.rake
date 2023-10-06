@@ -40,8 +40,13 @@ namespace :pafs do
   end
 
   desc "Remove data for financial years before the current financial year"
-  task remove_previous_years: :environment do
-    PafsCore::DataMigration::RemovePreviousYears.perform_all
+  task :remove_previous_years, [:max_projects] => :environment do |_t, args|
+    project_limit = if args[:max_projects].present?
+                      args[:max_projects].to_i
+                    else
+                      ENV.fetch("REMOVE_PREVIOUS_YEARS_MAX_PROJECTS", 100).to_i
+                    end
+    PafsCore::DataMigration::RemovePreviousYears.perform(project_limit)
   end
 end
 # rubocop:enable Metrics/BlockLength

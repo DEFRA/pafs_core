@@ -207,7 +207,7 @@ module PafsCore
     attr_accessor :project, :fcerm1_presenter, :pf_calculator_presenter, :fcerm1_mapper, :funding_sources_mapper
 
     def financial_years
-      Time.zone.today.uk_financial_year..project.project_end_financial_year
+      [-1] + (2015..project.project_end_financial_year).to_a
     end
   end
 end

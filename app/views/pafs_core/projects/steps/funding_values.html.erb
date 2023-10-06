@@ -26,7 +26,6 @@
                   <tbody>
                     <%= f.fields_for :funding_values, @project.current_funding_values do |builder| %>
                       <tr>
-                      <% next if builder.object.financial_year == -1 %>
                         <td class="financial_year">
                           <%= builder.hidden_field :financial_year %>
                           <%= builder.hidden_field :id %>

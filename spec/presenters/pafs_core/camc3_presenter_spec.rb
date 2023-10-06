@@ -22,6 +22,7 @@ RSpec.describe PafsCore::Camc3Presenter do
   end
   let(:funding_values) do
     [
+      { year: -1, value: 2000 },
       { year: 2015, value: 200  },
       { year: 2016, value: 250  },
       { year: 2017, value: 350  },
@@ -31,6 +32,7 @@ RSpec.describe PafsCore::Camc3Presenter do
   end
   let(:funding_years) do
     [
+      -1,
       2015,
       2016,
       2017,
@@ -41,6 +43,7 @@ RSpec.describe PafsCore::Camc3Presenter do
   end
   let(:outcome_measurements) do
     [
+      { year: -1, value: 2000 },
       { year: 2015, value: 200 },
       { year: 2016, value: 250 },
       { year: 2017, value: 350 },
