@@ -142,6 +142,10 @@ module PafsCore
       end
     end
 
+    def first_financial_year
+      funding_values.pluck(:financial_year).min
+    end
+
     private
 
     def set_slug

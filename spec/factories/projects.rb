@@ -68,7 +68,7 @@ FactoryBot.define do
 
     after(:create) do |project, builder|
       if builder.create_funding_values
-        (2015..(builder.project_end_financial_year || 2023)).to_a.push(-1).each do |fy|
+        (2015..(builder.project_end_financial_year || 2023)).to_a.each do |fy|
           create(
             :funding_value,
             public_contribution_names: builder.public_contribution_names,

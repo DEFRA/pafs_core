@@ -78,4 +78,20 @@ RSpec.describe PafsCore::Project do
       end
     end
   end
+
+  describe "#first_financial_year" do
+    let(:project) { create(:project, :with_funding_values) }
+
+    context "when all attributes have the same starting year" do
+      it { expect(project.first_financial_year).to eq(2015) }
+    end
+
+    context "when the attributes have different starting years" do
+      let(:earliest_year) { 2010 }
+
+      before { project.funding_values << build(:funding_value, financial_year: earliest_year) }
+
+      it { expect(project.first_financial_year).to eq earliest_year }
+    end
+  end
 end

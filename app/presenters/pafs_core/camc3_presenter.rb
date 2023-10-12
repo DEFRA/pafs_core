@@ -4,6 +4,9 @@ require "pafs_core/shapefile_serializer"
 
 module PafsCore
   class Camc3Presenter
+
+    include PafsCore::FinancialYear
+
     def initialize(project:)
       self.project = project
 
@@ -207,7 +210,8 @@ module PafsCore
     attr_accessor :project, :fcerm1_presenter, :pf_calculator_presenter, :fcerm1_mapper, :funding_sources_mapper
 
     def financial_years
-      [-1] + (2015..project.project_end_financial_year).to_a
+      start_year = project.first_financial_year || current_financial_year
+      (start_year..project.project_end_financial_year).to_a
     end
   end
 end
