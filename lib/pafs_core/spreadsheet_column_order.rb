@@ -94,156 +94,120 @@ module PafsCore
   ].freeze
 
   SPREADSHEET_GIA_FIGURES = %i[
-    gia_previous_years
-    gia_2015
-    gia_2016
-    gia_2017
-    gia_2018
-    gia_2019
-    gia_2020
-    gia_2021
-    gia_2022
     gia_2023
     gia_2024
     gia_2025
     gia_2026
     gia_2027
+    gia_2028
+    gia_2029
+    gia_2030
+    gia_2031
+    gia_2032
   ].freeze
 
   SPREADSHEET_LEVY_FIGURES = %i[
-    levy_previous_years
-    levy_2015
-    levy_2016
-    levy_2017
-    levy_2018
-    levy_2019
-    levy_2020
-    levy_2021
-    levy_2022
     levy_2023
     levy_2024
     levy_2025
     levy_2026
     levy_2027
+    levy_2028
+    levy_2029
+    levy_2030
+    levy_2031
+    levy_2032
   ].freeze
 
   SPREADSHEET_IDB_FIGURES = %i[
-    idb_previous_years
-    idb_2015
-    idb_2016
-    idb_2017
-    idb_2018
-    idb_2019
-    idb_2020
-    idb_2021
-    idb_2022
     idb_2023
     idb_2024
     idb_2025
     idb_2026
     idb_2027
+    idb_2028
+    idb_2029
+    idb_2030
+    idb_2031
+    idb_2032
   ].freeze
 
   SPREADSHEET_PUBLIC_FIGURES = %i[
-    public_previous_years
-    public_2015
-    public_2016
-    public_2017
-    public_2018
-    public_2019
-    public_2020
-    public_2021
-    public_2022
     public_2023
     public_2024
     public_2025
     public_2026
     public_2027
+    public_2028
+    public_2029
+    public_2030
+    public_2031
+    public_2032
   ].freeze
 
   SPREADSHEET_PRIVATE_FIGURES = %i[
-    private_previous_years
-    private_2015
-    private_2016
-    private_2017
-    private_2018
-    private_2019
-    private_2020
-    private_2021
-    private_2022
     private_2023
     private_2024
     private_2025
     private_2026
     private_2027
+    private_2028
+    private_2029
+    private_2030
+    private_2031
+    private_2032
   ].freeze
 
   SPREADSHEET_EA_FIGURES = %i[
-    ea_previous_years
-    ea_2015
-    ea_2016
-    ea_2017
-    ea_2018
-    ea_2019
-    ea_2020
-    ea_2021
-    ea_2022
     ea_2023
     ea_2024
     ea_2025
     ea_2026
     ea_2027
+    ea_2028
+    ea_2029
+    ea_2030
+    ea_2031
+    ea_2032
   ].freeze
 
   SPREADSHEET_GROWTH_FIGURES = %i[
-    growth_previous_years
-    growth_2015
-    growth_2016
-    growth_2017
-    growth_2018
-    growth_2019
-    growth_2020
-    growth_2021
-    growth_2022
     growth_2023
     growth_2024
     growth_2025
     growth_2026
     growth_2027
+    growth_2028
+    growth_2029
+    growth_2030
+    growth_2031
+    growth_2032
   ].freeze
 
   SPREADSHEET_NYI_FIGURES = %i[
-    nyi_previous_years
-    nyi_2015
-    nyi_2016
-    nyi_2017
-    nyi_2018
-    nyi_2019
-    nyi_2020
-    nyi_2021
-    nyi_2022
     nyi_2023
     nyi_2024
     nyi_2025
     nyi_2026
     nyi_2027
+    nyi_2028
+    nyi_2029
+    nyi_2030
+    nyi_2031
+    nyi_2032
   ].freeze
 
   SPREADSHEET_TOTAL_FIGURES = %i[
-    total_previous_years
-    total_2015
-    total_2016
-    total_2017
-    total_2018
-    total_2019
-    total_2020
-    total_2021
-    total_2022
     total_2023
     total_2024
     total_2025
     total_2026
     total_2027
+    total_2028
+    total_2029
+    total_2030
+    total_2031
+    total_2032
   ].freeze
 
   SPREADSHEET_COASTAL_FIGURES = %i[

@@ -74,21 +74,19 @@ module PafsCore
       # HACK: for some reason the formula in column BJ, BI, BL-BX are not recognised by RubyXL
       #       so we'll poke in the correct formula here
       formulae_map = [
-        { BJ: ["JO"] },
-        { BI: ["JN"] },
-        { BL: %w[BZ CN DB DP ED ER FF FT] },
-        { BM: %w[CA CO DC DQ EE ES FG FU] },
-        { BN: %w[CB CP DD DR EF ET FH FV] },
-        { BO: %w[CC CQ DE DS EG EU FI FW] },
-        { BP: %w[CD CR DF DT EH EV FJ FX] },
-        { BQ: %w[CE CS DG DU EI EW FK FY] },
-        { BR: %w[CF CT DH DV EJ EX FL FZ] },
-        { BS: %w[CG CU DI DW EK EY FM GA] },
-        { BT: %w[CH CV DJ DX EL EZ FN GB] },
-        { BU: %w[CI CW DK DY EM FA FO GC] },
-        { BV: %w[CJ CX DL DZ EN FB FP GD] },
-        { BW: %w[CK CY DM EA EO FC FQ GE] },
-        { BX: %w[CL CZ DN EB EP FD FR GF] }
+        { BA: ["GN"] },
+        { BB: ["GO"] },
+        { BC: ["GP"] },
+        { BD: %w[BN BX CH CR DB DL DV] },
+        { BE: %w[BO BY CI CS DC DM DW] },
+        { BF: %w[BP BZ CJ CT DD DN DX] },
+        { BG: %w[BQ CA CK CU DE DO DY] },
+        { BH: %w[BR CB CL CV DF DP DZ] },
+        { BI: %w[BS CC CM CW DG DQ EA] },
+        { BJ: %w[BT CD CN CX DH DR EB] },
+        { BK: %w[BU CE CO CY DI DS EC] },
+        { BL: %w[BV CF CP CZ DJ DT ED] },
+        { BM: %w[BW CG CQ DA DK DU EE] }
       ]
       formulae_map.each do |formula_hash|
         column = formula_hash.keys.first.to_s
@@ -131,7 +129,7 @@ module PafsCore
 
         if range
           start_column = column_index(col[:column])
-          years = [-1].concat((2015..2027).to_a)
+          years = (2023..2032).to_a
           years.each_with_index do |year, i|
             value = use_value ? project.send(name, year) : 0
             sheet[row_no][start_column + i].change_contents(value)
