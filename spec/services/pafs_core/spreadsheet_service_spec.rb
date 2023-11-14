@@ -50,12 +50,40 @@ RSpec.describe PafsCore::SpreadsheetService do
       expect(first_row[SpreadsheetMapperHelper.column_index("B")].value).to eql(spreadsheet_presenter_1.name)
     end
 
-    it "includes column BI" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("BI")].value).to be(0)
+    it "includes column AE" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("AE")].value).to eql(spreadsheet_presenter_1.earliest_start_date)
     end
 
-    it "includes column BL" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("BL")].value).to be(0)
+    it "includes column AF" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("AF")].value).to eql(spreadsheet_presenter_1.earliest_start_date_with_gia_available)
+    end
+
+    it "includes column AG" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("AG")].value).to eql(spreadsheet_presenter_1.start_business_case_date)
+    end
+
+    it "includes column AH" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("AH")].value).to eql(spreadsheet_presenter_1.complete_business_case_date)
+    end
+
+    it "includes column AI" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("AI")].value).to eql(spreadsheet_presenter_1.award_contract_date)
+    end
+
+    it "includes column AJ" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("AJ")].value).to eql(spreadsheet_presenter_1.start_construction_date)
+    end
+
+    it "includes column AK" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("AK")].value).to eql(spreadsheet_presenter_1.ready_for_service_date)
+    end
+
+    it "includes column BB" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("BB")].value).to be(0)
+    end
+
+    it "includes column BE" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("BE")].value).to be(0)
     end
 
     it "includes column BM" do
