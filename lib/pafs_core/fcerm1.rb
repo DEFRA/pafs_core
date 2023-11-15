@@ -145,20 +145,20 @@ module PafsCore
       { column: "GZ", field_name: :create_habitat_amount },
 
       # Confidence Assessment
-      { column: "HI", field_name: :confidence_homes_better_protected },
-      { column: "HJ", field_name: :confidence_homes_by_gateway_four },
-      { column: "HK", field_name: :confidence_secured_partnership_funding },
+      { column: "HA", field_name: :confidence_homes_better_protected },
+      { column: "HB", field_name: :confidence_homes_by_gateway_four },
+      { column: "HC", field_name: :confidence_secured_partnership_funding },
 
       # Project Status
-      { column: "HL", field_name: :project_status },
+      { column: "HD", field_name: :project_status },
 
       # Carbon
-      { column: "HM", field_name: :carbon_cost_build },
-      { column: "HN", field_name: :carbon_cost_operation },
+      { column: "HE", field_name: :carbon_cost_build },
+      { column: "HF", field_name: :carbon_cost_operation },
 
       # Additional columns per RUBY-2394
-      { column: "HO", field_name: :last_updated, import: false },
-      { column: "HP", field_name: :pso_name, import: false }
+      { column: "HG", field_name: :last_updated, import: false },
+      { column: "HH", field_name: :pso_name, import: false }
     ].freeze
 
     A2Z = ("A".."Z").to_a.freeze

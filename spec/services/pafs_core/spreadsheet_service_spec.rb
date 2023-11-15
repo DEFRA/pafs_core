@@ -118,16 +118,16 @@ RSpec.describe PafsCore::SpreadsheetService do
       expect(first_row[SpreadsheetMapperHelper.column_index("GZ")].value).to eql(spreadsheet_presenter_1.create_habitat_amount)
     end
 
-    it "includes column HL" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("HL")].value.to_s).to eql(spreadsheet_presenter_1.state.state.capitalize)
+    it "includes column HD" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("HD")].value.to_s).to eql(spreadsheet_presenter_1.state.state.capitalize)
     end
 
     it "includes the last_updated column" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("HO")].value.to_s).to eq(spreadsheet_presenter_1.last_updated)
+      expect(first_row[SpreadsheetMapperHelper.column_index("HG")].value.to_s).to eq(spreadsheet_presenter_1.last_updated)
     end
 
     it "includes the pso_name column" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("HP")].value.to_s).to eq(spreadsheet_presenter_1.pso_name)
+      expect(first_row[SpreadsheetMapperHelper.column_index("HH")].value.to_s).to eq(spreadsheet_presenter_1.pso_name)
     end
   end
 end
