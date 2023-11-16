@@ -241,7 +241,7 @@ module PafsCore
       # need to make the financial year equal the last year of spend if possible
       # this might need to be manually corrected by the RMA but we need something
       # otherwise tables etc. break without it.
-      project.project_end_financial_year = project.funding_values.maximum(:financial_year) || 2027
+      project.project_end_financial_year = project.funding_values.maximum(:financial_year) || 2032
     end
 
     def copy_project_errors(project, clear_attrs_with_errors = false) # rubocop:disable Style/OptionalBooleanParameter

@@ -211,48 +211,36 @@ module PafsCore
   ].freeze
 
   SPREADSHEET_COASTAL_FIGURES = %i[
-    coastal_households_previous_years
-    coastal_households_2015
-    coastal_households_2016
-    coastal_households_2017
-    coastal_households_2018
-    coastal_households_2019
-    coastal_households_2020
-    coastal_households_2021
-    coastal_households_2022
     coastal_households_2023
     coastal_households_2024
     coastal_households_2025
     coastal_households_2026
     coastal_households_2027
-    coastal_households_protected_previous_years
-    coastal_households_protected_2015
-    coastal_households_protected_2016
-    coastal_households_protected_2017
-    coastal_households_protected_2018
-    coastal_households_protected_2019
-    coastal_households_protected_2020
-    coastal_households_protected_2021
-    coastal_households_protected_2022
+    coastal_households_2028
+    coastal_households_2029
+    coastal_households_2030
+    coastal_households_2031
+    coastal_households_2032
     coastal_households_protected_2023
     coastal_households_protected_2024
     coastal_households_protected_2025
     coastal_households_protected_2026
     coastal_households_protected_2027
-    coastal_most_deprived_previous_years
-    coastal_most_deprived_2015
-    coastal_most_deprived_2016
-    coastal_most_deprived_2017
-    coastal_most_deprived_2018
-    coastal_most_deprived_2019
-    coastal_most_deprived_2020
-    coastal_most_deprived_2021
-    coastal_most_deprived_2022
+    coastal_households_protected_2028
+    coastal_households_protected_2029
+    coastal_households_protected_2030
+    coastal_households_protected_2031
+    coastal_households_protected_2032
     coastal_most_deprived_2023
     coastal_most_deprived_2024
     coastal_most_deprived_2025
     coastal_most_deprived_2026
     coastal_most_deprived_2027
+    coastal_most_deprived_2028
+    coastal_most_deprived_2029
+    coastal_most_deprived_2030
+    coastal_most_deprived_2031
+    coastal_most_deprived_2032
   ].freeze
 
   SPREADSHEET_FUTURE_FIGURES = %i[
@@ -263,93 +251,69 @@ module PafsCore
   ].freeze
 
   SPREADSHEET_FLOODING_FIGURES = %i[
-    flood_households_previous_years
-    flood_households_2015
-    flood_households_2016
-    flood_households_2017
-    flood_households_2018
-    flood_households_2019
-    flood_households_2020
-    flood_households_2021
-    flood_households_2022
     flood_households_2023
     flood_households_2024
     flood_households_2025
     flood_households_2026
     flood_households_2027
-    flood_households_moved_previous_years
-    flood_households_moved_2015
-    flood_households_moved_2016
-    flood_households_moved_2017
-    flood_households_moved_2018
-    flood_households_moved_2019
-    flood_households_moved_2020
-    flood_households_moved_2021
-    flood_households_moved_2022
+    flood_households_2028
+    flood_households_2029
+    flood_households_2030
+    flood_households_2031
+    flood_households_2032
     flood_households_moved_2023
     flood_households_moved_2024
     flood_households_moved_2025
     flood_households_moved_2026
     flood_households_moved_2027
-    flood_most_deprived_previous_years
-    flood_most_deprived_2015
-    flood_most_deprived_2016
-    flood_most_deprived_2017
-    flood_most_deprived_2018
-    flood_most_deprived_2019
-    flood_most_deprived_2020
-    flood_most_deprived_2021
-    flood_most_deprived_2022
+    flood_households_moved_2028
+    flood_households_moved_2029
+    flood_households_moved_2030
+    flood_households_moved_2031
+    flood_households_moved_2032
     flood_most_deprived_2023
     flood_most_deprived_2024
     flood_most_deprived_2025
     flood_most_deprived_2026
     flood_most_deprived_2027
+    flood_most_deprived_2028
+    flood_most_deprived_2029
+    flood_most_deprived_2030
+    flood_most_deprived_2031
+    flood_most_deprived_2032
   ].freeze
 
   SPREADSHEET_OM4_COLUMNS = %i[
-    hectares_of_net_water_dependent_habitat_created_previous_years
-    hectares_of_net_water_dependent_habitat_created_2015
-    hectares_of_net_water_dependent_habitat_created_2016
-    hectares_of_net_water_dependent_habitat_created_2017
-    hectares_of_net_water_dependent_habitat_created_2018
-    hectares_of_net_water_dependent_habitat_created_2019
-    hectares_of_net_water_dependent_habitat_created_2020
-    hectares_of_net_water_dependent_habitat_created_2021
-    hectares_of_net_water_dependent_habitat_created_2022
     hectares_of_net_water_dependent_habitat_created_2023
     hectares_of_net_water_dependent_habitat_created_2024
     hectares_of_net_water_dependent_habitat_created_2025
     hectares_of_net_water_dependent_habitat_created_2026
     hectares_of_net_water_dependent_habitat_created_2027
-    hectares_of_net_water_intertidal_habitat_created_previous_years
-    hectares_of_net_water_intertidal_habitat_created_2015
-    hectares_of_net_water_intertidal_habitat_created_2016
-    hectares_of_net_water_intertidal_habitat_created_2017
-    hectares_of_net_water_intertidal_habitat_created_2018
-    hectares_of_net_water_intertidal_habitat_created_2019
-    hectares_of_net_water_intertidal_habitat_created_2020
-    hectares_of_net_water_intertidal_habitat_created_2021
-    hectares_of_net_water_intertidal_habitat_created_2022
+    hectares_of_net_water_dependent_habitat_created_2028
+    hectares_of_net_water_dependent_habitat_created_2029
+    hectares_of_net_water_dependent_habitat_created_2030
+    hectares_of_net_water_dependent_habitat_created_2031
+    hectares_of_net_water_dependent_habitat_created_2032
     hectares_of_net_water_intertidal_habitat_created_2023
     hectares_of_net_water_intertidal_habitat_created_2024
     hectares_of_net_water_intertidal_habitat_created_2025
     hectares_of_net_water_intertidal_habitat_created_2026
     hectares_of_net_water_intertidal_habitat_created_2027
-    kilometres_of_protected_river_improved_previous_years
-    kilometres_of_protected_river_improved_2015
-    kilometres_of_protected_river_improved_2016
-    kilometres_of_protected_river_improved_2017
-    kilometres_of_protected_river_improved_2018
-    kilometres_of_protected_river_improved_2019
-    kilometres_of_protected_river_improved_2020
-    kilometres_of_protected_river_improved_2021
-    kilometres_of_protected_river_improved_2022
+    hectares_of_net_water_intertidal_habitat_created_2028
+    hectares_of_net_water_intertidal_habitat_created_2029
+    hectares_of_net_water_intertidal_habitat_created_2030
+    hectares_of_net_water_intertidal_habitat_created_2031
+    hectares_of_net_water_intertidal_habitat_created_2032
     kilometres_of_protected_river_improved_2023
     kilometres_of_protected_river_improved_2024
     kilometres_of_protected_river_improved_2025
     kilometres_of_protected_river_improved_2026
     kilometres_of_protected_river_improved_2027
+    kilometres_of_protected_river_improved_2028
+    kilometres_of_protected_river_improved_2029
+    kilometres_of_protected_river_improved_2030
+    kilometres_of_protected_river_improved_2031
+    kilometres_of_protected_river_improved_2032
   ].freeze
 
   SPREADSHEET_UNUSED_COLUMNS = %i[
@@ -363,48 +327,36 @@ module PafsCore
     scheme_comments
     additional_potential
     additional_funding_required_for_additional_benefits
-    hectares_of_net_water_dependent_habitat_created_previous_years
-    hectares_of_net_water_dependent_habitat_created_2015
-    hectares_of_net_water_dependent_habitat_created_2016
-    hectares_of_net_water_dependent_habitat_created_2017
-    hectares_of_net_water_dependent_habitat_created_2018
-    hectares_of_net_water_dependent_habitat_created_2019
-    hectares_of_net_water_dependent_habitat_created_2020
-    hectares_of_net_water_dependent_habitat_created_2021
-    hectares_of_net_water_dependent_habitat_created_2022
     hectares_of_net_water_dependent_habitat_created_2023
     hectares_of_net_water_dependent_habitat_created_2024
     hectares_of_net_water_dependent_habitat_created_2025
     hectares_of_net_water_dependent_habitat_created_2026
     hectares_of_net_water_dependent_habitat_created_2027
-    hectares_of_net_water_intertidal_habitat_created_previous_years
-    hectares_of_net_water_intertidal_habitat_created_2015
-    hectares_of_net_water_intertidal_habitat_created_2016
-    hectares_of_net_water_intertidal_habitat_created_2017
-    hectares_of_net_water_intertidal_habitat_created_2018
-    hectares_of_net_water_intertidal_habitat_created_2019
-    hectares_of_net_water_intertidal_habitat_created_2020
-    hectares_of_net_water_intertidal_habitat_created_2021
-    hectares_of_net_water_intertidal_habitat_created_2022
+    hectares_of_net_water_dependent_habitat_created_2028
+    hectares_of_net_water_dependent_habitat_created_2029
+    hectares_of_net_water_dependent_habitat_created_2030
+    hectares_of_net_water_dependent_habitat_created_2031
+    hectares_of_net_water_dependent_habitat_created_2032
     hectares_of_net_water_intertidal_habitat_created_2023
     hectares_of_net_water_intertidal_habitat_created_2024
     hectares_of_net_water_intertidal_habitat_created_2025
     hectares_of_net_water_intertidal_habitat_created_2026
     hectares_of_net_water_intertidal_habitat_created_2027
-    kilometres_of_protected_river_improved_previous_years
-    kilometres_of_protected_river_improved_2015
-    kilometres_of_protected_river_improved_2016
-    kilometres_of_protected_river_improved_2017
-    kilometres_of_protected_river_improved_2018
-    kilometres_of_protected_river_improved_2019
-    kilometres_of_protected_river_improved_2020
-    kilometres_of_protected_river_improved_2021
-    kilometres_of_protected_river_improved_2022
+    hectares_of_net_water_intertidal_habitat_created_2028
+    hectares_of_net_water_intertidal_habitat_created_2029
+    hectares_of_net_water_intertidal_habitat_created_2030
+    hectares_of_net_water_intertidal_habitat_created_2031
+    hectares_of_net_water_intertidal_habitat_created_2032
     kilometres_of_protected_river_improved_2023
     kilometres_of_protected_river_improved_2024
     kilometres_of_protected_river_improved_2025
     kilometres_of_protected_river_improved_2026
     kilometres_of_protected_river_improved_2027
+    kilometres_of_protected_river_improved_2028
+    kilometres_of_protected_river_improved_2029
+    kilometres_of_protected_river_improved_2030
+    kilometres_of_protected_river_improved_2031
+    kilometres_of_protected_river_improved_2032
   ].freeze
 
   SPREADSHEET_ADDITIONAL_COLUMNS = %i[
