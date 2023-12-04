@@ -4,6 +4,8 @@ module PafsCore
   module Spreadsheet
     module Contributors
       class Export
+        include PafsCore::FinancialYear
+
         attr_reader :project, :workbook
 
         SHEET_NAME = "Funding Contributors"
@@ -19,6 +21,9 @@ module PafsCore
           write_title_row
 
           project.funding_contributors.find_each.with_index do |contributor, _index|
+            # show only from the current financial year onwards #RUBY-2570
+            next if contributor.funding_value.financial_year < current_financial_year
+
             row_index = next_row_index
 
             sheet.add_cell(row_index, 0, project.reference_number)

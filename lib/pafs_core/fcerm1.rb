@@ -7,164 +7,158 @@ module PafsCore
     FCERM1_COLUMN_MAP = [
       { column: "A",  field_name: :reference_number },
       { column: "B",  field_name: :name },
-      { column: "C",  field_name: :lrma_project_reference, export: false, import: false },
-      { column: "D",  field_name: :ldw_cpw_idb_number, export: false, import: false },
-      { column: "E",  field_name: :region, import: false },
-      { column: "F",  field_name: :rfcc, import: false },
-      { column: "G",  field_name: :ea_area, import: false },
-      { column: "H",  field_name: :rma_name },
-      { column: "I",  field_name: :rma_type, import: false },
-      { column: "J",  field_name: :coastal_group, import: false },
-      { column: "K",  field_name: :project_type },
-      { column: "L",  field_name: :main_risk },
-      { column: "M",  field_name: :moderation_code },
-      { column: "N",  field_name: :package_reference, export: false, import: false },
-      { column: "O",  field_name: :consented },
-      { column: "P",  field_name: :grid_reference },
-      { column: "Q",  field_name: :project_location, export: false, import: false },
-      { column: "R",  field_name: :county, import: false },
-      { column: "S",  field_name: :parliamentary_constituency, import: false },
-      { column: "T",  field_name: :parliamentary_benefit_area, export: false, import: false },
-      { column: "U",  field_name: :agreed_strategy, export: false, import: false },
-      { column: "V",  field_name: :approach },
-      { column: "W",  field_name: :environmental_considerations, export: false, import: false },
+      { column: "C",  field_name: :region, import: false },
+      { column: "D",  field_name: :rfcc, import: false },
+      { column: "E",  field_name: :ea_area, import: false },
+      { column: "F",  field_name: :rma_name },
+      { column: "G",  field_name: :rma_type, import: false },
+      { column: "H",  field_name: :coastal_group, import: false },
+      { column: "I",  field_name: :project_type },
+      { column: "J",  field_name: :main_risk },
+      { column: "K",  field_name: :moderation_code },
+      { column: "L",  field_name: :consented },
+      { column: "M",  field_name: :grid_reference },
+      { column: "N",  field_name: :county, import: false },
+      { column: "O",  field_name: :parliamentary_constituency, import: false },
+      { column: "P",  field_name: :approach },
 
-      { column: "X",
+      { column: "Q",
         field_name: :flood_protection_before,
         if: ->(p) { p.project_protects_households? } },
 
-      { column: "Y",
+      { column: "R",
         field_name: :flood_protection_after,
         if: ->(p) { p.project_protects_households? } },
 
-      { column: "Z",
+      { column: "S",
         field_name: :coastal_protection_before,
         if: ->(p) { p.project_protects_households? } },
 
-      { column: "AA",
+      { column: "T",
         field_name: :coastal_protection_after,
         if: ->(p) { p.project_protects_households? } },
 
-      { column: "AB", field_name: :new_builds, export: false, import: false },
+      { column: "U", field_name: :strategic_approach, import: false },
+      { column: "V", field_name: :raw_partnership_funding_score, import: false },
+      { column: "W", field_name: :adjusted_partnership_funding_score, import: false },
+      { column: "X", field_name: :pv_whole_life_costs, import: false },
+      { column: "Y", field_name: :pv_whole_life_benefits, import: false },
+      { column: "Z", field_name: :benefit_cost_ratio, import: false },
+      { column: "AA", field_name: :duration_of_benefits, import: false },
 
-      { column: "AC", field_name: :strategic_approach, import: false },
-      { column: "AD", field_name: :raw_partnership_funding_score, import: false },
-      { column: "AE", field_name: :adjusted_partnership_funding_score, import: false },
-      { column: "AF", field_name: :pv_whole_life_costs, import: false },
-      { column: "AG", field_name: :pv_whole_life_benefits, import: false },
-      { column: "AH", field_name: :benefit_cost_ratio, import: false },
-      { column: "AI", field_name: :duration_of_benefits, import: false },
+      { column: "AB", field_name: :public_contributors },
+      { column: "AC", field_name: :private_contributors },
+      { column: "AD", field_name: :other_ea_contributors },
 
-      { column: "AJ", field_name: :public_contributors },
-      { column: "AK", field_name: :private_contributors },
-      { column: "AL", field_name: :other_ea_contributors },
-      { column: "AM", field_name: :scheme_comments, export: false, import: false },
+      { column: "AE", field_name: :earliest_start_date },
+      { column: "AF", field_name: :earliest_start_date_with_gia_available },
 
-      { column: "AN", field_name: :earliest_start_date },
-      { column: "AO", field_name: :start_business_case_date },
-      { column: "AP", field_name: :award_contract_date },
-      { column: "AQ", field_name: :start_construction_date },
-      { column: "AR", field_name: :ready_for_service_date },
+      { column: "AG", field_name: :start_business_case_date },
+      { column: "AH", field_name: :complete_business_case_date },
 
-      # Project totals AS - BJ (formula)
-      { column: "AS", field_name: :project_totals, export: false, import: false },
+      { column: "AI", field_name: :award_contract_date },
+      { column: "AJ", field_name: :start_construction_date },
+      { column: "AK", field_name: :ready_for_service_date },
 
-      # Total Project expenditure BK - BX (formula)
-      { column: "BK", field_name: :project_totals, export: false, import: false },
+      # Project totals AL - BC (formula)
+      { column: "AL", field_name: :project_totals, export: false, import: false },
 
-      # GiA columns BY - CL
-      { column: "BY", field_name: :fcerm_gia, date_range: true },
+      # Total Project expenditure BD - BM (formula)
+      { column: "BD", field_name: :project_totals, export: false, import: false },
 
-      # Local levy columns DA - DN
-      { column: "DA", field_name: :local_levy, date_range: true },
+      # GiA columns BN - BW
+      { column: "BN", field_name: :fcerm_gia, date_range: true },
 
-      # Internal drainage board columns DO - EB
-      { column: "DO", field_name: :internal_drainage_boards, date_range: true },
+      # Local levy columns BX - CG
+      { column: "BX", field_name: :local_levy, date_range: true },
 
-      # Public contribution columns EC - EP
-      { column: "EC", field_name: :public_contributions, date_range: true },
+      # Internal drainage board columns CH - CQ
+      { column: "CH", field_name: :internal_drainage_boards, date_range: true },
 
-      # Private contribution columns EQ - FD
-      { column: "EQ", field_name: :private_contributions, date_range: true },
+      # Public contribution columns CR - DA
+      { column: "CR", field_name: :public_contributions, date_range: true },
 
-      # Other EA contribution columns FE - FR
-      { column: "FE", field_name: :other_ea_contributions, date_range: true },
+      # Private contribution columns DB - DK
+      { column: "DB", field_name: :private_contributions, date_range: true },
 
-      # Not yet identified contribution columns FS - GF
-      { column: "FS", field_name: :not_yet_identified, date_range: true },
+      # Other EA contribution columns DL - DU
+      { column: "DL", field_name: :other_ea_contributions, date_range: true },
 
-      # Households affected by flooding OM2 GG - GT
-      { column: "GG",
+      # Not yet identified contribution columns DV - EE
+      { column: "DV", field_name: :not_yet_identified, date_range: true },
+
+      # Households affected by flooding OM2 EF - EO
+      { column: "EF",
         field_name: :households_at_reduced_risk,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Households affected by flooding OM2b GU - HH
-      { column: "GU",
+      # Households affected by flooding OM2b EP - EY
+      { column: "EP",
         field_name: :moved_from_very_significant_and_significant_to_moderate_or_low,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Households affected by flooding OM2c HI - HV
-      { column: "HI",
+      # Households affected by flooding OM2c EZ - FI
+      { column: "EZ",
         field_name: :households_protected_from_loss_in_20_percent_most_deprived,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Coastal erosion protection outcomes OM3 HW - IJ
-      { column: "HW",
+      # Coastal erosion protection outcomes OM3 FJ - FS
+      { column: "FJ",
         field_name: :coastal_households_at_reduced_risk,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Coastal erosion protection outcomes OM3b IK - IX
-      { column: "IK",
+      # Coastal erosion protection outcomes OM3b FT - GC
+      { column: "FT",
         field_name: :coastal_households_protected_from_loss_in_next_20_years,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Coastal erosion protection outcomes OM3c IY - JL
-      { column: "IY",
+      # Coastal erosion protection outcomes OM3c GD - GM
+      { column: "GD",
         field_name: :coastal_households_protected_from_loss_in_20_percent_most_deprived,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # From PF calculator OM4A-C JM-JO
-      { column: "JM", field_name: :hectares_of_net_water_dependent_habitat_created, import: false },
-      { column: "JN", field_name: :hectares_of_net_water_intertidal_habitat_created, import: false },
-      { column: "JO", field_name: :kilometres_of_protected_river_improved, import: false },
+      # From PF calculator OM4A-C GM-GO
+      { column: "GN", field_name: :hectares_of_net_water_dependent_habitat_created, import: false },
+      { column: "GO", field_name: :hectares_of_net_water_intertidal_habitat_created, import: false },
+      { column: "GP", field_name: :kilometres_of_protected_river_improved, import: false },
 
       # Natural flood risk management measure
-      { column: "JP", field_name: :natural_measures, export: false, import: false },
-      { column: "JQ", field_name: :main_natural_measure, export: false, import: false },
-      { column: "JR", field_name: :natural_measures_costs, export: false, import: false },
+      { column: "GQ", field_name: :natural_measures, export: false, import: false },
+      { column: "GR", field_name: :main_natural_measure, export: false, import: false },
+      { column: "GS", field_name: :natural_measures_costs, export: false, import: false },
 
       # # spa/sac, sssi or none
-      { column: "JS", field_name: :designated_site },
+      { column: "GT", field_name: :designated_site },
 
       # OM4D-H
-      { column: "JT", field_name: :improve_surface_or_groundwater_amount },
-      { column: "JU", field_name: :remove_fish_or_eel_barrier },
-      { column: "JV", field_name: :fish_or_eel_amount },
-      { column: "JW", field_name: :improve_river_amount },
-      { column: "JX", field_name: :improve_habitat_amount },
-      { column: "JY", field_name: :create_habitat_amount },
+      { column: "GU", field_name: :improve_surface_or_groundwater_amount },
+      { column: "GV", field_name: :remove_fish_or_eel_barrier },
+      { column: "GW", field_name: :fish_or_eel_amount },
+      { column: "GX", field_name: :improve_river_amount },
+      { column: "GY", field_name: :improve_habitat_amount },
+      { column: "GZ", field_name: :create_habitat_amount },
 
       # Confidence Assessment
-      { column: "KH", field_name: :confidence_homes_better_protected },
-      { column: "KI", field_name: :confidence_homes_by_gateway_four },
-      { column: "KJ", field_name: :confidence_secured_partnership_funding },
+      { column: "HA", field_name: :confidence_homes_better_protected },
+      { column: "HB", field_name: :confidence_homes_by_gateway_four },
+      { column: "HC", field_name: :confidence_secured_partnership_funding },
 
       # Project Status
-      { column: "KK", field_name: :project_status },
+      { column: "HD", field_name: :project_status },
 
       # Carbon
-      { column: "KL", field_name: :carbon_cost_build },
-      { column: "KM", field_name: :carbon_cost_operation },
+      { column: "HE", field_name: :carbon_cost_build },
+      { column: "HF", field_name: :carbon_cost_operation },
 
       # Additional columns per RUBY-2394
-      { column: "KN", field_name: :last_updated, import: false },
-      { column: "KO", field_name: :pso_name, import: false }
+      { column: "HG", field_name: :last_updated, import: false },
+      { column: "HH", field_name: :pso_name, import: false }
     ].freeze
 
     A2Z = ("A".."Z").to_a.freeze

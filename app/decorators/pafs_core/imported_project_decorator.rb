@@ -302,7 +302,7 @@ module PafsCore
     def populate_funding_values_for(fv_type, values)
       return if AGGREGATE_SOURCES.include?(fv_type)
 
-      (Time.zone.today.uk_financial_year..2027).each_with_index do |year, i|
+      (Time.zone.today.uk_financial_year..2032).each_with_index do |year, i|
         fv = project.funding_values.find_or_create_by(financial_year: year)
         fv.send("#{fv_type}=", values[i])
         fv.save
@@ -311,7 +311,7 @@ module PafsCore
     end
 
     def populate_flood_protection_outcome_for(fpo_type, values)
-      (Time.zone.today.uk_financial_year..2027).each_with_index do |year, i|
+      (Time.zone.today.uk_financial_year..2032).each_with_index do |year, i|
         fpo = project.flood_protection_outcomes.find_or_create_by(financial_year: year)
         fpo.send("#{fpo_type}=", values[i])
         fpo.save
@@ -319,7 +319,7 @@ module PafsCore
     end
 
     def populate_coastal_erosion_outcome_for(cepo_type, values)
-      (Time.zone.today.uk_financial_year..2027).each_with_index do |year, i|
+      (Time.zone.today.uk_financial_year..2032).each_with_index do |year, i|
         cepo = project.coastal_erosion_protection_outcomes.find_or_create_by(financial_year: year)
         cepo.send("#{cepo_type}=", values[i])
         cepo.save
