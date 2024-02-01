@@ -11,8 +11,8 @@ module PafsCore
     end
 
     def month_and_year(form, project, attribute, options = {})
-      m_key = "#{attribute}_month".to_sym
-      y_key = "#{attribute}_year".to_sym
+      m_key = :"#{attribute}_month"
+      y_key = :"#{attribute}_year"
       contents = []
       contents << heading_text(options.delete(:heading)) if options.include? :heading
       contents << content_tag(:p, options.delete(:hint), class: "govuk-hint") if options.include? :hint

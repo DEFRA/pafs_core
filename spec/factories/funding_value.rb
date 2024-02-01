@@ -29,7 +29,7 @@ FactoryBot.define do
         names.size.times do |i|
           create(
             :funding_contributor,
-            "#{attr}_contributor".to_sym,
+            :"#{attr}_contributor",
             funding_value: fv,
             name: names[i]
           )

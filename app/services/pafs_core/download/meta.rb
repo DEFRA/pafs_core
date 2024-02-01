@@ -43,7 +43,7 @@ module PafsCore
       end
 
       def dev_file_storage?
-        Rails.env.test? || Rails.env.development?
+        Rails.env.local?
       end
 
       def storage
