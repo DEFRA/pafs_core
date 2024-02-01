@@ -7,13 +7,13 @@ module PafsCore
     def initialize(file_name, virus_name)
       @file = file_name
       @virus_name = virus_name
-      super "Found virus [#{virus_name}] in file [#{file_name}]"
+      super("Found virus [#{virus_name}] in file [#{file_name}]")
     end
   end
 
   class VirusScannerError < RuntimeError
     def initialize(msg)
-      super "Encountered virus scanner problem - [#{msg}]"
+      super("Encountered virus scanner problem - [#{msg}]")
     end
   end
 

@@ -258,7 +258,7 @@ module PafsCore
     end
 
     def error_trim(message)
-      message&.split("")&.last
+      message&.chars&.last
     end
 
     def create_failures_from_errors(item)

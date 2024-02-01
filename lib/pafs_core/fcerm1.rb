@@ -60,105 +60,147 @@ module PafsCore
       { column: "AJ", field_name: :start_construction_date },
       { column: "AK", field_name: :ready_for_service_date },
 
-      # Project totals AL - BC (formula)
+      # Project totals AL - BJ (formula)
       { column: "AL", field_name: :project_totals, export: false, import: false },
 
-      # Total Project expenditure BD - BM (formula)
-      { column: "BD", field_name: :project_totals, export: false, import: false },
+      # Total Project expenditure BK - BT (formula)
+      { column: "BK", field_name: :project_totals, export: false, import: false },
 
-      # GiA columns BN - BW
-      { column: "BN", field_name: :fcerm_gia, date_range: true },
+      # GiA columns BU - CD
+      { column: "BU", field_name: :fcerm_gia, date_range: true },
 
-      # Local levy columns BX - CG
-      { column: "BX", field_name: :local_levy, date_range: true },
+      # Local levy columns CE - CN
+      { column: "CE", field_name: :local_levy, date_range: true },
 
-      # Internal drainage board columns CH - CQ
-      { column: "CH", field_name: :internal_drainage_boards, date_range: true },
+      # Internal drainage board columns CO - CX
+      { column: "CO", field_name: :internal_drainage_boards, date_range: true },
 
-      # Public contribution columns CR - DA
-      { column: "CR", field_name: :public_contributions, date_range: true },
+      # Public contribution columns CY - DH
+      { column: "CY", field_name: :public_contributions, date_range: true },
 
-      # Private contribution columns DB - DK
-      { column: "DB", field_name: :private_contributions, date_range: true },
+      # Private contribution columns DI - DR
+      { column: "DI", field_name: :private_contributions, date_range: true },
 
-      # Other EA contribution columns DL - DU
-      { column: "DL", field_name: :other_ea_contributions, date_range: true },
+      # Other EA contribution columns DS - EB
+      { column: "DS", field_name: :other_ea_contributions, date_range: true },
 
-      # Not yet identified contribution columns DV - EE
-      { column: "DV", field_name: :not_yet_identified, date_range: true },
+      # Not yet identified contribution columns EC - EL
+      { column: "EC", field_name: :not_yet_identified, date_range: true },
 
-      # Households affected by flooding OM2 EF - EO
-      { column: "EF",
+      # Households affected by flooding rOM2A EM - EV
+      { column: "EM",
         field_name: :households_at_reduced_risk,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Households affected by flooding OM2b EP - EY
-      { column: "EP",
+      # Households affected by flooding rOM2A.b EW - FF
+      { column: "EW",
         field_name: :moved_from_very_significant_and_significant_to_moderate_or_low,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Households affected by flooding OM2c EZ - FI
-      { column: "EZ",
+      # Households affected by flooding rOM2A.c FG - FP
+      { column: "FG",
         field_name: :households_protected_from_loss_in_20_percent_most_deprived,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Coastal erosion protection outcomes OM3 FJ - FS
-      { column: "FJ",
+      # Households affected by flooding rOM2A.PLP FQ - FZ
+      { column: "FQ",
+        field_name: :households_protected_through_plp_measures,
+        date_range: true,
+        if: ->(p) { p.project_protects_households? } },
+
+      # Households affected by flooding rOM2A.NRP GA - GJ
+      { column: "GA",
+        field_name: :non_residential_properties,
+        date_range: true,
+        if: ->(p) { p.project_protects_households? } },
+
+      # Households affected by flooding rOM2B GK - GT
+      { column: "GK",
+        field_name: :households_at_reduced_risk_2040,
+        date_range: true,
+        if: ->(p) { p.project_protects_households? } },
+
+      # Households affected by flooding rOM2B.b GU - HD
+      { column: "GU",
+        field_name: :moved_from_very_significant_and_significant_to_moderate_or_low_2040,
+        date_range: true,
+        if: ->(p) { p.project_protects_households? } },
+
+      # Households affected by flooding rOM2B.c HE - HN
+      { column: "HE",
+        field_name: :households_protected_from_loss_in_20_percent_most_deprived_2040,
+        date_range: true,
+        if: ->(p) { p.project_protects_households? } },
+
+      # Households affected by flooding rOM2B.NRP HO - HX
+      { column: "HO",
+        field_name: :non_residential_properties_2040,
+        date_range: true,
+        if: ->(p) { p.project_protects_households? } },
+
+      # Coastal erosion protection outcomes rOM3 HY - IH
+      { column: "HY",
         field_name: :coastal_households_at_reduced_risk,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Coastal erosion protection outcomes OM3b FT - GC
-      { column: "FT",
+      # Coastal erosion protection outcomes rOM3.b II - IR
+      { column: "II",
         field_name: :coastal_households_protected_from_loss_in_next_20_years,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # Coastal erosion protection outcomes OM3c GD - GM
-      { column: "GD",
+      # Coastal erosion protection outcomes rOM3.c IS - JB
+      { column: "IS",
         field_name: :coastal_households_protected_from_loss_in_20_percent_most_deprived,
         date_range: true,
         if: ->(p) { p.project_protects_households? } },
 
-      # From PF calculator OM4A-C GM-GO
-      { column: "GN", field_name: :hectares_of_net_water_dependent_habitat_created, import: false },
-      { column: "GO", field_name: :hectares_of_net_water_intertidal_habitat_created, import: false },
-      { column: "GP", field_name: :kilometres_of_protected_river_improved, import: false },
+      # Households affected by flooding rOM3B.NRP JC - JL
+      { column: "JC",
+        field_name: :coastal_non_residential_properties,
+        date_range: true,
+        if: ->(p) { p.project_protects_households? } },
+
+      # From PF calculator OM4A-C JM-JO
+      { column: "JM", field_name: :hectares_of_net_water_dependent_habitat_created, import: false },
+      { column: "JN", field_name: :hectares_of_net_water_intertidal_habitat_created, import: false },
+      { column: "JO", field_name: :kilometres_of_protected_river_improved, import: false },
 
       # Natural flood risk management measure
-      { column: "GQ", field_name: :natural_measures, export: false, import: false },
-      { column: "GR", field_name: :main_natural_measure, export: false, import: false },
-      { column: "GS", field_name: :natural_measures_costs, export: false, import: false },
+      { column: "JP", field_name: :natural_measures, export: false, import: false },
+      { column: "JQ", field_name: :main_natural_measure, export: false, import: false },
+      { column: "JR", field_name: :natural_measures_costs, export: false, import: false },
 
       # # spa/sac, sssi or none
-      { column: "GT", field_name: :designated_site },
+      { column: "JS", field_name: :designated_site },
 
-      # OM4D-H
-      { column: "GU", field_name: :improve_surface_or_groundwater_amount },
-      { column: "GV", field_name: :remove_fish_or_eel_barrier },
-      { column: "GW", field_name: :fish_or_eel_amount },
-      { column: "GX", field_name: :improve_river_amount },
-      { column: "GY", field_name: :improve_habitat_amount },
-      { column: "GZ", field_name: :create_habitat_amount },
+      # OM4D-H JT-JY
+      { column: "JT", field_name: :improve_surface_or_groundwater_amount },
+      { column: "JU", field_name: :remove_fish_or_eel_barrier },
+      { column: "JV", field_name: :fish_or_eel_amount },
+      { column: "JW", field_name: :improve_river_amount },
+      { column: "JX", field_name: :improve_habitat_amount },
+      { column: "JY", field_name: :create_habitat_amount },
 
       # Confidence Assessment
-      { column: "HA", field_name: :confidence_homes_better_protected },
-      { column: "HB", field_name: :confidence_homes_by_gateway_four },
-      { column: "HC", field_name: :confidence_secured_partnership_funding },
+      { column: "JZ", field_name: :confidence_homes_better_protected },
+      { column: "KA", field_name: :confidence_homes_by_gateway_four },
+      { column: "KB", field_name: :confidence_secured_partnership_funding },
 
       # Project Status
-      { column: "HD", field_name: :project_status },
+      { column: "KC", field_name: :project_status },
 
       # Carbon
-      { column: "HE", field_name: :carbon_cost_build },
-      { column: "HF", field_name: :carbon_cost_operation },
+      { column: "KD", field_name: :carbon_cost_build },
+      { column: "KE", field_name: :carbon_cost_operation },
 
       # Additional columns per RUBY-2394
-      { column: "HG", field_name: :last_updated, import: false },
-      { column: "HH", field_name: :pso_name, import: false }
+      { column: "KF", field_name: :last_updated, import: false },
+      { column: "KG", field_name: :pso_name, import: false }
     ].freeze
 
     A2Z = ("A".."Z").to_a.freeze
