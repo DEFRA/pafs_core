@@ -277,7 +277,7 @@ module PafsCore
 
     def set_date_for(sym, value)
       if value.blank?
-        project.errors.add("#{sym}_date".to_sym, "#{sym.to_s.titlecase} date not supplied")
+        project.errors.add(:"#{sym}_date", "#{sym.to_s.titlecase} date not supplied")
       elsif value.respond_to?(:month) && value.respond_to?(:year)
         project.send("#{sym}_month=", value.month)
         project.send("#{sym}_year=", value.year)
@@ -294,7 +294,7 @@ module PafsCore
           project.send("#{sym}_year=", d[1])
         else
           # an error then
-          project.errors.add("#{sym}_date".to_sym, "#{sym.to_s.titlecase} date not recognised (#{value})")
+          project.errors.add(:"#{sym}_date", "#{sym.to_s.titlecase} date not recognised (#{value})")
         end
       end
     end

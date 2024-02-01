@@ -3,7 +3,7 @@
 module PafsCore
   module FileStorage
     def storage
-      @storage ||= if Rails.env.test? || Rails.env.development?
+      @storage ||= if Rails.env.local?
                      PafsCore::DevelopmentFileStorageService.new
                    else
                      PafsCore::FileStorageService.new
