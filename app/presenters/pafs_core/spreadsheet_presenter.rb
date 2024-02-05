@@ -165,6 +165,34 @@ module PafsCore
       funding_for(year).sum(:fcerm_gia)
     end
 
+    def asset_replacement_allowance(year)
+      funding_for(year).sum(:asset_replacement_allowance)
+    end
+
+    def environment_statutory_funding(year)
+      funding_for(year).sum(:environment_statutory_funding)
+    end
+
+    def frequently_flooded_communities(year)
+      funding_for(year).sum(:frequently_flooded_communities)
+    end
+
+    def other_additional_grant_in_aid(year)
+      funding_for(year).sum(:other_additional_grant_in_aid)
+    end
+
+    def other_government_department(year)
+      funding_for(year).sum(:other_government_department)
+    end
+
+    def recovery(year)
+      funding_for(year).sum(:recovery)
+    end
+
+    def summer_economic_fund(year)
+      funding_for(year).sum(:summer_economic_fund)
+    end
+
     def local_levy(year)
       funding_for(year).sum(:local_levy)
     end

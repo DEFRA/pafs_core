@@ -80,19 +80,9 @@ module PafsCore
       # HACK: for some reason the formula in column BH-BT are not recognised by RubyXL
       #       so we'll poke in the correct formula here
       formulae_map = [
-        { BH: ["JM"] },
-        { BI: ["JN"] },
-        { BJ: ["JO"] },
-        { BK: %w[BU CE CO CY DI DS EC] },
-        { BL: %w[BV CF CP CZ DJ DT ED] },
-        { BM: %w[BW CG CQ DA DK DU EE] },
-        { BN: %w[BX CH CR DB DL DV EF] },
-        { BO: %w[BY CI CS DC DM DW EG] },
-        { BP: %w[BZ CJ CT DD DN DX EH] },
-        { BQ: %w[CA CK CU DE DO DY EI] },
-        { BR: %w[CB CL CV DF DP DZ EJ] },
-        { BS: %w[CC CM CW DG DQ EA EK] },
-        { BT: %w[CD CN CX DH DR EB EL] }
+        { BH: ["ME"] },
+        { BI: ["MF"] },
+        { BJ: ["MG"] }
       ]
       formulae_map.each do |formula_hash|
         column = formula_hash.keys.first.to_s
