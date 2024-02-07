@@ -90,44 +90,44 @@ RSpec.describe PafsCore::SpreadsheetService do
       expect(first_row[SpreadsheetMapperHelper.column_index("BM")].value).to be(0)
     end
 
-    it "includes column MK" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MK")].value).to eql(spreadsheet_presenter_1.designated_site)
-    end
-
-    it "includes ML" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("ML")].value).to eql(spreadsheet_presenter_1.improve_surface_or_groundwater_amount)
-    end
-
-    it "includes column MM" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MM")].value).to eql(spreadsheet_presenter_1.remove_fish_or_eel_barrier)
-    end
-
-    it "includes column MN" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MN")].value).to eql(spreadsheet_presenter_1.fish_or_eel_amount)
-    end
-
-    it "includes column MO" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MP")].value).to eql(spreadsheet_presenter_1.improve_river_amount)
-    end
-
-    it "includes column MP" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MP")].value).to eql(spreadsheet_presenter_1.improve_habitat_amount)
-    end
-
     it "includes column MQ" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MQ")].value).to eql(spreadsheet_presenter_1.create_habitat_amount)
+      expect(first_row[SpreadsheetMapperHelper.column_index("MQ")].value).to eql(spreadsheet_presenter_1.designated_site)
+    end
+
+    it "includes MR" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MR")].value).to eql(spreadsheet_presenter_1.improve_surface_or_groundwater_amount)
+    end
+
+    it "includes column MS" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MS")].value).to eql(spreadsheet_presenter_1.remove_fish_or_eel_barrier)
+    end
+
+    it "includes column MT" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MT")].value).to eql(spreadsheet_presenter_1.fish_or_eel_amount)
     end
 
     it "includes column MU" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MU")].value.to_s).to eql(spreadsheet_presenter_1.state.state.capitalize)
+      expect(first_row[SpreadsheetMapperHelper.column_index("MU")].value).to eql(spreadsheet_presenter_1.improve_river_amount)
+    end
+
+    it "includes column MV" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MV")].value).to eql(spreadsheet_presenter_1.improve_habitat_amount)
+    end
+
+    it "includes column MW" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MW")].value).to eql(spreadsheet_presenter_1.create_habitat_amount)
+    end
+
+    it "includes column NA" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("NA")].value.to_s).to eql(spreadsheet_presenter_1.state.state.capitalize)
     end
 
     it "includes the last_updated column" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MX")].value.to_s).to eq(spreadsheet_presenter_1.last_updated)
+      expect(first_row[SpreadsheetMapperHelper.column_index("ND")].value.to_s).to eq(spreadsheet_presenter_1.last_updated)
     end
 
     it "includes the pso_name column" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MY")].value.to_s).to eq(spreadsheet_presenter_1.pso_name)
+      expect(first_row[SpreadsheetMapperHelper.column_index("NE")].value.to_s).to eq(spreadsheet_presenter_1.pso_name)
     end
   end
 end
