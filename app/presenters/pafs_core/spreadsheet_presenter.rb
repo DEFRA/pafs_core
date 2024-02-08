@@ -361,8 +361,8 @@ module PafsCore
     end
 
     def funding_for(year)
-      if year > 2026
-        # sum up 2027 onwards for spreadsheet
+      if year > 2032
+        # sum up 2033 onwards for spreadsheet
         t = PafsCore::FundingValue.arel_table
         project.funding_values.where(t[:financial_year].gt(year - 1))
       else
