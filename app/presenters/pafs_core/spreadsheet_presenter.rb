@@ -362,7 +362,7 @@ module PafsCore
         end
       end
       # other_flood_measures
-      if send("other_flood_measures?")
+      if other_flood_measures?
         measures_selected << I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.other_label")
       end
       measures_selected.join(" | ")

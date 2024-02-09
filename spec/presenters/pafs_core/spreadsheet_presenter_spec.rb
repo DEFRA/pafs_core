@@ -137,7 +137,7 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
   end
 
   describe "#main_natural_measure" do
-    context "when no natural measures been chosen" do
+    context "when no natural measures selected" do
       let(:project) { create(:project, creator: create(:user)) }
 
       it "returns returns empty string" do
@@ -145,7 +145,7 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       end
     end
 
-    context "when there is one natural measure chosen" do
+    context "when there is one natural measure selected" do
       let(:project) { create(:project, creator: create(:user), cross_slope_woodland: true) }
 
       it "returns a single natural measure name" do
@@ -153,7 +153,7 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       end
     end
 
-    context "when Other natural measure is chosen" do
+    context "when Other natural measure is selected" do
       let(:project) { create(:project, creator: create(:user), other_flood_measures: true) }
 
       it "returns a single natural measure name" do
@@ -161,7 +161,7 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       end
     end
 
-    context "when there are multiple natural measure chosen" do
+    context "when there are multiple natural measures selected" do
       let(:project) { create(:project, creator: create(:user), cross_slope_woodland: true, floodplain_woodland: true, beach_nourishment: true) }
 
       it "returns a list of natural measures separated with | symbol" do
