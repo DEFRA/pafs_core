@@ -354,6 +354,20 @@ module PafsCore
       updated_at.strftime("%Y-%m-%d_%H-%M-%S")
     end
 
+    def main_natural_measure
+      measures_selected = []
+      PafsCore::NaturalFloodRiskMeasures::NATURAL_FLOOD_RISK_MEASURES.each do |measure|
+        if send("#{measure}?")
+          measures_selected << I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.#{measure}_label")
+        end
+      end
+      # other_flood_measures
+      if send("other_flood_measures?")
+        measures_selected << I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.other_label")
+      end
+      measures_selected.join(" | ")
+    end
+
     private
 
     def project
