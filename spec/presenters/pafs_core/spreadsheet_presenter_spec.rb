@@ -135,4 +135,42 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       it { expect(presenter.project_type).to eq "ENN" }
     end
   end
+
+  describe "#main_natural_measure" do
+    context "when no natural measures selected" do
+      let(:project) { create(:project, creator: create(:user)) }
+
+      it "returns returns empty string" do
+        expect(presenter.main_natural_measure).to eq ""
+      end
+    end
+
+    context "when there is one natural measure selected" do
+      let(:project) { create(:project, creator: create(:user), cross_slope_woodland: true) }
+
+      it "returns a single natural measure name" do
+        expect(presenter.main_natural_measure).to eq I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.cross_slope_woodland_label")
+      end
+    end
+
+    context "when Other natural measure is selected" do
+      let(:project) { create(:project, creator: create(:user), other_flood_measures: true) }
+
+      it "returns a single natural measure name" do
+        expect(presenter.main_natural_measure).to eq I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.other_label")
+      end
+    end
+
+    context "when there are multiple natural measures selected" do
+      let(:project) { create(:project, creator: create(:user), cross_slope_woodland: true, floodplain_woodland: true, beach_nourishment: true) }
+
+      it "returns a list of natural measures separated with | symbol" do
+        expect(presenter.main_natural_measure).to eq [
+          I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.cross_slope_woodland_label"),
+          I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.floodplain_woodland_label"),
+          I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.beach_nourishment_label")
+        ].join(" | ")
+      end
+    end
+  end
 end

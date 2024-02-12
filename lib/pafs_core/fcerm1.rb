@@ -193,7 +193,7 @@ module PafsCore
 
       # Natural flood risk management measure
       { column: "MN", field_name: :natural_measures, export: false, import: false },
-      { column: "MO", field_name: :main_natural_measure, export: false, import: false },
+      { column: "MO", field_name: :main_natural_measure },
       { column: "MP", field_name: :natural_measures_costs, export: false, import: false },
 
       # # spa/sac, sssi or none
