@@ -381,7 +381,7 @@ module PafsCore
     end
 
     def contains_natural_measures
-      main_natural_measure.length.positive? ? I18n.t("pafs_core.yes_option") : I18n.t("pafs_core.no_option")
+      main_natural_measure.length.positive? ? I18n.t("yes_option") : I18n.t("no_option")
     end
 
     private
