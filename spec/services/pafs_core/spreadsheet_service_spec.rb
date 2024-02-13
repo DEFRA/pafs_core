@@ -90,6 +90,18 @@ RSpec.describe PafsCore::SpreadsheetService do
       expect(first_row[SpreadsheetMapperHelper.column_index("BN")].value).to be(0)
     end
 
+    it "includes column MO" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MO")].value).to eql(spreadsheet_presenter_1.contains_natural_measures)
+    end
+
+    it "includes column MP" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MP")].value).to eql(spreadsheet_presenter_1.main_natural_measure)
+    end
+
+    it "includes column MQ" do
+      expect(first_row[SpreadsheetMapperHelper.column_index("MQ")].value).to eql(spreadsheet_presenter_1.natural_flood_risk_measures_cost)
+    end
+
     it "includes column MR" do
       expect(first_row[SpreadsheetMapperHelper.column_index("MR")].value).to eql(spreadsheet_presenter_1.designated_site)
     end
