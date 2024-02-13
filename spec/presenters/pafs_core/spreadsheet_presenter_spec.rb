@@ -174,6 +174,24 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
     end
   end
 
+  describe "#contains_natural_measures" do
+    context "when no natural measures selected" do
+      let(:project) { create(:project, creator: create(:user)) }
+
+      it "returns No" do
+        expect(presenter.contains_natural_measures).to eq I18n.t("pafs_core.no_option")
+      end
+    end
+
+    context "when there are natural measure selected" do
+      let(:project) { create(:project, creator: create(:user), cross_slope_woodland: true) }
+
+      it "returns Yes" do
+        expect(presenter.contains_natural_measures).to eq I18n.t("pafs_core.yes_option")
+      end
+    end
+  end
+
   describe "#secondary_risk_sources" do
     context "when there are no risk sources selected" do
       let(:project) { create(:project, creator: create(:user)) }

@@ -193,7 +193,7 @@ module PafsCore
       { column: "MN", field_name: :kilometres_of_protected_river_improved, import: false },
 
       # Natural flood risk management measure
-      { column: "MO", field_name: :natural_measures, export: false, import: false },
+      { column: "MO", field_name: :contains_natural_measures },
       { column: "MP", field_name: :main_natural_measure },
       { column: "MQ", field_name: :natural_measures_costs, export: false, import: false },
 
