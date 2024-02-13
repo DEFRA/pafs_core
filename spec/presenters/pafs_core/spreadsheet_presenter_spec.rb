@@ -140,7 +140,7 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
     context "when no natural measures selected" do
       let(:project) { create(:project, creator: create(:user)) }
 
-      it "returns returns empty string" do
+      it "returns empty string" do
         expect(presenter.main_natural_measure).to eq ""
       end
     end
@@ -169,6 +169,62 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
           I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.cross_slope_woodland_label"),
           I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.floodplain_woodland_label"),
           I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.beach_nourishment_label")
+        ].join(" | ")
+      end
+    end
+  end
+
+  describe "#contains_natural_measures" do
+    context "when no natural measures selected" do
+      let(:project) { create(:project, creator: create(:user)) }
+
+      it "returns No" do
+        expect(presenter.contains_natural_measures).to eq I18n.t("pafs_core.no_option")
+      end
+    end
+
+    context "when there are natural measure selected" do
+      let(:project) { create(:project, creator: create(:user), cross_slope_woodland: true) }
+
+      it "returns Yes" do
+        expect(presenter.contains_natural_measures).to eq I18n.t("pafs_core.yes_option")
+      end
+    end
+  end
+
+  describe "#secondary_risk_sources" do
+    context "when there are no risk sources selected" do
+      let(:project) { create(:project, creator: create(:user)) }
+
+      it "returns empty string" do
+        expect(presenter.secondary_risk_sources).to eq ""
+      end
+    end
+
+    context "when there is only a main risk source selected" do
+      let(:project) { create(:project, creator: create(:user), fluvial_flooding: true, main_risk: "fluvial_flooding") }
+
+      it "returns empty string" do
+        expect(presenter.secondary_risk_sources).to eq ""
+      end
+    end
+
+    context "when there is one secondary risk source selected" do
+      let(:project) { create(:project, creator: create(:user), fluvial_flooding: true, tidal_flooding: true, main_risk: "fluvial_flooding") }
+
+      it "returns selected secondary risk" do
+        expect(presenter.secondary_risk_sources).to eq I18n.t("pafs_core.fcerm1.risks.tidal_flooding")
+      end
+    end
+
+    context "when there are multiple secondary risk sources selected" do
+      let(:project) { create(:project, creator: create(:user), fluvial_flooding: true, tidal_flooding: true, sea_flooding: true, coastal_erosion: true, main_risk: "fluvial_flooding") }
+
+      it "returns a list of secondary risks separated with | symbol" do
+        expect(presenter.secondary_risk_sources).to eq [
+          I18n.t("pafs_core.fcerm1.risks.tidal_flooding"),
+          I18n.t("pafs_core.fcerm1.risks.sea_flooding"),
+          I18n.t("pafs_core.fcerm1.risks.coastal_erosion")
         ].join(" | ")
       end
     end

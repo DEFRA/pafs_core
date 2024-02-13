@@ -70,6 +70,18 @@ module PafsCore
       I18n.t(project.main_risk, scope: "pafs_core.fcerm1.risks") unless project.main_risk.nil?
     end
 
+    def secondary_risk_sources
+      secondary_risks = []
+      PafsCore::Risks::RISKS.each do |risk|
+        # exlude the main risk
+        next if risk.to_s == project.main_risk
+
+        secondary_risks << I18n.t("pafs_core.fcerm1.risks.#{risk}") if send("#{risk}?")
+      end
+
+      secondary_risks.join(" | ")
+    end
+
     def moderation_code
       if urgent?
         I18n.t(project.urgency_reason, scope: "pafs_core.fcerm1.moderation")
@@ -366,6 +378,10 @@ module PafsCore
         measures_selected << I18n.t("pafs_core.projects.steps.natural_flood_risk_measures.other_label")
       end
       measures_selected.join(" | ")
+    end
+
+    def contains_natural_measures
+      main_natural_measure.length.positive? ? I18n.t("pafs_core.yes_option") : I18n.t("pafs_core.no_option")
     end
 
     private
