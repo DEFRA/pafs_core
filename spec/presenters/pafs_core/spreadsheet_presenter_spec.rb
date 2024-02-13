@@ -179,7 +179,7 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       let(:project) { create(:project, creator: create(:user)) }
 
       it "returns No" do
-        expect(presenter.contains_natural_measures).to eq I18n.t("pafs_core.no_option")
+        expect(presenter.contains_natural_measures).to eq I18n.t("no_option")
       end
     end
 
@@ -187,7 +187,7 @@ RSpec.describe PafsCore::SpreadsheetPresenter do
       let(:project) { create(:project, creator: create(:user), cross_slope_woodland: true) }
 
       it "returns Yes" do
-        expect(presenter.contains_natural_measures).to eq I18n.t("pafs_core.yes_option")
+        expect(presenter.contains_natural_measures).to eq I18n.t("yes_option")
       end
     end
   end
