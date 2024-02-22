@@ -90,56 +90,35 @@ RSpec.describe PafsCore::SpreadsheetService do
       expect(first_row[SpreadsheetMapperHelper.column_index("BN")].value).to be(0)
     end
 
-    it "includes column MO" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MO")].value).to eql(spreadsheet_presenter_1.contains_natural_measures)
-    end
+    column_mapping = {
+      MI: :hectares_of_intertidal_habitat_created_or_enhanced,
+      MJ: :hectares_of_woodland_habitat_created_or_enhanced,
+      MK: :hectares_of_wet_woodland_habitat_created_or_enhanced,
+      ML: :hectares_of_wetland_or_wet_grassland_created_or_enhanced,
+      MM: :hectares_of_grassland_habitat_created_or_enhanced,
+      MN: :hectares_of_heathland_created_or_enhanced,
+      MO: :hectares_of_pond_or_lake_habitat_created_or_enhanced,
+      MP: :hectares_of_arable_land_lake_habitat_created_or_enhanced,
+      MQ: :kilometres_of_watercourse_enhanced_or_created_comprehensive,
+      MR: :kilometres_of_watercourse_enhanced_or_created_partial,
+      MS: :kilometres_of_watercourse_enhanced_or_created_single,
+      MT: :contains_natural_measures,
+      MU: :main_natural_measure,
+      MV: :natural_flood_risk_measures_cost,
+      MW: :confidence_homes_better_protected,
+      MX: :confidence_homes_by_gateway_four,
+      MY: :confidence_homes_better_protected,
+      MZ: :project_status,
+      NA: :carbon_cost_build,
+      NB: :carbon_cost_operation,
+      NC: :last_updated,
+      ND: :pso_name
+    }
 
-    it "includes column MP" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MP")].value).to eql(spreadsheet_presenter_1.main_natural_measure)
-    end
-
-    it "includes column MQ" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MQ")].value).to eql(spreadsheet_presenter_1.natural_flood_risk_measures_cost)
-    end
-
-    it "includes column MR" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MR")].value).to eql(spreadsheet_presenter_1.designated_site)
-    end
-
-    it "includes MS" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MS")].value).to eql(spreadsheet_presenter_1.improve_surface_or_groundwater_amount)
-    end
-
-    it "includes column MT" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MT")].value).to eql(spreadsheet_presenter_1.remove_fish_or_eel_barrier)
-    end
-
-    it "includes column MU" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MTU")].value).to eql(spreadsheet_presenter_1.fish_or_eel_amount)
-    end
-
-    it "includes column MV" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MV")].value).to eql(spreadsheet_presenter_1.improve_river_amount)
-    end
-
-    it "includes column MW" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MW")].value).to eql(spreadsheet_presenter_1.improve_habitat_amount)
-    end
-
-    it "includes column MX" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("MX")].value).to eql(spreadsheet_presenter_1.create_habitat_amount)
-    end
-
-    it "includes column NB" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("NB")].value.to_s).to eql(spreadsheet_presenter_1.state.state.capitalize)
-    end
-
-    it "includes the last_updated column" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("NE")].value.to_s).to eq(spreadsheet_presenter_1.last_updated)
-    end
-
-    it "includes the pso_name column" do
-      expect(first_row[SpreadsheetMapperHelper.column_index("NF")].value.to_s).to eq(spreadsheet_presenter_1.pso_name)
+    column_mapping.each do |column, value|
+      it "includes column #{column}" do
+        expect(first_row[SpreadsheetMapperHelper.column_index(column)].value).to eql(spreadsheet_presenter_1.send(value))
+      end
     end
   end
 end

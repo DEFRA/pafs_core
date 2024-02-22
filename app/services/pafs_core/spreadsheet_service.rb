@@ -74,19 +74,16 @@ module PafsCore
       # HACK: for some reason the formula in column BH-BT are not recognised by RubyXL
       #       so we'll poke in the correct formula here
       formulae_map = [
-        { BO: ["ML"] },
-        { BP: ["MM"] },
-        { BQ: ["MN"] },
+        { BO: %w[BY CI CS DC DM DW EG EQ FA FK FU GE GO GY] },
+        { BP: %w[BZ CJ CT DD DN DX EH ER FB FL FV GF GP GZ] },
+        { BQ: %w[CA CK CU DE DO DY EI ES FC FM FW GG GQ HA] },
         { BR: %w[CB CL CV DF DP DZ EJ ET FD FN FX GH GR HB] },
         { BS: %w[CC CM CW DG DQ EA EK EU FE FO FY GI GS HC] },
         { BT: %w[CD CN CX DH DR EB EL EV FF FP FZ GJ GT HD] },
         { BU: %w[CE CO CY DI DS EC EM EW FG FQ GA GK GU HE] },
         { BV: %w[CF CP CZ DJ DT ED EN EX FH FR GB GL GV HF] },
         { BW: %w[CG CQ DA DK DU EE EO EY FI FS GC GM GW HG] },
-        { BX: %w[CH CR DB DL DV EF EP EZ FJ FT GD GN GX HH] },
-        { BY: %w[CI CS DC DM DW EG EQ FA FK FU GE GO GY HI] },
-        { BZ: %w[CJ CT DD DN DX EH ER FB FL FV GF GP GZ HJ] },
-        { CA: %w[CK CU DE DO DY EI ES FC FM FW GG GQ HA HK] }
+        { BX: %w[CH CR DB DL DV EF EP EZ FJ FT GD GN GX HH] }
       ]
       formulae_map.each do |formula_hash|
         column = formula_hash.keys.first.to_s
