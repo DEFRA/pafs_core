@@ -101,7 +101,7 @@ module PafsCore
       { column: "FU", field_name: :public_contributions, date_range: true },
 
       # Private contribution columns GE - GN
-      { column: "GH", field_name: :private_contributions, date_range: true },
+      { column: "GE", field_name: :private_contributions, date_range: true },
 
       # Other EA contribution columns GO - GX
       { column: "GO", field_name: :other_ea_contributions, date_range: true },
