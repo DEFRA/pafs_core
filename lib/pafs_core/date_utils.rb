@@ -25,5 +25,11 @@ module PafsCore
       Date.new(send("#{date_name}_year").to_i, send("#{date_name}_month").to_i, 1) >
         Date.new(send("#{other_date_name}_year").to_i, send("#{other_date_name}_month").to_i, 1)
     end
+
+    def date_in_future?(date_name)
+      send("#{date_name}_year").to_i > Date.today.year || (
+        send("#{date_name}_year").to_i == Date.today.year && send("#{date_name}_month").to_i > Date.today.month
+      )
+    end
   end
 end

@@ -7,15 +7,30 @@ RSpec.describe PafsCore::StartOutlineBusinessCaseDateStep, type: :model do
     subject { build(:start_outline_business_case_date_step) }
 
     it_behaves_like "a project step"
+
+    it "validates that date have been set" do
+      subject.start_outline_business_case_year = nil
+      subject.start_outline_business_case_month = nil
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:award_contract])
+        .to include "Enter the date you expect to award the project's main contract"
+    end
+
+    it "validates that date is in the future" do
+      subject.start_outline_business_case_year = 2020
+      subject.start_outline_business_case_month = 1
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:start_outline_business_case].first).to eq "You cannot enter a date in the past"
+    end
   end
 
   describe "#update" do
-    subject { create(:start_outline_business_case_date_step) }
+    subject { create(:start_outline_business_case_date_step, start_outline_business_case_year: 2030, start_outline_business_case_month: 1) }
 
     let(:params) do
       ActionController::Parameters.new({
                                          start_outline_business_case_date_step: {
-                                           start_outline_business_case_year: "2020"
+                                           start_outline_business_case_year: "2030"
                                          }
                                        })
     end
