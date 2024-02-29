@@ -35,12 +35,12 @@ module PafsCore
     end
 
     def date_is_in_future
-      if date_present?("start_outline_business_case") && !date_in_future?("start_outline_business_case")
-        errors.add(
-          :start_outline_business_case,
-          "You cannot enter a date in the past"
-        )
-      end
+      return unless date_present?("start_outline_business_case") && !date_in_future?("start_outline_business_case")
+
+      errors.add(
+        :start_outline_business_case,
+        "You cannot enter a date in the past"
+      )
     end
   end
 end

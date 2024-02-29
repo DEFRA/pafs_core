@@ -27,8 +27,9 @@ module PafsCore
     end
 
     def date_in_future?(date_name)
-      send("#{date_name}_year").to_i > Date.today.year || (
-        send("#{date_name}_year").to_i == Date.today.year && send("#{date_name}_month").to_i > Date.today.month
+      send("#{date_name}_year").to_i > Time.zone.today.year || (
+        send("#{date_name}_year").to_i == Time.zone.today.year &&
+        send("#{date_name}_month").to_i > Time.zone.today.month
       )
     end
   end
