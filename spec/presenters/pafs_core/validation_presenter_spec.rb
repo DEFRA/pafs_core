@@ -143,7 +143,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       it "sets an error message" do
         subject.start_outline_business_case_year = 2020
         subject.key_dates_complete?
-        expect(subject.errors[:key_dates]).to include "Outline business case start date is in the past. The record will remain in draft"
+        expect(subject.errors[:key_dates]).to include "The record will remain in draft. One or more of the dates entered in your 'Important Dates’ section is in the past, please revise and resubmit your proposal."
         subject.start_outline_business_case_year = Time.zone.today.year
       end
     end
