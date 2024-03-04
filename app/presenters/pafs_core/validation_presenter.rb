@@ -59,13 +59,29 @@ module PafsCore
     end
 
     def key_dates_complete?
-      if start_outline_business_case_month.present? &&
+      # ensure all dates are present and start_outline_business_case is in the future
+      if start_outline_business_case_year.present? &&
+         start_outline_business_case_month.present? &&
+         award_contract_year.present? &&
          award_contract_month.present? &&
+         start_construction_year.present? &&
          start_construction_month.present? &&
+         ready_for_service_year.present? &&
          ready_for_service_month.present?
-        true
+        check_key_dates_in_future
       else
         add_error(:key_dates, "Tell us the project's important dates")
+      end
+    end
+
+    def check_key_dates_in_future
+      if date_in_future?("start_outline_business_case")
+        true
+      else
+        add_error(:key_dates,
+                  "The record will remain in draft. " \
+                  "One or more of the dates entered in your 'Important Dates’ section is in the past, " \
+                  "please revise and resubmit your proposal.")
       end
     end
 

@@ -86,16 +86,16 @@ RSpec.describe PafsCore::ValidationPresenter do
   describe "#key_dates_complete?" do
     before do
       subject.start_outline_business_case_month = 12
-      subject.start_outline_business_case_year = 2016
+      subject.start_outline_business_case_year = Time.zone.today.year
       subject.award_contract_month = 12
-      subject.award_contract_year = 2017
+      subject.award_contract_year = Time.zone.today.year + 1
       subject.start_construction_month = 12
-      subject.start_construction_year = 2018
+      subject.start_construction_year = Time.zone.today.year + 2
       subject.ready_for_service_month = 12
-      subject.ready_for_service_year = 2019
+      subject.ready_for_service_year = Time.zone.today.year + 3
     end
 
-    context "when the key dates are all present" do
+    context "when the key dates are all present and in future" do
       it "returns true" do
         expect(subject.key_dates_complete?).to be true
       end
@@ -103,9 +103,13 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when one of the key dates is missing" do
       let(:dates) do
-        %i[start_outline_business_case_month
+        %i[start_outline_business_case_year
+           start_outline_business_case_month
+           award_contract_year
            award_contract_month
+           start_construction_year
            start_construction_month
+           ready_for_service_year
            ready_for_service_month]
       end
 
@@ -126,6 +130,21 @@ RSpec.describe PafsCore::ValidationPresenter do
           expect(subject.errors[:key_dates]).to include "Tell us the project's important dates"
           subject.send(m, 12)
         end
+      end
+    end
+
+    context "when start_outline_business_case is in the past" do
+      it "returns false" do
+        subject.start_outline_business_case_year = 2020
+        expect(subject.key_dates_complete?).to be false
+        subject.start_outline_business_case_year = Time.zone.today.year
+      end
+
+      it "sets an error message" do
+        subject.start_outline_business_case_year = 2020
+        subject.key_dates_complete?
+        expect(subject.errors[:key_dates]).to include "The record will remain in draft. One or more of the dates entered in your 'Important Dates’ section is in the past, please revise and resubmit your proposal."
+        subject.start_outline_business_case_year = Time.zone.today.year
       end
     end
   end
