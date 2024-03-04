@@ -153,8 +153,9 @@ module PafsCore
       # Assuming that, if no user-defined sorts have yet been run, the system has already applied
       # any default sort properties.
 
-      if current_sorted_col.nil? \
-      && !default_sort_col.nil? && default_sort_col == this_col
+      if current_sorted_col.nil? &&
+         !default_sort_col.nil? &&
+         default_sort_col == this_col
         current_sorted_col = this_col
         curr_sort_order = default_sort_order
       end
