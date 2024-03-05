@@ -163,10 +163,10 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
     end
 
-    context "when earliest_start_month and earliest_start_year are present" do
+    context "when earliest_start_month and earliest_start_year are present and in future" do
       before do
         subject.earliest_start_month = 2
-        subject.earliest_start_year = 2017
+        subject.earliest_start_year = Time.zone.today.year + 1
       end
 
       context "when could_start_early is nil" do
@@ -182,7 +182,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         context "when earliest_with_gia_year is present" do
           it "returns true" do
             subject.earliest_with_gia_month = 2
-            subject.earliest_with_gia_year = 2017
+            subject.earliest_with_gia_year = Time.zone.today.year + 1
             expect(subject.earliest_start_complete?).to be true
           end
         end
@@ -201,6 +201,42 @@ RSpec.describe PafsCore::ValidationPresenter do
 
         it "returns true" do
           expect(subject.earliest_start_complete?).to be true
+        end
+      end
+    end
+
+    context "when earliest_start is in the past" do
+      context "when could_start_early is false" do
+        before do
+          subject.could_start_early = false
+          subject.earliest_start_year = 2020
+        end
+
+        it "returns false" do
+          expect(subject.earliest_start_complete?).to be false
+        end
+
+        it "sets an error message" do
+          subject.earliest_start_complete?
+          expect(subject.errors[:earliest_start]).to include "The record will remain in draft. One or more of the dates entered in your 'Earliest start’ section is in the past, please revise and resubmit your proposal."
+        end
+      end
+
+      context "when could_start_early is true" do
+        before do
+          subject.earliest_with_gia_month = 2
+          subject.earliest_with_gia_year = Time.zone.today.year + 1
+          subject.could_start_early = true
+          subject.earliest_start_year = 2020
+        end
+
+        it "returns false" do
+          expect(subject.earliest_start_complete?).to be false
+        end
+
+        it "sets an error message" do
+          subject.earliest_start_complete?
+          expect(subject.errors[:earliest_start]).to include "The record will remain in draft. One or more of the dates entered in your 'Earliest start’ section is in the past, please revise and resubmit your proposal."
         end
       end
     end

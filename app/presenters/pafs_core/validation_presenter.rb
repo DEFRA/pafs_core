@@ -92,16 +92,23 @@ module PafsCore
     end
 
     def earliest_start_complete?
-      if mandatory_earliest_start_fields_missing?
+      if mandatory_earliest_start_fields_missing? || (could_start_early? && additional_earliest_start_fields_missing?)
         add_earliest_start_error
-      elsif could_start_early?
-        if earliest_with_gia_month.present? && earliest_with_gia_year.present?
-          true
-        else
-          add_earliest_start_error
-        end
-      else
+      end
+
+      if (date_present?("earliest_start") && !date_in_future?("earliest_start")) ||
+         (date_present?("earliest_with_gia") && !date_in_future?("earliest_with_gia"))
+        add_earliest_start_in_the_past_error
+      end
+
+      errors.count.zero?
+    end
+
+    def check_earliest_start_in_future
+      if date_in_future?("earliest_start")
         true
+      else
+        add_earliest_start_in_the_past_error
       end
     end
 
@@ -109,8 +116,19 @@ module PafsCore
       (earliest_start_month.blank? || earliest_start_year.blank?) || could_start_early.nil?
     end
 
+    def additional_earliest_start_fields_missing?
+      earliest_with_gia_month.blank? || earliest_with_gia_year.blank?
+    end
+
     def add_earliest_start_error
       add_error(:earliest_start, "Tell us the earliest date the project can start")
+    end
+
+    def add_earliest_start_in_the_past_error
+      add_error(:earliest_start,
+                "The record will remain in draft. " \
+                "One or more of the dates entered in your 'Earliest start’ section is in the past, " \
+                "please revise and resubmit your proposal.")
     end
 
     def risks_complete?
