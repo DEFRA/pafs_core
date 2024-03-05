@@ -96,9 +96,8 @@ module PafsCore
         add_earliest_start_error
       end
 
-      add_earliest_start_in_the_past_error if date_present?("earliest_start") && !date_in_future?("earliest_start")
-
-      if date_present?("earliest_with_gia") && !date_in_future?("earliest_with_gia")
+      if (date_present?("earliest_start") && !date_in_future?("earliest_start")) ||
+         (date_present?("earliest_with_gia") && !date_in_future?("earliest_with_gia"))
         add_earliest_start_in_the_past_error
       end
 
