@@ -130,7 +130,9 @@ module PafsCore
     # pv_whole_life_benefits
 
     def benefit_cost_ratio
-      (pv_whole_life_benefits / pv_whole_life_costs).round(1) if pv_whole_life_benefits && pv_whole_life_costs
+      return unless pv_whole_life_benefits && pv_whole_life_costs && pv_whole_life_costs.positive?
+
+      (pv_whole_life_benefits / pv_whole_life_costs).round(1)
     end
 
     def public_contributors
