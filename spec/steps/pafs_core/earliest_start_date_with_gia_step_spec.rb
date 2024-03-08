@@ -44,15 +44,23 @@ RSpec.describe PafsCore::EarliestStartDateWithGiaStep, type: :model do
       expect(subject.valid?).to be false
       expect(subject.errors.messages[:earliest_with_gia_date].first).to eq "The year must be between 2000 and 2100"
     end
+
+    it "validates that :earliest_start is in future" do
+      subject.earliest_with_gia_month = 2
+      subject.earliest_with_gia_year = 2020
+      expect(subject.valid?).to be false
+      expect(subject.errors.messages[:earliest_with_gia_date].first).to eq "You cannot enter a date in the past"
+    end
   end
 
   describe "#update" do
-    subject { create(:earliest_start_date_with_gia_step) }
+    subject { create(:earliest_start_date_with_gia_step, earliest_with_gia_year: 2030, earliest_with_gia_month: 2) }
 
+    let(:next_year) { Time.zone.today.year + 1 }
     let(:valid_params) do
       ActionController::Parameters.new(
         { earliest_start_date_with_gia_step:
-          { earliest_with_gia_month: "11", earliest_with_gia_year: "2016" } }
+          { earliest_with_gia_month: "11", earliest_with_gia_year: next_year.to_s } }
       )
     end
     let(:error_params) do
@@ -65,7 +73,7 @@ RSpec.describe PafsCore::EarliestStartDateWithGiaStep, type: :model do
     it "saves the date params when valid" do
       expect(subject.update(valid_params)).to be true
       expect(subject.earliest_with_gia_month).to eq 11
-      expect(subject.earliest_with_gia_year).to eq 2016
+      expect(subject.earliest_with_gia_year).to eq next_year
     end
 
     it "returns false when validation fails" do
