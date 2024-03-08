@@ -12,6 +12,7 @@ module PafsCore
 
     def generate_xlsx(project)
       workbook = read_fcerm1_template
+      workbook.calc_pr.full_calc_on_load = true
       # until sheet names are fixed, take the first sheet in the workbook
       sheet = workbook.worksheets[0]
 
@@ -26,6 +27,7 @@ module PafsCore
 
     def generate_multi_xlsx(projects)
       workbook = read_fcerm1_template
+      workbook.calc_pr.full_calc_on_load = true
       # until sheet names are fixed, take the first sheet in the workbook
       sheet = workbook.worksheets[0]
 
@@ -71,7 +73,7 @@ module PafsCore
     end
 
     def fix_worksheet(sheet)
-      # HACK: for some reason the formula in column BH-BT are not recognised by RubyXL
+      # HACK: for some reason the formula in column AM-BX are not recognised by RubyXL
       #       so we'll poke in the correct formula here
       formulae_map = [
         { BO: %w[BY CI CS DC DM DW EG EQ FA FK FU GE GO GY] },
@@ -83,7 +85,35 @@ module PafsCore
         { BU: %w[CE CO CY DI DS EC EM EW FG FQ GA GK GU HE] },
         { BV: %w[CF CP CZ DJ DT ED EN EX FH FR GB GL GV HF] },
         { BW: %w[CG CQ DA DK DU EE EO EY FI FS GC GM GW HG] },
-        { BX: %w[CH CR DB DL DV EF EP EZ FJ FT GD GN GX HH] }
+        { BX: %w[CH CR DB DL DV EF EP EZ FJ FT GD GN GX HH] },
+        { AM: %w[BO BP BQ BR BS BT BU BV BW BX] },
+        { AN: %w[BY BZ CA CB CC CD CE CF CG CH] },
+        { AO: %w[CI CJ CK CL CM CN CO CP CQ CR] },
+        { AP: %w[CS CT CU CV CW CX CY CZ DA DB] },
+        { AQ: %w[DC DD DE DF DG DH DI DJ DK DL] },
+        { AR: %w[DM DN DO DP DQ DR DS DT DU DV] },
+        { AS: %w[DW DX DY DZ EA EB EC ED EE EF] },
+        { AT: %w[EG EH EI EJ EK EL EM EN EO EP] },
+        { AU: %w[EQ ER ES ET EU EV EW EX EY EZ] },
+        { AV: %w[FA FB FC FD FE FF FG FH FI FJ] },
+        { AW: %w[FK FL FM FN FO FP FQ FR FS FT] },
+        { AX: %w[FU FV FW FX FY FZ GA GB GC GD] },
+        { AY: %w[GE GF GG GH GI GJ GK GL GM GN] },
+        { AZ: %w[GO GP GQ GR GS GT GU GV GW GX] },
+        { BA: %w[GY GZ HA HB HC HD HE HF HG HH] },
+        { BB: %w[HI HJ HK HL HM HN HO HP HQ HR] },
+        { BC: %w[HS HT HU HV HW HX HY HZ IA IB] },
+        { BD: %w[IC ID IE IF IG IH II IJ IK IL] },
+        { BE: %w[IM IN IO IP IQ IR IS IT IU IV] },
+        { BF: %w[IW IX IY IZ JA JB JC JD JE JF] },
+        { BG: %w[JG JH JI JJ JK JL JM JN JO JP] },
+        { BH: %w[JQ JR JS JT JU JV JW JX JY JZ] },
+        { BI: %w[KA KB KC KD KE KF KG KH KI KJ] },
+        { BJ: %w[KK KL KM KN KO KP KQ KR KS KT] },
+        { BK: %w[KU KV KW KX KY KZ LA LB LC LD] },
+        { BL: %w[LE LF LG LH LI LJ LK LL LM LN] },
+        { BM: %w[LO LP LQ LR LS LT LU LV LW LX] },
+        { BN: %w[LY LZ MA MB MC MD ME MF MG MH] }
       ]
       formulae_map.each do |formula_hash|
         column = formula_hash.keys.first.to_s

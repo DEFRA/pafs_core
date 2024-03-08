@@ -110,10 +110,10 @@ GEM
     airbrake-ruby (6.2.2)
       rbtree3 (~> 0.6)
     ast (2.4.2)
-    async (2.8.2)
+    async (2.9.0)
       console (~> 1.10)
       fiber-annotation
-      io-event (~> 1.1)
+      io-event (~> 1.5, >= 1.5.1)
       timers (~> 4.1)
     async-http (0.63.0)
       async (>= 1.25)
@@ -165,7 +165,7 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
-    console (1.23.4)
+    console (1.23.5)
       fiber-annotation
       fiber-local
       json
@@ -187,7 +187,7 @@ GEM
       rubocop-factory_bot
       rubocop-rake
       rubocop-rspec
-    defra_ruby_template (3.15.0)
+    defra_ruby_template (3.15.1)
     diff-lcs (1.5.1)
     docile (1.4.0)
     dotenv (3.1.0)
@@ -230,11 +230,11 @@ GEM
     hashdiff (1.1.0)
     html-attributes-utils (0.9.2)
       activesupport (>= 6.1.4.4)
-    i18n (1.14.1)
+    i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
     io-event (1.5.1)
-    irb (1.11.2)
+    irb (1.12.0)
       rdoc
       reline (>= 0.4.2)
     jmespath (1.6.2)
@@ -386,7 +386,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.13.1)
-    rubocop (1.61.0)
+    rubocop (1.62.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -394,7 +394,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.30.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.31.1)
