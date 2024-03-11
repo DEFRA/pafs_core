@@ -24,6 +24,14 @@
 
 **Merged pull requests:**
 
+- \[RUBY-2590\] adding date validation for earliest\_start\_date\_with\_gia step [\#791](https://github.com/DEFRA/pafs_core/pull/791) ([brujeo](https://github.com/brujeo))
+- Fix/ruby 3008 pafs fcrm 1 report data filtering issue [\#790](https://github.com/DEFRA/pafs_core/pull/790) ([brujeo](https://github.com/brujeo))
+- Feature/ruby 2589 project start earliest date validation [\#788](https://github.com/DEFRA/pafs_core/pull/788) ([brujeo](https://github.com/brujeo))
+- Update CHANGELOG [\#782](https://github.com/DEFRA/pafs_core/pull/782) ([brujeo](https://github.com/brujeo))
+- Bump pg from 1.5.5 to 1.5.6 [\#781](https://github.com/DEFRA/pafs_core/pull/781) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Feature/ruby 2559 pafs bau validation on date field when do you expect to start the projects outline business case [\#778](https://github.com/DEFRA/pafs_core/pull/778) ([brujeo](https://github.com/brujeo))
+- Bump dotenv from 3.0.2 to 3.1.0 [\#777](https://github.com/DEFRA/pafs_core/pull/777) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump webmock from 3.22.0 to 3.23.0 [\#775](https://github.com/DEFRA/pafs_core/pull/775) ([dependabot[bot]](https://github.com/apps/dependabot))
 - \[RUBY-2991\] fixing typo in column name [\#774](https://github.com/DEFRA/pafs_core/pull/774) ([brujeo](https://github.com/brujeo))
 - Ruby 2583 2582 pafs bau fcrm 1 report remove old om 4 columns and add new ones [\#772](https://github.com/DEFRA/pafs_core/pull/772) ([brujeo](https://github.com/brujeo))
 - Add natural\_flood\_risk\_measures\_cost to fcrm1 report [\#763](https://github.com/DEFRA/pafs_core/pull/763) ([brujeo](https://github.com/brujeo))
