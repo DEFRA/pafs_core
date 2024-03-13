@@ -20,7 +20,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.households_at_reduced_risk(year)
+          value: zero_unless_flooding(fcerm1_presenter.households_at_reduced_risk(year))
         }
       end
     end
@@ -29,7 +29,9 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.moved_from_very_significant_and_significant_to_moderate_or_low(year)
+          value: zero_unless_flooding(
+            fcerm1_presenter.moved_from_very_significant_and_significant_to_moderate_or_low(year)
+          )
         }
       end
     end
@@ -38,7 +40,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.households_protected_from_loss_in_20_percent_most_deprived(year)
+          value: zero_unless_flooding(fcerm1_presenter.households_protected_from_loss_in_20_percent_most_deprived(year))
         }
       end
     end
@@ -47,7 +49,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.households_protected_through_plp_measures(year)
+          value: zero_unless_flooding(fcerm1_presenter.households_protected_through_plp_measures(year))
         }
       end
     end
@@ -56,7 +58,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.non_residential_properties(year)
+          value: zero_unless_flooding(fcerm1_presenter.non_residential_properties(year))
         }
       end
     end
@@ -65,7 +67,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.households_at_reduced_risk_2040(year)
+          value: zero_unless_flooding(fcerm1_presenter.households_at_reduced_risk_2040(year))
         }
       end
     end
@@ -74,7 +76,9 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.moved_from_very_significant_and_significant_to_moderate_or_low_2040(year)
+          value: zero_unless_flooding(
+            fcerm1_presenter.moved_from_very_significant_and_significant_to_moderate_or_low_2040(year)
+          )
         }
       end
     end
@@ -83,7 +87,9 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.households_protected_from_loss_in_20_percent_most_deprived_2040(year)
+          value: zero_unless_flooding(
+            fcerm1_presenter.households_protected_from_loss_in_20_percent_most_deprived_2040(year)
+          )
         }
       end
     end
@@ -92,7 +98,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.non_residential_properties_2040(year)
+          value: zero_unless_flooding(fcerm1_presenter.non_residential_properties_2040(year))
         }
       end
     end
@@ -101,7 +107,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.coastal_households_at_reduced_risk(year)
+          value: zero_unless_coastal_erosion(fcerm1_presenter.coastal_households_at_reduced_risk(year))
         }
       end
     end
@@ -110,7 +116,9 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.coastal_households_protected_from_loss_in_next_20_years(year)
+          value: zero_unless_coastal_erosion(
+            fcerm1_presenter.coastal_households_protected_from_loss_in_next_20_years(year)
+          )
         }
       end
     end
@@ -119,7 +127,9 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.coastal_households_protected_from_loss_in_20_percent_most_deprived(year)
+          value: zero_unless_coastal_erosion(
+            fcerm1_presenter.coastal_households_protected_from_loss_in_20_percent_most_deprived(year)
+          )
         }
       end
     end
@@ -128,7 +138,7 @@ module PafsCore
       financial_years.collect do |year|
         {
           year: year,
-          value: fcerm1_presenter.coastal_non_residential_properties(year)
+          value: zero_unless_coastal_erosion(fcerm1_presenter.coastal_non_residential_properties(year))
         }
       end
     end
@@ -212,6 +222,14 @@ module PafsCore
     def financial_years
       start_year = project.first_financial_year || current_financial_year
       (start_year..project.project_end_financial_year).to_a
+    end
+
+    def zero_unless_flooding(value)
+      project.flooding? ? value : 0
+    end
+
+    def zero_unless_coastal_erosion(value)
+      project.coastal_erosion? ? value : 0
     end
   end
 end

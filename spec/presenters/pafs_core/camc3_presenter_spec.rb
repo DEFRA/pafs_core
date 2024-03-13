@@ -61,6 +61,28 @@ RSpec.describe PafsCore::Camc3Presenter do
       { year: 2032, value: 0 }
     ]
   end
+  let(:zero_outcome_measurements) do
+    [
+      { year: 2015, value: 0 },
+      { year: 2016, value: 0 },
+      { year: 2017, value: 0 },
+      { year: 2018, value: 0 },
+      { year: 2019, value: 0 },
+      { year: 2020, value: 0 },
+      { year: 2021, value: 0 },
+      { year: 2022, value: 0 },
+      { year: 2023, value: 0 },
+      { year: 2024, value: 0 },
+      { year: 2025, value: 0 },
+      { year: 2026, value: 0 },
+      { year: 2027, value: 0 },
+      { year: 2028, value: 0 },
+      { year: 2029, value: 0 },
+      { year: 2030, value: 0 },
+      { year: 2031, value: 0 },
+      { year: 2032, value: 0 }
+    ]
+  end
   let(:json) { subject.attributes.to_json }
 
   before do
@@ -202,8 +224,18 @@ RSpec.describe PafsCore::Camc3Presenter do
         end
       end
 
-      it "has the forecast for #{attribute.to_s.humanize}" do
-        expect(subject.send(presenter_method || attribute)).to eql(outcome_measurements)
+      context "when risk category selected" do
+        it "has the forecast for #{attribute.to_s.humanize}" do
+          expect(project.flooding? || project.coastal_erosion?).to be_truthy
+          expect(subject.send(presenter_method || attribute)).to eql(outcome_measurements)
+        end
+      end
+
+      context "when no risk category selected" do
+        it "returns 0 forecast for #{attribute.to_s.humanize}" do
+          project.assign_attributes(PafsCore::Risks::RISKS.index_with { nil })
+          expect(subject.send(presenter_method || attribute)).to eql(zero_outcome_measurements)
+        end
       end
     end
 
