@@ -112,6 +112,7 @@ FactoryBot.define do
       earliest_start_year { 2017 }
       fluvial_flooding { true }
       sea_flooding { true }
+      coastal_erosion { true }
       main_risk { "sea_flooding" }
       project_location { [457_733, 221_751] }
       project_location_zoom_level { 15 }
