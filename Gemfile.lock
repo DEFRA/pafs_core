@@ -147,7 +147,7 @@ GEM
     aws-sigv4 (1.8.0)
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
-    bigdecimal (3.1.6)
+    bigdecimal (3.1.7)
     bstard (0.2.4)
     builder (3.2.4)
     byebug (11.1.3)
@@ -239,7 +239,7 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.2)
     json (2.7.1)
-    json_schemer (2.2.0)
+    json_schemer (2.2.1)
       base64
       bigdecimal
       hana (~> 1.3)
