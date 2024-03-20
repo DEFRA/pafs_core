@@ -113,7 +113,6 @@ module PafsCore
                 fv.public_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero? &&
                 fv.private_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero? &&
                 fv.other_ea_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero?
-
         # check if the financial year is within the project lifetime range
         next if fv.financial_year >= earliest_start_year && fv.financial_year <= project_end_financial_year
 
@@ -140,7 +139,6 @@ module PafsCore
         next if fpo.financial_year == -1
         # check if any of the protection outcomes has a value
         next if all_outcome_columns.reduce(0) { |sum, aoc| sum + fpo.send(aoc).to_i }.zero?
-
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year >= earliest_start_year && fpo.financial_year <= project_end_financial_year
 
@@ -166,7 +164,6 @@ module PafsCore
         next if fpo.financial_year == -1
         # check if any of the protection outcomes has a value
         next if all_outcome_columns.reduce(0) { |sum, aoc| sum + fpo.send(aoc).to_i }.zero?
-
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year >= earliest_start_year && fpo.financial_year <= project_end_financial_year
 
@@ -192,7 +189,6 @@ module PafsCore
         next if cepo.financial_year == -1
         # check if any of the protection outcomes has a value
         next if all_outcome_columns.reduce(0) { |sum, aoc| sum + cepo.send(aoc).to_i }.zero?
-
         # check if the financial year is within the project lifetime range
         next if cepo.financial_year >= earliest_start_year && cepo.financial_year <= project_end_financial_year
 
