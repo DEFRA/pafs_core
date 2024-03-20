@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength
 module PafsCore
   class SpreadsheetPresenter < SimpleDelegator
     include PafsCore::Carbon
@@ -465,4 +464,3 @@ module PafsCore
     end
   end
 end
-# rubocop:enable Metrics/ClassLength
