@@ -39,6 +39,12 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
   end
 
+  shared_examples "successful validation example" do |attribute|
+    it "returns true" do
+      expect(subject.public_send(attribute)).to be true
+    end
+  end
+
   describe "#project_name_complete?" do
     it "always returns true" do
       expect(subject.project_name_complete?).to be true
@@ -399,9 +405,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#check_key_dates_within_project_lifetime_range" do
     context "when dates are within the project lifetime range" do
-      it "returns true" do
-        expect(subject.check_key_dates_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_key_dates_within_project_lifetime_range
     end
 
     context "when the date is outside of the project lifetime range" do
@@ -430,9 +434,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         subject.funding_values << fv1
       end
 
-      it "returns true" do
-        expect(subject.check_funding_values_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
     end
 
     context "when funding value financial year is before the earliest_start date" do
@@ -463,9 +465,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         subject.funding_values << fv1
       end
 
-      it "returns true" do
-        expect(subject.check_funding_values_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
     end
 
     context "when public contribution financial year is before the earliest_start date" do
@@ -496,9 +496,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         subject.funding_values << fv1
       end
 
-      it "returns true" do
-        expect(subject.check_funding_values_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
     end
 
     context "when private contribution financial year is before the earliest_start date" do
@@ -529,9 +527,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         subject.funding_values << fv1
       end
 
-      it "returns true" do
-        expect(subject.check_funding_values_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
     end
 
     context "when other ea contribution financial year is before the earliest_start date" do
@@ -564,9 +560,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         subject.flood_protection_outcomes << fpo
       end
 
-      it "returns true" do
-        expect(subject.check_outcomes_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_outcomes_within_project_lifetime_range
     end
 
     context "when outcome financial year is before the earliest_start date" do
@@ -599,9 +593,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         subject.flood_protection2040_outcomes << fpo
       end
 
-      it "returns true" do
-        expect(subject.check_outcomes_2040_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_outcomes_2040_within_project_lifetime_range
     end
 
     context "when outcome financial year is before the earliest_start date" do
@@ -634,9 +626,7 @@ RSpec.describe PafsCore::ValidationPresenter do
         subject.coastal_erosion_protection_outcomes << cepo
       end
 
-      it "returns true" do
-        expect(subject.check_coastal_outcomes_within_project_lifetime_range).to be true
-      end
+      it_behaves_like "successful validation example", :check_coastal_outcomes_within_project_lifetime_range
     end
 
     context "when outcome financial year is before the earliest_start date" do
