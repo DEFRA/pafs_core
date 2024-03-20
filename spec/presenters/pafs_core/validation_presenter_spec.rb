@@ -570,7 +570,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       it_behaves_like "failed validation example",
-                      :check_outcomes_within_project_lifetime_range, :environmental_outcomes,
+                      :check_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
     end
 
@@ -581,7 +581,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       it_behaves_like "failed validation example",
-                      :check_outcomes_within_project_lifetime_range, :environmental_outcomes,
+                      :check_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
     end
   end
@@ -603,7 +603,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       it_behaves_like "failed validation example",
-                      :check_outcomes_2040_within_project_lifetime_range, :environmental_outcomes,
+                      :check_outcomes_2040_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
     end
 
@@ -614,7 +614,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       it_behaves_like "failed validation example",
-                      :check_outcomes_2040_within_project_lifetime_range, :environmental_outcomes,
+                      :check_outcomes_2040_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
     end
   end
@@ -636,7 +636,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       it_behaves_like "failed validation example",
-                      :check_coastal_outcomes_within_project_lifetime_range, :environmental_outcomes,
+                      :check_coastal_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
     end
 
@@ -647,7 +647,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       end
 
       it_behaves_like "failed validation example",
-                      :check_coastal_outcomes_within_project_lifetime_range, :environmental_outcomes,
+                      :check_coastal_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
     end
   end
