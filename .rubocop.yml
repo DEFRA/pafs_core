@@ -37,3 +37,8 @@ Style/RedundantInitialize:
 # this rule seems overly fussy:
 RSpec/IndexedLet:
   Enabled: false
+
+# I've noticed this rule has been violated across some files and inline disable being used to suppress it
+# It makes sense to increase the max length to a reasonable value
+Metrics/ClassLength:
+  Max: 500

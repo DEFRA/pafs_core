@@ -68,7 +68,12 @@ module PafsCore
          start_construction_month.present? &&
          ready_for_service_year.present? &&
          ready_for_service_month.present?
-        check_key_dates_in_future
+        check_key_dates_in_future &&
+          check_key_dates_within_project_lifetime_range &&
+          check_funding_values_within_project_lifetime_range &&
+          check_outcomes_within_project_lifetime_range &&
+          check_outcomes_2040_within_project_lifetime_range &&
+          check_coastal_outcomes_within_project_lifetime_range
       else
         add_error(:key_dates, "Tell us the project's important dates")
       end
@@ -83,6 +88,87 @@ module PafsCore
                   "One or more of the dates entered in your 'Important Dates’ section is in the past, " \
                   "please revise and resubmit your proposal.")
       end
+    end
+
+    def check_key_dates_within_project_lifetime_range
+      if date_within_project_lifetime_range?("ready_for_service")
+        true
+      else
+        add_error(:key_dates,
+                  I18n.t("pafs_core.validation_presenter.errors.key_dates_outside_project_lifetime"))
+      end
+    end
+
+    def check_funding_values_within_project_lifetime_range
+      err_count = 0
+      funding_values.each do |fv|
+        # ignore past financial years
+        next if fv.financial_year == -1
+        # check if any of the funding sources has a value
+        next unless fv.any_positive_values?
+        # check if the financial year is within the project lifetime range
+        next if fv.financial_year_in_range?(earliest_start_year, project_end_financial_year)
+
+        add_error(:funding_sources,
+                  I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime"))
+        err_count += 1
+      end
+
+      err_count.zero?
+    end
+
+    def check_outcomes_within_project_lifetime_range
+      err_count = 0
+      flood_protection_outcomes.each do |fpo|
+        # ignore past financial years
+        next if fpo.financial_year == -1
+        # check if any of the protection outcomes has a value
+        next unless fpo.any_positive_values?
+        # check if the financial year is within the project lifetime range
+        next if fpo.financial_year_in_range?(earliest_start_year, project_end_financial_year)
+
+        add_error(:risks,
+                  I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        err_count += 1
+      end
+
+      err_count.zero?
+    end
+
+    def check_outcomes_2040_within_project_lifetime_range
+      err_count = 0
+      flood_protection2040_outcomes.each do |fpo|
+        # ignore past financial years
+        next if fpo.financial_year == -1
+        # check if any of the protection outcomes has a value
+        next unless fpo.any_positive_values?
+        # check if the financial year is within the project lifetime range
+        next if fpo.financial_year_in_range?(earliest_start_year, project_end_financial_year)
+
+        add_error(:risks,
+                  I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        err_count += 1
+      end
+
+      err_count.zero?
+    end
+
+    def check_coastal_outcomes_within_project_lifetime_range
+      err_count = 0
+      coastal_erosion_protection_outcomes.each do |cepo|
+        # ignore past financial years
+        next if cepo.financial_year == -1
+        # check if any of the protection outcomes has a value
+        next unless cepo.any_positive_values?
+        # check if the financial year is within the project lifetime range
+        next if cepo.financial_year_in_range?(earliest_start_year, project_end_financial_year)
+
+        add_error(:risks,
+                  I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        err_count += 1
+      end
+
+      err_count.zero?
     end
 
     def funding_sources_complete?
@@ -360,6 +446,14 @@ module PafsCore
     end
 
     private
+
+    def date_within_project_lifetime_range?(date_name)
+      column_year = send("#{date_name}_year").to_i
+      column_month = send("#{date_name}_month").to_i
+
+      date_later_than?(date_name, "earliest_start") &&
+        Date.new(column_year, column_month, 1) < Date.new(project_end_financial_year, 3, 1)
+    end
 
     def funding_calculator_correct_version?
       tfile = Tempfile.new(["funding_calculator", ".xlsx"])

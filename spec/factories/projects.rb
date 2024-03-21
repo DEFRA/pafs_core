@@ -92,7 +92,7 @@ FactoryBot.define do
       reference_number { PafsCore::ProjectService.generate_reference_number("SO") }
       version { 0 }
       project_type { PafsCore::PROJECT_TYPES.first }
-      project_end_financial_year { 2022 }
+      project_end_financial_year { 2025 }
       start_outline_business_case_month { 2 }
       start_outline_business_case_year { 2012 }
       award_contract_month { 4 }
@@ -100,7 +100,7 @@ FactoryBot.define do
       start_construction_month { 5 }
       start_construction_year { 2015 }
       ready_for_service_month { 9 }
-      ready_for_service_year { 2029 }
+      ready_for_service_year { 2024 }
       fcerm_gia { true }
       local_levy { true }
       growth_funding { true }
