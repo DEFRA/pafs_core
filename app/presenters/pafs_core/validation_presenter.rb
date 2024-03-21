@@ -100,21 +100,14 @@ module PafsCore
     end
 
     def check_funding_values_within_project_lifetime_range
-      all_non_aggr_non_removed_funding_sources = PafsCore::FundingSources::ALL_FUNDING_SOURCES -
-                                                 PafsCore::FundingSources::REMOVED_FROM_FUNDING_VALUES -
-                                                 PafsCore::FundingSources::AGGREGATE_SOURCES
-
       err_count = 0
       funding_values.each do |fv|
         # ignore past financial years
         next if fv.financial_year == -1
         # check if any of the funding sources has a value
-        next if all_non_aggr_non_removed_funding_sources.reduce(0) { |sum, fs| sum + fv.send(fs).to_i }.zero? &&
-                fv.public_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero? &&
-                fv.private_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero? &&
-                fv.other_ea_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero?
+        next unless fv.any_positive_values?
         # check if the financial year is within the project lifetime range
-        next if fv.financial_year >= earliest_start_year && fv.financial_year <= project_end_financial_year
+        next if fv.financial_year_in_range?(earliest_start_year, project_end_financial_year)
 
         add_error(:funding_sources,
                   I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime"))
@@ -125,22 +118,14 @@ module PafsCore
     end
 
     def check_outcomes_within_project_lifetime_range
-      all_outcome_columns = %i[
-        households_at_reduced_risk
-        moved_from_very_significant_and_significant_to_moderate_or_low
-        households_protected_from_loss_in_20_percent_most_deprived
-        households_protected_through_plp_measures
-        non_residential_properties
-      ]
-
       err_count = 0
       flood_protection_outcomes.each do |fpo|
         # ignore past financial years
         next if fpo.financial_year == -1
         # check if any of the protection outcomes has a value
-        next if all_outcome_columns.reduce(0) { |sum, aoc| sum + fpo.send(aoc).to_i }.zero?
+        next unless fpo.any_positive_values?
         # check if the financial year is within the project lifetime range
-        next if fpo.financial_year >= earliest_start_year && fpo.financial_year <= project_end_financial_year
+        next if fpo.financial_year_in_range?(earliest_start_year, project_end_financial_year)
 
         add_error(:risks,
                   I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
@@ -151,21 +136,14 @@ module PafsCore
     end
 
     def check_outcomes_2040_within_project_lifetime_range
-      all_outcome_columns = %i[
-        households_at_reduced_risk
-        moved_from_very_significant_and_significant_to_moderate_or_low
-        households_protected_from_loss_in_20_percent_most_deprived
-        non_residential_properties
-      ]
-
       err_count = 0
       flood_protection2040_outcomes.each do |fpo|
         # ignore past financial years
         next if fpo.financial_year == -1
         # check if any of the protection outcomes has a value
-        next if all_outcome_columns.reduce(0) { |sum, aoc| sum + fpo.send(aoc).to_i }.zero?
+        next unless fpo.any_positive_values?
         # check if the financial year is within the project lifetime range
-        next if fpo.financial_year >= earliest_start_year && fpo.financial_year <= project_end_financial_year
+        next if fpo.financial_year_in_range?(earliest_start_year, project_end_financial_year)
 
         add_error(:risks,
                   I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
@@ -176,21 +154,14 @@ module PafsCore
     end
 
     def check_coastal_outcomes_within_project_lifetime_range
-      all_outcome_columns = %i[
-        households_at_reduced_risk
-        households_protected_from_loss_in_next_20_years
-        households_protected_from_loss_in_20_percent_most_deprived
-        non_residential_properties
-      ]
-
       err_count = 0
       coastal_erosion_protection_outcomes.each do |cepo|
         # ignore past financial years
         next if cepo.financial_year == -1
         # check if any of the protection outcomes has a value
-        next if all_outcome_columns.reduce(0) { |sum, aoc| sum + cepo.send(aoc).to_i }.zero?
+        next unless cepo.any_positive_values?
         # check if the financial year is within the project lifetime range
-        next if cepo.financial_year >= earliest_start_year && cepo.financial_year <= project_end_financial_year
+        next if cepo.financial_year_in_range?(earliest_start_year, project_end_financial_year)
 
         add_error(:risks,
                   I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))

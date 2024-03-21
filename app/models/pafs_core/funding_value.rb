@@ -40,6 +40,25 @@ module PafsCore
       end
     end
 
+    def any_positive_values?
+      all_non_aggr_non_removed_funding_sources = PafsCore::FundingSources::ALL_FUNDING_SOURCES -
+                                                 PafsCore::FundingSources::REMOVED_FROM_FUNDING_VALUES -
+                                                 PafsCore::FundingSources::AGGREGATE_SOURCES
+
+      return false if all_non_aggr_non_removed_funding_sources.reduce(0) { |sum, fs| sum + send(fs).to_i }.zero? &&
+                      public_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero? &&
+                      private_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero? &&
+                      other_ea_contributions.reduce(0) { |sum, pc| sum + pc.amount.to_i }.zero?
+
+      true
+    end
+
+    def financial_year_in_range?(year_from, year_to)
+      return false if financial_year.nil?
+
+      financial_year >= year_from && financial_year <= year_to
+    end
+
     private
 
     def selected_funding_sources
