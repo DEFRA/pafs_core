@@ -465,7 +465,7 @@ module PafsCore
     end
 
     def date_within_project_lifetime_range?(date_name)
-      return false if send("earliest_start_year").present? || send("earliest_start_month").present?
+      return false unless send("earliest_start_year").present? && send("earliest_start_month").present?
 
       column_year = send("#{date_name}_year").to_i
       column_month = send("#{date_name}_month").to_i
