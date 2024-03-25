@@ -152,8 +152,13 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        add_error(:risks,
-                  I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        # add error message if it's not already there
+        unless errors[:risks].include?(
+          I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+        )
+          add_error(:risks,
+                    I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        end
         err_count += 1
       end
 
@@ -173,8 +178,13 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        add_error(:risks,
-                  I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        # add error message if it's not already there
+        unless errors[:risks].include?(
+          I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+        )
+          add_error(:risks,
+                    I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        end
         err_count += 1
       end
 
@@ -194,8 +204,13 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if cepo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        add_error(:risks,
-                  I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        # add error message if it's not already there
+        unless errors[:risks].include?(
+          I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+        )
+          add_error(:risks,
+                    I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
+        end
         err_count += 1
       end
 
