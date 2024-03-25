@@ -114,6 +114,8 @@ module PafsCore
     end
 
     def check_funding_values_within_project_lifetime_range
+      return false unless date_present?("earliest_start") && date_plausible?("earliest_start")
+
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
       funding_values.each do |fv|
@@ -133,6 +135,8 @@ module PafsCore
     end
 
     def check_outcomes_within_project_lifetime_range
+      return false unless date_present?("earliest_start") && date_plausible?("earliest_start")
+
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
       flood_protection_outcomes.each do |fpo|
@@ -152,6 +156,8 @@ module PafsCore
     end
 
     def check_outcomes_2040_within_project_lifetime_range
+      return false unless date_present?("earliest_start") && date_plausible?("earliest_start")
+
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
       flood_protection2040_outcomes.each do |fpo|
@@ -171,6 +177,8 @@ module PafsCore
     end
 
     def check_coastal_outcomes_within_project_lifetime_range
+      return false unless date_present?("earliest_start") && date_plausible?("earliest_start")
+
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
       coastal_erosion_protection_outcomes.each do |cepo|
