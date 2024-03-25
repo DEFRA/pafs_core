@@ -68,15 +68,29 @@ module PafsCore
          start_construction_month.present? &&
          ready_for_service_year.present? &&
          ready_for_service_month.present?
-        check_key_dates_in_future &&
-          check_key_dates_within_project_lifetime_range &&
-          check_funding_values_within_project_lifetime_range &&
-          check_outcomes_within_project_lifetime_range &&
-          check_outcomes_2040_within_project_lifetime_range &&
-          check_coastal_outcomes_within_project_lifetime_range
+        check_key_dates_in_future && validate_project_dates_within_project_lifetime_range
       else
         add_error(:key_dates, "Tell us the project's important dates")
       end
+    end
+
+    def funding_sources_complete?
+      return true if funding_values_complete?
+
+      add_error(:funding_sources, "Tell us the project's funding sources and estimated spend")
+    end
+
+    def earliest_start_complete?
+      if mandatory_earliest_start_fields_missing? || (could_start_early? && additional_earliest_start_fields_missing?)
+        add_earliest_start_error
+      end
+
+      if (date_present?("earliest_start") && !date_in_future?("earliest_start")) ||
+         (date_present?("earliest_with_gia") && !date_in_future?("earliest_with_gia"))
+        add_earliest_start_in_the_past_error
+      end
+
+      errors.count.zero?
     end
 
     def check_key_dates_in_future
@@ -175,23 +189,14 @@ module PafsCore
       err_count.zero?
     end
 
-    def funding_sources_complete?
-      return true if funding_values_complete?
-
-      add_error(:funding_sources, "Tell us the project's funding sources and estimated spend")
-    end
-
-    def earliest_start_complete?
-      if mandatory_earliest_start_fields_missing? || (could_start_early? && additional_earliest_start_fields_missing?)
-        add_earliest_start_error
-      end
-
-      if (date_present?("earliest_start") && !date_in_future?("earliest_start")) ||
-         (date_present?("earliest_with_gia") && !date_in_future?("earliest_with_gia"))
-        add_earliest_start_in_the_past_error
-      end
-
-      errors.count.zero?
+    def validate_project_dates_within_project_lifetime_range
+      err_count_before = errors.count
+      check_key_dates_within_project_lifetime_range
+      check_funding_values_within_project_lifetime_range
+      check_outcomes_within_project_lifetime_range
+      check_outcomes_2040_within_project_lifetime_range
+      check_coastal_outcomes_within_project_lifetime_range
+      errors.count == err_count_before
     end
 
     def check_earliest_start_in_future
