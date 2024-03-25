@@ -126,14 +126,11 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if fv.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        # add error message if it's not already there
-        unless errors[:funding_sources].include?(
+        err_count += 1
+        add_error_if_not_already_added(
+          :funding_sources,
           I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
         )
-          add_error(:funding_sources,
-                    I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime"))
-        end
-        err_count += 1
       end
 
       err_count.zero?
@@ -152,14 +149,11 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        # add error message if it's not already there
-        unless errors[:risks].include?(
+        err_count += 1
+        add_error_if_not_already_added(
+          :risks,
           I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
         )
-          add_error(:risks,
-                    I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
-        end
-        err_count += 1
       end
 
       err_count.zero?
@@ -178,14 +172,11 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        # add error message if it's not already there
-        unless errors[:risks].include?(
+        err_count += 1
+        add_error_if_not_already_added(
+          :risks,
           I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
         )
-          add_error(:risks,
-                    I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
-        end
-        err_count += 1
       end
 
       err_count.zero?
@@ -204,14 +195,11 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if cepo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        # add error message if it's not already there
-        unless errors[:risks].include?(
+        err_count += 1
+        add_error_if_not_already_added(
+          :risks,
           I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
         )
-          add_error(:risks,
-                    I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime"))
-        end
-        err_count += 1
       end
 
       err_count.zero?
@@ -434,6 +422,12 @@ module PafsCore
       return false if selected_funding_sources.blank?
 
       selected_funding_sources.all? { |fs| total_for(fs).positive? }
+    end
+
+    def add_error_if_not_already_added(attr, msg)
+      return if errors[attr].include?(msg)
+
+      add_error(attr, msg)
     end
 
     def add_error(attr, msg)

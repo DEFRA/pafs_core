@@ -564,7 +564,7 @@ RSpec.describe PafsCore::ValidationPresenter do
                       :check_funding_values_within_project_lifetime_range, :funding_sources,
                       I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
 
-      it "shoes only one error message" do
+      it "shows only one error message" do
         subject.check_funding_values_within_project_lifetime_range
         expect(subject.errors[:funding_sources].count).to eq(1)
       end
@@ -615,7 +615,7 @@ RSpec.describe PafsCore::ValidationPresenter do
                       :check_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
 
-      it "shoes only one error message" do
+      it "shows only one error message" do
         subject.check_outcomes_within_project_lifetime_range
         expect(subject.errors[:risks].count).to eq(1)
       end
@@ -666,7 +666,7 @@ RSpec.describe PafsCore::ValidationPresenter do
                       :check_outcomes_2040_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
 
-      it "shoes only one error message" do
+      it "shows only one error message" do
         subject.check_outcomes_2040_within_project_lifetime_range
         expect(subject.errors[:risks].count).to eq(1)
       end
@@ -717,7 +717,7 @@ RSpec.describe PafsCore::ValidationPresenter do
                       :check_coastal_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
 
-      it "shoes only one error message" do
+      it "shows only one error message" do
         subject.check_coastal_outcomes_within_project_lifetime_range
         expect(subject.errors[:risks].count).to eq(1)
       end
