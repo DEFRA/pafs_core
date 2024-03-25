@@ -465,8 +465,8 @@ module PafsCore
     end
 
     def date_within_project_lifetime_range?(date_name)
-      return false unless date_plausible?("earliest_start")
-      return false unless date_plausible?(date_name)
+      return false unless date_present?("earliest_start") && date_plausible?("earliest_start")
+      return false unless date_present?(date_name) && date_plausible?(date_name)
 
       column_year = send("#{date_name}_year").to_i
       column_month = send("#{date_name}_month").to_i
