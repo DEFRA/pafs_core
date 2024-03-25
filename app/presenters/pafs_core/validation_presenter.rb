@@ -127,7 +127,7 @@ module PafsCore
         next if fv.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
         err_count += 1
-        add_error_if_not_already_added(
+        add_error_unless_exists(
           :funding_sources,
           I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
         )
@@ -150,7 +150,7 @@ module PafsCore
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
         err_count += 1
-        add_error_if_not_already_added(
+        add_error_unless_exists(
           :risks,
           I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
         )
@@ -173,7 +173,7 @@ module PafsCore
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
         err_count += 1
-        add_error_if_not_already_added(
+        add_error_unless_exists(
           :risks,
           I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
         )
@@ -196,7 +196,7 @@ module PafsCore
         next if cepo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
         err_count += 1
-        add_error_if_not_already_added(
+        add_error_unless_exists(
           :risks,
           I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
         )
@@ -424,7 +424,7 @@ module PafsCore
       selected_funding_sources.all? { |fs| total_for(fs).positive? }
     end
 
-    def add_error_if_not_already_added(attr, msg)
+    def add_error_unless_exists(attr, msg)
       return if errors[attr].include?(msg)
 
       add_error(attr, msg)
