@@ -126,8 +126,13 @@ module PafsCore
         # check if the financial year is within the project lifetime range
         next if fv.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
-        add_error(:funding_sources,
-                  I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime"))
+        # add error message if it's not already there
+        unless errors[:funding_sources].include?(
+          I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
+        )
+          add_error(:funding_sources,
+                    I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime"))
+        end
         err_count += 1
       end
 

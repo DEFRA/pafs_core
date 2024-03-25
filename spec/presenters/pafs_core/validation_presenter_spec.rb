@@ -551,6 +551,24 @@ RSpec.describe PafsCore::ValidationPresenter do
                       :check_funding_values_within_project_lifetime_range, :funding_sources,
                       I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
     end
+
+    context "when multiple funding values are outside the project lifetime range" do
+      before do
+        fv1 = create(:funding_value, :with_public_contributor, financial_year: 2015)
+        subject.funding_values << fv1
+        fv2 = build(:funding_value, :with_other_ea_contributor, financial_year: 2028)
+        subject.funding_values << fv2
+      end
+
+      it_behaves_like "failed validation example",
+                      :check_funding_values_within_project_lifetime_range, :funding_sources,
+                      I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
+
+      it "shoes only one error message" do
+        subject.check_funding_values_within_project_lifetime_range
+        expect(subject.errors[:funding_sources].count).to eq(1)
+      end
+    end
   end
 
   describe "#check_outcomes_within_project_lifetime_range" do
