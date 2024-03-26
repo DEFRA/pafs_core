@@ -551,6 +551,24 @@ RSpec.describe PafsCore::ValidationPresenter do
                       :check_funding_values_within_project_lifetime_range, :funding_sources,
                       I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
     end
+
+    context "when multiple funding values are outside the project lifetime range" do
+      before do
+        fv1 = create(:funding_value, :with_public_contributor, financial_year: 2015)
+        subject.funding_values << fv1
+        fv2 = build(:funding_value, :with_other_ea_contributor, financial_year: 2028)
+        subject.funding_values << fv2
+      end
+
+      it_behaves_like "failed validation example",
+                      :check_funding_values_within_project_lifetime_range, :funding_sources,
+                      I18n.t("pafs_core.validation_presenter.errors.funding_data_outside_project_lifetime")
+
+      it "shows only one error message" do
+        subject.check_funding_values_within_project_lifetime_range
+        expect(subject.errors[:funding_sources].count).to eq(1)
+      end
+    end
   end
 
   describe "#check_outcomes_within_project_lifetime_range" do
@@ -583,6 +601,24 @@ RSpec.describe PafsCore::ValidationPresenter do
       it_behaves_like "failed validation example",
                       :check_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+    end
+
+    context "when multiple outcomes are outside the project lifetime range" do
+      before do
+        fpo1 = build(:flood_protection_outcomes, financial_year: 2015)
+        subject.flood_protection_outcomes << fpo1
+        fpo2 = build(:flood_protection_outcomes, financial_year: 2028)
+        subject.flood_protection_outcomes << fpo2
+      end
+
+      it_behaves_like "failed validation example",
+                      :check_outcomes_within_project_lifetime_range, :risks,
+                      I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+
+      it "shows only one error message" do
+        subject.check_outcomes_within_project_lifetime_range
+        expect(subject.errors[:risks].count).to eq(1)
+      end
     end
   end
 
@@ -617,6 +653,24 @@ RSpec.describe PafsCore::ValidationPresenter do
                       :check_outcomes_2040_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
     end
+
+    context "when multiple outcomes are outside the project lifetime range" do
+      before do
+        fpo1 = build(:flood_protection2040_outcomes, financial_year: 2015)
+        subject.flood_protection2040_outcomes << fpo1
+        fpo2 = build(:flood_protection2040_outcomes, financial_year: 2028)
+        subject.flood_protection2040_outcomes << fpo2
+      end
+
+      it_behaves_like "failed validation example",
+                      :check_outcomes_2040_within_project_lifetime_range, :risks,
+                      I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+
+      it "shows only one error message" do
+        subject.check_outcomes_2040_within_project_lifetime_range
+        expect(subject.errors[:risks].count).to eq(1)
+      end
+    end
   end
 
   describe "#check_coastal_outcomes_within_project_lifetime_range" do
@@ -649,6 +703,24 @@ RSpec.describe PafsCore::ValidationPresenter do
       it_behaves_like "failed validation example",
                       :check_coastal_outcomes_within_project_lifetime_range, :risks,
                       I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+    end
+
+    context "when multiple outcomes are outside the project lifetime range" do
+      before do
+        cepo1 = build(:coastal_erosion_protection_outcomes, financial_year: 2015)
+        subject.coastal_erosion_protection_outcomes << cepo1
+        cepo2 = build(:coastal_erosion_protection_outcomes, financial_year: 2028)
+        subject.coastal_erosion_protection_outcomes << cepo2
+      end
+
+      it_behaves_like "failed validation example",
+                      :check_coastal_outcomes_within_project_lifetime_range, :risks,
+                      I18n.t("pafs_core.validation_presenter.errors.outcome_outside_project_lifetime")
+
+      it "shows only one error message" do
+        subject.check_coastal_outcomes_within_project_lifetime_range
+        expect(subject.errors[:risks].count).to eq(1)
+      end
     end
   end
 
