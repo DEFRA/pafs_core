@@ -112,7 +112,8 @@ RSpec.describe PafsCore::SpreadsheetService do
       NA: :carbon_cost_build,
       NB: :carbon_cost_operation,
       NC: :last_updated,
-      ND: :pso_name
+      ND: :last_updated_by,
+      NE: :pso_name
     }
 
     column_mapping.each do |column, value|

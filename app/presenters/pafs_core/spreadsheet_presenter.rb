@@ -367,6 +367,10 @@ module PafsCore
       updated_at.strftime("%Y-%m-%d_%H-%M-%S")
     end
 
+    def last_updated_by
+      updated_by&.email
+    end
+
     def main_natural_measure
       measures_selected = []
       PafsCore::NaturalFloodRiskMeasures::NATURAL_FLOOD_RISK_MEASURES.each do |measure|
