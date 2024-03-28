@@ -24,6 +24,11 @@
 
 **Merged pull requests:**
 
+- Adding base service class [\#807](https://github.com/DEFRA/pafs_core/pull/807) ([brujeo](https://github.com/brujeo))
+- Fix/ruby 2985 adjustments [\#804](https://github.com/DEFRA/pafs_core/pull/804) ([brujeo](https://github.com/brujeo))
+- Feature/ruby 2985 pa fs validation workflow triggers on submission to prevent data being displayed out of the grid range in the aims pd pipeline form [\#803](https://github.com/DEFRA/pafs_core/pull/803) ([brujeo](https://github.com/brujeo))
+- \[RUBY-2593\] zeroing risk values for Camc3Presenter when no risks selected [\#795](https://github.com/DEFRA/pafs_core/pull/795) ([brujeo](https://github.com/brujeo))
+- Update CHANGELOG [\#792](https://github.com/DEFRA/pafs_core/pull/792) ([brujeo](https://github.com/brujeo))
 - \[RUBY-2590\] adding date validation for earliest\_start\_date\_with\_gia step [\#791](https://github.com/DEFRA/pafs_core/pull/791) ([brujeo](https://github.com/brujeo))
 - Fix/ruby 3008 pafs fcrm 1 report data filtering issue [\#790](https://github.com/DEFRA/pafs_core/pull/790) ([brujeo](https://github.com/brujeo))
 - Feature/ruby 2589 project start earliest date validation [\#788](https://github.com/DEFRA/pafs_core/pull/788) ([brujeo](https://github.com/brujeo))
