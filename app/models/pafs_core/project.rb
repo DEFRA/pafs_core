@@ -17,6 +17,7 @@ module PafsCore
     validates :version, presence: true
 
     belongs_to :creator, class_name: "User", optional: true
+    belongs_to :updated_by, polymorphic: true, optional: true
     has_many :area_projects, dependent: :destroy
     has_many :areas, through: :area_projects
     has_many :funding_values, dependent: :destroy

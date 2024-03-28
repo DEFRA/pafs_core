@@ -217,7 +217,8 @@ module PafsCore
 
       # Additional columns per RUBY-2394
       { column: "NC", field_name: :last_updated, import: false },
-      { column: "ND", field_name: :pso_name, import: false }
+      { column: "ND", field_name: :last_updated_by, import: false },
+      { column: "NE", field_name: :pso_name, import: false }
     ].freeze
 
     A2Z = ("A".."Z").to_a.freeze

@@ -83,6 +83,11 @@ RSpec.describe PafsCore::ProjectsController do
         patch :save, params: { id: project.to_param, step: "project_name", project_name_step: { name: "Haystack" } }
         expect(response).to redirect_to project_path(id: project.to_param, anchor: "project-name")
       end
+
+      it "stores updated_by" do
+        patch :save, params: { id: project.to_param, step: "project_name", project_name_step: { name: "Haystack" } }
+        expect(PafsCore::Project.find(project.id).updated_by).to eq user
+      end
     end
 
     context "when user completes a section" do
