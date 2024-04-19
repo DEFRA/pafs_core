@@ -45,11 +45,10 @@ module PafsCore
     def error_message(object, prefix, attribute)
       return unless object.errors.include? attribute
 
-      content = []
-      object.errors.full_messages_for(attribute).each do |message|
-        content << content_tag(:p, trim_error_message(attribute, message),
-                               class: "govuk-error-message",
-                               id: error_id(prefix, attribute))
+      content = object.errors.full_messages_for(attribute).map do |message|
+        content_tag(:p, trim_error_message(attribute, message),
+                    class: "govuk-error-message",
+                    id: error_id(prefix, attribute))
       end
       safe_join(content, "\n")
     end
