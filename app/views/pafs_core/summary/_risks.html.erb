@@ -59,6 +59,33 @@
                   <td><%= project.summary_label(:flooding_outcome_e) %></td>
                   <td id="total-for-flooding-e" class="align-right"><%= number_with_delimiter project.total_for_flooding_e %></td>
                 </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <% if !project.draft? %>
+          <div class="govuk-grid-row">
+            <details class="govuk-details headroom" data-module="govuk-details">
+              <summary class="govuk-details__summary" role="button" aria-controls="show_risks and households benefitting detail">
+                <span class="details__summary-text">View households affected by flooding detail </span>
+              </summary>
+              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+                <%= render partial: "pafs_core/summary/flood_protection_outcomes_detail", locals: {project: @project} %>
+              </div>
+            </details>
+          </div>
+        <% end %>
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-three-quarters">
+            <h3 class="heading-small summary-sub-heading"><%= project.summary_label(:flooding_2040_outcome_title) %></h3>
+            <table class="full-table" aria-labelledby="<%= project.summary_label(:flooding_2040_outcome_title) %>">
+              <thead>
+                <tr>
+                  <th class="govuk-visually-hidden">Households benefitting</th>
+                  <th class="govuk-visually-hidden">Total</th>
+                </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td><%= project.summary_label(:flooding_2040_outcome_a) %></td>
                   <td id="total-for-flooding-2040-a" class="align-right"><%= number_with_delimiter project.total_for_flooding_2040_a %></td>
@@ -83,10 +110,10 @@
           <div class="govuk-grid-row">
             <details class="govuk-details headroom" data-module="govuk-details">
               <summary class="govuk-details__summary" role="button" aria-controls="show_risks and households benefitting detail">
-                <span class="details__summary-text">View households affected by flooding detail </span>
+                <span class="details__summary-text">View households affected by flooding by 2040 </span>
               </summary>
               <div id="show_risks and households benefitting detail" class="govuk-details__text">
-                <%= render partial: "pafs_core/summary/flood_protection_outcomes_detail", locals: {project: @project} %>
+                <%= render partial: "pafs_core/summary/flood_protection_outcomes2040_detail", locals: {project: @project} %>
               </div>
             </details>
           </div>
