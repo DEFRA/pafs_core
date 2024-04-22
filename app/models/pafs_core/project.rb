@@ -103,6 +103,14 @@ module PafsCore
       households
     end
 
+    def total_households_flood_protected_2040_by_category(category)
+      households = 0
+      flood_protection2040_outcomes.each do |fo|
+        households += fo[category].to_i
+      end
+      households
+    end
+
     def total_households_coastal_protected_by_category(category)
       households = 0
       coastal_erosion_protection_outcomes.each do |fo|

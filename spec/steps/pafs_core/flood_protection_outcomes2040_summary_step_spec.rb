@@ -43,4 +43,18 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040SummaryStep, type: :model do
       expect(subject.total_fpo2040_for(:households_protected_from_loss_in_20_percent_most_deprived)).to eq 50
     end
   end
+
+  describe "#total_households_flood_protected_2040_by_category" do
+    subject { @project }
+
+    it "returns the correct totals for the three columns" do
+      expect(subject.total_households_flood_protected_2040_by_category(:households_at_reduced_risk)).to eq 300
+      expect(subject
+.total_households_flood_protected_2040_by_category(:moved_from_very_significant_and_significant_to_moderate_or_low)).to eq 150
+      expect(subject
+.total_households_flood_protected_2040_by_category(:households_protected_from_loss_in_20_percent_most_deprived)).to eq 75
+      expect(subject
+.total_households_flood_protected_2040_by_category(:non_residential_properties)).to eq 30
+    end
+  end
 end
