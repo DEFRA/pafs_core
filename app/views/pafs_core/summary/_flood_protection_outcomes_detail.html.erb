@@ -15,6 +15,7 @@
               <th class="risk-summary-heading" scope="col"><%= project.summary_label(:households_moved_from_very_significant_and_significant_to_moderate_or_low_label) %></th>
               <th class="risk-summary-heading" scope="col"><%= project.summary_label(:households_protected_from_loss_in_20_percent_most_deprived_label) %></th>
               <th class="risk-summary-heading" scope="col"><%= project.summary_label(:households_protected_through_plp_measures_label) %></th>
+              <th class="risk-summary-heading" scope="col"><%= project.summary_label(:non_residential_properties_at_reduced_risk_flood_protection_label) %></th>
             </tr>
             <tr>
               <td></td>
@@ -22,6 +23,7 @@
               <th class="risk-summary-subheading" scope="col">B</th>
               <th class="risk-summary-subheading" scope="col">C</th>
               <th class="risk-summary-subheading" scope="col">D</th>
+              <th class="risk-summary-subheading" scope="col">E</th>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +44,9 @@
                   <td id=<%= "households_protected_through_plp_measures_#{fo.financial_year}" %> class="<%= funding_table_cell(fo.financial_year, fo.households_protected_through_plp_measures) %>">
                     <%= number_with_delimiter fo.households_protected_through_plp_measures %>
                   </td>
+                  <td id=<%= "non_residential_properties_#{fo.financial_year}" %> class="<%= funding_table_cell(fo.financial_year, fo.non_residential_properties) %>">
+                    <%= number_with_delimiter fo.non_residential_properties %>
+                  </td>
                 </tr>
             <% end %>
             </tbody>
@@ -52,6 +57,7 @@
                 <td id="moved_from_very_significant_and_significant_to_moderate_or_low" class="numeric moved-from-very-significant-and-significant-to-moderate-or-low-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:moved_from_very_significant_and_significant_to_moderate_or_low)%></td>
                 <td id="households_protected_from_loss_in_20_percent_most_deprived" class="numeric households-protected-from-loss-in-20-percent-most-deprived-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:households_protected_from_loss_in_20_percent_most_deprived)%></td>
                 <td id="households_protected_through_plp_measures" class="numeric households-protected-through-plp-measures-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:households_protected_thhrough_plp_measures)%></td>
+                <td id="non_residential_properties" class="numeric non-residential-properties-total"><%= number_with_delimiter project.total_households_flood_protected_by_category(:non_residential_properties)%></td>
               </tr>
             </tfoot>
           </table>
