@@ -6,7 +6,7 @@
 
 **Fixed bugs:**
 
-- Fixing translation misssing error in fcrm report [\#762](https://github.com/DEFRA/pafs_core/pull/762) ([brujeo](https://github.com/brujeo))
+- Fixing translation misssing error in fcrm report [\#762](https://github.com/DEFRA/pafs_core/pull/762)  ([brujeo](https://github.com/brujeo))
 - Fixing area factory [\#711](https://github.com/DEFRA/pafs_core/pull/711) ([brujeo](https://github.com/brujeo))
 - Fix/ruby 2485 pafs unable to unselect my project does not move any properties to a lower flood risk category check box after [\#626](https://github.com/DEFRA/pafs_core/pull/626) ([brujeo](https://github.com/brujeo))
 - Fix issue with could start early not being taken into account [\#603](https://github.com/DEFRA/pafs_core/pull/603) ([jjromeo](https://github.com/jjromeo))
@@ -24,7 +24,18 @@
 
 **Merged pull requests:**
 
+- Fix/ruby 2741 pafs om 2 view summary om 2 column e non residential properties summary details missing in UI [\#826](https://github.com/DEFRA/pafs_core/pull/826) ([brujeo](https://github.com/brujeo))
+- RUBY-2303 Summary page for flood protection outcomes 2040 [\#825](https://github.com/DEFRA/pafs_core/pull/825) ([brujeo](https://github.com/brujeo))
+- Bump faker from 3.2.3 to 3.3.1 [\#816](https://github.com/DEFRA/pafs_core/pull/816) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rspec from 2.27.1 to 2.28.0 [\#815](https://github.com/DEFRA/pafs_core/pull/815) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubyXL from 3.4.25 to 3.4.26 [\#814](https://github.com/DEFRA/pafs_core/pull/814) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump aws-sdk-s3 from 1.146.0 to 1.146.1 [\#813](https://github.com/DEFRA/pafs_core/pull/813) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump sprockets from 3.7.2 to 3.7.3 [\#812](https://github.com/DEFRA/pafs_core/pull/812) ([dependabot[bot]](https://github.com/apps/dependabot))
+- RUBY-2881 keep track of who last updated the project and show it on FCRM1 report [\#811](https://github.com/DEFRA/pafs_core/pull/811) ([brujeo](https://github.com/brujeo))
+- Update CHANGELOG [\#810](https://github.com/DEFRA/pafs_core/pull/810) ([brujeo](https://github.com/brujeo))
+- Bump net-smtp from 0.4.0.1 to 0.5.0 [\#809](https://github.com/DEFRA/pafs_core/pull/809) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Adding base service class [\#807](https://github.com/DEFRA/pafs_core/pull/807) ([brujeo](https://github.com/brujeo))
+- Bump rubocop-rails from 2.24.0 to 2.24.1 [\#806](https://github.com/DEFRA/pafs_core/pull/806) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Fix/ruby 2985 adjustments [\#804](https://github.com/DEFRA/pafs_core/pull/804) ([brujeo](https://github.com/brujeo))
 - Feature/ruby 2985 pa fs validation workflow triggers on submission to prevent data being displayed out of the grid range in the aims pd pipeline form [\#803](https://github.com/DEFRA/pafs_core/pull/803) ([brujeo](https://github.com/brujeo))
 - \[RUBY-2593\] zeroing risk values for Camc3Presenter when no risks selected [\#795](https://github.com/DEFRA/pafs_core/pull/795) ([brujeo](https://github.com/brujeo))
