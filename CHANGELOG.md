@@ -6,7 +6,7 @@
 
 **Fixed bugs:**
 
-- Fixing translation misssing error in fcrm report [\#762](https://github.com/DEFRA/pafs_core/pull/762) ([brujeo](https://github.com/brujeo))
+- Fixing translation misssing error in fcrm report [\#762](https://github.com/DEFRA/pafs_core/pull/762)  ([brujeo](https://github.com/brujeo))
 - Fixing area factory [\#711](https://github.com/DEFRA/pafs_core/pull/711) ([brujeo](https://github.com/brujeo))
 - Fix/ruby 2485 pafs unable to unselect my project does not move any properties to a lower flood risk category check box after [\#626](https://github.com/DEFRA/pafs_core/pull/626) ([brujeo](https://github.com/brujeo))
 - Fix issue with could start early not being taken into account [\#603](https://github.com/DEFRA/pafs_core/pull/603) ([jjromeo](https://github.com/jjromeo))
