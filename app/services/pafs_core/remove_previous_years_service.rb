@@ -23,7 +23,7 @@ module PafsCore
     private
 
     def prune_years(annual_attribute)
-      project.send(annual_attribute).where("financial_year < ?", current_year).destroy_all
+      project.send(annual_attribute).where(financial_year: ...current_year).destroy_all
     end
   end
 end
