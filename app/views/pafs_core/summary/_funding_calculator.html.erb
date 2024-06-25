@@ -1,7 +1,7 @@
 <article class="summary-item" aria-labelledby="funding-calculator">
   <% if project.funding_calculator_uploaded? %>
     <div class="summary-item-content">
-      <h2 class="govuk-heading-m" role="heading" id="funding-calculator"><%= project.summary_label(:funding_calculator_title) %></h2>
+      <h2 class="govuk-heading-m" id="funding-calculator"><%= project.summary_label(:funding_calculator_title) %></h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
           <div class="attachment">
@@ -45,7 +45,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="govuk-heading-m" role="heading" id="funding-calculator"><%= project.summary_label(:funding_calculator_title) %></h2>
+          <h2 class="govuk-heading-m" id="funding-calculator"><%= project.summary_label(:funding_calculator_title) %></h2>
         </div>
         <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>

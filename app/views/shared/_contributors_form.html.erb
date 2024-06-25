@@ -11,7 +11,7 @@
           <%= form_group f.object, project.step, :base, "contributors" do %>
             <%= error_message(f.object, "#{project.step}-step", :base) %>
 
-            <label class='form-label-bold'>What is the Contributor Name?</label>
+            <label for="<%= project.step %>-base" class='form-label-bold'>What is the Contributor Name?</label>
             <% project.current_funding_contributors.each_with_index do |contributor, index| %>
               <div class="form-group">
                 <%= fields_for "name[#{index}]", contributor do |builder| %>

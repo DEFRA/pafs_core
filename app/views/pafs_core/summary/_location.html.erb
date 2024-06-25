@@ -1,7 +1,7 @@
 <article class="summary-item" aria-labelledby="location">
   <% if project.location_set? %>
     <div class="summary-item-content">
-      <h2 class="govuk-heading-m" role="heading" id="location"><%= project.summary_label(:location_title) %></h2>
+      <h2 class="govuk-heading-m" id="location"><%= project.summary_label(:location_title) %></h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
           <h3 class="column-heading-small">National Grid Reference</h3>
@@ -88,7 +88,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="govuk-heading-m" role="heading" id="location">
+          <h2 class="govuk-heading-m" id="location">
             <%= project.summary_label(:location_title) %>
           </h2>
         </div>

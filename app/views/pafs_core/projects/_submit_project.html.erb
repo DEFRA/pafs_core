@@ -3,7 +3,7 @@
     <div class="govuk-grid-row govuk-body-s submission">
       <% if can_change_project_state?(@project) %>
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="govuk-heading-m" role="heading" id="submission">
+          <h2 class="govuk-heading-m" id="submission">
             <%= @project.summary_label(:submission_title) %>
           </h2>
         </div>
@@ -20,7 +20,7 @@
         </div>
       <% else %>
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="govuk-heading-m" role="heading" id="submission">
+          <h2 class="govuk-heading-m" id="submission">
             <p>EA Projects are now managed in PoL</p>
           </h2>
         </div>
