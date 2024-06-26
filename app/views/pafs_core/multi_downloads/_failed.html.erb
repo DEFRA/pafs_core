@@ -1,4 +1,4 @@
-<div class="error-summary" role="group" aria-labelledby="error-summary-heading" tabindex="-1">
+<div class="govuk-error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
   <h1 class="govuk-heading-m error-summary-heading" id="error-summary-heading">
     Programme generation failed
   </h1>
@@ -9,8 +9,7 @@
 </div>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= link_to "Generate programme", pafs_core.generate_multi_downloads_path,
-        class: "button headroom-smaller", role: "button" %>
+    <%= link_to "Generate programme", pafs_core.generate_multi_downloads_path, class: "govuk-button" %>
   </div>
 </div>
 <div class="govuk-grid-row">

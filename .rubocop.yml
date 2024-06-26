@@ -4,10 +4,11 @@ inherit_gem:
   defra_ruby_style:
     - default.yml
 require:
+  - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-rails
   - rubocop-rspec
-  - rubocop-capybara
+  - rubocop-rspec_rails
 
 AllCops:
   TargetRubyVersion: 3.2

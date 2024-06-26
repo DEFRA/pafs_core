@@ -75,15 +75,6 @@ RSpec/BeforeAfterAll:
 RSpec/ExampleLength:
   Max: 16
 
-# Offense count: 3
-# Configuration parameters: Include, CustomTransform, IgnoreMethods, SpecSuffixOnly.
-# Include: **/*_spec*rb*, **/spec/**/*
-RSpec/FilePath:
-  Exclude:
-    - 'spec/steps/pafs_core/coastal_erosion_protection_outcomes_detail_spec.rb'
-    - 'spec/steps/pafs_core/flood_protection_outcomes_details_spec.rb'
-    - 'spec/steps/pafs_core/funding_sources_and_spending_detail_spec.rb'
-
 # Offense count: 271
 # Configuration parameters: AssignmentOnly.
 RSpec/InstanceVariable:
@@ -183,6 +174,15 @@ RSpec/VerifiedDoubles:
 Rails/CreateTableWithTimestamps:
   Exclude:
     - 'db/migrate/20220714093909_create_pafs_core_flood_protection_2040_outcomes.rb'
+
+# Offense count: 3
+# Configuration parameters: Include, CustomTransform, IgnoreMethods, SpecSuffixOnly.
+# Include: **/*_spec*rb*, **/spec/**/*
+Rails/FilePath:
+  Exclude:
+    - 'spec/steps/pafs_core/coastal_erosion_protection_outcomes_detail_spec.rb'
+    - 'spec/steps/pafs_core/flood_protection_outcomes_details_spec.rb'
+    - 'spec/steps/pafs_core/funding_sources_and_spending_detail_spec.rb'
 
 # Offense count: 10
 # Configuration parameters: Include.
