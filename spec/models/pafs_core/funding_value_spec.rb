@@ -55,15 +55,44 @@ RSpec.describe PafsCore::FundingValue do
       build(
         :funding_value,
         project: project,
-        fcerm_gia: 2_500_000,
-        local_levy: 1_000_000,
-        internal_drainage_boards: 100,
-        not_yet_identified: 2_500
+        fcerm_gia: fcerm_gia_amount,
+        local_levy: local_levy_amount,
+        internal_drainage_boards: internal_drainage_boards_amount,
+        not_yet_identified: not_yet_identified_amount,
+        asset_replacement_allowance: asset_replacement_allowance_amount,
+        environment_statutory_funding: environment_statutory_funding_amount
       )
     end
 
-    it "calculates the total" do
-      expect { subject.save }.to change(subject, :total).to(3_502_600)
+    let(:fcerm_gia_amount) { Faker::Number.number(digits: 7) }
+    let(:local_levy_amount) { Faker::Number.number(digits: 7) }
+    let(:internal_drainage_boards_amount) { Faker::Number.number(digits: 4) }
+    let(:not_yet_identified_amount) { Faker::Number.number(digits: 4) }
+
+    let(:base_funding_total) { fcerm_gia_amount + local_levy_amount + internal_drainage_boards_amount + not_yet_identified_amount }
+    let(:additional_fcerm_gia_funding_total) { asset_replacement_allowance_amount + environment_statutory_funding_amount }
+
+    context "without additional fcerm_gia funding sources" do
+      let(:asset_replacement_allowance_amount) { nil }
+      let(:environment_statutory_funding_amount) { nil }
+
+      it "calculates the total" do
+        expect { subject.save }.to change(subject, :total).to(base_funding_total)
+      end
+    end
+
+    context "with additional fcerm_gia funding sources" do
+      let(:asset_replacement_allowance_amount) { Faker::Number.number(digits: 6) }
+      let(:environment_statutory_funding_amount) { Faker::Number.number(digits: 6) }
+
+      before do
+        project.asset_replacement_allowance = true
+        project.environment_statutory_funding = true
+      end
+
+      it "calculates the total" do
+        expect { subject.save }.to change(subject, :total).to(base_funding_total + additional_fcerm_gia_funding_total)
+      end
     end
   end
 end
