@@ -707,4 +707,20 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
            financial_year: year,
            project_id: project_id)
   end
+
+  describe "#pfc_required?" do
+    context "when project type is DEF or CM" do
+      it "returns true" do
+        subject.project_type = "DEF"
+        expect(subject.pfc_required?).to be true
+      end
+    end
+
+    context "when project type is not DEF or CM" do
+      it "returns false" do
+        subject.project_type = "PLP"
+        expect(subject.pfc_required?).to be false
+      end
+    end
+  end
 end

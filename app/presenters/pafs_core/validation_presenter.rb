@@ -399,6 +399,8 @@ module PafsCore
     end
 
     def funding_calculator_complete?
+      return true if project_type.present? && !pfc_required?
+
       if funding_calculator_file_name.blank?
         return add_error(:funding_calculator, "Upload the project's partnership funding calculator")
       end
