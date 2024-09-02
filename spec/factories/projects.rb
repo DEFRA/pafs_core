@@ -5,7 +5,7 @@ require File.join(PafsCore::Engine.root, "spec", "support", "shapefile_upload")
 FactoryBot.define do
   factory :project, class: "PafsCore::Project" do
     reference_number { PafsCore::ProjectService.generate_reference_number("TH") }
-    name { Faker::Lorem.sentence }
+    name { Faker::Lorem.sentence.remove(".") }
     version { 0 }
     created_at { 1.day.ago }
     updated_at { 1.day.ago }
