@@ -9,4 +9,7 @@ module PafsCore
   # STR - strategies
   # ENV - environmental projects (not SSSI or BAP)
   PROJECT_TYPES = %w[DEF CM PLP STR ENV_WITH_HOUSEHOLDS ENV_WITHOUT_HOUSEHOLDS].freeze
+
+  # Project types that require a Project Funding Calculator to be provided
+  PROJECT_TYPES_REQUIRE_PFC = %w[DEF CM].freeze
 end

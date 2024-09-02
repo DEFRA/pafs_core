@@ -363,41 +363,56 @@ RSpec.describe PafsCore::ValidationPresenter do
   describe "#funding_calculator_complete?" do
     subject { described_class.new(project) }
 
-    let(:project) { create(:full_project) }
+    let(:project_type) { "DEF" }
+    let(:project) { create(:full_project, project_type: project_type) }
 
-    context "with no PFC attached" do
-      it_behaves_like "failed validation example", :funding_calculator_complete?
-    end
+    context "when project type is not DEF or CM" do
+      let(:project_type) { "PLP" }
 
-    context "with a PFC attached" do
-      before do
-        file_path = Rails.root.join("..", "fixtures", "calculators", filename)
-        file = File.open file_path
-        storage = PafsCore::DevelopmentFileStorageService.new
-        dest_file = File.join(project.storage_path, filename)
-        storage.upload(file, dest_file)
-        project.funding_calculator_file_name = filename
-      end
-
-      context "with a v8 PFC attached" do
-        let(:filename) { "v8.xlsx" }
-
+      context "with no PFC attached" do
         it "returns true" do
           expect(subject.funding_calculator_complete?).to be true
         end
       end
+    end
 
-      context "with a 2020 v1 PFC attached" do
-        let(:filename) { "v9old.xlsx" }
+    context "when project type is DEF or CM" do
+      let(:project_type) { "DEF" }
 
+      context "with no PFC attached" do
         it_behaves_like "failed validation example", :funding_calculator_complete?
       end
 
-      context "with a 2020 v2 PFC attached" do
-        let(:filename) { "v9.xlsx" }
+      context "with a PFC attached" do
+        before do
+          file_path = Rails.root.join("..", "fixtures", "calculators", filename)
+          file = File.open file_path
+          storage = PafsCore::DevelopmentFileStorageService.new
+          dest_file = File.join(project.storage_path, filename)
+          storage.upload(file, dest_file)
+          project.funding_calculator_file_name = filename
+        end
 
-        it "returns true" do
-          expect(subject.funding_calculator_complete?).to be true
+        context "with a v8 PFC attached" do
+          let(:filename) { "v8.xlsx" }
+
+          it "returns true" do
+            expect(subject.funding_calculator_complete?).to be true
+          end
+        end
+
+        context "with a 2020 v1 PFC attached" do
+          let(:filename) { "v9old.xlsx" }
+
+          it_behaves_like "failed validation example", :funding_calculator_complete?
+        end
+
+        context "with a 2020 v2 PFC attached" do
+          let(:filename) { "v9.xlsx" }
+
+          it "returns true" do
+            expect(subject.funding_calculator_complete?).to be true
+          end
         end
       end
     end
