@@ -42,5 +42,16 @@ RSpec.describe PafsCore::ProjectNameStep, type: :model do
         end
       end
     end
+
+    context "when name already exists" do
+      let!(:existing_project) { create(:project_name_step, name: "Unique Project Name") }
+      let(:duplicate_name_params) { ActionController::Parameters.new({ project_name_step: { name: "Unique Project Name" } }) }
+
+      it "returns false and sets the uniqueness error message" do
+        project_name_step.name = "Different Name"
+        expect(project_name_step.update(duplicate_name_params)).to be false
+        expect(project_name_step.errors[:name].join).to eq("The project name already exists. Your project must have a unique name.")
+      end
+    end
   end
 end
