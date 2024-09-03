@@ -9,7 +9,7 @@ module PafsCore
     validates :name, format: {
       with: /\A[A-Za-z0-9 _-]+\z/,
       message: "The project name must only contain letters, underscores, hyphens and numbers"
-    }
+    }, if: -> { name.present? }
 
     validate :name_must_be_unique
 
