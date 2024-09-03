@@ -22,9 +22,9 @@ module PafsCore
     # BasicStep does not have access to the uniqueness validator presumably
     # because it's not an ActiveRecord model. So we need to implement our own
     def name_must_be_unique
-      if PafsCore::Project.exists?(name: name)
-        errors.add(:name, "The project name already exists. Your project must have a unique name.")
-      end
+      return unless PafsCore::Project.exists?(name: name)
+
+      errors.add(:name, "The project name already exists. Your project must have a unique name.")
     end
   end
 end
