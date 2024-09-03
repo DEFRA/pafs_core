@@ -10,6 +10,8 @@ RSpec.describe PafsCore::ProjectNameStep, type: :model do
     let(:blank_name_params) { ActionController::Parameters.new({ project_name_step: { name: nil } }) }
     let(:error_message) { "The project name must only contain letters, underscores, hyphens and numbers" }
 
+    it_behaves_like "a project step"
+
     context "when name is valid" do
       it "returns true and saves the name" do
         expect(project_name_step.name).not_to eq "Wigwam waste water"
