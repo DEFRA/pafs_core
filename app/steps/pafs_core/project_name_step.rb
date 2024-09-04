@@ -6,6 +6,11 @@ module PafsCore
 
     validates :name, presence: { message: "Tell us the project name" }
 
+    validates :name, format: {
+      with: /\A[A-Za-z0-9 _-]+\z/,
+      message: "The project name must only contain letters, underscores, hyphens and numbers"
+    }, if: -> { name.present? }
+
     private
 
     def step_params(params)
