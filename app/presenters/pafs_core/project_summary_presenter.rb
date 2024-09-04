@@ -307,15 +307,19 @@ module PafsCore
     end
 
     def articles
-      if project_protects_households?
-        if risks_started?
-          all_articles
-        else
-          all_articles - [:standard_of_protection]
-        end
-      else
-        all_articles - %i[risks standard_of_protection]
-      end
+      articles = if project_protects_households?
+                   if risks_started?
+                     all_articles
+                   else
+                     all_articles - [:standard_of_protection]
+                   end
+                 else
+                   all_articles - %i[risks standard_of_protection]
+                 end
+
+      articles -= %i[funding_calculator] unless pfc_required?
+
+      articles
     end
 
     def not_provided
@@ -340,6 +344,10 @@ module PafsCore
       return not_provided if send(attribute).nil?
 
       "#{send(attribute)} kilometres"
+    end
+
+    def pfc_required?
+      PROJECT_TYPES_REQUIRE_PFC.include?(project.project_type)
     end
 
     private
