@@ -399,4 +399,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_104418) do
     t.index ["reset_password_token"], name: "index_pafs_core_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_pafs_core_users_on_unlock_token", unique: true
   end
+
 end
