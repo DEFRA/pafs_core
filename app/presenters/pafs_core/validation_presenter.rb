@@ -25,7 +25,9 @@ module PafsCore
         return add_error(:project_name, "The project name must only contain letters, underscores, hyphens and numbers")
       end
 
-      if PafsCore::Project.where.not(id: project.id).exists?(name: name)
+      other_projects_with_same_name = PafsCore::Project.where.not(id: project.id).where(name: name)
+
+      if other_projects_with_same_name.present?
         return add_error(:project_name, "The project name already exists. Your project must have a unique name.")
       end
 
