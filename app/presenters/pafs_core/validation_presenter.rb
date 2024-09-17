@@ -19,7 +19,16 @@ module PafsCore
     end
 
     def project_name_complete?
-      # NOTE: currently has to be present before creation
+      return add_error(:project_name, "Tell us the project name") if name.blank?
+
+      unless name =~ PafsCore::ProjectNameStep::PROJECT_NAME_REGEX
+        return add_error(:project_name, "The project name must only contain letters, underscores, hyphens and numbers")
+      end
+
+      if PafsCore::Project.where.not(id: project.id).exists?(name: name)
+        return add_error(:project_name, "The project name already exists. Your project must have a unique name.")
+      end
+
       true
     end
 
