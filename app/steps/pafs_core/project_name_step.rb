@@ -2,12 +2,13 @@
 
 module PafsCore
   class ProjectNameStep < BasicStep
+    PROJECT_NAME_REGEX = /\A[A-Za-z0-9 _-]+\z/
     delegate :name, :name=, to: :project
 
     validates :name, presence: { message: "Tell us the project name" }
 
     validates :name, format: {
-      with: /\A[A-Za-z0-9 _-]+\z/,
+      with: PROJECT_NAME_REGEX,
       message: "The project name must only contain letters, underscores, hyphens and numbers"
     }, if: -> { name.present? }
 

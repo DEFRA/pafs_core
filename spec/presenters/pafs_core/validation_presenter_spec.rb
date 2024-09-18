@@ -46,8 +46,58 @@ RSpec.describe PafsCore::ValidationPresenter do
   end
 
   describe "#project_name_complete?" do
-    it "always returns true" do
-      expect(subject.project_name_complete?).to be true
+    context "when the project name is blank" do
+      before { subject.name = "" }
+
+      it_behaves_like "failed validation example", :project_name_complete?, :project_name, "Tell us the project name"
+    end
+
+    context "when the project name contains invalid characters" do
+      invalid_names = ["Project/123", "Project@Name", "Project#ABC"]
+
+      invalid_names.each do |invalid_name|
+        context "with name '#{invalid_name}'" do
+          before { subject.name = invalid_name }
+
+          it_behaves_like "failed validation example", :project_name_complete?, :project_name, "The project name must only contain letters, underscores, hyphens and numbers"
+        end
+      end
+    end
+
+    context "when the project name is not unique" do
+      before do
+        existing_project = create(:project, name: "Existing Project")
+        subject.name = existing_project.name
+      end
+
+      it_behaves_like "failed validation example", :project_name_complete?, :project_name, "The project name already exists. Your project must have a unique name."
+    end
+
+    context "when the project name is valid and unique" do
+      valid_names = ["Project 123", "PROJECT_ABC", "project-xyz", "Simple Project Name"]
+
+      valid_names.each do |valid_name|
+        context "with name '#{valid_name}'" do
+          before { subject.name = valid_name }
+
+          it_behaves_like "successful validation example", :project_name_complete?
+        end
+      end
+    end
+
+    context "when updating an existing project" do
+      subject { described_class.new(existing_project) }
+
+      let(:existing_project) { create(:project, name: "Existing Project") }
+
+      it "allows the project to keep its current name" do
+        expect(subject.project_name_complete?).to be true
+      end
+
+      it "allows the project to change its name" do
+        subject.name = "Updated Project Name"
+        expect(subject.project_name_complete?).to be true
+      end
     end
   end
 
