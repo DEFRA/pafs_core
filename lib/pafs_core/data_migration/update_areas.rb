@@ -23,7 +23,7 @@ module PafsCore
 
           area = PafsCore::Area.find_by(name: row["PAFS_LRMA_NAME"])
           destination_area = PafsCore::Area.where.not(
-            id: (area ? area.id : nil)
+            id: area&.id
           ).find_by(name: row["POL_LRMA_NAME"])
 
           next if destination_area && area.nil?
