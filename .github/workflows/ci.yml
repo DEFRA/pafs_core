@@ -50,10 +50,13 @@ jobs:
       - name: Run unit tests
         run: |
           bundle exec rspec
-          sed -i 's/\/home\/runner\/work\/pafs_core\/pafs_core\//\/github\/workspace\//g' coverage/coverage.json
+
+      - name: Update coverage output
+        run: |
+          sed -i "s@/home/runner/work/DEFRA/pafs_core@/github/workspace@g" coverage/coverage.json
 
       - name: Analyze with SonarCloud
-        uses: sonarsource/sonarcloud-github-action@master
+        uses: sonarsource/sonarqube-scan-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is provided automatically by GitHub
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # This needs to be set in your repo; settings -> secrets
