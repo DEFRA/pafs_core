@@ -30,8 +30,8 @@ module PafsCore
           if outcome.send(attr).to_i.positive?
             return errors.add(
               :base,
-              "In the applicable year(s), tell us how many households moved to a lower flood risk category \
-              (column A), OR if this does not apply select the checkbox."
+              "In the applicable year(s), tell us how many households moved to a lower flood risk category " \
+              "(column A), OR if this does not apply select the checkbox."
             )
           end
         end
@@ -52,8 +52,8 @@ module PafsCore
       unless b_too_big.empty?
         errors.add(
           :base,
-          "The number of households protected from loss within the next 20 years (column B) must be lower \
-          than or equal to the number of households at a reduced risk of coastal erosion (column A)."
+          "The number of households protected from loss within the next 20 years (column B) must be lower " \
+          "than or equal to the number of households at a reduced risk of coastal erosion (column A)."
         )
       end
 
@@ -61,8 +61,8 @@ module PafsCore
 
       errors.add(
         :base,
-        "The number of households in the 20% most deprived areas (column C) must be lower than or \
-        equal to the number of households protected from loss within the next 20 years (column B)."
+        "The number of households in the 20% most deprived areas (column C) must be lower than or " \
+        "equal to the number of households protected from loss within the next 20 years (column B)."
       )
     end
 
@@ -111,8 +111,8 @@ module PafsCore
       unless c_insensible.empty?
         errors.add(
           :base,
-          "The number of households protected from loss in the 20 percent most deprived areas must \
-          be less than or equal to 1 million."
+          "The number of households protected from loss in the 20 percent most deprived areas must " \
+          "be less than or equal to 1 million."
         )
       end
 
@@ -120,8 +120,7 @@ module PafsCore
 
       errors.add(
         :base,
-        "The number of non-residential properties must \
-        be less than or equal to 1 million."
+        "The number of non-residential properties must be less than or equal to 1 million."
       )
     end
 

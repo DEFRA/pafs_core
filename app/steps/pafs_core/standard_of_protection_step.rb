@@ -7,8 +7,8 @@ module PafsCore
 
     validates :flood_protection_before, presence: {
       message:
-      "Select the option that shows the current risk of flooding to the area \
-      likely to benefit from the project."
+      "Select the option that shows the current risk of flooding to the area " \
+      "likely to benefit from the project."
     }
 
     validates :flood_protection_before, numericality: {

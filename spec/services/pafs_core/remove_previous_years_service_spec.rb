@@ -17,14 +17,10 @@ RSpec.describe PafsCore::RemovePreviousYearsService do
       project.state.update(state: state)
 
       (data_start_year..data_end_year).each do |year|
-        project.funding_values <<
-          create(:funding_value, financial_year: year)
-        project.flood_protection_outcomes <<
-          create(:flood_protection_outcomes, financial_year: year)
-        project.flood_protection2040_outcomes <<
-          create(:flood_protection2040_outcomes, financial_year: year)
-        project.coastal_erosion_protection_outcomes <<
-          create(:coastal_erosion_protection_outcomes, financial_year: year)
+        create(:funding_value, project:, financial_year: year)
+        create(:flood_protection_outcomes, project:, financial_year: year)
+        create(:flood_protection2040_outcomes, project:, financial_year: year)
+        create(:coastal_erosion_protection_outcomes, project:, financial_year: year)
       end
 
       described_class.new(project).run

@@ -32,10 +32,11 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
                                               moved_from_very_significant_and_significant_to_moderate_or_low: 50,
                                               households_protected_from_loss_in_20_percent_most_deprived: 100)
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "The number of households in the 20% most deprived areas (column C) must be lower than \
-      or equal to the number of households moved from very significant \
-      or significant to the moderate or low flood risk category (column B)."
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households in the 20% most deprived areas (column C) must be lower than " \
+        "or equal to the number of households moved from very significant " \
+        "or significant to the moderate or low flood risk category (column B)."
+      )
     end
 
     it "validates that value D is smaller than B" do
@@ -44,10 +45,12 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
                                               moved_from_very_significant_and_significant_to_moderate_or_low: 50,
                                               households_protected_through_plp_measures: 100)
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "The number of households that are protected through Property Level Protection (PLP) measures (column D) must be lower than or equal to \
-      to the number of households moved from very significant \
-      or significant to the moderate or low flood risk category (column B)."
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households that are protected through Property Level Protection " \
+        "(PLP) measures (column D) must be lower than or equal to " \
+        "the number of households moved from very significant " \
+        "or significant to the moderate or low flood risk category (column B)."
+      )
     end
 
     it "validates that value B is smaller than A" do
@@ -55,10 +58,11 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
                                               households_at_reduced_risk: 100,
                                               moved_from_very_significant_and_significant_to_moderate_or_low: 200)
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "The number of households moved from very significant or significant to \
-      the moderate or low flood risk category (column B) must be lower than or equal \
-      to the number of households moved to a lower flood risk category (column A)."
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households moved from very significant or significant to " \
+        "moderate or low flood risk category (column B) must be lower than or equal " \
+        "to the number of households moved to a lower flood risk category (column A)."
+      )
     end
 
     it "validates that there is at least one A value" do
@@ -68,28 +72,30 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
                                               households_at_reduced_risk: 0)
 
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "In the applicable year(s), tell us how many households moved to a lower flood \
-      risk category (column A)."
+      expect(subject.errors.messages[:base]).to include(
+        "In the applicable year(s), tell us how many households moved to a lower flood " \
+        "risk category (column A), OR if this does not apply select the checkbox."
+      )
     end
 
-    # rubocop:disable Lint/Void
     it "validates that number of households is less than or equal to 1 million" do
       subject.flood_protection_outcomes.build(financial_year: 2020,
                                               households_at_reduced_risk: 1_000_001,
                                               moved_from_very_significant_and_significant_to_moderate_or_low: 1_000_001,
                                               households_protected_from_loss_in_20_percent_most_deprived: 1_000_001)
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "The number of households at reduced risk must be less than or equal to 1 million."
-      expect(subject.errors.messages[:base]).to include
-      "The number of households moved from very significant and significant to moderate or low must be \
-      less than or equal to 1 million."
-      expect(subject.errors.messages[:base]).to include
-      "The number of households protected from loss in the 20 percent most deprived must be \
-      less than or equal to 1 million."
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households at reduced risk must be less than or equal to 1 million."
+      )
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households moved from very significant and significant to moderate or low must be " \
+        "less than or equal to 1 million."
+      )
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households protected from loss in the 20 percent most deprived must be " \
+        "less than or equal to 1 million."
+      )
     end
-    # rubocop:enable Lint/Void
   end
 
   describe "#update" do

@@ -32,9 +32,10 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
                                                         households_protected_from_loss_in_next_20_years: 50,
                                                         households_protected_from_loss_in_20_percent_most_deprived: 100)
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "The number of households in the 20% most deprived areas (column C) must be lower than or equal to the number of \
-      households protected from loss within the next 20 years (column B)."
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households in the 20% most deprived areas (column C) must be lower than or equal to the number of " \
+        "households protected from loss within the next 20 years (column B)."
+      )
     end
 
     it "validates that value B is smaller than A" do
@@ -42,9 +43,10 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
                                                         households_at_reduced_risk: 100,
                                                         households_protected_from_loss_in_next_20_years: 200)
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "The number of households protected from loss within the next 20 years (column B) must be lower than or equal \
-      to the number of households at a reduced risk of coastal erosion (column A)."
+      expect(subject.errors.messages[:base]).to include(
+        "The number of households protected from loss within the next 20 years (column B) must be lower than or equal " \
+        "to the number of households at a reduced risk of coastal erosion (column A)."
+      )
     end
 
     it "validates that there is at least one A value" do
@@ -54,30 +56,37 @@ RSpec.describe PafsCore::CoastalErosionProtectionOutcomesStep, type: :model do
                                                         households_at_reduced_risk: 0)
 
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "In the applicable year(s), tell us how many households are at a reduced risk of coastal erosion."
+      expect(subject.errors.messages[:base]).to include(
+        "In the applicable year(s), tell us how many households are at a reduced risk of coastal erosion " \
+        "(column A), OR if this does not apply select the checkbox."
+      )
     end
 
-    # rubocop:disable Lint/Void
+    # rubocop:disable RSpec/ExampleLength
     it "validates that number of properties is less than or equal to 1 million" do
       subject.coastal_erosion_protection_outcomes.build(financial_year: 2020,
                                                         households_at_reduced_risk: 1_000_001,
                                                         households_protected_from_loss_in_next_20_years: 1_000_001,
                                                         households_protected_from_loss_in_20_percent_most_deprived: 1_000_001,
                                                         non_residential_properties: 1_000_001)
-      expect(subject.valid?).to be false
-      expect(subject.errors.messages[:base]).to include
-      "The number of properties at reduced risk must be less than or equal to 1 million."
-      expect(subject.errors.messages[:base]).to include
-      "The number of properties protected from loss in the next 20 years must be less than or equal to 1 million."
-      expect(subject.errors.messages[:base]).to include
-      "The number of properties protected from loss in the 20 percent most deprived must be \
-      less than or equal to 1 million."
-      expect(subject.errors.messages[:base]).to include
-      "The number of non-residential properties protected from loss must be \
-      less than or equal to 1 million."
+      aggregate_failures do
+        expect(subject.valid?).to be false
+        expect(subject.errors.messages[:base]).to include(
+          "The number of households at reduced risk must be less than or equal to 1 million."
+        )
+        expect(subject.errors.messages[:base]).to include(
+          "The number of households protected from loss in the next 20 years must be less than or equal to 1 million."
+        )
+        expect(subject.errors.messages[:base]).to include(
+          "The number of households protected from loss in the 20 percent most deprived areas must be " \
+          "less than or equal to 1 million."
+        )
+        expect(subject.errors.messages[:base]).to include(
+          "The number of non-residential properties must be less than or equal to 1 million."
+        )
+      end
     end
-    # rubocop:enable Lint/Void
+    # rubocop:enable RSpec/ExampleLength
   end
 
   describe "#update" do

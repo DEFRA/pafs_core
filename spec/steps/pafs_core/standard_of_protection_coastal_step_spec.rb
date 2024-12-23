@@ -11,19 +11,20 @@ RSpec.describe PafsCore::StandardOfProtectionCoastalStep, type: :model do
     it "validates that :coastal_protection_before is present" do
       subject.coastal_protection_before = nil
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:coastal_protection_before]).to include
-      "Select the option that shows the length of time before coastal \
-      erosion affects the area likely to benefit from the project."
+      expect(subject.errors.messages[:coastal_protection_before]).to include(
+        "Select the option that shows the length of time before coastal " \
+        "erosion affects the area likely to benefit from the project."
+      )
     end
 
     it "validates that :coastal_protection_before is not greater than :coastal_protection_after" do
       subject.project.coastal_protection_before = 3
       subject.coastal_protection_after = 0
       expect(subject.valid?).to be false
-      expect(subject.errors.messages[:coastal_protection_before]).to include
-      "Once the project is complete the length of time before " \
-        "coastal erosion affects the area must be greater than it " \
-        "is now"
+      expect(subject.errors.messages[:coastal_protection_before]).to include(
+        "Once the project is complete, the length of time before " \
+        "coastal erosion affects the area must not be less than it is now"
+      )
     end
   end
 

@@ -58,18 +58,18 @@ module PafsCore
       unless b_too_big.empty?
         errors.add(
           :base,
-          "The number of households moved from very significant or significant to \
-          the moderate or low flood risk category (column B) must be lower than or equal \
-          to the number of households moved to a lower flood risk category (column A)."
+          "The number of households moved from very significant or significant to " \
+          "moderate or low flood risk category (column B) must be lower than or equal " \
+          "to the number of households moved to a lower flood risk category (column A)."
         )
       end
 
       unless c_too_big.empty?
         errors.add(
           :base,
-          "The number of households in the 20% most deprived areas (column C) must be lower than or equal \
-          to the number of households moved from very significant \
-          or significant to the moderate or low flood risk category (column B)."
+          "The number of households in the 20% most deprived areas (column C) must be lower than or equal " \
+          "to the number of households moved from very significant " \
+          "or significant to the moderate or low flood risk category (column B)."
         )
       end
 
@@ -77,10 +77,10 @@ module PafsCore
 
       errors.add(
         :base,
-        "The number of households that are protected through Property Level Protection (PLP) \
-        measures (column D) must be lower than or equal to \
-        to the number of households moved from very significant \
-        or significant to the moderate or low flood risk category (column B)."
+        "The number of households that are protected through Property Level Protection (PLP) " \
+        "measures (column D) must be lower than or equal to " \
+        "the number of households moved from very significant " \
+        "or significant to the moderate or low flood risk category (column B)."
       )
     end
 
@@ -89,8 +89,8 @@ module PafsCore
 
       errors.add(
         :base,
-        "In the applicable year(s), tell us how many households moved to a lower flood risk category (column A), \
-        OR if this does not apply select the checkbox."
+        "In the applicable year(s), tell us how many households moved to a lower flood risk category (column A), " \
+        "OR if this does not apply select the checkbox."
       )
     end
 
@@ -125,24 +125,24 @@ module PafsCore
       unless b_insensible.empty?
         errors.add(
           :base,
-          "The number of households moved from very significant and significant to moderate or low must be \
-          less than or equal to 1 million."
+          "The number of households moved from very significant and significant to moderate or low must be " \
+          "less than or equal to 1 million."
         )
       end
 
       unless c_insensible.empty?
         errors.add(
           :base,
-          "The number of households protected from loss in the 20 percent most deprived must be \
-          less than or equal to 1 million."
+          "The number of households protected from loss in the 20 percent most deprived must be " \
+          "less than or equal to 1 million."
         )
       end
 
       unless d_insensible.empty?
         errors.add(
           :base,
-          "The number of households protected through Property Level Protection (PLP) measures must be \
-          less than or equal to 1 million."
+          "The number of households protected through Property Level Protection (PLP) measures must be " \
+          "less than or equal to 1 million."
         )
       end
 
@@ -150,8 +150,7 @@ module PafsCore
 
       errors.add(
         :base,
-        "The number of non-residential properties must be \
-        less than or equal to 1 million."
+        "The number of non-residential properties must be less than or equal to 1 million."
       )
     end
 

@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe PafsCore::Mapper::FundingSources do
   subject { described_class.new(project: project) }
 
-  let(:funding_values) { create_list(:funding_value, 1) }
-  let(:project) { create(:full_project, funding_values: funding_values) }
+  let(:project) { create(:full_project) }
+  let(:funding_values) { create_list(:funding_value, 1, project:) }
 
   describe "#attributes" do
     let(:expected_funding_values) do
