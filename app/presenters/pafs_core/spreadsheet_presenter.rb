@@ -41,7 +41,9 @@ module PafsCore
     end
 
     def pso_name
-      pso? ? creator&.primary_area&.name : creator&.primary_area&.parent&.name
+      return nil if creator&.primary_area.blank?
+
+      pso? ? creator.primary_area.name : creator.primary_area.parent&.name
     end
 
     def coastal_group
@@ -129,7 +131,7 @@ module PafsCore
     # pv_whole_life_benefits
 
     def benefit_cost_ratio
-      return unless pv_whole_life_benefits && pv_whole_life_costs && pv_whole_life_costs.positive?
+      return unless pv_whole_life_benefits && pv_whole_life_costs&.positive?
 
       (pv_whole_life_benefits / pv_whole_life_costs).round(1)
     end

@@ -14,7 +14,7 @@ RSpec.describe PafsCore::FundingValue do
   end
 
   describe "attributes" do
-    subject { create(:funding_value) }
+    subject { create(:funding_value, project:) }
 
     it { is_expected.to validate_numericality_of(:fcerm_gia).allow_nil }
     it { is_expected.to validate_numericality_of(:local_levy).allow_nil }

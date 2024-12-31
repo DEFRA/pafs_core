@@ -139,16 +139,18 @@ RSpec.describe PafsCore::ValidationPresenter do
   end
 
   describe "#key_dates_complete?" do
+    let(:future_start_date) { 1.month.from_now }
+
     before do
-      subject.start_outline_business_case_month = 12
-      subject.start_outline_business_case_year = Time.zone.today.year
-      subject.award_contract_month = 12
-      subject.award_contract_year = Time.zone.today.year + 1
-      subject.start_construction_month = 12
-      subject.start_construction_year = Time.zone.today.year + 2
-      subject.ready_for_service_month = 12
-      subject.ready_for_service_year = Time.zone.today.year + 3
-      subject.project_end_financial_year = Time.zone.today.year + 4
+      subject.start_outline_business_case_month = future_start_date.month
+      subject.start_outline_business_case_year = future_start_date.year
+      subject.award_contract_month = future_start_date.month
+      subject.award_contract_year = future_start_date.year + 1
+      subject.start_construction_month = future_start_date.month
+      subject.start_construction_year = future_start_date.year + 2
+      subject.ready_for_service_month = future_start_date.month
+      subject.ready_for_service_year = future_start_date.year + 3
+      subject.project_end_financial_year = future_start_date.year + 4
     end
 
     context "when the key dates are all present and in future" do

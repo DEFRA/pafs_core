@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "ostruct"
 
 RSpec.describe PafsCore::CustomHeaders do
   describe "#cache_busting" do
