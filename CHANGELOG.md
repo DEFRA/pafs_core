@@ -1,8 +1,8 @@
 # Changelog
 
-## [v1.0](https://github.com/DEFRA/pafs_core/tree/v1.0) (2017-03-24)
+## [v1.0](https://github.com/defra/pafs_core/tree/v1.0) (2017-03-24)
 
-[Full Changelog](https://github.com/DEFRA/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
+[Full Changelog](https://github.com/defra/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
 
 **Merged pull requests:**
 
