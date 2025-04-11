@@ -56,7 +56,7 @@ module PafsCore
     def financial_year_in_range?(year_from, year_to)
       return false if financial_year.nil?
 
-      financial_year >= year_from && financial_year <= year_to
+      financial_year.between?(year_from, year_to)
     end
 
     private

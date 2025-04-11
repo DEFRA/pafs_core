@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class UpdateAuthorityData < ActiveRecord::Migration[7.0]
-  def up
-    PafsCore::DataMigration::UpdateAuthorities.up
-  end
+  delegate :up, to: :"PafsCore::DataMigration::UpdateAuthorities"
 
-  def down
-    PafsCore::DataMigration::UpdateAuthorities.down
-  end
+  delegate :down, to: :"PafsCore::DataMigration::UpdateAuthorities"
 end

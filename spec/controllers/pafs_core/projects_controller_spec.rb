@@ -296,7 +296,7 @@ RSpec.describe PafsCore::ProjectsController do
           {
             earliest_start_date_step: {
               earliest_start_month: "2",
-              earliest_start_year: "2025"
+              earliest_start_year: 1.year.from_now.year
             },
             commit: "Save and continue",
             id: project.to_param,

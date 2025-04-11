@@ -105,23 +105,15 @@ module PafsCore
     end
 
     def check_key_dates_in_future
-      if date_in_future?("start_outline_business_case")
-        true
-      else
-        add_error(:key_dates,
-                  "The record will remain in draft. " \
-                  "One or more of the dates entered in your 'Important Dates’ section is in the past, " \
-                  "please revise and resubmit your proposal.")
-      end
+      date_in_future?("start_outline_business_case") ||
+        add_error(:key_dates, "The record will remain in draft. " \
+                              "One or more of the dates entered in your 'Important Dates’ section is in the past, " \
+                              "please revise and resubmit your proposal.")
     end
 
     def check_key_dates_within_project_lifetime_range
-      if date_within_project_lifetime_range?("ready_for_service")
-        true
-      else
-        add_error(:key_dates,
-                  I18n.t("pafs_core.validation_presenter.errors.key_dates_outside_project_lifetime"))
-      end
+      date_within_project_lifetime_range?("ready_for_service") ||
+        add_error(:key_dates, I18n.t("pafs_core.validation_presenter.errors.key_dates_outside_project_lifetime"))
     end
 
     def check_funding_values_within_project_lifetime_range
@@ -227,11 +219,7 @@ module PafsCore
     end
 
     def check_earliest_start_in_future
-      if date_in_future?("earliest_start")
-        true
-      else
-        add_earliest_start_in_the_past_error
-      end
+      date_in_future?("earliest_start") || add_earliest_start_in_the_past_error
     end
 
     def mandatory_earliest_start_fields_missing?
