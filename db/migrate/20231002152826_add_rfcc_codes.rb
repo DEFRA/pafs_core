@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class AddRfccCodes < ActiveRecord::Migration[7.0]
-  def up
-    PafsCore::DataMigration::AddRfccCodes.up
-  end
+  delegate :up, to: :"PafsCore::DataMigration::AddRfccCodes"
 
-  def down
-    PafsCore::DataMigration::AddRfccCodes.down
-  end
+  delegate :down, to: :"PafsCore::DataMigration::AddRfccCodes"
 end

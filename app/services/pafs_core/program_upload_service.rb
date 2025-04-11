@@ -16,9 +16,7 @@ module PafsCore
       @user = user
     end
 
-    def find(id)
-      PafsCore::ProgramUpload.find(id)
-    end
+    delegate :find, to: :"PafsCore::ProgramUpload"
 
     def upload(params = {})
       record = PafsCore::ProgramUpload.new(number_of_records: 0,
