@@ -112,6 +112,20 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
       )
     end
 
+    let(:checkbox_params) do
+      ActionController::Parameters.new(
+        { flood_protection_outcomes_step:
+          { reduced_risk_of_households_for_floods: "1",
+            flood_protection_outcomes_attributes:
+            [{ financial_year: 2020,
+               households_at_reduced_risk: 2000,
+               moved_from_very_significant_and_significant_to_moderate_or_low: 1000,
+               households_protected_from_loss_in_20_percent_most_deprived: 500,
+               households_protected_through_plp_measures: 300,
+               non_residential_properties: 100 }] } }
+      )
+    end
+
     let(:error_params) do
       ActionController::Parameters.new(
         { flood_protection_outcomes_step:
@@ -145,6 +159,22 @@ RSpec.describe PafsCore::FloodProtectionOutcomesStep, type: :model do
 
       it "returns true" do
         expect(subject.update(params)).to be true
+      end
+    end
+
+    context "when the 'no properties affected' checkbox is checked" do
+      it "sets all values to zero" do
+        subject.update(params)
+
+        subject.update(checkbox_params)
+
+        subject.flood_protection_outcomes.each do |outcome|
+          expect(outcome.households_at_reduced_risk).to eq 0
+          expect(outcome.moved_from_very_significant_and_significant_to_moderate_or_low).to eq 0
+          expect(outcome.households_protected_from_loss_in_20_percent_most_deprived).to eq 0
+          expect(outcome.households_protected_through_plp_measures).to eq 0
+          expect(outcome.non_residential_properties).to eq 0
+        end
       end
     end
   end
