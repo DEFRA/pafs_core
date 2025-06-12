@@ -34,7 +34,6 @@ module PafsCore
     def clear_values_if_checkbox_checked
       return unless reduced_risk_of_households_for_floods?
 
-      # When the checkbox is checked, set all values to zero
       flood_protection_outcomes.each do |outcome|
         outcome.households_at_reduced_risk = 0
         outcome.moved_from_very_significant_and_significant_to_moderate_or_low = 0
