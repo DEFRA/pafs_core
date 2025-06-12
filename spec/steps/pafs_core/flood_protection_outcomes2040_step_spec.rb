@@ -98,10 +98,23 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
       )
     end
 
-    let(:checkbox_params) do
+    let(:checkbox_true_params) do
       ActionController::Parameters.new(
         { flood_protection_outcomes2040_step:
           { no_properties_affected_by_flooding_2040: "1",
+            flood_protection2040_outcomes_attributes:
+            [{ financial_year: 2024,
+               households_at_reduced_risk: 2000,
+               moved_from_very_significant_and_significant_to_moderate_or_low: 1000,
+               households_protected_from_loss_in_20_percent_most_deprived: 500,
+               non_residential_properties: 100 }] } }
+      )
+    end
+
+    let(:checkbox_false_params) do
+      ActionController::Parameters.new(
+        { flood_protection_outcomes2040_step:
+          { no_properties_affected_by_flooding_2040: "0",
             flood_protection2040_outcomes_attributes:
             [{ financial_year: 2024,
                households_at_reduced_risk: 2000,
@@ -151,13 +164,28 @@ RSpec.describe PafsCore::FloodProtectionOutcomes2040Step, type: :model do
       it "sets all values to zero" do
         subject.update(params)
 
-        subject.update(checkbox_params)
+        subject.update(checkbox_true_params)
 
         subject.flood_protection2040_outcomes.each do |outcome|
           expect(outcome.households_at_reduced_risk).to eq 0
           expect(outcome.moved_from_very_significant_and_significant_to_moderate_or_low).to eq 0
           expect(outcome.households_protected_from_loss_in_20_percent_most_deprived).to eq 0
           expect(outcome.non_residential_properties).to eq 0
+        end
+      end
+    end
+
+    context "when the 'no properties affected' checkbox is unchecked" do
+      it "does not set values to zero" do
+        subject.update(params)
+
+        subject.update(checkbox_false_params)
+
+        subject.flood_protection2040_outcomes.each do |outcome|
+          expect(outcome.households_at_reduced_risk).to eq 2000
+          expect(outcome.moved_from_very_significant_and_significant_to_moderate_or_low).to eq 1000
+          expect(outcome.households_protected_from_loss_in_20_percent_most_deprived).to eq 500
+          expect(outcome.non_residential_properties).to eq 100
         end
       end
     end
