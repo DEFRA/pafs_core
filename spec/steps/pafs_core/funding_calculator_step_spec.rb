@@ -156,6 +156,32 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
         expect(subject.update(params)).to be false
       end
     end
+
+    context "when there is an error parsing the calculator file" do
+      let(:storage) { double("storage") }
+
+      before do
+        allow(PafsCore::DevelopmentFileStorageService).to receive(:new) { storage }
+        allow(storage).to receive_messages(upload: true, delete: true)
+        allow(PafsCore::CalculatorParser).to receive(:parse).and_raise(StandardError, "Unknown PFC version")
+      end
+
+      it "adds an error message" do
+        subject.update(params)
+        expect(subject.errors[:funding_calculator]).to include(
+          "The file could not be processed. Please ensure you're using the correct Partnership Funding Calculator version."
+        )
+      end
+
+      it "cleans up the uploaded file" do
+        expect(storage).to receive(:delete).with(File.join(subject.storage_path, filename))
+        subject.update(params)
+      end
+
+      it "returns false" do
+        expect(subject.update(params)).to be false
+      end
+    end
   end
 
   # describe "#download" do
