@@ -292,7 +292,7 @@ module PafsCore
 
       return true unless environmental_benefits?
 
-      return false if selected_om4_attributes.empty?
+      return outcomes_error if selected_om4_attributes.empty?
 
       check_intertidal && check_woodland && check_wet_woodland && check_wetland_or_wet_grassland &&
         check_grassland && check_heathland && check_pond_or_lake && check_arable_land &&
@@ -438,7 +438,7 @@ module PafsCore
 
     def outcomes_error
       add_error(:environmental_outcomes,
-                "Tell us the project’s environmental outcomes")
+                "Tell us the project's environmental outcomes")
     end
 
     def check_flooding

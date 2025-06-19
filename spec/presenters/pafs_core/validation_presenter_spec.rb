@@ -384,7 +384,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.environmental_benefits = true }
 
       context "when no environmental benefits have been selected" do
-        it_behaves_like "failed validation example", :environmental_outcomes_complete?
+        it_behaves_like "failed validation example", :environmental_outcomes_complete?, :environmental_outcomes, "Tell us the project's environmental outcomes"
       end
 
       context "when at least one environmental benefit has been elected" do
