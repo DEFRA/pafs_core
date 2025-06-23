@@ -21,7 +21,6 @@ module PafsCore
     end
 
     def update(params)
-      @javascript_enabled = params.fetch(:js_enabled, false)
       assign_attributes(step_params(params))
       project.updated_by = user if project.respond_to?(:updated_by)
       clear_values_if_checkbox_checked
