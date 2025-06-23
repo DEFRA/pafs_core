@@ -20,6 +20,13 @@ module PafsCore
       setup_coastal_erosion_protection_outcomes
     end
 
+    def update(params)
+      assign_attributes(step_params(params))
+      project.updated_by = user if project.respond_to?(:updated_by)
+      clear_values_if_checkbox_checked
+      valid? && project.save
+    end
+
     private
 
     def values?
@@ -150,6 +157,17 @@ module PafsCore
       return if coastal_erosion_protection_outcomes.exists?(financial_year: year)
 
       coastal_erosion_protection_outcomes.build(financial_year: year)
+    end
+
+    def clear_values_if_checkbox_checked
+      return unless reduced_risk_of_households_for_coastal_erosion?
+
+      coastal_erosion_protection_outcomes.each do |outcome|
+        outcome.households_at_reduced_risk = 0
+        outcome.households_protected_from_loss_in_next_20_years = 0
+        outcome.households_protected_from_loss_in_20_percent_most_deprived = 0
+        outcome.non_residential_properties = 0
+      end
     end
   end
 end
