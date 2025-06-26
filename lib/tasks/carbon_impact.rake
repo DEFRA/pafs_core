@@ -6,7 +6,7 @@ namespace :pafs do
     reference_number = args[:reference_number]
 
     unless reference_number
-      puts "Error: Please provide a reference number"
+      puts "Error: Please provide a project reference number"
       puts "Usage: rake 'pafs:carbon_impact[reference_number]'"
       puts "Example: rake 'pafs:carbon_impact[WXC501E/000A/008A]'"
       exit 1
