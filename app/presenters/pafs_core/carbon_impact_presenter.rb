@@ -1,0 +1,161 @@
+# frozen_string_literal: true
+
+module PafsCore
+  class CarbonImpactPresenter
+
+    def initialize(project:)
+      self.project = project
+
+      self.pf_calculator_presenter = PartnershipFundingCalculatorPresenter.new(project: project)
+    end
+
+    # How much capital carbon will the project produce (tCO2)?
+    def capital_carbon_estimate
+      project.carbon_cost_build
+    end
+
+    # How much operational carbon will the project produce (tCO2)?
+    def operational_carbon_estimate
+      project.carbon_cost_operation
+    end
+
+    # This is the whole life carbon calculated for the project (tCO2)
+    def total_carbon_estimate
+      capital_carbon_estimate + operational_carbon_estimate
+    end
+
+    # How much sequestered carbon will the project produce (tCO2)
+    def sequestered_carbon_estimate
+      project.carbon_cost_sequestered
+    end
+
+    # How much carbon will be avoided by this project (tCO2)?
+    def avoided_carbon_estimate
+      project.carbon_cost_avoided
+    end
+
+    # This is the net carbon calculated for the project (tCO2)
+    def net_carbon_estimate
+      total_carbon_estimate - sequestered_carbon_estimate - avoided_carbon_estimate
+    end
+
+    # How much net carbon will economically benefit the project ?
+    def net_economic_benefit_estimate
+      project.carbon_savings_net_economic_benefit
+    end
+
+    # The estimated capital cost for the project
+    def capital_cost_estimate
+      construction_total_project_funding
+    end
+
+    # The estimated operation and maintenance cost
+    def operational_cost_estimate
+      operational_total_project_funding
+    end
+
+    # Calculated capital carbon baseline
+    def capital_carbon_baseline
+      construction_total_project_funding * mid_year_cap_do_nothing_intensity / 10_000
+    end
+
+    # Operations and maintenance carbon baseline
+    def operational_carbon_baseline
+      operational_total_project_funding * gw4_ops_do_nothing_intensity / 10_000
+    end
+
+    # Calculated capital carbon target
+    def capital_carbon_target
+      construction_total_project_funding * mid_year_cap_do_nothing_intensity *
+        (1 + mid_year_cap_target_reduction_rate) / 10_000
+    end
+
+    # Operations and maintenance carbon target
+    def operational_carbon_target
+      operational_total_project_funding * gw4_ops_do_nothing_intensity *
+        (1 + gw4_ops_target_reduction_rate) / 10_000
+    end
+
+    # Net carbot with blank values calculated
+    def net_carbon_with_blanks_calculated
+      # defaults to capital_carbon_baseline when blank
+      carbon_cost_build = project.carbon_cost_build.presence || capital_carbon_baseline
+      # defaults to operational_carbon_baseline when blank
+      carbon_cost_operation = project.carbon_cost_operation.presence || operational_carbon_baseline
+      # defaults to 0 when blank
+      carbon_cost_sequestered = project.carbon_cost_sequestered.presence || 0
+      # defaults to 0 when blank
+      carbon_cost_avoided = project.carbon_cost_avoided.presence || 0
+
+      carbon_cost_build + carbon_cost_operation - carbon_cost_sequestered - carbon_cost_avoided
+    end
+
+    protected
+
+    attr_accessor :project, :pf_calculator_presenter
+
+    def start_construction_fin_year
+      project.start_construction_month < 4 ? project.start_construction_year - 1 : project.start_construction_year
+    end
+
+    def ready_for_service_fin_year
+      project.ready_for_service_month < 4 ? project.ready_for_service_year - 1 : project.ready_for_service_year
+    end
+
+    def mid_year
+      (start_construction_fin_year + ready_for_service_fin_year).div(2)
+    end
+
+    def mid_year_string
+      "#{mid_year}/#{(mid_year + 1) % 100}"
+    end
+
+    def ready_for_service_year_string
+      "#{ready_for_service_fin_year}/#{(ready_for_service_fin_year + 1) % 100}"
+    end
+
+    def carbon_impact_rates
+      json = JSON.parse(File.read(PafsCore::Engine.root.join("config", "carbon_impact_rates.json")))
+      json["carbon_impact_rates"]
+    end
+
+    def carbon_impact_rate_for_year(year_string, rate_label)
+      rate_not_present_in_mid_year_data = false
+
+      carbon_impact_rates.reverse.each do |rates|
+        if rates["Year"] == year_string
+          return rates[rate_label] if rates[rate_label].present?
+
+          rate_not_present_in_mid_year_data = true
+        end
+
+        return rates[rate_label] if rate_not_present_in_mid_year_data && rates[rate_label].present?
+      end
+    end
+
+    def mid_year_cap_do_nothing_intensity
+      carbon_impact_rate_for_year(mid_year_string, "Cap Do Nothing Intensity")
+    end
+
+    def gw4_ops_do_nothing_intensity
+      carbon_impact_rate_for_year(ready_for_service_year_string, "Cap Do Nothing Intensity")
+    end
+
+    def mid_year_cap_target_reduction_rate
+      carbon_impact_rate_for_year(mid_year_string, "Cap Target Reduction Rate")
+    end
+
+    def gw4_ops_target_reduction_rate
+      carbon_impact_rate_for_year(ready_for_service_year_string, "Cap Target Reduction Rate")
+    end
+
+    def construction_total_project_funding
+      construction_years = (start_construction_fin_year..ready_for_service_fin_year)
+      project.funding_values.select { |x| construction_years.include?(x.financial_year) }.sum(&:total)
+    end
+
+    def operational_total_project_funding
+      pf_calculator_presenter.attributes[:pv_future_costs]
+    end
+  end
+end
