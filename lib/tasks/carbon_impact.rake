@@ -19,12 +19,18 @@ namespace :pafs do
       exit 1
     end
 
-    presenter = PafsCore::CarbonImpactPresenter.new(project:)
-    print_carbon_impact_stats(presenter)
+    print_carbon_impact_stats(project)
   end
 end
 
-def print_carbon_impact_stats(presenter)
+def print_carbon_impact_stats(project)
+  all_net_carbot_values_present = project.carbon_cost_build.present? &&
+                                  project.carbon_cost_operation.present? &&
+                                  project.carbon_cost_sequestered.present? &&
+                                  project.carbon_cost_avoided.present?
+
+  presenter = PafsCore::CarbonImpactPresenter.new(project: project)
+
   puts "** Carbon impact **"
 
   puts " "
@@ -43,6 +49,8 @@ def print_carbon_impact_stats(presenter)
   puts " "
   puts "Sequestered carbon will the project produce (tCO2) \t\t #{presenter.sequestered_carbon_estimate} tonnes"
   puts "Carbon will be avoided by this project (tCO2) \t\t\t #{presenter.avoided_carbon_estimate} tonnes"
-  puts "Net carbon with blank values calculated (tCO2) \t\t\t #{presenter.net_carbon_with_blanks_calculated} tonnes"
+  unless all_net_carbot_values_present
+    puts "Net carbon with blank values calculated (tCO2) \t\t\t #{presenter.net_carbon_with_blanks_calculated} tonnes"
+  end
   puts "Net carbon will economically benefit the project (£) \t\t £#{presenter.net_economic_benefit_estimate}"
 end
