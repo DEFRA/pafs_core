@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_04_104418) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_26_144043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -271,8 +271,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_104418) do
     t.string "confidence_homes_better_protected"
     t.string "confidence_homes_by_gateway_four"
     t.string "confidence_secured_partnership_funding"
-    t.bigint "carbon_cost_build"
-    t.bigint "carbon_cost_operation"
+    t.decimal "carbon_cost_build", precision: 10, scale: 2
+    t.decimal "carbon_cost_operation", precision: 10, scale: 2
     t.boolean "natural_flood_risk_measures_included"
     t.boolean "river_restoration"
     t.boolean "floodplain_restoration"
@@ -328,6 +328,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_104418) do
     t.integer "earliest_start_year"
     t.string "updated_by_type"
     t.bigint "updated_by_id"
+    t.decimal "carbon_cost_sequestered", precision: 10, scale: 2
+    t.decimal "carbon_cost_avoided", precision: 10, scale: 2
+    t.decimal "carbon_savings_net_economic_benefit", precision: 10, scale: 2
     t.index ["name"], name: "index_pafs_core_projects_on_name", unique: true
     t.index ["reference_number", "version"], name: "index_pafs_core_projects_on_reference_number_and_version", unique: true
     t.index ["slug"], name: "index_pafs_core_projects_on_slug", unique: true
@@ -399,5 +402,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_104418) do
     t.index ["reset_password_token"], name: "index_pafs_core_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_pafs_core_users_on_unlock_token", unique: true
   end
-
 end
