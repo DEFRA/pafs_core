@@ -122,6 +122,9 @@ module PafsCore
       json["carbon_impact_rates"]
     end
 
+    # Where a rate is not populated for a particular FY (or the FY does not exist in the rate table),
+    # utilise the latest available rate e.g. if MidYr is 2030/31 then Cap Do Nothing Intensity
+    # of 3.5 would be picked up from the 2028/29 field as this is the latest available year.
     def carbon_impact_rate_for_year(year_string, rate_label)
       rate_not_present_in_mid_year_data = false
 
