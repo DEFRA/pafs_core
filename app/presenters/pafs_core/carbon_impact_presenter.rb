@@ -20,7 +20,7 @@ module PafsCore
     end
 
     # This is the whole life carbon calculated for the project (tCO2)
-    def total_carbon_estimate
+    def total_carbon_without_mitigations
       capital_carbon_estimate + operational_carbon_estimate
     end
 
@@ -36,7 +36,7 @@ module PafsCore
 
     # This is the net carbon calculated for the project (tCO2)
     def net_carbon_estimate
-      total_carbon_estimate - sequestered_carbon_estimate - avoided_carbon_estimate
+      total_carbon_without_mitigations - sequestered_carbon_estimate - avoided_carbon_estimate
     end
 
     # How much net carbon will economically benefit the project ?
@@ -76,7 +76,7 @@ module PafsCore
         (1 + gw4_ops_target_reduction_rate) / 10_000
     end
 
-    # Net carbot with blank values calculated
+    # Net carbon with blank values calculated
     def net_carbon_with_blanks_calculated
       # defaults to capital_carbon_baseline when blank
       carbon_cost_build = project.carbon_cost_build.presence || capital_carbon_baseline
@@ -94,24 +94,27 @@ module PafsCore
 
     attr_accessor :project, :pf_calculator_presenter
 
-    def start_construction_fin_year
+    def start_construction_financial_year
       project.start_construction_month < 4 ? project.start_construction_year - 1 : project.start_construction_year
     end
 
-    def ready_for_service_fin_year
+    def ready_for_service_financial_year
       project.ready_for_service_month < 4 ? project.ready_for_service_year - 1 : project.ready_for_service_year
     end
 
+    # Mid year of Construction start date and Ready for service. Earliest of 2 where even numbers of years
     def mid_year
-      (start_construction_fin_year + ready_for_service_fin_year).div(2)
+      (start_construction_financial_year + ready_for_service_financial_year).div(2)
     end
 
-    def mid_year_string
+    # mid year formatted as financial year string, e.g. 2025/26
+    def mid_year_formatted
       "#{mid_year}/#{(mid_year + 1) % 100}"
     end
 
-    def ready_for_service_year_string
-      "#{ready_for_service_fin_year}/#{(ready_for_service_fin_year + 1) % 100}"
+    # ready for service year formatted as financial year string, e.g. 2025/26
+    def ready_for_service_year_formatted
+      "#{ready_for_service_financial_year}/#{(ready_for_service_financial_year + 1) % 100}"
     end
 
     def carbon_impact_rates
@@ -134,23 +137,23 @@ module PafsCore
     end
 
     def mid_year_cap_do_nothing_intensity
-      carbon_impact_rate_for_year(mid_year_string, "Cap Do Nothing Intensity")
+      carbon_impact_rate_for_year(mid_year_formatted, "Cap Do Nothing Intensity")
     end
 
     def gw4_ops_do_nothing_intensity
-      carbon_impact_rate_for_year(ready_for_service_year_string, "Cap Do Nothing Intensity")
+      carbon_impact_rate_for_year(ready_for_service_year_formatted, "Cap Do Nothing Intensity")
     end
 
     def mid_year_cap_target_reduction_rate
-      carbon_impact_rate_for_year(mid_year_string, "Cap Target Reduction Rate")
+      carbon_impact_rate_for_year(mid_year_formatted, "Cap Target Reduction Rate")
     end
 
     def gw4_ops_target_reduction_rate
-      carbon_impact_rate_for_year(ready_for_service_year_string, "Cap Target Reduction Rate")
+      carbon_impact_rate_for_year(ready_for_service_year_formatted, "Cap Target Reduction Rate")
     end
 
     def construction_total_project_funding
-      construction_years = (start_construction_fin_year..ready_for_service_fin_year)
+      construction_years = (start_construction_financial_year..ready_for_service_financial_year)
       project.funding_values.select { |x| construction_years.include?(x.financial_year) }.sum(&:total)
     end
 

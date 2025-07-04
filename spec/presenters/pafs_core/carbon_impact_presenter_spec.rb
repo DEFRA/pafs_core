@@ -57,13 +57,13 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
   end
 
-  describe "#total_carbon_estimate" do
+  describe "#total_carbon_without_mitigations" do
     before do
       allow(project).to receive_messages(carbon_cost_build: 1000.0, carbon_cost_operation: 2000.0)
     end
 
-    it "returns the sum of capital and operational carbon estimates" do
-      expect(presenter.total_carbon_estimate).to eq(3000.0)
+    it "returns the sum of capital and operational carbon estimates excluding sequestered and avoided" do
+      expect(presenter.total_carbon_without_mitigations).to eq(3000.0)
     end
   end
 
@@ -199,12 +199,12 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
   end
 
   describe "protected methods" do
-    describe "#start_construction_fin_year" do
+    describe "#start_construction_financial_year" do
       context "when start_construction_month is before April" do
         let(:project) { create(:project, start_construction_month: 2, start_construction_year: 2024) }
 
         it "returns previous year" do
-          expect(presenter.send(:start_construction_fin_year)).to eq(2023)
+          expect(presenter.send(:start_construction_financial_year)).to eq(2023)
         end
       end
 
@@ -212,17 +212,17 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
         let(:project) { create(:project, start_construction_month: 4, start_construction_year: 2024) }
 
         it "returns the same year" do
-          expect(presenter.send(:start_construction_fin_year)).to eq(2024)
+          expect(presenter.send(:start_construction_financial_year)).to eq(2024)
         end
       end
     end
 
-    describe "#ready_for_service_fin_year" do
+    describe "#ready_for_service_financial_year" do
       context "when ready_for_service_month is before April" do
         let(:project) { create(:project, ready_for_service_month: 3, ready_for_service_year: 2025) }
 
         it "returns previous year" do
-          expect(presenter.send(:ready_for_service_fin_year)).to eq(2024)
+          expect(presenter.send(:ready_for_service_financial_year)).to eq(2024)
         end
       end
 
@@ -230,7 +230,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
         let(:project) { create(:project, ready_for_service_month: 5, ready_for_service_year: 2025) }
 
         it "returns the same year" do
-          expect(presenter.send(:ready_for_service_fin_year)).to eq(2025)
+          expect(presenter.send(:ready_for_service_financial_year)).to eq(2025)
         end
       end
     end
@@ -241,15 +241,15 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       end
     end
 
-    describe "#mid_year_string" do
+    describe "#mid_year_formatted" do
       it "formats as financial year string" do
-        expect(presenter.send(:mid_year_string)).to eq("2024/25")
+        expect(presenter.send(:mid_year_formatted)).to eq("2024/25")
       end
     end
 
-    describe "#ready_for_service_year_string" do
+    describe "#ready_for_service_year_formatted" do
       it "formats as financial year string" do
-        expect(presenter.send(:ready_for_service_year_string)).to eq("2025/26")
+        expect(presenter.send(:ready_for_service_year_formatted)).to eq("2025/26")
       end
     end
 
