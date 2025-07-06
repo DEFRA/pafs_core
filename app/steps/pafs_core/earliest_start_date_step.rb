@@ -2,14 +2,48 @@
 
 module PafsCore
   class EarliestStartDateStep < BasicStep
-    delegate :could_start_early?,
-             :earliest_start_month, :earliest_start_month=,
+    include PafsCore::DateUtils
+    delegate :earliest_start_month, :earliest_start_month=,
              :earliest_start_year, :earliest_start_year=,
-             :date_present?, :date_plausible?, :year_plausible?,
-             :month_plausible?, :date_in_future?,
+             :project_end_financial_year,
+             :pending_earliest_start_month, :pending_earliest_start_month=,
+             :pending_earliest_start_year, :pending_earliest_start_year=,
+             :date_change_requires_confirmation, :date_change_requires_confirmation=,
              to: :project
 
     validate :date_is_present_and_correct
+
+    def before_view(_params)
+      project.update(
+        pending_earliest_start_month: nil,
+        pending_earliest_start_year: nil,
+        date_change_requires_confirmation: nil
+      )
+    end
+
+    def update(params)
+      original_month, original_year = [project.earliest_start_month, project.earliest_start_year]
+      assign_attributes(step_params(params))
+
+      return false unless valid?
+
+      checker = PafsCore::DateRangeDataChecker.new(
+        project,
+        earliest_date: Date.new(earliest_start_year, earliest_start_month, 1)
+      )
+
+      if checker.data_outside_date_range?
+        project.pending_earliest_start_month = earliest_start_month
+        project.pending_earliest_start_year = earliest_start_year
+        project.date_change_requires_confirmation = true
+        # Revert the dates to original until it's confirmed user wants to proceed
+        project.earliest_start_month = original_month
+        project.earliest_start_year = original_year
+      end
+
+      project.updated_by = user if project.respond_to?(:updated_by)
+      project.save
+    end
 
     private
 

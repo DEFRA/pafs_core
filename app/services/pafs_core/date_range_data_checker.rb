@@ -1,0 +1,46 @@
+# frozen_string_literal: true
+
+module PafsCore
+  # Checks for project data (funding or outcomes) that falls outside a given
+  # date range. This is used to warn the user before they change a project's
+  # dates and inadvertently delete data.
+  class DateRangeDataChecker
+    attr_reader :project, :earliest_date, :latest_date
+
+    def initialize(project, earliest_date: nil, latest_date: nil)
+      @project = project
+      @earliest_date = earliest_date || default_earliest_date
+      @latest_date = latest_date || default_latest_date
+    end
+
+    def data_outside_date_range?
+      relations_for_records_outside_range.any?(&:exists?)
+    end
+
+    def relations_for_records_outside_range
+      @relations_for_records_outside_range ||= [
+        project.funding_values.where(years_out_of_range_scope),
+        project.flood_protection_outcomes.where(years_out_of_range_scope),
+        project.coastal_erosion_protection_outcomes.where(years_out_of_range_scope)
+      ]
+    end
+
+    private
+
+    def years_out_of_range_scope
+      ["financial_year < ? OR financial_year > ?", earliest_date.year, latest_date.year]
+    end
+
+    def default_earliest_date
+      return Date.new(project.earliest_start_year, project.earliest_start_month, 1) if project.earliest_start_year.present?
+
+      Date.today
+    end
+
+    def default_latest_date
+      return PafsCore::FinancialYearUtilities.financial_year_end_date(project.project_end_financial_year) if project.project_end_financial_year.present?
+
+      10.years.from_now
+    end
+  end
+end
