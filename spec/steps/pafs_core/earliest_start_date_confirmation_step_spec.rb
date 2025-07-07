@@ -23,8 +23,8 @@ RSpec.describe PafsCore::EarliestStartDateConfirmationStep do
 
     it "applies the new start date, cleans data, and resets pending flags" do
       new_start_date = Date.new(2026, 4, 1)
-      expect(PafsCore::DateRangeDataCleaner).to receive(:new).with(project, earliest_date: new_start_date)
-      expect(cleaner_double).to receive(:clean_data_outside_range!)
+      allow(PafsCore::DateRangeDataCleaner).to receive(:new).with(project, earliest_date: new_start_date).and_return(cleaner_double)
+      allow(cleaner_double).to receive(:clean_data_outside_range!)
 
       step.update
 

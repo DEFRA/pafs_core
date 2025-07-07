@@ -88,9 +88,10 @@ RSpec.describe PafsCore::DateRangeDataChecker do
     end
 
     it "memoizes the result" do
-      expect(project).to receive(:funding_values).once.and_call_original
+      allow(project).to receive(:funding_values).and_call_original
       checker.relations_for_records_outside_range
       checker.relations_for_records_outside_range
+      expect(project).to have_received(:funding_values).once
     end
   end
 end

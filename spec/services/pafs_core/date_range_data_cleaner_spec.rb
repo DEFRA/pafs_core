@@ -10,9 +10,9 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
 
   describe "#clean_data_outside_range!" do
     let(:checker_double) { instance_double(PafsCore::DateRangeDataChecker) }
-    let(:funding_relation) { double("funding_relation") }
-    let(:flood_relation) { double("flood_relation") }
-    let(:coastal_relation) { double("coastal_relation") }
+    let(:funding_relation) { instance_double(ActiveRecord::Relation) }
+    let(:flood_relation) { instance_double(ActiveRecord::Relation) }
+    let(:coastal_relation) { instance_double(ActiveRecord::Relation) }
 
     before do
       allow(PafsCore::DateRangeDataChecker).to receive(:new).with(

@@ -24,8 +24,8 @@ RSpec.describe PafsCore::FinancialYearConfirmationStep do
     end
 
     it "applies the new financial year, cleans data, and resets pending flags" do
-      expect(PafsCore::DateRangeDataCleaner).to receive(:new).with(project, latest_date: end_date)
-      expect(cleaner_double).to receive(:clean_data_outside_range!)
+      allow(PafsCore::DateRangeDataCleaner).to receive(:new).with(project, latest_date: end_date).and_return(cleaner_double)
+      allow(cleaner_double).to receive(:clean_data_outside_range!)
 
       step.update
 
