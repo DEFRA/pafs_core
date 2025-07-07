@@ -160,8 +160,7 @@ module PafsCore
         s.add :earliest_start_date
         s.add :earliest_start_date_confirmation, if: ->(p) { p.project.date_change_requires_confirmation? }
         s.add :could_start_sooner
-        s.add :earliest_start_date, if: :could_start_early?
-        s.add :earliest_start_date_confirmation, if: ->(p) { p.project.date_change_requires_confirmation? }
+        s.add :earliest_start_date_with_gia, if: :could_start_early?
         s.add :summary_7
 
         s.add :risks
