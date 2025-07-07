@@ -45,6 +45,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
 
   describe "#update" do
     subject(:step) { create(:financial_year_step) }
+
     let(:project) { step.project }
     let(:checker_service) { instance_double(PafsCore::DateRangeDataChecker) }
 

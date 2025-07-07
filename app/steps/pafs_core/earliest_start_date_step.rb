@@ -22,7 +22,8 @@ module PafsCore
     end
 
     def update(params)
-      original_month, original_year = [project.earliest_start_month, project.earliest_start_year]
+      original_month = project.earliest_start_month
+      original_year = project.earliest_start_year
       assign_attributes(step_params(params))
 
       return false unless valid?

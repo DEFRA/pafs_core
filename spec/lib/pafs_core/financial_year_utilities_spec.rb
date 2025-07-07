@@ -22,7 +22,7 @@ RSpec.describe PafsCore::FinancialYearUtilities do
       expect(described_class.financial_years_between(2022, 2025)).to eq([2022, 2023, 2024, 2025])
       expect(described_class.financial_years_between(2030, 2030)).to eq([2030])
     end
-    
+
     it "returns an empty array when last_year is less than first_year" do
       expect(described_class.financial_years_between(2025, 2022)).to eq([])
     end

@@ -4,9 +4,10 @@ require "rails_helper"
 # require_relative "./shared_step_spec"
 
 RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
+  subject(:step) { described_class.new(project, user) }
+
   let(:project) { create(:project, earliest_start_year: 2030, earliest_start_month: 2, project_end_financial_year: 2032) }
   let(:user) { create(:user) }
-  subject(:step) { described_class.new(project, user) }
 
   describe "attributes" do
     it_behaves_like "a project step"
@@ -64,6 +65,7 @@ RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
 
     context "when no data is outside the new date range" do
       let(:params) { ActionController::Parameters.new({ earliest_start_date_step: { earliest_start_month: "5", earliest_start_year: "2026" } }) }
+
       before { allow(checker_service).to receive(:data_outside_date_range?).and_return(false) }
 
       it "saves the date" do
@@ -89,6 +91,7 @@ RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
 
     context "when data is outside the new date range" do
       let(:params) { ActionController::Parameters.new({ earliest_start_date_step: { earliest_start_month: "6", earliest_start_year: "2027" } }) }
+
       before { allow(checker_service).to receive(:data_outside_date_range?).and_return(true) }
 
       it "returns true" do

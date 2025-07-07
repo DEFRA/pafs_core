@@ -22,10 +22,10 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
       ).and_return(checker_double)
 
       allow(checker_double).to receive(:relations_for_records_outside_range).and_return([
-        funding_relation,
-        flood_relation,
-        coastal_relation
-      ])
+                                                                                          funding_relation,
+                                                                                          flood_relation,
+                                                                                          coastal_relation
+                                                                                        ])
 
       allow(funding_relation).to receive(:delete_all)
       allow(flood_relation).to receive(:delete_all)

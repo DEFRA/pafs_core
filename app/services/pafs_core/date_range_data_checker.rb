@@ -32,13 +32,18 @@ module PafsCore
     end
 
     def default_earliest_date
-      return Date.new(project.earliest_start_year, project.earliest_start_month, 1) if project.earliest_start_year.present?
+      if project.earliest_start_year.present?
+        return Date.new(project.earliest_start_year, project.earliest_start_month,
+                        1)
+      end
 
-      Date.today
+      Time.zone.today
     end
 
     def default_latest_date
-      return PafsCore::FinancialYearUtilities.financial_year_end_date(project.project_end_financial_year) if project.project_end_financial_year.present?
+      if project.project_end_financial_year.present?
+        return PafsCore::FinancialYearUtilities.financial_year_end_date(project.project_end_financial_year)
+      end
 
       10.years.from_now
     end
