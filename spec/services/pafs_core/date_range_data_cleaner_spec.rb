@@ -9,38 +9,73 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
   let(:service) { described_class.new(project, earliest_date: earliest_date, latest_date: latest_date) }
 
   describe "#clean_data_outside_range!" do
-    let(:checker_double) { instance_double(PafsCore::DateRangeDataChecker) }
-    let(:funding_relation) { instance_double(ActiveRecord::Relation) }
-    let(:flood_relation) { instance_double(ActiveRecord::Relation) }
-    let(:coastal_relation) { instance_double(ActiveRecord::Relation) }
+    # Data that should be deleted (outside date range)
+    let!(:funding_outside_before) { create(:funding_value, project: project, financial_year: 2021) }
+    let!(:funding_outside_after) { create(:funding_value, project: project, financial_year: 2030) }
+    let!(:flood_outcome_outside) { create(:flood_protection_outcomes, project: project, financial_year: 2021) }
+    let!(:coastal_outcome_outside) { create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2030) }
 
-    before do
-      allow(PafsCore::DateRangeDataChecker).to receive(:new).with(
-        project,
-        earliest_date: earliest_date,
-        latest_date: latest_date
-      ).and_return(checker_double)
+    # Data that should be kept (within date range)
+    let!(:funding_inside_start) { create(:funding_value, project: project, financial_year: 2022) }
+    let!(:funding_inside_end) { create(:funding_value, project: project, financial_year: 2028) }
+    let!(:flood_outcome_inside) { create(:flood_protection_outcomes, project: project, financial_year: 2025) }
+    let!(:coastal_outcome_inside) { create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2027) }
 
-      allow(checker_double).to receive(:relations_for_records_outside_range).and_return([
-                                                                                          funding_relation,
-                                                                                          flood_relation,
-                                                                                          coastal_relation
-                                                                                        ])
+    # Shared setup for all examples in this context
+    let!(:run_cleaner) { service.clean_data_outside_range! }
 
-      allow(funding_relation).to receive(:delete_all)
-      allow(flood_relation).to receive(:delete_all)
-      allow(coastal_relation).to receive(:delete_all)
+    it "returns true when successful" do
+      expect(run_cleaner).to be true
     end
 
-    it "uses the checker to find and delete records" do
-      service.clean_data_outside_range!
-      expect(funding_relation).to have_received(:delete_all)
-      expect(flood_relation).to have_received(:delete_all)
-      expect(coastal_relation).to have_received(:delete_all)
+    context "with funding values" do
+      it "verifies initial count of funding values" do
+        expect(project.reload.funding_values.count).to eq(2)
+      end
+
+      it "deletes funding values before the date range" do
+        expect(project.funding_values.exists?(id: funding_outside_before.id)).to be false
+      end
+
+      it "deletes funding values after the date range" do
+        expect(project.funding_values.exists?(id: funding_outside_after.id)).to be false
+      end
+
+      it "keeps funding values at the start of date range" do
+        expect(project.funding_values.exists?(id: funding_inside_start.id)).to be true
+      end
+
+      it "keeps funding values at the end of date range" do
+        expect(project.funding_values.exists?(id: funding_inside_end.id)).to be true
+      end
     end
 
-    it "returns true on success" do
-      expect(service.clean_data_outside_range!).to be true
+    context "with flood protection outcomes" do
+      it "verifies final count of flood protection outcomes" do
+        expect(project.reload.flood_protection_outcomes.count).to eq(1)
+      end
+
+      it "deletes flood protection outcomes outside date range" do
+        expect(project.flood_protection_outcomes.exists?(id: flood_outcome_outside.id)).to be false
+      end
+
+      it "keeps flood protection outcomes inside date range" do
+        expect(project.flood_protection_outcomes.exists?(id: flood_outcome_inside.id)).to be true
+      end
+    end
+
+    context "with coastal erosion protection outcomes" do
+      it "verifies final count of coastal erosion protection outcomes" do
+        expect(project.reload.coastal_erosion_protection_outcomes.count).to eq(1)
+      end
+
+      it "deletes coastal protection outcomes outside date range" do
+        expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_outcome_outside.id)).to be false
+      end
+
+      it "keeps coastal protection outcomes inside date range" do
+        expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_outcome_inside.id)).to be true
+      end
     end
 
     context "when a transaction fails" do
