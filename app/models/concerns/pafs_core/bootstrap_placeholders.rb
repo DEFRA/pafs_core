@@ -37,6 +37,10 @@ module PafsCore
       NullAssociation.new
     end
 
+    def flood_protection2040_outcomes
+      NullAssociation.new
+    end
+
     def earliest_start_year
       nil
     end

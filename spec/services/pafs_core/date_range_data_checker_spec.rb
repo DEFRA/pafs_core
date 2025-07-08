@@ -58,6 +58,16 @@ RSpec.describe PafsCore::DateRangeDataChecker do
       end
     end
 
+    context "when flood protection 2040 outcomes are outside the date range" do
+      before do
+        create(:flood_protection2040_outcomes, project: project, financial_year: 2024)
+      end
+
+      it "returns true" do
+        expect(checker.data_outside_date_range?).to be true
+      end
+    end
+
     context "when using default dates from the project" do
       subject(:checker) { described_class.new(project) }
 
@@ -79,12 +89,14 @@ RSpec.describe PafsCore::DateRangeDataChecker do
   describe "#relations_for_records_outside_range" do
     let!(:funding_value) { create(:funding_value, project: project, financial_year: 2029) }
     let!(:flood_outcome) { create(:flood_protection_outcomes, project: project, financial_year: 2024) }
+    let!(:flood_2040_outcome) { create(:flood_protection2040_outcomes, project: project, financial_year: 2024) }
 
     it "returns the correct ActiveRecord relations" do
       relations = checker.relations_for_records_outside_range
       expect(relations[0].first).to eq(funding_value)
       expect(relations[1].first).to eq(flood_outcome)
-      expect(relations[2]).to be_empty
+      expect(relations[2].first).to eq(flood_2040_outcome)
+      expect(relations[3]).to be_empty
     end
 
     it "memoizes the result" do

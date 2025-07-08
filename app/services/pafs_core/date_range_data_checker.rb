@@ -21,6 +21,7 @@ module PafsCore
       @relations_for_records_outside_range ||= [
         project.funding_values.where(years_out_of_range_scope),
         project.flood_protection_outcomes.where(years_out_of_range_scope),
+        project.flood_protection2040_outcomes.where(years_out_of_range_scope),
         project.coastal_erosion_protection_outcomes.where(years_out_of_range_scope)
       ]
     end
