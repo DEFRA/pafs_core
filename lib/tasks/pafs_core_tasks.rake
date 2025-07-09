@@ -56,5 +56,10 @@ namespace :pafs do
                     end
     PafsCore::DataMigration::RemovePreviousYears.perform(project_limit)
   end
+
+  desc "Remove all old versions of the PFC from draft and archived proposals"
+  task remove_old_pfc_versions: :environment do
+    PafsCore::DataMigration::RemoveOldPfcVersions.perform
+  end
 end
 # rubocop:enable Metrics/BlockLength
