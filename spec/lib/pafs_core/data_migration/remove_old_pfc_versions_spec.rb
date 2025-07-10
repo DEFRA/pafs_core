@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
   describe "#perform" do
     let(:migration) { described_class.new }
+    let(:v8_calculator_file) { Rails.root.join("../fixtures/calculators/v8.xlsx").open }
     let(:project_with_v8_pfc) { create(:project, :draft, funding_calculator_file_name: "v8_calculator.xlsx") }
     let(:project_with_v9_pfc) { create(:project, :draft, funding_calculator_file_name: "v9_calculator.xlsx") }
     let(:project_without_pfc) { create(:project, :draft) }
@@ -18,13 +19,11 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
 
     context "when processing projects with different PFC versions" do
       before do
-        allow(migration).to receive_messages(calculator_version: :v8, calculator_version_accepted?: false)
+        allow(migration).to receive(:fetch_funding_calculator_for).and_return(v8_calculator_file)
       end
 
       it "removes old PFC versions from draft projects" do
         project_with_v8_pfc
-        allow(migration).to receive(:delete_funding_calculator_for).with(project_with_v8_pfc)
-
         migration.perform
 
         expect(migration).to have_received(:delete_funding_calculator_for).with(project_with_v8_pfc)
@@ -32,8 +31,6 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
 
       it "removes old PFC versions from archived projects" do
         archived_project_with_v8_pfc
-        allow(migration).to receive(:delete_funding_calculator_for).with(archived_project_with_v8_pfc)
-
         migration.perform
 
         expect(migration).to have_received(:delete_funding_calculator_for).with(archived_project_with_v8_pfc)
@@ -50,10 +47,6 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
     end
 
     context "when projects have accepted PFC versions" do
-      before do
-        allow(migration).to receive_messages(calculator_version: :v9, calculator_version_accepted?: true)
-      end
-
       it "does not remove v9 PFC files" do
         project_with_v9_pfc
 
@@ -74,10 +67,6 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
     end
 
     context "when projects are in submitted state" do
-      before do
-        allow(migration).to receive_messages(calculator_version: :v8, calculator_version_accepted?: false)
-      end
-
       it "does not process submitted projects" do
         submitted_project_with_v8_pfc
 
@@ -130,6 +119,8 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
 
   describe "#old_pfc_version?" do
     let(:migration) { described_class.new }
+    let(:v8_calculator_file) { Rails.root.join("../fixtures/calculators/v8.xlsx").open }
+    let(:v9_calculator_file) { Rails.root.join("../fixtures/calculators/v9.xlsx").open }
     let(:project_with_pfc) { create(:project, funding_calculator_file_name: "calculator.xlsx") }
     let(:project_without_pfc) { create(:project) }
 
@@ -141,7 +132,7 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
 
     context "when project has PFC file with old version" do
       before do
-        allow(migration).to receive_messages(calculator_version: :v8, calculator_version_accepted?: false)
+        allow(migration).to receive(:fetch_funding_calculator_for).and_return(v8_calculator_file)
       end
 
       it "returns true" do
@@ -151,7 +142,7 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
 
     context "when project has PFC file with accepted version" do
       before do
-        allow(migration).to receive_messages(calculator_version: :v9, calculator_version_accepted?: true)
+        allow(migration).to receive(:fetch_funding_calculator_for).and_return(v9_calculator_file)
       end
 
       it "returns false" do
