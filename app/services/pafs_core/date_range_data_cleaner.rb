@@ -13,20 +13,25 @@ module PafsCore
     end
 
     def clean_data_outside_range!
-      checker = DateRangeDataChecker.new(
-        project,
-        earliest_date: earliest_date,
-        latest_date: latest_date
-      )
+      # Ensure we only clean data for Draft projects
+      raise StandardError, "DateRangeDataCleaner should only be used on projects in Draft state" unless project.draft?
 
-      ActiveRecord::Base.transaction do
-        checker.relations_for_records_outside_range.each(&:delete_all)
+      begin
+        checker = DateRangeDataChecker.new(
+          project,
+          earliest_date: earliest_date,
+          latest_date: latest_date
+        )
+
+        ActiveRecord::Base.transaction do
+          checker.relations_for_records_outside_range.each(&:delete_all)
+        end
+
+        true
+      rescue StandardError => e
+        Rails.logger.error("Error cleaning data outside date range: #{e.message}")
+        false
       end
-
-      true
-    rescue StandardError => e
-      Rails.logger.error("Error cleaning data outside date range: #{e.message}")
-      false
     end
   end
 end

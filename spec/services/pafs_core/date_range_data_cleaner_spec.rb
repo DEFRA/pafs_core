@@ -21,65 +21,90 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
     let!(:flood_outcome_inside) { create(:flood_protection_outcomes, project: project, financial_year: 2025) }
     let!(:coastal_outcome_inside) { create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2027) }
 
-    # Shared setup for all examples in this context
-    let!(:run_cleaner) { service.clean_data_outside_range! }
-
-    it "returns true when successful" do
-      expect(run_cleaner).to be true
+    # Ensure project is in draft state by default for these tests
+    before do
+      allow(project).to receive(:draft?).and_return(true)
     end
 
-    context "with funding values" do
-      it "verifies initial count of funding values" do
-        expect(project.reload.funding_values.count).to eq(2)
+    context "when project is in draft state" do
+      let!(:run_cleaner) { service.clean_data_outside_range! }
+
+      it "returns true when successful" do
+        expect(run_cleaner).to be true
       end
 
-      it "deletes funding values before the date range" do
-        expect(project.funding_values.exists?(id: funding_outside_before.id)).to be false
+      context "with funding values" do
+        it "verifies initial count of funding values" do
+          expect(project.reload.funding_values.count).to eq(2)
+        end
+
+        it "deletes funding values before the date range" do
+          expect(project.funding_values.exists?(id: funding_outside_before.id)).to be false
+        end
+
+        it "deletes funding values after the date range" do
+          expect(project.funding_values.exists?(id: funding_outside_after.id)).to be false
+        end
+
+        it "keeps funding values at the start of date range" do
+          expect(project.funding_values.exists?(id: funding_inside_start.id)).to be true
+        end
+
+        it "keeps funding values at the end of date range" do
+          expect(project.funding_values.exists?(id: funding_inside_end.id)).to be true
+        end
       end
 
-      it "deletes funding values after the date range" do
-        expect(project.funding_values.exists?(id: funding_outside_after.id)).to be false
+      context "with flood protection outcomes" do
+        it "verifies final count of flood protection outcomes" do
+          expect(project.reload.flood_protection_outcomes.count).to eq(1)
+        end
+
+        it "deletes flood protection outcomes outside date range" do
+          expect(project.flood_protection_outcomes.exists?(id: flood_outcome_outside.id)).to be false
+        end
+
+        it "keeps flood protection outcomes inside date range" do
+          expect(project.flood_protection_outcomes.exists?(id: flood_outcome_inside.id)).to be true
+        end
       end
 
-      it "keeps funding values at the start of date range" do
-        expect(project.funding_values.exists?(id: funding_inside_start.id)).to be true
-      end
+      context "with coastal erosion protection outcomes" do
+        it "verifies final count of coastal erosion protection outcomes" do
+          expect(project.reload.coastal_erosion_protection_outcomes.count).to eq(1)
+        end
 
-      it "keeps funding values at the end of date range" do
-        expect(project.funding_values.exists?(id: funding_inside_end.id)).to be true
+        it "deletes coastal protection outcomes outside date range" do
+          expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_outcome_outside.id)).to be false
+        end
+
+        it "keeps coastal protection outcomes inside date range" do
+          expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_outcome_inside.id)).to be true
+        end
       end
     end
 
-    context "with flood protection outcomes" do
-      it "verifies final count of flood protection outcomes" do
-        expect(project.reload.flood_protection_outcomes.count).to eq(1)
+    shared_examples "project not in draft state" do |state|
+      before do
+        allow(project).to receive(:draft?).and_return(false)
       end
 
-      it "deletes flood protection outcomes outside date range" do
-        expect(project.flood_protection_outcomes.exists?(id: flood_outcome_outside.id)).to be false
-      end
-
-      it "keeps flood protection outcomes inside date range" do
-        expect(project.flood_protection_outcomes.exists?(id: flood_outcome_inside.id)).to be true
+      it "raises an error" do
+        expect { service.clean_data_outside_range! }.to raise_error(StandardError, "DateRangeDataCleaner should only be used on projects in Draft state")
       end
     end
 
-    context "with coastal erosion protection outcomes" do
-      it "verifies final count of coastal erosion protection outcomes" do
-        expect(project.reload.coastal_erosion_protection_outcomes.count).to eq(1)
-      end
+    context "when project is in live state" do
+      include_examples "project not in draft state", "live"
+    end
 
-      it "deletes coastal protection outcomes outside date range" do
-        expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_outcome_outside.id)).to be false
-      end
-
-      it "keeps coastal protection outcomes inside date range" do
-        expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_outcome_inside.id)).to be true
-      end
+    context "when project is in archived state" do
+      include_examples "project not in draft state", "archived"
     end
 
     context "when a transaction fails" do
       before do
+        allow(project).to receive(:draft?).and_return(true)
         allow(ActiveRecord::Base).to receive(:transaction).and_raise(StandardError, "DB Error")
         allow(Rails.logger).to receive(:error)
       end
