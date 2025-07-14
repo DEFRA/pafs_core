@@ -84,7 +84,7 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
       end
     end
 
-    shared_examples "project not in draft state" do |state|
+    shared_examples "project not in draft state" do
       before do
         allow(project).to receive(:draft?).and_return(false)
       end
