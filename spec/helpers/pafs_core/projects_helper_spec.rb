@@ -16,6 +16,16 @@ module PafsCore
       end
     end
 
+    describe "#financial_year_end_from_year" do
+      it "returns the end of the financial year for the supplied year" do
+        test_year = 2022
+        expect(helper.financial_year_end_from_year(test_year)).to eq Date.new(2023, 3, 31)
+
+        test_year = 2017
+        expect(helper.financial_year_end_from_year(test_year)).to eq Date.new(2018, 3, 31)
+      end
+    end
+
     describe "#six_year_limit_date" do
       it "returns a string for the end of the six year limit financial year" do
         expect(helper.six_year_limit_date).to eq "31 March 2021"

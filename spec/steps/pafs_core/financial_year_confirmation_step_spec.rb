@@ -19,7 +19,7 @@ RSpec.describe PafsCore::FinancialYearConfirmationStep do
     let(:end_date) { Date.new(2029, 3, 31) }
 
     before do
-      allow(PafsCore::FinancialYearUtilities).to receive(:financial_year_end_date).with(2028).and_return(end_date)
+      allow(step).to receive(:financial_year_end_for).with(2028).and_return(end_date)
       allow(PafsCore::DateRangeDataCleaner).to receive(:new).and_return(cleaner_double)
     end
 
