@@ -25,6 +25,10 @@ module PafsCore
       sequence.next(step, project)
     end
 
+    def previous_step(step, project)
+      sequence.prev(step, project)
+    end
+
     def last_step
       sequence.last
     end
@@ -117,6 +121,7 @@ module PafsCore
         s.add :project_type
         s.add :summary_2
         s.add :financial_year
+        s.add :financial_year_confirmation, if: ->(p) { p.project.date_change_requires_confirmation? }
         s.add :financial_year_alternative, unless: ->(p) { p.step == :financial_year }
         s.add :summary_3
 
@@ -153,6 +158,7 @@ module PafsCore
         s.add :summary_6
 
         s.add :earliest_start_date
+        s.add :earliest_start_date_confirmation, if: ->(p) { p.project.date_change_requires_confirmation? }
         s.add :could_start_sooner
         s.add :earliest_start_date_with_gia, if: :could_start_early?
         s.add :summary_7

@@ -2,6 +2,7 @@
 
 module PafsCore
   class Bootstrap < ApplicationRecord
+    include PafsCore::BootstrapPlaceholders
     validates :slug, presence: true, uniqueness: true
     belongs_to :creator, class_name: "User", optional: true
 
