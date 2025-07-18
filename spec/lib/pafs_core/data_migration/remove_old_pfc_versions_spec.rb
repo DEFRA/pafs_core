@@ -24,6 +24,7 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
 
       it "removes old PFC versions from draft projects" do
         project_with_v8_pfc
+
         migration.perform
 
         expect(migration).to have_received(:delete_funding_calculator_for).with(project_with_v8_pfc)
@@ -31,6 +32,7 @@ RSpec.describe PafsCore::DataMigration::RemoveOldPfcVersions do
 
       it "removes old PFC versions from archived projects" do
         archived_project_with_v8_pfc
+
         migration.perform
 
         expect(migration).to have_received(:delete_funding_calculator_for).with(archived_project_with_v8_pfc)
