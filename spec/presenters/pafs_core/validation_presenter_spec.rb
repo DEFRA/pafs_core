@@ -448,8 +448,8 @@ RSpec.describe PafsCore::ValidationPresenter do
         context "with a v8 PFC attached" do
           let(:filename) { "v8.xlsx" }
 
-          it "returns true" do
-            expect(subject.funding_calculator_complete?).to be true
+          it "returns false" do
+            expect(subject.funding_calculator_complete?).to be false
           end
         end
 
