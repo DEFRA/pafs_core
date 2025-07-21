@@ -6,6 +6,9 @@ module PafsCore
   module BootstrapPlaceholders
     extend ActiveSupport::Concern
 
+    attr_accessor :earliest_start_year, :earliest_start_month, :pending_financial_year,
+                  :date_change_requires_confirmation
+
     # A null object that responds to ActiveRecord methods and always returns empty results
     class NullAssociation
       def where(*_args)
@@ -39,14 +42,6 @@ module PafsCore
 
     def flood_protection2040_outcomes
       NullAssociation.new
-    end
-
-    def earliest_start_year
-      nil
-    end
-
-    def earliest_start_month
-      nil
     end
   end
 end
