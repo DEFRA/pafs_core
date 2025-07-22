@@ -1,0 +1,19 @@
+<% content_for :title, t(".heading") %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+
+    <p class="govuk-body"><%= t(".para1") %></p>
+
+    <p class="govuk-body"><%= t(".para2") %></p>
+
+    <p class="govuk-body"><%= t(".para3") %></p>
+
+    <%= form_for @project, as: :financial_year_confirmation, url: project_step_path, method: :patch do |f| %>
+      <%= f.govuk_submit t(".submit_button") %>
+    <% end %>
+
+    <%= render "pafs_core/projects/steps/back_link" %>
+  </div>
+</div>

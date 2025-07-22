@@ -16,6 +16,7 @@ en:
     project_name: Name
     project_area: Area
     project_type: Type
+    financial_year_confirmation: Financial year confirmation
     location: Location
     benefit_area_file: Benefit area upload
     location_results: Location results
@@ -37,6 +38,7 @@ en:
     carbon_cost_operation: Carbon Assessment
     could_start_sooner: Earliest start
     earliest_start_date: Earliest start date
+    earliest_start_date_confirmation: Earliest start date confirmation
     location: Location
     map: Map
     benefit_area_file_summary: Benefit area upload summary

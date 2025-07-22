@@ -405,7 +405,9 @@ module PafsCore
       end
 
       unless funding_calculator_correct_version?
-        return add_error(:funding_calculator, "Upload a valid version of the partnership funding calculator")
+        return add_error(:funding_calculator,
+                         "Partnership funding calculator v8 (2014) is no longer valid. " \
+                         "Project Proposals must use 2020 V2 of the calculator.")
       end
 
       true
@@ -508,7 +510,7 @@ module PafsCore
 
       tfile.unlink
 
-      Check::VERSION_MAP.include? calculator_version
+      Check::ACCEPTED_VERSIONS.keys.include? calculator_version
     end
   end
 end

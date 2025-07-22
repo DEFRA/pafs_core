@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_26_144043) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_02_180640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -328,6 +328,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_26_144043) do
     t.integer "earliest_start_year"
     t.string "updated_by_type"
     t.bigint "updated_by_id"
+    t.integer "pending_earliest_start_month"
+    t.integer "pending_earliest_start_year"
+    t.integer "pending_financial_year"
+    t.boolean "date_change_requires_confirmation"
     t.decimal "carbon_cost_sequestered", precision: 10, scale: 2
     t.decimal "carbon_cost_avoided", precision: 10, scale: 2
     t.decimal "carbon_savings_net_economic_benefit", precision: 10, scale: 2

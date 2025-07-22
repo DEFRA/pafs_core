@@ -45,6 +45,14 @@ en:
           lede: Don't include years which include maintenance costs.
           financial_year_label: Financial year starting April
           example_text: For example, 2023
+# financial year confirmation
+        financial_year_confirmation:
+          back_link: Back
+          heading: You have entered a date that is outside the current date range of your project.
+          para1: By changing this date, you may have 'Risks and properties benefitting' or 'Funding sources and spending' data that falls outside your project's date range (Earliest Start Date to the Last financial year in which the project will spend funds).
+          para2: If you select 'Save and continue', any property or funding data outside your project's date range will be automatically deleted.
+          para3: Or, you can select 'Back' to manually review and correct your data.
+          submit_button: Save and continue
 # key dates
         key_dates:
           heading: What are the estimated dates for important milestones of your proposed project?
@@ -148,6 +156,14 @@ en:
           heading: What is the earliest date the project could start if Grant in Aid funding was made available earlier?
           description: Spend includes any funding source (e.g. local levy, contributions and GiA).
           example_text: For example, 10 2019
+# earliest start date confirmation
+        earliest_start_date_confirmation:
+          back_link: Back
+          heading: You have entered a date that is outside the current date range of your project.
+          para1: By changing this date, you may have 'Risks and properties benefitting' or 'Funding sources and spending' data that falls outside your project's date range (Earliest Start Date to the Last financial year in which the project will spend funds).
+          para2: If you select 'Save and continue', any property or funding data outside your project's date range will be automatically deleted.
+          para3: Or, you can select 'Back' to manually review and correct your data.
+          submit_button: Save and continue
 # location
         location:
           heading: Where is the project located?
@@ -218,15 +234,10 @@ en:
         funding_calculator:
           heading: Partnership funding calculator
           lede: The partnership funding calculator generates a score for the project based on the benefits and outcomes that it aims to deliver and any contributions that it will raise. This score is used to prioritise and allocate funding in each year.
-          version_statement: The version of the calculator you need to use depends on your project stage. Answer the question below to choose the correct version.
           version_guidance: "If you are unsure which version to use check the <a href='https://www.gov.uk/guidance/partnership-funding' target='_blank'>partnership funding guidance</a> or contact your local partnership and strategic overview officer."
-          version_question: Will your Outline Business Case be signed off after the 26th June 2020?
           download_file_html: "<span class='govuk-visually-hidden'>Download your funding calculator named </span>%{file}"
-          v8:
-            download_heading: Download and complete the version 8 of the partnership funding calculator 2014
-            download_link_label: "Download the <a href='%{url}' alt='Version 8' target='_blank'>partnership funding calculator</a>"
           v9:
-            download_heading: Download and complete the partnership funding calculator 2020
+            download_heading: Download and complete the partnership funding calculator
             download_link_label: "Download the <a href='%{url}' alt='Version 9' target='_blank'>partnership funding calculator</a>"
           upload_heading: Upload the completed partnership funding calculator
           uploaded_heading: The uploaded partnership funding calculator
