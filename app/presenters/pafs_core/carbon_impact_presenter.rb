@@ -11,12 +11,12 @@ module PafsCore
 
     # How much capital carbon will the project produce (tCO2)?
     def capital_carbon_estimate
-      project.carbon_cost_build
+      project.carbon_cost_build || 0
     end
 
     # How much operational carbon will the project produce (tCO2)?
     def operational_carbon_estimate
-      project.carbon_cost_operation
+      project.carbon_cost_operation || 0
     end
 
     # This is the whole life carbon calculated for the project (tCO2)
@@ -26,12 +26,12 @@ module PafsCore
 
     # How much sequestered carbon will the project produce (tCO2)
     def sequestered_carbon_estimate
-      project.carbon_cost_sequestered
+      project.carbon_cost_sequestered || 0
     end
 
     # How much carbon will be avoided by this project (tCO2)?
     def avoided_carbon_estimate
-      project.carbon_cost_avoided
+      project.carbon_cost_avoided || 0
     end
 
     # This is the net carbon calculated for the project (tCO2)
@@ -44,33 +44,33 @@ module PafsCore
       project.carbon_savings_net_economic_benefit
     end
 
-    # The estimated capital cost for the project
+    # Capital TPF / The estimated capital cost for the project
     def capital_cost_estimate
       construction_total_project_funding
     end
 
-    # The estimated operation and maintenance cost
+    # Ops TPF / The estimated operation and maintenance cost
     def operational_cost_estimate
       operational_total_project_funding
     end
 
-    # Calculated capital carbon baseline
+    # Cap Bl / Calculated capital carbon baseline
     def capital_carbon_baseline
       construction_total_project_funding * mid_year_cap_do_nothing_intensity / 10_000
     end
 
-    # Operations and maintenance carbon baseline
+    # Ops Bl / Operations and maintenance carbon baseline
     def operational_carbon_baseline
       operational_total_project_funding * gw4_ops_do_nothing_intensity / 10_000
     end
 
-    # Calculated capital carbon target
+    # Cap Tgt / Calculated capital carbon target
     def capital_carbon_target
       construction_total_project_funding * mid_year_cap_do_nothing_intensity *
         (1 + mid_year_cap_target_reduction_rate) / 10_000
     end
 
-    # Operations and maintenance carbon target
+    # Ops Tgt / Operations and maintenance carbon target
     def operational_carbon_target
       operational_total_project_funding * gw4_ops_do_nothing_intensity *
         (1 + gw4_ops_target_reduction_rate) / 10_000
@@ -107,12 +107,12 @@ module PafsCore
       (start_construction_financial_year + ready_for_service_financial_year).div(2)
     end
 
-    # mid year formatted as financial year string, e.g. 2025/26
+    # CON Mid Yr / mid year formatted as financial year string, e.g. 2025/26
     def mid_year_formatted
       "#{mid_year}/#{(mid_year + 1) % 100}"
     end
 
-    # ready for service year formatted as financial year string, e.g. 2025/26
+    # GW4 Yr / ready for service year formatted as financial year string, e.g. 2025/26
     def ready_for_service_year_formatted
       "#{ready_for_service_financial_year}/#{(ready_for_service_financial_year + 1) % 100}"
     end
@@ -139,20 +139,24 @@ module PafsCore
       end
     end
 
+    # Cap DN / Cap Do Nothing Intensity rate for the mid year
     def mid_year_cap_do_nothing_intensity
       carbon_impact_rate_for_year(mid_year_formatted, "Cap Do Nothing Intensity")
     end
 
+    # Ops DN / Cap Do Nothing Intensity rate for the ready for service year
     def gw4_ops_do_nothing_intensity
-      carbon_impact_rate_for_year(ready_for_service_year_formatted, "Cap Do Nothing Intensity")
+      carbon_impact_rate_for_year(ready_for_service_year_formatted, "Ops Do Nothing Intensity")
     end
 
+    # Cap Reduc % / Cap Target Reduction Rate for the mid year
     def mid_year_cap_target_reduction_rate
-      carbon_impact_rate_for_year(mid_year_formatted, "Cap Target Reduction Rate")
+      carbon_impact_rate_for_year(mid_year_formatted, "Cap Target Reduction Rate") / 100
     end
 
+    # Ops Reduc % / Ops Target Reduction Rate for the ready for service year
     def gw4_ops_target_reduction_rate
-      carbon_impact_rate_for_year(ready_for_service_year_formatted, "Cap Target Reduction Rate")
+      carbon_impact_rate_for_year(ready_for_service_year_formatted, "Ops Target Reduction Rate") / 100
     end
 
     def construction_total_project_funding
@@ -161,7 +165,7 @@ module PafsCore
     end
 
     def operational_total_project_funding
-      pf_calculator_presenter.attributes[:pv_future_costs]
+      pf_calculator_presenter.attributes[:pv_future_costs] || 0
     end
   end
 end

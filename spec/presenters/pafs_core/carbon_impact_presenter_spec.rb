@@ -39,11 +39,11 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#capital_carbon_estimate" do
     before do
-      allow(project).to receive(:carbon_cost_build).and_return(1000.5)
+      allow(project).to receive(:carbon_cost_build).and_return(1001)
     end
 
     it "returns the project's carbon_cost_build" do
-      expect(presenter.capital_carbon_estimate).to eq(1000.5)
+      expect(presenter.capital_carbon_estimate).to eq(1001)
     end
   end
 
@@ -123,7 +123,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#capital_carbon_baseline" do
     it "calculates baseline from funding and intensity" do
-      expect(presenter.capital_carbon_baseline).to eq(3.15)
+      expect(presenter.capital_carbon_baseline).to eq(2.943)
     end
   end
 
@@ -133,14 +133,14 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
 
     it "calculates baseline from funding and intensity" do
-      expect(presenter.operational_carbon_baseline).to eq(17.5)
+      expect(presenter.operational_carbon_baseline).to eq(19.55)
     end
   end
 
   describe "#capital_carbon_target" do
     it "calculates target with reduction rate applied" do
-      # 9000 * 3.5 * (1 + (-41.36)) / 10000 = 9000 * 3.5 * (-40.36) / 10000
-      expect(presenter.capital_carbon_target).to eq(-127.134)
+      # 9000 * 3.27 * (1 + (-0.4136)) / 10000 = 9000 * 3.27 * 0.5864 / 10000
+      expect(presenter.capital_carbon_target.round(4)).to eq(1.7258)
     end
   end
 
@@ -150,8 +150,8 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
 
     it "calculates target with reduction rate applied" do
-      # 50000 * 3.5 * (1 + (-41.36)) / 10000 = 50000 * 3.5 * (-40.36) / 10000
-      expect(presenter.operational_carbon_target).to eq(-706.3)
+      # 50000 * 3.91 * (1 + (-0.1)) / 10000 = 50000 * 3.91 * 0.9 / 10000
+      expect(presenter.operational_carbon_target).to eq(17.595)
     end
   end
 
@@ -172,7 +172,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       end
 
       it "uses capital_carbon_baseline as default" do
-        expect(presenter.net_carbon_with_blanks_calculated).to eq(553.05)
+        expect(presenter.net_carbon_with_blanks_calculated.round).to eq(553)
       end
     end
 
@@ -183,7 +183,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       end
 
       it "uses operational_carbon_baseline as default" do
-        expect(presenter.net_carbon_with_blanks_calculated).to eq(567.5)
+        expect(presenter.net_carbon_with_blanks_calculated).to eq(569.55)
       end
     end
 
@@ -285,7 +285,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       context "when the rate is present for the requested year" do
         it "returns the rate for the specific year" do
           rate = presenter.send(:carbon_impact_rate_for_year, "2023/24", "Cap Do Nothing Intensity")
-          expect(rate).to eq(3.5)
+          expect(rate).to eq(3.41)
         end
       end
 

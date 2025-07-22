@@ -16,73 +16,87 @@
     },
     {
       "Year": "2021/22",
-      "Cap Do Nothing Intensity": 3.65, 
-      "Ops Do Nothing Intensity": "",
-      "Cap Target Reduction Rate": -19.18,
+      "Cap Do Nothing Intensity": 3.648, 
+      "Ops Do Nothing Intensity": 4.49,
+      "Cap Target Reduction Rate": -19.20,
       "Ops Target Reduction Rate": ""
     },
     {
       "Year": "2022/23",
       "Cap Do Nothing Intensity": 3.55,
-      "Ops Do Nothing Intensity": "",
+      "Ops Do Nothing Intensity": 4.37,
       "Cap Target Reduction Rate": -26.92,
-      "Ops Target Reduction Rate": ""
+      "Ops Target Reduction Rate": -2.50
     },
     {
       "Year": "2023/24",
-      "Cap Do Nothing Intensity": 3.50,
-      "Ops Do Nothing Intensity": "",
+      "Cap Do Nothing Intensity": 3.41,
+      "Ops Do Nothing Intensity": 4.2,
       "Cap Target Reduction Rate": -34.24,
-      "Ops Target Reduction Rate": ""
+      "Ops Target Reduction Rate": -5.00
     },
     {
       "Year": "2024/25",
-      "Cap Do Nothing Intensity": 3.50,
-      "Ops Do Nothing Intensity": "",
+      "Cap Do Nothing Intensity": 3.27,
+      "Ops Do Nothing Intensity": 4.03,
       "Cap Target Reduction Rate": -41.36,
-      "Ops Target Reduction Rate": ""
+      "Ops Target Reduction Rate": -7.50
     },
     {
       "Year": "2025/26",
-      "Cap Do Nothing Intensity": 3.50,
-      "Ops Do Nothing Intensity": "",
-      "Cap Target Reduction Rate %": -46.38,
-      "Ops Target Reduction Rate %": ""
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
+      "Cap Target Reduction Rate": -46.40,
+      "Ops Target Reduction Rate": -10.00
     },
     {
       "Year": "2026/27",
-      "Cap Do Nothing Intensity": 3.50,
-      "Ops Do Nothing Intensity": "",
-      "Cap Target Reduction Rate": -51.19,
-      "Ops Target Reduction Rate": ""
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
+      "Cap Target Reduction Rate": -51.20,
+      "Ops Target Reduction Rate": -12.50
     },
     {
       "Year": "2027/28",
-      "Cap Do Nothing Intensity": 3.50,
-      "Ops Do Nothing Intensity": "",
-      "Cap Target Reduction Rate": -54.32,
-      "Ops Target Reduction Rate": ""
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
+      "Cap Target Reduction Rate": -54.30,
+      "Ops Target Reduction Rate": -15.00
     },
     {
       "Year": "2028/29",
-      "Cap Do Nothing Intensity": 3.50,
-      "Ops Do Nothing Intensity": "",
-      "Cap Target Reduction Rate": -57.34,
-      "Ops Target Reduction Rate": ""
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
+      "Cap Target Reduction Rate": -57.30,
+      "Ops Target Reduction Rate": -17.50
     },
     {
       "Year": "2029/30",
-      "Cap Do Nothing Intensity": "",
-      "Ops Do Nothing Intensity": "",
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
       "Cap Target Reduction Rate": -60.00,
-      "Ops Target Reduction Rate": ""
+      "Ops Target Reduction Rate": -20.00
     },
     {
       "Year": "2030/31",
-      "Cap Do Nothing Intensity": "",
-      "Ops Do Nothing Intensity": "",
-      "Cap Target Reduction Rate": -62.99,
-      "Ops Target Reduction Rate": ""
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
+      "Cap Target Reduction Rate": -63.00,
+      "Ops Target Reduction Rate": -22.50
+    },
+    {
+      "Year": "2031/32",
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
+      "Cap Target Reduction Rate": -63.00,
+      "Ops Target Reduction Rate": -25.00
+    },
+    {
+      "Year": "2032/33",
+      "Cap Do Nothing Intensity": 3.17,
+      "Ops Do Nothing Intensity": 3.91,
+      "Cap Target Reduction Rate": -63.00,
+      "Ops Target Reduction Rate": -27.50
     }
   ]
 }
