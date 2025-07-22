@@ -79,7 +79,7 @@ module PafsCore
     end
 
     def content_id(form, attribute, attribute_error)
-      "#{form}-#{attribute}#{attribute_error ? '-error' : ''}".dasherize
+      "#{form}-#{attribute}#{'-error' if attribute_error}".dasherize
     end
 
     def error_class(object, attribute, default_classes)

@@ -13,7 +13,7 @@ module PafsCore
         raise "Override #data in subclass"
       end
 
-      def binary_value(value)
+      def binary_value?(value)
         return false if value.nil?
 
         value.casecmp("yes").zero?

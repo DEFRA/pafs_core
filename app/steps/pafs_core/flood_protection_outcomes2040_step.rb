@@ -13,7 +13,7 @@ module PafsCore
              :no_properties_affected_by_flooding_2040=,
              to: :project
 
-    validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
+    validate :at_least_one_value?, :values_make_sense, :sensible_number_of_houses
 
     validate :values?, if: :no_properties_affected_by_flooding_2040?
 
@@ -82,9 +82,9 @@ module PafsCore
       )
     end
 
-    def at_least_one_value
-      return unless flooding_total_protected_households_2040.zero? &&
-                    !project.no_properties_affected_by_flooding_2040?
+    def at_least_one_value?
+      return false unless flooding_total_protected_households_2040.zero? &&
+                          !project.no_properties_affected_by_flooding_2040?
 
       errors.add(
         :base,

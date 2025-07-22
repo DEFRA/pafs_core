@@ -165,7 +165,7 @@ module PafsCore
 
         s.add :risks
         s.add :main_risk,
-              if: ->(p) { p.selected_risks.count > 1 }
+              if: ->(p) { p.selected_risks.many? }
         s.add :flood_protection_outcomes,
               if: ->(p) { p.protects_against_flooding? }
         s.add :flood_protection_outcomes_summary,

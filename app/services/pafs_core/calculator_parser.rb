@@ -48,7 +48,7 @@ module PafsCore
       project.update(data)
     end
 
-    def binary_value(value)
+    def binary_value?(value)
       value.casecmp("yes").zero?
     end
   end

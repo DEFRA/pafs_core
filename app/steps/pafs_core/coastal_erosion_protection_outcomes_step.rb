@@ -12,7 +12,7 @@ module PafsCore
              :reduced_risk_of_households_for_coastal_erosion=,
              to: :project
 
-    validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
+    validate :at_least_one_value?, :values_make_sense, :sensible_number_of_houses
 
     validate :values?, if: :reduced_risk_of_households_for_coastal_erosion?
 
@@ -74,8 +74,9 @@ module PafsCore
       )
     end
 
-    def at_least_one_value
-      return unless coastal_total_protected_households.zero? && !project.reduced_risk_of_households_for_coastal_erosion?
+    def at_least_one_value?
+      return false unless coastal_total_protected_households.zero? &&
+                          !project.reduced_risk_of_households_for_coastal_erosion?
 
       errors.add(
         :base,

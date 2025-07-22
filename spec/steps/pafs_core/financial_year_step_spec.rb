@@ -106,7 +106,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
 
     it "returns the correct set of financial year options" do
       current_financial_year = Time.zone.today.uk_financial_year
-      expect(subject.financial_year_options).to eq current_financial_year..current_financial_year + 5
+      expect(subject.financial_year_options).to eq current_financial_year..(current_financial_year + 5)
     end
   end
 
