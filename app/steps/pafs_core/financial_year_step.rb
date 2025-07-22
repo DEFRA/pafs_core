@@ -13,6 +13,9 @@ module PafsCore
     validate :project_end_financial_year_is_present_and_correct
 
     def before_view(_params)
+      # These attributes are not present on a BootStrap
+      return unless project.is_a?(PafsCore::Project)
+
       project.update(
         pending_financial_year: nil,
         date_change_requires_confirmation: nil

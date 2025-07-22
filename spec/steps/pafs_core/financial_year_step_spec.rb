@@ -109,4 +109,22 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
       expect(subject.financial_year_options).to eq current_financial_year..current_financial_year + 5
     end
   end
+
+  describe "#before_view" do
+    subject(:step) { create(:financial_year_step, pending_financial_year: 2025, date_change_requires_confirmation: true) }
+
+    context "with a PafsCore::Project" do
+      it "sets the project's pending_financial_year value to nil" do
+        expect { subject.before_view({}) }.to change(subject, :pending_financial_year).to(nil)
+      end
+
+      it "sets the project's date_change_requires_confirmation values to nil" do
+        expect { subject.before_view({}) }.to change(subject, :date_change_requires_confirmation).to(nil)
+      end
+    end
+
+    context "with a PafsCore::Bootstrap" do
+      it { expect { subject.before_view({}) }.not_to raise_error }
+    end
+  end
 end
