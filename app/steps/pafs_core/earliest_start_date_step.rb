@@ -28,18 +28,20 @@ module PafsCore
 
       return false unless valid?
 
-      checker = PafsCore::DateRangeDataChecker.new(
-        project,
-        earliest_date: Date.new(earliest_start_year, earliest_start_month, 1)
-      )
+      if project.is_a?(PafsCore::Project)
+        checker = PafsCore::DateRangeDataChecker.new(
+          project,
+          earliest_date: Date.new(earliest_start_year, earliest_start_month, 1)
+        )
 
-      if checker.data_outside_date_range?
-        project.pending_earliest_start_month = earliest_start_month
-        project.pending_earliest_start_year = earliest_start_year
-        project.date_change_requires_confirmation = true
-        # Revert the dates to original until it's confirmed user wants to proceed
-        project.earliest_start_month = original_month
-        project.earliest_start_year = original_year
+        if checker.data_outside_date_range?
+          project.pending_earliest_start_month = earliest_start_month
+          project.pending_earliest_start_year = earliest_start_year
+          project.date_change_requires_confirmation = true
+          # Revert the dates to original until it's confirmed user wants to proceed
+          project.earliest_start_month = original_month
+          project.earliest_start_year = original_year
+        end
       end
 
       project.updated_by = user if project.respond_to?(:updated_by)

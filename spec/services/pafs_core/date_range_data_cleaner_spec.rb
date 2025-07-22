@@ -95,11 +95,11 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
     end
 
     context "when project is in live state" do
-      include_examples "project not in draft state", "live"
+      it_behaves_like "project not in draft state", "live"
     end
 
     context "when project is in archived state" do
-      include_examples "project not in draft state", "archived"
+      it_behaves_like "project not in draft state", "archived"
     end
 
     context "when a transaction fails" do
