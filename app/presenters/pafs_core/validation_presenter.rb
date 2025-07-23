@@ -101,7 +101,7 @@ module PafsCore
         add_earliest_start_in_the_past_error
       end
 
-      errors.count.zero?
+      errors.none?
     end
 
     def check_key_dates_in_future
@@ -468,7 +468,7 @@ module PafsCore
     end
 
     def natural_flood_risk_measures_and_cost_provided?
-      (selected_natural_flood_risk_measures.count.positive? || project.other_flood_measures.present?) &&
+      (selected_natural_flood_risk_measures.any? || project.other_flood_measures.present?) &&
         !project.natural_flood_risk_measures_cost.nil?
     end
 

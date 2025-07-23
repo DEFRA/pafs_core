@@ -134,11 +134,11 @@ module PafsCore
     end
 
     def flood_protection_outcomes_entered?
-      flood_protection_outcomes.count.positive?
+      flood_protection_outcomes.any?
     end
 
     def coastal_erosion_protection_outcomes_entered?
-      coastal_erosion_protection_outcomes.count.positive?
+      coastal_erosion_protection_outcomes.any?
     end
 
     def carbon_started?

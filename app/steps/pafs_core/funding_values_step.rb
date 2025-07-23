@@ -9,7 +9,7 @@ module PafsCore
     # This sorts the sources with the aggregated sources at the end of the array
     SORTED_SOURCES = (FUNDING_SOURCES + FCRM_GIA_FUNDING_SOURCES - AGGREGATE_SOURCES) + AGGREGATE_SOURCES
 
-    validate :at_least_one_value
+    validate :at_least_one_value?
 
     def update(params)
       clean_unselected_funding_sources
@@ -33,7 +33,7 @@ module PafsCore
     end
 
     # rubocop:disable Style/MultilineBlockChain
-    def at_least_one_value
+    def at_least_one_value?
       values = funding_values.map { |x| x.attributes.slice(*funding_values_to_check.map(&:to_s)) }
       zero_valued = values.each_with_object({}) do |e, a|
         e.each do |k, v|
@@ -45,7 +45,7 @@ module PafsCore
         end
       end.select { |_k, v| v.zero? }
 
-      return if zero_valued.empty?
+      return false if zero_valued.empty?
 
       errors.add(:base, "Please ensure at least one value is added for each funding source")
       false

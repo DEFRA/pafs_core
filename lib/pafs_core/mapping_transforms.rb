@@ -46,7 +46,7 @@ module PafsCore
       n = grid_ref[2..]
       hl = n.length / 2
       {
-        easting: "#{gr[0]}#{n[0..hl - 1]}".ljust(6, "0").to_i,
+        easting: "#{gr[0]}#{n[0..(hl - 1)]}".ljust(6, "0").to_i,
         northing: "#{gr[1]}#{n[hl..]}".ljust(6, "0").to_i
       }
     end

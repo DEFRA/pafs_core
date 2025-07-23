@@ -5,7 +5,7 @@ module PafsCore
     class V9 < Base
       def data
         @data ||= {
-          strategic_approach: binary_value(sheet.cell("E", 17)),
+          strategic_approach: binary_value?(sheet.cell("E", 17)),
           raw_partnership_funding_score: sheet.cell("E", 19),
           adjusted_partnership_funding_score: sheet.cell("K", 19),
           pv_whole_life_costs: sheet.cell("E", 33),

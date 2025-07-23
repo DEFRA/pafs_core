@@ -22,11 +22,11 @@ module PafsCore
     end
 
     def risks_started?
-      selected_risks.count.positive?
+      selected_risks.any?
     end
 
     def protects_against_multiple_risks?
-      selected_risks.count > 1
+      selected_risks.many?
     end
 
     def protects_against_flooding?

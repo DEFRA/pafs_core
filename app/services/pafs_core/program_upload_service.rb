@@ -98,7 +98,7 @@ module PafsCore
             create_failures_from_errors(item)
 
             # update record to indicate we've visited funding_sources section
-            project.funding_sources_visited = project.funding_values.count.positive?
+            project.funding_sources_visited = project.funding_values.any?
             project.save
           else
             # An issue with the project reference number

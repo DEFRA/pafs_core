@@ -88,7 +88,7 @@ module PafsCore
     end
 
     def class_for_summary_list(underline_all)
-      "summary-list underlined-#{underline_all ? 'all-' : ''}items"
+      "summary-list underlined-#{'all-' if underline_all}items"
     end
 
     def flood_class_for_sop(proj)

@@ -13,7 +13,7 @@ module PafsCore
              :reduced_risk_of_households_for_floods=,
              to: :project
 
-    validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
+    validate :at_least_one_value?, :values_make_sense, :sensible_number_of_houses
 
     validate :values?, if: :reduced_risk_of_households_for_floods?
 
@@ -104,8 +104,8 @@ module PafsCore
       )
     end
 
-    def at_least_one_value
-      return unless flooding_total_protected_households.zero? && !project.reduced_risk_of_households_for_floods?
+    def at_least_one_value?
+      return false unless flooding_total_protected_households.zero? && !project.reduced_risk_of_households_for_floods?
 
       errors.add(
         :base,
