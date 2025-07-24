@@ -271,8 +271,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_02_180640) do
     t.string "confidence_homes_better_protected"
     t.string "confidence_homes_by_gateway_four"
     t.string "confidence_secured_partnership_funding"
-    t.bigint "carbon_cost_build"
-    t.bigint "carbon_cost_operation"
+    t.decimal "carbon_cost_build", precision: 10, scale: 2
+    t.decimal "carbon_cost_operation", precision: 10, scale: 2
     t.boolean "natural_flood_risk_measures_included"
     t.boolean "river_restoration"
     t.boolean "floodplain_restoration"
@@ -332,6 +332,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_02_180640) do
     t.integer "pending_earliest_start_year"
     t.integer "pending_financial_year"
     t.boolean "date_change_requires_confirmation"
+    t.decimal "carbon_cost_sequestered", precision: 10, scale: 2
+    t.decimal "carbon_cost_avoided", precision: 10, scale: 2
+    t.decimal "carbon_savings_net_economic_benefit", precision: 10, scale: 2
+    t.index ["name"], name: "index_pafs_core_projects_on_name", unique: true
     t.index ["reference_number", "version"], name: "index_pafs_core_projects_on_reference_number_and_version", unique: true
     t.index ["slug"], name: "index_pafs_core_projects_on_slug", unique: true
     t.index ["submitted_to_pol"], name: "index_pafs_core_projects_on_submitted_to_pol"
