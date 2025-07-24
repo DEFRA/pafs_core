@@ -271,8 +271,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_02_180640) do
     t.string "confidence_homes_better_protected"
     t.string "confidence_homes_by_gateway_four"
     t.string "confidence_secured_partnership_funding"
-    t.decimal "carbon_cost_build", precision: 10, scale: 2
-    t.decimal "carbon_cost_operation", precision: 10, scale: 2
+    t.decimal "carbon_cost_build", precision: 20, scale: 2
+    t.decimal "carbon_cost_operation", precision: 20, scale: 2
     t.boolean "natural_flood_risk_measures_included"
     t.boolean "river_restoration"
     t.boolean "floodplain_restoration"
@@ -328,13 +328,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_02_180640) do
     t.integer "earliest_start_year"
     t.string "updated_by_type"
     t.bigint "updated_by_id"
+    t.decimal "carbon_cost_sequestered", precision: 20, scale: 2
+    t.decimal "carbon_cost_avoided", precision: 20, scale: 2
+    t.decimal "carbon_savings_net_economic_benefit", precision: 20, scale: 2
     t.integer "pending_earliest_start_month"
     t.integer "pending_earliest_start_year"
     t.integer "pending_financial_year"
-    t.boolean "date_change_requires_confirmation"
-    t.decimal "carbon_cost_sequestered", precision: 10, scale: 2
-    t.decimal "carbon_cost_avoided", precision: 10, scale: 2
-    t.decimal "carbon_savings_net_economic_benefit", precision: 10, scale: 2
+    t.boolean "date_change_requires_confirmation", default: false, null: false
     t.index ["name"], name: "index_pafs_core_projects_on_name", unique: true
     t.index ["reference_number", "version"], name: "index_pafs_core_projects_on_reference_number_and_version", unique: true
     t.index ["slug"], name: "index_pafs_core_projects_on_slug", unique: true

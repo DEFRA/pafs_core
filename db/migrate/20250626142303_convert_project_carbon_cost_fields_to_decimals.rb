@@ -3,8 +3,8 @@
 class ConvertProjectCarbonCostFieldsToDecimals < ActiveRecord::Migration[7.2]
   def up
     change_table :pafs_core_projects do |t|
-      t.change :carbon_cost_build, :decimal, precision: 10, scale: 2
-      t.change :carbon_cost_operation, :decimal, precision: 10, scale: 2
+      t.change :carbon_cost_build, :decimal, precision: 20, scale: 2
+      t.change :carbon_cost_operation, :decimal, precision: 20, scale: 2
     end
   end
 
