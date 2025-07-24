@@ -54,8 +54,8 @@ def print_carbon_impact_stats(project)
 
   puts " "
   puts "** Capital **"
-  puts "Capital carbon estimated by you (tCO2) \t\t\t\t #{display_number(presenter.capital_carbon_estimate)} tonnes"
-  puts "Capital carbon baseline (tCO2) \t\t\t\t\t #{display_number(presenter.capital_carbon_baseline)} tonnes"
+  puts "Capital carbon estimated by you (tCO2) \t\t\t #{display_number(presenter.capital_carbon_estimate)} tonnes"
+  puts "Capital carbon baseline (tCO2) \t\t\t\t #{display_number(presenter.capital_carbon_baseline)} tonnes"
   puts "Capital carbon target (tCO2) \t\t\t\t\t #{display_number(presenter.capital_carbon_target)} tonnes"
   puts "Capital cost calculated for the project \t\t\t #{display_cost(presenter.capital_cost_estimate)}"
 
@@ -73,7 +73,7 @@ def print_carbon_impact_stats(project)
   puts "Sequestered carbon estimated by you (tCO2) " \
        "\t\t\t #{display_number(presenter.sequestered_carbon_estimate)} tonnes"
   puts "Carbon avoided estimated by you (tCO2) " \
-       "\t\t\t\t #{display_number(presenter.avoided_carbon_estimate)} tonnes"
+       "\t\t\t #{display_number(presenter.avoided_carbon_estimate)} tonnes"
   puts "Net carbon estimated by you (tCO2) " \
        "\t\t\t\t #{display_number(presenter.net_carbon_estimate)} tonnes"
   unless all_net_carbot_values_present
