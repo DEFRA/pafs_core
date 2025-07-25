@@ -4,7 +4,7 @@ module PafsCore
   class FinancialYearConfirmationStep < PafsCore::BasicStep
     include PafsCore::ProjectsHelper
 
-    def update
+    def update(_params)
       new_latest_date = financial_year_end_from_year(project.pending_financial_year)
 
       DateRangeDataCleaner.new(project, latest_date: new_latest_date).clean_data_outside_range!

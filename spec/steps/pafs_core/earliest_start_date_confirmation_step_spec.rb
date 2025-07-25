@@ -16,6 +16,7 @@ RSpec.describe PafsCore::EarliestStartDateConfirmationStep do
     end
     let(:step) { described_class.new(project, user) }
     let(:cleaner_double) { instance_double(PafsCore::DateRangeDataCleaner, clean_data_outside_range!: true) }
+    let(:params) { ActionController::Parameters.new({}) }
 
     before do
       allow(PafsCore::DateRangeDataCleaner).to receive(:new).and_return(cleaner_double)
@@ -26,7 +27,7 @@ RSpec.describe PafsCore::EarliestStartDateConfirmationStep do
       allow(PafsCore::DateRangeDataCleaner).to receive(:new).with(project, earliest_date: new_start_date).and_return(cleaner_double)
       allow(cleaner_double).to receive(:clean_data_outside_range!)
 
-      step.update
+      step.update(params)
 
       project.reload
       expect(project.earliest_start_year).to eq(2026)
