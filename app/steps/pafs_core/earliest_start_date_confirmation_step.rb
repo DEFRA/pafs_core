@@ -2,7 +2,7 @@
 
 module PafsCore
   class EarliestStartDateConfirmationStep < PafsCore::BasicStep
-    def update
+    def update(_params)
       new_start_date = Date.new(project.pending_earliest_start_year, project.pending_earliest_start_month, 1)
 
       DateRangeDataCleaner.new(project, earliest_date: new_start_date).clean_data_outside_range!
