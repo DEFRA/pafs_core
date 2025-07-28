@@ -1,0 +1,24 @@
+<% content_for :title, t(".heading") %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t(".heading") %></h1>
+
+    <p class="govuk-body">
+      <%= t(".para1", carbon_impact_guidance: link_to(t(".carbon_impact_guidance_label"), t(".carbon_impact_guidance_link"), target: "_blank")).html_safe %>
+    </p>
+
+    <p class="govuk-body"><%= t(".para2_ul") %></p>
+    <div class="govuk-body">
+      <ol class="govuk-list govuk-list--number">
+        <li><p><%= t(".para2_li1") %></p></li>
+        <li><p><%= t(".para2_li2") %></p></li>
+        <li><p><%= t(".para2_li3") %></p></li>
+      </ol>
+    </div>
+    
+    <%= form_for @project, as: :carbon_prepare, url: project_step_path, method: :patch do |f| %>
+      <%= f.govuk_submit t(".submit_button") %>
+    <% end %>
+  </div>
+</div>

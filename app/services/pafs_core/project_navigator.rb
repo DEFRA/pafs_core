@@ -237,6 +237,7 @@ module PafsCore
         s.add :confidence_secured_partnership_funding
         s.add :summary_15
 
+        s.add :carbon_prepare
         s.add :carbon_cost_build
         s.add :carbon_cost_operation
         s.add :summary_16
