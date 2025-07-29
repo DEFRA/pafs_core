@@ -259,5 +259,8 @@ FactoryBot.define do
     factory :kilometres_of_watercourse_enhanced_or_created_single_step, class: "PafsCore::KilometresOfWatercourseEnhancedOrCreatedSingleStep" do
       kilometres_of_watercourse_enhanced_or_created_single { 12 }
     end
+
+    factory :carbon_prepare_step, class: "PafsCore::CarbonPrepareStep" do
+    end
   end
 end

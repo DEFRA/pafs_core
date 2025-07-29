@@ -42,6 +42,7 @@ Naming/PredicateMethod:
     - app/steps/pafs_core/flood_protection_outcomes2040_summary_step.rb
     - app/steps/pafs_core/funding_calculator_summary_step.rb
     - app/steps/pafs_core/funding_values_summary_step.rb
+    - app/steps/pafs_core/carbon_prepare_step.rb
 
 RSpec/DescribeClass:
   Exclude:
