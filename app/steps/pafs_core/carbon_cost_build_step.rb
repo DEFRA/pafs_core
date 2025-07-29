@@ -4,12 +4,10 @@ module PafsCore
   class CarbonCostBuildStep < BasicStep
     include PafsCore::Carbon
 
-    validates :carbon_cost_build,
-              numericality: {
-                greater_than_or_equal_to: 0,
-                only_integer: false
-              },
-              unless: -> { carbon_cost_build.blank? }
+    validates_numericality_of :carbon_cost_build,
+                              only_numeric: true,
+                              allow_nil: true,
+                              greater_than_or_equal_to: 0
 
     private
 
