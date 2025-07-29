@@ -23,10 +23,10 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
     end
 
     # Data that should be kept (within date range)
-    let!(:funding_inside_start) { create(:funding_value, project: project, financial_year: 2022) }
-    let!(:funding_inside_end) { create(:funding_value, project: project, financial_year: 2028) }
-    let!(:flood_outcome_inside) { create(:flood_protection_outcomes, project: project, financial_year: 2025) }
-    let!(:coastal_outcome_inside) { create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2027) }
+    let!(:funding_inside_start) { create(:funding_value, project: project, financial_year: 2022, fcerm_gia: 100) }
+    let!(:funding_inside_end) { create(:funding_value, project: project, financial_year: 2028, fcerm_gia: 100) }
+    let!(:flood_outcome_inside) { create(:flood_protection_outcomes, project: project, financial_year: 2025, households_at_reduced_risk: 10) }
+    let!(:coastal_outcome_inside) { create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2027, households_at_reduced_risk: 10) }
 
     # Ensure project is in draft state by default for these tests
     before do
@@ -60,6 +60,14 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
         it "keeps funding values at the end of date range" do
           expect(project.funding_values.exists?(id: funding_inside_end.id)).to be true
         end
+
+        context "when the value is zero" do
+          let!(:funding_zero_outside) { create(:funding_value, project: project, financial_year: 2021, fcerm_gia: 0) }
+
+          it "keeps the record" do
+            expect(project.funding_values.exists?(id: funding_zero_outside.id)).to be true
+          end
+        end
       end
 
       context "with flood protection outcomes" do
@@ -74,6 +82,16 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
         it "keeps flood protection outcomes inside date range" do
           expect(project.flood_protection_outcomes.exists?(id: flood_outcome_inside.id)).to be true
         end
+
+        context "when the value is zero" do
+          let!(:flood_zero_outside) do
+            create(:flood_protection_outcomes, project: project, financial_year: 2021, households_at_reduced_risk: 0)
+          end
+
+          it "keeps the record" do
+            expect(project.flood_protection_outcomes.exists?(id: flood_zero_outside.id)).to be true
+          end
+        end
       end
 
       context "with coastal erosion protection outcomes" do
@@ -87,6 +105,16 @@ RSpec.describe PafsCore::DateRangeDataCleaner do
 
         it "keeps coastal protection outcomes inside date range" do
           expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_outcome_inside.id)).to be true
+        end
+
+        context "when the value is zero" do
+          let!(:coastal_zero_outside) do
+            create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2030, households_at_reduced_risk: 0)
+          end
+
+          it "keeps the record" do
+            expect(project.coastal_erosion_protection_outcomes.exists?(id: coastal_zero_outside.id)).to be true
+          end
         end
       end
     end

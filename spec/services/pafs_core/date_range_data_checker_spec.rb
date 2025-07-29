@@ -27,6 +27,29 @@ RSpec.describe PafsCore::DateRangeDataChecker do
       end
     end
 
+    context "when data outside the range contains only zero or nil values" do
+      before do
+        create(:funding_value, :blank, project: project, financial_year: 2024)
+        create(:flood_protection_outcomes, project: project, financial_year: 2024,
+                                           households_at_reduced_risk: 0,
+                                           moved_from_very_significant_and_significant_to_moderate_or_low: 0,
+                                           households_protected_from_loss_in_20_percent_most_deprived: 0)
+        create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2029,
+                                                     households_at_reduced_risk: 0,
+                                                     households_protected_from_loss_in_next_20_years: 0,
+                                                     households_protected_from_loss_in_20_percent_most_deprived: 0)
+        create(:flood_protection2040_outcomes, project: project, financial_year: 2024,
+                                               households_at_reduced_risk: 0,
+                                               moved_from_very_significant_and_significant_to_moderate_or_low: 0,
+                                               households_protected_from_loss_in_20_percent_most_deprived: 0,
+                                               non_residential_properties: 0)
+      end
+
+      it "returns false" do
+        expect(checker.data_outside_date_range?).to be false
+      end
+    end
+
     context "when funding values are outside the date range" do
       before do
         create(:funding_value, project: project, financial_year: 2024, fcerm_gia: 100) # Before
