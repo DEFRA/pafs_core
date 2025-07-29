@@ -72,7 +72,7 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
         step.update(params)
         project.reload
         expect(project.pending_financial_year).to be_nil
-        expect(project.date_change_requires_confirmation).to be_nil
+        expect(project.date_change_requires_confirmation).to be_falsey
       end
     end
 
@@ -118,8 +118,8 @@ RSpec.describe PafsCore::FinancialYearStep, type: :model do
         expect { subject.before_view({}) }.to change(subject, :pending_financial_year).to(nil)
       end
 
-      it "sets the project's date_change_requires_confirmation values to nil" do
-        expect { subject.before_view({}) }.to change(subject, :date_change_requires_confirmation).to(nil)
+      it "sets the project's date_change_requires_confirmation values to false" do
+        expect { subject.before_view({}) }.to change(subject, :date_change_requires_confirmation).to(false)
       end
     end
 
