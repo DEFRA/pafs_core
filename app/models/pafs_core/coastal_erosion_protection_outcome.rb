@@ -20,7 +20,6 @@ module PafsCore
                               only_integer: true,
                               greater_than_or_equal_to: 0 }
 
-
     def financial_year_in_range?(year_from, year_to)
       return false if financial_year.nil?
 

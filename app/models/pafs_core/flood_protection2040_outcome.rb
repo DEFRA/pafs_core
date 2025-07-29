@@ -9,7 +9,7 @@ module PafsCore
       moved_from_very_significant_and_significant_to_moderate_or_low
       households_protected_from_loss_in_20_percent_most_deprived
       non_residential_properties
-    ]
+    ].freeze
 
     belongs_to :project
 

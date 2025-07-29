@@ -10,7 +10,7 @@ module PafsCore
     extend ActiveSupport::Concern
 
     included do
-      scope :with_positive_values, -> {
+      scope :with_positive_values, lambda {
         where(const_get(:OUTCOME_COLUMNS).map { |col| "#{col} > 0" }.join(" OR "))
       }
     end
