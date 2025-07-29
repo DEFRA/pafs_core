@@ -3,17 +3,24 @@
 require "rails_helper"
 
 RSpec.describe PafsCore::DateRangeDataCleaner do
-  let(:project) { create(:project, earliest_start_year: 2022, earliest_start_month: 4, project_end_financial_year: 2028) }
+  let(:project) do
+    create(:project, fcerm_gia: true, earliest_start_year: 2022, earliest_start_month: 4,
+                     project_end_financial_year: 2028)
+  end
   let(:earliest_date) { Date.new(2022, 4, 1) }
   let(:latest_date) { Date.new(2029, 3, 31) }
   let(:service) { described_class.new(project, earliest_date: earliest_date, latest_date: latest_date) }
 
   describe "#clean_data_outside_range!" do
     # Data that should be deleted (outside date range)
-    let!(:funding_outside_before) { create(:funding_value, project: project, financial_year: 2021) }
-    let!(:funding_outside_after) { create(:funding_value, project: project, financial_year: 2030) }
-    let!(:flood_outcome_outside) { create(:flood_protection_outcomes, project: project, financial_year: 2021) }
-    let!(:coastal_outcome_outside) { create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2030) }
+    let!(:funding_outside_before) { create(:funding_value, project: project, financial_year: 2021, fcerm_gia: 100) }
+    let!(:funding_outside_after) { create(:funding_value, project: project, financial_year: 2030, fcerm_gia: 100) }
+    let!(:flood_outcome_outside) do
+      create(:flood_protection_outcomes, project: project, financial_year: 2021, households_at_reduced_risk: 10)
+    end
+    let!(:coastal_outcome_outside) do
+      create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2030, households_at_reduced_risk: 10)
+    end
 
     # Data that should be kept (within date range)
     let!(:funding_inside_start) { create(:funding_value, project: project, financial_year: 2022) }
