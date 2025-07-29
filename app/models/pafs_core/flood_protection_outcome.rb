@@ -14,14 +14,10 @@ module PafsCore
 
     belongs_to :project
 
-    validates :households_at_reduced_risk,
-              :moved_from_very_significant_and_significant_to_moderate_or_low,
-              :households_protected_from_loss_in_20_percent_most_deprived,
-              :households_protected_through_plp_measures,
-              :non_residential_properties,
+    validates(*OUTCOME_COLUMNS,
               numericality: { allow_blank: true,
                               only_integer: true,
-                              greater_than_or_equal_to: 0 }
+                              greater_than_or_equal_to: 0 })
 
     def financial_year_in_range?(year_from, year_to)
       return false if financial_year.nil?
