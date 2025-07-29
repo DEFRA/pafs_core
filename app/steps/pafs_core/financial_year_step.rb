@@ -18,7 +18,7 @@ module PafsCore
 
       project.update(
         pending_financial_year: nil,
-        date_change_requires_confirmation: nil
+        date_change_requires_confirmation: false
       )
     end
 
