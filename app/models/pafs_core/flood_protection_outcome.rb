@@ -2,8 +2,6 @@
 
 module PafsCore
   class FloodProtectionOutcome < ApplicationRecord
-    include PafsCore::OutcomeScopes
-
     OUTCOME_COLUMNS = %i[
       households_at_reduced_risk
       moved_from_very_significant_and_significant_to_moderate_or_low
@@ -12,12 +10,9 @@ module PafsCore
       non_residential_properties
     ].freeze
 
-    belongs_to :project
+    include PafsCore::OutcomeData
 
-    validates(*OUTCOME_COLUMNS,
-              numericality: { allow_blank: true,
-                              only_integer: true,
-                              greater_than_or_equal_to: 0 })
+    belongs_to :project
 
     def financial_year_in_range?(year_from, year_to)
       return false if financial_year.nil?

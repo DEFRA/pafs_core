@@ -2,8 +2,6 @@
 
 module PafsCore
   class CoastalErosionProtectionOutcome < ApplicationRecord
-    include PafsCore::OutcomeScopes
-
     OUTCOME_COLUMNS = %i[
       households_at_reduced_risk
       households_protected_from_loss_in_next_20_years
@@ -11,12 +9,9 @@ module PafsCore
       non_residential_properties
     ].freeze
 
-    belongs_to :project
+    include PafsCore::OutcomeData
 
-    validates(*OUTCOME_COLUMNS,
-              numericality: { allow_blank: true,
-                              only_integer: true,
-                              greater_than_or_equal_to: 0 })
+    belongs_to :project
 
     def financial_year_in_range?(year_from, year_to)
       return false if financial_year.nil?
