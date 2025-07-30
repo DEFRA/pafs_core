@@ -2,7 +2,8 @@
 
 <div class="step-container">
   <div class="govuk-grid-row govuk-body">
-    <div class="govuk-grid-column-two-thirds">
+    <% text_width_class = local_assigns.has_key?(:full_width) && local_assigns[:full_width] ? 'govuk-grid-column-full' : 'govuk-grid-column-two-thirds' %>
+    <div class="<%= text_width_class %>" >
       <div class="step-form">
         <%= pafs_form_for @project, url: save_project_step_path(id: @project.to_param, step: @project.step) do |f| %>
 
@@ -28,6 +29,10 @@
                   suffix_text: units
                   ) %>
 
+            <% end %>
+
+            <% if local_assigns.has_key? :notes %>
+              <p><%= notes %></p>
             <% end %>
 
             <%= f.govuk_submit t("save_and_continue_label"), class: 'button' %>

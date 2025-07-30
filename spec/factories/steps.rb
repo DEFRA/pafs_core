@@ -262,5 +262,9 @@ FactoryBot.define do
 
     factory :carbon_prepare_step, class: "PafsCore::CarbonPrepareStep" do
     end
+
+    factory :carbon_cost_build_step, class: "PafsCore::CarbonCostBuildStep" do
+      carbon_cost_build { 150.0 }
+    end
   end
 end

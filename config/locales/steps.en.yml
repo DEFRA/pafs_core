@@ -403,22 +403,26 @@ en:
         carbon_prepare:
           heading: What to record about your carbon impact
           para1: |
-            Carbon impact data provides information alongside the Partnership funding calculator that helps scope and prioritise projects in the pipeline. 
-            For subsequent business cases, Carbon impact data is a mandatory requirement. Guidance on how to calculate Carbon impact and the use of a 
-            supporting tool is %{carbon_impact_guidance} (opens in a new window).
-          para2_ul: "Carbon impact data comprises:"
-          para2_li1: Emissions from both the capital and operational stages of the whole-life investment
-          para2_li2: Emissions avoided as a result of reduced flood risk and impacts to properties over the whole-life investment as well as from any solutions that sequester carbon
-          para2_li3: A net calculation of emissions 1) minus 2) in tonnes CO2e over the whole-life investment period and monetised as an economic benefit for use in the Partnership funding calculator.
+            Carbon impact data provides information alongside the Partnership funding calculator that helps scope and
+            prioritise projects in the pipeline. For subsequent business cases, Carbon impact data is a mandatory requirement. 
+            %{carbon_impact_guidance} (opens in a new window). <br/>
+            Carbon impact data comprises:
+          para1_li1: Emissions from both the capital and operational stages of the whole-life investment
+          para1_li2: Emissions avoided as a result of reduced flood risk and impacts to properties over the whole-life investment as well as from any solutions that sequester carbon
+          para1_li3: A net calculation of emissions 1) minus 2) in tonnes CO2e over the whole-life investment period and monetised as an economic benefit for use in the Partnership funding calculator.
           submit_button: Continue
-          carbon_impact_guidance_label: here
+          carbon_impact_guidance_label: Guidance on how to calculate Carbon impact and the use of a supporting tool
           carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
 
         carbon_cost_build:
-          heading: How much Capital Carbon will this project produce?
+          heading: How much capital carbon will this project produce?
           lede: |
-            <p>A Carbon Calculator is a requirement at both Outline Business Case and Full Business Case stages. Your project’s carbon calculation can be determined using the Environment Agency’s ERIC tool and is measured as Carbon Dioxide Equivalent (CO2e), expressed in tonnes.</p>
-            <p>For Risk Management Authorities outside of the Environment Agency, please contact your local Environment Agency office for support in using the ERIC tool.</p>
+            <p>Capital emissions are the project carbon impact from the works that build or refurbish assets. They are calculated from quantities of resource used in building or refurbishing assets.</p>
+            <p>To provide capital emissions for the Carbon impact data requires a supporting Carbon assessment and is a mandatory requirement for subsequent business cases. The quantities of resource used in building or refurbishing assets will be calculated into tonnes of CO2e in a Carbon assessment. Enter the total recorded ‘capital emissions’ Carbon impact here.</p>
+            <p>The EA is able to provide a supporting Carbon assessment tool (ERIC). Alternative carbon assessment tools should have up to date industry emission rates for resources used such as material, plant and transport.</p>
+          notes: |
+            <p>If you do not have an estimate from a carbon assessment this total must be left blank.</p>
+            <p>If there is no construction element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
         carbon_cost_operation:
           heading: How much Carbon will this project’s assets produce in their lifecycle?
           lede: |
