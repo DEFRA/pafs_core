@@ -407,8 +407,8 @@ en:
             prioritise projects in the pipeline. For subsequent business cases, Carbon impact data is a mandatory requirement. 
             %{carbon_impact_guidance} (opens in a new window). <br/>
             Carbon impact data comprises:
-          para1_li1: Emissions from both the capital and operational stages of the whole-life investment
-          para1_li2: Emissions avoided as a result of reduced flood risk and impacts to properties over the whole-life investment as well as from any solutions that sequester carbon
+          para1_li1: Emissions from both the capital and operational stages of the whole-life investment.
+          para1_li2: Emissions avoided as a result of reduced flood risk and impacts to properties over the whole-life investment as well as from any solutions that sequester carbon.
           para1_li3: A net calculation of emissions 1) minus 2) in tonnes CO2e over the whole-life investment period and monetised as an economic benefit for use in the Partnership funding calculator.
           submit_button: Continue
           carbon_impact_guidance_label: Guidance on how to calculate Carbon impact and the use of a supporting tool
@@ -424,11 +424,14 @@ en:
             <p>If you do not have an estimate from a carbon assessment this total must be left blank.</p>
             <p>If there is no construction element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
         carbon_cost_operation:
-          heading: How much Carbon will this project’s assets produce in their lifecycle?
+          heading: How much operational carbon will this project produce?
           lede: |
-            <p>A Carbon Calculator is a requirement at both Outline Business Case and Full Business Case stages. Your project’s carbon calculation can be determined using the Environment Agency’s ERIC tool and is measured as Carbon Dioxide Equivalent (CO2e), expressed in tonnes.</p>
-            <p>For Risk Management Authorities outside of the Environment Agency, please contact your local Environment Agency office for support in using the ERIC tool.</p>
-
+            <p>Operational emissions are from the operation and maintenance of assets over their lifetime that have been built or refurbished by the project. They are calculated alongside capital emissions for the project works from quantities of resources used to operate and maintain assets.</p>
+            <p>The quantities of resource used in operation and maintenance of assets will be calculated into tonnes of CO2e in a Carbon assessment. Enter the total recorded ‘operational emissions’ Carbon impact here.</p>
+            <p>Any Carbon assessment tool used should be able to calculate emissions for industry standard ‘Life cycle assessment’ (LCA) stages in which all non-capital stages comprise the ‘operational emissions’ Carbon impact.</p>
+          notes: |
+            <p>If you do not have an estimate from a carbon assessment this total must be left blank.</p>
+            <p>If there is no operations or maintenance element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
 # Confidence assessment
         confidence_homes_better_protected:
           heading: Confidence in number of properties better protected by this project
