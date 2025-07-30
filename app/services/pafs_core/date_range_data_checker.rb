@@ -20,10 +20,10 @@ module PafsCore
 
     def relations_for_records_outside_range
       @relations_for_records_outside_range ||= [
-        project.funding_values.where(years_out_of_range_scope),
-        project.flood_protection_outcomes.where(years_out_of_range_scope),
-        project.flood_protection2040_outcomes.where(years_out_of_range_scope),
-        project.coastal_erosion_protection_outcomes.where(years_out_of_range_scope)
+        project.funding_values.where("total > 0").where(years_out_of_range_scope),
+        project.flood_protection_outcomes.with_positive_values.where(years_out_of_range_scope),
+        project.flood_protection2040_outcomes.with_positive_values.where(years_out_of_range_scope),
+        project.coastal_erosion_protection_outcomes.with_positive_values.where(years_out_of_range_scope)
       ]
     end
 

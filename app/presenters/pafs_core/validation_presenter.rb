@@ -121,11 +121,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      funding_values.each do |fv|
+      funding_values.where("total > 0").find_each do |fv|
         # ignore past financial years
         next if fv.financial_year == -1
-        # check if any of the funding sources has a value
-        next unless fv.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if fv.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
@@ -144,11 +142,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      flood_protection_outcomes.each do |fpo|
+      flood_protection_outcomes.with_positive_values.each do |fpo|
         # ignore past financial years
         next if fpo.financial_year == -1
-        # check if any of the protection outcomes has a value
-        next unless fpo.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
@@ -167,11 +163,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      flood_protection2040_outcomes.each do |fpo|
+      flood_protection2040_outcomes.with_positive_values.each do |fpo|
         # ignore past financial years
         next if fpo.financial_year == -1
-        # check if any of the protection outcomes has a value
-        next unless fpo.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
@@ -190,11 +184,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      coastal_erosion_protection_outcomes.each do |cepo|
+      coastal_erosion_protection_outcomes.with_positive_values.each do |cepo|
         # ignore past financial years
         next if cepo.financial_year == -1
-        # check if any of the protection outcomes has a value
-        next unless cepo.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if cepo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
