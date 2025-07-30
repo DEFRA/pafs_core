@@ -78,6 +78,10 @@ en:
           attributes:
             carbon_cost_build:
               greater_than_or_equal_to: "The value entered can not be negative"
+        pafs_core/carbon_cost_operation_step:
+          attributes:
+            carbon_cost_operation:
+              greater_than_or_equal_to: "The value entered can not be negative"
     attributes:
       pafs_core/project_name_step:
         name: "Project name"
@@ -91,3 +95,5 @@ en:
         coastal_protection_after: "After"
       pafs_core/carbon_cost_build_step:
         carbon_cost_build: "Capital Carbon (tCO2e)"
+      pafs_core/carbon_cost_operation_step:
+        carbon_cost_operation: "Operational Carbon (tCO2e)"
