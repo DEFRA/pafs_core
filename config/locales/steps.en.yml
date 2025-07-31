@@ -432,6 +432,14 @@ en:
           notes: |
             <p>If you do not have an estimate from a carbon assessment this total must be left blank.</p>
             <p>If there is no operations or maintenance element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
+        whole_life_carbon:
+          heading: This is the whole life carbon calculated for the project
+          para1: |
+            A whole life calculation of carbon impact is provided for the project from emissions added 
+            as ‘capital’ and ‘operational’ carbon in tonnes CO2e over the whole-life investment period.
+          submit_button: Continue
+          units: metric tonnes
+          
 # Confidence assessment
         confidence_homes_better_protected:
           heading: Confidence in number of properties better protected by this project
