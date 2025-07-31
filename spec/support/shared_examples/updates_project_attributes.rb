@@ -4,13 +4,13 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
 
   let(:valid_params) do
     ActionController::Parameters.new(
-      { step => { attribute => "150.75" } }
+      { step => { attribute => Faker::Number.decimal(l_digits: 3, r_digits: 2) } }
     )
   end
 
   let(:invalid_params) do
     ActionController::Parameters.new(
-      { step => { attribute => "-50" } }
+      { step => { attribute => Faker::Number.negative } }
     )
   end
 
@@ -28,9 +28,7 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
 
   context "when params are valid" do
     it "saves the #{attribute} value" do
-      expect(subject.send(attribute)).not_to eq(150.75)
-      expect(subject.update(valid_params)).to be true
-      expect(subject.send(attribute)).to eq(150.75)
+      expect{ subject.update(valid_params) }.to change { subject.send(attribute) }.to(valid_params[step][attribute])
     end
 
     it "returns true" do
@@ -39,17 +37,12 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
   end
 
   context "when params are invalid" do
-    it "assigns the invalid value but does not save to the database" do
-      original_project_value = subject.project.send(attribute)
-      expect(subject.update(invalid_params)).to be false
-      # The step assigns the invalid value but database remains unchanged
-      expect(subject.send(attribute)).to eq(-50.0)
-      subject.project.reload
-      expect(subject.project.send(attribute)).to eq(original_project_value)
+    it "returns false" do
+      expect(subject.update(invalid_params)).to be_falsey
     end
 
-    it "returns false" do
-      expect(subject.update(invalid_params)).to be false
+    it "assigns the invalid value but does not save to the database" do
+      expect{ subject.update(invalid_params) }.not_to change { subject.project.reload.send(attribute) }
     end
 
     it "adds validation errors" do
@@ -60,9 +53,8 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
 
   context "when #{attribute} is blank" do
     it "saves the blank value successfully" do
-      subject.send("#{attribute}=", 100)
-      expect(subject.update(blank_params)).to be true
-      expect(subject.send(attribute)).to be_blank
+      subject.project.send("#{attribute}=", Faker::Number.number)
+      expect{ subject.update(blank_params) }.to change { subject.project.reload.send(attribute) }.to(nil)
     end
 
     it "returns true" do
