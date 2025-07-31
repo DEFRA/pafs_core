@@ -28,7 +28,7 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
 
   context "when params are valid" do
     it "saves the #{attribute} value" do
-      expect{ subject.update(valid_params) }.to change { subject.send(attribute) }.to(valid_params[step][attribute])
+      expect { subject.update(valid_params) }.to change { subject.send(attribute) }.to(valid_params[step][attribute])
     end
 
     it "returns true" do
@@ -42,7 +42,7 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
     end
 
     it "assigns the invalid value but does not save to the database" do
-      expect{ subject.update(invalid_params) }.not_to change { subject.project.reload.send(attribute) }
+      expect { subject.update(invalid_params) }.not_to(change { subject.project.reload.send(attribute) })
     end
 
     it "adds validation errors" do
@@ -54,7 +54,7 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
   context "when #{attribute} is blank" do
     it "saves the blank value successfully" do
       subject.project.send("#{attribute}=", Faker::Number.number)
-      expect{ subject.update(blank_params) }.to change { subject.project.reload.send(attribute) }.to(nil)
+      expect { subject.update(blank_params) }.to change { subject.project.reload.send(attribute) }.to(nil)
     end
 
     it "returns true" do
