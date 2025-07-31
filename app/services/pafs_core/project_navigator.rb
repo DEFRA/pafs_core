@@ -241,6 +241,7 @@ module PafsCore
         s.add :carbon_cost_build
         s.add :carbon_cost_operation
         s.add :whole_life_carbon
+        s.add :carbon_cost_sequestered
         s.add :summary_16
       end
     end

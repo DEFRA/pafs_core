@@ -440,7 +440,15 @@ en:
           submit_button: Continue
           units: metric tonnes
           not_provided: Not provided
-          
+        carbon_cost_sequestered:
+          heading: How much carbon will be sequestered by this project?
+          lede: |
+            <p>Sequestered emissions are from any part of the delivered solution that removes and stores carbon from being emitted over the lifetime of the assets that have been built or refurbished by the project. They are calculated alongside capital and operational emissions for the project works from quantities of natural assets or technologies that have measurable carbon sequestration rates and have been delivered additionally to what was already in place.</p>
+            <p>The quantities of natural assets or technologies and their sequestration rates will be calculated into tonnes of CO2e in a Carbon Assessment. Enter the total recorded ‘sequestered emissions’ Carbon impact here.</p>
+            <p>Any Carbon assessment tool used should be able to calculate sequestered emissions for accredited forms of natural asset or technology-based removals of emissions.</p>
+          notes: |
+            <p>If you do not have an estimate from a carbon assessment this total must be left blank. Any calculations will use 0 metric tonnes.</p>
+
 # Confidence assessment
         confidence_homes_better_protected:
           heading: Confidence in number of properties better protected by this project
