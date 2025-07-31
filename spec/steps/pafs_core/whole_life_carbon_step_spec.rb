@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe PafsCore::CarbonPrepareStep, type: :model do
-  subject { build(:carbon_prepare_step) }
+RSpec.describe PafsCore::WholeLifeCarbonStep, type: :model do
+  subject { build(:whole_life_carbon_step) }
 
   it_behaves_like "a project step"
 

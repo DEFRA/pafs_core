@@ -270,5 +270,8 @@ FactoryBot.define do
     factory :carbon_cost_operation_step, class: "PafsCore::CarbonCostOperationStep" do
       carbon_cost_operation { 150.0 }
     end
+
+    factory :whole_life_carbon_step, class: "PafsCore::WholeLifeCarbonStep" do
+    end
   end
 end
