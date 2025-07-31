@@ -439,6 +439,7 @@ en:
             as ‘capital’ and ‘operational’ carbon in tonnes CO2e over the whole-life investment period.
           submit_button: Continue
           units: metric tonnes
+          not_provided: Not provided
           
 # Confidence assessment
         confidence_homes_better_protected:
