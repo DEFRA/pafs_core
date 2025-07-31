@@ -7,17 +7,5 @@ RSpec.describe PafsCore::CarbonPrepareStep, type: :model do
 
   it_behaves_like "a project step"
 
-  describe "#update" do
-    let(:params) { ActionController::Parameters.new({}) }
-
-    it "returns true as this is an informational step" do
-      expect(subject.update(params)).to be true
-    end
-
-    it "does not modify any project attributes" do
-      original_attributes = subject.project.attributes.dup
-      subject.update(params)
-      expect(subject.project.attributes).to eq original_attributes
-    end
-  end
+  it_behaves_like "does not modify project attributes"
 end
