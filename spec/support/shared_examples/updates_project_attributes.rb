@@ -41,7 +41,7 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
       expect(subject.update(invalid_params)).to be_falsey
     end
 
-    it "assigns the invalid value but does not save to the database" do
+    it "does not update project attribute" do
       expect { subject.update(invalid_params) }.not_to(change { subject.project.reload.send(attribute) })
     end
 
