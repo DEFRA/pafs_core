@@ -12,7 +12,7 @@
               </p>
 
               <p><b>
-                <% if @project.carbon_cost_build.blank? && @project.carbon_cost_operation.blank? %>
+                <% if @project.whole_life_carbon_required_fields_empty? %>
                   <%= t(".not_provided") %>
                 <% else %>
                   <%= @project.carbon_impact_presenter.total_carbon_without_mitigations %> <%= t(".units") %>
