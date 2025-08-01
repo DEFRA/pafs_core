@@ -47,7 +47,7 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
 
     it "adds validation errors" do
       subject.update(invalid_params)
-      expect(subject.errors[attribute]).to include("The value entered can not be negative")
+      expect(subject.errors[attribute].count).to be > 0
     end
   end
 

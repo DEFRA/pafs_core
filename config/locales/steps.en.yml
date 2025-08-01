@@ -448,6 +448,15 @@ en:
             <p>Any Carbon assessment tool used should be able to calculate sequestered emissions for accredited forms of natural asset or technology-based removals of emissions.</p>
           notes: |
             <p>If you do not have an estimate from a carbon assessment this total must be left blank. Any calculations will use 0 metric tonnes.</p>
+        carbon_cost_avoided:
+          heading: How much carbon will be avoided by this project?
+          lede: |
+            <p>Avoided emissions are as a result of the level of reduced flood risk and impacts to properties over the whole-life investment. They are calculated using the %{carbon_impact_guidance} (opens in a new window).</p>
+            <p>For Carbon impact data this total will be profiled over the duration of the asset lifetime. Enter the total recorded ‘avoided emissions’ Carbon impact here.</p>
+          notes: |
+            <p>If you do not have an estimate from a Carbon impact tool this total must be left blank. Any calculations will use 0 metric tonnes.</p>
+          carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
+          carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
 
 # Confidence assessment
         confidence_homes_better_protected:

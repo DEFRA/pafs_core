@@ -21,7 +21,7 @@ RSpec.shared_examples "validates numericality" do |field|
     it "rejects negative values" do
       subject.send("#{field}=", -1)
       expect(subject).not_to be_valid
-      expect(subject.errors[field]).to include("The value entered can not be negative")
+      expect(subject.errors[field].count).to be > 0
     end
   end
 

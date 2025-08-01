@@ -277,5 +277,9 @@ FactoryBot.define do
     factory :carbon_cost_sequestered_step, class: "PafsCore::CarbonCostSequesteredStep" do
       carbon_cost_sequestered { 50.0 }
     end
+
+    factory :carbon_cost_avoided_step, class: "PafsCore::CarbonCostAvoidedStep" do
+      carbon_cost_avoided { 50.0 }
+    end
   end
 end
