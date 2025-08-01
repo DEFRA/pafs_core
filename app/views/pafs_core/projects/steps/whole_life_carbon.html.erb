@@ -11,13 +11,13 @@
                 <%= t(".para1") %>
               </p>
 
-              <p>
+              <p><b>
                 <% if @project.carbon_cost_build.blank? && @project.carbon_cost_operation.blank? %>
                   <%= t(".not_provided") %>
                 <% else %>
                   <%= @project.carbon_cost_build.to_f + @project.carbon_cost_operation.to_f %> <%= t(".units") %>
                 <% end %>
-              </p>
+              </b></p>
 
               <%= f.govuk_submit t(".submit_button"), class: 'button' %>
             <% end %>
