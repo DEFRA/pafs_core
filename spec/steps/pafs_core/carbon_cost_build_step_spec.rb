@@ -8,7 +8,7 @@ RSpec.describe PafsCore::CarbonCostBuildStep, type: :model do
   it_behaves_like "a project step"
 
   describe "validations" do
-    it_behaves_like "validates numericality", :carbon_cost_build
+    it_behaves_like "validates numericality", :carbon_cost_build_step, :carbon_cost_build
   end
 
   it_behaves_like "updates project attributes", :carbon_cost_build_step, :carbon_cost_build

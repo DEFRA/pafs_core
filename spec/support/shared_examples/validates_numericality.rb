@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "validates numericality" do |field|
+RSpec.shared_examples "validates numericality" do |step, field|
   context "when #{field} is present" do
     it "validates numericality with non-negative values" do
       subject.send("#{field}=", 0)
@@ -21,7 +21,7 @@ RSpec.shared_examples "validates numericality" do |field|
     it "rejects negative values" do
       subject.send("#{field}=", -1)
       expect(subject).not_to be_valid
-      expect(subject.errors[field]).to include("The value entered can not be negative")
+      expect(subject.errors[field]).to include(I18n.t("activemodel.errors.models.pafs_core/#{step}.attributes.#{field}.greater_than_or_equal_to"))
     end
   end
 

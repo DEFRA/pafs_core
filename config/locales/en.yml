@@ -85,7 +85,11 @@ en:
         pafs_core/carbon_cost_sequestered_step:
           attributes:
             carbon_cost_sequestered:
-              greater_than_or_equal_to: "The value entered can not be negative"
+              greater_than_or_equal_to: "You cannot enter a negative value for sequestered carbon"
+        pafs_core/carbon_cost_avoided_step:
+          attributes:
+            carbon_cost_avoided:
+              greater_than_or_equal_to: "You cannot enter a negative value for avoided carbon"
     attributes:
       pafs_core/project_name_step:
         name: "Project name"
@@ -103,3 +107,5 @@ en:
         carbon_cost_operation: "Operational Carbon (tCO2e)"
       pafs_core/carbon_cost_sequestered_step:
         carbon_cost_sequestered: "Sequestered Carbon (tCO2e)"
+      pafs_core/carbon_cost_avoided_step:
+        carbon_cost_avoided: "Avoided Carbon (tCO2e)"
