@@ -15,7 +15,7 @@
                 <% if @project.carbon_cost_build.blank? && @project.carbon_cost_operation.blank? %>
                   <%= t(".not_provided") %>
                 <% else %>
-                  <%= @project.carbon_cost_build.to_f + @project.carbon_cost_operation.to_f %> <%= t(".units") %>
+                  <%= @project.carbon_impact_presenter.total_carbon_without_mitigations %> <%= t(".units") %>
                 <% end %>
               </b></p>
 

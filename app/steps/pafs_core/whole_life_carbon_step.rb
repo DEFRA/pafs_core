@@ -8,5 +8,9 @@ module PafsCore
       # just progress to next step
       true
     end
+
+    def carbon_impact_presenter
+      @carbon_impact_presenter ||= PafsCore::CarbonImpactPresenter.new(project: project)
+    end
   end
 end
