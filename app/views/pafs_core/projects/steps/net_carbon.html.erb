@@ -12,7 +12,7 @@
               </p>
 
               <p><b>
-                <% if @project.carbon_cost_build.blank? && @project.carbon_cost_operation.blank? && @project.carbon_cost_sequestered.blank? && @project.carbon_cost_avoided.blank? %>
+                <% if @project.net_carbon_required_fields_empty? %>
                   <%= t(".not_provided") %>
                 <% else %>
                   <%= @project.carbon_impact_presenter.net_carbon_estimate %> <%= t(".units") %>
