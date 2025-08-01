@@ -1,0 +1,29 @@
+<% content_for :title, t(".heading") %>
+
+<div class="step-container">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-full">
+      <div class="step-form">
+        <%= form_for @project, as: :net_carbon, url: project_step_path, method: :patch do |f| %>
+          <%= f.govuk_fieldset legend: { text: t(".heading"), size: 'l' } do %>
+            <%= form_group(f.object, @project.step, :net_carbon) do %>
+              <p>
+                <%= t(".para1") %>
+              </p>
+
+              <p><b>
+                <% if @project.carbon_cost_build.blank? && @project.carbon_cost_operation.blank? && @project.carbon_cost_sequestered.blank? && @project.carbon_cost_avoided.blank? %>
+                  <%= t(".not_provided") %>
+                <% else %>
+                  <%= @project.carbon_impact_presenter.net_carbon_estimate %> <%= t(".units") %>
+                <% end %>
+              </b></p>
+
+              <%= f.govuk_submit t(".submit_button"), class: 'button' %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
