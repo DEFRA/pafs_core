@@ -457,7 +457,14 @@ en:
             <p>If you do not have an estimate from a Carbon impact tool this total must be left blank. Any calculations will use 0 metric tonnes.</p>
           carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
           carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
-
+        net_carbon:
+          heading: This is the net carbon calculated for the project
+          para1: |
+            A net calculation of Carbon impact is provided for the project from emissions added as ‘capital’ and ‘operational’ carbon, 
+            minus ‘sequestered’ and ‘avoided’ carbon in tonnes CO2e over the whole-life investment period.
+          submit_button: Continue
+          units: metric tonnes
+          not_provided: Not provided
 # Confidence assessment
         confidence_homes_better_protected:
           heading: Confidence in number of properties better protected by this project

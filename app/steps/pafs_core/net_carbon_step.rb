@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class WholeLifeCarbonStep < BasicStep
+  class NetCarbonStep < BasicStep
     include PafsCore::Carbon
 
     def update(_params)
@@ -9,9 +9,11 @@ module PafsCore
       true
     end
 
-    def whole_life_carbon_required_fields_empty?
+    def net_carbon_required_fields_empty?
       project.carbon_cost_build.blank? &&
-        project.carbon_cost_operation.blank?
+        project.carbon_cost_operation.blank? &&
+        project.carbon_cost_sequestered.blank? &&
+        project.carbon_cost_avoided.blank?
     end
 
     def carbon_impact_presenter

@@ -281,5 +281,8 @@ FactoryBot.define do
     factory :carbon_cost_avoided_step, class: "PafsCore::CarbonCostAvoidedStep" do
       carbon_cost_avoided { 50.0 }
     end
+
+    factory :net_carbon_step, class: "PafsCore::NetCarbonStep" do
+    end
   end
 end

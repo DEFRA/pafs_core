@@ -4,18 +4,18 @@
   <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-full">
       <div class="step-form">
-        <%= form_for @project, as: :whole_life_carbon, url: project_step_path, method: :patch do |f| %>
+        <%= form_for @project, as: :net_carbon, url: project_step_path, method: :patch do |f| %>
           <%= f.govuk_fieldset legend: { text: t(".heading"), size: 'l' } do %>
-            <%= form_group(f.object, @project.step, :whole_life_carbon) do %>
+            <%= form_group(f.object, @project.step, :net_carbon) do %>
               <p>
                 <%= t(".para1") %>
               </p>
 
               <p><b>
-                <% if @project.whole_life_carbon_required_fields_empty? %>
+                <% if @project.net_carbon_required_fields_empty? %>
                   <%= t(".not_provided") %>
                 <% else %>
-                  <%= @project.carbon_impact_presenter.total_carbon_without_mitigations %> <%= t(".units") %>
+                  <%= @project.carbon_impact_presenter.net_carbon_estimate %> <%= t(".units") %>
                 <% end %>
               </b></p>
 
