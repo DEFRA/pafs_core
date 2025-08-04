@@ -244,6 +244,7 @@ module PafsCore
         s.add :carbon_cost_sequestered
         s.add :carbon_cost_avoided
         s.add :net_carbon
+        s.add :net_carbon_benefit
         s.add :summary_16
       end
     end

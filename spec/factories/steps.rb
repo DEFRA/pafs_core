@@ -284,5 +284,8 @@ FactoryBot.define do
 
     factory :net_carbon_step, class: "PafsCore::NetCarbonStep" do
     end
+
+    factory :net_carbon_benefit_step, class: "PafsCore::NetCarbonBenefitStep" do
+    end
   end
 end

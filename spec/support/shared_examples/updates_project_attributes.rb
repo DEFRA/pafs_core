@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "updates project attributes" do |step, attribute|
+RSpec.shared_examples "updates project attributes" do |step, attribute, negatives_allowed = false|
 
   let(:valid_params) do
     ActionController::Parameters.new(
@@ -36,24 +36,30 @@ RSpec.shared_examples "updates project attributes" do |step, attribute|
     end
   end
 
-  context "when params are invalid" do
-    it "returns false" do
-      expect(subject.update(invalid_params)).to be_falsey
-    end
+  unless negatives_allowed
+    context "when params are invalid" do
+      it "returns false" do
+        expect(subject.update(invalid_params)).to be_falsey
+      end
 
-    it "does not update project attribute" do
-      expect { subject.update(invalid_params) }.not_to(change { subject.project.reload.send(attribute) })
-    end
+      it "does not update project attribute" do
+        expect { subject.update(invalid_params) }.not_to(change { subject.project.reload.send(attribute) })
+      end
 
-    it "adds validation errors" do
-      subject.update(invalid_params)
-      expect(subject.errors[attribute]).to include(I18n.t("activemodel.errors.models.pafs_core/#{step}.attributes.#{attribute}.greater_than_or_equal_to"))
+      it "adds validation errors" do
+        subject.update(invalid_params)
+        expect(subject.errors[attribute]).to include(I18n.t("activemodel.errors.models.pafs_core/#{step}.attributes.#{attribute}.greater_than_or_equal_to"))
+      end
     end
   end
 
   context "when #{attribute} is blank" do
-    it "saves the blank value successfully" do
+    before do
       subject.project.send("#{attribute}=", Faker::Number.number)
+      subject.project.send("save")
+    end
+
+    it "saves the blank value successfully" do
       expect { subject.update(blank_params) }.to change { subject.project.reload.send(attribute) }.to(nil)
     end
 

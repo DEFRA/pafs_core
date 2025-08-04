@@ -465,6 +465,15 @@ en:
           submit_button: Continue
           units: metric tonnes
           not_provided: Not provided
+        net_carbon_benefit:
+          heading: How much net economic benefit is generated from any net carbon savings?
+          lede: |
+            <p>The economic benefit of the Carbon impact should be provided from a monetisation of the net emissions in tonnes CO2. This must be calculated using the %{carbon_impact_guidance} (opens in a new window). This includes the use of carbon prices and discounting over the investment period.</p>
+            <p>The resulting economic benefit value should be used to consider the carbon impact of project options in appraisal and also be included in the Partnership funding calculator.</p>
+          notes: |
+            <p>If you do not have an estimate from a Carbon impact tool this total must be left blank.</p>
+          carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
+          carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
 # Confidence assessment
         confidence_homes_better_protected:
           heading: Confidence in number of properties better protected by this project
