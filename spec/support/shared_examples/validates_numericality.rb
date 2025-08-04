@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "validates numericality" do |step, field, negatives_allowed = false|
+RSpec.shared_examples "validates numericality" do |step, field, negatives_allowed: false|
   context "when #{field} is present" do
     it "validates numericality with non-negative values" do
       subject.send("#{field}=", 0)

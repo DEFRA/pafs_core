@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "updates project attributes" do |step, attribute, negatives_allowed = false, only_integers = false|
+RSpec.shared_examples "updates project attributes" do |step, attribute, negatives_allowed: false, only_integers: false|
 
   let(:valid_params) do
     value = only_integers ? Faker::Number.number : Faker::Number.decimal(l_digits: 3, r_digits: 2)
