@@ -12,10 +12,11 @@ RSpec.describe PafsCore::NetCarbonBenefitStep, type: :model do
   end
 
   describe "#update" do
-    it_behaves_like "updates project attributes", :net_carbon_benefit_step, :carbon_savings_net_economic_benefit, negatives_allowed: true
+    it_behaves_like "updates project attributes", :net_carbon_benefit_step, :carbon_savings_net_economic_benefit,
+                    negatives_allowed: true, only_integers: true
 
     it "allows saving a negative carbon savings value" do
-      value = Faker::Number.negative.round(2)
+      value = Faker::Number.negative.round(0)
       params = ActionController::Parameters.new(
         net_carbon_benefit_step: { carbon_savings_net_economic_benefit: value }
       )
