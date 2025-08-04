@@ -5,7 +5,7 @@ module PafsCore
     include PafsCore::Carbon
 
     validates_numericality_of :carbon_savings_net_economic_benefit,
-                              only_numeric: true,
+                              only_integer: true,
                               allow_nil: true
 
     private
