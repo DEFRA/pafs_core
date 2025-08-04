@@ -26,7 +26,8 @@
                   min: min,
                   step: step,
                   label: nil,
-                  suffix_text: units
+                  suffix_text: (local_assigns.has_key?(:units) ?  units : ''),
+                  prefix_text: (local_assigns.has_key?(:prefix_text) ? prefix_text : ''),
                   ) %>
 
             <% end %>
