@@ -1,0 +1,115 @@
+<% content_for :title, t(".heading") %>
+
+<div class="step-container">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-full">
+      <div class="step-form">
+        <%= form_for @project, as: :carbon_summary, url: project_step_path, method: :patch do |f| %>
+          <%= f.govuk_fieldset legend: { text: t(".heading"), size: 'l' } do %>
+            <%= form_group(f.object, @project.step, :carbon_summary) do %>
+              
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".carbon_cost_build") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:carbon_cost_build) %>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".carbon_cost_operation") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:carbon_cost_operation) %>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".whole_life_carbon") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:total_carbon_without_mitigations) %>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".carbon_cost_sequestered") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:carbon_cost_sequestered) %>
+                </span>
+              </p>
+              
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".carbon_cost_avoided") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:carbon_cost_avoided) %>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".net_carbon") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:net_carbon_estimate) %>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".net_carbon_benefit") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:carbon_savings_net_economic_benefit) %>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <br/>
+                  <b><%= t(".capital_cost_estimate") %></b>
+                </span>
+              </p>
+               
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".capital_cost_estimate_hint") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:capital_cost_estimate) %>
+                </span>
+              </p>
+               
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <br/>
+                  <b><%= t(".operational_cost_estimate") %></b>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".operational_cost_estimate_hint") %>
+                </div>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_field(:operational_cost_estimate) %>
+                </div>
+              </p>
+
+              <p>
+                <%= f.govuk_submit t(".submit_button"), class: 'button' %>
+              </p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
