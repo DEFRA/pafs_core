@@ -105,9 +105,33 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
   end
 
+  describe "#capital_cost_estimate_present?" do
+    it "returns true if start_construction_year is present" do
+      allow(project).to receive_messages(start_construction_month: 1, start_construction_year: 2024)
+      expect(presenter.capital_cost_estimate_present?).to be true
+    end
+
+    it "returns false if start_construction_year is nil" do
+      allow(project).to receive_messages(start_construction_month: 1, start_construction_year: nil)
+      expect(presenter.capital_cost_estimate_present?).to be false
+    end
+  end
+
   describe "#capital_cost_estimate" do
     it "returns the construction total project funding" do
       expect(presenter.capital_cost_estimate).to eq(9_000.0)
+    end
+  end
+
+  describe "#operational_cost_estimate_present?" do
+    it "returns true if operational_total_project_funding is present" do
+      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 25_000.0 })
+      expect(presenter.operational_cost_estimate_present?).to be true
+    end
+
+    it "returns false if operational_total_project_funding is nil" do
+      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: nil })
+      expect(presenter.operational_cost_estimate_present?).to be false
     end
   end
 

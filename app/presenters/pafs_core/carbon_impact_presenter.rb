@@ -44,9 +44,21 @@ module PafsCore
       project.carbon_savings_net_economic_benefit
     end
 
+    def capital_cost_estimate_present?
+      construction_total_project_funding.present?
+    rescue StandardError
+      false
+    end
+
     # Capital TPF / The estimated capital cost for the project
     def capital_cost_estimate
       construction_total_project_funding
+    end
+
+    def operational_cost_estimate_present?
+      pf_calculator_presenter.attributes[:pv_future_costs].present?
+    rescue StandardError
+      false
     end
 
     # Ops TPF / The estimated operation and maintenance cost
