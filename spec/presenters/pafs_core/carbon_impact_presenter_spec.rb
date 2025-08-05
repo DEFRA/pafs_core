@@ -222,6 +222,104 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
   end
 
+  shared_examples "carbon field in units" do |field|
+    it "returns formatted field value when present" do
+      project.send("#{field}=", 1234.56)
+      expect(subject.display_carbon_field(field)).to eq("1,234.56 tonnes")
+    end
+
+    it "returns 'not provided' when field value is nil" do
+      project.send("#{field}=", nil)
+      expect(subject.display_carbon_field(field)).to eq(I18n.t(".not_provided"))
+    end
+  end
+
+  shared_examples "carbon field in pounds" do |field|
+    it "returns formatted field value when present" do
+      project.send("#{field}=", 1234)
+      expect(subject.display_carbon_field(field)).to eq("£1,234")
+    end
+
+    it "returns 'not provided' when field value is nil" do
+      project.send("#{field}=", nil)
+      expect(subject.display_carbon_field(field)).to eq(I18n.t(".not_provided"))
+    end
+  end
+
+  describe "#display_carbon_field" do
+    context "when field is carbon_cost_build" do
+      it_behaves_like "carbon field in units", :carbon_cost_build
+    end
+
+    context "when field is carbon_cost_operation" do
+      it_behaves_like "carbon field in units", :carbon_cost_operation
+    end
+
+    context "when field is total_carbon_without_mitigations" do
+      it "returns 'not provided' when all required fields are nil" do
+        project.carbon_cost_build = nil
+        project.carbon_cost_operation = nil
+        expect(subject.display_carbon_field(:total_carbon_without_mitigations)).to eq(I18n.t(".not_provided"))
+      end
+
+      it "returns formatted field value when at least one is present" do
+        project.carbon_cost_build = 1000.00
+        expect(subject.display_carbon_field(:total_carbon_without_mitigations)).to eq("1,000.00 tonnes")
+      end
+    end
+
+    context "when field is carbon_cost_sequestered" do
+      it_behaves_like "carbon field in units", :carbon_cost_sequestered
+    end
+
+    context "when field is carbon_cost_avoided" do
+      it_behaves_like "carbon field in units", :carbon_cost_avoided
+    end
+
+    context "when field is net_carbon_estimate" do
+      it "returns 'not provided' when all required fields are nil" do
+        project.carbon_cost_build = nil
+        project.carbon_cost_operation = nil
+        project.carbon_cost_sequestered = nil
+        project.carbon_cost_avoided = nil
+        expect(subject.display_carbon_field(:net_carbon_estimate)).to eq(I18n.t(".not_provided"))
+      end
+
+      it "returns formatted field value when at least one carbon field is present" do
+        project.carbon_cost_build = 500.00
+        expect(subject.display_carbon_field(:net_carbon_estimate)).to eq("500.00 tonnes")
+      end
+    end
+
+    context "when field is carbon_savings_net_economic_benefit" do
+      it_behaves_like "carbon field in pounds", :carbon_savings_net_economic_benefit
+    end
+
+    context "when field is capital_cost_estimate" do
+      it "returns 'not provided' when field value is nil" do
+        allow(project).to receive_messages(start_construction_month: 1, start_construction_year: nil)
+        expect(subject.display_carbon_field(:capital_cost_estimate)).to eq(I18n.t(".not_provided"))
+      end
+
+      it "returns formatted field value when present" do
+        allow(project).to receive_messages(start_construction_month: 1, start_construction_year: 2025)
+        expect(subject.display_carbon_field(:capital_cost_estimate)).to include("£")
+      end
+    end
+
+    context "when field is operational_cost_estimate" do
+      it "returns 'not provided' when field value is nil" do
+        allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: nil })
+        expect(subject.display_carbon_field(:operational_cost_estimate)).to eq(I18n.t(".not_provided"))
+      end
+
+      it "returns formatted field value when present" do
+        allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 12_345 })
+        expect(subject.display_carbon_field(:operational_cost_estimate)).to eq("£12,345")
+      end
+    end
+  end
+
   describe "protected methods" do
     describe "#start_construction_financial_year" do
       context "when start_construction_month is before April" do
