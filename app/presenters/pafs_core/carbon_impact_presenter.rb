@@ -103,31 +103,48 @@ module PafsCore
       carbon_cost_build + carbon_cost_operation - carbon_cost_sequestered - carbon_cost_avoided
     end
 
-    def display_carbon_field(field)
-      case field
-      when :carbon_cost_build
-        format_carbon_value(project.carbon_cost_build)
-      when :carbon_cost_operation
-        format_carbon_value(project.carbon_cost_operation)
-      when :total_carbon_without_mitigations
-        format_total_carbon_without_mitigations
-      when :carbon_cost_sequestered
-        format_carbon_value(project.carbon_cost_sequestered)
-      when :carbon_cost_avoided
-        format_carbon_value(project.carbon_cost_avoided)
-      when :net_carbon_estimate
-        format_net_carbon_estimate
-      when :carbon_savings_net_economic_benefit
-        format_currency_value(project.carbon_savings_net_economic_benefit)
-      when :capital_cost_estimate
-        capital_cost_estimate_present? ? format_currency_value(capital_cost_estimate) : I18n.t(".not_provided")
-      when :operational_cost_estimate
-        operational_cost_estimate_present? ? format_currency_value(operational_cost_estimate) : I18n.t(".not_provided")
-      else
-        I18n.t(".not_provided")
-      end
-    rescue StandardError
-      I18n.t(".not_provided")
+    # Display methods
+
+    def display_carbon_cost_build
+      format_carbon_value(project.carbon_cost_build)
+    end
+
+    def display_carbon_cost_operation
+      format_carbon_value(project.carbon_cost_operation)
+    end
+
+    def display_total_carbon_without_mitigations
+      return I18n.t(".not_provided") if project.carbon_cost_build.nil? && project.carbon_cost_operation.nil?
+
+      "#{number_with_precision(total_carbon_without_mitigations, delimiter: ',', precision: 2)} " \
+        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
+    end
+
+    def display_carbon_cost_sequestered
+      format_carbon_value(project.carbon_cost_sequestered)
+    end
+
+    def display_carbon_cost_avoided
+      format_carbon_value(project.carbon_cost_avoided)
+    end
+
+    def display_net_carbon_estimate
+      return I18n.t(".not_provided") if all_carbon_values_nil?
+
+      "#{number_with_precision(net_carbon_estimate, delimiter: ',', precision: 2)} " \
+        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
+    end
+
+    def display_carbon_savings_net_economic_benefit
+      format_currency_value(project.carbon_savings_net_economic_benefit)
+    end
+
+    def display_capital_cost_estimate
+      capital_cost_estimate_present? ? format_currency_value(capital_cost_estimate) : I18n.t(".not_provided")
+    end
+
+    def display_operational_cost_estimate
+      operational_cost_estimate_present? ? format_currency_value(operational_cost_estimate) : I18n.t(".not_provided")
     end
 
     protected
@@ -145,20 +162,6 @@ module PafsCore
       return I18n.t(".not_provided") if value.nil?
 
       "£#{number_with_delimiter(value)}"
-    end
-
-    def format_total_carbon_without_mitigations
-      return I18n.t(".not_provided") if project.carbon_cost_build.nil? && project.carbon_cost_operation.nil?
-
-      "#{number_with_precision(total_carbon_without_mitigations, delimiter: ',', precision: 2)} " \
-        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
-    end
-
-    def format_net_carbon_estimate
-      return I18n.t(".not_provided") if all_carbon_values_nil?
-
-      "#{number_with_precision(net_carbon_estimate, delimiter: ',', precision: 2)} " \
-        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
     end
 
     def all_carbon_values_nil?

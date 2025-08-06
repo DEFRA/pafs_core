@@ -13,7 +13,7 @@
                   <%= t(".carbon_cost_build") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:carbon_cost_build) %>
+                  <%= @project.presenter.display_carbon_cost_build %>
                 </span>
               </p>
 
@@ -22,7 +22,7 @@
                   <%= t(".carbon_cost_operation") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:carbon_cost_operation) %>
+                  <%= @project.presenter.display_carbon_cost_operation %>
                 </span>
               </p>
 
@@ -31,7 +31,7 @@
                   <%= t(".whole_life_carbon") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:total_carbon_without_mitigations) %>
+                  <%= @project.presenter.display_total_carbon_without_mitigations %>
                 </span>
               </p>
 
@@ -40,7 +40,7 @@
                   <%= t(".carbon_cost_sequestered") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:carbon_cost_sequestered) %>
+                  <%= @project.presenter.display_carbon_cost_sequestered %>
                 </span>
               </p>
               
@@ -49,7 +49,7 @@
                   <%= t(".carbon_cost_avoided") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:carbon_cost_avoided) %>
+                  <%= @project.presenter.display_carbon_cost_avoided %>
                 </span>
               </p>
 
@@ -58,7 +58,7 @@
                   <%= t(".net_carbon") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:net_carbon_estimate) %>
+                  <%= @project.presenter.display_net_carbon_estimate %>
                 </span>
               </p>
 
@@ -67,7 +67,7 @@
                   <%= t(".net_carbon_benefit") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:carbon_savings_net_economic_benefit) %>
+                  <%= @project.presenter.display_carbon_savings_net_economic_benefit %>
                 </span>
               </p>
 
@@ -83,7 +83,7 @@
                   <%= t(".capital_cost_estimate_hint") %>
                 </span>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:capital_cost_estimate) %>
+                  <%= @project.presenter.display_capital_cost_estimate %>
                 </span>
               </p>
                
@@ -99,7 +99,7 @@
                   <%= t(".operational_cost_estimate_hint") %>
                 </div>
                 <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_carbon_field(:operational_cost_estimate) %>
+                  <%= @project.presenter.display_operational_cost_estimate %>
                 </div>
               </p>
 
