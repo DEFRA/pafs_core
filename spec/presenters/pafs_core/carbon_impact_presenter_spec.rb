@@ -105,9 +105,33 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
   end
 
+  describe "#capital_cost_estimate_present?" do
+    it "returns true if start_construction_year is present" do
+      allow(project).to receive_messages(start_construction_month: 1, start_construction_year: 2024)
+      expect(presenter.capital_cost_estimate_present?).to be true
+    end
+
+    it "returns false if start_construction_year is nil" do
+      allow(project).to receive_messages(start_construction_month: 1, start_construction_year: nil)
+      expect(presenter.capital_cost_estimate_present?).to be false
+    end
+  end
+
   describe "#capital_cost_estimate" do
     it "returns the construction total project funding" do
       expect(presenter.capital_cost_estimate).to eq(9_000.0)
+    end
+  end
+
+  describe "#operational_cost_estimate_present?" do
+    it "returns true if operational_total_project_funding is present" do
+      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 25_000.0 })
+      expect(presenter.operational_cost_estimate_present?).to be true
+    end
+
+    it "returns false if operational_total_project_funding is nil" do
+      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: nil })
+      expect(presenter.operational_cost_estimate_present?).to be false
     end
   end
 
@@ -195,6 +219,102 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       it "defaults blank values to 0" do
         expect(presenter.net_carbon_with_blanks_calculated).to eq(3000.0)
       end
+    end
+  end
+
+  shared_examples "carbon field in units" do |field|
+    it "returns formatted field value when present" do
+      project.send("#{field}=", 1234.56)
+      expect(subject.send("display_#{field}")).to eq("1,234.56 tonnes")
+    end
+
+    it "returns 'not provided' when field value is nil" do
+      project.send("#{field}=", nil)
+      expect(subject.send("display_#{field}")).to eq(I18n.t(".not_provided"))
+    end
+  end
+
+  shared_examples "carbon field in pounds" do |field|
+    it "returns formatted field value when present" do
+      project.send("#{field}=", 1234)
+      expect(subject.send("display_#{field}")).to eq("£1,234")
+    end
+
+    it "returns 'not provided' when field value is nil" do
+      project.send("#{field}=", nil)
+      expect(subject.send("display_#{field}")).to eq(I18n.t(".not_provided"))
+    end
+  end
+
+  describe "#display_carbon_cost_build" do
+    it_behaves_like "carbon field in units", :carbon_cost_build
+  end
+
+  describe "#display_carbon_cost_operation" do
+    it_behaves_like "carbon field in units", :carbon_cost_operation
+  end
+
+  describe "#display_total_carbon_without_mitigations" do
+    it "returns 'not provided' when all required fields are nil" do
+      project.carbon_cost_build = nil
+      project.carbon_cost_operation = nil
+      expect(subject.display_total_carbon_without_mitigations).to eq(I18n.t(".not_provided"))
+    end
+
+    it "returns formatted field value when at least one is present" do
+      project.carbon_cost_build = 1000.00
+      expect(subject.display_total_carbon_without_mitigations).to eq("1,000.00 tonnes")
+    end
+  end
+
+  describe "#display_carbon_cost_sequestered" do
+    it_behaves_like "carbon field in units", :carbon_cost_sequestered
+  end
+
+  describe "#display_carbon_cost_avoided" do
+    it_behaves_like "carbon field in units", :carbon_cost_avoided
+  end
+
+  describe "#display_net_carbon_estimate" do
+    it "returns 'not provided' when all required fields are nil" do
+      project.carbon_cost_build = nil
+      project.carbon_cost_operation = nil
+      project.carbon_cost_sequestered = nil
+      project.carbon_cost_avoided = nil
+      expect(subject.display_net_carbon_estimate).to eq(I18n.t(".not_provided"))
+    end
+
+    it "returns formatted field value when at least one carbon field is present" do
+      project.carbon_cost_build = 500.00
+      expect(subject.display_net_carbon_estimate).to eq("500.00 tonnes")
+    end
+  end
+
+  describe "#display_carbon_savings_net_economic_benefit" do
+    it_behaves_like "carbon field in pounds", :carbon_savings_net_economic_benefit
+  end
+
+  describe "#display_capital_cost_estimate" do
+    it "returns 'not provided' when field value is nil" do
+      allow(project).to receive_messages(start_construction_month: 1, start_construction_year: nil)
+      expect(subject.display_capital_cost_estimate).to eq(I18n.t(".not_provided"))
+    end
+
+    it "returns formatted field value when present" do
+      allow(project).to receive_messages(start_construction_month: 1, start_construction_year: 2025)
+      expect(subject.display_capital_cost_estimate).to include("£")
+    end
+  end
+
+  describe "#display_operational_cost_estimate" do
+    it "returns 'not provided' when field value is nil" do
+      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: nil })
+      expect(subject.display_operational_cost_estimate).to eq(I18n.t(".not_provided"))
+    end
+
+    it "returns formatted field value when present" do
+      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 12_345 })
+      expect(subject.display_operational_cost_estimate).to eq("£12,345")
     end
   end
 

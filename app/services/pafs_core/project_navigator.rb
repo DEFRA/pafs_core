@@ -245,6 +245,7 @@ module PafsCore
         s.add :carbon_cost_avoided
         s.add :net_carbon
         s.add :net_carbon_benefit
+        s.add :carbon_summary
         s.add :summary_16
       end
     end

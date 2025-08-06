@@ -2,6 +2,7 @@
 
 module PafsCore
   class CarbonImpactPresenter
+    include ActionView::Helpers::NumberHelper
 
     def initialize(project:)
       self.project = project
@@ -44,9 +45,21 @@ module PafsCore
       project.carbon_savings_net_economic_benefit
     end
 
+    def capital_cost_estimate_present?
+      construction_total_project_funding.present?
+    rescue StandardError
+      false
+    end
+
     # Capital TPF / The estimated capital cost for the project
     def capital_cost_estimate
       construction_total_project_funding
+    end
+
+    def operational_cost_estimate_present?
+      pf_calculator_presenter.attributes[:pv_future_costs].present?
+    rescue StandardError
+      false
     end
 
     # Ops TPF / The estimated operation and maintenance cost
@@ -90,9 +103,75 @@ module PafsCore
       carbon_cost_build + carbon_cost_operation - carbon_cost_sequestered - carbon_cost_avoided
     end
 
+    # Display methods
+
+    NOT_PROVIDED = I18n.t(".not_provided")
+
+    def display_carbon_cost_build
+      format_carbon_value(project.carbon_cost_build)
+    end
+
+    def display_carbon_cost_operation
+      format_carbon_value(project.carbon_cost_operation)
+    end
+
+    def display_total_carbon_without_mitigations
+      return NOT_PROVIDED if project.carbon_cost_build.nil? && project.carbon_cost_operation.nil?
+
+      "#{number_with_precision(total_carbon_without_mitigations, delimiter: ',', precision: 2)} " \
+        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
+    end
+
+    def display_carbon_cost_sequestered
+      format_carbon_value(project.carbon_cost_sequestered)
+    end
+
+    def display_carbon_cost_avoided
+      format_carbon_value(project.carbon_cost_avoided)
+    end
+
+    def display_net_carbon_estimate
+      return NOT_PROVIDED if all_carbon_values_nil?
+
+      "#{number_with_precision(net_carbon_estimate, delimiter: ',', precision: 2)} " \
+        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
+    end
+
+    def display_carbon_savings_net_economic_benefit
+      format_currency_value(project.carbon_savings_net_economic_benefit)
+    end
+
+    def display_capital_cost_estimate
+      capital_cost_estimate_present? ? format_currency_value(capital_cost_estimate) : NOT_PROVIDED
+    end
+
+    def display_operational_cost_estimate
+      operational_cost_estimate_present? ? format_currency_value(operational_cost_estimate) : NOT_PROVIDED
+    end
+
     protected
 
     attr_accessor :project, :pf_calculator_presenter
+
+    def format_carbon_value(value)
+      return NOT_PROVIDED if value.nil?
+
+      "#{number_with_precision(value, delimiter: ',', precision: 2)} " \
+        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
+    end
+
+    def format_currency_value(value)
+      return NOT_PROVIDED if value.nil?
+
+      "£#{number_with_delimiter(value)}"
+    end
+
+    def all_carbon_values_nil?
+      project.carbon_cost_build.nil? &&
+        project.carbon_cost_operation.nil? &&
+        project.carbon_cost_sequestered.nil? &&
+        project.carbon_cost_avoided.nil?
+    end
 
     def start_construction_financial_year
       project.start_construction_month < 4 ? project.start_construction_year - 1 : project.start_construction_year
