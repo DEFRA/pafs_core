@@ -122,7 +122,7 @@ module PafsCore
         s.add :summary_2
         s.add :financial_year
         s.add :financial_year_confirmation, if: ->(p) { p.project.date_change_requires_confirmation? }
-        s.add :financial_year_alternative, unless: ->(p) { p.step == :financial_year }
+        s.add :financial_year_alternative, unless: ->(p) { %i[financial_year financial_year_confirmation].include?(p.step) }
         s.add :summary_3
 
         s.add :location
