@@ -105,6 +105,8 @@ module PafsCore
 
     # Display methods
 
+    NOT_PROVIDED = I18n.t(".not_provided")
+
     def display_carbon_cost_build
       format_carbon_value(project.carbon_cost_build)
     end
@@ -114,7 +116,7 @@ module PafsCore
     end
 
     def display_total_carbon_without_mitigations
-      return I18n.t(".not_provided") if project.carbon_cost_build.nil? && project.carbon_cost_operation.nil?
+      return NOT_PROVIDED if project.carbon_cost_build.nil? && project.carbon_cost_operation.nil?
 
       "#{number_with_precision(total_carbon_without_mitigations, delimiter: ',', precision: 2)} " \
         "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
@@ -129,7 +131,7 @@ module PafsCore
     end
 
     def display_net_carbon_estimate
-      return I18n.t(".not_provided") if all_carbon_values_nil?
+      return NOT_PROVIDED if all_carbon_values_nil?
 
       "#{number_with_precision(net_carbon_estimate, delimiter: ',', precision: 2)} " \
         "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
@@ -140,11 +142,11 @@ module PafsCore
     end
 
     def display_capital_cost_estimate
-      capital_cost_estimate_present? ? format_currency_value(capital_cost_estimate) : I18n.t(".not_provided")
+      capital_cost_estimate_present? ? format_currency_value(capital_cost_estimate) : NOT_PROVIDED
     end
 
     def display_operational_cost_estimate
-      operational_cost_estimate_present? ? format_currency_value(operational_cost_estimate) : I18n.t(".not_provided")
+      operational_cost_estimate_present? ? format_currency_value(operational_cost_estimate) : NOT_PROVIDED
     end
 
     protected
@@ -152,14 +154,14 @@ module PafsCore
     attr_accessor :project, :pf_calculator_presenter
 
     def format_carbon_value(value)
-      return I18n.t(".not_provided") if value.nil?
+      return NOT_PROVIDED if value.nil?
 
       "#{number_with_precision(value, delimiter: ',', precision: 2)} " \
         "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
     end
 
     def format_currency_value(value)
-      return I18n.t(".not_provided") if value.nil?
+      return NOT_PROVIDED if value.nil?
 
       "£#{number_with_delimiter(value)}"
     end
