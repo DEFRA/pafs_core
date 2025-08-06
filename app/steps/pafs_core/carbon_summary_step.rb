@@ -12,12 +12,5 @@ module PafsCore
     def presenter
       @presenter ||= PafsCore::CarbonImpactPresenter.new(project: project)
     end
-
-    def at_least_one_value_provided?(values = [])
-      values.any? do |value|
-        return true if project.send(value).present?
-      end
-      false
-    end
   end
 end
