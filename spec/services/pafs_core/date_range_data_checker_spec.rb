@@ -109,6 +109,42 @@ RSpec.describe PafsCore::DateRangeDataChecker do
         expect(checker.data_outside_date_range?).to be true
       end
     end
+
+    context "when earliest date is in February (FY spans years)" do
+      let(:earliest_date) { Date.new(2025, 2, 1) }  # FY 2024
+      let(:latest_date)   { Date.new(2028, 3, 31) } # FY 2028
+
+      context "when financial year is 2023" do
+        before { create(:funding_value, project: project, financial_year: 2023) }
+
+        it "is treated as out-of-range" do
+          expect(checker.data_outside_date_range?).to be true
+        end
+      end
+
+      context "when financial year is 2024" do
+        before { create(:funding_value, project: project, financial_year: 2024) }
+
+        it "is treated as in-range" do
+          expect(checker.data_outside_date_range?).to be false
+        end
+      end
+    end
+
+    context "when latest date supplied by default helper" do
+      subject(:checker) { described_class.new(project) }
+
+      let(:project) do
+        create(:project,
+               fcerm_gia: true,
+               earliest_start_year: 2024, earliest_start_month: 4,
+               project_end_financial_year: 2026)
+      end
+
+      before { create(:funding_value, project: project, financial_year: 2027) }
+
+      it { expect(checker.data_outside_date_range?).to be true }
+    end
   end
 
   describe "#relations_for_records_outside_range" do

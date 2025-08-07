@@ -30,7 +30,8 @@ module PafsCore
     private
 
     def years_out_of_range_scope
-      ["financial_year < ? OR financial_year > ?", earliest_date.year, latest_date.year]
+      ["financial_year < ? OR financial_year > ?", earliest_date.to_date.uk_financial_year,
+       latest_date.to_date.uk_financial_year]
     end
 
     def default_earliest_date
@@ -43,8 +44,7 @@ module PafsCore
 
     def default_latest_date
       if project.project_end_financial_year.present?
-        financial_year_start = Date.new(project.project_end_financial_year, 4, 1)
-        return financial_year_end_for(financial_year_start)
+        return financial_year_end_from_year(project.project_end_financial_year)
       end
 
       10.years.from_now
