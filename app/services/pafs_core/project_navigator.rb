@@ -246,6 +246,7 @@ module PafsCore
         s.add :net_carbon
         s.add :net_carbon_benefit
         s.add :carbon_summary
+        s.add :carbon_impact
         s.add :summary_16
       end
     end

@@ -103,6 +103,20 @@ module PafsCore
       carbon_cost_build + carbon_cost_operation - carbon_cost_sequestered - carbon_cost_avoided
     end
 
+    def all_carbon_values_nil?
+      project.carbon_cost_build.nil? &&
+        project.carbon_cost_operation.nil? &&
+        project.carbon_cost_sequestered.nil? &&
+        project.carbon_cost_avoided.nil?
+    end
+
+    def all_carbon_values_present?
+      project.carbon_cost_build.present? &&
+        project.carbon_cost_operation.present? &&
+        project.carbon_cost_sequestered.present? &&
+        project.carbon_cost_avoided.present?
+    end
+
     # Display methods
 
     NOT_PROVIDED = I18n.t(".not_provided")
@@ -149,6 +163,53 @@ module PafsCore
       operational_cost_estimate_present? ? format_currency_value(operational_cost_estimate) : NOT_PROVIDED
     end
 
+    def display_capital_carbon_estimate
+      return NOT_PROVIDED if project.carbon_cost_build.nil?
+
+      format_carbon_value(project.carbon_cost_build)
+    end
+
+    def display_capital_carbon_baseline
+      return NOT_PROVIDED unless capital_cost_estimate_present?
+      return NOT_PROVIDED if capital_carbon_baseline.nil?
+
+      format_carbon_value(capital_carbon_baseline)
+    end
+
+    def display_capital_carbon_target
+      return NOT_PROVIDED unless capital_cost_estimate_present?
+      return NOT_PROVIDED if capital_carbon_target.nil?
+
+      format_carbon_value(capital_carbon_target)
+    end
+
+    def display_operational_carbon_estimate
+      return NOT_PROVIDED if project.carbon_cost_operation.nil?
+
+      format_carbon_value(project.carbon_cost_operation)
+    end
+
+    def display_operational_carbon_baseline
+      return NOT_PROVIDED unless operational_cost_estimate_present?
+      return NOT_PROVIDED if operational_carbon_baseline.nil?
+
+      format_carbon_value(operational_carbon_baseline)
+    end
+
+    def display_operational_carbon_target
+      return NOT_PROVIDED unless operational_cost_estimate_present?
+      return NOT_PROVIDED if operational_carbon_target.nil?
+
+      format_carbon_value(operational_carbon_target)
+    end
+
+    def display_net_carbon_with_blanks_calculated
+      return NOT_PROVIDED if all_carbon_values_nil?
+      return NOT_PROVIDED if net_carbon_with_blanks_calculated.nil?
+
+      format_carbon_value(net_carbon_with_blanks_calculated)
+    end
+
     protected
 
     attr_accessor :project, :pf_calculator_presenter
@@ -164,13 +225,6 @@ module PafsCore
       return NOT_PROVIDED if value.nil?
 
       "£#{number_with_delimiter(value)}"
-    end
-
-    def all_carbon_values_nil?
-      project.carbon_cost_build.nil? &&
-        project.carbon_cost_operation.nil? &&
-        project.carbon_cost_sequestered.nil? &&
-        project.carbon_cost_avoided.nil?
     end
 
     def start_construction_financial_year

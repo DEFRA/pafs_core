@@ -1,0 +1,98 @@
+<% content_for :title, t(".heading") %>
+
+<div class="step-container">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-full">
+      <div class="step-form">
+        <%= form_for @project, as: :carbon_impact, url: project_step_path, method: :patch do |f| %>
+          <%= f.govuk_fieldset legend: { text: t(".heading"), size: 'l' } do %>
+            <%= form_group(f.object, @project.step, :carbon_impact) do %>
+
+              <%= t(".lede").html_safe %>
+
+              <h3 class="govuk-!-margin-bottom-0"><%= t(".capital_carbon.heading") %></h3>
+              <p class="govuk-!-margin-top-0">
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".capital_carbon.estimated") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_capital_carbon_estimate %>
+                </span>
+              </p>
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".capital_carbon.baseline") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_capital_carbon_baseline %>
+                </span>
+              </p>
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".capital_carbon.target") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_capital_carbon_target %>
+                </span>
+              </p>
+              <br/><br/>
+
+
+              <h3 class="govuk-!-margin-bottom-0"><%= t(".operational_carbon.heading") %></h3>
+              <p class="govuk-!-margin-top-0">
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".operational_carbon.estimated") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_operational_carbon_estimate %>
+                </span>
+              </p>
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".operational_carbon.baseline") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_operational_carbon_baseline %>
+                </span>
+              </p>
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".operational_carbon.target") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_operational_carbon_target %>
+                </span>
+              </p>
+              <br/><br/>
+
+              <h3 class="govuk-!-margin-bottom-0"><%= t(".net_carbon.heading") %></h3>
+              <p class="govuk-!-margin-top-0">
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".net_carbon.estimated") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_net_carbon_estimate %>
+                </span>
+              </p>
+              <% unless @project.presenter.all_carbon_values_present? %> 
+                <p class="govuk-!-margin-top-0">
+                  <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                    <%= t(".net_carbon.with_blanks") %>
+                  </span>
+                  <span class="govuk-grid-column-one-quarter">
+                    <%= @project.presenter.display_net_carbon_with_blanks_calculated %>
+                  </span>
+                </p>
+              <% end %>
+              <br/><br/>
+
+              <p>
+                <%= f.govuk_submit t(".submit_button"), class: 'button' %>
+              </p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
