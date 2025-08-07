@@ -290,5 +290,8 @@ FactoryBot.define do
 
     factory :carbon_summary_step, class: "PafsCore::CarbonSummaryStep" do
     end
+
+    factory :carbon_impact_step, class: "PafsCore::CarbonImpactStep" do
+    end
   end
 end

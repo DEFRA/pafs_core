@@ -490,6 +490,29 @@ en:
           submit_button: Continue
           units: tonnes
           not_provided: Not provided
+        carbon_impact:
+          heading: What we have calculated about your Carbon Impact
+          lede: |
+            <p>The EA maintain historic carbon data for programmes that enable a common baseline value of emissions per unit of cost in 2020 to be calculated for every project that enables the ‘capital’ and ‘operational’ Carbon Impact data to be compared against.<br/>The EA also maintain a carbon reduction target for the programme in line with Government Net Zero Carbon commitments that is calculated for every project and its dates of construction that enables the ‘capital’ and ‘operational’ Carbon Impact data to be compared against.</p>
+            <p>Based on data provided in your proposal, we have calculated a baseline and target for comparison against any ‘capital’ and ‘operational’ carbon values you have provided.</p>
+            <p>Any subsequent changes you make to data in other sections used to calculate these values may result in a change which can be viewed on the Proposal overview page before submission.</p>
+          capital_carbon:
+            heading: Capital carbon
+            estimated: Capital carbon estimated by you
+            baseline: Calculated capital carbon baseline
+            target: Calculated capital carbon target
+          operational_carbon:
+            heading: Operations and maintenance carbon
+            estimated: Operations and maintenance carbon estimated by you
+            baseline: Calculated operations and maintenance carbon baseline
+            target: Calculated operations and maintenance carbon target
+          net_carbon:
+            heading: Net carbon
+            estimated: Net carbon estimated by you
+            with_blanks: Net carbon with blank values calculated
+          submit_button: Continue
+            
+
 # Confidence assessment
         confidence_homes_better_protected:
           heading: Confidence in number of properties better protected by this project
