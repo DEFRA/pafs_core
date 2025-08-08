@@ -289,6 +289,11 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       project.carbon_cost_build = 1000.00
       expect(subject.display_total_carbon_without_mitigations).to eq("1,000.00 tonnes")
     end
+
+    it "returns formatted field value with custom units" do
+      project.carbon_cost_build = 1234.56
+      expect(subject.display_total_carbon_without_mitigations(units: "metric tonnes")).to eq("1,234.56 metric tonnes")
+    end
   end
 
   describe "#display_carbon_cost_sequestered" do
@@ -311,6 +316,11 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     it "returns formatted field value when at least one carbon field is present" do
       project.carbon_cost_build = 500.00
       expect(subject.display_net_carbon_estimate).to eq("500.00 tonnes")
+    end
+
+    it "returns formatted field value with custom units" do
+      project.carbon_cost_build = 1234.56
+      expect(subject.display_net_carbon_estimate(units: "metric tonnes")).to eq("1,234.56 metric tonnes")
     end
   end
 
