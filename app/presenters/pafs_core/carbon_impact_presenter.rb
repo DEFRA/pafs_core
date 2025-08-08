@@ -204,7 +204,6 @@ module PafsCore
     end
 
     def display_net_carbon_with_blanks_calculated
-      return NOT_PROVIDED if all_carbon_values_nil?
       return NOT_PROVIDED if net_carbon_with_blanks_calculated.nil?
 
       format_carbon_value(net_carbon_with_blanks_calculated)

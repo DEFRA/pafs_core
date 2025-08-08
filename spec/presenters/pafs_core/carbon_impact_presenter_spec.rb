@@ -428,9 +428,10 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       expect(subject.display_net_carbon_with_blanks_calculated).to eq("2,469.12 tonnes")
     end
 
-    it "returns 'not provided' when all required fields are nil" do
-      allow(project).to receive_messages(carbon_cost_build: nil, carbon_cost_operation: nil, carbon_cost_sequestered: nil, carbon_cost_avoided: nil)
-      expect(subject.display_net_carbon_with_blanks_calculated).to eq(I18n.t(".not_provided"))
+    it "returns 'not provided' when net_carbon_with_blanks_calculated is nil" do
+      presenter = described_class.new(project: project)
+      allow(presenter).to receive(:net_carbon_with_blanks_calculated).and_return(nil)
+      expect(presenter.display_net_carbon_with_blanks_calculated).to eq(I18n.t(".not_provided"))
     end
   end
 
