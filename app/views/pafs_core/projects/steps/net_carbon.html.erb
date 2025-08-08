@@ -12,11 +12,7 @@
               </p>
 
               <p><b>
-                <% if @project.net_carbon_required_fields_empty? %>
-                  <%= t(".not_provided") %>
-                <% else %>
-                  <%= @project.carbon_impact_presenter.net_carbon_estimate %> <%= t(".units") %>
-                <% end %>
+                <%= @project.presenter.display_net_carbon_estimate(units: t(".units")) %>
               </b></p>
 
               <%= f.govuk_submit t(".submit_button"), class: 'button' %>
