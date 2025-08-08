@@ -289,6 +289,11 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       project.carbon_cost_build = 1000.00
       expect(subject.display_total_carbon_without_mitigations).to eq("1,000.00 tonnes")
     end
+
+    it "returns formatted field value with custom units" do
+      project.carbon_cost_build = 1234.56
+      expect(subject.display_total_carbon_without_mitigations(units: "metric tonnes")).to eq("1,234.56 metric tonnes")
+    end
   end
 
   describe "#display_carbon_cost_sequestered" do
@@ -311,6 +316,11 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     it "returns formatted field value when at least one carbon field is present" do
       project.carbon_cost_build = 500.00
       expect(subject.display_net_carbon_estimate).to eq("500.00 tonnes")
+    end
+
+    it "returns formatted field value with custom units" do
+      project.carbon_cost_build = 1234.56
+      expect(subject.display_net_carbon_estimate(units: "metric tonnes")).to eq("1,234.56 metric tonnes")
     end
   end
 
@@ -418,9 +428,10 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
       expect(subject.display_net_carbon_with_blanks_calculated).to eq("2,469.12 tonnes")
     end
 
-    it "returns 'not provided' when all required fields are nil" do
-      allow(project).to receive_messages(carbon_cost_build: nil, carbon_cost_operation: nil, carbon_cost_sequestered: nil, carbon_cost_avoided: nil)
-      expect(subject.display_net_carbon_with_blanks_calculated).to eq(I18n.t(".not_provided"))
+    it "returns 'not provided' when net_carbon_with_blanks_calculated is nil" do
+      presenter = described_class.new(project: project)
+      allow(presenter).to receive(:net_carbon_with_blanks_calculated).and_return(nil)
+      expect(presenter.display_net_carbon_with_blanks_calculated).to eq(I18n.t(".not_provided"))
     end
   end
 

@@ -129,11 +129,11 @@ module PafsCore
       format_carbon_value(project.carbon_cost_operation)
     end
 
-    def display_total_carbon_without_mitigations
+    def display_total_carbon_without_mitigations(units: I18n.t("pafs_core.projects.steps.carbon_summary.units"))
       return NOT_PROVIDED if project.carbon_cost_build.nil? && project.carbon_cost_operation.nil?
 
       "#{number_with_precision(total_carbon_without_mitigations, delimiter: ',', precision: 2)} " \
-        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
+        "#{units}"
     end
 
     def display_carbon_cost_sequestered
@@ -144,11 +144,11 @@ module PafsCore
       format_carbon_value(project.carbon_cost_avoided)
     end
 
-    def display_net_carbon_estimate
+    def display_net_carbon_estimate(units: I18n.t("pafs_core.projects.steps.carbon_summary.units"))
       return NOT_PROVIDED if all_carbon_values_nil?
 
       "#{number_with_precision(net_carbon_estimate, delimiter: ',', precision: 2)} " \
-        "#{I18n.t('pafs_core.projects.steps.carbon_summary.units')}"
+        "#{units}"
     end
 
     def display_carbon_savings_net_economic_benefit
@@ -204,7 +204,6 @@ module PafsCore
     end
 
     def display_net_carbon_with_blanks_calculated
-      return NOT_PROVIDED if all_carbon_values_nil?
       return NOT_PROVIDED if net_carbon_with_blanks_calculated.nil?
 
       format_carbon_value(net_carbon_with_blanks_calculated)

@@ -12,11 +12,7 @@
               </p>
 
               <p><b>
-                <% if @project.whole_life_carbon_required_fields_empty? %>
-                  <%= t(".not_provided") %>
-                <% else %>
-                  <%= @project.carbon_impact_presenter.total_carbon_without_mitigations %> <%= t(".units") %>
-                <% end %>
+                <%= @project.presenter.display_total_carbon_without_mitigations(units: t(".units")) %>
               </b></p>
 
               <%= f.govuk_submit t(".submit_button"), class: 'button' %>
