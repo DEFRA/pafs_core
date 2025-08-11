@@ -8,5 +8,22 @@ module PafsCore
              :carbon_cost_avoided, :carbon_cost_avoided=,
              :carbon_savings_net_economic_benefit, :carbon_savings_net_economic_benefit=,
              to: :project
+
+    def carbon_required_information_present?
+      required = %i[
+        start_construction_month start_construction_year
+        ready_for_service_month ready_for_service_year
+      ]
+
+      # check required fields
+      required.each do |field_name|
+        return false if project.send(field_name).nil?
+      end
+
+      # check funding sources
+      return false unless PafsCore::ValidationPresenter.new(project).funding_sources_complete?
+
+      true
+    end
   end
 end
