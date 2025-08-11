@@ -260,6 +260,9 @@ FactoryBot.define do
       kilometres_of_watercourse_enhanced_or_created_single { 12 }
     end
 
+    factory :carbon_required_information_step, class: "PafsCore::CarbonRequiredInformationStep" do
+    end
+
     factory :carbon_prepare_step, class: "PafsCore::CarbonPrepareStep" do
     end
 
