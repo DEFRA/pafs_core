@@ -1,0 +1,31 @@
+<% content_for :title, t(".heading") %>
+
+<div class="step-container">
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-full">
+      <div class="step-form">
+        <%= form_for @project, as: :carbon_required_information, url: project_step_path, method: :patch do |f| %>
+          <%= f.govuk_fieldset legend: { text: t(".heading"), size: 'l' } do %>
+            <%= form_group(f.object, @project.step, :carbon_required_information) do %>
+              <p>
+                <%= t(".para1", carbon_impact_guidance: link_to(t(".carbon_impact_guidance_label"), t(".carbon_impact_guidance_link"), target: "_blank")).html_safe %>
+              </p>
+
+              <ol class="govuk-list govuk-list--bullet">
+                <li><p><%= t(".para1_li1") %></p></li>
+                <li><p><%= t(".para1_li2") %></p></li>
+                <li><p><%= t(".para1_li3") %></p></li>
+              </ol>
+
+              <p>
+                <%= t(".para2") %>
+              </p>
+
+              <%= f.govuk_submit t(".submit_button"), class: 'button' %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -237,16 +237,17 @@ module PafsCore
         s.add :confidence_secured_partnership_funding
         s.add :summary_15
 
-        s.add :carbon_prepare
-        s.add :carbon_cost_build
-        s.add :carbon_cost_operation
-        s.add :whole_life_carbon
-        s.add :carbon_cost_sequestered
-        s.add :carbon_cost_avoided
-        s.add :net_carbon
-        s.add :net_carbon_benefit
-        s.add :carbon_summary
-        s.add :carbon_impact
+        s.add :carbon_required_information, unless: :carbon_required_information_present?
+        s.add :carbon_prepare, if: :carbon_required_information_present?
+        s.add :carbon_cost_build, if: :carbon_required_information_present?
+        s.add :carbon_cost_operation, if: :carbon_required_information_present?
+        s.add :whole_life_carbon, if: :carbon_required_information_present?
+        s.add :carbon_cost_sequestered, if: :carbon_required_information_present?
+        s.add :carbon_cost_avoided, if: :carbon_required_information_present?
+        s.add :net_carbon, if: :carbon_required_information_present?
+        s.add :net_carbon_benefit, if: :carbon_required_information_present?
+        s.add :carbon_summary, if: :carbon_required_information_present?
+        s.add :carbon_impact, if: :carbon_required_information_present?
         s.add :summary_16
       end
     end
