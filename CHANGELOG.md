@@ -1,8 +1,24 @@
 # Changelog
 
-## [v1.0.1](https://github.com/defra/pafs_core/tree/v1.0.1) (2025-04-11)
+## [Unreleased](https://github.com/defra/pafs_core/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/pafs_core/compare/v1.0...v1.0.1)
+[Full Changelog](https://github.com/defra/pafs_core/compare/v1.0.1...HEAD)
+
+**Merged pull requests:**
+
+- \[RUBY-3937\] Update Magic Map link and polygon drawing instructions [\#1094](https://github.com/DEFRA/pafs_core/pull/1094) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- RUBY 3889 pafs changes to earliest start date and last financial year [\#1092](https://github.com/DEFRA/pafs_core/pull/1092) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- \[RUBY-3889\] Fix bug with financial year confirmation heading to financial\_year\_alternative [\#1088](https://github.com/DEFRA/pafs_core/pull/1088) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- RUBY 3889 pafs changes to earliest start date and last financial year [\#1075](https://github.com/DEFRA/pafs_core/pull/1075) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- \[RUBY-3889\] Remove NOT NULL constraint and default from `date\_change\_requires\_confirmation` in `pafs\_core\_projects` [\#1069](https://github.com/DEFRA/pafs_core/pull/1069) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Fix/ruby 3889 bootstrap attributes not defined [\#1066](https://github.com/DEFRA/pafs_core/pull/1066) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- RUBY 3889 pafs changes to earliest start date and last financial year [\#1064](https://github.com/DEFRA/pafs_core/pull/1064) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- RUBY-2365-pafs-remove-pfc-v-8-options [\#1062](https://github.com/DEFRA/pafs_core/pull/1062) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
+- Bump rack from 2.2.10 to 2.2.14 [\#1030](https://github.com/DEFRA/pafs_core/pull/1030) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.0.1](https://github.com/DEFRA/pafs_core/tree/v1.0.1) (2025-04-11)
+
+[Full Changelog](https://github.com/DEFRA/pafs_core/compare/v1.0...v1.0.1)
 
 **Fixed bugs:**
 
@@ -435,9 +451,9 @@
 - Added program upload functionality [\#144](https://github.com/DEFRA/pafs_core/pull/144) ([tonyheadford](https://github.com/tonyheadford))
 - Add ability 2 generate file with multiple projects [\#130](https://github.com/DEFRA/pafs_core/pull/130) ([Cruikshanks](https://github.com/Cruikshanks))
 
-## [v1.0](https://github.com/defra/pafs_core/tree/v1.0) (2017-03-24)
+## [v1.0](https://github.com/DEFRA/pafs_core/tree/v1.0) (2017-03-24)
 
-[Full Changelog](https://github.com/defra/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
+[Full Changelog](https://github.com/DEFRA/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
 
 **Merged pull requests:**
 
