@@ -20,17 +20,18 @@ module PafsCore
 
     def relations_for_records_outside_range
       @relations_for_records_outside_range ||= [
-        project.funding_values.where(years_out_of_range_scope),
-        project.flood_protection_outcomes.where(years_out_of_range_scope),
-        project.flood_protection2040_outcomes.where(years_out_of_range_scope),
-        project.coastal_erosion_protection_outcomes.where(years_out_of_range_scope)
+        project.funding_values.where("total > 0").where(years_out_of_range_scope),
+        project.flood_protection_outcomes.with_positive_values.where(years_out_of_range_scope),
+        project.flood_protection2040_outcomes.with_positive_values.where(years_out_of_range_scope),
+        project.coastal_erosion_protection_outcomes.with_positive_values.where(years_out_of_range_scope)
       ]
     end
 
     private
 
     def years_out_of_range_scope
-      ["financial_year < ? OR financial_year > ?", earliest_date.year, latest_date.year]
+      ["financial_year < ? OR financial_year > ?", earliest_date.to_date.uk_financial_year,
+       latest_date.to_date.uk_financial_year]
     end
 
     def default_earliest_date
@@ -43,8 +44,7 @@ module PafsCore
 
     def default_latest_date
       if project.project_end_financial_year.present?
-        financial_year_start = Date.new(project.project_end_financial_year, 4, 1)
-        return financial_year_end_for(financial_year_start)
+        return financial_year_end_from_year(project.project_end_financial_year)
       end
 
       10.years.from_now
