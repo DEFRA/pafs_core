@@ -1,8 +1,25 @@
 en:
   pafs_core:
     summary:
-      carbon_title: "Carbon Assessment"
-      carbon_cost_build: "How much Capital Carbon will this project produce?"
+      carbon_title: "Carbon Impact"
+      capital_carbon:
+        heading: Capital
+        estimated: Capital carbon estimated by you (tCO2)
+        baseline: Calculated capital carbon baseline (tCO2) 
+        target: Calculated capital carbon target (tCO2)
+        cost: Capital cost calculated for the project
+      operational_carbon:
+        heading: Operations and maintenance carbon
+        estimated: Operations and maintenance carbon estimated by you (tCO2)
+        baseline: Calculated operations and maintenance carbon baseline (tCO2)
+        target: Calculated operations and maintenance carbon target (tCO2)
+        cost: Operations and maintenance cost calculated for the project
+      sequestered_carbon: Sequestered carbon estimated by you (tCO2)
+      avoided_carbon: Carbon avoided estimated by you (tCO2)
+      net_carbon: Net carbon estimated by you (tCO2)
+      net_carbon_with_blanks: Net carbon with blank values calculated (tCO2)
+      net_carbon_economic_benefit: Net carbon economic benefit estimated by you
+      carbon_cost_build: "Capital carbon will this project produce?"
       carbon_cost_operation: "How much Carbon will this project’s assets produce in their lifecycle?"
       confidence_title: "Confidence Assessment"
       confidence_homes_better_protected: "Confidence in number of properties better protected by this project"

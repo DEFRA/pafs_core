@@ -24,7 +24,8 @@ module PafsCore
 
     def show
       # project summary page
-      @project = PafsCore::ProjectSummaryPresenter.new navigator.find(params[:id])
+      @project = PafsCore::ProjectSummaryPresenter.new(navigator.find(params[:id]))
+      @carbon_presenter = PafsCore::CarbonImpactPresenter.new(project: navigator.find(params[:id]))
     end
 
     # GET
