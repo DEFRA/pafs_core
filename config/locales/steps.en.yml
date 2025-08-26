@@ -406,7 +406,6 @@ en:
             To complete the Carbon impact section, we need other sections to be completed first so that we can calculate carbon baseline and carbon target figures:
           para1_li1: "Important dates: We use this to estimate the years of construction."
           para1_li2: "Funding sources and spending: We use this to estimate the capital cost of the proposed project, based on spending profiled between ‘Start of construction’ and ‘Ready for service’."
-          para1_li3: "Partnership funding calculator: We use this to estimate the operation and maintenance costs based on the ‘pv future costs’ value provided."
           para2: |
             Select Save and continue to return to the proposal overview and complete the relevant sections.
           submit_button: Continue
