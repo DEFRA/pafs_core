@@ -335,7 +335,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_26_103422) do
     t.integer "pending_earliest_start_year"
     t.integer "pending_financial_year"
     t.boolean "date_change_requires_confirmation", default: false, null: false
-    t.decimal "carbon_operational_cost", precision: 20, scale: 2
+    t.decimal "carbon_operational_cost_forecast", precision: 20, scale: 2
     t.index ["name"], name: "index_pafs_core_projects_on_name", unique: true
     t.index ["reference_number", "version"], name: "index_pafs_core_projects_on_reference_number_and_version", unique: true
     t.index ["slug"], name: "index_pafs_core_projects_on_slug", unique: true
