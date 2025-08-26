@@ -225,7 +225,7 @@ RSpec.describe PafsCore::Camc3Presenter do
       it_behaves_like "json contains attribute", "carbon_lifecycle"
       it_behaves_like "json contains attribute", "carbon_sequestered"
       it_behaves_like "json contains attribute", "carbon_avoided"
-      it_behaves_like "json contains attribute", "carbon_net_economic_benefit",
+      it_behaves_like "json contains attribute", "carbon_net_economic_benefit"
       it_behaves_like "json contains attribute", "carbon_operational_cost_forecast"
     end
 
