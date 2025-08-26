@@ -158,7 +158,10 @@ module PafsCore
                    .merge(
                      {
                        capital_carbon: fcerm1_presenter.carbon_cost_build,
-                       carbon_lifecycle: fcerm1_presenter.carbon_cost_operation
+                       carbon_lifecycle: fcerm1_presenter.carbon_cost_operation,
+                       carbon_sequestered: fcerm1_presenter.carbon_cost_sequestered,
+                       carbon_avoided: fcerm1_presenter.carbon_cost_avoided,
+                       carbon_net_economic_benefit: fcerm1_presenter.carbon_savings_net_economic_benefit
                      }
                    )
                    .merge(

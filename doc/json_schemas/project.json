@@ -37,7 +37,10 @@
       "outcome_measures",
       "confidence",
       "capital_carbon",
-      "carbon_lifecycle"
+      "carbon_lifecycle",
+      "carbon_sequestered",
+      "carbon_avoided",
+      "carbon_net_economic_benefit"
     ],
     "properties": {
       "name": {
