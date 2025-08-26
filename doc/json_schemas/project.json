@@ -444,7 +444,8 @@
       },
       "carbon_operational_cost_forecast": {
         "type": [
-          "integer"
+          "integer",
+          "null"
         ]
       },
       "confidence": {
