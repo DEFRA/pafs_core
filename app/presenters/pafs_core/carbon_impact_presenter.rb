@@ -155,12 +155,12 @@ module PafsCore
       format_currency_value(project.carbon_savings_net_economic_benefit)
     end
 
-    def display_capital_cost_estimate
-      capital_cost_estimate_present? ? format_currency_value(capital_cost_estimate) : NOT_PROVIDED
+    def display_carbon_operational_cost_forecast
+      format_currency_value(project.carbon_operational_cost_forecast)
     end
 
-    def display_operational_cost_estimate
-      operational_cost_estimate_present? ? format_currency_value(operational_cost_estimate) : NOT_PROVIDED
+    def display_capital_cost_estimate
+      capital_cost_estimate_present? ? format_currency_value(capital_cost_estimate) : NOT_PROVIDED
     end
 
     def display_capital_carbon_estimate

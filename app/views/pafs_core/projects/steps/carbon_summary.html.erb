@@ -73,6 +73,15 @@
 
               <p>
                 <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+                  <%= t(".carbon_operational_cost_forecast") %>
+                </span>
+                <span class="govuk-grid-column-one-quarter">
+                  <%= @project.presenter.display_carbon_operational_cost_forecast %>
+                </span>
+              </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
                   <br/>
                   <b><%= t(".capital_cost_estimate") %></b>
                 </span>
@@ -86,25 +95,17 @@
                   <%= @project.presenter.display_capital_cost_estimate %>
                 </span>
               </p>
+
+              <p>
+                <span class="govuk-grid-column-three-quarters">
+                  <br/><br/>
+                </span>
+              </p>
                
               <p>
                 <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
-                  <br/>
-                  <b><%= t(".operational_cost_estimate") %></b>
+                  <%= f.govuk_submit t(".submit_button"), class: 'button' %>
                 </span>
-              </p>
-
-              <p>
-                <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
-                  <%= t(".operational_cost_estimate_hint") %>
-                </div>
-                <span class="govuk-grid-column-one-quarter">
-                  <%= @project.presenter.display_operational_cost_estimate %>
-                </div>
-              </p>
-
-              <p>
-                <%= f.govuk_submit t(".submit_button"), class: 'button' %>
               </p>
             <% end %>
           <% end %>

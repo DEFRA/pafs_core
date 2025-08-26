@@ -328,6 +328,10 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     it_behaves_like "carbon field in pounds", :carbon_savings_net_economic_benefit
   end
 
+  describe "#display_carbon_operational_cost_forecast" do
+    it_behaves_like "carbon field in pounds", :carbon_operational_cost_forecast
+  end
+
   describe "#display_capital_cost_estimate" do
     it "returns 'not provided' when field value is nil" do
       allow(project).to receive_messages(start_construction_month: 1, start_construction_year: nil)
@@ -337,18 +341,6 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     it "returns formatted field value when present" do
       allow(project).to receive_messages(start_construction_month: 1, start_construction_year: 2025)
       expect(subject.display_capital_cost_estimate).to include("£")
-    end
-  end
-
-  describe "#display_operational_cost_estimate" do
-    it "returns 'not provided' when field value is nil" do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: nil })
-      expect(subject.display_operational_cost_estimate).to eq(I18n.t(".not_provided"))
-    end
-
-    it "returns formatted field value when present" do
-      allow(project).to receive(:carbon_operational_cost_forecast).and_return(12_345)
-      expect(subject.display_operational_cost_estimate).to eq("£12,345")
     end
   end
 

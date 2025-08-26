@@ -499,10 +499,9 @@ en:
           carbon_cost_avoided: How much carbon will be avoided by this project (tCO2)?
           net_carbon: This is the net carbon calculated for the project (tCO2)
           net_carbon_benefit: How much economic benefit is generated from carbon savings?
+          carbon_operational_cost_forecast: How much operation & maintenance cost is forecast for the project?
           capital_cost_estimate: The estimated capital cost for the project from the sum of spending in the years between start of construction and ready for service (Gateway 4 important dates).
           capital_cost_estimate_hint: This is the capital cost calculated for the project
-          operational_cost_estimate: The estimated operation and maintenance cost from ‘pv future costs’ entered in the Partnership funding calculator.
-          operational_cost_estimate_hint: This is the operation & maintenance cost calculated for the project
           submit_button: Continue
           units: tonnes
           not_provided: Not provided
