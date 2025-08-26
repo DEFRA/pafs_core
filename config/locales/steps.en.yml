@@ -483,6 +483,13 @@ en:
             <p>If you do not have an estimate from a Carbon impact tool this total must be left blank.</p>
           carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
           carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
+        carbon_operational_cost_forecast:
+          heading: How much Operation & Maintenance cost is forecast for the project?
+          lede: |
+            <p>The Operation & Maintenance cost is the forecast cost for all operation, maintenance, refurbishment and decommissioning (where required) over the whole-life investment period as used in the appraisal and carbon impact calculations.</p>
+            <p>It should be provided in 'todays prices', in other words, at the current price base. It must not be discounted to a present value or inflated for future cost increases. This allows the baseline calculation to be established from current carbon intensity factors.</p>
+          notes: |
+            <p>If there is no operations or maintenance element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
         carbon_summary:
           heading: Summary of your input data
           carbon_cost_build: How much capital carbon will the project produce (tCO2)?

@@ -246,6 +246,7 @@ module PafsCore
         s.add :carbon_cost_avoided, if: :carbon_required_information_present?
         s.add :net_carbon, if: :carbon_required_information_present?
         s.add :net_carbon_benefit, if: :carbon_required_information_present?
+        s.add :carbon_operational_cost_forecast, if: :carbon_required_information_present?
         s.add :carbon_summary, if: :carbon_required_information_present?
         s.add :carbon_impact, if: :carbon_required_information_present?
         s.add :summary_16

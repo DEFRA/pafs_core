@@ -1,0 +1,14 @@
+<% content_for :title, t(".heading") %>
+
+<%= render partial: 'shared/single_numeric_field_form',
+  locals: {
+    project: @project,
+    numeric_field: :carbon_operational_cost_forecast,
+    heading: t(".heading"),
+    lede: t('.lede').html_safe,
+    notes: t('.notes').html_safe,
+    full_width: true,
+    prefix_text: "£",
+    min: 0
+  }
+%>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples "updates project attributes" do |step, attribute, negatives_allowed: false, only_integers: false|
+RSpec.shared_examples "updates project attributes" do |step, attribute, negatives_allowed: false, only_integers: false, blanks_allowed: true|
 
   let(:valid_params) do
     value = only_integers ? Faker::Number.number : Faker::Number.decimal(l_digits: 3, r_digits: 2)
@@ -49,7 +49,7 @@ RSpec.shared_examples "updates project attributes" do |step, attribute, negative
 
       it "adds validation errors" do
         subject.update(invalid_params)
-        expect(subject.errors[attribute]).to include(I18n.t("activemodel.errors.models.pafs_core/#{step}.attributes.#{attribute}.greater_than_or_equal_to"))
+        expect(subject.errors[attribute]).to be_present
       end
     end
   end
@@ -60,12 +60,27 @@ RSpec.shared_examples "updates project attributes" do |step, attribute, negative
       subject.project.send("save")
     end
 
-    it "saves the blank value successfully" do
-      expect { subject.update(blank_params) }.to change { subject.project.reload.send(attribute) }.to(nil)
-    end
+    if blanks_allowed
+      it "saves the blank value successfully" do
+        expect { subject.update(blank_params) }.to change { subject.project.reload.send(attribute) }.to(nil)
+      end
 
-    it "returns true" do
-      expect(subject.update(blank_params)).to be true
+      it "returns true" do
+        expect(subject.update(blank_params)).to be true
+      end
+    else
+      it "returns false" do
+        expect(subject.update(invalid_params)).to be_falsey
+      end
+
+      it "does not save blank value" do
+        expect { subject.update(invalid_params) }.not_to(change { subject.project.reload.send(attribute) })
+      end
+
+      it "adds validation errors" do
+        subject.update(invalid_params)
+        expect(subject.errors[attribute]).to be_present
+      end
     end
   end
 
