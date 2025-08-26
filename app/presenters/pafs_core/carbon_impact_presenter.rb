@@ -57,7 +57,7 @@ module PafsCore
     end
 
     def operational_cost_estimate_present?
-      pf_calculator_presenter.attributes[:pv_future_costs].present?
+      project.carbon_operational_cost_forecast.present?
     rescue StandardError
       false
     end
@@ -297,7 +297,7 @@ module PafsCore
     end
 
     def operational_total_project_funding
-      pf_calculator_presenter.attributes[:pv_future_costs] || 0
+      project.carbon_operational_cost_forecast || 0
     end
   end
 end
