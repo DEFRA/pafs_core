@@ -125,23 +125,23 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#operational_cost_estimate_present?" do
     it "returns true if operational_total_project_funding is present" do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 25_000.0 })
+      allow(project).to receive(:carbon_operational_cost_forecast).and_return(500)
       expect(presenter.operational_cost_estimate_present?).to be true
     end
 
     it "returns false if operational_total_project_funding is nil" do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: nil })
+      allow(project).to receive(:carbon_operational_cost_forecast).and_return(nil)
       expect(presenter.operational_cost_estimate_present?).to be false
     end
   end
 
   describe "#operational_cost_estimate" do
     before do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 25_000.0 })
+      allow(project).to receive(:carbon_operational_cost_forecast).and_return(500)
     end
 
-    it "returns the pv_future_costs from partnership funding calculator" do
-      expect(presenter.operational_cost_estimate).to eq(25_000.0)
+    it "returns the operation & maintenence cost forecast" do
+      expect(presenter.operational_cost_estimate).to eq(500)
     end
   end
 
@@ -153,7 +153,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#operational_carbon_baseline" do
     before do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 50_000.0 })
+      allow(project).to receive(:carbon_operational_cost_forecast).and_return(50_000)
     end
 
     it "calculates baseline from funding and intensity" do
@@ -170,7 +170,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#operational_carbon_target" do
     before do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 50_000.0 })
+      allow(project).to receive(:carbon_operational_cost_forecast).and_return(50_000)
     end
 
     it "calculates target with reduction rate applied" do
@@ -202,7 +202,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
     context "when carbon_cost_operation is blank" do
       before do
-        allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 50_000.0 })
+        allow(project).to receive(:carbon_operational_cost_forecast).and_return(50_000)
         allow(project).to receive_messages(carbon_cost_build: 1750.2, carbon_cost_operation: nil, carbon_cost_sequestered: 500.2, carbon_cost_avoided: 700.0)
       end
 
@@ -328,6 +328,10 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     it_behaves_like "carbon field in pounds", :carbon_savings_net_economic_benefit
   end
 
+  describe "#display_carbon_operational_cost_forecast" do
+    it_behaves_like "carbon field in pounds", :carbon_operational_cost_forecast
+  end
+
   describe "#display_capital_cost_estimate" do
     it "returns 'not provided' when field value is nil" do
       allow(project).to receive_messages(start_construction_month: 1, start_construction_year: nil)
@@ -337,18 +341,6 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     it "returns formatted field value when present" do
       allow(project).to receive_messages(start_construction_month: 1, start_construction_year: 2025)
       expect(subject.display_capital_cost_estimate).to include("£")
-    end
-  end
-
-  describe "#display_operational_cost_estimate" do
-    it "returns 'not provided' when field value is nil" do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: nil })
-      expect(subject.display_operational_cost_estimate).to eq(I18n.t(".not_provided"))
-    end
-
-    it "returns formatted field value when present" do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 12_345 })
-      expect(subject.display_operational_cost_estimate).to eq("£12,345")
     end
   end
 
@@ -400,7 +392,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#display_operational_carbon_baseline" do
     it "returns formatted carbon baseline with units" do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 12_345 })
+      allow(project).to receive(:carbon_operational_cost_forecast).and_return(12_345)
       expect(subject.display_operational_carbon_baseline).to eq("4.83 tonnes")
     end
 
@@ -412,7 +404,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#display_operational_carbon_target" do
     it "returns formatted carbon target with units" do
-      allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 12_345 })
+      allow(project).to receive(:carbon_operational_cost_forecast).and_return(12_345)
       expect(subject.display_operational_carbon_target).to eq("4.34 tonnes")
     end
 
@@ -543,7 +535,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
     describe "#operational_total_project_funding" do
       before do
-        allow(pf_calculator_presenter).to receive(:attributes).and_return({ pv_future_costs: 75_000.0 })
+        allow(project).to receive(:carbon_operational_cost_forecast).and_return(75_000)
       end
 
       it "returns pv_future_costs from partnership funding calculator" do

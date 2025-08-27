@@ -3,9 +3,9 @@
 <%= render partial: 'shared/single_numeric_field_form',
   locals: {
     project: @project,
-    numeric_field: :carbon_savings_net_economic_benefit,
+    numeric_field: :carbon_operational_cost_forecast,
     heading: t(".heading"),
-    lede: t('.lede', carbon_impact_guidance: link_to(t(".carbon_impact_guidance_label"), t(".carbon_impact_guidance_link"), target: "_blank")).html_safe,
+    lede: t('.lede').html_safe,
     notes: t('.notes').html_safe,
     full_width: true,
     prefix_text: "£",

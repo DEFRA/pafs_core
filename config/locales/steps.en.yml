@@ -406,7 +406,6 @@ en:
             To complete the Carbon impact section, we need other sections to be completed first so that we can calculate carbon baseline and carbon target figures:
           para1_li1: "Important dates: We use this to estimate the years of construction."
           para1_li2: "Funding sources and spending: We use this to estimate the capital cost of the proposed project, based on spending profiled between ‘Start of construction’ and ‘Ready for service’."
-          para1_li3: "Partnership funding calculator: We use this to estimate the operation and maintenance costs based on the ‘pv future costs’ value provided."
           para2: |
             Select Save and continue to return to the proposal overview and complete the relevant sections.
           submit_button: Continue
@@ -420,6 +419,7 @@ en:
           para1_li1: Emissions from both the capital and operational stages of the whole-life investment.
           para1_li2: Emissions avoided as a result of reduced flood risk and impacts to properties over the whole-life investment as well as from any solutions that sequester carbon.
           para1_li3: A net calculation of emissions 1) minus 2) in tonnes CO2e over the whole-life investment period and monetised as an economic benefit for use in the Partnership funding calculator.
+          para1_li4: An estimated cost for all operation and maintenance activities over the whole-life investment period, to help calculate a carbon baseline and target for these activities.
           submit_button: Continue
           carbon_impact_guidance_label: Guidance on how to calculate Carbon impact and the use of a supporting tool
           carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
@@ -483,6 +483,13 @@ en:
             <p>If you do not have an estimate from a Carbon impact tool this total must be left blank.</p>
           carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
           carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
+        carbon_operational_cost_forecast:
+          heading: How much Operation & Maintenance cost is forecast for the project?
+          lede: |
+            <p>The Operation & Maintenance cost is the forecast cost for all operation, maintenance, refurbishment and decommissioning (where required) over the whole-life investment period as used in the appraisal and carbon impact calculations.</p>
+            <p>It should be provided in 'todays prices', in other words, at the current price base. It must not be discounted to a present value or inflated for future cost increases. This allows the baseline calculation to be established from current carbon intensity factors.</p>
+          notes: |
+            <p>If there is no operations or maintenance element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
         carbon_summary:
           heading: Summary of your input data
           carbon_cost_build: How much capital carbon will the project produce (tCO2)?
@@ -492,10 +499,9 @@ en:
           carbon_cost_avoided: How much carbon will be avoided by this project (tCO2)?
           net_carbon: This is the net carbon calculated for the project (tCO2)
           net_carbon_benefit: How much economic benefit is generated from carbon savings?
+          carbon_operational_cost_forecast: How much operation & maintenance cost is forecast for the project?
           capital_cost_estimate: The estimated capital cost for the project from the sum of spending in the years between start of construction and ready for service (Gateway 4 important dates).
           capital_cost_estimate_hint: This is the capital cost calculated for the project
-          operational_cost_estimate: The estimated operation and maintenance cost from ‘pv future costs’ entered in the Partnership funding calculator.
-          operational_cost_estimate_hint: This is the operation & maintenance cost calculated for the project
           submit_button: Continue
           units: tonnes
           not_provided: Not provided

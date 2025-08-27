@@ -7,6 +7,7 @@ module PafsCore
              :carbon_cost_sequestered, :carbon_cost_sequestered=,
              :carbon_cost_avoided, :carbon_cost_avoided=,
              :carbon_savings_net_economic_benefit, :carbon_savings_net_economic_benefit=,
+             :carbon_operational_cost_forecast, :carbon_operational_cost_forecast=,
              to: :project
 
     def carbon_required_information_present?

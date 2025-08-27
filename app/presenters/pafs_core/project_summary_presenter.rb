@@ -142,8 +142,7 @@ module PafsCore
     end
 
     def carbon_started?
-      carbon_cost_build.present? ||
-        carbon_cost_operation.present?
+      carbon_operational_cost_forecast.present?
     end
 
     def confidence_started?

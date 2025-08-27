@@ -291,6 +291,10 @@ FactoryBot.define do
     factory :net_carbon_benefit_step, class: "PafsCore::NetCarbonBenefitStep" do
     end
 
+    factory :carbon_operational_cost_forecast_step, class: "PafsCore::CarbonOperationalCostForecastStep" do
+      carbon_operational_cost_forecast { 50 }
+    end
+
     factory :carbon_summary_step, class: "PafsCore::CarbonSummaryStep" do
     end
 
