@@ -419,6 +419,7 @@ en:
           para1_li1: Emissions from both the capital and operational stages of the whole-life investment.
           para1_li2: Emissions avoided as a result of reduced flood risk and impacts to properties over the whole-life investment as well as from any solutions that sequester carbon.
           para1_li3: A net calculation of emissions 1) minus 2) in tonnes CO2e over the whole-life investment period and monetised as an economic benefit for use in the Partnership funding calculator.
+          para1_li4: An estimated cost for all operation and maintenance activities over the whole-life investment period, to help calculate a carbon baseline and target for these activities.
           submit_button: Continue
           carbon_impact_guidance_label: Guidance on how to calculate Carbon impact and the use of a supporting tool
           carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
