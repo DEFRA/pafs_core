@@ -138,6 +138,20 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
   end
 
+  describe "#carbon_complete?" do
+    context "when carbon_operational_cost_forecast has been set" do
+      before { subject.carbon_operational_cost_forecast = 50.25 }
+
+      it { expect(subject).to be_carbon_complete }
+    end
+
+    context "when carbon_operational_cost_forecast has not been set" do
+      before { subject.carbon_operational_cost_forecast = nil }
+
+      it_behaves_like "failed validation example", :carbon_complete?, :carbon, "Tell us about the carbon cost of the project"
+    end
+  end
+
   describe "#key_dates_complete?" do
     let(:future_start_date) { 1.month.from_now }
 
