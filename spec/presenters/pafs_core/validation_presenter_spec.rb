@@ -140,9 +140,23 @@ RSpec.describe PafsCore::ValidationPresenter do
 
   describe "#carbon_complete?" do
     context "when carbon_operational_cost_forecast has been set" do
-      before { subject.carbon_operational_cost_forecast = 50.25 }
+      describe "to a positive value" do
+        before { subject.carbon_operational_cost_forecast = 50.25 }
 
-      it { expect(subject).to be_carbon_complete }
+        it { expect(subject).to be_carbon_complete }
+      end
+
+      describe "to zero" do
+        before { subject.carbon_operational_cost_forecast = 0 }
+
+        it { expect(subject).to be_carbon_complete }
+      end
+
+      describe "to a negative value" do
+        before { subject.carbon_operational_cost_forecast = -100 }
+
+        it_behaves_like "failed validation example", :carbon_complete?, :carbon, "Tell us about the carbon cost of the project"
+      end
     end
 
     context "when carbon_operational_cost_forecast has not been set" do
