@@ -48,6 +48,7 @@ module PafsCore
     def complete
       # RMA completes a proposal for PSO review
       @project = PafsCore::ValidationPresenter.new navigator.find(params[:id])
+      @carbon_presenter = PafsCore::CarbonImpactPresenter.new(project: navigator.find(params[:id]))
       if @project.complete?
         @project.submission_state.complete!
         redirect_to pafs_core.confirm_project_path(@project)
