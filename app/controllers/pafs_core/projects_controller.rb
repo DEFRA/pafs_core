@@ -60,6 +60,7 @@ module PafsCore
     def submit
       # PSO mark proposal as submitted to APT
       @project = PafsCore::ValidationPresenter.new navigator.find(params[:id])
+      @carbon_presenter = PafsCore::CarbonImpactPresenter.new(project: navigator.find(params[:id]))
 
       if @project.complete?
         @project.submission_state.submit!
