@@ -3,6 +3,7 @@
 module PafsCore
   class FundingValuesSummaryStep < BasicStep
     include PafsCore::FundingSources
+
     delegate :project_end_financial_year,
              :funding_values,
              to: :project

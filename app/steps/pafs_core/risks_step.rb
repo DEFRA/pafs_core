@@ -3,6 +3,7 @@
 module PafsCore
   class RisksStep < BasicStep
     include PafsCore::Risks
+
     delegate :project_protects_households?,
              to: :project
 

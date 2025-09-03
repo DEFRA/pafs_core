@@ -3,6 +3,7 @@
 module PafsCore
   class MapStep < BasicStep
     include PafsCore::FileTypes
+
     delegate :benefit_area=,
              :benefit_area_zoom_level, :benefit_area_zoom_level=,
              :benefit_area_centre=,

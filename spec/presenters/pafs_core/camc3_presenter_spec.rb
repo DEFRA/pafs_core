@@ -214,6 +214,21 @@ RSpec.describe PafsCore::Camc3Presenter do
       end
     end
 
+    shared_examples "json contains attribute" do |attribute|
+      it "contains the attribute" do
+        expect(json).to include(attribute)
+      end
+    end
+
+    describe "carbon section" do
+      it_behaves_like "json contains attribute", "capital_carbon"
+      it_behaves_like "json contains attribute", "carbon_lifecycle"
+      it_behaves_like "json contains attribute", "carbon_sequestered"
+      it_behaves_like "json contains attribute", "carbon_avoided"
+      it_behaves_like "json contains attribute", "carbon_net_economic_benefit"
+      it_behaves_like "json contains attribute", "carbon_operational_cost_forecast"
+    end
+
     shared_examples "has the expected forecast" do |outcomes_category, attribute, presenter_method = nil|
       before do
         funding_values.each do |hash|

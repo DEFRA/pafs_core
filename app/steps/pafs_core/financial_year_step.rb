@@ -4,6 +4,7 @@ module PafsCore
   class FinancialYearStep < BasicStep
     include PafsCore::FinancialYear
     include PafsCore::ProjectsHelper
+
     delegate :project_end_financial_year, :project_end_financial_year=,
              :earliest_start_month, :earliest_start_year,
              :pending_financial_year, :pending_financial_year=,
@@ -18,7 +19,7 @@ module PafsCore
 
       project.update(
         pending_financial_year: nil,
-        date_change_requires_confirmation: nil
+        date_change_requires_confirmation: false
       )
     end
 

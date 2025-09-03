@@ -3,6 +3,7 @@
 module PafsCore
   class EarliestStartDateStep < BasicStep
     include PafsCore::DateUtils
+
     delegate :earliest_start_month, :earliest_start_month=,
              :earliest_start_year, :earliest_start_year=,
              :project_end_financial_year,

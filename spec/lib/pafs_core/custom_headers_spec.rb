@@ -22,6 +22,7 @@ end
 # response attribute
 class MockObjectWithResponse
   include PafsCore::CustomHeaders
+
   attr_reader :response
 
   def initialize

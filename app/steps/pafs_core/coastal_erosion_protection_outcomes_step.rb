@@ -5,6 +5,7 @@ module PafsCore
     include PafsCore::FinancialYear
     include PafsCore::Outcomes
     include PafsCore::Risks
+
     delegate :project_type,
              :project_protects_households?,
              :reduced_risk_of_households_for_coastal_erosion?,
