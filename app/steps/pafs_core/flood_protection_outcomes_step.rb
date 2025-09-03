@@ -5,6 +5,7 @@ module PafsCore
     include PafsCore::FinancialYear
     include PafsCore::Risks
     include PafsCore::Outcomes
+
     delegate :project_end_financial_year,
              :project_type,
              :project_protects_households?,

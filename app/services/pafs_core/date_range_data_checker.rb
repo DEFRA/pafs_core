@@ -6,6 +6,7 @@ module PafsCore
   # dates and inadvertently delete data.
   class DateRangeDataChecker
     include PafsCore::ProjectsHelper
+
     attr_reader :project, :earliest_date, :latest_date
 
     def initialize(project, earliest_date: nil, latest_date: nil)
