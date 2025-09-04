@@ -37,7 +37,11 @@
       "outcome_measures",
       "confidence",
       "capital_carbon",
-      "carbon_lifecycle"
+      "carbon_lifecycle",
+      "carbon_sequestered",
+      "carbon_avoided",
+      "carbon_net_economic_benefit",
+      "carbon_operational_cost_forecast"
     ],
     "properties": {
       "name": {
@@ -417,6 +421,30 @@
       "carbon_lifecycle": {
         "type": [
           "number",
+          "null"
+        ]
+      },
+      "carbon_sequestered": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "carbon_avoided": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "carbon_net_economic_benefit": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "carbon_operational_cost_forecast": {
+        "type": [
+          "integer",
           "null"
         ]
       },

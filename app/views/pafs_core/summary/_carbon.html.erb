@@ -1,37 +1,139 @@
 <article class="summary-item" aria-labelledby="carbon">
-  <% if project.carbon_started? %>
+  <% if project.carbon_required_information_present? && project.carbon_started? %>
     <div class="summary-item-content">
       <h2 class="govuk-heading-m" id="carbon">
-        <%= project.summary_label(:carbon_title) %>
+        <%= t("pafs_core.summary.carbon_title") %>
       </h2>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <table class="full-table" aria-describedby="<%= "Carbon amount in metric tonnes" %>">
-            <thead>
-              <tr>
-                <th class="govuk-visually-hidden">Category</th>
-                <th class="govuk-visually-hidden">Carbon amount in metric tonnes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= project.summary_label(:carbon_cost_build) %></td>
-                <td id="carbon_cost_build" class="align-right"><%= number_to_human(project.carbon_cost_build, significant: false, units: { unit: 'tonnes' }) %></td>
-              </tr>
-              <tr>
-                <td><%= project.summary_label(:carbon_cost_operation) %></td>
-                <td id="carbon_cost_operation" class="align-right"><%= number_to_human(project.carbon_cost_operation, significant: false, units: { unit: 'tonnes' }) %></td>
-              </tr>
-            </tbody>
-          </table>
+        
+          <h3 class="govuk-!-margin-bottom-0"><%= t("pafs_core.summary.capital_carbon.heading") %></h3>
+          <p class="govuk-!-margin-top-0">
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.capital_carbon.estimated") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_capital_carbon_estimate %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.capital_carbon.baseline") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_capital_carbon_baseline %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.capital_carbon.target") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_capital_carbon_target %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.capital_carbon.cost") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_capital_cost_estimate %>
+            </span>
+          </p>
+          <br/><br/><br/>
+
+          <h3 class="govuk-!-margin-bottom-0"><%= t("pafs_core.summary.operational_carbon.heading") %></h3>
+          <p class="govuk-!-margin-top-0">
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.operational_carbon.estimated") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_operational_carbon_estimate %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.operational_carbon.baseline") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_operational_carbon_baseline %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.operational_carbon.target") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_operational_carbon_target %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.operational_carbon.cost") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_carbon_operational_cost_forecast %>
+            </span>
+          </p>
+          <br/><br/><br/>
+          
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.sequestered_carbon") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_carbon_cost_sequestered %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.avoided_carbon") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_carbon_cost_avoided %>
+            </span>
+          </p>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.net_carbon") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_net_carbon_estimate %>
+            </span>
+          </p>
+          <% unless @carbon_presenter.all_carbon_values_present? %> 
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.net_carbon_with_blanks") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_net_carbon_with_blanks_calculated %>
+            </span>
+          </p>
+          <% end %>
+          <p>
+            <span class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+              <%= t("pafs_core.summary.net_carbon_economic_benefit") %>
+            </span>
+            <span class="govuk-grid-column-one-quarter">
+              <%= @carbon_presenter.display_carbon_savings_net_economic_benefit %>
+            </span>
+          </p>
+      
         </div>
         <div class="govuk-grid-column-one-quarter">
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="change-link">
-                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :carbon_cost_build) do -%>
-                  Change<span class="govuk-visually-hidden"> the <%= project.summary_label(:carbon).downcase %></span>
-                <% end -%>
+                <% if project.carbon_required_information_present? %>
+                  <%= link_to pafs_core.project_step_path(id: project.to_param, step: :carbon_prepare) do -%>
+                    Change<span class="govuk-visually-hidden"> the <%= project.summary_label(:carbon).downcase %></span>
+                  <% end -%>
+                <% else %>
+                  <%= link_to pafs_core.project_step_path(id: project.to_param, step: :carbon_required_information) do -%>
+                    Change<span class="govuk-visually-hidden"> the <%= project.summary_label(:carbon).downcase %></span>
+                  <% end -%>
+                <% end %>
               </div>
             <% end -%>
           <% end -%>
@@ -50,9 +152,15 @@
           <% unless project.archived? %>
             <% if can_edit_project_sections?(project) -%>
               <div class="add-link">
-                <%= link_to pafs_core.project_step_path(id: project.to_param, step: :carbon_cost_build) do -%>
-                  Add<span class="govuk-visually-hidden"> <%= project.summary_label(:carbon_title).downcase %></span>
-                <% end -%>
+                <% if project.carbon_required_information_present? %>
+                  <%= link_to pafs_core.project_step_path(id: project.to_param, step: :carbon_prepare) do -%>
+                    Add<span class="govuk-visually-hidden"> <%= project.summary_label(:carbon_title).downcase %></span>
+                  <% end -%>
+                <% else %>
+                  <%= link_to pafs_core.project_step_path(id: project.to_param, step: :carbon_required_information) do -%>
+                    Add<span class="govuk-visually-hidden"> <%= project.summary_label(:carbon_title).downcase %></span>
+                  <% end -%>
+                <% end %>
               </div>
             <% end -%>
           <% end -%>

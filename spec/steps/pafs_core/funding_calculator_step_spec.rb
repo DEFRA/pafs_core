@@ -25,18 +25,18 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
     end
 
     it "validates the calculator version when correct" do
-      allow(subject).to receive_messages(expected_version: "v9", uploaded_file: v9_calculator_file)
+      allow(subject).to receive_messages(uploaded_file: v9_calculator_file)
 
       expect(subject).to be_valid
     end
 
     it "validates the calculator version" do
-      allow(subject).to receive_messages(expected_version: "v8", uploaded_file: v9_calculator_file)
+      allow(subject).to receive_messages(uploaded_file: v8_calculator_file)
 
       subject.valid?
 
       expect(subject.errors[:funding_calculator])
-        .to include "The uploaded calculator is the incorrect version. You must submit the v8 2014 calculator."
+        .to include "The uploaded calculator is the incorrect version. You must submit the v2 2020 calculator."
     end
 
     context "when a virus is found" do
@@ -59,18 +59,18 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
     let(:filename) { "new_file.xlsx" }
     let(:content_type) { "text/plain" }
     let(:temp_file) do
-      ActionDispatch::Http::UploadedFile.new(tempfile: v8_calculator_file,
+      ActionDispatch::Http::UploadedFile.new(tempfile: v9_calculator_file,
                                              filename: filename.dup,
                                              type: content_type)
     end
     let(:params) do
       ActionController::Parameters.new(
-        { funding_calculator_step: { funding_calculator: temp_file, expected_version: "v8" } }
+        { funding_calculator_step: { funding_calculator: temp_file } }
       )
     end
     let(:empty_params) do
       ActionController::Parameters.new(
-        { funding_calculator_step: { funding_calculator_file_name: "placeholder", expected_version: "v8" } }
+        { funding_calculator_step: { funding_calculator_file_name: "placeholder" } }
       )
     end
     let(:continue_params) { { commit: "Continue" } }
@@ -98,7 +98,7 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
         subject.update(params)
         expect(subject.funding_calculator_file_name).to eq filename
         expect(subject.funding_calculator_content_type).to eq content_type
-        expect(subject.funding_calculator_file_size).to eq v8_calculator_file.size
+        expect(subject.funding_calculator_file_size).to eq v9_calculator_file.size
         expect(subject.funding_calculator_updated_at).to be_within(1.second).of(Time.zone.now)
       end
 
@@ -150,6 +150,32 @@ RSpec.describe PafsCore::FundingCalculatorStep, type: :model do
 
       it "does not save the file details" do
         expect { subject.update(params) }.not_to change(subject, :funding_calculator_file_name)
+      end
+
+      it "returns false" do
+        expect(subject.update(params)).to be false
+      end
+    end
+
+    context "when there is an error parsing the calculator file" do
+      let(:storage) { double("storage") }
+
+      before do
+        allow(PafsCore::DevelopmentFileStorageService).to receive(:new) { storage }
+        allow(storage).to receive_messages(upload: true, delete: true)
+        allow(PafsCore::CalculatorParser).to receive(:parse).and_raise(StandardError, "Unknown PFC version")
+      end
+
+      it "adds an error message" do
+        subject.update(params)
+        expect(subject.errors[:funding_calculator]).to include(
+          "The file could not be processed. Please ensure you're using the correct Partnership Funding Calculator version."
+        )
+      end
+
+      it "cleans up the uploaded file" do
+        expect(storage).to receive(:delete).with(File.join(subject.storage_path, filename))
+        subject.update(params)
       end
 
       it "returns false" do

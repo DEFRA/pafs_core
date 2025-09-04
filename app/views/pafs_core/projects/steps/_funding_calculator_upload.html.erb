@@ -6,24 +6,12 @@
 
     <%= f.govuk_fieldset legend: { text: t('heading', scope: scope), size: 'l' } do %>
       <p><%= t('lede', scope: scope) %></p>
-      <p><%= t('version_statement', scope: scope) %></p>
-      <p><strong><%= t('version_question', scope: scope) %></strong></p>
-
+      
       <%= form_group(f.object, @project.step, :funding_calculator) do %>
         <%= error_message(f.object, :funding_calculator_step, :funding_calculator) %>
       
         <legend class="govuk-visually-hidden">Version</legend>
 
-        <% radio_struct = Struct.new(:value, :text) %>
-        <%= f.govuk_collection_radio_buttons(:expected_version,
-                                                  [radio_struct.new("v9", t(:yes_option)),
-                                                   radio_struct.new("v8", t(:no_option))],
-                                                   :value,
-                                                   :text,
-                                                   legend: nil,
-                                                   inline: true) %>
-
-        <%= render partial: 'pafs_core/projects/steps/funding_calculator_upload_version/v8' %>
         <%= render partial: 'pafs_core/projects/steps/funding_calculator_upload_version/v9' %>
 
         <div class='upload-section'>

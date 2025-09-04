@@ -5,6 +5,7 @@ module PafsCore
     include PafsCore::FinancialYear
     include PafsCore::Risks
     include PafsCore::Outcomes
+
     delegate :project_end_financial_year,
              :project_type,
              :project_protects_households?,
@@ -13,7 +14,7 @@ module PafsCore
              :reduced_risk_of_households_for_floods=,
              to: :project
 
-    validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
+    validate :at_least_one_value?, :values_make_sense, :sensible_number_of_houses
 
     validate :values?, if: :reduced_risk_of_households_for_floods?
 
@@ -21,7 +22,27 @@ module PafsCore
       setup_flood_protection_outcomes
     end
 
+    def update(params)
+      @javascript_enabled = params.fetch(:js_enabled, false)
+      assign_attributes(step_params(params))
+      project.updated_by = user if project.respond_to?(:updated_by)
+      clear_values_if_checkbox_checked
+      valid? && project.save
+    end
+
     private
+
+    def clear_values_if_checkbox_checked
+      return unless reduced_risk_of_households_for_floods?
+
+      flood_protection_outcomes.each do |outcome|
+        outcome.households_at_reduced_risk = 0
+        outcome.moved_from_very_significant_and_significant_to_moderate_or_low = 0
+        outcome.households_protected_from_loss_in_20_percent_most_deprived = 0
+        outcome.households_protected_through_plp_measures = 0
+        outcome.non_residential_properties = 0
+      end
+    end
 
     def values?
       values = flood_protection_outcomes.collect do |outcome|
@@ -84,8 +105,8 @@ module PafsCore
       )
     end
 
-    def at_least_one_value
-      return unless flooding_total_protected_households.zero? && !project.reduced_risk_of_households_for_floods?
+    def at_least_one_value?
+      return false unless flooding_total_protected_households.zero? && !project.reduced_risk_of_households_for_floods?
 
       errors.add(
         :base,

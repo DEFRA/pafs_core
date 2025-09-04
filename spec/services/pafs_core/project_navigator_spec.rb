@@ -70,4 +70,40 @@ RSpec.describe PafsCore::ProjectNavigator do
       expect(p.step).to eq(:project_type)
     end
   end
+
+  shared_examples "navigates to expected next step" do |expected_next_step|
+    it "navigates to #{expected_next_step} next" do
+      step = subject.build_project_step(project, current_step, user)
+      next_step = subject.next_step(current_step, step)
+
+      expect(next_step).to eq(expected_next_step)
+    end
+  end
+
+  describe "#next_step" do
+    let(:project) { create(:project) }
+    let(:user) { build(:user) }
+
+    context "when current step is financial_year" do
+      let(:current_step) { :financial_year }
+
+      context "when project date does not require confirmation" do
+        before { allow(project).to receive(:date_change_requires_confirmation).and_return(false) }
+
+        it_behaves_like "navigates to expected next step", :summary
+      end
+
+      context "when project date requires confirmation" do
+        before { allow(project).to receive(:date_change_requires_confirmation).and_return(true) }
+
+        it_behaves_like "navigates to expected next step", :financial_year_confirmation
+      end
+    end
+
+    context "when current step is financial_year_confirmation" do
+      let(:current_step) { :financial_year_confirmation }
+
+      it_behaves_like "navigates to expected next step", :summary
+    end
+  end
 end

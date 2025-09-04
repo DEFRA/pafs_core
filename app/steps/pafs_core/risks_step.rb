@@ -3,6 +3,7 @@
 module PafsCore
   class RisksStep < BasicStep
     include PafsCore::Risks
+
     delegate :project_protects_households?,
              to: :project
 
@@ -21,7 +22,7 @@ module PafsCore
     def update(params)
       assign_attributes(all_risks(step_params(params) || {}))
       if valid?
-        self.main_risk = selected_risks.first.to_s if selected_risks.count == 1
+        self.main_risk = selected_risks.first.to_s if selected_risks.one?
         project.save
       else
         false
@@ -41,7 +42,7 @@ module PafsCore
 
     def at_least_one_risk_is_selected
       errors.add(:base, "Select the risks your project protects against") unless
-        selected_risks.count.positive?
+        selected_risks.any?
     end
   end
 end

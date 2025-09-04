@@ -11,7 +11,7 @@ module PafsCore
     end
 
     def financial_year_options
-      current_financial_year..current_financial_year + 5
+      current_financial_year..(current_financial_year + 5)
     end
 
     def project_end_financial_year_is_present_and_correct

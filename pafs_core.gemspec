@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency "nokogiri"
   s.add_dependency "rack-cors"
   s.add_dependency "rails", "~> 7.2"
-  s.add_dependency "roo"
+  s.add_dependency "roo", "~> 2"
   s.add_dependency "rubyXL"
   s.add_dependency "secure_headers"
 

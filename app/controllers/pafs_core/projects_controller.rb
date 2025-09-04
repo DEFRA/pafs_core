@@ -24,7 +24,8 @@ module PafsCore
 
     def show
       # project summary page
-      @project = PafsCore::ProjectSummaryPresenter.new navigator.find(params[:id])
+      @project = PafsCore::ProjectSummaryPresenter.new(navigator.find(params[:id]))
+      @carbon_presenter = PafsCore::CarbonImpactPresenter.new(project: navigator.find(params[:id]))
     end
 
     # GET
@@ -47,6 +48,7 @@ module PafsCore
     def complete
       # RMA completes a proposal for PSO review
       @project = PafsCore::ValidationPresenter.new navigator.find(params[:id])
+      @carbon_presenter = PafsCore::CarbonImpactPresenter.new(project: navigator.find(params[:id]))
       if @project.complete?
         @project.submission_state.complete!
         redirect_to pafs_core.confirm_project_path(@project)
@@ -58,6 +60,7 @@ module PafsCore
     def submit
       # PSO mark proposal as submitted to APT
       @project = PafsCore::ValidationPresenter.new navigator.find(params[:id])
+      @carbon_presenter = PafsCore::CarbonImpactPresenter.new(project: navigator.find(params[:id]))
 
       if @project.complete?
         @project.submission_state.submit!

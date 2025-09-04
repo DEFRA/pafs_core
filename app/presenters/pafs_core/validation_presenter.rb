@@ -61,10 +61,8 @@ module PafsCore
     end
 
     def carbon_complete?
-      return true if carbon_cost_build.present? &&
-                     (carbon_cost_build.to_i >= 0) &&
-                     carbon_cost_operation.present? &&
-                     (carbon_cost_operation.to_i >= 0)
+      return true if carbon_operational_cost_forecast.present? &&
+                     (carbon_operational_cost_forecast.to_i >= 0)
 
       add_error(:carbon, "Tell us about the carbon cost of the project")
     end
@@ -101,7 +99,7 @@ module PafsCore
         add_earliest_start_in_the_past_error
       end
 
-      errors.count.zero?
+      errors.none?
     end
 
     def check_key_dates_in_future
@@ -121,11 +119,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      funding_values.each do |fv|
+      funding_values.where("total > 0").find_each do |fv|
         # ignore past financial years
         next if fv.financial_year == -1
-        # check if any of the funding sources has a value
-        next unless fv.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if fv.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
@@ -144,11 +140,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      flood_protection_outcomes.each do |fpo|
+      flood_protection_outcomes.with_positive_values.each do |fpo|
         # ignore past financial years
         next if fpo.financial_year == -1
-        # check if any of the protection outcomes has a value
-        next unless fpo.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
@@ -167,11 +161,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      flood_protection2040_outcomes.each do |fpo|
+      flood_protection2040_outcomes.with_positive_values.each do |fpo|
         # ignore past financial years
         next if fpo.financial_year == -1
-        # check if any of the protection outcomes has a value
-        next unless fpo.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if fpo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
@@ -190,11 +182,9 @@ module PafsCore
 
       earliest_start_financial_year = define_financial_year(Date.new(earliest_start_year, earliest_start_month, 1))
       err_count = 0
-      coastal_erosion_protection_outcomes.each do |cepo|
+      coastal_erosion_protection_outcomes.with_positive_values.each do |cepo|
         # ignore past financial years
         next if cepo.financial_year == -1
-        # check if any of the protection outcomes has a value
-        next unless cepo.any_positive_values?
         # check if the financial year is within the project lifetime range
         next if cepo.financial_year_in_range?(earliest_start_financial_year, project_end_financial_year)
 
@@ -292,7 +282,7 @@ module PafsCore
 
       return true unless environmental_benefits?
 
-      return false if selected_om4_attributes.empty?
+      return outcomes_error if selected_om4_attributes.empty?
 
       check_intertidal && check_woodland && check_wet_woodland && check_wetland_or_wet_grassland &&
         check_grassland && check_heathland && check_pond_or_lake && check_arable_land &&
@@ -405,7 +395,9 @@ module PafsCore
       end
 
       unless funding_calculator_correct_version?
-        return add_error(:funding_calculator, "Upload a valid version of the partnership funding calculator")
+        return add_error(:funding_calculator,
+                         "Partnership funding calculator v8 (2014) is no longer valid. " \
+                         "Project Proposals must use 2020 V2 of the calculator.")
       end
 
       true
@@ -438,7 +430,7 @@ module PafsCore
 
     def outcomes_error
       add_error(:environmental_outcomes,
-                "Tell us the project’s environmental outcomes")
+                "Tell us the project's environmental outcomes")
     end
 
     def check_flooding
@@ -466,7 +458,7 @@ module PafsCore
     end
 
     def natural_flood_risk_measures_and_cost_provided?
-      (selected_natural_flood_risk_measures.count.positive? || project.other_flood_measures.present?) &&
+      (selected_natural_flood_risk_measures.any? || project.other_flood_measures.present?) &&
         !project.natural_flood_risk_measures_cost.nil?
     end
 
@@ -508,7 +500,7 @@ module PafsCore
 
       tfile.unlink
 
-      Check::VERSION_MAP.include? calculator_version
+      Check::ACCEPTED_VERSIONS.keys.include? calculator_version
     end
   end
 end

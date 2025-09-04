@@ -25,6 +25,10 @@ module PafsCore
       sequence.next(step, project)
     end
 
+    def previous_step(step, project)
+      sequence.prev(step, project)
+    end
+
     def last_step
       sequence.last
     end
@@ -117,7 +121,8 @@ module PafsCore
         s.add :project_type
         s.add :summary_2
         s.add :financial_year
-        s.add :financial_year_alternative, unless: ->(p) { p.step == :financial_year }
+        s.add :financial_year_confirmation, if: ->(p) { p.project.date_change_requires_confirmation? }
+        s.add :financial_year_alternative, unless: ->(p) { %i[financial_year financial_year_confirmation].include?(p.step) }
         s.add :summary_3
 
         s.add :location
@@ -153,13 +158,14 @@ module PafsCore
         s.add :summary_6
 
         s.add :earliest_start_date
+        s.add :earliest_start_date_confirmation, if: ->(p) { p.project.date_change_requires_confirmation? }
         s.add :could_start_sooner
         s.add :earliest_start_date_with_gia, if: :could_start_early?
         s.add :summary_7
 
         s.add :risks
         s.add :main_risk,
-              if: ->(p) { p.selected_risks.count > 1 }
+              if: ->(p) { p.selected_risks.many? }
         s.add :flood_protection_outcomes,
               if: ->(p) { p.protects_against_flooding? }
         s.add :flood_protection_outcomes_summary,
@@ -231,8 +237,18 @@ module PafsCore
         s.add :confidence_secured_partnership_funding
         s.add :summary_15
 
-        s.add :carbon_cost_build
-        s.add :carbon_cost_operation
+        s.add :carbon_required_information, unless: :carbon_required_information_present?
+        s.add :carbon_prepare, if: :carbon_required_information_present?
+        s.add :carbon_cost_build, if: :carbon_required_information_present?
+        s.add :carbon_cost_operation, if: :carbon_required_information_present?
+        s.add :whole_life_carbon, if: :carbon_required_information_present?
+        s.add :carbon_cost_sequestered, if: :carbon_required_information_present?
+        s.add :carbon_cost_avoided, if: :carbon_required_information_present?
+        s.add :net_carbon, if: :carbon_required_information_present?
+        s.add :net_carbon_benefit, if: :carbon_required_information_present?
+        s.add :carbon_operational_cost_forecast, if: :carbon_required_information_present?
+        s.add :carbon_summary, if: :carbon_required_information_present?
+        s.add :carbon_impact, if: :carbon_required_information_present?
         s.add :summary_16
       end
     end

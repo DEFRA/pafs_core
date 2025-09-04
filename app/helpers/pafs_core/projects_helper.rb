@@ -6,6 +6,10 @@ module PafsCore
       Date.new(date.month < 4 ? date.year : date.year + 1, 3, 31)
     end
 
+    def financial_year_end_from_year(year)
+      Date.new(year + 1, 3, 31)
+    end
+
     def rma_user?
       current_resource.respond_to?(:primary_area) && current_resource.primary_area.rma?
     end
@@ -84,7 +88,7 @@ module PafsCore
     end
 
     def class_for_summary_list(underline_all)
-      "summary-list underlined-#{underline_all ? 'all-' : ''}items"
+      "summary-list underlined-#{'all-' if underline_all}items"
     end
 
     def flood_class_for_sop(proj)

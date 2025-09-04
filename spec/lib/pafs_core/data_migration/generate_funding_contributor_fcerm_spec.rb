@@ -14,7 +14,7 @@ RSpec.describe PafsCore::DataMigration::GenerateFundingContributorFcerm do
     xit "testing perf" do
       report = MemoryProfiler.report do
         described_class.perform(user)
-        puts "complete"
+        puts "complete" # rubocop:disable Rails/Output
       end
 
       report.pretty_print

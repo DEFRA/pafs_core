@@ -45,6 +45,14 @@ en:
           lede: Don't include years which include maintenance costs.
           financial_year_label: Financial year starting April
           example_text: For example, 2023
+# financial year confirmation
+        financial_year_confirmation:
+          back_link: Back
+          heading: You have entered a date that is outside the current date range of your project.
+          para1: By changing this date, you may have 'Risks and properties benefitting' or 'Funding sources and spending' data that falls outside your project's date range (Earliest Start Date to the Last financial year in which the project will spend funds).
+          para2: If you select 'Save and continue', any property or funding data outside your project's date range will be automatically deleted.
+          para3: Or, you can select 'Back' to manually review and correct your data.
+          submit_button: Save and continue
 # key dates
         key_dates:
           heading: What are the estimated dates for important milestones of your proposed project?
@@ -148,6 +156,14 @@ en:
           heading: What is the earliest date the project could start if Grant in Aid funding was made available earlier?
           description: Spend includes any funding source (e.g. local levy, contributions and GiA).
           example_text: For example, 10 2019
+# earliest start date confirmation
+        earliest_start_date_confirmation:
+          back_link: Back
+          heading: You have entered a date that is outside the current date range of your project.
+          para1: By changing this date, you may have 'Risks and properties benefitting' or 'Funding sources and spending' data that falls outside your project's date range (Earliest Start Date to the Last financial year in which the project will spend funds).
+          para2: If you select 'Save and continue', any property or funding data outside your project's date range will be automatically deleted.
+          para3: Or, you can select 'Back' to manually review and correct your data.
+          submit_button: Save and continue
 # location
         location:
           heading: Where is the project located?
@@ -218,15 +234,10 @@ en:
         funding_calculator:
           heading: Partnership funding calculator
           lede: The partnership funding calculator generates a score for the project based on the benefits and outcomes that it aims to deliver and any contributions that it will raise. This score is used to prioritise and allocate funding in each year.
-          version_statement: The version of the calculator you need to use depends on your project stage. Answer the question below to choose the correct version.
           version_guidance: "If you are unsure which version to use check the <a href='https://www.gov.uk/guidance/partnership-funding' target='_blank'>partnership funding guidance</a> or contact your local partnership and strategic overview officer."
-          version_question: Will your Outline Business Case be signed off after the 26th June 2020?
           download_file_html: "<span class='govuk-visually-hidden'>Download your funding calculator named </span>%{file}"
-          v8:
-            download_heading: Download and complete the version 8 of the partnership funding calculator 2014
-            download_link_label: "Download the <a href='%{url}' alt='Version 8' target='_blank'>partnership funding calculator</a>"
           v9:
-            download_heading: Download and complete the partnership funding calculator 2020
+            download_heading: Download and complete the partnership funding calculator
             download_link_label: "Download the <a href='%{url}' alt='Version 9' target='_blank'>partnership funding calculator</a>"
           upload_heading: Upload the completed partnership funding calculator
           uploaded_heading: The uploaded partnership funding calculator
@@ -389,16 +400,133 @@ en:
           example_text: Limit your answer to 700 characters or fewer
 
 # Carbon
+        carbon_required_information:
+          heading: Information we require before you can complete the carbon impact section
+          para1: |
+            To complete the Carbon impact section, we need other sections to be completed first so that we can calculate carbon baseline and carbon target figures:
+          para1_li1: "Important dates: We use this to estimate the years of construction."
+          para1_li2: "Funding sources and spending: We use this to estimate the capital cost of the proposed project, based on spending profiled between ‘Start of construction’ and ‘Ready for service’."
+          para2: |
+            Select Save and continue to return to the proposal overview and complete the relevant sections.
+          submit_button: Continue
+        carbon_prepare:
+          heading: What to record about your carbon impact
+          para1: |
+            Carbon impact data provides information alongside the Partnership funding calculator that helps scope and
+            prioritise projects in the pipeline. For subsequent business cases, Carbon impact data is a mandatory requirement. 
+            %{carbon_impact_guidance} (opens in a new window). <br/>
+            Carbon impact data comprises:
+          para1_li1: Emissions from both the capital and operational stages of the whole-life investment.
+          para1_li2: Emissions avoided as a result of reduced flood risk and impacts to properties over the whole-life investment as well as from any solutions that sequester carbon.
+          para1_li3: A net calculation of emissions 1) minus 2) in tonnes CO2e over the whole-life investment period and monetised as an economic benefit for use in the Partnership funding calculator.
+          para1_li4: An estimated cost for all operation and maintenance activities over the whole-life investment period, to help calculate a carbon baseline and target for these activities.
+          submit_button: Continue
+          carbon_impact_guidance_label: Guidance on how to calculate Carbon impact and the use of a supporting tool
+          carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
         carbon_cost_build:
-          heading: How much Capital Carbon will this project produce?
+          heading: How much capital carbon will this project produce?
           lede: |
-            <p>A Carbon Calculator is a requirement at both Outline Business Case and Full Business Case stages. Your project’s carbon calculation can be determined using the Environment Agency’s ERIC tool and is measured as Carbon Dioxide Equivalent (CO2e), expressed in tonnes.</p>
-            <p>For Risk Management Authorities outside of the Environment Agency, please contact your local Environment Agency office for support in using the ERIC tool.</p>
+            <p>Capital emissions are the project carbon impact from the works that build or refurbish assets. They are calculated from quantities of resource used in building or refurbishing assets.</p>
+            <p>To provide capital emissions for the Carbon impact data requires a supporting Carbon assessment and is a mandatory requirement for subsequent business cases. The quantities of resource used in building or refurbishing assets will be calculated into tonnes of CO2e in a Carbon assessment. Enter the total recorded ‘capital emissions’ Carbon impact here.</p>
+            <p>The EA is able to provide a supporting Carbon assessment tool (ERIC). Alternative carbon assessment tools should have up to date industry emission rates for resources used such as material, plant and transport.</p>
+          notes: |
+            <p>If you do not have an estimate from a carbon assessment this total must be left blank.</p>
+            <p>If there is no construction element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
         carbon_cost_operation:
-          heading: How much Carbon will this project’s assets produce in their lifecycle?
+          heading: How much operational carbon will this project produce?
           lede: |
-            <p>A Carbon Calculator is a requirement at both Outline Business Case and Full Business Case stages. Your project’s carbon calculation can be determined using the Environment Agency’s ERIC tool and is measured as Carbon Dioxide Equivalent (CO2e), expressed in tonnes.</p>
-            <p>For Risk Management Authorities outside of the Environment Agency, please contact your local Environment Agency office for support in using the ERIC tool.</p>
+            <p>Operational emissions are from the operation and maintenance of assets over their lifetime that have been built or refurbished by the project. They are calculated alongside capital emissions for the project works from quantities of resources used to operate and maintain assets.</p>
+            <p>The quantities of resource used in operation and maintenance of assets will be calculated into tonnes of CO2e in a Carbon assessment. Enter the total recorded ‘operational emissions’ Carbon impact here.</p>
+            <p>Any Carbon assessment tool used should be able to calculate emissions for industry standard ‘Life cycle assessment’ (LCA) stages in which all non-capital stages comprise the ‘operational emissions’ Carbon impact.</p>
+          notes: |
+            <p>If you do not have an estimate from a carbon assessment this total must be left blank.</p>
+            <p>If there is no operations or maintenance element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
+        whole_life_carbon:
+          heading: This is the whole life carbon calculated for the project
+          para1: |
+            A whole life calculation of carbon impact is provided for the project from emissions added 
+            as ‘capital’ and ‘operational’ carbon in tonnes CO2e over the whole-life investment period.
+          submit_button: Continue
+          units: metric tonnes
+          not_provided: Not provided
+        carbon_cost_sequestered:
+          heading: How much carbon will be sequestered by this project?
+          lede: |
+            <p>Sequestered emissions are from any part of the delivered solution that removes and stores carbon from being emitted over the lifetime of the assets that have been built or refurbished by the project. They are calculated alongside capital and operational emissions for the project works from quantities of natural assets or technologies that have measurable carbon sequestration rates and have been delivered additionally to what was already in place.</p>
+            <p>The quantities of natural assets or technologies and their sequestration rates will be calculated into tonnes of CO2e in a Carbon Assessment. Enter the total recorded ‘sequestered emissions’ Carbon impact here.</p>
+            <p>Any Carbon assessment tool used should be able to calculate sequestered emissions for accredited forms of natural asset or technology-based removals of emissions.</p>
+          notes: |
+            <p>If you do not have an estimate from a carbon assessment this total must be left blank. Any calculations will use 0 metric tonnes.</p>
+        carbon_cost_avoided:
+          heading: How much carbon will be avoided by this project?
+          lede: |
+            <p>Avoided emissions are as a result of the level of reduced flood risk and impacts to properties over the whole-life investment. They are calculated using the %{carbon_impact_guidance} (opens in a new window).</p>
+            <p>For Carbon impact data this total will be profiled over the duration of the asset lifetime. Enter the total recorded ‘avoided emissions’ Carbon impact here.</p>
+          notes: |
+            <p>If you do not have an estimate from a Carbon impact tool this total must be left blank. Any calculations will use 0 metric tonnes.</p>
+          carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
+          carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
+        net_carbon:
+          heading: This is the net carbon calculated for the project
+          para1: |
+            A net calculation of Carbon impact is provided for the project from emissions added as ‘capital’ and ‘operational’ carbon, 
+            minus ‘sequestered’ and ‘avoided’ carbon in tonnes CO2e over the whole-life investment period.
+          submit_button: Continue
+          units: metric tonnes
+          not_provided: Not provided
+        net_carbon_benefit:
+          heading: How much net economic benefit is generated from any net carbon savings?
+          lede: |
+            <p>The economic benefit of the Carbon impact should be provided from a monetisation of the net emissions in tonnes CO2. This must be calculated using the %{carbon_impact_guidance} (opens in a new window). This includes the use of carbon prices and discounting over the investment period.</p>
+            <p>The resulting economic benefit value should be used to consider the carbon impact of project options in appraisal and also be included in the Partnership funding calculator.</p>
+          notes: |
+            <p>If you do not have an estimate from a Carbon impact tool this total must be left blank.</p>
+          carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
+          carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
+        carbon_operational_cost_forecast:
+          heading: How much Operation & Maintenance cost is forecast for the project?
+          lede: |
+            <p>The Operation & Maintenance cost is the forecast cost for all operation, maintenance, refurbishment and decommissioning (where required) over the whole-life investment period as used in the appraisal and carbon impact calculations.</p>
+            <p>It should be provided in 'todays prices', in other words, at the current price base. It must not be discounted to a present value or inflated for future cost increases. This allows the baseline calculation to be established from current carbon intensity factors.</p>
+          notes: |
+            <p>If there is no operations or maintenance element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
+        carbon_summary:
+          heading: Summary of your input data
+          carbon_cost_build: How much capital carbon will the project produce (tCO2)?
+          carbon_cost_operation: How much operational carbon will the project produce (tCO2)?
+          whole_life_carbon: This is the whole life carbon calculated for the project (tCO2)
+          carbon_cost_sequestered: How much carbon will be sequestered by this project (tCO2)?
+          carbon_cost_avoided: How much carbon will be avoided by this project (tCO2)?
+          net_carbon: This is the net carbon calculated for the project (tCO2)
+          net_carbon_benefit: How much economic benefit is generated from carbon savings?
+          carbon_operational_cost_forecast: How much operation & maintenance cost is forecast for the project?
+          capital_cost_estimate: The estimated capital cost for the project from the sum of spending in the years between start of construction and ready for service (Gateway 4 important dates).
+          capital_cost_estimate_hint: This is the capital cost calculated for the project
+          submit_button: Continue
+          units: tonnes
+          not_provided: Not provided
+        carbon_impact:
+          heading: What we have calculated about your Carbon Impact
+          lede: |
+            <p>The EA maintain historic carbon data for programmes that enable a common baseline value of emissions per unit of cost in 2020 to be calculated for every project that enables the ‘capital’ and ‘operational’ Carbon Impact data to be compared against.<br/>The EA also maintain a carbon reduction target for the programme in line with Government Net Zero Carbon commitments that is calculated for every project and its dates of construction that enables the ‘capital’ and ‘operational’ Carbon Impact data to be compared against.</p>
+            <p>Based on data provided in your proposal, we have calculated a baseline and target for comparison against any ‘capital’ and ‘operational’ carbon values you have provided.</p>
+            <p>Any subsequent changes you make to data in other sections used to calculate these values may result in a change which can be viewed on the Proposal overview page before submission.</p>
+          capital_carbon:
+            heading: Capital carbon
+            estimated: Capital carbon estimated by you
+            baseline: Calculated capital carbon baseline
+            target: Calculated capital carbon target
+          operational_carbon:
+            heading: Operations and maintenance carbon
+            estimated: Operations and maintenance carbon estimated by you
+            baseline: Calculated operations and maintenance carbon baseline
+            target: Calculated operations and maintenance carbon target
+          net_carbon:
+            heading: Net carbon
+            estimated: Net carbon estimated by you
+            with_blanks: Net carbon with blank values calculated
+          submit_button: Continue
+            
 
 # Confidence assessment
         confidence_homes_better_protected:

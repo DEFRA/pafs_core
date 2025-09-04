@@ -138,6 +138,34 @@ RSpec.describe PafsCore::ValidationPresenter do
     end
   end
 
+  describe "#carbon_complete?" do
+    context "when carbon_operational_cost_forecast has been set" do
+      context "when set to a positive value" do
+        before { subject.carbon_operational_cost_forecast = 50.25 }
+
+        it { expect(subject).to be_carbon_complete }
+      end
+
+      context "when set to zero" do
+        before { subject.carbon_operational_cost_forecast = 0 }
+
+        it { expect(subject).to be_carbon_complete }
+      end
+
+      context "when set to a negative value" do
+        before { subject.carbon_operational_cost_forecast = -100 }
+
+        it_behaves_like "failed validation example", :carbon_complete?, :carbon, "Tell us about the carbon cost of the project"
+      end
+    end
+
+    context "when carbon_operational_cost_forecast has not been set" do
+      before { subject.carbon_operational_cost_forecast = nil }
+
+      it_behaves_like "failed validation example", :carbon_complete?, :carbon, "Tell us about the carbon cost of the project"
+    end
+  end
+
   describe "#key_dates_complete?" do
     let(:future_start_date) { 1.month.from_now }
 
@@ -384,7 +412,7 @@ RSpec.describe PafsCore::ValidationPresenter do
       before { subject.environmental_benefits = true }
 
       context "when no environmental benefits have been selected" do
-        it_behaves_like "failed validation example", :environmental_outcomes_complete?
+        it_behaves_like "failed validation example", :environmental_outcomes_complete?, :environmental_outcomes, "Tell us the project's environmental outcomes"
       end
 
       context "when at least one environmental benefit has been elected" do
@@ -448,8 +476,8 @@ RSpec.describe PafsCore::ValidationPresenter do
         context "with a v8 PFC attached" do
           let(:filename) { "v8.xlsx" }
 
-          it "returns true" do
-            expect(subject.funding_calculator_complete?).to be true
+          it "returns false" do
+            expect(subject.funding_calculator_complete?).to be false
           end
         end
 
@@ -495,10 +523,13 @@ RSpec.describe PafsCore::ValidationPresenter do
   end
 
   describe "#check_funding_values_within_project_lifetime_range" do
+    subject { described_class.new(project) }
+
+    let(:project) { create(:full_project, fcerm_gia: true, local_levy: true) }
+
     context "when funding value financial year is within the project lifetime range" do
       before do
-        fv1 = build(:funding_value, financial_year: 2020, fcerm_gia: 10, local_levy: 20, total: 30)
-        subject.funding_values << fv1
+        create(:funding_value, project: project, financial_year: 2020, fcerm_gia: 10, local_levy: 20)
       end
 
       it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
@@ -506,8 +537,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when funding value financial year is before the earliest_start date" do
       before do
-        fv1 = build(:funding_value, financial_year: 2015, fcerm_gia: 10, local_levy: 20, total: 30)
-        subject.funding_values << fv1
+        project.update(earliest_start_year: 2022)
+        create(:funding_value, project: project, financial_year: 2015, fcerm_gia: 10, local_levy: 20)
       end
 
       it_behaves_like "failed validation example",
@@ -517,8 +548,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when funding value financial year is after the project_end_financial_year" do
       before do
-        fv1 = build(:funding_value, financial_year: 2028, fcerm_gia: 10, local_levy: 20, total: 30)
-        subject.funding_values << fv1
+        project.update(project_end_financial_year: 2027)
+        create(:funding_value, project: project, financial_year: 2028, fcerm_gia: 10, local_levy: 20)
       end
 
       it_behaves_like "failed validation example",
@@ -528,8 +559,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when public contribution financial year is within the project lifetime range" do
       before do
-        fv1 = create(:funding_value, :with_public_contributor)
-        subject.funding_values << fv1
+        create(:funding_value, :with_public_contributor, project: project)
       end
 
       it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
@@ -537,8 +567,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when public contribution financial year is before the earliest_start date" do
       before do
-        fv1 = create(:funding_value, :with_public_contributor, financial_year: 2015)
-        subject.funding_values << fv1
+        project.update(earliest_start_year: 2022)
+        create(:funding_value, :with_public_contributor, project: project, financial_year: 2015)
       end
 
       it_behaves_like "failed validation example",
@@ -548,8 +578,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when public contribution financial year is after the project_end_financial_year" do
       before do
-        fv1 = build(:funding_value, :with_public_contributor, financial_year: 2028)
-        subject.funding_values << fv1
+        project.update(project_end_financial_year: 2027)
+        create(:funding_value, :with_public_contributor, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -559,8 +589,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when private contribution financial year is within the project lifetime range" do
       before do
-        fv1 = create(:funding_value, :with_private_contributor)
-        subject.funding_values << fv1
+        create(:funding_value, :with_private_contributor, project: project)
       end
 
       it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
@@ -568,8 +597,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when private contribution financial year is before the earliest_start date" do
       before do
-        fv1 = create(:funding_value, :with_private_contributor, financial_year: 2015)
-        subject.funding_values << fv1
+        project.update(earliest_start_year: 2022)
+        create(:funding_value, :with_private_contributor, project: project, financial_year: 2015)
       end
 
       it_behaves_like "failed validation example",
@@ -579,8 +608,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when private contribution financial year is after the project_end_financial_year" do
       before do
-        fv1 = build(:funding_value, :with_private_contributor, financial_year: 2028)
-        subject.funding_values << fv1
+        project.update(project_end_financial_year: 2027)
+        create(:funding_value, :with_private_contributor, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -590,8 +619,7 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when other ea contribution financial year is within the project lifetime range" do
       before do
-        fv1 = create(:funding_value, :with_other_ea_contributor)
-        subject.funding_values << fv1
+        create(:funding_value, :with_other_ea_contributor, project: project)
       end
 
       it_behaves_like "successful validation example", :check_funding_values_within_project_lifetime_range
@@ -599,8 +627,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when other ea contribution financial year is before the earliest_start date" do
       before do
-        fv1 = create(:funding_value, :with_other_ea_contributor, financial_year: 2015)
-        subject.funding_values << fv1
+        project.update(earliest_start_year: 2022)
+        create(:funding_value, :with_other_ea_contributor, project: project, financial_year: 2015)
       end
 
       it_behaves_like "failed validation example",
@@ -610,8 +638,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when other ea contribution financial year is after the project_end_financial_year" do
       before do
-        fv1 = build(:funding_value, :with_other_ea_contributor, financial_year: 2028)
-        subject.funding_values << fv1
+        project.update(project_end_financial_year: 2027)
+        create(:funding_value, :with_other_ea_contributor, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -621,10 +649,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when multiple funding values are outside the project lifetime range" do
       before do
-        fv1 = create(:funding_value, :with_public_contributor, financial_year: 2015)
-        subject.funding_values << fv1
-        fv2 = build(:funding_value, :with_other_ea_contributor, financial_year: 2028)
-        subject.funding_values << fv2
+        create(:funding_value, :with_public_contributor, project: project, financial_year: 2015)
+        create(:funding_value, :with_other_ea_contributor, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -639,10 +665,13 @@ RSpec.describe PafsCore::ValidationPresenter do
   end
 
   describe "#check_outcomes_within_project_lifetime_range" do
+    subject { described_class.new(project) }
+
+    let(:project) { create(:full_project) }
+
     context "when outcome financial year is within the project lifetime range" do
       before do
-        fpo = build(:flood_protection_outcomes, financial_year: 2020)
-        subject.flood_protection_outcomes << fpo
+        create(:flood_protection_outcomes, project: project, financial_year: 2020)
       end
 
       it_behaves_like "successful validation example", :check_outcomes_within_project_lifetime_range
@@ -650,8 +679,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when outcome financial year is before the earliest_start date" do
       before do
-        fpo = build(:flood_protection_outcomes, financial_year: 2015)
-        subject.flood_protection_outcomes << fpo
+        project.update(earliest_start_year: 2022)
+        create(:flood_protection_outcomes, project: project, financial_year: 2015)
       end
 
       it_behaves_like "failed validation example",
@@ -661,8 +690,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when outcome financial year is after the project_end_financial_year" do
       before do
-        fpo = build(:flood_protection_outcomes, financial_year: 2028)
-        subject.flood_protection_outcomes << fpo
+        project.update(project_end_financial_year: 2027)
+        create(:flood_protection_outcomes, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -672,10 +701,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when multiple outcomes are outside the project lifetime range" do
       before do
-        fpo1 = build(:flood_protection_outcomes, financial_year: 2015)
-        subject.flood_protection_outcomes << fpo1
-        fpo2 = build(:flood_protection_outcomes, financial_year: 2028)
-        subject.flood_protection_outcomes << fpo2
+        create(:flood_protection_outcomes, project: project, financial_year: 2015)
+        create(:flood_protection_outcomes, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -690,10 +717,13 @@ RSpec.describe PafsCore::ValidationPresenter do
   end
 
   describe "#check_outcomes_2040_within_project_lifetime_range" do
+    subject { described_class.new(project) }
+
+    let(:project) { create(:full_project) }
+
     context "when outcome financial year is within the project lifetime range" do
       before do
-        fpo = build(:flood_protection2040_outcomes, financial_year: 2020)
-        subject.flood_protection2040_outcomes << fpo
+        create(:flood_protection2040_outcomes, project: project, financial_year: 2020)
       end
 
       it_behaves_like "successful validation example", :check_outcomes_2040_within_project_lifetime_range
@@ -701,8 +731,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when outcome financial year is before the earliest_start date" do
       before do
-        fpo = build(:flood_protection2040_outcomes, financial_year: 2015)
-        subject.flood_protection2040_outcomes << fpo
+        project.update(earliest_start_year: 2022)
+        create(:flood_protection2040_outcomes, project: project, financial_year: 2015)
       end
 
       it_behaves_like "failed validation example",
@@ -712,8 +742,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when outcome financial year is after the project_end_financial_year" do
       before do
-        fpo = build(:flood_protection2040_outcomes, financial_year: 2028)
-        subject.flood_protection2040_outcomes << fpo
+        project.update(project_end_financial_year: 2027)
+        create(:flood_protection2040_outcomes, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -723,10 +753,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when multiple outcomes are outside the project lifetime range" do
       before do
-        fpo1 = build(:flood_protection2040_outcomes, financial_year: 2015)
-        subject.flood_protection2040_outcomes << fpo1
-        fpo2 = build(:flood_protection2040_outcomes, financial_year: 2028)
-        subject.flood_protection2040_outcomes << fpo2
+        create(:flood_protection2040_outcomes, project: project, financial_year: 2015)
+        create(:flood_protection2040_outcomes, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -741,10 +769,13 @@ RSpec.describe PafsCore::ValidationPresenter do
   end
 
   describe "#check_coastal_outcomes_within_project_lifetime_range" do
+    subject { described_class.new(project) }
+
+    let(:project) { create(:full_project) }
+
     context "when outcome financial year is within the project lifetime range" do
       before do
-        cepo = build(:coastal_erosion_protection_outcomes, financial_year: 2020)
-        subject.coastal_erosion_protection_outcomes << cepo
+        create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2020)
       end
 
       it_behaves_like "successful validation example", :check_coastal_outcomes_within_project_lifetime_range
@@ -752,8 +783,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when outcome financial year is before the earliest_start date" do
       before do
-        cepo = build(:coastal_erosion_protection_outcomes, financial_year: 2015)
-        subject.coastal_erosion_protection_outcomes << cepo
+        project.update(earliest_start_year: 2022)
+        create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2015)
       end
 
       it_behaves_like "failed validation example",
@@ -763,8 +794,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when outcome financial year is after the project_end_financial_year" do
       before do
-        cepo = build(:coastal_erosion_protection_outcomes, financial_year: 2028)
-        subject.coastal_erosion_protection_outcomes << cepo
+        project.update(project_end_financial_year: 2027)
+        create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",
@@ -774,10 +805,8 @@ RSpec.describe PafsCore::ValidationPresenter do
 
     context "when multiple outcomes are outside the project lifetime range" do
       before do
-        cepo1 = build(:coastal_erosion_protection_outcomes, financial_year: 2015)
-        subject.coastal_erosion_protection_outcomes << cepo1
-        cepo2 = build(:coastal_erosion_protection_outcomes, financial_year: 2028)
-        subject.coastal_erosion_protection_outcomes << cepo2
+        create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2015)
+        create(:coastal_erosion_protection_outcomes, project: project, financial_year: 2028)
       end
 
       it_behaves_like "failed validation example",

@@ -4,6 +4,7 @@ module PafsCore
   class FloodProtectionOutcomes2040SummaryStep < BasicStep
     include PafsCore::Risks
     include PafsCore::Outcomes
+
     delegate :project_protects_households?,
              to: :project
 

@@ -16,7 +16,7 @@ module PafsCore
              to: :project
 
     attr_reader :funding_calculator
-    attr_accessor :virus_info, :uploaded_file, :expected_version
+    attr_accessor :virus_info, :uploaded_file
 
     validate :virus_free_funding_calculator_present
     validate :validate_calculator_sheet_present
@@ -36,7 +36,18 @@ module PafsCore
           filename = File.basename(uploaded_file.original_filename)
           dest_file = File.join(storage_path, filename)
           storage.upload(uploaded_file.tempfile.path, dest_file)
-          PafsCore::CalculatorParser.parse(uploaded_file, project)
+
+          begin
+            PafsCore::CalculatorParser.parse(uploaded_file, project)
+          rescue StandardError
+            errors.add(
+              :funding_calculator,
+              "The file could not be processed. Please ensure you're using the correct " \
+              "Partnership Funding Calculator version."
+            )
+            storage.delete(dest_file)
+            return false
+          end
 
           if old_file && old_file != filename
             # aws doesn't raise an error if it cannot find the key when deleting
@@ -44,7 +55,6 @@ module PafsCore
           end
 
           self.uploaded_file = uploaded_file.tempfile
-          self.expected_version = step_params(params).fetch(:expected_version, nil)
 
           self.funding_calculator_file_name = filename
           self.funding_calculator_content_type = uploaded_file.content_type
@@ -64,7 +74,7 @@ module PafsCore
     def step_params(params)
       params
         .require(:funding_calculator_step)
-        .permit(:funding_calculator, :expected_version)
+        .permit(:funding_calculator)
     end
 
     # NOTE: we could probably check the content type of the file but we are
@@ -100,13 +110,6 @@ module PafsCore
       @sheet ||= calculator.sheet(calculator_sheet_name)
     end
 
-    def expected_version_name
-      {
-        v8: "v8 2014",
-        v9: "v2 2020"
-      }[expected_version.to_sym]
-    end
-
     def validate_calculator_sheet_present
       return if virus_info.present?
       return if calculator_sheet_name.present?
@@ -118,11 +121,11 @@ module PafsCore
     def validate_calculator_version
       return if virus_info.present?
       return if calculator_sheet_name.blank?
-      return if calculator_version.to_s == expected_version && calculator_version.present?
+      return if calculator_version.present? && calculator_version_accepted?
 
       self.funding_calculator_file_name = ""
       errors.add(:funding_calculator, "The uploaded calculator is the incorrect version. " \
-                                      "You must submit the #{expected_version_name} calculator.")
+                                      "You must submit the #{accepted_version_names} calculator.")
     end
   end
 end

@@ -9,7 +9,7 @@ module PafsCore
              :funding_contributors_attributes=,
              to: :project
 
-    validate :at_least_one_value
+    validate :at_least_one_value?
 
     # override to allow us to set up the funding_values if needed
     def before_view(_params)
@@ -26,7 +26,7 @@ module PafsCore
       PafsCore::FundingSources::PRIVATE_CONTRIBUTIONS
     end
 
-    def at_least_one_value
+    def at_least_one_value?
       contributors = funding_contributors.to_a.select do |x|
         x.contributor_type == contributor_type.to_s
       end.group_by(&:name)

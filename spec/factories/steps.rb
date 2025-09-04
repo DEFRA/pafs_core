@@ -259,5 +259,46 @@ FactoryBot.define do
     factory :kilometres_of_watercourse_enhanced_or_created_single_step, class: "PafsCore::KilometresOfWatercourseEnhancedOrCreatedSingleStep" do
       kilometres_of_watercourse_enhanced_or_created_single { 12 }
     end
+
+    factory :carbon_required_information_step, class: "PafsCore::CarbonRequiredInformationStep" do
+    end
+
+    factory :carbon_prepare_step, class: "PafsCore::CarbonPrepareStep" do
+    end
+
+    factory :carbon_cost_build_step, class: "PafsCore::CarbonCostBuildStep" do
+      carbon_cost_build { 150.0 }
+    end
+
+    factory :carbon_cost_operation_step, class: "PafsCore::CarbonCostOperationStep" do
+      carbon_cost_operation { 150.0 }
+    end
+
+    factory :whole_life_carbon_step, class: "PafsCore::WholeLifeCarbonStep" do
+    end
+
+    factory :carbon_cost_sequestered_step, class: "PafsCore::CarbonCostSequesteredStep" do
+      carbon_cost_sequestered { 50.0 }
+    end
+
+    factory :carbon_cost_avoided_step, class: "PafsCore::CarbonCostAvoidedStep" do
+      carbon_cost_avoided { 50.0 }
+    end
+
+    factory :net_carbon_step, class: "PafsCore::NetCarbonStep" do
+    end
+
+    factory :net_carbon_benefit_step, class: "PafsCore::NetCarbonBenefitStep" do
+    end
+
+    factory :carbon_operational_cost_forecast_step, class: "PafsCore::CarbonOperationalCostForecastStep" do
+      carbon_operational_cost_forecast { 50 }
+    end
+
+    factory :carbon_summary_step, class: "PafsCore::CarbonSummaryStep" do
+    end
+
+    factory :carbon_impact_step, class: "PafsCore::CarbonImpactStep" do
+    end
   end
 end

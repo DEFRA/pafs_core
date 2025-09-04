@@ -28,7 +28,7 @@ RSpec.describe PafsCore::DataMigration::RemovePreviousYears do
         end
       end
       projects_without_previous_years_data.each do |project|
-        (current_year..data_end_year - 1).each do |year|
+        (current_year..(data_end_year - 1)).each do |year|
           add_financial_year_data(project, year)
         end
       end

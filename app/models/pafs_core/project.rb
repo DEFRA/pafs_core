@@ -5,6 +5,7 @@ require "bstard"
 module PafsCore
   class Project < ApplicationRecord
     include PafsCore::DateUtils
+
     validates :reference_number, presence: true, uniqueness: { scope: :version }
     # broaden validation to cope with initial bulk import of existing projects
     # with subtly non-standard formatting

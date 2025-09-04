@@ -5,6 +5,7 @@ module PafsCore
     include PafsCore::FinancialYear
     include PafsCore::Risks
     include PafsCore::Outcomes
+
     delegate :project_end_financial_year,
              :project_type,
              :project_protects_households?,
@@ -13,9 +14,19 @@ module PafsCore
              :no_properties_affected_by_flooding_2040=,
              to: :project
 
-    validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
+    validate :at_least_one_value?, :values_make_sense, :sensible_number_of_houses
 
     validate :values?, if: :no_properties_affected_by_flooding_2040?
+
+    def update(params)
+      @javascript_enabled = params.fetch(:js_enabled, false)
+      assign_attributes(step_params(params))
+      project.updated_by = user if project.respond_to?(:updated_by)
+
+      clear_values_if_checkbox_checked
+
+      valid? && project.save
+    end
 
     def before_view(_params)
       setup_flood_protection_outcomes
@@ -72,9 +83,9 @@ module PafsCore
       )
     end
 
-    def at_least_one_value
-      return unless flooding_total_protected_households_2040.zero? &&
-                    !project.no_properties_affected_by_flooding_2040?
+    def at_least_one_value?
+      return false unless flooding_total_protected_households_2040.zero? &&
+                          !project.no_properties_affected_by_flooding_2040?
 
       errors.add(
         :base,
@@ -161,6 +172,18 @@ module PafsCore
       return if flood_protection2040_outcomes.exists?(financial_year: year)
 
       flood_protection2040_outcomes.build(financial_year: year)
+    end
+
+    def clear_values_if_checkbox_checked
+      return unless no_properties_affected_by_flooding_2040?
+
+      # When the checkbox is checked, set all values to zero
+      flood_protection2040_outcomes.each do |outcome|
+        outcome.households_at_reduced_risk = 0
+        outcome.moved_from_very_significant_and_significant_to_moderate_or_low = 0
+        outcome.households_protected_from_loss_in_20_percent_most_deprived = 0
+        outcome.non_residential_properties = 0
+      end
     end
   end
 end

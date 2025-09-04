@@ -24,10 +24,27 @@ AllCops:
     # These files are not actively maintained but are retained for reference:
     - db/old_migrations/**/*
 
+# I've noticed this rule has been violated across some files and inline disable being used to suppress it
+# It makes sense to increase the max length to a reasonable value
+Metrics/ClassLength:
+  Max: 500
+
+# Not all methods returning a boolean are predicates
+Naming/PredicateMethod:
+  Exclude:
+    - app/presenters/pafs_core/validation_presenter.rb
+    - app/services/pafs_core/antivirus_service.rb
+    - app/services/pafs_core/spreadsheet/contributors/coerce/boolean.rb
+    - app/steps/pafs_core/*_step.rb
+
 RSpec/DescribeClass:
   Exclude:
   # This cop is n/a for rake tasks
     - spec/lib/tasks/*
+
+# this rule seems overly fussy:
+RSpec/IndexedLet:
+  Enabled: false
 
 # This is required in app/services/pafs_core/download/base.rb
 # but adding a disable directive there causes rubocop to complain
@@ -35,12 +52,3 @@ RSpec/DescribeClass:
 Style/RedundantInitialize:
   Exclude:
     - app/services/pafs_core/download/base.rb
-
-# this rule seems overly fussy:
-RSpec/IndexedLet:
-  Enabled: false
-
-# I've noticed this rule has been violated across some files and inline disable being used to suppress it
-# It makes sense to increase the max length to a reasonable value
-Metrics/ClassLength:
-  Max: 500

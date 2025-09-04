@@ -5,6 +5,7 @@ module PafsCore
     include PafsCore::FinancialYear
     include PafsCore::Outcomes
     include PafsCore::Risks
+
     delegate :project_type,
              :project_protects_households?,
              :reduced_risk_of_households_for_coastal_erosion?,
@@ -12,12 +13,20 @@ module PafsCore
              :reduced_risk_of_households_for_coastal_erosion=,
              to: :project
 
-    validate :at_least_one_value, :values_make_sense, :sensible_number_of_houses
+    validate :at_least_one_value?, :values_make_sense, :sensible_number_of_houses
 
     validate :values?, if: :reduced_risk_of_households_for_coastal_erosion?
 
     def before_view(_params)
       setup_coastal_erosion_protection_outcomes
+    end
+
+    def update(params)
+      @javascript_enabled = params.fetch(:js_enabled, false)
+      assign_attributes(step_params(params))
+      project.updated_by = user if project.respond_to?(:updated_by)
+      clear_values_if_checkbox_checked
+      valid? && project.save
     end
 
     private
@@ -66,8 +75,9 @@ module PafsCore
       )
     end
 
-    def at_least_one_value
-      return unless coastal_total_protected_households.zero? && !project.reduced_risk_of_households_for_coastal_erosion?
+    def at_least_one_value?
+      return false unless coastal_total_protected_households.zero? &&
+                          !project.reduced_risk_of_households_for_coastal_erosion?
 
       errors.add(
         :base,
@@ -150,6 +160,17 @@ module PafsCore
       return if coastal_erosion_protection_outcomes.exists?(financial_year: year)
 
       coastal_erosion_protection_outcomes.build(financial_year: year)
+    end
+
+    def clear_values_if_checkbox_checked
+      return unless reduced_risk_of_households_for_coastal_erosion?
+
+      coastal_erosion_protection_outcomes.each do |outcome|
+        outcome.households_at_reduced_risk = 0
+        outcome.households_protected_from_loss_in_next_20_years = 0
+        outcome.households_protected_from_loss_in_20_percent_most_deprived = 0
+        outcome.non_residential_properties = 0
+      end
     end
   end
 end

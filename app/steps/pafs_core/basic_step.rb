@@ -73,5 +73,15 @@ module PafsCore
     def view_path
       "pafs_core/projects/steps/#{step}"
     end
+
+    def previous_step
+      navigator.previous_step(step, project)
+    end
+
+    private
+
+    def navigator
+      @navigator ||= PafsCore::ProjectNavigator.new(user)
+    end
   end
 end
