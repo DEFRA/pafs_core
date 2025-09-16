@@ -484,9 +484,9 @@ en:
           carbon_impact_guidance_label: FCRM Appraisal guide to Carbon impact valuation and supporting tool
           carbon_impact_guidance_link: https://www.gov.uk/government/publications/valuing-the-carbon-net-impacts-of-fcerm-projects
         carbon_operational_cost_forecast:
-          heading: How much Operation & Maintenance cost is forecast for the project?
+          heading: How much Operation and Maintenance cost is forecast for the project?
           lede: |
-            <p>The Operation & Maintenance cost is the forecast cost for all operation, maintenance, refurbishment and decommissioning (where required) over the whole-life investment period as used in the appraisal and carbon impact calculations.</p>
+            <p>The Operation and Maintenance cost is the forecast cost for all operation, maintenance, refurbishment and decommissioning (where required) over the whole-life investment period as used in the appraisal and carbon impact calculations.</p>
             <p>It should be provided in 'todays prices', in other words, at the current price base. It must not be discounted to a present value or inflated for future cost increases. This allows the baseline calculation to be established from current carbon intensity factors.</p>
           notes: |
             <p>If there is no operations or maintenance element to this proposed project then you must enter 0. Any calculations and reporting will use 0.</p>
@@ -499,7 +499,7 @@ en:
           carbon_cost_avoided: How much carbon will be avoided by this project (tCO2)?
           net_carbon: This is the net carbon calculated for the project (tCO2)
           net_carbon_benefit: How much economic benefit is generated from carbon savings?
-          carbon_operational_cost_forecast: How much operation & maintenance cost is forecast for the project?
+          carbon_operational_cost_forecast: How much operation and maintenance cost is forecast for the project?
           capital_cost_estimate: The estimated capital cost for the project from the sum of spending in the years between start of construction and ready for service (Gateway 4 important dates).
           capital_cost_estimate_hint: This is the capital cost calculated for the project
           submit_button: Continue
