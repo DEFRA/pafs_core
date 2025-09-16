@@ -9,11 +9,11 @@ en:
         target: Calculated capital carbon target (tCO2)
         cost: Capital cost calculated for the project
       operational_carbon:
-        heading: Operations and maintenance carbon
+        heading: Operations and maintenance
         estimated: Operations and maintenance carbon estimated by you (tCO2)
         baseline: Calculated operations and maintenance carbon baseline (tCO2)
         target: Calculated operations and maintenance carbon target (tCO2)
-        cost: Operations and maintenance cost calculated for the project
+        cost: Operations and maintenance cost estimated by you
       sequestered_carbon: Sequestered carbon estimated by you (tCO2)
       avoided_carbon: Carbon avoided estimated by you (tCO2)
       net_carbon: Net carbon estimated by you (tCO2)
