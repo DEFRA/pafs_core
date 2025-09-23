@@ -260,19 +260,22 @@ module PafsCore
     def carbon_impact_rate_for_year(year_string, rate_label)
       rate_not_present_in_mid_year_data = false
 
+      # check if year present
+      year_present = carbon_impact_rates.find { |rates| rates["Year"] == year_string }.present?
+
       carbon_impact_rates.reverse.each do |rates|
+        # year not present in data at all, return the previous year rate available
+        return rates[rate_label] if !year_present && rates[rate_label].present?
+
         if rates["Year"] == year_string
           return rates[rate_label] if rates[rate_label].present?
 
           rate_not_present_in_mid_year_data = true
         end
 
-        # year present but rate not present, return the rate from the previous year available
+        # year present but rate is missing, return the rate from the previous year available
         return rates[rate_label] if rate_not_present_in_mid_year_data && rates[rate_label].present?
       end
-
-      # year not present in data at all, return the previous year rate available
-      carbon_impact_rates.last[rate_label]
     end
 
     # Cap DN / Cap Do Nothing Intensity rate for the mid year
