@@ -267,8 +267,12 @@ module PafsCore
           rate_not_present_in_mid_year_data = true
         end
 
+        # year present but rate not present, return the rate from the previous year available
         return rates[rate_label] if rate_not_present_in_mid_year_data && rates[rate_label].present?
       end
+
+      # year not present in data at all, return the previous year rate available
+      carbon_impact_rates.last[rate_label]
     end
 
     # Cap DN / Cap Do Nothing Intensity rate for the mid year

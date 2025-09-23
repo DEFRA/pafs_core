@@ -503,25 +503,31 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
 
     describe "#carbon_impact_rate_for_year" do
-      let(:rates) do
-        [
-          { "Year" => "2022/23", "Cap Do Nothing Intensity" => 3.0, "Cap Target Reduction Rate" => -10.0 },
-          { "Year" => "2023/24", "Cap Do Nothing Intensity" => 3.5, "Cap Target Reduction Rate" => nil },
-          { "Year" => "2024/25", "Cap Do Nothing Intensity" => 4.0, "Cap Target Reduction Rate" => -20.0 }
-        ]
+      let(:json_content) do
+        {
+          "carbon_impact_rates" => [
+            { "Year" => "2022/23", "Cap Do Nothing Intensity" => 3.0, "Cap Target Reduction Rate" => -10.0 },
+            { "Year" => "2023/24", "Cap Do Nothing Intensity" => 3.5, "Cap Target Reduction Rate" => nil },
+            { "Year" => "2024/25", "Cap Do Nothing Intensity" => 4.0, "Cap Target Reduction Rate" => -20.0 }
+          ]
+        }.to_json
+      end
+
+      before do
+        allow(File).to receive(:read).and_return(json_content)
       end
 
       context "when the rate is present for the requested year" do
         it "returns the rate for the specific year" do
           rate = presenter.send(:carbon_impact_rate_for_year, "2023/24", "Cap Do Nothing Intensity")
-          expect(rate).to eq(3.41)
+          expect(rate).to eq(3.5)
         end
       end
 
       context "when the rate is not present for the requested year" do
         it "returns the first available rate from previous years" do
-          rate = presenter.send(:carbon_impact_rate_for_year, "2023/24", "Cap Target Reduction Rate")
-          expect(rate).to eq(-34.24)
+          rate = presenter.send(:carbon_impact_rate_for_year, "2027/28", "Cap Target Reduction Rate")
+          expect(rate).to eq(-20.0)
         end
       end
     end
