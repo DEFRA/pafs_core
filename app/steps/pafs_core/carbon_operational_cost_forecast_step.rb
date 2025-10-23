@@ -5,7 +5,8 @@ module PafsCore
     include PafsCore::Carbon
 
     validates :carbon_operational_cost_forecast, presence: {
-      message: "You must enter a value"
+      message: "You must enter a value. If there is no operation or maintenance " \
+               "element enter 0. Otherwise enter an estimate above 0."
     }
 
     validates :carbon_operational_cost_forecast, numericality: {
