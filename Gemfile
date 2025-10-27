@@ -29,7 +29,7 @@ group :development, :test do
   gem "defra_ruby_style"
   gem "dotenv"
   gem "factory_bot_rails"
-  gem "github_changelog_generator"
+  gem "github_changelog_generator", "1.15.2"
   gem "json_schemer"
   gem "pg"
   gem "pry"
