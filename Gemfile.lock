@@ -463,7 +463,7 @@ DEPENDENCIES
   dotenv
   factory_bot_rails
   faker
-  github_changelog_generator (~> 1.15)
+  github_changelog_generator (= 1.15.2)
   govuk_design_system_formbuilder
   json_schemer
   memory_profiler
