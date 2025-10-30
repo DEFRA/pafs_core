@@ -163,8 +163,8 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#capital_carbon_target" do
     it "calculates target with reduction rate applied" do
-      # 9000 * 3.27 * (1 + (-0.4136)) / 10000 = 9000 * 3.27 * 0.5864 / 10000
-      expect(presenter.capital_carbon_target.round(4)).to eq(1.7258)
+      # 9000 * 3.27 * (1 + (-0.225)) / 10000 = 9000 * 3.27 * 0.775 / 10000
+      expect(presenter.capital_carbon_target.round(4)).to eq(2.2808)
     end
   end
 
@@ -174,8 +174,8 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
     end
 
     it "calculates target with reduction rate applied" do
-      # 50000 * 3.91 * (1 + (-0.1)) / 10000 = 50000 * 3.91 * 0.9 / 10000
-      expect(presenter.operational_carbon_target).to eq(17.595)
+      # 50000 * 3.91 * (1 + (-0.27)) / 10000 = 50000 * 3.91 * 0.73 / 10000
+      expect(presenter.operational_carbon_target).to eq(14.2715)
     end
   end
 
@@ -369,7 +369,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
 
   describe "#display_capital_carbon_target" do
     it "returns formatted carbon target with units" do
-      expect(subject.display_capital_carbon_target).to eq("1.73 tonnes")
+      expect(subject.display_capital_carbon_target).to eq("2.28 tonnes")
     end
 
     it "returns 'not provided' when start_construction_year is nil" do
@@ -405,7 +405,7 @@ RSpec.describe PafsCore::CarbonImpactPresenter do
   describe "#display_operational_carbon_target" do
     it "returns formatted carbon target with units" do
       allow(project).to receive(:carbon_operational_cost_forecast).and_return(12_345)
-      expect(subject.display_operational_carbon_target).to eq("4.34 tonnes")
+      expect(subject.display_operational_carbon_target).to eq("3.52 tonnes")
     end
 
     it "returns 'not provided' if operational_total_project_funding is nil" do
