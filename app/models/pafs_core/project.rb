@@ -156,6 +156,22 @@ module PafsCore
       funding_values.pluck(:financial_year).min
     end
 
+    def carbon_values_calculate_hexdigest
+      # The presenter's net_carbon_with_blanks_calculated method involves all relevant attributes
+      # so a change to any one of the relevant values should result in a different hexdigest value.
+      # There are extreme edge cases where changes to two attributs offset each other exactly
+      # but this is too unlikely to justify the build and maintenance effort of specifying each
+      # relevant attribute separately.
+      presenter = PafsCore::CarbonImpactPresenter.new(project: self)
+      hash_input_data = presenter.net_carbon_with_blanks_calculated
+
+      Digest::SHA1.hexdigest(hash_input_data.to_s)
+    end
+
+    def carbon_values_update_hexdigest
+      update(carbon_values_hexdigest: carbon_values_calculate_hexdigest)
+    end
+
     private
 
     def set_slug
