@@ -70,7 +70,7 @@ RSpec.describe PafsCore::ProjectsController do
 
           it { expect(project.carbon_values_hexdigest).to be_nil }
 
-          it_behaves_like "does not show the carbon values changes message"
+          it_behaves_like "shows the carbon values changed message"
         end
 
         context "when the hexdigest has been calculated and stored" do
@@ -96,20 +96,20 @@ RSpec.describe PafsCore::ProjectsController do
             it_behaves_like "shows the carbon values changed message"
           end
 
-                    context "when the funding values have been updated since the hexdigest was stored" do
-                      before do
-                        project.carbon_values_update_hexdigest
+          context "when the funding values have been updated since the hexdigest was stored" do
+            before do
+              project.carbon_values_update_hexdigest
 
-                        project.update(ready_for_service_year: project.ready_for_service_year - 1)
-                        project.update(carbon_cost_operation: nil)
-                        financial_years = project.start_construction_year..project.ready_for_service_year
-                        project.funding_values.select { |x| financial_years.include?(x.financial_year) }.map{|fv| fv.update(fcerm_gia: 987) }
+              project.update(ready_for_service_year: project.ready_for_service_year - 1)
+              project.update(carbon_cost_operation: nil)
+              financial_years = project.start_construction_year..project.ready_for_service_year
+              project.funding_values.select { |x| financial_years.include?(x.financial_year) }.map { |fv| fv.update(fcerm_gia: 987) }
 
-                        get :show, params: { id: project.to_param }
-                      end
+              get :show, params: { id: project.to_param }
+            end
 
-                      it_behaves_like "shows the carbon values changed message"
-                    end
+            it_behaves_like "shows the carbon values changed message"
+          end
         end
       end
     end

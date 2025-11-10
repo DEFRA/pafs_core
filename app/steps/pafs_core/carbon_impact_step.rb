@@ -6,7 +6,7 @@ module PafsCore
 
     def update(_params)
       project.carbon_values_update_hexdigest
-      
+
       true
     end
 
