@@ -250,8 +250,8 @@ module PafsCore
     end
 
     def carbon_impact_rates
-      json = JSON.parse(File.read(PafsCore::Engine.root.join("config", "carbon_impact_rates.json")))
-      json["carbon_impact_rates"]
+      @carbon_impact_rates ||=
+        JSON.parse(File.read(PafsCore::Engine.root.join("config", "carbon_impact_rates.json")))["carbon_impact_rates"]
     end
 
     # Where a rate is not populated for a particular FY (or the FY does not exist in the rate table),
