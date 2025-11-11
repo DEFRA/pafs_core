@@ -121,8 +121,6 @@
             <br/><br/>
           </p>
 
-<% Rails.logger.warn "\n>>>> stored hexdigest #{project.carbon_values_hexdigest}, now #{project.carbon_values_calculate_hexdigest} \n" %>
-        <%# <% if project.carbon_values_hexdigest.present? && (project.carbon_values_hexdigest != project.carbon_values_calculate_hexdigest) %> 
           <% if (project.carbon_values_hexdigest != project.carbon_values_calculate_hexdigest) %>
             <% Rails.logger.warn "\n>>>> showing message \"#{t("pafs_core.summary.carbon_values_have_changed_message")}\"\n" %>
               <br/><br/>
