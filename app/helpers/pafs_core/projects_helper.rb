@@ -228,17 +228,5 @@ module PafsCore
     def file_extension(file_name)
       file_name.split(".").last.upcase
     end
-
-    # def key_date_field(f, attr)
-    #   # expecting attr to end with either '_month' or '_year'
-    #   date_type = attr.to_s.split("_").last
-    #   range = date_type == "month" ? 1..12 : 2000..2099
-    #   length = date_type == "month" ? 2 : 4
-    #
-    #   content_tag(:div, class: "form-group form-group-#{date_type}") do
-    #     concat(f.label(attr, t(".#{date_type}_label"), class: "form-label"))
-    #     concat(f.number_field(attr, in: range, maxlength: length, class: "form-control form-#{date_type}"))
-    #   end
-    # end
   end
 end

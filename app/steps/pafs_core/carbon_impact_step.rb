@@ -5,7 +5,8 @@ module PafsCore
     include PafsCore::Carbon
 
     def update(_params)
-      # just progress to next step
+      project.carbon_values_update_hexdigest
+
       true
     end
 

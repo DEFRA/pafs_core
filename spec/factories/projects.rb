@@ -59,6 +59,15 @@ FactoryBot.define do
       create_funding_values { true }
     end
 
+    trait :with_carbon_values do
+      carbon_cost_build { 150.0 }
+      carbon_cost_operation { 150.0 }
+      carbon_cost_sequestered { 50.0 }
+      carbon_cost_avoided { 50.0 }
+      carbon_savings_net_economic_benefit { 300 }
+      carbon_operational_cost_forecast { 50 }
+    end
+
     transient do
       public_contribution_names { [] }
       private_contribution_names { [] }

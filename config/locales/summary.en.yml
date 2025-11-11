@@ -21,6 +21,7 @@ en:
       net_carbon_economic_benefit: Net carbon economic benefit estimated by you
       carbon_cost_build: "Capital carbon will this project produce?"
       carbon_cost_operation: "How much Carbon will this project’s assets produce in their lifecycle?"
+      carbon_values_have_changed_message: Calculated values have changed since the section was last completed.
       confidence_title: "Confidence Assessment"
       confidence_homes_better_protected: "Confidence in number of properties better protected by this project"
       confidence_homes_by_gateway_four: "Confidence in properties being delivered by the project’s Gateway 4 (Readiness for Service) date"

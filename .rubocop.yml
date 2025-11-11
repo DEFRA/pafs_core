@@ -37,6 +37,16 @@ Naming/PredicateMethod:
     - app/services/pafs_core/spreadsheet/contributors/coerce/boolean.rb
     - app/steps/pafs_core/*_step.rb
 
+# Allow "for" in context names
+RSpec/ContextWording:
+  Prefixes:
+     - when
+     - with
+     - without
+     - if
+     - unless
+     - for
+
 RSpec/DescribeClass:
   Exclude:
   # This cop is n/a for rake tasks
@@ -45,6 +55,11 @@ RSpec/DescribeClass:
 # this rule seems overly fussy:
 RSpec/IndexedLet:
   Enabled: false
+
+RSpec/NestedGroups:
+  Exclude:
+    # Extra nesting tolerated as hexdigest behaviour is conditional on multiple factors.
+    - spec/controllers/pafs_core/projects_controller_spec.rb
 
 # This is required in app/services/pafs_core/download/base.rb
 # but adding a disable directive there causes rubocop to complain

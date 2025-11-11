@@ -118,9 +118,17 @@
             <span class="govuk-grid-column-one-quarter">
               <%= @carbon_presenter.display_carbon_savings_net_economic_benefit %>
             </span>
+            <br/><br/>
           </p>
-      
+
+          <% if (project.carbon_values_hexdigest != project.carbon_values_calculate_hexdigest) %>
+            <br/><br/>
+              <h3>
+                <%= t("pafs_core.summary.carbon_values_have_changed_message") %>
+              </h3>
+          <% end %>
         </div>
+
         <div class="govuk-grid-column-one-quarter">
           <% if project.draft? %>
             <% if can_edit_project_sections?(project) -%>

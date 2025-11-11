@@ -30,6 +30,9 @@ RSpec.describe PafsCore::ProjectsController do
   end
 
   describe "GET show" do
+    # By default, rspec suppresses view rendering in controller specs
+    render_views
+
     it "assigns @project" do
       get :show, params: { id: project.to_param }
       expect(assigns(:project)).to eq(project)
@@ -39,14 +42,98 @@ RSpec.describe PafsCore::ProjectsController do
       get :show, params: { id: project.to_param }
       expect(response).to render_template("show")
     end
-  end
 
-  # describe "GET submit" do
-  #   it "renders the submit template" do
-  #     get :submit, id: project.to_param
-  #     expect(response).to render_template("submit")
-  #   end
-  # end
+    context "for carbon values changed message" do
+      shared_examples "does not show the carbon values changes message" do
+        it { expect(response.body).not_to include I18n.t("pafs_core.summary.carbon_values_have_changed_message") }
+      end
+
+      shared_examples "shows the carbon values changed message" do
+        it { expect(response.body).to include I18n.t("pafs_core.summary.carbon_values_have_changed_message") }
+      end
+
+      context "when carbon input values have not yet been stored" do
+        let(:project) { create(:full_project, :with_funding_values) }
+
+        before { get :show, params: { id: project.to_param } }
+
+        it { expect(project.carbon_values_hexdigest).to be_nil }
+
+        it_behaves_like "does not show the carbon values changes message"
+      end
+
+      context "when carbon input values have been stored" do
+        let(:project) { create(:full_project, :with_funding_values, :with_carbon_values) }
+
+        context "when the hexdigest has not been calculated" do
+          before { get :show, params: { id: project.to_param } }
+
+          it { expect(project.carbon_values_hexdigest).to be_nil }
+
+          it_behaves_like "shows the carbon values changed message"
+        end
+
+        context "when the hexdigest has been calculated and stored" do
+          before { project.carbon_values_update_hexdigest }
+
+          context "when carbon input values have not been updated since the hexdigest was stored" do
+            before do
+              get :show, params: { id: project.to_param }
+            end
+
+            it { expect(project.carbon_values_hexdigest).not_to be_nil }
+
+            it_behaves_like "does not show the carbon values changes message"
+          end
+
+          context "when carbon input values have been updated since the hexdigest was stored" do
+            before do
+              project.update(carbon_cost_operation: project.carbon_cost_operation + 1)
+
+              get :show, params: { id: project.to_param }
+            end
+
+            it_behaves_like "shows the carbon values changed message"
+          end
+
+          context "when the funding values have been updated since the hexdigest was stored" do
+            before do
+              project.carbon_values_update_hexdigest
+
+              project.update(ready_for_service_year: project.ready_for_service_year - 1)
+              project.update(carbon_cost_operation: nil)
+              financial_years = project.start_construction_year..project.ready_for_service_year
+              project.funding_values.select { |x| financial_years.include?(x.financial_year) }.map { |fv| fv.update(fcerm_gia: 987) }
+
+              get :show, params: { id: project.to_param }
+            end
+
+            it_behaves_like "shows the carbon values changed message"
+          end
+
+          context "when start construction date has been updated since the hexdigest was stored" do
+            before do
+              project.update(start_construction_month: project.start_construction_month + 1)
+
+              get :show, params: { id: project.to_param }
+            end
+
+            it_behaves_like "shows the carbon values changed message"
+          end
+
+          context "when ready for service date has been updated since the hexdigest was stored" do
+            before do
+              project.update(ready_for_service_month: project.ready_for_service_month + 1)
+
+              get :show, params: { id: project.to_param }
+            end
+
+            it_behaves_like "shows the carbon values changed message"
+          end
+        end
+      end
+    end
+  end
 
   describe "GET pipeline" do
     it "renders the pipeline template" do
