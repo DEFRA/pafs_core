@@ -98,7 +98,7 @@ RSpec.describe PafsCore::Project do
   # Here we don't verify Digest::SHA1 checksum generation; we just test basic behaviour.
   # Checksum value checking will be performed in the projects request specs.
   describe "#carbon_values_calculate_hexdigest" do
-    let(:project) { build(:project, :with_carbon_values) }
+    let(:project) { build(:full_project, :with_carbon_values) }
 
     it { expect { project.carbon_values_calculate_hexdigest }.not_to raise_error }
 
@@ -108,7 +108,7 @@ RSpec.describe PafsCore::Project do
   end
 
   describe "#carbon_values_update_hexdigest" do
-    let(:project) { build(:project, :with_carbon_values) }
+    let(:project) { build(:full_project, :with_carbon_values) }
 
     it { expect { project.carbon_values_update_hexdigest }.to change(project, :carbon_values_hexdigest) }
   end

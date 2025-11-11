@@ -110,6 +110,26 @@ RSpec.describe PafsCore::ProjectsController do
 
             it_behaves_like "shows the carbon values changed message"
           end
+
+          context "when start construction date has been updated since the hexdigest was stored" do
+            before do
+              project.update(start_construction_month: project.start_construction_month + 1)
+
+              get :show, params: { id: project.to_param }
+            end
+
+            it_behaves_like "shows the carbon values changed message"
+          end
+
+          context "when ready for service date has been updated since the hexdigest was stored" do
+            before do
+              project.update(ready_for_service_month: project.ready_for_service_month + 1)
+
+              get :show, params: { id: project.to_param }
+            end
+
+            it_behaves_like "shows the carbon values changed message"
+          end
         end
       end
     end
