@@ -122,11 +122,10 @@
           </p>
 
           <% if (project.carbon_values_hexdigest != project.carbon_values_calculate_hexdigest) %>
-            <% Rails.logger.warn "\n>>>> showing message \"#{t("pafs_core.summary.carbon_values_have_changed_message")}\"\n" %>
-              <br/><br/>
-                <h3>
-                  <%= t("pafs_core.summary.carbon_values_have_changed_message") %>
-                </h3>
+            <br/><br/>
+              <h3>
+                <%= t("pafs_core.summary.carbon_values_have_changed_message") %>
+              </h3>
           <% end %>
         </div>
 
