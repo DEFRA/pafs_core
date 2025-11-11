@@ -111,9 +111,9 @@ RSpec.describe PafsCore::SpreadsheetService do
       MZ: :project_status,
       NA: :carbon_cost_build,
       NB: :carbon_cost_operation,
-      NC: :last_updated,
-      ND: :last_updated_by,
-      NE: :pso_name
+      NG: :last_updated,
+      NH: :last_updated_by,
+      NI: :pso_name
     }
 
     column_mapping.each do |column, value|
