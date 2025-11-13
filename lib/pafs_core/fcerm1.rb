@@ -211,14 +211,18 @@ module PafsCore
       # Project Status
       { column: "MZ", field_name: :project_status },
 
-      # Carbon
+      # Carbon impact
       { column: "NA", field_name: :carbon_cost_build },
       { column: "NB", field_name: :carbon_cost_operation },
+      { column: "NC", field_name: :carbon_cost_sequestered },
+      { column: "ND", field_name: :carbon_cost_avoided },
+      { column: "NE", field_name: :carbon_savings_net_economic_benefit },
+      { column: "NF", field_name: :carbon_operational_cost_forecast },
 
       # Additional columns per RUBY-2394
-      { column: "NC", field_name: :last_updated, import: false },
-      { column: "ND", field_name: :last_updated_by, import: false },
-      { column: "NE", field_name: :pso_name, import: false }
+      { column: "NG", field_name: :last_updated, import: false },
+      { column: "NH", field_name: :last_updated_by, import: false },
+      { column: "NI", field_name: :pso_name, import: false }
     ].freeze
 
     A2Z = ("A".."Z").to_a.freeze
