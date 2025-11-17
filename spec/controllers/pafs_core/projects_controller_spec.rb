@@ -96,19 +96,46 @@ RSpec.describe PafsCore::ProjectsController do
             it_behaves_like "shows the carbon values changed message"
           end
 
-          context "when the funding values have been updated since the hexdigest was stored" do
+          context "when important dates have been updated since the hexdigest was stored" do
             before do
               project.carbon_values_update_hexdigest
 
               project.update(ready_for_service_year: project.ready_for_service_year - 1)
-              project.update(carbon_cost_operation: nil)
-              financial_years = project.start_construction_year..project.ready_for_service_year
-              project.funding_values.select { |x| financial_years.include?(x.financial_year) }.map { |fv| fv.update(fcerm_gia: 987) }
 
               get :show, params: { id: project.to_param }
             end
 
             it_behaves_like "shows the carbon values changed message"
+          end
+
+          context "when the funding values have been updated since the hexdigest was stored" do
+            # The next two specs are to address an issue where funding value changes
+            # were not taken into account if carbon_cost_build was populated.
+            context "when the project carbon_cost_build is not populated" do
+              before do
+                project.update(carbon_cost_build: nil)
+
+                project.carbon_values_update_hexdigest
+                project.funding_values.find_by(financial_year: project.start_construction_year).update(fcerm_gia: 987)
+
+                get :show, params: { id: project.to_param }
+              end
+
+              it_behaves_like "shows the carbon values changed message"
+            end
+
+            context "when the project carbon_cost_build is populated" do
+              before do
+                project.update(carbon_cost_build: 1_000)
+
+                project.carbon_values_update_hexdigest
+                project.funding_values.find_by(financial_year: project.start_construction_year).update(fcerm_gia: 987)
+
+                get :show, params: { id: project.to_param }
+              end
+
+              it_behaves_like "shows the carbon values changed message"
+            end
           end
 
           context "when start construction date has been updated since the hexdigest was stored" do
