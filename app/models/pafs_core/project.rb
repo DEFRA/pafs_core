@@ -168,7 +168,7 @@ module PafsCore
 
       hash_input_data = {
         net_carbon_with_blanks_calculated: presenter.net_carbon_with_blanks_calculated,
-        funding_values: funding_values.all.map { |fv| fv.attributes.to_h },
+        funding_values: funding_values.all.map { |fv| fv.attributes.sort_by { |k, _v| k }.sort }.sort,
         start_construction_year: start_construction_year,
         start_construction_month: start_construction_month,
         ready_for_service_year: ready_for_service_year,
