@@ -91,13 +91,9 @@ module PafsCore
 
     # Net carbon with blank values calculated
     def net_carbon_with_blanks_calculated
-      # defaults to capital_carbon_baseline when blank
       carbon_cost_build = project.carbon_cost_build.presence || capital_carbon_baseline
-      # defaults to operational_carbon_baseline when blank
       carbon_cost_operation = project.carbon_cost_operation.presence || operational_carbon_baseline
-      # defaults to 0 when blank
       carbon_cost_sequestered = project.carbon_cost_sequestered.presence || 0
-      # defaults to 0 when blank
       carbon_cost_avoided = project.carbon_cost_avoided.presence || 0
 
       carbon_cost_build + carbon_cost_operation - carbon_cost_sequestered - carbon_cost_avoided
