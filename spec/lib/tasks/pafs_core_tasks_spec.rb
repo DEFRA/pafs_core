@@ -7,16 +7,15 @@ RSpec.describe "PafsCore::DataMigration", type: :rake do
 
   include_context "rake"
 
-  original_stdout = $stdout
-
   before do
     # suppress noisy outputs during unit test
+    @original_stdout = $stdout
     $stdout = StringIO.new
 
     create(:full_project)
   end
 
-  after { $stdout = original_stdout }
+  after { $stdout = @original_stdout }
 
   describe "pafs:bulk_export_to_pol" do
     it { expect { Rake::Task["pafs:bulk_export_to_pol"].invoke }.not_to raise_error }
