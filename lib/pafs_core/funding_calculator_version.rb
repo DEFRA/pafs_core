@@ -21,11 +21,11 @@ module PafsCore
       end
 
       def calculator_version
-        VERSION_MAP.each do |k, v|
-          return k if sheet.cell(v[:column], v[:row]).to_s.match(v[:version_text])
+        version_entry = VERSION_MAP.find do |_k, v|
+          sheet.cell(v[:column], v[:row]).to_s.match(v[:version_text])
         end
 
-        nil
+        version_entry&.first
       end
     end
 
