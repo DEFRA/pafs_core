@@ -25,4 +25,7 @@ module PafsCore
 
   class AreaImportError < StandardError
   end
+
+  class AreaParentError < StandardError
+  end
 end
