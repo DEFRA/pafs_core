@@ -4,16 +4,15 @@
 require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("dummy/config/environment", __dir__)
-
-# Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
-
 require "rspec/rails"
 # require "capybara/rspec"
 require "factory_bot_rails"
 require "shoulda-matchers"
 require "vcr"
 require "webmock/rspec"
+
+# Prevent database truncation if the environment is production
+abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 Rails.backtrace_cleaner.remove_silencers!
 

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
+require "csv"
+
 module PafsCore
   class AreaImporter
-
-    require "csv"
     HEADERS = ["name",
                "parent area",
                "type",
