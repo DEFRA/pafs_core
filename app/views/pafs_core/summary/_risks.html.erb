@@ -66,10 +66,10 @@
         <% if !project.draft? %>
           <div class="govuk-grid-row">
             <details class="govuk-details headroom" data-module="govuk-details">
-              <summary class="govuk-details__summary" aria-controls="show_risks and households benefitting detail">
+              <summary class="govuk-details__summary" aria-controls="flooding-detail">
                 <span class="details__summary-text">View households affected by flooding detail </span>
               </summary>
-              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+              <div id="flooding-detail" class="govuk-details__text">
                 <%= render partial: "pafs_core/summary/flood_protection_outcomes_detail", locals: {project: @project} %>
               </div>
             </details>
@@ -109,10 +109,10 @@
         <% if !project.draft? %>
           <div class="govuk-grid-row">
             <details class="govuk-details headroom" data-module="govuk-details">
-              <summary class="govuk-details__summary" aria-controls="show_risks and households benefitting detail">
+              <summary class="govuk-details__summary" aria-controls="flooding-2040-detail">
                 <span class="details__summary-text">View households affected by flooding by 2040 detail</span>
               </summary>
-              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+              <div id="flooding-2040-detail" class="govuk-details__text">
                 <%= render partial: "pafs_core/summary/flood_protection_outcomes2040_detail", locals: {project: @project} %>
               </div>
             </details>
@@ -154,10 +154,10 @@
         <% if !project.draft? %>
           <div class="govuk-grid-row">
             <details class="govuk-details headroom" data-module="govuk-details">
-              <summary class="govuk-details__summary" aria-controls="show_risks and households benefitting detail">
+              <summary class="govuk-details__summary" aria-controls="coastal-erosion-detail">
                 <span class="details__summary-text">View properties affected by coastal erosion detail </span>
               </summary>
-              <div id="show_risks and households benefitting detail" class="govuk-details__text">
+              <div id="coastal-erosion-detail" class="govuk-details__text">
                 <%= render partial: "pafs_core/summary/coastal_erosion_protection_outcomes_detail", locals: {project: @project} %>
               </div>
             </details>
@@ -169,7 +169,7 @@
     <div class="add-row">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-three-quarters">
-          <h2 class="govuk-heading-m" id="risks">Risks and properties benefitting</h2>
+          <h2 class="govuk-heading-m" id="risks-add">Risks and properties benefitting</h2>
         </div>
         <div class="govuk-grid-column-one-quarter">
           <% unless project.archived? %>
