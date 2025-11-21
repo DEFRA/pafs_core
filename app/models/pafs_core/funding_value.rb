@@ -34,9 +34,11 @@ module PafsCore
       next if FundingSources::REMOVED_FROM_FUNDING_VALUES.include?(source)
 
       define_method("#{source}_total") do
-        return public_send(source).to_i unless FundingSources::AGGREGATE_SOURCES.include?(source)
-
-        (public_send(source) || []).map(&:amount).compact.sum.to_i
+        if FundingSources::AGGREGATE_SOURCES.include?(source)
+          (public_send(source) || []).map(&:amount).compact.sum.to_i
+        else
+          public_send(source).to_i
+        end
       end
     end
 
