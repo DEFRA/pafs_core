@@ -32,19 +32,27 @@ module PafsCore
     private
 
     def values?
+      error_found = false
+
       coastal_erosion_protection_outcomes.each do |outcome|
         %i[households_at_reduced_risk
            households_protected_from_loss_in_next_20_years
            households_protected_from_loss_in_20_percent_most_deprived].each do |attr|
           if outcome.send(attr).to_i.positive?
-            return errors.add(
-              :base,
-              "In the applicable year(s), tell us how many households moved to a lower flood risk category " \
-              "(column A), OR if this does not apply select the checkbox."
-            )
+            error_found = true
+            break
           end
         end
+        break if error_found
       end
+
+      return unless error_found
+
+      errors.add(
+        :base,
+        "In the applicable year(s), tell us how many households moved to a lower flood risk category " \
+        "(column A), OR if this does not apply select the checkbox."
+      )
     end
 
     def values_make_sense

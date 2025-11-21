@@ -68,6 +68,8 @@ module PafsCore
     end
 
     def contins_required_gis_files(uploaded_file)
+      all_extensions_present = true
+
       Zip::File.open(uploaded_file.tempfile.path) do |zip_file|
         entries = zip_file.entries.map(&:name)
 
@@ -76,11 +78,12 @@ module PafsCore
 
           errors.add(:base, "The selected file must be a zip file, " \
                             "containing the following mandatory files: dbf. shx. shp. prj.")
-          return false
+          all_extensions_present = false
+          break
         end
       end
 
-      true
+      all_extensions_present
     rescue Zip::Error
       errors.add(:base, "The selected file must be a zip file, " \
                         "containing the following mandatory files: dbf. shx. shp. prj.")
