@@ -15,7 +15,7 @@ module PafsCore
     end
 
     def full_import(path_to_file)
-      abort("Areas already exist") if PafsCore::Area.any?
+      raise PafsCore::AreaImportError, "Areas already exist" if PafsCore::Area.any?
 
       extract_csv_data(path_to_file)
 
@@ -35,7 +35,7 @@ module PafsCore
     end
 
     def import_areas
-      abort("Headers incorrect.") unless (@areas_to_be_imported.first.keys - HEADERS).empty?
+      raise PafsCore::AreaImportError, "Headers incorrect." unless (@areas_to_be_imported.first.keys - HEADERS).empty?
 
       remove_areas_that_have_already_been_imported
 

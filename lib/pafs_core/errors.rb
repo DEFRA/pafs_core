@@ -22,4 +22,7 @@ module PafsCore
 
   class MapServiceError < RuntimeError
   end
+
+  class AreaImportError < StandardError
+  end
 end
