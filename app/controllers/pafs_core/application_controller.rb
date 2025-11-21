@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PafsCore
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
     include PafsCore::ApplicationHelper
     include PafsCore::CustomHeaders
 
