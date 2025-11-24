@@ -19,13 +19,14 @@ module PafsCore
     ].freeze
 
     def initialize(calculator, project)
-      calculator_sheet_name = calculator.sheets.grep(/PF Calculator/i).first || raise("No calculator sheet found")
+      calculator_sheet_name = calculator.sheets.grep(/PF Calculator/i).first ||
+                              raise(PafsCore::CalculatorSheetNotFoundError, "No calculator sheet found")
       @sheet = calculator.sheet(calculator_sheet_name)
       @project = project
     end
 
     def self.parse(file, project)
-      raise "require an xlsx file" unless File.extname(file.path) == ".xlsx"
+      raise PafsCore::InvalidFileTypeError, "require an xlsx file" unless File.extname(file.path) == ".xlsx"
 
       begin
         calculator = Roo::Excelx.new(file.path)

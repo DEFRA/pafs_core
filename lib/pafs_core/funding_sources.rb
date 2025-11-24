@@ -43,11 +43,11 @@ module PafsCore
     end
 
     def current_funding_values
-      funding_values.select { |fv| fv.financial_year <= project_end_financial_year }.sort_by(&:financial_year)
       # if this is a db query we lose inputted data when there are errors
       # and we send the user back to fix it
       # It also breaks validating that every column has at least one value overall
       # funding_values.to_financial_year(project_end_financial_year)
+      funding_values.select { |fv| fv.financial_year <= project_end_financial_year }.sort_by(&:financial_year)
     end
 
     def selected_funding_sources

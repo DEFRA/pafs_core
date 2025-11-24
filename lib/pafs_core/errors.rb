@@ -22,4 +22,25 @@ module PafsCore
 
   class MapServiceError < RuntimeError
   end
+
+  class AreaImportError < StandardError
+  end
+
+  class AreaParentError < StandardError
+  end
+
+  class InvalidFileTypeError < StandardError
+  end
+
+  class CalculatorSheetNotFoundError < StandardError
+  end
+
+  class MissingRfccAreaCodeError < StandardError
+  end
+
+  class RisksNotSetError < StandardError
+  end
+
+  class SpreadsheetProcessingError < StandardError
+  end
 end

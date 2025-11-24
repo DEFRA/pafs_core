@@ -17,9 +17,7 @@ module PafsCore
       ]
 
       # check required fields
-      required.each do |field_name|
-        return false if project.send(field_name).nil?
-      end
+      return false unless required.all? { |field_name| project.send(field_name).present? }
 
       # check funding sources
       return false unless PafsCore::ValidationPresenter.new(project).funding_sources_complete?

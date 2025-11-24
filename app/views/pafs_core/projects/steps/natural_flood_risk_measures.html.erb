@@ -32,26 +32,15 @@
             <% end %>
             <div class="govuk-checkboxes__item">
               <%# <input name="natural_flood_risk_measures_step[other_flood_measures_selected]" type="hidden" value="0"> %>
-              <% if f.object.other_flood_measures_selected %>
-                <input id="natural_flood_risk_measures_step_other_flood_measures_selected"
-                       type="checkbox"
-                       name="natural_flood_risk_measures_step[other_flood_measures_selected]"
-                       class="govuk-checkboxes__input"
-                       value="other_flood_measures_selected"
-                       checked
-                       onclick="toggleBoxVisibility()"
-                       onkeydown="toggleBoxVisibility()"
-                >
-              <% else %>
-                <input id="natural_flood_risk_measures_step_other_flood_measures_selected"
-                       type="checkbox"
-                       name="natural_flood_risk_measures_step[other_flood_measures_selected]"
-                       class="govuk-checkboxes__input"
-                       value="other_flood_measures_selected"
-                       onclick="toggleBoxVisibility()"
-                       onkeydown="toggleBoxVisibility()"
-                       >
-              <% end %>
+              <input id="natural_flood_risk_measures_step_other_flood_measures_selected"
+                     type="checkbox"
+                     name="natural_flood_risk_measures_step[other_flood_measures_selected]"
+                     class="govuk-checkboxes__input"
+                     value="other_flood_measures_selected"
+                     <%= 'checked' if f.object.other_flood_measures_selected %>
+                     onclick="toggleBoxVisibility()"
+                     onkeydown="toggleBoxVisibility()"
+              >
               <label for="natural_flood_risk_measures_step_other_flood_measures_selected" class="govuk-label govuk-checkboxes__label">
                 Other
               </label>

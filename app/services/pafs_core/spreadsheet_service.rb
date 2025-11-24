@@ -166,7 +166,8 @@ module PafsCore
             value = use_value ? project.send(col[:field_name]) : 0
             sheet[row_no][column_index(col[:column])].change_contents(value)
           rescue StandardError => e
-            raise "Boom - Project (#{project.slug}) Row no (#{row_no}) col (#{col}) " \
+            raise PafsCore::SpreadsheetProcessingError,
+                  "Boom - Project (#{project.slug}) Row no (#{row_no}) col (#{col}) " \
                   "field_name (#{col[:field_name]}) value (#{value}): exception #{e}"
           end
         end

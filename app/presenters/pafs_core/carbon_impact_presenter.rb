@@ -255,23 +255,35 @@ module PafsCore
     # of 3.5 would be picked up from the 2028/29 field as this is the latest available year.
     def carbon_impact_rate_for_year(year_string, rate_label)
       rate_not_present_in_mid_year_data = false
+      result = nil
 
       # check if year present
       year_present = carbon_impact_rates.find { |rates| rates["Year"] == year_string }.present?
 
       carbon_impact_rates.reverse.each do |rates|
         # year not present in data at all, return the previous year rate available
-        return rates[rate_label] if !year_present && rates[rate_label].present?
+        if !year_present && rates[rate_label].present?
+          result = rates[rate_label]
+          break
+        end
 
         if rates["Year"] == year_string
-          return rates[rate_label] if rates[rate_label].present?
+          if rates[rate_label].present?
+            result = rates[rate_label]
+            break
+          end
 
           rate_not_present_in_mid_year_data = true
         end
 
         # year present but rate is missing, return the rate from the previous year available
-        return rates[rate_label] if rate_not_present_in_mid_year_data && rates[rate_label].present?
+        if rate_not_present_in_mid_year_data && rates[rate_label].present?
+          result = rates[rate_label]
+          break
+        end
       end
+
+      result
     end
 
     # Cap DN / Cap Do Nothing Intensity rate for the mid year

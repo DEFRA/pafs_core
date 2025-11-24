@@ -4,26 +4,29 @@ require "rails_helper"
 
 RSpec.describe PafsCore::Area do
   describe "attributes" do
-    area_levels = [
-      {
-        level: :country,
-        parent_id: nil
-      },
-      {
-        level: :ea_area,
-        parent_id: 1
-      },
-      {
-        level: :pso_area,
-        parent_id: 1
-      },
-      {
-        level: :rma_area,
-        parent_id: 1
-      }
-    ]
-    area = area_levels.sample
     subject { create(area[:level], parent_id: area[:parent_id]) }
+
+    let(:area_levels) do
+      [
+        {
+          level: :country,
+          parent_id: nil
+        },
+        {
+          level: :ea_area,
+          parent_id: 1
+        },
+        {
+          level: :pso_area,
+          parent_id: 1
+        },
+        {
+          level: :rma_area,
+          parent_id: 1
+        }
+      ]
+    end
+    let(:area) { area_levels.sample }
 
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :area_type }

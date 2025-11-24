@@ -78,7 +78,7 @@ module PafsCore
       elsif rma?
         parent.parent
       else
-        raise "Cannot find ea parent for #{name}"
+        raise PafsCore::AreaParentError, "Cannot find ea parent for #{name}"
       end
     end
 

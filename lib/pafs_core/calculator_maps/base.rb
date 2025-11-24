@@ -10,7 +10,7 @@ module PafsCore
       end
 
       def data
-        raise "Override #data in subclass"
+        raise NotImplementedError, "Override #data in subclass"
       end
 
       def binary_value?(value)
