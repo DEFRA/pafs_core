@@ -97,7 +97,7 @@ module PafsCore
       elsif protects_against_coastal_erosion?
         :standard_of_protection_coastal
       else
-        raise "Risks not set prior to standard of protection"
+        raise PafsCore::RisksNotSetError, "Risks not set prior to standard of protection"
       end
     end
 

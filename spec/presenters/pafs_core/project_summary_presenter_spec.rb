@@ -257,7 +257,7 @@ RSpec.describe PafsCore::ProjectSummaryPresenter do
       context "when the project does not protect against coastal erosion" do
         it "raises an error" do
           expect { subject.standard_of_protection_step }
-            .to raise_error(RuntimeError, "Risks not set prior to standard of protection")
+            .to raise_error(PafsCore::RisksNotSetError, "Risks not set prior to standard of protection")
         end
       end
     end

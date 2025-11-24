@@ -37,4 +37,10 @@ module PafsCore
 
   class MissingRfccAreaCodeError < StandardError
   end
+
+  class RisksNotSetError < StandardError
+  end
+
+  class SpreadsheetProcessingError < StandardError
+  end
 end
