@@ -28,4 +28,13 @@ module PafsCore
 
   class AreaParentError < StandardError
   end
+
+  class InvalidFileTypeError < StandardError
+  end
+
+  class CalculatorSheetNotFoundError < StandardError
+  end
+
+  class MissingRfccAreaCodeError < StandardError
+  end
 end

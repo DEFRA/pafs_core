@@ -194,7 +194,7 @@ module PafsCore
     end
 
     def derive_rfcc_code_from_user(area_name)
-      raise "User has no RFCC area code" unless user.rfcc_code(area_name)
+      raise PafsCore::MissingRfccAreaCodeError, "User has no RFCC area code" unless user.rfcc_code(area_name)
 
       user.rfcc_code(area_name)
     end
