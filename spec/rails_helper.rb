@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-ENV["RAILS_ENV"] ||= "test"
-
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require "spec_helper"
+# @SuppressWarnings("rubydre:S7816")
+ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("dummy/config/environment", __dir__)
 require "rspec/rails"
 # require "capybara/rspec"
