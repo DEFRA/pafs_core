@@ -67,3 +67,8 @@ RSpec/NestedGroups:
 Style/RedundantInitialize:
   Exclude:
     - app/services/pafs_core/download/base.rb
+
+# some of the comments, such as NOSONAR must be placed on the same line
+Style/CommentedKeyword:
+  Exclude:
+    - app/controllers/pafs_core/application_controller.rb
