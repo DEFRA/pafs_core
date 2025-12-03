@@ -166,7 +166,7 @@ GEM
     defra_ruby_template (5.11.0)
     diff-lcs (1.6.2)
     docile (1.4.1)
-    dotenv (3.1.8)
+    dotenv (3.2.0)
     drb (2.2.3)
     erb (6.0.0)
     erubi (1.13.1)
