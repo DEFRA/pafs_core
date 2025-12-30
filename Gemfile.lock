@@ -208,7 +208,7 @@ GEM
       activesupport (>= 6.1.4.4)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    io-console (0.8.1)
+    io-console (0.8.2)
     irb (1.15.3)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
@@ -280,7 +280,7 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.7.0)
-    pry (0.15.2)
+    pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
       reline (>= 0.6.0)
