@@ -157,23 +157,14 @@ module PafsCore
     end
 
     def carbon_values_calculate_hexdigest
-      # The presenter's net_carbon_with_blanks_calculated method involves most of the relevant attributes
-      # so a change to any one of the relevant values should result in a different hexdigest value.
-      # We also include the key years/months as these may also impact carbon calculations.
-      # There are extreme edge cases where changes to two attributs offset each other exactly
-      # but this is too unlikely to justify the build and maintenance effort of specifying each
-      # relevant attribute separately.
-      # We also include funding values as these have a bearing on carbon cost calculations.
       presenter = PafsCore::CarbonImpactPresenter.new(project: self)
 
-      hash_input_data = {
-        net_carbon_with_blanks_calculated: presenter.net_carbon_with_blanks_calculated,
-        funding_values: funding_values.all.map { |fv| fv.attributes.sort_by { |k, _v| k }.sort }.sort,
-        start_construction_year: start_construction_year,
-        start_construction_month: start_construction_month,
-        ready_for_service_year: ready_for_service_year,
-        ready_for_service_month: ready_for_service_month
-      }
+      hash_input_data = [
+        presenter.capital_carbon_baseline,
+        presenter.operational_carbon_baseline,
+        presenter.capital_carbon_target,
+        presenter.operational_carbon_target
+      ]
 
       Digest::SHA1.hexdigest(hash_input_data.sort.inspect)
     end
