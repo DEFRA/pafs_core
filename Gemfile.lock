@@ -163,7 +163,7 @@ GEM
     defra_ruby_alert (2.2.1)
       airbrake
     defra_ruby_style (0.4.1)
-    defra_ruby_template (5.11.0)
+    defra_ruby_template (5.11.1)
     diff-lcs (1.6.2)
     docile (1.4.1)
     dotenv (3.2.0)
