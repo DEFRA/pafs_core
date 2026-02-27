@@ -67,3 +67,8 @@ RSpec/NestedGroups:
 Style/RedundantInitialize:
   Exclude:
     - app/services/pafs_core/download/base.rb
+
+# File.open without block is needed where callers expect an IO object;
+# refactoring requires upstream interface changes — deferring to a separate PR.
+Style/FileOpen:
+  Enabled: false
