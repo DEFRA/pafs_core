@@ -10,6 +10,7 @@ RSpec.describe PafsCore::DataMigration::GenerateFundingContributorFcerm do
     create_list(:full_project, 10, :with_funding_values, public_contribution_names: %w[Matt Test])
   end
 
+  # rubocop:disable RSpec/Output
   describe "#perform" do
     xit "testing perf" do
       report = MemoryProfiler.report do
@@ -20,4 +21,5 @@ RSpec.describe PafsCore::DataMigration::GenerateFundingContributorFcerm do
       report.pretty_print
     end
   end
+  # rubocop:enable RSpec/Output
 end
