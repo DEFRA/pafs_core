@@ -68,7 +68,7 @@ module PafsCore
 
     # override this to handle any setup required before being viewed
     # This is called before rendering in the controller
-    def before_view(params); end
+    def before_view(_params); end
 
     def view_path
       "pafs_core/projects/steps/#{step}"
