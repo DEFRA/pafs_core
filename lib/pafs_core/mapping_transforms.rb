@@ -57,7 +57,7 @@ module PafsCore
       osgb36_to_wgs84(osgb36[:latitude], osgb36[:longitude])
     end
 
-    # rubocop:disable Layout/SpaceAroundOperators, Layout/ExtraSpacing, Lint/UnderscorePrefixedVariableName
+    # rubocop:disable Layout/SpaceAroundOperators, Layout/ExtraSpacing
     # Converts easting/northing coords into OSGB36 latitude/longitude
     def easting_northing_to_osgb36(easting, northing)
       osbg_f0   = 0.9996012717
@@ -65,121 +65,119 @@ module PafsCore
       e0        = 400_000.0
       phi0      = deg_to_rad(49.0)
       lambda0   = deg_to_rad(-2.0)
-      _a        = 6_377_563.396
-      _b        = 6_356_256.909
-      e_squared = ((_a * _a) - (_b * _b)) / (_a * _a)
-      _phi      = 0.0
-      _lambda   = 0.0
+      a         = 6_377_563.396
+      b         = 6_356_256.909
+      e_squared = ((a * a) - (b * b)) / (a * a)
       est       = easting
       nrth      = northing
-      _n        = (_a - _b) / (_a + _b)
-      _m        = 0.0
-      phi_prime = ((nrth - n0) / (_a * osbg_f0)) + phi0
+      n         = (a - b) / (a + b)
+      m         = 0.0
+      phi_prime = ((nrth - n0) / (a * osbg_f0)) + phi0
 
       loop do
-        _m = (_b * osbg_f0) \
-          * (((1 + _n + ((5.0 / 4.0) * _n * _n) + ((5.0 / 4.0) * _n * _n * _n)) \
+        m = (b * osbg_f0) \
+          * (((1 + n + ((5.0 / 4.0) * n * n) + ((5.0 / 4.0) * n * n * n)) \
               * (phi_prime - phi0)) \
-          - (((3 * _n) + (3 * _n * _n) + ((21.0 / 8.0) * _n * _n * _n)) \
+          - (((3 * n) + (3 * n * n) + ((21.0 / 8.0) * n * n * n)) \
              * Math.sin(phi_prime - phi0) \
              * Math.cos(phi_prime + phi0)) \
-          + ((((15.0 / 8.0) * _n * _n) + ((15.0 / 8.0) * _n * _n * _n)) \
+          + ((((15.0 / 8.0) * n * n) + ((15.0 / 8.0) * n * n * n)) \
              * Math.sin(2.0 * (phi_prime - phi0)) \
              * Math.cos(2.0 * (phi_prime + phi0))) \
-          - (((35.0 / 24.0) * _n * _n * _n) \
+          - (((35.0 / 24.0) * n * n * n) \
              * Math.sin(3.0 * (phi_prime - phi0)) \
              * Math.cos(3.0 * (phi_prime + phi0))))
 
-        phi_prime += (nrth - n0 - _m) / (_a * osbg_f0)
-        break unless (nrth - n0 - _m) >= 0.001
+        phi_prime += (nrth - n0 - m) / (a * osbg_f0)
+        break unless (nrth - n0 - m) >= 0.001
       end
 
-      _v = _a * osbg_f0 * ((1.0 - (e_squared * sin_pow_2(phi_prime))) ** -0.5)
-      _rho = _a * osbg_f0 * (1.0 - e_squared) * ((1.0 - (e_squared * sin_pow_2(phi_prime))) ** -1.5)
+      v   = a * osbg_f0 * ((1.0 - (e_squared * sin_pow_2(phi_prime))) ** -0.5)
+      rho = a * osbg_f0 * (1.0 - e_squared) * ((1.0 - (e_squared * sin_pow_2(phi_prime))) ** -1.5)
 
-      eta_squared = (_v / _rho) - 1.0
+      eta_squared = (v / rho) - 1.0
 
-      _vii = Math.tan(phi_prime) / (2 * _rho * _v)
+      vii = Math.tan(phi_prime) / (2 * rho * v)
 
-      _viii = (Math.tan(phi_prime) / (24.0 * _rho * (_v ** 3.0))) *
-              (5.0 + (3.0 * tan_pow_2(phi_prime)) + eta_squared -
-              (9.0 * tan_pow_2(phi_prime) * eta_squared))
+      viii = (Math.tan(phi_prime) / (24.0 * rho * (v ** 3.0))) *
+             (5.0 + (3.0 * tan_pow_2(phi_prime)) + eta_squared -
+             (9.0 * tan_pow_2(phi_prime) * eta_squared))
 
-      _ix = (Math.tan(phi_prime) / (720.0 * _rho * (_v ** 5.0))) *
-            (61.0 + (90.0 * tan_pow_2(phi_prime)) + (45.0 * tan_pow_2(phi_prime) *
+      ix = (Math.tan(phi_prime) / (720.0 * rho * (v ** 5.0))) *
+           (61.0 + (90.0 * tan_pow_2(phi_prime)) + (45.0 * tan_pow_2(phi_prime) *
+           tan_pow_2(phi_prime)))
+
+      x = sec(phi_prime) / v
+
+      xi = (sec(phi_prime) / (6.0 * v * v * v)) *
+           ((v / rho) + (2 * tan_pow_2(phi_prime)))
+
+      xii = (sec(phi_prime) / (120.0 * (v ** 5.0))) *
+            (5.0 + (28.0 * tan_pow_2(phi_prime)) + (24.0 * tan_pow_2(phi_prime) *
             tan_pow_2(phi_prime)))
 
-      _x = sec(phi_prime) / _v
-
-      _xi = (sec(phi_prime) / (6.0 * _v * _v * _v)) *
-            ((_v / _rho) + (2 * tan_pow_2(phi_prime)))
-
-      _xii = (sec(phi_prime) / (120.0 * (_v ** 5.0))) *
-             (5.0 + (28.0 * tan_pow_2(phi_prime)) + (24.0 * tan_pow_2(phi_prime) *
+      xiia = (sec(phi_prime) / (5040.0 * (v ** 7.0))) *
+             (61.0 + (662.0 * tan_pow_2(phi_prime)) +
+             (1320.0 * tan_pow_2(phi_prime) * tan_pow_2(phi_prime)) +
+             (720.0 * tan_pow_2(phi_prime) * tan_pow_2(phi_prime) *
              tan_pow_2(phi_prime)))
 
-      _xiia = (sec(phi_prime) / (5040.0 * (_v ** 7.0))) *
-              (61.0 + (662.0 * tan_pow_2(phi_prime)) +
-              (1320.0 * tan_pow_2(phi_prime) * tan_pow_2(phi_prime)) +
-              (720.0 * tan_pow_2(phi_prime) * tan_pow_2(phi_prime) *
-              tan_pow_2(phi_prime)))
+      phi = phi_prime - (vii * ((est - e0) ** 2.0)) +
+            (viii * ((est - e0) ** 4.0)) - (ix * ((est - e0) ** 6.0))
 
-      _phi = phi_prime - (_vii * ((est - e0) ** 2.0)) +
-             (_viii * ((est - e0) ** 4.0)) - (_ix * ((est - e0) ** 6.0))
+      lmbda = lambda0 + (x * (est - e0)) - (xi * ((est - e0) ** 3.0)) +
+              (xii * ((est - e0) ** 5.0)) - (xiia * ((est - e0) ** 7.0))
 
-      _lambda = lambda0 + (_x * (est - e0)) - (_xi * ((est - e0) ** 3.0)) +
-                (_xii * ((est - e0) ** 5.0)) - (_xiia * ((est - e0) ** 7.0))
-
-      { latitude: rad_to_deg(_phi), longitude: rad_to_deg(_lambda) }
+      { latitude: rad_to_deg(phi), longitude: rad_to_deg(lmbda) }
     end
 
     # Convert OSGB36 latitude/longitude coords
     # into WGS84 latitude/longitude
     def osgb36_to_wgs84(latitude, longitude)
-      _a        = 6_377_563.396
-      _b        = 6_356_256.909
-      e_squared = ((_a * _a) - (_b * _b)) / (_a * _a)
+      a         = 6_377_563.396
+      b         = 6_356_256.909
+      e_squared = ((a * a) - (b * b)) / (a * a)
 
-      _phi = deg_to_rad(latitude)
-      _lambda = deg_to_rad(longitude)
-      _v = _a / Math.sqrt(1 - (e_squared * sin_pow_2(_phi)))
-      _h = 0
-      _x = (_v + _h) * Math.cos(_phi) * Math.cos(_lambda)
-      _y = (_v + _h) * Math.cos(_phi) * Math.sin(_lambda)
-      _z = (((1 - e_squared) * _v) + _h) * Math.sin(_phi)
+      phi = deg_to_rad(latitude)
+      lmbda = deg_to_rad(longitude)
+      v = a / Math.sqrt(1 - (e_squared * sin_pow_2(phi)))
+      h = 0
+      x = (v + h) * Math.cos(phi) * Math.cos(lmbda)
+      y = (v + h) * Math.cos(phi) * Math.sin(lmbda)
+      z = (((1 - e_squared) * v) + h) * Math.sin(phi)
 
-      _tx =        446.448
-      _ty =       -124.157
-      _tz =        542.060
+      tx =        446.448
+      ty =       -124.157
+      tz =        542.060
 
-      _s  =         -0.0000204894
-      _rx = deg_to_rad(0.00004172222)
-      _ry = deg_to_rad(0.00006861111)
-      _rz = deg_to_rad(0.00023391666)
+      s  =         -0.0000204894
+      rx = deg_to_rad(0.00004172222)
+      ry = deg_to_rad(0.00006861111)
+      rz = deg_to_rad(0.00023391666)
 
-      _xb = _tx + (_x * (1 + _s)) + (-_rx * _y)     + (_ry * _z)
-      _yb = _ty + (_rz * _x)      + (_y * (1 + _s)) + (-_rx * _z)
-      _zb = _tz + (-_ry * _x)     + (_rx * _y)      + (_z * (1 + _s))
+      xb = tx + (x * (1 + s)) + (-rx * y)     + (ry * z)
+      yb = ty + (rz * x)      + (y * (1 + s)) + (-rx * z)
+      zb = tz + (-ry * x)     + (rx * y)      + (z * (1 + s))
 
-      _a        = 6_378_137.000
-      _b        = 6_356_752.3141
-      e_squared = ((_a * _a) - (_b * _b)) / (_a * _a)
+      a         = 6_378_137.000
+      b         = 6_356_752.3141
+      e_squared = ((a * a) - (b * b)) / (a * a)
 
-      _lambda_b = rad_to_deg(Math.atan(_yb / _xb))
-      _p = Math.sqrt((_xb * _xb) + (_yb * _yb))
-      _phi_n = Math.atan(_zb / (_p * (1 - e_squared)))
+      lambda_b = rad_to_deg(Math.atan(yb / xb))
+      p_dist = Math.sqrt((xb * xb) + (yb * yb))
+      phi_n = Math.atan(zb / (p_dist * (1 - e_squared)))
 
       (1..10).each do |_i|
-        _v = _a / Math.sqrt(1 - (e_squared * sin_pow_2(_phi_n)))
-        _phi_n1 = Math.atan((_zb + (e_squared * _v * Math.sin(_phi_n))) / _p)
-        _phi_n = _phi_n1
+        v = a / Math.sqrt(1 - (e_squared * sin_pow_2(phi_n)))
+        phi_n1 = Math.atan((zb + (e_squared * v * Math.sin(phi_n))) / p_dist)
+        phi_n = phi_n1
       end
 
-      _phi_b = rad_to_deg(_phi_n)
+      phi_b = rad_to_deg(phi_n)
 
-      { latitude: _phi_b.round(6), longitude: _lambda_b.round(6) }
+      { latitude: phi_b.round(6), longitude: lambda_b.round(6) }
     end
-    # rubocop:enable Layout/SpaceAroundOperators, Layout/ExtraSpacing, Lint/UnderscorePrefixedVariableName
+    # rubocop:enable Layout/SpaceAroundOperators, Layout/ExtraSpacing
 
     private # Some math helpers
 

@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/defra/pafs_core/tree/HEAD)
+## [Unreleased](https://github.com/DEFRA/pafs_core/tree/HEAD)
 
-[Full Changelog](https://github.com/defra/pafs_core/compare/v1.0.1...HEAD)
+[Full Changelog](https://github.com/DEFRA/pafs_core/compare/v1.0.1...HEAD)
 
 **Fixed bugs:**
 
@@ -22,6 +22,11 @@
 
 **Merged pull requests:**
 
+- Update dependencies and fix minor coding style issues [\#1197](https://github.com/DEFRA/pafs_core/pull/1197) ([brujeo](https://github.com/brujeo))
+- Bump aws-sdk-s3 from 1.209.0 to 1.213.0 [\#1190](https://github.com/DEFRA/pafs_core/pull/1190) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump faker from 3.5.3 to 3.6.0 [\#1188](https://github.com/DEFRA/pafs_core/pull/1188) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update CHANGELOG [\#1187](https://github.com/DEFRA/pafs_core/pull/1187) ([brujeo](https://github.com/brujeo))
+- Bump rubocop-rails from 2.34.2 to 2.34.3 [\#1180](https://github.com/DEFRA/pafs_core/pull/1180) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump pry from 0.15.2 to 0.16.0 [\#1179](https://github.com/DEFRA/pafs_core/pull/1179) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump pg from 1.6.2 to 1.6.3 [\#1178](https://github.com/DEFRA/pafs_core/pull/1178) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump pry from 0.15.2 to 0.16.0 [\#1177](https://github.com/DEFRA/pafs_core/pull/1177) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -80,9 +85,9 @@
 - Update Dependabot configuration [\#1018](https://github.com/DEFRA/pafs_core/pull/1018) ([brujeo](https://github.com/brujeo))
 - Update version [\#1017](https://github.com/DEFRA/pafs_core/pull/1017) ([brujeo](https://github.com/brujeo))
 
-## [v1.0.1](https://github.com/defra/pafs_core/tree/v1.0.1) (2025-04-11)
+## [v1.0.1](https://github.com/DEFRA/pafs_core/tree/v1.0.1) (2025-04-11)
 
-[Full Changelog](https://github.com/defra/pafs_core/compare/v1.0...v1.0.1)
+[Full Changelog](https://github.com/DEFRA/pafs_core/compare/v1.0...v1.0.1)
 
 **Fixed bugs:**
 
@@ -211,9 +216,9 @@
 - Adding a hint to earliest start date page [\#628](https://github.com/DEFRA/pafs_core/pull/628) ([brujeo](https://github.com/brujeo))
 - Fix/ruby 2485 adjustments [\#627](https://github.com/DEFRA/pafs_core/pull/627) ([brujeo](https://github.com/brujeo))
 
-## [v1.0](https://github.com/defra/pafs_core/tree/v1.0) (2017-03-24)
+## [v1.0](https://github.com/DEFRA/pafs_core/tree/v1.0) (2017-03-24)
 
-[Full Changelog](https://github.com/defra/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
+[Full Changelog](https://github.com/DEFRA/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
 
 **Merged pull requests:**
 

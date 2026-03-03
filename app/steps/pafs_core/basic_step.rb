@@ -66,9 +66,9 @@ module PafsCore
       step_name.to_sym
     end
 
-    # override this to handle any setup required before being viewed
-    # This is called before rendering in the controller
-    def before_view(params); end
+    def before_view(_params)
+      # Override in subclasses to handle setup required before being viewed
+    end
 
     def view_path
       "pafs_core/projects/steps/#{step}"
