@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/DEFRA/pafs_core/tree/HEAD)
+## [Unreleased](https://github.com/defra/pafs_core/tree/HEAD)
 
-[Full Changelog](https://github.com/DEFRA/pafs_core/compare/v1.0.1...HEAD)
+[Full Changelog](https://github.com/defra/pafs_core/compare/v1.0.1...HEAD)
 
 **Fixed bugs:**
 
@@ -22,6 +22,8 @@
 
 **Merged pull requests:**
 
+- update carbon impact rates [\#1215](https://github.com/DEFRA/pafs_core/pull/1215) ([brujeo](https://github.com/brujeo))
+- Update CHANGELOG [\#1198](https://github.com/DEFRA/pafs_core/pull/1198) ([jjromeo](https://github.com/jjromeo))
 - Update dependencies and fix minor coding style issues [\#1197](https://github.com/DEFRA/pafs_core/pull/1197) ([brujeo](https://github.com/brujeo))
 - Bump aws-sdk-s3 from 1.209.0 to 1.213.0 [\#1190](https://github.com/DEFRA/pafs_core/pull/1190) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump faker from 3.5.3 to 3.6.0 [\#1188](https://github.com/DEFRA/pafs_core/pull/1188) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -85,9 +87,9 @@
 - Update Dependabot configuration [\#1018](https://github.com/DEFRA/pafs_core/pull/1018) ([brujeo](https://github.com/brujeo))
 - Update version [\#1017](https://github.com/DEFRA/pafs_core/pull/1017) ([brujeo](https://github.com/brujeo))
 
-## [v1.0.1](https://github.com/DEFRA/pafs_core/tree/v1.0.1) (2025-04-11)
+## [v1.0.1](https://github.com/defra/pafs_core/tree/v1.0.1) (2025-04-11)
 
-[Full Changelog](https://github.com/DEFRA/pafs_core/compare/v1.0...v1.0.1)
+[Full Changelog](https://github.com/defra/pafs_core/compare/v1.0...v1.0.1)
 
 **Fixed bugs:**
 
@@ -96,6 +98,7 @@
 - Fix/ruby 3038 funding row totals [\#876](https://github.com/DEFRA/pafs_core/pull/876) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
 - Fixing translation misssing error in fcrm report [\#762](https://github.com/DEFRA/pafs_core/pull/762) ([brujeo](https://github.com/brujeo))
 - Fixing area factory [\#711](https://github.com/DEFRA/pafs_core/pull/711) ([brujeo](https://github.com/brujeo))
+- Fix/ruby 2485 pafs unable to unselect my project does not move any properties to a lower flood risk category check box after [\#626](https://github.com/DEFRA/pafs_core/pull/626) ([brujeo](https://github.com/brujeo))
 
 **Merged pull requests:**
 
@@ -216,9 +219,9 @@
 - Adding a hint to earliest start date page [\#628](https://github.com/DEFRA/pafs_core/pull/628) ([brujeo](https://github.com/brujeo))
 - Fix/ruby 2485 adjustments [\#627](https://github.com/DEFRA/pafs_core/pull/627) ([brujeo](https://github.com/brujeo))
 
-## [v1.0](https://github.com/DEFRA/pafs_core/tree/v1.0) (2017-03-24)
+## [v1.0](https://github.com/defra/pafs_core/tree/v1.0) (2017-03-24)
 
-[Full Changelog](https://github.com/DEFRA/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
+[Full Changelog](https://github.com/defra/pafs_core/compare/05e323caabf387d6658b6de6d2a685260bb5eff7...v1.0)
 
 **Merged pull requests:**
 
