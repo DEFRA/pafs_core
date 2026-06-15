@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/defra/pafs_core/compare/v1.0.1...HEAD)
 
+**Security fixes:**
+
+- Bump aws-sdk-s3, faraday, net-imap, nokogiri, and secure_headers dependencies.
+
 **Fixed bugs:**
 
 - Fix/ruby 4087 carbon rates [\#1175](https://github.com/DEFRA/pafs_core/pull/1175) ([PaulDoyle-EA](https://github.com/PaulDoyle-EA))
