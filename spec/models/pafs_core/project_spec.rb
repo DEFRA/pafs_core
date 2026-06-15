@@ -28,7 +28,7 @@ RSpec.describe PafsCore::Project do
         it "rejects #{ref}" do
           subject.reference_number = ref
           expect(subject).not_to be_valid
-          expect(subject.errors[:reference_number].join).to match(/invalid format/)
+          expect(subject.errors[:reference_number].join).to include("invalid format")
         end
       end
     end
