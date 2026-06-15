@@ -6,7 +6,7 @@
 
 **Security fixes:**
 
-- Bump aws-sdk-s3, faraday, net-imap, nokogiri, and secure_headers dependencies.
+- Bump gem dependencies, including aws-sdk-s3, faraday, net-imap, nokogiri, and secure_headers.
 
 **Fixed bugs:**
 
