@@ -57,6 +57,8 @@ RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
   end
 
   describe "#update" do
+    let(:updated_earliest_start_date) { Time.zone.today.next_year }
+    let(:pending_earliest_start_date) { Time.zone.today.next_year.next_year }
     let(:checker_service) { instance_double(PafsCore::DateRangeDataChecker) }
 
     before do
@@ -64,15 +66,22 @@ RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
     end
 
     context "when no data is outside the new date range" do
-      let(:params) { ActionController::Parameters.new({ earliest_start_date_step: { earliest_start_month: "5", earliest_start_year: "2026" } }) }
+      let(:params) do
+        ActionController::Parameters.new(
+          earliest_start_date_step: {
+            earliest_start_month: updated_earliest_start_date.month.to_s,
+            earliest_start_year: updated_earliest_start_date.year.to_s
+          }
+        )
+      end
 
       before { allow(checker_service).to receive(:data_outside_date_range?).and_return(false) }
 
       it "saves the date" do
         expect(step.update(params)).to be true
         project.reload
-        expect(project.earliest_start_month).to eq 5
-        expect(project.earliest_start_year).to eq 2026
+        expect(project.earliest_start_month).to eq updated_earliest_start_date.month
+        expect(project.earliest_start_year).to eq updated_earliest_start_date.year
       end
 
       it "returns false when validation fails" do
@@ -90,7 +99,14 @@ RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
     end
 
     context "when data is outside the new date range" do
-      let(:params) { ActionController::Parameters.new({ earliest_start_date_step: { earliest_start_month: "6", earliest_start_year: "2027" } }) }
+      let(:params) do
+        ActionController::Parameters.new(
+          earliest_start_date_step: {
+            earliest_start_month: pending_earliest_start_date.month.to_s,
+            earliest_start_year: pending_earliest_start_date.year.to_s
+          }
+        )
+      end
 
       before { allow(checker_service).to receive(:data_outside_date_range?).and_return(true) }
 
@@ -101,8 +117,8 @@ RSpec.describe PafsCore::EarliestStartDateStep, type: :model do
       it "sets the pending date on the project" do
         step.update(params)
         project.reload
-        expect(project.pending_earliest_start_month).to eq(6)
-        expect(project.pending_earliest_start_year).to eq(2027)
+        expect(project.pending_earliest_start_month).to eq(pending_earliest_start_date.month)
+        expect(project.pending_earliest_start_year).to eq(pending_earliest_start_date.year)
       end
 
       it "sets the date_change_requires_confirmation flag to true" do
